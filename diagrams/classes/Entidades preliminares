@@ -92,6 +92,7 @@ class ReservaDeProduccion
 class Guarida
 class Espiral
 
+Criadero o-- Moho
 
 @enduml
 
@@ -99,24 +100,26 @@ class Espiral
 "Clases que tienen unidades que se gastan"
 @startuml
 
-abstract class Consumible
-Consumuble <|-- Tiempo
-Consumuble <|-- Vida
-Consumuble <|-- Unidad
-
-class Nombre
-class Costo
-class Tiempo{
+abstract class Consumible{
 	-cantidad: Int
+}
+Consumible <|-- Tiempo
+Consumible <|-- Vida
+Consumible <|-- Unidad
+Consumible <|-- Escudo
+
+class Tiempo{
 	+Tiempo(cantidad: int)
 	+pasarTiempo()
 }
 
 class Vida
 class Unidad{
-	-cantidad
+	
 }
-class Turno
+class Escudo
+
+interface Consumible2
 
 @enduml
 
@@ -153,4 +156,5 @@ interface Transportable
 
 
 @enduml
+
 
