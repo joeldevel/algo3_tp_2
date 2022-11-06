@@ -2,9 +2,22 @@
 "Razas de los personajes que se extiende a los edificios"
 @startuml
 
-abstract class Raza
+abstract class Raza{
+	-vida: Vida
+	{abstract}+recibirDanio()
+}
+class Protoss{
+	-escudo: Escudo
+}
 Raza <|-- Zerg
 Raza <|-- Protoss
+
+abstract class Personaje
+abstract class Construccion
+
+Construccion *-- Raza
+Personaje *-- Raza 
+
 
 
 @enduml
@@ -13,9 +26,13 @@ Raza <|-- Protoss
 "Recursos"
 @startuml
 
-class Mineral
+class Mineral{
+	-unidad: Unidad
+	+disminuirUnidades(cantidad)
+}
 class Nodo
-class GasVespeno
+abstract class Gas
+class Vespeno
 class Volcan
 class RefineriaDeGas
 class Geiser
@@ -23,16 +40,32 @@ class Cristal
 
 interface Recolectable
 
+Gas <|-- Vespeno
+
+
+abstract class Unidad{
+	-cantidad
+	+Unidad(cantidad)
+}
+
+class Turno{
+	- tie
+}
+
 @enduml
 
 "Edificios Zerg"
 @startuml
 
-interface Construible
+interface Construible{
+	+construir()
+}
 interface Destruible
 interface Daniable
 interface Recuperable
-interface Evolucionable
+interface Evolucionable{
+	+evolucionar(Zerg)
+}
 interface Mutable
 interface Creable
 interface Edificable
@@ -40,7 +73,16 @@ interface Habilitable
 interface Transformable
 
 class Unidad
-class Larva
+class Larva{
+	+evolucionar(): Zangano
+}
+
+class Evolucionador{
+	+evolucionar(Zerg)
+}
+
+Evolucionador ..> Evolucionable
+
 class Zangano
 class Construccion
 class Moho
@@ -57,11 +99,23 @@ class Espiral
 "Clases que tienen unidades que se gastan"
 @startuml
 
+abstract class Consumible
+Consumuble <|-- Tiempo
+Consumuble <|-- Vida
+Consumuble <|-- Unidad
+
 class Nombre
 class Costo
-class TiempoDeCostruccion
+class Tiempo{
+	-cantidad: Int
+	+Tiempo(cantidad: int)
+	+pasarTiempo()
+}
+
 class Vida
-class Unidad
+class Unidad{
+	-cantidad
+}
 class Turno
 
 @enduml
