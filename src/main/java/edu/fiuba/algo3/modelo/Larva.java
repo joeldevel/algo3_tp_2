@@ -7,4 +7,9 @@ public class Larva {
 		
 	}
 
+	public Zangano evolucionar() {
+		Zangano zangano = new Zangano();
+		return zangano;
+	}
+
 }
