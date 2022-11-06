@@ -1,0 +1,102 @@
+
+"Razas de los personajes que se extiende a los edificios"
+@startuml
+
+abstract class Raza
+Raza <|-- Zerg
+Raza <|-- Protoss
+
+
+@enduml
+
+
+"Recursos"
+@startuml
+
+class Mineral
+class Nodo
+class GasVespeno
+class Volcan
+class RefineriaDeGas
+class Geiser
+class Cristal
+
+interface Recolectable
+
+@enduml
+
+"Edificios Zerg"
+@startuml
+
+interface Construible
+interface Destruible
+interface Daniable
+interface Recuperable
+interface Evolucionable
+interface Mutable
+interface Creable
+interface Edificable
+interface Habilitable
+interface Transformable
+
+class Unidad
+class Larva
+class Zangano
+class Construccion
+class Moho
+class Criadero
+class Extractor
+class ReservaDeProduccion
+class Guarida
+class Espiral
+
+
+@enduml
+
+
+"Clases que tienen unidades que se gastan"
+@startuml
+
+class Nombre
+class Costo
+class TiempoDeCostruccion
+class Vida
+class Unidad
+class Turno
+
+@enduml
+
+
+" Edificios Protoss"
+@startuml
+
+class Escudo
+class Vida
+class Pilon
+class RadioDeAlcance
+class NexoMineral
+class MatrizPsi
+class Asimilador
+class CapsulaDeGas
+class Acceso
+class GrietaDistorcion
+class Entrada
+class Tropa
+class Aiur
+class PuertoEstelar
+
+
+interface Daniable
+interface Recuperable
+interface Construible
+interface Destruible
+interface Edificable
+interface Energizable
+interface Emitible
+interface Producible
+interface Entrenable
+interface Transportable
+
+
+@enduml
+
