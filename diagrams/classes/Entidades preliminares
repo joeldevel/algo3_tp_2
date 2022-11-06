@@ -77,7 +77,7 @@ class Larva{
 	+evolucionar(): Zangano
 }
 
-class Evolucionador{
+class Evolucionador {
 	+evolucionar(Zerg)
 }
 
@@ -86,7 +86,16 @@ Evolucionador ..> Evolucionable
 class Zangano
 class Construccion
 class Moho
-class Criadero
+class Criadero {
+    -larvas: Larva
+    -maxLarvas
+    +Criadero()
+    +contarLarvas()
+    +engenrarZangano(): Zangano
+    +avanzarTurno()
+    +generarLarva(): Larva
+}
+
 class Extractor
 class ReservaDeProduccion
 class Guarida
