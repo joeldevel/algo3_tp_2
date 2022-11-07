@@ -13,7 +13,10 @@ class Mapa{
 	+encontrarUbicacionConRequisito(Construccion)
 }
 
-abstract class Raza
+abstract class Raza{
+    -construcciones: Construccion
+    +guardarConstruccion()
+}
 abstract class Recurso
 
 class Ubicacion{
@@ -25,34 +28,110 @@ class Ubicacion{
 
 }
 
-class GasVespeno
-class NodoMineral
+class Volcan
+class NodoMineral {
+    -cantidadDeMineral: int
+}
 
 AlgoStar --> Mapa
 AlgoStar --> Raza
 AlgoStar --> Recurso
 Mapa --> Ubicacion
-Recurso <|-- GasVespeno
+Recurso <|-- Volcan
 Recurso <|-- NodoMineral
 
 @enduml
 
 "Supongamos que queremos construir un Criadero Zerg.
+Inicializamos una instancia de Criadero y Ubicacion.
 Le enviamos un mensaje a AlgoStar para constuir un edificio
-le pasamos por parametro una instancia del Criadero y
+y le pasamos por parametro una instancia del Criadero y
 tambien la ubicacion donde queremos construirlo.
 Luego, le va a delegar a la clase Mapa la responsabilidad
 de comprobar que efectivamente puede construir en dicha
-ubicacion. Si la clase Mapa autoriza, entonces le envia
-un mensaje a la clase Zerg para construir. Esta clase
+ubicacion. Si la clase Mapa autoriza, entonces AlgoStar le envia
+un mensaje a la clase Zerg para guardar su construccion. Esta clase
 debe comprobar si tiene recursos suficientes para
 la construccion. Si efectivamente tiene recursos,
-se construye y se guarda en la lista de construcciones
+se guarda en la lista de construcciones
 de los Zerg. El edificio comienza como NoUtilizable."
+
+"Supongamos que queremos construir Extractor.
+Inicializamos una instancia de Extractor y Ubicacion.
+Le enviamos un mensaje a AlgoStar para construir un edificio
+y le pasamos por parametro una instancia del Extractor y
+tambien la ubicacion donde queremos construirlo.
+Luego, le va a delegar a la clase Mapa la responsabilidad
+de comprobar que efectivamente puede construir en dicha
+ubicacion. Si la clase Mapa autoriza, entonces AlgoStar le envia
+un mensaje a la clase Volcan para construir un Extractor allí.
+Si se autoriza, entonces la clase AlgoStar le envia un mensaje
+a Raza para guardar su construccion, la cual solo se guardara si
+tiene la cantidad de materiales suficientes.
+
+La clase Volcan tendra que recibir una instancia de la
+clase del tipo Extractor en su constructor, sino
+lanza excepcion.
+Si es del tipo Extractor, entonces Volcan se guarda
+como atributo al Extractor."
 
 "Supongamos que queremos recolectar Gas.
 Le enviamos un mensaje a AlgoStar para recolectar Gas
 Vespeno... "
+
+"-------------------------------------------------------"
+
+"Recursos: Gas"
+@startuml
+
+class GasVespeno{
+    -cantidad: int
+}
+
+class Volcan{
+	-edificio: Construccion
+	+Volcan(EdificioVacio)
+	+construir(Construccion edificio)
+	+extraerGas()
+	+extraer(cantidadAExtraer)
+}
+
+abstract class RefineriaDeGas{
+	-cantidadExtraible: int
+	+RefineriaDeGas(cantidad)
+	+extraerGas(Volcan)
+}
+
+class Extractor{
+	-zanganos: Zangano
+	+guardarZangano(unZangano)
+}
+
+class Asimilador{
+}
+
+RefineriaDeGas <|--Extractor
+RefineriaDeGas <|--Asimilador
+
+Volcan --> GasVespeno
+Volcan --> RefineriaDeGas
+
+@enduml
+
+"Supongamos que queremos construir un Extractor.
+El Volcan recibira en su constructor una instancia
+de la clase Extractor con un estado operativo inicial
+de ExtractorNoUtilizable.
+Entonces el Volcan se guardara como atributo al Extractor."
+
+"Supongamos que queremos recolectar Gas utilizando un Extractor.
+Le enviamos un mensaje a Volcan diciendole que queremos extraer
+gas. El Volcan le delega al Extractor la responsabilidad
+de calcular la cantidad de gas a extraer.
+Extractor recorre su lista de Zanganos y suma
+Extractor le pide la cantidad de gas al Volcan y este
+le devuelve la cantidad que tiene disponible.
+Luego el Volcan devuelve la cantidad extraida de gas."
 
 "-------------------------------------------------------"
 
@@ -95,12 +174,17 @@ abstract class Raza{
 
 class Zerg
 abstract class Construccion
-interface EstadoOperativo
 class Criadero
 class Extractor
 class ReservaDeProduccion
 class Guarida
 class Espiral
+abstract class Unidad
+class Larva
+class Zangano {
+    -cantidadRecolectablePorZangano: int
+    +recolectarMineral()
+}
 
 Raza <|-- Zerg
 Zerg --> Construccion
@@ -109,6 +193,9 @@ Construccion <|-- Extractor
 Construccion <|-- ReservaDeProduccion
 Construccion <|-- Guarida
 Construccion <|-- Espiral
+Zerg --> Unidad
+Unidad <|-- Larva
+Unidad <|-- Zangano
 
 @enduml
 
@@ -119,11 +206,11 @@ Construccion <|-- Espiral
 
 class Criadero {
     -estadoOperativo: EstadoOperativo
-    -maxLarvas
-    +Criadero(Tiempo, EstadoOperativo)
+    -maxLarvas: int
+    +Criadero(Tiempo, EstadoOperativo, Moho)
     +contarLarvas()
     +evolucionar(Larva)
-    +avanzarTurno()
+    +avanzarTiempo()
     +generarLarva(): Larva
 
 }
@@ -137,7 +224,7 @@ class Larva{
 }
 
 class Moho{
-	-radio:Int
+	-radio: int
 	+expandirse()
 }
 
@@ -179,7 +266,11 @@ estadoOperativo contarLarvas()
 y utilizando de esta forma polimorfismo dependiendo
 de su estado (que cambiara en tiempo de ejecucion)
 la respuesta al mensaje sera diferente.
-Estamos delegando en el estadoOperativo."
+Estamos delegando en el estadoOperativo.
+
+Por esta razon es que Criadero es una clase concreta.
+Dentro de Criadero se delegaran los distintos tipos
+de mensajes."
 
 "--------------------------------------------------------"
 
