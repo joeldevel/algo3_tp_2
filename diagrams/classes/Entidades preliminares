@@ -33,10 +33,15 @@ class Mineral{
 class Nodo
 abstract class Gas
 class Vespeno
-class Volcan
-class RefineriaDeGas
+class Volcan{
+	-edificio: Construccion
+	+Volcan(EdificioVacio)
+	+construir(Construccion edificio)
+	+extraerGas()
+	+extraer(cantidadAExtraer)
+}
+
 class Geiser
-class Cristal
 
 interface Recolectable
 
@@ -64,7 +69,7 @@ interface Destruible
 interface Daniable
 interface Recuperable
 interface Evolucionable{
-	+evolucionar(Zerg)
+	+evolucionar(UnidadRaza)
 }
 interface Mutable
 interface Creable
@@ -77,26 +82,55 @@ class Larva{
 	+evolucionar(): Zangano
 }
 
-class Evolucionador {
-	+evolucionar(Zerg)
-}
-
-Evolucionador ..> Evolucionable
-
 class Zangano
 class Construccion
-class Moho
-class Criadero {
-    -larvas: Larva
+class Moho{
+	-radio:Int
+	+expandirse()
+}
+abstract class Criadero {
     -maxLarvas
-    +Criadero()
+    +Criadero(Tiempo)
     +contarLarvas()
-    +engenrarZangano(): Zangano
+    +evolucionar(Larva)
     +avanzarTurno()
     +generarLarva(): Larva
 }
 
-class Extractor
+Criadero <|-- CriaderoUtilizable
+Criadero <|-- CriaderoNoUtilizable
+
+class Tiempo{
+	-cantidad: Int
+	+Tiempo(cantidad)
+	+avanzarTiempo()
+	+tiempo(): Int
+}
+
+
+
+Tiempo <-right- Criadero
+
+Larva ..|> Evolucionable
+Criadero --> Larva
+
+abstract class RefineriaDeGas{
+	-extraible:Int
+	+RefineriaDeGas(cantidad)
+	+extraerGas(Volcan)
+}
+
+class Extractor{
+	-zanganos:Array<Zangano>
+}
+
+Extractor "1" --> Zangano
+
+class Asimilador{
+}
+
+RefineriaDeGas <|--Extractor
+RefineriaDeGas <|--Asimilador
 class ReservaDeProduccion
 class Guarida
 class Espiral
@@ -127,6 +161,21 @@ class Unidad{
 	
 }
 class Escudo
+
+class Mapa{
+	+construir(Construccion,Ubicacion)
+	+encontrarUbicacionConRequisito(Construccion)
+}
+
+class Ubicacion{
+	-posX: int
+	-posY: int
+	-elementos:Array
+	+sePuedeConstruirEn(Ubicacion)
+	+estaDentroDeRadioDeConstruccion()
+	
+}
+Mapa *-- Ubicacion
 
 interface Consumible2
 
@@ -167,3 +216,50 @@ interface Transportable
 @enduml
 
 
+@startuml
+
+abstract class Construccion
+
+abstract class Criadero{
+	+{abstract}metodo1()
+	+{abstract}metodo2()
+}
+class CriaderoUtilizable
+class CriaderoNoUtilizable
+
+Construccion <|-- Utilizable
+Construccion <|-- NoUtilizable
+
+@enduml
+
+@startuml
+
+Usuario->Mapa: construir(Construccion, Ubicacion)
+	loop para cada ubicacion
+		Mapa->Mapa: ubicacionBuscada = encontrarUbicacion(Ubicacion)
+	end
+	Mapa->Ubicacion:puedoConstruirEnEstaUbicacion()
+	Ubicacion-->Mapa:true
+	Mapa->Ubicacion: puedoConstruirEsteEdificio(Construccion)
+	Ubicacion->Construccion: dameLoQueNecesitasParaConstruirte()
+	Construccion-->Ubicacion: Moho/Pilon
+	Ubicacion->Ubicacion: tengo(Moho/Pilon)
+	Ubicacion-->Mapa:true
+	Mapa->Ubicacion:crear(Construccion)
+	
+@enduml
+
+@startuml
+
+Usuario->Mapa: construir(Construccion, Ubicacion)
+	loop para cada ubicacion
+		Mapa->Mapa: conRequisito = encontrarUbicacionConRequisito(Construccion)
+	end
+	loop para cada ubicacion con moho
+		Mapa->Ubicacion:sePuedeConstruirEn(Ubicacion)
+		Ubicacion->Ubicacion: estaDentroDeRadioDeConstruccion()
+		Ubicacion-->Mapa:true
+	end
+	Mapa->Ubicacion:crear(Construccion)
+	
+@enduml
