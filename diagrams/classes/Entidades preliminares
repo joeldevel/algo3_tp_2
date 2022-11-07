@@ -290,6 +290,8 @@ abstract class RefineriaDeGas{
 
 class Extractor{
 	-zanganos: Zangano
+	-tiempo
+	-recursosNecesarios
 	+guardarZangano(unZangano)
 }
 
@@ -324,6 +326,12 @@ Luego el Volcan devuelve la cantidad extraida de gas."
 "Razas"
 @startuml
 
+abstract class ConstruccionProtoss
+abstract class ConstruccionZerg
+abstract class PersonajeProtoss
+abstract class PersonajeZerg
+
+
 abstract class Raza{
 	-vida: Vida
 	-construcciones: Construccion
@@ -338,11 +346,10 @@ class Protoss{
 Raza <|-- Zerg
 Raza <|-- Protoss
 
-abstract class Unidad
-abstract class Construccion
-
-Construccion *-- Raza
-Unidad *-- Raza
+Protoss -down-> ConstruccionProtoss
+Protoss -down-> PersonajeProtoss
+Zerg -down-> ConstruccionZerg
+Zerg -down-> PersonajeZerg
 
 @enduml
 
@@ -490,122 +497,10 @@ Construccion <|-- PuertoEstelar
 
 "--------------------------------------------------------"
 
-"Recursos"
-@startuml
-
-class Mineral{
-	-unidad: Unidad
-	+disminuirUnidades(cantidad)
-}
-class Nodo
-abstract class Gas
-class Vespeno
-class Volcan{
-	-edificio: Construccion
-	+Volcan(EdificioVacio)
-	+construir(Construccion edificio)
-	+extraerGas()
-	+extraer(cantidadAExtraer)
-}
-
-class Geiser
-
-interface Recolectable
-
-Gas <|-- Vespeno
-
-
-abstract class Unidad{
-	-cantidad
-	+Unidad(cantidad)
-}
-
-class Turno{
-	- tie
-}
-
-@enduml
 
 "--------------------------------------------------------"
 
-"Edificios Zerg"
-@startuml
 
-interface Construible{
-	+construir()
-}
-interface Destruible
-interface Daniable
-interface Recuperable
-interface Evolucionable{
-	+evolucionar(UnidadRaza)
-}
-interface Mutable
-interface Creable
-interface Edificable
-interface Habilitable
-interface Transformable
-
-class Unidad
-class Larva{
-	+evolucionar(): Zangano
-}
-
-class Zangano
-class Construccion
-class Moho{
-	-radio:Int
-	+expandirse()
-}
-abstract class Criadero {
-    -maxLarvas
-    +Criadero(Tiempo)
-    +contarLarvas()
-    +evolucionar(Larva)
-    +avanzarTurno()
-    +generarLarva(): Larva
-}
-
-Criadero <|-- CriaderoUtilizable
-Criadero <|-- CriaderoNoUtilizable
-
-class Tiempo{
-	-cantidad: Int
-	+Tiempo(cantidad)
-	+avanzarTiempo()
-	+tiempo(): Int
-}
-
-
-Tiempo <-right- Criadero
-
-Larva ..|> Evolucionable
-Criadero --> Larva
-
-abstract class RefineriaDeGas{
-	-extraible:Int
-	+RefineriaDeGas(cantidad)
-	+extraerGas(Volcan)
-}
-
-class Extractor{
-	-zanganos:Array<Zangano>
-}
-
-Extractor "1" --> Zangano
-
-class Asimilador{
-}
-
-RefineriaDeGas <|--Extractor
-RefineriaDeGas <|--Asimilador
-class ReservaDeProduccion
-class Guarida
-class Espiral
-
-Criadero o-- Moho
-
-@enduml
 
 "--------------------------------------------------------"
 
@@ -639,57 +534,9 @@ interface Consumible2
 "--------------------------------------------------------"
 
 
-" Edificios Protoss"
-@startuml
-
-class Escudo
-class Vida
-class Pilon
-class RadioDeAlcance
-class NexoMineral
-class MatrizPsi
-class Asimilador
-class CapsulaDeGas
-class Acceso
-class GrietaDistorcion
-class Entrada
-class Tropa
-class Aiur
-class PuertoEstelar
-
-
-interface Daniable
-interface Recuperable
-interface Construible
-interface Destruible
-interface Edificable
-interface Energizable
-interface Emitible
-interface Producible
-interface Entrenable
-interface Transportable
-
-
-@enduml
 
 "--------------------------------------------------------"
 
-
-@startuml
-
-abstract class Construccion
-
-abstract class Criadero{
-	+{abstract}metodo1()
-	+{abstract}metodo2()
-}
-class CriaderoUtilizable
-class CriaderoNoUtilizable
-
-Construccion <|-- Utilizable
-Construccion <|-- NoUtilizable
-
-@enduml
 
 "--------------------------------------------------------"
 
