@@ -1,27 +1,217 @@
+"Relacion entre las clases principales"
+@startuml
 
-"Razas de los personajes que se extiende a los edificios"
+class AlgoStar {
+    -mapa: Mapa
+    -razas: Raza
+    -recursos: Recurso
+}
+
+class Mapa{
+    -ubicaciones: Ubicacion
+	+construir(Construccion,Ubicacion)
+	+encontrarUbicacionConRequisito(Construccion)
+}
+
+abstract class Raza
+abstract class Recurso
+
+class Ubicacion{
+	-posX: int
+	-posY: int
+	-elementos:Array
+	+sePuedeConstruirEn(Ubicacion)
+	+estaDentroDeRadioDeConstruccion()
+
+}
+
+class GasVespeno
+class NodoMineral
+
+AlgoStar --> Mapa
+AlgoStar --> Raza
+AlgoStar --> Recurso
+Mapa --> Ubicacion
+Recurso <|-- GasVespeno
+Recurso <|-- NodoMineral
+
+@enduml
+
+"Supongamos que queremos construir un Criadero Zerg.
+Le enviamos un mensaje a AlgoStar para constuir un edificio
+le pasamos por parametro una instancia del Criadero y
+tambien la ubicacion donde queremos construirlo.
+Luego, le va a delegar a la clase Mapa la responsabilidad
+de comprobar que efectivamente puede construir en dicha
+ubicacion. Si la clase Mapa autoriza, entonces le envia
+un mensaje a la clase Zerg para construir. Esta clase
+debe comprobar si tiene recursos suficientes para
+la construccion. Si efectivamente tiene recursos,
+se construye y se guarda en la lista de construcciones
+de los Zerg. El edificio comienza como NoUtilizable."
+
+"Supongamos que queremos recolectar Gas.
+Le enviamos un mensaje a AlgoStar para recolectar Gas
+Vespeno... "
+
+"-------------------------------------------------------"
+
+"Razas"
 @startuml
 
 abstract class Raza{
 	-vida: Vida
+	-construcciones: Construccion
+	-unidades: Unidad
 	{abstract}+recibirDanio()
 }
+
 class Protoss{
 	-escudo: Escudo
 }
+
 Raza <|-- Zerg
 Raza <|-- Protoss
 
-abstract class Personaje
+abstract class Unidad
 abstract class Construccion
 
 Construccion *-- Raza
-Personaje *-- Raza 
-
-
+Unidad *-- Raza
 
 @enduml
 
+"-------------------------------------------------------"
+
+"Raza Zerg y su relacion con los edificios"
+@startuml
+
+abstract class Raza{
+	-vida: Vida
+	-construcciones: Construccion
+	-unidades: Unidad
+	{abstract}+recibirDanio()
+}
+
+class Zerg
+abstract class Construccion
+interface EstadoOperativo
+class Criadero
+class Extractor
+class ReservaDeProduccion
+class Guarida
+class Espiral
+
+Raza <|-- Zerg
+Zerg --> Construccion
+Construccion <|-- Criadero
+Construccion <|-- Extractor
+Construccion <|-- ReservaDeProduccion
+Construccion <|-- Guarida
+Construccion <|-- Espiral
+
+@enduml
+
+"-------------------------------------------------------"
+
+"Criadero"
+@startuml
+
+class Criadero {
+    -estadoOperativo: EstadoOperativo
+    -maxLarvas
+    +Criadero(Tiempo, EstadoOperativo)
+    +contarLarvas()
+    +evolucionar(Larva)
+    +avanzarTurno()
+    +generarLarva(): Larva
+
+}
+
+interface Evolucionable{
+	+evolucionar(UnidadRaza)
+}
+
+class Larva{
+	+evolucionar(): Zangano
+}
+
+class Moho{
+	-radio:Int
+	+expandirse()
+}
+
+class Tiempo{
+	-cantidad: Int
+	+Tiempo(cantidad)
+	+avanzarTiempo()
+	+tiempo(): Int
+}
+
+interface EstadoOperativo{
+    +contarLarvas()
+    +evolucionar(Larva)
+    +avanzarTurno()
+    +generarLarva(): Larva
+}
+
+class CriaderoUtilizable
+class CriaderoNoUtilizable
+
+Criadero --> EstadoOperativo
+CriaderoUtilizable ..up|> EstadoOperativo
+CriaderoNoUtilizable ..up|> EstadoOperativo
+
+Tiempo <-right- Criadero
+Larva ..|> Evolucionable
+Criadero --> Larva
+Criadero o-- Moho
+
+@enduml
+
+"Inicialmente el Criadero comenzara con un estado Operativo
+de CriaderoNoUtilizable.
+Si quisieramos pedirle a Criadero que cuenta las larvas,
+dentro del metodo contarLarvas() hariamos algo como
+
+estadoOperativo contarLarvas()
+
+y utilizando de esta forma polimorfismo dependiendo
+de su estado (que cambiara en tiempo de ejecucion)
+la respuesta al mensaje sera diferente.
+Estamos delegando en el estadoOperativo."
+
+"--------------------------------------------------------"
+
+"Raza Protoss y su relacion con los edificios"
+@startuml
+
+abstract class Raza{
+	-vida: Vida
+	-construcciones: Construccion
+	-unidades: Unidad
+	{abstract}+recibirDanio()
+}
+
+class Protoss
+abstract class Construccion
+class NexoMineral
+class Pilon
+class Asimilador
+class Acceso
+class PuertoEstelar
+
+Raza <|-- Protoss
+Protoss --> Construccion
+Construccion <|-- NexoMineral
+Construccion <|-- Pilon
+Construccion <|-- Asimilador
+Construccion <|-- Acceso
+Construccion <|-- PuertoEstelar
+
+@enduml
+
+"--------------------------------------------------------"
 
 "Recursos"
 @startuml
@@ -58,6 +248,8 @@ class Turno{
 }
 
 @enduml
+
+"--------------------------------------------------------"
 
 "Edificios Zerg"
 @startuml
@@ -108,7 +300,6 @@ class Tiempo{
 }
 
 
-
 Tiempo <-right- Criadero
 
 Larva ..|> Evolucionable
@@ -139,6 +330,8 @@ Criadero o-- Moho
 
 @enduml
 
+"--------------------------------------------------------"
+
 
 "Clases que tienen unidades que se gastan"
 @startuml
@@ -162,24 +355,11 @@ class Unidad{
 }
 class Escudo
 
-class Mapa{
-	+construir(Construccion,Ubicacion)
-	+encontrarUbicacionConRequisito(Construccion)
-}
-
-class Ubicacion{
-	-posX: int
-	-posY: int
-	-elementos:Array
-	+sePuedeConstruirEn(Ubicacion)
-	+estaDentroDeRadioDeConstruccion()
-	
-}
-Mapa *-- Ubicacion
-
 interface Consumible2
 
 @enduml
+
+"--------------------------------------------------------"
 
 
 " Edificios Protoss"
@@ -215,6 +395,8 @@ interface Transportable
 
 @enduml
 
+"--------------------------------------------------------"
+
 
 @startuml
 
@@ -231,6 +413,8 @@ Construccion <|-- Utilizable
 Construccion <|-- NoUtilizable
 
 @enduml
+
+"--------------------------------------------------------"
 
 @startuml
 
@@ -249,6 +433,8 @@ Usuario->Mapa: construir(Construccion, Ubicacion)
 	
 @enduml
 
+"--------------------------------------------------------"
+
 @startuml
 
 Usuario->Mapa: construir(Construccion, Ubicacion)
@@ -263,3 +449,5 @@ Usuario->Mapa: construir(Construccion, Ubicacion)
 	Mapa->Ubicacion:crear(Construccion)
 	
 @enduml
+
+"--------------------------------------------------------"
