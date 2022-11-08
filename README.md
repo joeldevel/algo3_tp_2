@@ -10,7 +10,6 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 2** - [Leonardo Duchen](https://github.com/leoduchen)
 * **Integrante 3** - [Alan Valdevenito](https://github.com/AlanValdevenito)
 * **Integrante 4** - [Brian Lahuta](https://github.com/brianlahuta)
-* **Integrante 5** - [Nicolas Nieva](https://github.com/NicolaZK)
 
 Corrector: **{Corrector}**
 
