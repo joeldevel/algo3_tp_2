@@ -36,6 +36,6 @@ class AsimiladorTest {
         int resultado = volcan.extraerGasUsandoRefineria();
 
         // Assert
-        assertEquals(20, resultado);
+        assertEquals(resultado, 20);
     }
 }

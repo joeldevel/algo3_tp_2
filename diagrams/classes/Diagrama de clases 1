@@ -1,0 +1,70 @@
+"Criadero"
+
+@startuml
+
+class Criadero {
+    -estadoOperativo: EstadoOperativo
+    -maxLarvas: int
+    +Criadero(Tiempo, EstadoOperativo, Moho)
+    +contarLarvas()
+    +evolucionar(Larva)
+    +avanzarTiempo()
+    +generarLarva(): Larva
+}
+
+interface Evolucionable{
+	+evolucionar(UnidadRaza)
+}
+
+class Larva{
+	+evolucionar(): Zangano
+}
+
+class Moho{
+	-radio: int
+	+expandirse()
+}
+
+class Tiempo{
+	-cantidad: Int
+	+Tiempo(cantidad)
+	+avanzarTiempo()
+	+tiempo(): Int
+}
+
+interface EstadoOperativo{
+    +contarLarvas()
+    +evolucionar(Larva)
+    +avanzarTurno()
+    +generarLarva(): Larva
+}
+
+class CriaderoUtilizable
+class CriaderoNoUtilizable
+
+Criadero --> EstadoOperativo
+CriaderoUtilizable ..up|> EstadoOperativo
+CriaderoNoUtilizable ..up|> EstadoOperativo
+
+Tiempo <-right- Criadero
+Larva ..|> Evolucionable
+Criadero --> Larva
+Criadero o-- Moho
+
+@enduml
+
+"Inicialmente el Criadero comenzara con un estado Operativo
+de CriaderoNoUtilizable.
+Si quisieramos pedirle a Criadero que cuenta las larvas,
+dentro del metodo contarLarvas() hariamos algo como
+
+estadoOperativo contarLarvas()
+
+y utilizando de esta forma polimorfismo dependiendo
+de su estado (que cambiara en tiempo de ejecucion)
+la respuesta al mensaje sera diferente.
+Estamos delegando en el estadoOperativo.
+
+Por esta razon es que Criadero es una clase concreta.
+Dentro de Criadero se delegaran los distintos tipos
+de mensajes."
