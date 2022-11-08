@@ -275,31 +275,87 @@ class GasVespeno{
 }
 
 class Volcan{
-	-edificio: Construccion
-	+Volcan(EdificioVacio)
-	+construir(Construccion edificio)
-	+extraerGas()
-	+extraer(cantidadAExtraer)
+	-refineria: RefineriaDeGas
+	-cantidadDeGasVespenoDisponible: int
+	+Volcan()
+	+construirRefineriaDeGas(unaRefineria)
+	+extraerGasUsandoRefineria()
+	+extraerGas(cantidadDeGasParaExtraer)
 }
 
-abstract class RefineriaDeGas{
-	-cantidadExtraible: int
-	+RefineriaDeGas(cantidad)
-	+extraerGas(Volcan)
+interface RefineriaDeGas{
+	+extraerGasUsandoRefineria(unVolcan)
 }
 
 class Extractor{
-	-zanganos: Zangano
-	-tiempo
-	-recursosNecesarios
+	-estadoOperativo: EstadoOperativo
+	-tiempoDeConstruccion: int
+	-costoMineral: int
+	-costoGas: int
+	+Extractor()
 	+guardarZangano(unZangano)
+	+avanzarTurno()
+	+extraerGasUsandoRefineria()
+}
+
+interface EstadoOperativoExtractor{
+    +extraerGas()
+    +guardarZangano(unZangano)
+}
+
+class ExtractorUtilizable {
+    -vida: int
+    -cantidadExtraible: int
+    -cantidadMaximaDeZanganos: int
+    -zanganos: Zangano
+    +ExtractorUtilziable(unaCantidadExtraible)
+    +extraerGas()
+    +guardarZangano()
+}
+
+class ExtractorNoUtilizable {
+    +ExtractorNoUtilizable()
+    +extraerGas()
+    +guardarZangano()
 }
 
 class Asimilador{
+    -estadoOperativo: EstadoOperativo
+    -tiempoDeConstruccion: int
+    -costoMineral: int
+    -costoGas: int
+    +Asimilador()
+    +avanzarTurno()
+    +extraerGasUsandoRefineria()
 }
 
-RefineriaDeGas <|--Extractor
-RefineriaDeGas <|--Asimilador
+interface EstadoOperativoAsimilador{
+    +extraerGas()
+}
+
+class AsimiladorUtilizable {
+    -vida: int
+    -escudo: int
+    -cantidadExtraible: int
+    +ExtractorUtilziable(unaCantidadExtraible)
+    +extraerGas()
+}
+
+class AsimiladorNoUtilizable {
+    +ExtractorNoUtilizable()
+    +extraerGas()
+}
+
+Extractor --> EstadoOperativoExtractor
+ExtractorUtilizable ..up|> EstadoOperativoExtractor
+ExtractorNoUtilizable ..up|> EstadoOperativoExtractor
+
+Asimilador --> EstadoOperativoAsimilador
+AsimiladorUtilizable ..up|> EstadoOperativoAsimilador
+AsimiladorNoUtilizable ..up|> EstadoOperativoAsimilador
+
+RefineriaDeGas <|.. Extractor
+RefineriaDeGas <|.. Asimilador
 
 Volcan --> GasVespeno
 Volcan --> RefineriaDeGas
