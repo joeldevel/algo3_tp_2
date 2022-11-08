@@ -2,12 +2,10 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Asimilador;
 import edu.fiuba.algo3.modelo.EdificioNoOperativoException;
-import edu.fiuba.algo3.modelo.Extractor;
 import edu.fiuba.algo3.modelo.Volcan;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AsimiladorTest {
 
