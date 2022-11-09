@@ -11,7 +11,7 @@ class AsimiladorTest {
     @Test
     void test01SeConstruyeUnAsimiladorEnUnVolcanYNoSeEncuentraOperativo(){
         Asimilador asimilador = new Asimilador();
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(asimilador);
 
         assertThrows(EdificioNoOperativoException.class,()->{
@@ -23,7 +23,7 @@ class AsimiladorTest {
     void test02SeConstruyeUnAsimiladorEnUnVolcanYLuegoDeSeisTurnosSeExtraeGasYDevuelveElResultadoIndicado(){
         // Arrange
         Asimilador asimilador = new Asimilador();
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(asimilador);
         asimilador.avanzarTurno();
         asimilador.avanzarTurno();

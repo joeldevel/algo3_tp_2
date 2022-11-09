@@ -6,12 +6,12 @@ public class Guarida extends EdificioZerg {
 
     private EstadoOperativoGuarida estadoOperativo;
 
-    public Guarida(){
-        this.vidaMaxima = 1250;
-        this.vidaRestante = 1250;
-        this.tiempoDeConstruccion = -12;
-        this.costoMineral = 200;
-        this.costoGas = 100;
+    public Guarida(int unaVida, int unTiempoDeConstruccion, int unCostoMineral, int unCostoGas){
+        this.vidaMaxima = unaVida;
+        this.vidaRestante = unaVida;
+        this.tiempoDeConstruccion = unTiempoDeConstruccion;
+        this.costoMineral = unCostoMineral;
+        this.costoGas = unCostoGas;
         this.setComportamientoUtilizable(new GuaridaNoUtilizable());
     }
 

@@ -6,12 +6,12 @@ public class Espiral extends EdificioZerg {
 
     private EstadoOperativoEspiral estadoOperativo;
 
-    public Espiral(){
-        this.vidaMaxima = 1300;
-        this.vidaRestante = 1300;
-        this.tiempoDeConstruccion = -10;
-        this.costoMineral = 150;
-        this.costoGas = 100;
+    public Espiral(int unaVida, int unTiempoDeConstruccion, int unCostoMineral, int unCostoGas){
+        this.vidaMaxima = unaVida;
+        this.vidaRestante = unaVida;
+        this.tiempoDeConstruccion = unTiempoDeConstruccion;
+        this.costoMineral = unCostoMineral;
+        this.costoGas = unCostoGas;
         this.setComportamientoUtilizable(new EspiralNoUtilizable());
     }
 

@@ -7,12 +7,12 @@ public class ReservaDeProduccion extends EdificioZerg {
 
     private EstadoOperativoReservaDeProduccion estadoOperativo;
 
-    public ReservaDeProduccion(){
-        this.vidaMaxima = 1000;
-        this.vidaRestante = 1000;
-        this.tiempoDeConstruccion = -12;
-        this.costoMineral = 150;
-        this.costoGas = 0;
+    public ReservaDeProduccion(int unaVida, int unTiempoDeConstruccion, int unCostoMineral, int unCostoGas){
+        this.vidaMaxima = unaVida;
+        this.vidaRestante = unaVida;
+        this.tiempoDeConstruccion = unTiempoDeConstruccion;
+        this.costoMineral = unCostoMineral;
+        this.costoGas = unCostoGas;
         this.setComportamientoUtilizable(new ReservaDeProduccionNoUtilizable());
     }
 

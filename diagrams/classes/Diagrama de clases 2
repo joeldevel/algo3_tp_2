@@ -9,7 +9,7 @@ class GasVespeno{
 class Volcan{
 	-refineria: RefineriaDeGas
 	-cantidadDeGasVespenoDisponible: int
-	+Volcan()
+	+Volcan(unaCantidadDeGasVespeno)
 	+construirRefineriaDeGas(unaRefineria)
 	+extraerGasUsandoRefineria()
 	+extraerGas(cantidadDeGasParaExtraer)
@@ -21,11 +21,10 @@ interface RefineriaDeGas{
 
 class Extractor{
 	-estadoOperativo: EstadoOperativo
-	-tiempoDeConstruccion: int
-	-costoMineral: int
-	-costoGas: int
-	+Extractor()
+	-cantidadExtraible: int
+	+Extractor(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas, unaCantidadExtraible)
 	+guardarZangano(unZangano)
+	+setComportamientoUtilizable(nuevoEstadoOperativo)
 	+avanzarTurno()
 	+extraerGasUsandoRefineria()
 }
@@ -36,7 +35,6 @@ interface EstadoOperativoExtractor{
 }
 
 class ExtractorUtilizable {
-    -vida: int
     -cantidadExtraible: int
     -cantidadMaximaDeZanganos: int
     -zanganos: Zangano

@@ -7,13 +7,13 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     private EstadoOperativoExtractor estadoOperativo;
     private int cantidadExtraible;
 
-    public Extractor(){
-        this.vidaMaxima = 750;
-        this.vidaRestante = 750;
-        this.cantidadExtraible = 10;
-        this.tiempoDeConstruccion = -6;
-        this.costoMineral = 100;
-        this.costoGas = 0;
+    public Extractor(int unaVida, int unTiempoDeConstruccion, int unCostoMineral, int unCostoGas, int unaCantidadExtraible){
+        this.vidaMaxima = unaVida;
+        this.vidaRestante = unaVida;
+        this.tiempoDeConstruccion = unTiempoDeConstruccion;
+        this.costoMineral = unCostoMineral;
+        this.costoGas = unCostoGas;
+        this.cantidadExtraible = unaCantidadExtraible;
         this.setComportamientoUtilizable(new ExtractorNoUtilizable());
     }
 

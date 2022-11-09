@@ -10,7 +10,7 @@ class ReservaDeProduccionTest {
     @Test
     void test01SeConstruyeUnaReservaDeProduccionYRecibeDanio(){
         // Arrange
-        ReservaDeProduccion rdp = new ReservaDeProduccion();
+        ReservaDeProduccion rdp = new ReservaDeProduccion(1000, -12, 150, 0);
         rdp.recibirDanio(10);
 
         // Act
@@ -23,7 +23,7 @@ class ReservaDeProduccionTest {
     @Test
     void test02SeConstruyeUnaReservaDeProduccionQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        ReservaDeProduccion rdp = new ReservaDeProduccion();
+        ReservaDeProduccion rdp = new ReservaDeProduccion(1000, -12, 150, 0);
         rdp.recibirDanio(10);
 
         // Act

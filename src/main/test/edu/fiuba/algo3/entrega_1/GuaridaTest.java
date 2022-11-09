@@ -10,7 +10,7 @@ class GuaridaTest {
     @Test
     void test01SeConstruyeUnaGuaridaYRecibeDanio(){
         // Arrange
-        Guarida guarida = new Guarida();
+        Guarida guarida = new Guarida(1250, -12, 200, 100);
         guarida.recibirDanio(10);
 
         // Act
@@ -23,7 +23,7 @@ class GuaridaTest {
     @Test
     void test02SeConstruyeUnaGuaridaQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Guarida guarida = new Guarida();
+        Guarida guarida = new Guarida(1250, -12, 200, 100);
         guarida.recibirDanio(10);
 
         // Act

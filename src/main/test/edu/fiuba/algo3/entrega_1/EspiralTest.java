@@ -10,7 +10,7 @@ class EspiralTest {
     @Test
     void test01SeConstruyeUnaEspiralYRecibeDanio(){
         // Arrange
-        Espiral espiral = new Espiral();
+        Espiral espiral = new Espiral(1300, -10, 150, 100);
         espiral.recibirDanio(10);
 
         // Act
@@ -23,7 +23,7 @@ class EspiralTest {
     @Test
     void test02SeConstruyeUnaEspiralQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Espiral espiral = new Espiral();
+        Espiral espiral = new Espiral(1300, -10, 150, 100);
         espiral.recibirDanio(10);
 
         // Act

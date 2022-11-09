@@ -12,8 +12,8 @@ class ExtractorTest {
 
     @Test
     void test01SeConstruyeUnExtractorEnUnVolcanYNoSeEncuentraOperativo(){
-        Extractor extractor = new Extractor();
-        Volcan volcan = new Volcan();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
+        Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
 
         assertThrows(EdificioNoOperativoException.class,()->{
@@ -29,8 +29,8 @@ class ExtractorTest {
     @Test
     void test03SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeExtraeGasSinTenerZanganosDevuelveElResultadoIndicado(){
         // Arrange
-        Extractor extractor = new Extractor();
-        Volcan volcan = new Volcan();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
+        Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();
         extractor.avanzarTurno();
@@ -49,8 +49,8 @@ class ExtractorTest {
     @Test
     void test04SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeGuardaUnZanganoYSeExtraeElValorDeGasIndicado(){
         // Arrange
-        Extractor extractor = new Extractor();
-        Volcan volcan = new Volcan();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
+        Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas((extractor));
         extractor.avanzarTurno();
         extractor.avanzarTurno();
@@ -71,8 +71,8 @@ class ExtractorTest {
     @Test
     void test05SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeGuardanDosZanganoYSeExtraeElValorDeGasIndicado(){
         // Arrange
-        Extractor extractor = new Extractor();
-        Volcan volcan = new Volcan();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
+        Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();
         extractor.avanzarTurno();
@@ -95,8 +95,8 @@ class ExtractorTest {
     @Test
     void test06SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeGuardanTresZanganoYSeExtraeElValorDeGasIndicado(){
         // Arrange
-        Extractor extractor = new Extractor();
-        Volcan volcan = new Volcan();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
+        Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();
         extractor.avanzarTurno();
@@ -121,7 +121,7 @@ class ExtractorTest {
     @Test
     void test07SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
         // Arrange
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
@@ -144,7 +144,7 @@ class ExtractorTest {
     @Test
     void test08SeConstruyeUnExtractorYRecibeDanio(){
         // Arrange
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
         extractor.recibirDanio(10);
 
         // Act
@@ -157,7 +157,7 @@ class ExtractorTest {
     @Test
     void test09SeConstruyeUnExtractorQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
         extractor.recibirDanio(10);
 
         // Act

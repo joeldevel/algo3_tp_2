@@ -36,8 +36,8 @@ abstract class EdificioZerg {
 
 class ReservaDeProduccion {
     -estadoOperativo: EstadoOperativo
-    +ReservaDeProduccion()
-    +setComportamientoUtilizable()
+    +ReservaDeProduccion(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas)
+    +setComportamientoUtilizable(nuevoEstadoOperativo)
 }
 interface EstadoOperativoReservaDeProduccion
 class ReservaDeProduccionUtilizable {
@@ -68,8 +68,8 @@ class CriaderoNoUtilizable
 class Extractor{
     -estadoOperativo: EstadoOperativo
     -cantidadExtraible: int
-    +Extractor()
-    +setComportamientoUtilizable()
+    +Extractor(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas, unaCantidadExtraible)
+    +setComportamientoUtilizable(nuevoEstadoOperativo)
 	+extraerGasUsandoRefineria()
 	+guardarZangano(unZangano)
 }
@@ -93,8 +93,8 @@ class ExtractorNoUtilizable {
 
 class Guarida {
     -estadoOperativo: EstadoOperativo
-    +Guarida()
-    +setComportamientoUtilizable()
+    +Guarida(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas)
+    +setComportamientoUtilizable(nuevoEstadoOperativo)
 }
 interface EstadoOperativoGuarida
 class GuaridaUtilizable {
@@ -106,8 +106,8 @@ class GuaridaNoUtilizable {
 
 class Espiral {
     -estadoOperativo: EstadoOperativo
-    +Espiral()
-    +setComportamientoUtilizable()
+    +Espiral(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas)
+    +setComportamientoUtilizable(nuevoEstadoOperativo)
 }
 interface EstadoOperativoEspiral
 class EspiralUtilizable {
