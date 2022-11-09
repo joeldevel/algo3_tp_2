@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GuaridaTest {
-
+    /* A guarida le falta el prerequisito de reserva de producción. */
     @Test
     void test01SeConstruyeUnaGuaridaYNoSeEncuentraOperativa(){
         // Arrange

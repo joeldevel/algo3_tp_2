@@ -4,10 +4,13 @@ public class NexoMineralUtilizable implements EstadoOperativoNexoMineral {
 
     private int vida;
 
+    private int escudo;
+
     private int cantidadRecolectable;
 
-    public NexoMineralUtilizable(int unaVida, int unaCantidadRecolecatble) {
+    public NexoMineralUtilizable(int unaVida, int unEscudo, int unaCantidadRecolecatble) {
         this.vida = unaVida;
+        this.escudo = unEscudo;
         this.cantidadRecolectable = unaCantidadRecolecatble;
     }
 

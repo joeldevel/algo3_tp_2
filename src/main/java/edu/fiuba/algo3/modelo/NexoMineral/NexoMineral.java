@@ -16,12 +16,18 @@ public class NexoMineral implements RecolectorDeMineral {
 
     private int tiempoDeConstruccion;
 
+    private int costoMineral;
+
+    private int costoGas;
+
     public NexoMineral() {
         this.vidaMaxima = 250;
         this.vidaRestante = 250;
         this.escudoMaximo = 250;
         this.escudoRestante = 250;
         this.tiempoDeConstruccion = -4;
+        this.costoMineral = 50;
+        this.costoGas = 0;
         this.estadoOperativo = new NexoMineralNoUtilizable();
     }
 
@@ -36,7 +42,7 @@ public class NexoMineral implements RecolectorDeMineral {
 
         /* No específica cuanto mineral se puede llevar un NexoMineral. */
         if (tiempoDeConstruccion == 0) {
-            this.setComportamientoUtilizable(new NexoMineralUtilizable(this.vidaMaxima, 10));
+            this.setComportamientoUtilizable(new NexoMineralUtilizable(this.vidaMaxima, this.escudoMaximo, 10));
         }
 
         if(this.vidaRestante < this.vidaMaxima) {
