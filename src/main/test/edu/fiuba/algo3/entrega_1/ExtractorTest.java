@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
+import edu.fiuba.algo3.modelo.Extractor.Extractor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +17,7 @@ class ExtractorTest {
         volcan.construirRefineriaDeGas(extractor);
 
         assertThrows(EdificioNoOperativoException.class,()->{
-            volcan.extraerGasUsandoRefineria();
+            int gasExtraido = volcan.extraerGasUsandoRefineria();
         });
     }
 

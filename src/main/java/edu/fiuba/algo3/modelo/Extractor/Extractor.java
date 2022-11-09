@@ -1,8 +1,10 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Extractor;
+
+import edu.fiuba.algo3.modelo.*;
 
 public class Extractor implements RefineriaDeGas {
 
-    private EstadoOperativoExtractor estadoOperativoExtractor;
+    private EstadoOperativoExtractor estadoOperativo;
     private int tiempoDeConstruccion;
     private int costoMineral;
     private int costoGas;
@@ -11,11 +13,15 @@ public class Extractor implements RefineriaDeGas {
         this.tiempoDeConstruccion = -6;
         this.costoMineral = 100;
         this.costoGas = 0;
-        this.estadoOperativoExtractor = new ExtractorNoUtilizable();
+        this.estadoOperativo = new ExtractorNoUtilizable();
     }
 
     public void guardarZangano(Zangano zangano) {
-        this.estadoOperativoExtractor.guardarZangano(zangano);
+        this.estadoOperativo.guardarZangano(zangano);
+    }
+
+    public void setComportamientoUtilizable(ExtractorUtilizable nuevoEstadoOperativo) {
+        this.estadoOperativo = nuevoEstadoOperativo;
     }
 
     public void avanzarTurno() {
@@ -25,12 +31,12 @@ public class Extractor implements RefineriaDeGas {
         }
 
         if(tiempoDeConstruccion == 0) {
-            this.estadoOperativoExtractor = new ExtractorUtilizable(750,10);
+            this.setComportamientoUtilizable(new ExtractorUtilizable(750,10));
         }
     }
 
     @Override
     public int extraerGasUsandoRefineria(Volcan unVolcan) {
-         return unVolcan.extraerGas(estadoOperativoExtractor.extraerGas());
+         return unVolcan.extraerGas(estadoOperativo.extraerGas());
     }
 }

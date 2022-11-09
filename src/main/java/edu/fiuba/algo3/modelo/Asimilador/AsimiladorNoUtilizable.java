@@ -1,4 +1,6 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Asimilador;
+
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 
 public class AsimiladorNoUtilizable implements EstadoOperativoAsimilador {
 

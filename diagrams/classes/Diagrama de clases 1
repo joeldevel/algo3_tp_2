@@ -8,7 +8,7 @@ class Criadero {
     +Criadero(Tiempo, EstadoOperativo, Moho)
     +contarLarvas()
     +evolucionar(Larva)
-    +avanzarTiempo()
+    +avanzarTurno()
     +generarLarva(): Larva
 }
 
@@ -32,7 +32,7 @@ class Tiempo{
 	+tiempo(): Int
 }
 
-interface EstadoOperativo{
+interface EstadoOperativoCriadero{
     +contarLarvas()
     +evolucionar(Larva)
     +avanzarTurno()
@@ -42,9 +42,9 @@ interface EstadoOperativo{
 class CriaderoUtilizable
 class CriaderoNoUtilizable
 
-Criadero --> EstadoOperativo
-CriaderoUtilizable ..up|> EstadoOperativo
-CriaderoNoUtilizable ..up|> EstadoOperativo
+Criadero --> EstadoOperativoCriadero
+CriaderoUtilizable ..up|> EstadoOperativoCriadero
+CriaderoNoUtilizable ..up|> EstadoOperativoCriadero
 
 Tiempo <-right- Criadero
 Larva ..|> Evolucionable

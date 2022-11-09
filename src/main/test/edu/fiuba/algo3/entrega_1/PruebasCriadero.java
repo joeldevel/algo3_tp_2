@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Creador;
 import edu.fiuba.algo3.modelo.Criadero;
-import edu.fiuba.algo3.modelo.CriaderoSinLarvasException;
+import edu.fiuba.algo3.modelo.Excepciones.CriaderoSinLarvasException;
 import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Zangano;
 

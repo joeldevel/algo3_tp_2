@@ -1,0 +1,139 @@
+"Construcciones Zerg"
+
+"Es una interfaz EstadoOperativo para cada edificio debido
+a que los edificios tienen comportamiento (metodos) distinto."
+
+"Falta hacer el refactor para subir todo el codigo
+repetido a la clase madre EdificioZerg."
+
+"ReservaDeProduccion evoluciona larvas a TBD"
+
+"Guarida evoluciona larvas a TBD"
+
+"Espiral permite crear TBD"
+
+@startuml
+
+abstract class Raza{
+	-construcciones: Construccion
+	-unidades: Unidad
+}
+
+class Zerg
+
+abstract class EdificioZerg {
+    -estadoOperativo: EstadoOperativo
+    -tiempoDeConstruccion: int
+    -costoMineral: int
+    -costoGas: int
+    +Edificio()
+    +setComportamientoUtilizable()
+    +avanzarTurno()
+}
+
+note left: Todos los edificios Zerg comparten estos atributos y metodos. Ademas faltan aquellos para regenerar vida y recibir daño.
+
+class ReservaDeProduccion
+interface EstadoOperativoReservaDeProduccion
+class ReservaDeProduccionUtilizable {
+    -vida: int
+    +ReservaDeProduccionUtilizable(unaVida)
+}
+class ReservaDeProduccionNoUtilizable {
+    +ReservaDeProduccionNoUtilizable()
+}
+
+class Criadero {
+    -estadoOperativo: EstadoOperativo
+    -tiempoDeConstruccion: int
+    -costoMineral: int
+    -costoGas: int
+    +Criadero(Tiempo, EstadoOperativo, Moho)
+    +contarLarvas()
+    +evolucionar(Larva)
+    +avanzarTurno()
+    +generarLarva(): Larva
+}
+interface EstadoOperativoCriadero{
+    +contarLarvas()
+    +evolucionar(Larva)
+    +generarLarva(): Larva
+}
+class CriaderoUtilizable {
+    -vida: int
+    -maxLarvas: int
+}
+class CriaderoNoUtilizable
+
+class Extractor{
+	+extraerGasUsandoRefineria()
+	+guardarZangano(unZangano)
+}
+interface EstadoOperativoExtractor{
+    +extraerGas()
+    +guardarZangano(unZangano)
+}
+class ExtractorUtilizable {
+    -vida: int
+    -cantidadExtraible: int
+    -cantidadMaximaDeZanganos: int
+    -zanganos: Zangano
+    +ExtractorUtilziable(unaCantidadExtraible)
+    +extraerGas()
+    +guardarZangano()
+}
+class ExtractorNoUtilizable {
+    +ExtractorNoUtilizable()
+    +extraerGas()
+    +guardarZangano()
+}
+
+class Guarida
+interface EstadoOperativoGuarida
+class GuaridaUtilizable {
+    -vida: int
+    +GuaridaUtilizable(unaVida)
+}
+class GuaridaNoUtilizable {
+    +GuaridaNoUtilizable()
+}
+
+class Espiral
+interface EstadoOperativoEspiral
+class EspiralUtilizable {
+    -vida: int
+    +EspiraUtilizable(unaVida)
+}
+class EspiralNoUtilizable {
+    +EspiralNoUtilizable()
+}
+
+Raza <|-- Zerg
+Zerg --> EdificioZerg
+
+EdificioZerg <|-- ReservaDeProduccion
+ReservaDeProduccion --> EstadoOperativoReservaDeProduccion
+ReservaDeProduccionUtilizable .up.|> EstadoOperativoReservaDeProduccion
+ReservaDeProduccionNoUtilizable .up.|> EstadoOperativoReservaDeProduccion
+
+EdificioZerg <|-- Criadero
+Criadero --> EstadoOperativoCriadero
+CriaderoUtilizable .up.|> EstadoOperativoCriadero
+CriaderoNoUtilizable .up.|> EstadoOperativoCriadero
+
+EdificioZerg <|-- Extractor
+Extractor --> EstadoOperativoExtractor
+ExtractorUtilizable .up.|> EstadoOperativoExtractor
+ExtractorNoUtilizable .up.|> EstadoOperativoExtractor
+
+EdificioZerg <|-- Guarida
+Guarida --> EstadoOperativoGuarida
+GuaridaUtilizable .up.|> EstadoOperativoGuarida
+GuaridaNoUtilizable .up.|> EstadoOperativoGuarida
+
+EdificioZerg <|-- Espiral
+Espiral --> EstadoOperativoEspiral
+EspiralUtilizable .up.|> EstadoOperativoEspiral
+EspiralNoUtilizable .up.|> EstadoOperativoEspiral
+
+@enduml

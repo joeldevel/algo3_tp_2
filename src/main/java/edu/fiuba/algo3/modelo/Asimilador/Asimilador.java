@@ -1,4 +1,6 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Asimilador;
+
+import edu.fiuba.algo3.modelo.*;
 
 public class Asimilador implements RefineriaDeGas {
 
@@ -14,6 +16,10 @@ public class Asimilador implements RefineriaDeGas {
         this.estadoOperativo = new AsimiladorNoUtilizable();
     }
 
+    public void setComportamientoUtilizable(AsimiladorUtilizable nuevoEstadoOperativo) {
+        this.estadoOperativo = nuevoEstadoOperativo;
+    }
+
     public void avanzarTurno() {
 
         if(tiempoDeConstruccion < 0) {
@@ -21,7 +27,7 @@ public class Asimilador implements RefineriaDeGas {
         }
 
         if(tiempoDeConstruccion == 0) {
-            this.estadoOperativo = new AsimiladorUtilizable(450, 450, 20);
+            this.setComportamientoUtilizable(new AsimiladorUtilizable(450, 450, 20));
         }
     }
 
