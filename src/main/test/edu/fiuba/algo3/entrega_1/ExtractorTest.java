@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
+import edu.fiuba.algo3.modelo.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Extractor.Extractor;
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +51,7 @@ class ExtractorTest {
         // Arrange
         Extractor extractor = new Extractor();
         Volcan volcan = new Volcan();
-        volcan.construirRefineriaDeGas(extractor);
+        volcan.construirRefineriaDeGas((extractor));
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
@@ -142,15 +142,9 @@ class ExtractorTest {
     }
 
     @Test
-    void test08SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosRecibeDanio(){
+    void test08SeConstruyeUnExtractorYRecibeDanio(){
         // Arrange
         Extractor extractor = new Extractor();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
         extractor.recibirDanio(10);
 
         // Act
@@ -161,15 +155,9 @@ class ExtractorTest {
     }
 
     @Test
-    void test08SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
+    void test09SeConstruyeUnExtractorQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Extractor extractor = new Extractor();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
-        extractor.avanzarTurno();
         extractor.recibirDanio(10);
 
         // Act

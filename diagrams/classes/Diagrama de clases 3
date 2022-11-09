@@ -22,21 +22,23 @@ abstract class Raza{
 class Zerg
 
 abstract class EdificioZerg {
-    -estadoOperativo: EstadoOperativo
-    -vida: int
+    -vidaMaxima: int
+    -vidaRestante: int
     -tiempoDeConstruccion: int
     -costoMineral: int
     -costoGas: int
     +Edificio()
-    +setComportamientoUtilizable()
-    +avanzarTurno()
+    +avanzarTurno(){abstract}
     +recuperarVida()
     +recibirDanio(unDanio)
+    +obtenerVida()
 }
 
-note left: Todos los edificios Zerg comparten estos atributos y metodos.
-
-class ReservaDeProduccion
+class ReservaDeProduccion {
+    -estadoOperativo: EstadoOperativo
+    +ReservaDeProduccion()
+    +setComportamientoUtilizable()
+}
 interface EstadoOperativoReservaDeProduccion
 class ReservaDeProduccionUtilizable {
     +ReservaDeProduccionUtilizable()
@@ -47,13 +49,11 @@ class ReservaDeProduccionNoUtilizable {
 
 class Criadero {
     -estadoOperativo: EstadoOperativo
-    -tiempoDeConstruccion: int
-    -costoMineral: int
-    -costoGas: int
+    -maxLarvas: int
     +Criadero(Tiempo, EstadoOperativo, Moho)
+    +setComportamientoUtilizable()
     +contarLarvas()
     +evolucionar(Larva)
-    +avanzarTurno()
     +generarLarva(): Larva
 }
 interface EstadoOperativoCriadero{
@@ -62,11 +62,14 @@ interface EstadoOperativoCriadero{
     +generarLarva(): Larva
 }
 class CriaderoUtilizable {
-    -maxLarvas: int
 }
 class CriaderoNoUtilizable
 
 class Extractor{
+    -estadoOperativo: EstadoOperativo
+    -cantidadExtraible: int
+    +Extractor()
+    +setComportamientoUtilizable()
 	+extraerGasUsandoRefineria()
 	+guardarZangano(unZangano)
 }
@@ -88,7 +91,11 @@ class ExtractorNoUtilizable {
     +guardarZangano()
 }
 
-class Guarida
+class Guarida {
+    -estadoOperativo: EstadoOperativo
+    +Guarida()
+    +setComportamientoUtilizable()
+}
 interface EstadoOperativoGuarida
 class GuaridaUtilizable {
     +GuaridaUtilizable()
@@ -97,7 +104,11 @@ class GuaridaNoUtilizable {
     +GuaridaNoUtilizable()
 }
 
-class Espiral
+class Espiral {
+    -estadoOperativo: EstadoOperativo
+    +Espiral()
+    +setComportamientoUtilizable()
+}
 interface EstadoOperativoEspiral
 class EspiralUtilizable {
     +EspiraUtilizable()

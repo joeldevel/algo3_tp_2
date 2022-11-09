@@ -1,31 +1,37 @@
 package edu.fiuba.algo3.modelo.Espiral;
 
-public class Espiral {
+import edu.fiuba.algo3.modelo.EdificioZerg;
+
+public class Espiral extends EdificioZerg {
 
     private EstadoOperativoEspiral estadoOperativo;
-    private int tiempoDeConstruccion;
-    private int costoMineral;
-    private int costoGas;
 
     public Espiral(){
+        this.vidaMaxima = 1300;
+        this.vidaRestante = 1300;
         this.tiempoDeConstruccion = -10;
         this.costoMineral = 150;
         this.costoGas = 100;
-        this.estadoOperativo = new EspiralNoUtilizable();
+        this.setComportamientoUtilizable(new EspiralNoUtilizable());
     }
 
-    public void setComportamientoUtilizable(EspiralUtilizable nuevoEstadoOperativo) {
+    public void setComportamientoUtilizable(EstadoOperativoEspiral nuevoEstadoOperativo) {
         this.estadoOperativo = nuevoEstadoOperativo;
     }
 
+    @Override
     public void avanzarTurno() {
+
+        if(this.vidaRestante < this.vidaMaxima) {
+            this.recuperarVida();
+        }
 
         if(tiempoDeConstruccion < 0) {
             this.tiempoDeConstruccion = this.tiempoDeConstruccion + 1;
         }
 
         if(tiempoDeConstruccion == 0) {
-            this.setComportamientoUtilizable(new EspiralUtilizable(1300));
+            this.setComportamientoUtilizable(new EspiralUtilizable());
         }
     }
 }

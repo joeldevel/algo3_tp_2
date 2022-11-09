@@ -7,14 +7,12 @@ import java.util.ArrayList;
 
 public class ExtractorUtilizable implements EstadoOperativoExtractor {
 
-    private int vida;
     private int cantidadExtraible;
     private int cantidadMaximaDeZanganos;
     private ArrayList<Zangano> zanganos;
 
-    public ExtractorUtilizable(int unaVida, int unaCantidadExtraible) {
+    public ExtractorUtilizable(int unaCantidadExtraible) {
         this.zanganos = new ArrayList<>();
-        this.vida = unaVida;
         this.cantidadMaximaDeZanganos = 3;
         this.cantidadExtraible = unaCantidadExtraible;
     }
@@ -32,6 +30,5 @@ public class ExtractorUtilizable implements EstadoOperativoExtractor {
         }
 
         this.zanganos.add(unZangano);
-        //System.out.println(this.zanganos.size());
     }
 }
