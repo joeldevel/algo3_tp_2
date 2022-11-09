@@ -28,4 +28,8 @@ public class Guarida {
             this.setComportamientoUtilizable(new GuaridaUtilizable(1250));
         }
     }
+
+    public boolean evolucionarLarva() {
+        return this.estadoOperativo.evolucionarLarva();
+    }
 }

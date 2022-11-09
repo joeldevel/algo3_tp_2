@@ -7,7 +7,7 @@ public class ExtractorNoUtilizable implements EstadoOperativoExtractor {
 
     public ExtractorNoUtilizable() {}
     @Override
-     public int extraerGas() {
+    public int extraerGas() {
         throw new EdificioNoOperativoException();
     }
     @Override
