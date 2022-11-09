@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Guarida;
 
 public class Guarida {
-
     private EstadoOperativoGuarida estadoOperativo;
     private int tiempoDeConstruccion;
     private int costoMineral;

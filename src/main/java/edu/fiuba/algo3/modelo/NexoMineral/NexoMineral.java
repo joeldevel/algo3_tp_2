@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.NexoMineral;
 import edu.fiuba.algo3.modelo.*;
 
 public class NexoMineral implements RecolectorDeMineral {
-
     private EstadoOperativoNexoMineral estadoOperativo;
 
     private int vidaMaxima;

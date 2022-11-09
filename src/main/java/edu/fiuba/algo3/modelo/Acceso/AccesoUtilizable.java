@@ -11,7 +11,7 @@ public class AccesoUtilizable implements EstadoOperativoAcceso {
     }
 
     public boolean transportarTropas() {
-        /* TBD. Por ahora devuelve True.*/
+        /* TBD. Por ahora devuelve True. */
 
         return true;
     }

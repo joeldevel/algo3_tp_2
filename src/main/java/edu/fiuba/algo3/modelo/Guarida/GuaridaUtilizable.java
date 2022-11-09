@@ -11,7 +11,7 @@ public class GuaridaUtilizable implements EstadoOperativoGuarida {
     }
 
     public boolean evolucionarLarva() {
-        /* TBD. Por ahora devuelve True.*/
+        /* TBD. Por ahora devuelve True. */
 
         return true;
     }

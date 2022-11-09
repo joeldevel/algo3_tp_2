@@ -20,7 +20,7 @@ public class AccesoTest {
     }
 
     @Test
-    void test02SeConstruyeUnaGuaridaYDespuesDeDoceTurnosSeEncuentraOperativa(){
+    void test02SeConstruyeUnAccesoYDespuesDeOchoTurnosSeEncuentraOperativo(){
         // Arrange
         Acceso acceso = new Acceso();
 

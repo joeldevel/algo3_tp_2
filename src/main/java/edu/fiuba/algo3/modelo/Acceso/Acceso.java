@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Acceso;
 
 public class Acceso {
-
     private EstadoOperativoAcceso estadoOperativo;
     private int tiempoDeConstruccion;
     private int costoMineral;
