@@ -23,21 +23,23 @@ class Zerg
 
 abstract class EdificioZerg {
     -estadoOperativo: EstadoOperativo
+    -vida: int
     -tiempoDeConstruccion: int
     -costoMineral: int
     -costoGas: int
     +Edificio()
     +setComportamientoUtilizable()
     +avanzarTurno()
+    +recuperarVida()
+    +recibirDanio(unDanio)
 }
 
-note left: Todos los edificios Zerg comparten estos atributos y metodos. Ademas faltan aquellos para regenerar vida y recibir daño.
+note left: Todos los edificios Zerg comparten estos atributos y metodos.
 
 class ReservaDeProduccion
 interface EstadoOperativoReservaDeProduccion
 class ReservaDeProduccionUtilizable {
-    -vida: int
-    +ReservaDeProduccionUtilizable(unaVida)
+    +ReservaDeProduccionUtilizable()
 }
 class ReservaDeProduccionNoUtilizable {
     +ReservaDeProduccionNoUtilizable()
@@ -60,7 +62,6 @@ interface EstadoOperativoCriadero{
     +generarLarva(): Larva
 }
 class CriaderoUtilizable {
-    -vida: int
     -maxLarvas: int
 }
 class CriaderoNoUtilizable
@@ -74,11 +75,10 @@ interface EstadoOperativoExtractor{
     +guardarZangano(unZangano)
 }
 class ExtractorUtilizable {
-    -vida: int
     -cantidadExtraible: int
     -cantidadMaximaDeZanganos: int
     -zanganos: Zangano
-    +ExtractorUtilziable(unaCantidadExtraible)
+    +ExtractorUtilizable(unaCantidadExtraible)
     +extraerGas()
     +guardarZangano()
 }
@@ -91,8 +91,7 @@ class ExtractorNoUtilizable {
 class Guarida
 interface EstadoOperativoGuarida
 class GuaridaUtilizable {
-    -vida: int
-    +GuaridaUtilizable(unaVida)
+    +GuaridaUtilizable()
 }
 class GuaridaNoUtilizable {
     +GuaridaNoUtilizable()
@@ -101,8 +100,7 @@ class GuaridaNoUtilizable {
 class Espiral
 interface EstadoOperativoEspiral
 class EspiralUtilizable {
-    -vida: int
-    +EspiraUtilizable(unaVida)
+    +EspiraUtilizable()
 }
 class EspiralNoUtilizable {
     +EspiralNoUtilizable()

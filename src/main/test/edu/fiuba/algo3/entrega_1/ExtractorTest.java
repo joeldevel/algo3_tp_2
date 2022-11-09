@@ -140,4 +140,42 @@ class ExtractorTest {
             extractor.guardarZangano(CuartoZangano);
         });
     }
+
+    @Test
+    void test08SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosRecibeDanio(){
+        // Arrange
+        Extractor extractor = new Extractor();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.recibirDanio(10);
+
+        // Act
+        int resultado = extractor.obtenerVida();
+
+        // Assert
+        assertEquals(resultado, 740);
+    }
+
+    @Test
+    void test08SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
+        // Arrange
+        Extractor extractor = new Extractor();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.avanzarTurno();
+        extractor.recibirDanio(10);
+
+        // Act
+        extractor.avanzarTurno();
+
+        // Assert
+        assertEquals(extractor.obtenerVida(), 750);
+    }
 }
