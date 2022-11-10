@@ -1,10 +1,10 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeRecursosException;
 
 import static edu.fiuba.algo3.util.Constantes.*;
 
-public class Jugador {
+public class Jugador implements IJugador {
     private int cantidadMineral;
     private int cantidadGas;
 
