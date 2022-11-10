@@ -28,4 +28,8 @@ public class ReservaDeProduccion {
             this.setComportamientoUtilizable(new ReservaDeProduccionUtilizable(1000));
         }
     }
+
+    public boolean evolucionarLarva() {
+        return this.estadoOperativo.evolucionarLarva();
+    }
 }

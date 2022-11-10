@@ -7,4 +7,10 @@ public class ReservaDeProduccionUtilizable implements EstadoOperativoReservaDePr
     public ReservaDeProduccionUtilizable(int unaVida) {
         this.vida = unaVida;
     }
+
+    public boolean evolucionarLarva() {
+        /* TBD. Por ahora devuelve True. */
+
+        return true;
+    }
 }
