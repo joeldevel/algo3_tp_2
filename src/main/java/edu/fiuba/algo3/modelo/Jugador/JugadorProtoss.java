@@ -4,11 +4,11 @@ import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeRecursosExceptio
 
 import static edu.fiuba.algo3.util.Constantes.*;
 
-public class Jugador implements IJugador {
+public class JugadorProtoss implements IJugador {
     private int cantidadMineral;
     private int cantidadGas;
 
-    public Jugador() {
+    public JugadorProtoss() {
         this.cantidadMineral = 0;
         this.cantidadGas = 0;
     }
