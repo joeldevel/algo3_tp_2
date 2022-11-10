@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.ValorInvalidoDeDanioError;
 import edu.fiuba.algo3.modelo.ValorInvalidoParaEscudoError;
 import edu.fiuba.algo3.modelo.ValorInvalidoParaVidaError;
 import edu.fiuba.algo3.modelo.Vida;
@@ -94,6 +95,39 @@ class EscudoTest {
 		
 		assertEquals(escudo.proteccion(),50);
 	}
+	
+	@Test
+	void test10UnEscudoRecibeDanioPorEncimaDeSuProteccionMaximaYSeRecuperaSuProteccionDeberiaSerSuRecuperacion() {
+		
+		Escudo escudo = new Escudo(100,50);
+		
+		escudo.recibirDanioPor(100);
+		escudo.recuperarse();
+		
+		assertEquals(escudo.proteccion(),50);
+	}
+	
+	@Test
+	void test11UnEscudoNoRecibeDanioYSeRecuperaSuProteccionDeberiaSerMaxima() {
+		
+		Escudo escudo = new Escudo(100,50);
+		
+		escudo.recuperarse();
+		
+		assertEquals(escudo.proteccion(),100);
+	}
+	
+	@Test
+	void test12UnEscudoRecibeDanioNegativoDeberiaLanzarUnaExcepcion() {
+		
+		Escudo escudo = new Escudo(500,30);
+		
+		assertThrows(ValorInvalidoDeDanioError.class,()->{
+			escudo.recibirDanioPor(-100);
+			});
+	}
+	
+	
 	
 	
 	
