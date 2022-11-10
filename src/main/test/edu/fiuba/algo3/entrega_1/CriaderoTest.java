@@ -266,4 +266,31 @@ class CriaderoTest {
 
 		assertEquals(criadero.contarLarvas(),3);
 	}
+
+	@Test
+	void test23SeConstruyeUnCriaderoYRecibeDanio() {
+		// Arrange
+		Criadero criadero = new Criadero();
+		criadero.recibirDanio(10);
+
+		// Act
+		int resultado = criadero.obtenerVida();
+
+		// Assert
+		assertEquals(resultado, 490);
+	}
+
+	@Test
+	void test24SeConstruyeUnCriaderoQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente() {
+		// Arrange
+		Criadero criadero = new Criadero();
+		criadero.recibirDanio(10);
+		criadero.avanzarTurno();
+
+		// Act
+		int resultado = criadero.obtenerVida();
+
+		// Assert
+		assertEquals(resultado, 500);
+	}
 }

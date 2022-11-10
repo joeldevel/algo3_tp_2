@@ -5,6 +5,7 @@ import java.util.*;
 public class Criadero extends EdificioZerg implements Edificio{
 
 	private int maxLarvas;
+
 	private EstadoDeEdificio estado;
 	private Tiempo tiempo;
 	private Moho moho;
@@ -27,7 +28,8 @@ public class Criadero extends EdificioZerg implements Edificio{
 		for(int i=0; i<this.maxLarvas; i++) {
 			larvas.add(new Larva());
 		}
-
+		this.vidaMaxima = 500;
+		this.vidaRestante = 500;
 	}
 
 	public boolean sePuedeUtilizar() {
@@ -51,6 +53,10 @@ public class Criadero extends EdificioZerg implements Edificio{
 		}
 		if(this.contarLarvas() < this.maxLarvas) {
 			this.larvas.add(new Larva());
+		}
+
+		if(this.vidaRestante < this.vidaMaxima) {
+			this.recuperarVida();
 		}
 	}
 
