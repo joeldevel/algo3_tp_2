@@ -36,4 +36,8 @@ public class Guarida extends EdificioZerg implements RequisitoDeConstruccion {
 	public boolean esIgualA(RequisitoDeConstruccion otroRequisito) {
 		return (otroRequisito instanceof Guarida);
 	}
+
+    public boolean evolucionarLarva() {
+        return this.estadoOperativo.evolucionarLarva();
+    }
 }
