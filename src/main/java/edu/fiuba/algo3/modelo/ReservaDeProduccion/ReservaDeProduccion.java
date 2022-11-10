@@ -51,4 +51,8 @@ public class ReservaDeProduccion extends EdificioZerg implements Edificio, Requi
 	public boolean esIgualA(RequisitoDeConstruccion otroRequisito) {
 		return (otroRequisito instanceof ReservaDeProduccion);
 	}
+
+	public boolean evolucionarLarva() {
+		return this.estadoOperativo.evolucionarLarva();
+	}
 }

@@ -120,7 +120,7 @@ class GuaridaTest {
 
 
     @Test
-    void test01SeConstruyeUnaGuaridaYRecibeDanio(){
+    void test06SeConstruyeUnaGuaridaYRecibeDanio(){
         // Arrange
         Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
         guarida.recibirDanio(10);
@@ -133,7 +133,7 @@ class GuaridaTest {
     }
 
     @Test
-    void test02SeConstruyeUnaGuaridaQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
+    void test07SeConstruyeUnaGuaridaQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
         guarida.recibirDanio(10);
