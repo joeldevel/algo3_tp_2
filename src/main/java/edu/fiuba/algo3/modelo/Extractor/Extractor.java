@@ -2,7 +2,9 @@ package edu.fiuba.algo3.modelo.Extractor;
 
 import edu.fiuba.algo3.modelo.*;
 
-public class Extractor extends EdificioZerg implements RefineriaDeGas {
+import java.util.ArrayList;
+
+public class Extractor extends EdificioZerg implements RefineriaDeGas, Edificio {
 
     private EstadoOperativoExtractor estadoOperativo;
     private int cantidadExtraible;
@@ -45,5 +47,15 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     @Override
     public int extraerGasUsandoRefineria(Volcan unVolcan) {
         return unVolcan.extraerGas(this.estadoOperativo.extraerGas());
+    }
+
+    @Override
+    public ArrayList<RequisitoDeConstruccion> requisitos() {
+        return null;
+    }
+
+    @Override
+    public void actualizarRequisitosDeLaUbicacion(ArrayList<RequisitoDeConstruccion> requisitos) {
+
     }
 }

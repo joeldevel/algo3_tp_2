@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 public abstract class EdificioZerg {
 
     public int vidaMaxima;
@@ -7,6 +9,7 @@ public abstract class EdificioZerg {
     public int tiempoDeConstruccion;
     public int costoMineral;
     public int costoGas;
+    public ArrayList<RequisitoDeConstruccion> requisitos;
 
     public abstract void avanzarTurno();
 
