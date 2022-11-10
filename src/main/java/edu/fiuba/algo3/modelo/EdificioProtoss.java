@@ -4,32 +4,45 @@ import java.util.ArrayList;
 
 public abstract class EdificioProtoss {
 
-    public int vidaMaxima;
-    public int vidaRestante;
+    protected Vida vida;
+    protected Tiempo tiempo;
+    protected ArrayList<RequisitoDeConstruccion> requisitos;
+    protected ArrayList<CostoDeConstruccion> costos;
+    protected Escudo escudo;
+   /* protected int costoMineral;
+    protected int costoGas;*/
 
-    public int escudoMaximo;
-
-    public int escudoRestante;
-
-    public int tiempoDeConstruccion;
-
-    public int costoMineral;
-
-    public int costoGas;
-
-    public ArrayList<RequisitoDeConstruccion> requisitos;
-
+    protected EdificioProtoss(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, 
+    						  ArrayList<CostoDeConstruccion> unosCostos, Escudo unEscudo) {
+    	this.vida = unaVida;
+    	this.tiempo = unTiempo;
+    	this.requisitos = unosRequisitos;
+    	this.costos = unosCostos;
+    	this.escudo = unEscudo;
+    }
+    
     public abstract void avanzarTurno();
 
     public void recibirDanio(int unDanio) {
-        this.escudoRestante = this.escudoRestante - unDanio;
+    	if(unDanio > this.escudo.proteccion()) {
+    		int danioRestante = unDanio - this.escudo.proteccion();
+    		this.escudo.recibirDanioPor(unDanio);
+    		this.vida.recibirDanioPor(danioRestante);
+    	}
+    	else {
+    		this.escudo.recibirDanioPor(unDanio);
+    	}
     }
 
     public int obtenerEscudo() {
-        return this.escudoRestante;
+        return (this.escudo.proteccion());
     }
 
     public void recuperarEscudo() {
-        this.escudoRestante = this.escudoRestante + 10;
+        this.escudo.recuperarse();
+    }
+    
+    public int obtenerVida() {
+    	return (this.vida.restante());
     }
 }

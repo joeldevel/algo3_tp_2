@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Guarida;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.EdificioZerg;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -12,12 +13,10 @@ public class Guarida extends EdificioZerg implements RequisitoDeConstruccion {
 
     private EstadoOperativoGuarida estadoOperativo;
 
-    public Guarida(Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, Vida unaVida,
-    		int unCostoMineral, int unCostoGas){
-        super(unaVida,unosRequisitos,unTiempo);
-    	this.costoMineral = unCostoMineral;
-        this.costoGas = unCostoGas;
-        this.setComportamientoUtilizable(new GuaridaNoUtilizable());
+    public Guarida(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, 
+    			   ArrayList<CostoDeConstruccion> unosCostos){
+        super(unaVida,unTiempo,unosRequisitos,unosCostos);
+    	this.setComportamientoUtilizable(new GuaridaNoUtilizable());
     }
 
     public void setComportamientoUtilizable(EstadoOperativoGuarida nuevoEstadoOperativo) {

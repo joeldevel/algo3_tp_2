@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Espiral;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.EdificioZerg;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -12,11 +13,9 @@ public class Espiral extends EdificioZerg {
 
     private EstadoOperativoEspiral estadoOperativo;
 
-    public Espiral(Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, Vida unaVida,
-    		int unCostoMineral, int unCostoGas){
-        super(unaVida,unosRequisitos,unTiempo);
-        this.costoMineral = unCostoMineral;
-        this.costoGas = unCostoGas;
+    public Espiral(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos,
+    			   ArrayList<CostoDeConstruccion> unosCostos){
+        super(unaVida,unTiempo,unosRequisitos,unosCostos);
         this.setComportamientoUtilizable(new EspiralNoUtilizable());
     }
 

@@ -11,13 +11,14 @@ import java.util.ArrayList;
 
 class ExtractorTest {
 
-	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
-	Tiempo tiempo = new Tiempo(-6);
 	Vida vida = new Vida(750,10);
+	Tiempo tiempo = new Tiempo(-6);
+	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
+	ArrayList<CostoDeConstruccion> costos = new ArrayList<CostoDeConstruccion>();
 	
     @Test
     void test01SeConstruyeUnExtractorEnUnVolcanYNoSeEncuentraOperativo(){
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
 
@@ -34,7 +35,7 @@ class ExtractorTest {
     @Test
     void test03SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeExtraeGasSinTenerZanganosDevuelveElResultadoIndicado(){
         // Arrange
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();
@@ -54,7 +55,7 @@ class ExtractorTest {
     @Test
     void test04SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeGuardaUnZanganoYSeExtraeElValorDeGasIndicado(){
         // Arrange
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas((extractor));
         extractor.avanzarTurno();
@@ -76,7 +77,7 @@ class ExtractorTest {
     @Test
     void test05SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeGuardanDosZanganoYSeExtraeElValorDeGasIndicado(){
         // Arrange
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();
@@ -100,7 +101,7 @@ class ExtractorTest {
     @Test
     void test06SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeGuardanTresZanganoYSeExtraeElValorDeGasIndicado(){
         // Arrange
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();
@@ -126,7 +127,7 @@ class ExtractorTest {
     @Test
     void test07SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
         // Arrange
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
@@ -149,7 +150,7 @@ class ExtractorTest {
     @Test
     void test08SeConstruyeUnExtractorYRecibeDanio(){
         // Arrange
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         extractor.recibirDanio(10);
 
         // Act
@@ -162,7 +163,7 @@ class ExtractorTest {
     @Test
     void test09SeConstruyeUnExtractorQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor extractor = new Extractor(vida, tiempo, requisitos, costos, 10);
         extractor.recibirDanio(10);
 
         // Act

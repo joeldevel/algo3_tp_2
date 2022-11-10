@@ -15,10 +15,11 @@ public class Criadero extends EdificioZerg implements Edificio{
 	 * esto haria el codigo mas flexible, pues el criadero pordria admitir cachorros en vez de larvas y deberia
 	 * funcionar igual*/
 
-	public Criadero(EstadoDeEdificio unEstado, Tiempo unTiempo, Moho unMoho, 
-					ArrayList<RequisitoDeConstruccion> unosRequisitos, ArrayList<Larva> unasLarvas, Vida unaVida) {
+	public Criadero(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos,
+					ArrayList<CostoDeConstruccion> unosCostos, EstadoDeEdificio unEstado, Moho unMoho, 
+					ArrayList<Larva> unasLarvas) {
 		
-		super(unaVida,unosRequisitos,unTiempo);
+		super(unaVida, unTiempo, unosRequisitos, unosCostos);
 		this.maxLarvas = 3;
 		this.estado = unEstado;
 		this.moho = unMoho;
@@ -80,6 +81,10 @@ public class Criadero extends EdificioZerg implements Edificio{
 
 	public Moho moho() {
 		return this.moho;
+	}
+	
+	public ArrayList<CostoDeConstruccion> costos(){
+		return this.costos;
 	}
 
 }

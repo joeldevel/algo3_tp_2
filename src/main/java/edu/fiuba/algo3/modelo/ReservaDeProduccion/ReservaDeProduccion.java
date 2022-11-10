@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.ReservaDeProduccion;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.Edificio;
 import edu.fiuba.algo3.modelo.EdificioZerg;
 import edu.fiuba.algo3.modelo.Moho;
@@ -15,11 +16,9 @@ public class ReservaDeProduccion extends EdificioZerg implements Edificio, Requi
 
     private EstadoOperativoReservaDeProduccion estadoOperativo;
 
-    public ReservaDeProduccion(Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, Vida unaVida,
-    		int unCostoMineral, int unCostoGas){
-        super(unaVida,unosRequisitos,unTiempo);
-        this.costoMineral = unCostoMineral;
-        this.costoGas = unCostoGas;
+    public ReservaDeProduccion(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos,
+    						   ArrayList<CostoDeConstruccion> unosCostos){
+        super(unaVida,unTiempo,unosRequisitos,unosCostos);
         this.setComportamientoUtilizable(new ReservaDeProduccionNoUtilizable());
     }
 

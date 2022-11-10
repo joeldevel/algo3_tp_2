@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.Criadero;
 import edu.fiuba.algo3.modelo.CriaderoSinLarvasException;
 import edu.fiuba.algo3.modelo.EnConstruccion;
@@ -22,6 +23,7 @@ class CriaderoTest {
 
 	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
 	ArrayList<Larva> larvas = new ArrayList<Larva>();
+	ArrayList<CostoDeConstruccion> costos = new ArrayList<CostoDeConstruccion>();
 	EstadoDeEdificio estado = new EnConstruccion();
 	Tiempo tiempo = new Tiempo(-4);
 	Moho moho = new Moho(5,new Tiempo(0));
@@ -35,7 +37,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 
 		assertFalse(criadero.sePuedeUtilizar());
 	}
@@ -48,7 +50,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		assertEquals(criadero.tiempoDeEspera(),4);
 	}
@@ -61,7 +63,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 
@@ -76,7 +78,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 
@@ -91,7 +93,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 		criadero.avanzarTurno();
@@ -109,7 +111,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 		criadero.avanzarTurno();
@@ -127,7 +129,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 		criadero.avanzarTurno();
@@ -146,7 +148,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		assertEquals(criadero.radioDeMoho(),5);
 	}
@@ -159,7 +161,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 
@@ -174,7 +176,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 		criadero.avanzarTurno();
@@ -190,7 +192,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 		criadero.avanzarTurno();
@@ -207,7 +209,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		for(int i=0; i<10; i++) {
 			criadero.avanzarTurno();
@@ -236,7 +238,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		assertEquals(criadero.contarLarvas(),3);
 	}
@@ -249,7 +251,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 
@@ -264,7 +266,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 
@@ -281,7 +283,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -299,7 +301,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -318,7 +320,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 
@@ -333,7 +335,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -349,7 +351,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -366,7 +368,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -385,7 +387,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.avanzarTurno();
 
@@ -400,7 +402,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.recibirDanio(10);
 
@@ -419,7 +421,7 @@ class CriaderoTest {
 			larvas.add(new Larva());			
 		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero(vida,tiempo,requisitos,costos,estado,moho,larvas);
 		
 		criadero.recibirDanio(10);
 		criadero.avanzarTurno();

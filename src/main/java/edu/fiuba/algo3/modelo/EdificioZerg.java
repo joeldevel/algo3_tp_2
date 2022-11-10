@@ -9,18 +9,19 @@ public abstract class EdificioZerg {
 	public int tiempoDeConstruccion;*/
 
 	protected Vida vida;
-	protected ArrayList<RequisitoDeConstruccion> requisitos;
 	protected Tiempo tiempo;
-
-
-	public int costoMineral;
-    public int costoGas;
+	protected ArrayList<RequisitoDeConstruccion> requisitos;
+	protected ArrayList<CostoDeConstruccion> costos;
+	/*protected int costoMineral;
+    protected int costoGas;*/
 
     
-    protected EdificioZerg(Vida unaVida, ArrayList<RequisitoDeConstruccion> unosRequisitos, Tiempo unTiempo) {
+    protected EdificioZerg(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos,
+    					   ArrayList<CostoDeConstruccion> unosCostos) {
     	this.vida = unaVida;
-    	this.requisitos = unosRequisitos;
     	this.tiempo = unTiempo;
+    	this.requisitos = unosRequisitos;
+    	this.costos = unosCostos;
     }
 
     protected abstract void avanzarTurno();

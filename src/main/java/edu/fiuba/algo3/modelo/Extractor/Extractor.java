@@ -9,13 +9,11 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas, Edificio 
     private EstadoOperativoExtractor estadoOperativo;
     private int cantidadExtraible;
 
-    public Extractor(Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, Vida unaVida,
-    		int unCostoMineral, int unCostoGas, int unaCantidadExtraible){
+    public Extractor(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, 
+    				 ArrayList<CostoDeConstruccion> unosCostos, int unaCantidadExtraible){
         
-    	super(unaVida,unosRequisitos,unTiempo);
-    	this.costoMineral = unCostoMineral;
-        this.costoGas = unCostoGas;
-        this.cantidadExtraible = unaCantidadExtraible;
+    	super(unaVida,unTiempo,unosRequisitos,unosCostos);
+    	this.cantidadExtraible = unaCantidadExtraible;
         this.setComportamientoUtilizable(new ExtractorNoUtilizable());
         
     }

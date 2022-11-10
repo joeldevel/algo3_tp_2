@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.EnConstruccion;
 import edu.fiuba.algo3.modelo.EstadoDeEdificio;
 import edu.fiuba.algo3.modelo.Larva;
@@ -16,15 +17,15 @@ import java.util.ArrayList;
 
 class EspiralTest {
 	
-	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
-	Tiempo tiempo = new Tiempo(-10);
 	Vida vida = new Vida(1300,10);
-
+	Tiempo tiempo = new Tiempo(-10);
+	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
+	ArrayList<CostoDeConstruccion> costos = new ArrayList<CostoDeConstruccion>();
 
     @Test
     void test01SeConstruyeUnaEspiralYRecibeDanio(){
         // Arrange
-        Espiral espiral = new Espiral(tiempo, requisitos, vida, 150, 100);
+        Espiral espiral = new Espiral(vida, tiempo, requisitos, costos);
         espiral.recibirDanio(10);
 
         // Act
@@ -37,7 +38,7 @@ class EspiralTest {
     @Test
     void test02SeConstruyeUnaEspiralQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Espiral espiral = new Espiral(tiempo, requisitos, vida, 150, 100);
+        Espiral espiral = new Espiral(vida, tiempo, requisitos, costos);
         espiral.recibirDanio(10);
 
         // Act
