@@ -114,7 +114,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-version}</version>
                 <configuration>
-                    <argLine>${argLine} -XX:MaxPermSize=256m</argLine>
+<!--                    <argLine>${argLine} -XX:MaxPermSize=256m</argLine>-->
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
             <plugin>
