@@ -24,6 +24,7 @@ public class Criadero extends EdificioZerg implements Edificio{
 		this.moho = new Moho();
 		this.requisitos = new ArrayList<RequisitoDeConstruccion>();
 		this.requisitos.add(new SinRequisitoDeConstruccion());
+		this.requisitos.add(new SinGas());
 		this.larvas = new ArrayList<Larva>();
 		for(int i=0; i<this.maxLarvas; i++) {
 			larvas.add(new Larva());

@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.EdificioZerg;
 import edu.fiuba.algo3.modelo.GasVespeno;
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
+import edu.fiuba.algo3.modelo.SinGas;
 import edu.fiuba.algo3.modelo.SinRequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Extractor.Extractor;
@@ -25,13 +26,25 @@ class UbicacionTest {
         assertTrue(ubicacion.sePuedeConstruir(new Criadero()));
 
     }
+    
+    @Test
+    void test02EnUnaUbicacionConMohoYConGasNoSeDeberiaPoderConstruirUnCriadero() {
+    	
+    	Ubicacion ubicacion = new Ubicacion();
+    	
+    	ubicacion.agregarRequisito(new Moho());
+    	ubicacion.agregarRequisito(new GasVespeno());
+    	
+    	assertFalse(ubicacion.sePuedeConstruir(new Criadero()));
+    }
 
     @Test
-    void test02EnUnaUbicacionConMohoSeDeberiaPoderConstruirUnCriadero() {
+    void test03EnUnaUbicacionConMohoYSinGasSeDeberiaPoderConstruirUnCriadero() {
 
         Ubicacion ubicacion = new Ubicacion();
 
         ubicacion.agregarRequisito(new Moho());
+        ubicacion.agregarRequisito(new SinGas());
 
         assertTrue(ubicacion.sePuedeConstruir(new Criadero()));
     }
