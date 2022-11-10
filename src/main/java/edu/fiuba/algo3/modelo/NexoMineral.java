@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
-public class Zangano implements Minero {
+public class NexoMineral implements Minero {
 
-    public Zangano() {
+    public NexoMineral() {
 
     }
 
-    public Zangano(int cantidadMineralExtraidoPorTurno) {
+    public NexoMineral(int cantidadMineralExtraidoPorTurno) {
         this.cantidadMineralExtraidoPorTurno = cantidadMineralExtraidoPorTurno;
     }
 
@@ -38,5 +38,4 @@ public class Zangano implements Minero {
     private int cantidadMineralExtraidoPorTurno = 0;
     private Mineral mineral;
     private int mineralAcumulado;
-
 }
