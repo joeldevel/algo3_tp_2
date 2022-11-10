@@ -1,0 +1,65 @@
+*-----------------------------------------------*
+AsimiladorTest
+test02SeConstruyeUnAsimiladorEnUnVolcanYLuegoDeSeisTurnosSeExtraeGasYDevuelveElResultadoIndicado
+
+@startuml
+
+Usuario->Asimilador: Asimilador()
+note left: Inicializamos el Asimilador y el Volcan.
+
+Usuario->Volcan: Volcan()
+Usuario->Volcan: construirRefineriaDeGas(asimilador)
+Volcan-->Usuario
+
+loop seis veces
+Usuario->Asimilador: avanzarTurno()
+Asimilador-->Usuario
+end
+note left: Avanzamos seis veces los turnos para que el Asimilador tenga un estado utilizable.
+
+Usuario->Volcan: extraerGasUsandoRefineria()
+Volcan->Asimilador: extraerGasUsandoRefineria(Volcan)
+Asimilador->AsimiladorUtilizable: extraerGas()
+AsimiladorUtilizable-->Asimilador: unaCantidadExtraible
+Asimilador->Volcan: extraerGas(unaCantidadExtraible)
+Volcan-->Asimilador: resultado
+Asimilador-->Volcan: resultado
+Volcan-->Usuario: resultado
+
+@enduml
+
+*-----------------------------------------------*
+ExtractorTest
+test04SeConstruyeUnExtractorEnUnVolcanYLuegoDeSeisTurnosSeGuardaUnZanganoYSeExtraeElValorDeGasIndicado
+
+@startuml
+
+Usuario->Zangano: Zangano()
+
+Usuario->Extractor: Extractor()
+note left: Inicializamos el Zangano que trabajara, el Extractor y el Volcan.
+
+Usuario->Volcan: Volcan()
+Usuario->Volcan: construirRefineriaDeGas(extractor)
+Volcan-->Usuario
+
+loop seis veces
+Usuario->Extractor: avanzarTurno()
+Extractor-->Usuario
+end
+note left: Avanzamos seis veces los turnos para que el Extractor tenga un estado utilizable.
+
+Usuario->Extractor: guardarZangano(zangano)
+
+Usuario->Volcan: extraerGasUsandoRefineria()
+Volcan->Extractor: extraerGasUsandoRefineria(Volcan)
+Extractor->ExtractorUtilizable: extraerGas()
+ExtractorUtilizable-->Extractor: unaCantidadExtraible
+Extractor->Volcan: extraerGas(unaCantidadExtraible)
+Volcan-->Extractor: resultado
+Extractor-->Volcan: resultado
+Volcan-->Usuario: resultado
+
+@enduml
+
+*--------------------------------------*
