@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Espiral.EspiralNoUtilizable;
 import edu.fiuba.algo3.modelo.Extractor.ExtractorUtilizable;
 
-public class ReservaDeProduccion extends EdificioZerg implements Edificio{
+public class ReservaDeProduccion extends EdificioZerg implements Edificio, RequisitoDeConstruccion{
 
     private EstadoOperativoReservaDeProduccion estadoOperativo;
 
@@ -46,5 +46,10 @@ public class ReservaDeProduccion extends EdificioZerg implements Edificio{
 	@Override
 	public void actualizarRequisitosDeLaUbicacion(ArrayList<RequisitoDeConstruccion> requisitos) {
 		
+	}
+
+	@Override
+	public boolean esIgualA(RequisitoDeConstruccion otroRequisito) {
+		return (otroRequisito instanceof ReservaDeProduccion);
 	}
 }

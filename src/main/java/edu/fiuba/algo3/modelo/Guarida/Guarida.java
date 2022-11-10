@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Extractor.ExtractorUtilizable;
 
-public class Guarida extends EdificioZerg {
+public class Guarida extends EdificioZerg implements RequisitoDeConstruccion {
 
     private EstadoOperativoGuarida estadoOperativo;
 
@@ -32,4 +32,9 @@ public class Guarida extends EdificioZerg {
         	this.setComportamientoUtilizable(new GuaridaUtilizable());
         }
     }
+
+	@Override
+	public boolean esIgualA(RequisitoDeConstruccion otroRequisito) {
+		return (otroRequisito instanceof Guarida);
+	}
 }
