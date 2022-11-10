@@ -32,4 +32,8 @@ public class Espiral extends EdificioZerg {
         	this.setComportamientoUtilizable(new EspiralUtilizable());
         }
     }
+
+    public boolean crear() {
+        return this.estadoOperativo.crear();
+    }
 }

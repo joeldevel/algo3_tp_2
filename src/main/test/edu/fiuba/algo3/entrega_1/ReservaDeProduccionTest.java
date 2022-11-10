@@ -58,7 +58,7 @@ class ReservaDeProduccionTest {
     }
 
     @Test
-    void test03SeConstruyeUnaReservaDeProduccionYDespuesDeDoceTurnosSeEncuentraOperativa(){
+    void test04SeConstruyeUnaReservaDeProduccionYDespuesDeDoceTurnosSeEncuentraOperativa(){
         // Arrange
         ReservaDeProduccion rdp = new ReservaDeProduccion(vida, tiempo, requisitos, costos);
         rdp.avanzarTurno();
