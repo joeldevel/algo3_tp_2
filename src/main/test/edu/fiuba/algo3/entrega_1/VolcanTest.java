@@ -7,7 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+
 class VolcanTest {
+	
+	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
+	Tiempo tiempo = new Tiempo(-6);
+	Vida vida = new Vida(750,10);
 
     @Test
     void test01SeCreaUnVolcanSinUnaRefineriaDeGasYAlIntentarExtraerGasSeLanzaExcepcion(){
@@ -21,8 +27,8 @@ class VolcanTest {
     @Test
     void test02SeIntentaConstruirUnExtractorEnUnVolcanDondeYaHayUnExtractorConstruidoYSeLanzaUnaExcepcion(){
         Volcan volcan = new Volcan(5000);
-        Extractor primerExtractor = new Extractor(750, -6, 100, 0, 10);
-        Extractor segundoExtractor = new Extractor(750, -6, 100, 0, 10);
+        Extractor primerExtractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
+        Extractor segundoExtractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
         volcan.construirRefineriaDeGas(primerExtractor);
 
         assertThrows(VolcanYaTieneUnaRefineriaDeGasConstruidaException.class,()->{
@@ -33,7 +39,7 @@ class VolcanTest {
     @Test
     void test03SeConstruyeUnExtractorEnUnVolcanSinGasVespenoYAlIntentarExtraerSeLanzaUnaExcepcion(){
         // Arrange
-        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
+        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
         Volcan volcan = new Volcan(0);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();
@@ -54,7 +60,7 @@ class VolcanTest {
     @Test
     void test04SeConstruyeUnExtractorEnUnVolcanCon10UnidadesDeGasVespenoYConDosZanganosTrabajandoYAlExtraerGasSoloExtraemosLas10UnidadesQueLeQuedanAlVolcan() {
         // Arrange
-        Extractor extractor = new Extractor(750, -6, 100, 0, 10);
+        Extractor extractor = new Extractor(tiempo,requisitos,vida, 100, 0, 10);
         Volcan volcan = new Volcan(10);
         volcan.construirRefineriaDeGas(extractor);
         extractor.avanzarTurno();

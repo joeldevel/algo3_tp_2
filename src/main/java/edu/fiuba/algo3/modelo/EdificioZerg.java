@@ -4,28 +4,39 @@ import java.util.ArrayList;
 
 public abstract class EdificioZerg {
 
-    public int vidaMaxima;
+    /*public int vidaMaxima;
     public int vidaRestante;
+	public int tiempoDeConstruccion;*/
 
-    public int tiempoDeConstruccion;
+	protected Vida vida;
+	protected ArrayList<RequisitoDeConstruccion> requisitos;
+	protected Tiempo tiempo;
 
-    public int costoMineral;
 
+	public int costoMineral;
     public int costoGas;
 
-    public ArrayList<RequisitoDeConstruccion> requisitos;
+    
+    protected EdificioZerg(Vida unaVida, ArrayList<RequisitoDeConstruccion> unosRequisitos, Tiempo unTiempo) {
+    	this.vida = unaVida;
+    	this.requisitos = unosRequisitos;
+    	this.tiempo = unTiempo;
+    }
 
-    public abstract void avanzarTurno();
+    protected abstract void avanzarTurno();
 
     public void recibirDanio(int unDanio) {
-        this.vidaRestante = this.vidaRestante - unDanio;
+        /*this.vidaRestante = this.vidaRestante - unDanio;*/
+    	this.vida.recibirDanioPor(unDanio);
     }
 
     public int obtenerVida() {
-        return this.vidaRestante;
+        /*return this.vidaRestante;*/
+    	return (this.vida.restante());
     }
 
     public void recuperarVida() {
-        this.vidaRestante = this.vidaRestante + 10;
+        /*this.vidaRestante = this.vidaRestante + 10;*/
+    	this.vida.recuperarse();
     }
 }

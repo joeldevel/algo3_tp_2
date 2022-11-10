@@ -7,9 +7,7 @@ public class Criadero extends EdificioZerg implements Edificio{
 	private int maxLarvas;
 
 	private EstadoDeEdificio estado;
-	private Tiempo tiempo;
 	private Moho moho;
-	private ArrayList<RequisitoDeConstruccion> requisitos;
 	private ArrayList<Larva> larvas;
 
 	/*este constructor hay que cambiarlo porque es muy malo tener una dependencia tan fuerte con otras clases
@@ -17,20 +15,14 @@ public class Criadero extends EdificioZerg implements Edificio{
 	 * esto haria el codigo mas flexible, pues el criadero pordria admitir cachorros en vez de larvas y deberia
 	 * funcionar igual*/
 
-	public Criadero() {
+	public Criadero(EstadoDeEdificio unEstado, Tiempo unTiempo, Moho unMoho, 
+					ArrayList<RequisitoDeConstruccion> unosRequisitos, ArrayList<Larva> unasLarvas, Vida unaVida) {
+		
+		super(unaVida,unosRequisitos,unTiempo);
 		this.maxLarvas = 3;
-		this.estado = new EnConstruccion();
-		this.tiempo = new Tiempo(-4);
-		this.moho = new Moho();
-		this.requisitos = new ArrayList<RequisitoDeConstruccion>();
-		this.requisitos.add(new SinRequisitoDeConstruccion());
-		this.requisitos.add(new SinGas());
-		this.larvas = new ArrayList<Larva>();
-		for(int i=0; i<this.maxLarvas; i++) {
-			larvas.add(new Larva());
-		}
-		this.vidaMaxima = 500;
-		this.vidaRestante = 500;
+		this.estado = unEstado;
+		this.moho = unMoho;
+		this.larvas = unasLarvas;
 	}
 
 	public boolean sePuedeUtilizar() {
@@ -41,6 +33,7 @@ public class Criadero extends EdificioZerg implements Edificio{
 		return (this.tiempo.restante());
 	}
 
+	@Override
 	public void avanzarTurno() {
 		/* En esta parte debe ir una clase tiempo o un metodo actualizar que llame a los demas metodos
 		 * incluyendo al metodo que genera la larva
@@ -48,16 +41,13 @@ public class Criadero extends EdificioZerg implements Edificio{
 		 * aparte*/
 
 		this.tiempo.pasarTiempo();
-		this.moho.expandirRadio(this.tiempo);
+		this.moho.avanzarTurno();
+		this.vida.recuperarse();
 		if(this.tiempoDeEspera() == 0) {
 			this.estado = new Construido();
 		}
 		if(this.contarLarvas() < this.maxLarvas) {
 			this.larvas.add(new Larva());
-		}
-
-		if(this.vidaRestante < this.vidaMaxima) {
-			this.recuperarVida();
 		}
 	}
 

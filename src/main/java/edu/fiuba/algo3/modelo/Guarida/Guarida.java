@@ -1,16 +1,21 @@
 package edu.fiuba.algo3.modelo.Guarida;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.modelo.EdificioZerg;
+import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
+import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Vida;
+import edu.fiuba.algo3.modelo.Extractor.ExtractorUtilizable;
 
 public class Guarida extends EdificioZerg {
 
     private EstadoOperativoGuarida estadoOperativo;
 
-    public Guarida(int unaVida, int unTiempoDeConstruccion, int unCostoMineral, int unCostoGas){
-        this.vidaMaxima = unaVida;
-        this.vidaRestante = unaVida;
-        this.tiempoDeConstruccion = unTiempoDeConstruccion;
-        this.costoMineral = unCostoMineral;
+    public Guarida(Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, Vida unaVida,
+    		int unCostoMineral, int unCostoGas){
+        super(unaVida,unosRequisitos,unTiempo);
+    	this.costoMineral = unCostoMineral;
         this.costoGas = unCostoGas;
         this.setComportamientoUtilizable(new GuaridaNoUtilizable());
     }
@@ -21,16 +26,10 @@ public class Guarida extends EdificioZerg {
 
     public void avanzarTurno() {
 
-        if(this.vidaRestante < this.vidaMaxima) {
-            this.recuperarVida();
-        }
-
-        if(tiempoDeConstruccion < 0) {
-            this.tiempoDeConstruccion = this.tiempoDeConstruccion + 1;
-        }
-
-        if(tiempoDeConstruccion == 0) {
-            this.setComportamientoUtilizable(new GuaridaUtilizable());
+    	this.tiempo.pasarTiempo();
+    	this.vida.recuperarse();
+        if(this.tiempo.restante() == 0) {
+        	this.setComportamientoUtilizable(new GuaridaUtilizable());
         }
     }
 }

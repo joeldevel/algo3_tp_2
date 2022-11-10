@@ -1,15 +1,20 @@
 package edu.fiuba.algo3.modelo.Espiral;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.modelo.EdificioZerg;
+import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
+import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Vida;
+import edu.fiuba.algo3.modelo.Extractor.ExtractorUtilizable;
 
 public class Espiral extends EdificioZerg {
 
     private EstadoOperativoEspiral estadoOperativo;
 
-    public Espiral(int unaVida, int unTiempoDeConstruccion, int unCostoMineral, int unCostoGas){
-        this.vidaMaxima = unaVida;
-        this.vidaRestante = unaVida;
-        this.tiempoDeConstruccion = unTiempoDeConstruccion;
+    public Espiral(Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, Vida unaVida,
+    		int unCostoMineral, int unCostoGas){
+        super(unaVida,unosRequisitos,unTiempo);
         this.costoMineral = unCostoMineral;
         this.costoGas = unCostoGas;
         this.setComportamientoUtilizable(new EspiralNoUtilizable());
@@ -22,16 +27,10 @@ public class Espiral extends EdificioZerg {
     @Override
     public void avanzarTurno() {
 
-        if(this.vidaRestante < this.vidaMaxima) {
-            this.recuperarVida();
-        }
-
-        if(tiempoDeConstruccion < 0) {
-            this.tiempoDeConstruccion = this.tiempoDeConstruccion + 1;
-        }
-
-        if(tiempoDeConstruccion == 0) {
-            this.setComportamientoUtilizable(new EspiralUtilizable());
+    	this.tiempo.pasarTiempo();
+    	this.vida.recuperarse();
+        if(this.tiempo.restante() == 0) {
+        	this.setComportamientoUtilizable(new EspiralUtilizable());
         }
     }
 }

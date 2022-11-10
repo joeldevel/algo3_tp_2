@@ -2,15 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 public class Tiempo {
 	
-	/* posiblemente haya que sacar el contador de aca, pues es solo para que funcione el 
-	 * método de Moho expandirRadio, quizas otras clases necesiten otro contador, o quizas habria que
-	 * instaciarlo de otra manera*/
 	private int tiempo;
-	private int contador;
+	private int transcurrido;
 	
 	public Tiempo(int unTiempo) {
 		this.tiempo = unTiempo;
-		this.contador = 0;
+		this.transcurrido = 0;
 	}
 	
 	public int restante() {
@@ -23,16 +20,11 @@ public class Tiempo {
 	
 	public void pasarTiempo() {
 		this.tiempo++;
-		if( (this.contador == 0) || (this.contador == 2) ) {
-			this.contador = 1;
-		}
-		else {
-			this.contador++;
-		}
+		this.transcurrido++;
 	}
 	
-	public int contador() {
-		return this.contador;
+	public int transcurrido() {
+		return this.transcurrido;
 	}
 	
 	

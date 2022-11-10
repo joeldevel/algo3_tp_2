@@ -9,14 +9,15 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas, Edificio 
     private EstadoOperativoExtractor estadoOperativo;
     private int cantidadExtraible;
 
-    public Extractor(int unaVida, int unTiempoDeConstruccion, int unCostoMineral, int unCostoGas, int unaCantidadExtraible){
-        this.vidaMaxima = unaVida;
-        this.vidaRestante = unaVida;
-        this.tiempoDeConstruccion = unTiempoDeConstruccion;
-        this.costoMineral = unCostoMineral;
+    public Extractor(Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, Vida unaVida,
+    		int unCostoMineral, int unCostoGas, int unaCantidadExtraible){
+        
+    	super(unaVida,unosRequisitos,unTiempo);
+    	this.costoMineral = unCostoMineral;
         this.costoGas = unCostoGas;
         this.cantidadExtraible = unaCantidadExtraible;
         this.setComportamientoUtilizable(new ExtractorNoUtilizable());
+        
     }
 
     public void guardarZangano(Zangano zangano) {
@@ -29,16 +30,10 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas, Edificio 
 
     @Override
     public void avanzarTurno() {
-
-        if(this.vidaRestante < this.vidaMaxima) {
-            this.recuperarVida();
-        }
-
-        if(this.tiempoDeConstruccion < 0) {
-            this.tiempoDeConstruccion = this.tiempoDeConstruccion + 1;
-        }
-
-        if(this.tiempoDeConstruccion == 0) {
+    	
+    	this.tiempo.pasarTiempo();
+    	this.vida.recuperarse();
+        if(this.tiempo.restante() == 0) {
             this.setComportamientoUtilizable(new ExtractorUtilizable(this.cantidadExtraible));
         }
 
@@ -51,7 +46,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas, Edificio 
 
     @Override
     public ArrayList<RequisitoDeConstruccion> requisitos() {
-        return null;
+        return this.requisitos;
     }
 
     @Override
