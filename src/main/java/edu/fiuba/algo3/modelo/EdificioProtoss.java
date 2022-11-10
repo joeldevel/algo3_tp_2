@@ -2,10 +2,14 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-public abstract class EdificioZerg {
+public abstract class EdificioProtoss {
 
     public int vidaMaxima;
     public int vidaRestante;
+
+    public int escudoMaximo;
+
+    public int escudoRestante;
 
     public int tiempoDeConstruccion;
 
@@ -18,14 +22,14 @@ public abstract class EdificioZerg {
     public abstract void avanzarTurno();
 
     public void recibirDanio(int unDanio) {
-        this.vidaRestante = this.vidaRestante - unDanio;
+        this.escudoRestante = this.escudoRestante - unDanio;
     }
 
-    public int obtenerVida() {
-        return this.vidaRestante;
+    public int obtenerEscudo() {
+        return this.escudoRestante;
     }
 
-    public void recuperarVida() {
-        this.vidaRestante = this.vidaRestante + 10;
+    public void recuperarEscudo() {
+        this.escudoRestante = this.escudoRestante + 10;
     }
 }
