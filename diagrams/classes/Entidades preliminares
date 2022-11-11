@@ -1,0 +1,702 @@
+Esta seria la realición a grandes rasgos de como va a funcionar
+el juego. Va a haber una clase juego que se va a crear en el
+main. Esta clase nos va a pedir que creemos el jugador con todo
+lo que ello implica, poner un nombre del jugador, elegir una
+raza con la que vamos a jugar, etc.
+Una vez hecho se crea el mapa, hay que definir como se crea,
+si es que se va a crear ya con algo adentro o sin nada y va 
+a ser el jugador el que comience a crear los edificios y demas.
+Una vez que se cargue todo lo necesario, se comienza a jugar.
+Cuando se llama al metodo jugador lo que se hace es que se le
+pasa al jugador el mapa por parametro y entonces el jugador va
+a operar sobre el mapa.
+Todas estas clases ademas van a tener que usar una clase de
+entidades que son personajes, edificios, etc que el jugador
+pueda buscar cuando tiene que elegir.Es parecido a una base de 
+datos pero no lo es, esto tiene que estar cargado en memoria
+para que cuando el jugador quiera crear algo durante la partida
+pueda crear una copia de esa entidad y guardarsela.
+El mapa va a recibir los personajes, edificios y recursos del
+jugador para realizar acciones sobre ellos. 
+En los siguientes diagramas se muestra como va a ser este 
+proceso y como va a ser la relacion entre las clases
+
+@startuml
+
+class Juego{
+	+Juego()
+	+crearJugador()
+	+crearMapa()
+	+jugar()
+}
+class Jugador{
+	-nombre
+	-recursos
+	-personajes
+	-edificios
+	+crear()
+	+extraerRecurso()
+}
+class Mapa{
+	-ubicaciones
+	+construir(Construccion,Ubicacion)
+	+encontrarUbicacionConRequisito(Construccion)
+}
+
+class Entidades{
+	-personajes
+	-edificios
+	+mostrarEntidades()
+	+crearCopia()
+}
+
+Juego "1 " o-- "1 " Jugador
+Juego "1" o-- "1  " Mapa
+Juego "1   " o-- "1" Entidades
+Jugador "1" .right.> "1"  Mapa
+Jugador "1" .left.> "1"  Entidades
+
+@enduml
+
+@startuml
+
+actor Usuario
+
+== Inicialización ==
+
+create Juego
+Usuario->Juego: new Juego()
+
+== creacion del jugador ==
+ 
+ Usuario -> Juego: crearJugador()
+ Juego->Consola: mostrarOpcionesDeCreacio()
+ Consola-->Juego
+ Juego-->Usuario
+ Usuario->Entidades: mostrarEntidades()
+ Entidades-->Usuario: entidades
+ Usuario-> Entidades: crearCopia(unaEntidad)
+ Entidades->Usuario: Entidad
+ Usuario->Juego: jugadorCon(parametro)
+ create Jugador
+ Juego->Jugador: new Jugador(parametros)
+ Usuario->Juego: crearMapa()
+ create Mapa
+ Juego->Mapa: new Mapa()
+ Usuario->Juego:jugar() 
+
+@enduml
+
+El siguiente diagrama es para ejemplificar la relacion entre
+mapa y jugador. Estamos en la situacion en la que queremos 
+extraer un recurso del mapa, supongamos un volcan. Entonces el 
+jugador le dice a mapa, extraerRecurso y le pasa sus
+personajes, edificios, y recursos.
+Lo que el mapa va a hacer es agarrar los edificios y ver si
+tiene algun edificio que le permite extraer recursos, si lo
+tiene, ahora se fija la ubicacion que tiene este edificio y se
+la guarda. Luego va a los personajes y se fija si en la 
+ubicacion que se guardo el mapa hay personaes que extraigan
+recursos, por ejemplo que en la misma ubicacion que un 
+extractor tambien haya zanganos. Todo esto es posible porque
+las entidades van a tener una ubicacion dentro. Si estan los
+personajes, lo unico que queda hacer es que el mapa agarre el 
+volcan que esta en la ubicacion (recordemos que un extractor
+solo se puede construir en un volcan por lo que doy por
+supueste que en esa ubicacion hay un vocan) y le diga 
+extraerRecurso, el volcan le va a decir al extractor que tiene 
+guardado que extraiga el recurso, depende de los zanganos que
+haya se extrae alguna cantidad, y por ultimo Mapa toma la lista
+recursos del Jugador, se fija donde haya un objeto de tipo Gas
+y le aumenta la cantidad de recursos. Luego de todo esto el 
+Mapa le devuelve los personajes, los edificios y los recursos
+al jugador. Ahora si hay una consola que siempre por pantalla 
+el mapa y los recursos al jugador, el jugador va a ver
+incrementado sus recursos.
+
+@startuml
+
+Jugador->Mapa: extraerRecurso(personajes,edificios,recursos)
+loop para cada edificio
+	Mapa->Edificio: puedeExtraerRecursos()
+	Edificio-->Mapa: true	
+end
+Mapa->Edificio: ubicacion()
+Edificio-->Mapa: Ubicacion
+loop para cada personaje
+	Mapa->Personaje: hayPersonajesQuePuedenExtraerRecursosEn(Ubicacion)
+	Personaje-->true
+end
+Mapa->Mapa: volcan = lugarExplotableEnUbucacion(Ubicacion)
+Mapa->Volcan: extraer()
+Volcan-->Mapa: UnidadesDeGas
+loop para cada recurso
+	Mapa->Recurso: recursoQueBusco(UnidadesDeGas)
+	Recurso-->Mapa: Gas
+end
+Mapa->Gas: aumentarCantidad(unidadesDeGas)
+@enduml
+
+Ahora supongamos que el jugador quiere construir un Criadero
+de tipo Zerg. Lo que va a hacer es buscarlo en las entidades y
+crearse una copia. Luego le va a decir a mapa crearEdificioEn
+y le va a pasar como parametro el edificio que se acaba de
+copiar, la ubicacion en donde quiere construirlos, los
+edificios y los recursos. El trabajo de mapa va a ser el de 
+verificar que se puede hacer. Lo que va a hacer es, primero
+fijarse si la ubicacion cumple los requisitos de edificio, por
+ejemplo como esto va a ser un edificio Zerg, necesita Moho. Si
+cumple con esto, la siguiente verificacion es que los recursos
+del jugador sean suficientes para construir el edificio.
+Si todo va bien, el mapa le descuenta los recursos al jugador,
+crea el edificio, le guarda la ubicacion, y se la guarda al
+jugador en la lista de edificios.
+Hay que tener en cuenta que los edificios se crean con un
+tiempo que debe pasar para que puedan ser utilizados. Esos
+datos se pueden ir a buscar a algun lado y pueden estar
+embebidos en el mismo objeto Edificio, y cuando se crea la 
+copia de entidades ya tenerlo listo
+
+@startuml
+
+Jugador->Entidades: buscarEntidad()
+Entidades-->Jugador: Criadero
+Jugador->Mapa: construirEdificioEn(Criadero,Ubicacion,Edificios,Recursos)
+Mapa->Mapa:buscada = encontrar(Ubicacion)
+Mapa->Ubicacion: cumpleRequisitosDe(Criadero) 
+Ubicacion-->Mapa:true		
+loop para cada recurso
+		Mapa->Recurso: suficienteParaConstruir(Criadero)
+		Recurso-->Mapa: true
+		Mapa->Recurso: descontarParaContruir(Criadero)	
+	end
+Mapa->Criadero: conUbicacion(Ubicacion)
+Mapa->Edificios: agregar(Criadero)
+	
+@enduml
+
+
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+
+
+
+
+
+"Relacion entre las clases principales"
+@startuml
+
+class AlgoStar {
+    -mapa: Mapa
+    -razas: Raza
+    -recursos: Recurso
+}
+
+class Mapa{
+    -ubicaciones: Ubicacion
+	+construir(Construccion,Ubicacion)
+	+encontrarUbicacionConRequisito(Construccion)
+}
+
+abstract class Raza{
+    -construcciones: Construccion
+    +guardarConstruccion()
+}
+abstract class Recurso
+
+class Ubicacion{
+	-posX: int
+	-posY: int
+	-elementos:Array
+	+sePuedeConstruirEn(Ubicacion)
+	+estaDentroDeRadioDeConstruccion()
+
+}
+
+class Volcan
+class NodoMineral {
+    -cantidadDeMineral: int
+}
+
+AlgoStar --> Mapa
+AlgoStar --> Raza
+AlgoStar --> Recurso
+Mapa --> Ubicacion
+Recurso <|-- Volcan
+Recurso <|-- NodoMineral
+
+@enduml
+
+"Supongamos que queremos construir un Criadero Zerg.
+Inicializamos una instancia de Criadero y Ubicacion.
+Le enviamos un mensaje a AlgoStar para constuir un edificio
+y le pasamos por parametro una instancia del Criadero y
+tambien la ubicacion donde queremos construirlo.
+Luego, le va a delegar a la clase Mapa la responsabilidad
+de comprobar que efectivamente puede construir en dicha
+ubicacion. Si la clase Mapa autoriza, entonces AlgoStar le envia
+un mensaje a la clase Zerg para guardar su construccion. Esta clase
+debe comprobar si tiene recursos suficientes para
+la construccion. Si efectivamente tiene recursos,
+se guarda en la lista de construcciones
+de los Zerg. El edificio comienza como NoUtilizable."
+
+"Supongamos que queremos construir Extractor.
+Inicializamos una instancia de Extractor y Ubicacion.
+Le enviamos un mensaje a AlgoStar para construir un edificio
+y le pasamos por parametro una instancia del Extractor y
+tambien la ubicacion donde queremos construirlo.
+Luego, le va a delegar a la clase Mapa la responsabilidad
+de comprobar que efectivamente puede construir en dicha
+ubicacion. Si la clase Mapa autoriza, entonces AlgoStar le envia
+un mensaje a la clase Volcan para construir un Extractor allí.
+Si se autoriza, entonces la clase AlgoStar le envia un mensaje
+a Raza para guardar su construccion, la cual solo se guardara si
+tiene la cantidad de materiales suficientes.
+
+La clase Volcan tendra que recibir una instancia de la
+clase del tipo Extractor en su constructor, sino
+lanza excepcion.
+Si es del tipo Extractor, entonces Volcan se guarda
+como atributo al Extractor."
+
+"Supongamos que queremos recolectar Gas.
+Le enviamos un mensaje a AlgoStar para recolectar Gas
+Vespeno... "
+
+"-------------------------------------------------------"
+
+"Recursos: Gas"
+@startuml
+
+class GasVespeno{
+    -cantidad: int
+}
+
+class Volcan{
+	-refineria: RefineriaDeGas
+	-cantidadDeGasVespenoDisponible: int
+	+Volcan()
+	+construirRefineriaDeGas(unaRefineria)
+	+extraerGasUsandoRefineria()
+	+extraerGas(cantidadDeGasParaExtraer)
+}
+
+interface RefineriaDeGas{
+	+extraerGasUsandoRefineria(unVolcan)
+}
+
+class Extractor{
+	-estadoOperativo: EstadoOperativo
+	-tiempoDeConstruccion: int
+	-costoMineral: int
+	-costoGas: int
+	+Extractor()
+	+guardarZangano(unZangano)
+	+avanzarTurno()
+	+extraerGasUsandoRefineria()
+}
+
+interface EstadoOperativoExtractor{
+    +extraerGas()
+    +guardarZangano(unZangano)
+}
+
+class ExtractorUtilizable {
+    -vida: int
+    -cantidadExtraible: int
+    -cantidadMaximaDeZanganos: int
+    -zanganos: Zangano
+    +ExtractorUtilziable(unaCantidadExtraible)
+    +extraerGas()
+    +guardarZangano()
+}
+
+class ExtractorNoUtilizable {
+    +ExtractorNoUtilizable()
+    +extraerGas()
+    +guardarZangano()
+}
+
+class Asimilador{
+    -estadoOperativo: EstadoOperativo
+    -tiempoDeConstruccion: int
+    -costoMineral: int
+    -costoGas: int
+    +Asimilador()
+    +avanzarTurno()
+    +extraerGasUsandoRefineria()
+}
+
+interface EstadoOperativoAsimilador{
+    +extraerGas()
+}
+
+class AsimiladorUtilizable {
+    -vida: int
+    -escudo: int
+    -cantidadExtraible: int
+    +ExtractorUtilziable(unaCantidadExtraible)
+    +extraerGas()
+}
+
+class AsimiladorNoUtilizable {
+    +ExtractorNoUtilizable()
+    +extraerGas()
+}
+
+Extractor --> EstadoOperativoExtractor
+ExtractorUtilizable ..up|> EstadoOperativoExtractor
+ExtractorNoUtilizable ..up|> EstadoOperativoExtractor
+
+Asimilador --> EstadoOperativoAsimilador
+AsimiladorUtilizable ..up|> EstadoOperativoAsimilador
+AsimiladorNoUtilizable ..up|> EstadoOperativoAsimilador
+
+RefineriaDeGas <|.. Extractor
+RefineriaDeGas <|.. Asimilador
+
+Volcan --> GasVespeno
+Volcan --> RefineriaDeGas
+
+@enduml
+
+"Supongamos que queremos construir un Extractor.
+El Volcan recibira en su constructor una instancia
+de la clase Extractor con un estado operativo inicial
+de ExtractorNoUtilizable.
+Entonces el Volcan se guardara como atributo al Extractor."
+
+"Supongamos que queremos recolectar Gas utilizando un Extractor.
+Le enviamos un mensaje a Volcan diciendole que queremos extraer
+gas. El Volcan le delega al Extractor la responsabilidad
+de calcular la cantidad de gas a extraer.
+Extractor recorre su lista de Zanganos y suma
+Extractor le pide la cantidad de gas al Volcan y este
+le devuelve la cantidad que tiene disponible.
+Luego el Volcan devuelve la cantidad extraida de gas."
+
+"-------------------------------------------------------"
+
+"Razas"
+@startuml
+
+abstract class ConstruccionProtoss
+abstract class ConstruccionZerg
+abstract class PersonajeProtoss
+abstract class PersonajeZerg
+
+
+abstract class Raza{
+	-vida: Vida
+	-construcciones: Construccion
+	-unidades: Unidad
+	{abstract}+recibirDanio()
+}
+
+class Protoss{
+	-escudo: Escudo
+}
+
+Raza <|-- Zerg
+Raza <|-- Protoss
+
+Protoss -down-> ConstruccionProtoss
+Protoss -down-> PersonajeProtoss
+Zerg -down-> ConstruccionZerg
+Zerg -down-> PersonajeZerg
+
+@enduml
+
+"-------------------------------------------------------"
+
+"Raza Zerg y su relacion con los edificios"
+@startuml
+
+abstract class Raza{
+	-vida: Vida
+	-construcciones: Construccion
+	-unidades: Unidad
+	{abstract}+recibirDanio()
+}
+
+class Zerg
+abstract class Construccion
+class Criadero
+class Extractor
+class ReservaDeProduccion
+class Guarida
+class Espiral
+abstract class Unidad
+class Larva
+class Zangano {
+    -cantidadRecolectablePorZangano: int
+    +recolectarMineral()
+}
+
+Raza <|-- Zerg
+Zerg --> Construccion
+Construccion <|-- Criadero
+Construccion <|-- Extractor
+Construccion <|-- ReservaDeProduccion
+Construccion <|-- Guarida
+Construccion <|-- Espiral
+Zerg --> Unidad
+Unidad <|-- Larva
+Unidad <|-- Zangano
+
+@enduml
+
+"-------------------------------------------------------"
+
+"Criadero"
+@startuml
+
+class Criadero {
+    -estadoOperativo: EstadoOperativo
+    -maxLarvas: int
+    +Criadero(Tiempo, EstadoOperativo, Moho)
+    +contarLarvas()
+    +evolucionar(Larva)
+    +avanzarTiempo()
+    +generarLarva(): Larva
+
+}
+
+interface Evolucionable{
+	+evolucionar(UnidadRaza)
+}
+
+class Larva{
+	+evolucionar(): Zangano
+}
+
+class Moho{
+	-radio: int
+	+expandirse()
+}
+
+class Tiempo{
+	-cantidad: Int
+	+Tiempo(cantidad)
+	+avanzarTiempo()
+	+tiempo(): Int
+}
+
+interface EstadoOperativo{
+    +contarLarvas()
+    +evolucionar(Larva)
+    +avanzarTurno()
+    +generarLarva(): Larva
+}
+
+class CriaderoUtilizable
+class CriaderoNoUtilizable
+
+Criadero --> EstadoOperativo
+CriaderoUtilizable ..up|> EstadoOperativo
+CriaderoNoUtilizable ..up|> EstadoOperativo
+
+Tiempo <-right- Criadero
+Larva ..|> Evolucionable
+Criadero --> Larva
+Criadero o-- Moho
+
+@enduml
+
+"Inicialmente el Criadero comenzara con un estado Operativo
+de CriaderoNoUtilizable.
+Si quisieramos pedirle a Criadero que cuenta las larvas,
+dentro del metodo contarLarvas() hariamos algo como
+
+estadoOperativo contarLarvas()
+
+y utilizando de esta forma polimorfismo dependiendo
+de su estado (que cambiara en tiempo de ejecucion)
+la respuesta al mensaje sera diferente.
+Estamos delegando en el estadoOperativo.
+
+Por esta razon es que Criadero es una clase concreta.
+Dentro de Criadero se delegaran los distintos tipos
+de mensajes."
+
+"--------------------------------------------------------"
+
+"Raza Protoss y su relacion con los edificios"
+@startuml
+
+abstract class Raza{
+	-vida: Vida
+	-construcciones: Construccion
+	-unidades: Unidad
+	{abstract}+recibirDanio()
+}
+
+class Protoss
+abstract class Construccion
+class NexoMineral
+class Pilon
+class Asimilador
+class Acceso
+class PuertoEstelar
+
+Raza <|-- Protoss
+Protoss --> Construccion
+Construccion <|-- NexoMineral
+Construccion <|-- Pilon
+Construccion <|-- Asimilador
+Construccion <|-- Acceso
+Construccion <|-- PuertoEstelar
+
+@enduml
+
+"--------------------------------------------------------"
+
+
+"--------------------------------------------------------"
+
+
+
+"--------------------------------------------------------"
+
+
+"Clases que tienen unidades que se gastan"
+@startuml
+
+abstract class Consumible{
+	-cantidad: Int
+}
+Consumible <|-- Tiempo
+Consumible <|-- Vida
+Consumible <|-- Unidad
+Consumible <|-- Escudo
+
+class Tiempo{
+	+Tiempo(cantidad: int)
+	+pasarTiempo()
+}
+
+class Vida
+class Unidad{
+	
+}
+class Escudo
+
+interface Consumible2
+
+@enduml
+
+"--------------------------------------------------------"
+
+
+
+"--------------------------------------------------------"
+
+
+"--------------------------------------------------------"
+
+@startuml
+
+Usuario->Mapa: construir(Construccion, Ubicacion)
+	loop para cada ubicacion
+		Mapa->Mapa: ubicacionBuscada = encontrarUbicacion(Ubicacion)
+	end
+	Mapa->Ubicacion:puedoConstruirEnEstaUbicacion()
+	Ubicacion-->Mapa:true
+	Mapa->Ubicacion: puedoConstruirEsteEdificio(Construccion)
+	Ubicacion->Construccion: dameLoQueNecesitasParaConstruirte()
+	Construccion-->Ubicacion: Moho/Pilon
+	Ubicacion->Ubicacion: tengo(Moho/Pilon)
+	Ubicacion-->Mapa:true
+	Mapa->Ubicacion:crear(Construccion)
+	
+@enduml
+
+"--------------------------------------------------------"
+
+@startuml
+
+Usuario->Mapa: construir(Construccion, Ubicacion)
+	loop para cada ubicacion
+		Mapa->Mapa: conRequisito = encontrarUbicacionConRequisito(Construccion)
+	end
+	loop para cada ubicacion con moho
+		Mapa->Ubicacion:sePuedeConstruirEn(Ubicacion)
+		Ubicacion->Ubicacion: estaDentroDeRadioDeConstruccion()
+		Ubicacion-->Mapa:true
+	end
+	Mapa->Ubicacion:crear(Construccion)
+	
+@enduml
+
+"--------------------------------------------------------"
+
+
+@startuml
+
+class Mineral{
+    -cantidad: int
+}
+
+class NodoMineral{
+	-recolectorDeMineral: RecolectorDeMineral
+	-cantidadDeMineralDisponible: int
+	+NodoMineral(unaCantidadDeMineral)
+	+construirRecolectorDeMineral(unRecolectorDeMineral)
+	+recolectarMineralUsandoRecolectorDeMineral()
+	+recolectarMineral(cantidadDeMineralParaExtraer)
+}
+
+interface RecolectorDeMineral{
+	+recolectarMineralUsandoRecolectorDeMineral(unNodoMineral)
+}
+
+class NexoMineral{
+	-estadoOperativo: EstadoOperativoNexoMineral
+	-cantidadRecolectable: int
+	+NexoMineral(unaVida, unEscudo, unTiempoDeConstruccion, unCostoMineral, unCostoGas, unaCantidadRecolectable)
+	+setComportamientoUtilizable(nuevoEstadoOperativo)
+	+avanzarTurno()
+	+recolectarMineralUsandoRecolectorDeMineral(unNodoMineral)
+}
+
+interface EstadoOperativoNexoMineral{
+    +recolectarMineral()
+}
+
+class NexoMineralUtilizable {
+    -cantidadRecolectable: int
+    +NexoMineralUtilziable(unaCantidadRecolectable)
+    +recolectarMineral()
+}
+
+class NexoMineralNoUtilizable {
+    +NexoMineralNoUtilziable()
+    +recolectarMineral()
+}
+
+class Zangano{
+    -cantidadRecolectableDeMineral: int
+    +Zangano(unaCantidadRecolectable)
+    +recolectarMineralUsandoRecolectorDeMineral(unNodoMineral)
+}
+
+NexoMineral --> EstadoOperativoNexoMineral
+NexoMineralUtilizable ..up|> EstadoOperativoNexoMineral
+NexoMineralNoUtilizable ..up|> EstadoOperativoNexoMineral
+
+RecolectorDeMineral <|.. NexoMineral
+RecolectorDeMineral <|.. Zangano
+
+NodoMineral --> Mineral
+NodoMineral --> RecolectorDeMineral
+
+@enduml
+
+
+
+
+
+
+
