@@ -48,7 +48,7 @@ class VolcanTest {
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
-        Zangano primerZangano =  new Zangano();
+        Zangano primerZangano =  new Zangano(10);
         extractor.guardarZangano(primerZangano);
 
         // Act & Assert
@@ -69,9 +69,9 @@ class VolcanTest {
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
-        Zangano primerZangano = new Zangano();
+        Zangano primerZangano = new Zangano(10);
         extractor.guardarZangano(primerZangano);
-        Zangano segundoZangano = new Zangano();
+        Zangano segundoZangano = new Zangano(10);
         extractor.guardarZangano(segundoZangano);
 
         // Act

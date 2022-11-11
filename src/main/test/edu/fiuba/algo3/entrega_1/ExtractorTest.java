@@ -31,6 +31,7 @@ class ExtractorTest {
         // ...
 
         // Este iria en CriaderoTest creo.
+        // Iria en Volcan diria yo.
     }
 
     @Test
@@ -65,7 +66,7 @@ class ExtractorTest {
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
-        Zangano zangano =  new Zangano();
+        Zangano zangano =  new Zangano(10);
         extractor.guardarZangano(zangano);
 
         // Act
@@ -87,9 +88,9 @@ class ExtractorTest {
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
-        Zangano primerZangano =  new Zangano();
+        Zangano primerZangano =  new Zangano(10);
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano();
+        Zangano SegundoZangano =  new Zangano(10);
         extractor.guardarZangano(SegundoZangano);
 
         // Act
@@ -111,11 +112,11 @@ class ExtractorTest {
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
-        Zangano primerZangano =  new Zangano();
+        Zangano primerZangano =  new Zangano(10);
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano();
+        Zangano SegundoZangano =  new Zangano(10);
         extractor.guardarZangano(SegundoZangano);
-        Zangano TercerZangano =  new Zangano();
+        Zangano TercerZangano =  new Zangano(10);
         extractor.guardarZangano(TercerZangano);
 
         // Act
@@ -135,13 +136,13 @@ class ExtractorTest {
         extractor.avanzarTurno();
         extractor.avanzarTurno();
         extractor.avanzarTurno();
-        Zangano primerZangano =  new Zangano();
+        Zangano primerZangano =  new Zangano(10);
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano();
+        Zangano SegundoZangano =  new Zangano(10);
         extractor.guardarZangano(SegundoZangano);
-        Zangano TercerZangano =  new Zangano();
+        Zangano TercerZangano =  new Zangano(10);
         extractor.guardarZangano(TercerZangano);
-        Zangano CuartoZangano =  new Zangano();
+        Zangano CuartoZangano =  new Zangano(10);
 
         assertThrows(CantidadMaximaDeZanganosEnExtractorException.class,()->{
             extractor.guardarZangano(CuartoZangano);
