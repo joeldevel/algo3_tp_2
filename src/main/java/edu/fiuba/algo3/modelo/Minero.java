@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-interface Minero {
+// Deben implementar esta interfaz NexoMineral y Zangano (ya que son los recolectores de ambas razas.)
 
-    void recibirMineral(Mineral mineral);
-
-    void recolectarMineral(Mineral mineral, int cantidad);
+public interface Minero {
+    int recolectarMineralUsandoRecolectorDeMineral(NodoMineral unNodoMineral);
 }
