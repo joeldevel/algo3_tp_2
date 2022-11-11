@@ -6,10 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.Criadero;
+import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.EdificioZerg;
-import edu.fiuba.algo3.modelo.EnConstruccion;
-import edu.fiuba.algo3.modelo.EstadoDeEdificio;
 import edu.fiuba.algo3.modelo.GasVespeno;
 import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Moho;
@@ -19,23 +17,18 @@ import edu.fiuba.algo3.modelo.SinRequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
+import edu.fiuba.algo3.modelo.Criadero.Criadero;
 import edu.fiuba.algo3.modelo.Extractor.Extractor;
 import edu.fiuba.algo3.modelo.ReservaDeProduccion.ReservaDeProduccion;
 
 class UbicacionTest {
 	
-	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
-	ArrayList<Larva> larvas = new ArrayList<Larva>();
-	EstadoDeEdificio estado = new EnConstruccion();
-	Tiempo tiempo = new Tiempo(-4);
-	Moho moho = new Moho(5,new Tiempo(0));
-	Vida vida = new Vida(500,10);
-
+	
     @Test
     void test01EnUnaUbicacionSinMohoYSinGasSeDeberiaPoderConstruirUnCriadero() {
 
         Ubicacion ubicacion = new Ubicacion();
-        Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+        Criadero criadero = new Criadero();
         
         ubicacion.agregarRequisito(new SinGas());
 
@@ -47,10 +40,10 @@ class UbicacionTest {
     void test02EnUnaUbicacionConMohoYConGasNoSeDeberiaPoderConstruirUnCriadero() {
     	
     	Ubicacion ubicacion = new Ubicacion();
-    	requisitos.add(new SinGas());
-    	Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+    
+    	Criadero criadero = new Criadero();
     	
-    	ubicacion.agregarRequisito(new Moho(5,new Tiempo(0)));
+    	ubicacion.agregarRequisito(new Moho());
     	ubicacion.agregarRequisito(new GasVespeno());
     	
     	assertFalse(ubicacion.sePuedeConstruir(criadero));
@@ -60,9 +53,9 @@ class UbicacionTest {
     void test03EnUnaUbicacionConMohoYSinGasSeDeberiaPoderConstruirUnCriadero() {
 
         Ubicacion ubicacion = new Ubicacion();
-        Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+        Criadero criadero = new Criadero();
         
-        ubicacion.agregarRequisito(new Moho(5,new Tiempo(0)));
+        ubicacion.agregarRequisito(new Moho());
         ubicacion.agregarRequisito(new SinGas());
 
         assertTrue(ubicacion.sePuedeConstruir(criadero));
@@ -72,9 +65,7 @@ class UbicacionTest {
     void test04EnUnaUbicacionSinMohoYConGasNoSeDeberiaPoderConstruirUnExtractor() {
 
         Ubicacion ubicacion = new Ubicacion();
-        requisitos.add(moho);
-        requisitos.add(new GasVespeno());
-        Extractor extractor = new Extractor(new Tiempo(-6),requisitos,new Vida(750,10),100,0,10);
+        Extractor extractor = new Extractor();
         
         ubicacion.agregarRequisito(new GasVespeno());
 
@@ -85,11 +76,9 @@ class UbicacionTest {
     void test05EnUnaUbicacionConMohoPeroSinGasNoSeDeberiaPoderConstruirUnExtractor() {
 
         Ubicacion ubicacion = new Ubicacion();
-        requisitos.add(moho);
-        requisitos.add(new GasVespeno());
-        Extractor extractor = new Extractor(new Tiempo(-6),requisitos,new Vida(750,10),100,0,10);
+        Extractor extractor = new Extractor();
         
-        ubicacion.agregarRequisito(new Moho(5,new Tiempo(0)));
+        ubicacion.agregarRequisito(new Moho());
         ubicacion.agregarRequisito(new SinGas());
 
         assertFalse(ubicacion.sePuedeConstruir(extractor));
@@ -99,9 +88,7 @@ class UbicacionTest {
     void test06EnUnaUbicacionSinMohoPeroConGasNoSeDeberiaPoderConstruirUnExtractor() {
 
         Ubicacion ubicacion = new Ubicacion();
-        requisitos.add(moho);
-        requisitos.add(new GasVespeno());
-        Extractor extractor = new Extractor(new Tiempo(-6),requisitos,new Vida(750,10),100,0,10);
+        Extractor extractor = new Extractor();
         
         ubicacion.agregarRequisito(new GasVespeno());
 
@@ -112,11 +99,9 @@ class UbicacionTest {
     void test07EnUnaUbicacionConMohoYConGasSeDeberiaPoderConstruriUnExtractor() {
 
         Ubicacion ubicacion = new Ubicacion();
-        requisitos.add(moho);
-        requisitos.add(new GasVespeno());
-        Extractor extractor = new Extractor(new Tiempo(-6),requisitos,new Vida(750,10),100,0,10);
+        Extractor extractor = new Extractor();
         
-        ubicacion.agregarRequisito(new Moho(5,new Tiempo(0)));
+        ubicacion.agregarRequisito(new Moho());
         ubicacion.agregarRequisito(new GasVespeno());
 
         assertTrue(ubicacion.sePuedeConstruir(extractor));
@@ -126,9 +111,7 @@ class UbicacionTest {
     void test08EnUnaUbicacionSinMohoYSinGasNoSeDeberiaPoderConstruirUnExtractor() {
     	
     	Ubicacion ubicacion = new Ubicacion();
-    	requisitos.add(moho);
-        requisitos.add(new GasVespeno());
-        Extractor extractor = new Extractor(new Tiempo(-6),requisitos,new Vida(750,10),100,0,10);
+    	Extractor extractor = new Extractor();
         
     	ubicacion.agregarRequisito(new SinGas());
     	
@@ -152,12 +135,8 @@ class UbicacionTest {
     void test10EnUnaUbicacionConCriaderoDestruidoSePuedenConstruir() {
 
         Ubicacion ubicacion = new Ubicacion();
-        requisitos.add(new SinGas());
-        ArrayList<RequisitoDeConstruccion> otrosRequisitos = new ArrayList<RequisitoDeConstruccion>();
-        otrosRequisitos.add(moho);
-        otrosRequisitos.add(new SinGas());
-        Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
-        ReservaDeProduccion reserva = new ReservaDeProduccion(new Tiempo(-12),otrosRequisitos,new Vida(1000,10),150,0);
+        Criadero criadero = new Criadero();
+        ReservaDeProduccion reserva = new ReservaDeProduccion();
         
         ubicacion.agregarRequisito(new SinGas());
         ubicacion.construir(criadero);

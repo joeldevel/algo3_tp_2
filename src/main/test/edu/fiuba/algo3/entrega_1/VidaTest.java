@@ -65,10 +65,10 @@ class VidaTest {
 	}
 	
 	@Test
-	void test07SeIntentaInstanciarUnaVidaConSuRecuperacionEnCeroDeberiaLanzarUnaExcepcion() {
+	void test07SeIntentaInstanciarUnaVidaConSuRecuperacionNegativaDeberiaLanzarUnaExcepcion() {
 		
 		assertThrows(ValorInvalidoParaVidaError.class,()->{
-		new Vida(100,0);
+		new Vida(100,-1);
 		});
 	}
 	

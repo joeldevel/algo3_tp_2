@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.ReservaDeProduccion;
 
-import edu.fiuba.algo3.modelo.EdificioNoOperativoException;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 
 public class ReservaDeProduccionNoUtilizable implements EstadoOperativoReservaDeProduccion {
 

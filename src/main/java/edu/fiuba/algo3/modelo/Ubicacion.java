@@ -56,13 +56,14 @@ public class Ubicacion {
     public void construir(Edificio unEdificio) {
         if(this.sePuedeConstruir(unEdificio)) {
             this.edificio = unEdificio;
-            this.actualizarRequisitos();
         }
     }
 
     public void destruirEdificio() {
-        this.edificio = new SinEdificio();
-        this.actualizarRequisitos();
+    	Moho mohoDelEdificio = this.edificio.moho();
+    	if(! this.unRequisitoEstaEnEstaUbicacion(mohoDelEdificio) && mohoDelEdificio != null) {
+    		this.requisitos.add(mohoDelEdificio);
+    	}
     }
 
     /* la idea es que si el edificio es un criadero de el moho a los requisitos de la ubicacion
@@ -70,7 +71,4 @@ public class Ubicacion {
      * pues cuando avance el tiempo el radio del moho puede crecer y donde antes no se podia quizas
      * ahora si se puede construir un edificio*/
 
-    public void actualizarRequisitos() {
-        this.edificio.actualizarRequisitosDeLaUbicacion(this.requisitos);
-    }
 }

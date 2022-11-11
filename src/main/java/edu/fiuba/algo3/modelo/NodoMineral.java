@@ -44,4 +44,15 @@ public class NodoMineral {
         this.cantidadDeMineralDisponible = this.cantidadDeMineralDisponible - unaCantidadDeMineralParaExtraer;
         return unaCantidadDeMineralParaExtraer;
     }
+
+    public NodoMineral(Mineral mineral) {
+        this.mineral = mineral;
+    }
+
+    public Mineral getMineral() {
+        return mineral;
+    }
+
+    private Mineral mineral;
+
 }

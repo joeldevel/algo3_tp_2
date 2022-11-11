@@ -6,10 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.Criadero;
+import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.CriaderoSinLarvasException;
-import edu.fiuba.algo3.modelo.EnConstruccion;
-import edu.fiuba.algo3.modelo.EstadoDeEdificio;
 import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
@@ -17,51 +15,30 @@ import edu.fiuba.algo3.modelo.SinGas;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Zangano;
+import edu.fiuba.algo3.modelo.Criadero.Criadero;
 
 class CriaderoTest {
-
-	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
-	ArrayList<Larva> larvas = new ArrayList<Larva>();
-	EstadoDeEdificio estado = new EnConstruccion();
-	Tiempo tiempo = new Tiempo(-4);
-	Moho moho = new Moho(5,new Tiempo(0));
-	Vida vida = new Vida(500,10);
 
 	@Test
 	void test01UnCriaderoNuevoNoDeberiaPoderSerUtilizado() {
 		
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
-		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 
 		assertFalse(criadero.sePuedeUtilizar());
 	}
 
 	@Test
 	void test02UnCriaderoNuevoDeberiaTenerUnTiempoDeEsperaDe4() {
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
 		assertEquals(criadero.tiempoDeEspera(),4);
 	}
 
 	@Test
 	void test03UnCriaderoNuevoAvanzaUnTurnoDeberiaSeguirSinPoderseUtilizar() {
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
 		criadero.avanzarTurno();
 
@@ -71,12 +48,7 @@ class CriaderoTest {
 	@Test
 	void test04UnCriaderoNuevoAvanzaUnTurnoDeberiaTenerUnTiempoDeEsperaDe3() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
-		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
 		criadero.avanzarTurno();
 
@@ -86,17 +58,9 @@ class CriaderoTest {
 	@Test
 	void test05UnCriaderoNuevoAvanzaCuatroTurnosSeDeberiaPoderUtilizar() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
-		
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
+		criadero.avanzarTurno(4);
 
 		assertTrue(criadero.sePuedeUtilizar());
 	}
@@ -104,62 +68,35 @@ class CriaderoTest {
 	@Test
 	void test06UnCriaderoNuevoAvanzaCuatroTurnosSuTiempoDeEsperaDeberiaSerCero() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
-		
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
+		criadero.avanzarTurno(4);
 
 		assertEquals(criadero.tiempoDeEspera(),0);
 	}
 
 	@Test
 	void test07UnCriaderoNuevoAvanzaCincoTurnosSuTiempoDeEsperaDeberiaSerCero() {
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-
+		criadero.avanzarTurno(4);
+		
 		assertEquals(criadero.tiempoDeEspera(),0);
 	}
 
 	@Test
 	void test08UnCriaderoNuevoTieneUnMohoDeRadio5() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
-		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
 		assertEquals(criadero.radioDeMoho(),5);
 	}
 
 	@Test
 	void test09UnCriaderoNuevoAvanzaUnTurnoSuRadioDeberiaSer5() {
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
 		criadero.avanzarTurno();
 
@@ -167,53 +104,33 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test10UnCriaderoNuevoAvanzaDosTurnosSuRadioDeberiaSer6() {
+	void test10UnCriaderoNuevoAvanzaDosTurnosSuRadioDeberiaSer5() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
-		
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
+		criadero.avanzarTurno(2);
 
-		assertEquals(criadero.radioDeMoho(),6);
+		assertEquals(criadero.radioDeMoho(),5);
 	}
 
 	@Test
-	void test11UnCriaderoNuevoAvanzaTresTurnosSuRadioDeberiaSer6() {
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+	void test11UnCriaderoNuevoAvanzaTresTurnosSuRadioDeberiaSer5() {
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-		criadero.avanzarTurno();
-
-		assertEquals(criadero.radioDeMoho(),6);
+		criadero.avanzarTurno(3);
+		
+		assertEquals(criadero.radioDeMoho(),5);
 	}
 
 	@Test
-	void test12UnCriaderoNuevoAvanzaDiezTurnoSuRadioDeberiaSer10() {
+	void test12UnCriaderoNuevoAvanzaDiezTurnoSuRadioDeberiaSer8() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
-		
-		for(int i=0; i<10; i++) {
-			criadero.avanzarTurno();
-		}
+		criadero.avanzarTurno(10);
 
-		assertEquals(criadero.radioDeMoho(),10);
+		assertEquals(criadero.radioDeMoho(),8);
 	}
 
 	/* habria que probar tambien que si un criadero no se puede utilizar, que cuando se quiere utilizar
@@ -223,33 +140,30 @@ class CriaderoTest {
 	 * esta en construccion a pesar de no poder hacer nada con edificio, el jugador deberia poder seguir
 	 * jugando*/
 
-
 	@Test
-	void test13UnNuevoCriaderoNuevoDeberiaEmpezarConTresLarvas(){
-
-		/* quizas deba emplearse la clase Unidad y que dentro de ella se guarde la cantidad de larvas
-		 * y un objeto de tipo Larva. En caso de que le pidan una larva desde afuera para crear un zangano
-		 * la clase Unidad deberia crear con new una nueva larva o una copia y devolverla*/
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+	void test13UnNuevoCriaderoNoTieneLarvas() {
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
+		
+		assertEquals(criadero.contarLarvas(),0);
+	}
+	
+	@Test
+	void test14UnNuevoCriaderoQueAvanzaCuatroTurnoDeberiaTenerTresLarvas(){
+
+		Criadero criadero = new Criadero();
+		
+		criadero.avanzarTurno(4);
 		
 		assertEquals(criadero.contarLarvas(),3);
 	}
 
 	@Test
-	void test14UnCriaderoNuevoEngendraUnaZanganoDeberiaTenerDosLarvas() {
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+	void test15UnCriaderoOperativoEngendraUnaZanganoDeberiaTenerDosLarvas() {
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
+		
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 
@@ -257,14 +171,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test15UnCriaderoConDosLarvasDeberiaTenerTresEnElSiguienteTurno() {
+	void test16UnCriaderoOperativoConDosLarvasDeberiaTenerTresEnElSiguienteTurno() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 
@@ -274,14 +185,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test16UnCriaderoConsumeDosLarvasEnElProximoTurnoDebeTenerDos(){
+	void test17UnCriaderoOperativoConsumeDosLarvasEnElProximoTurnoDebeTenerDos(){
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -292,14 +200,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test17UnCriaderoConsumeTresLarvasEnElProximoTurnoDebeTenerUna(){
+	void test18UnCriaderoOperativoConsumeTresLarvasEnElProximoTurnoDebeTenerUna(){
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
-		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
+	
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -311,14 +216,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test18UnCriaderoQueConsumeUnaLarvaDeberiaTenerDosAntesDeAvanzarElTurno() {
+	void test19UnCriaderoOperativoQueConsumeUnaLarvaDeberiaTenerDosAntesDeAvanzarElTurno() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 
@@ -326,14 +228,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test19UnCriaderoConsumeDosLarvasDebeTenerUnaLarvaAntesDeAvanzarElTurno(){
+	void test20UnCriaderoOperativoConsumeDosLarvasDebeTenerUnaLarvaAntesDeAvanzarElTurno(){
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -342,14 +241,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test20UnCriaderoConsumeTresLarvasNoDeberiaTenerLarvasAntesDeAvanzarDeTurno(){
+	void test21UnCriaderoOperativoConsumeTresLarvasNoDeberiaTenerLarvasAntesDeAvanzarDeTurno(){
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -359,14 +255,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test21UnCriaderoSinLarvasQuiereConsumirUnaLarvaDeberiaLanzarUnaExcepcion(){
-
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+	void test22UnCriaderoOperativoSinLarvasQuiereConsumirUnaLarvaDeberiaLanzarUnaExcepcion(){
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
+		
+		criadero.avanzarTurno(4);
 		
 		criadero.engendrarZangano();
 		criadero.engendrarZangano();
@@ -378,16 +271,11 @@ class CriaderoTest {
 	}
 
 	@Test
-	void test22UnCriaderoConTresLarvasAlPasarElTurnoDeberiaTenerTresLarvas() {
+	void test23UnCriaderoOperativoConTresLarvasAlPasarElTurnoDeberiaTenerTresLarvas() {
 
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
+		Criadero criadero = new Criadero();
 		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
-		
-		criadero.avanzarTurno();
+		criadero.avanzarTurno(5);
 
 		assertEquals(criadero.contarLarvas(),3);
 	}
@@ -395,12 +283,7 @@ class CriaderoTest {
 	@Test
 	void test23SeConstruyeUnCriaderoYRecibeDanio() {
 		// Arrange
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
-		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
 		criadero.recibirDanio(10);
 
@@ -414,12 +297,7 @@ class CriaderoTest {
 	@Test
 	void test24SeConstruyeUnCriaderoQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente() {
 		// Arrange
-		requisitos.add(new SinGas());
-		for(int i=0; i<3; i++) {
-			larvas.add(new Larva());			
-		}
-		
-		Criadero criadero = new Criadero(estado,tiempo,moho,requisitos,larvas,vida);
+		Criadero criadero = new Criadero();
 		
 		criadero.recibirDanio(10);
 		criadero.avanzarTurno();
