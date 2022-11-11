@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.NexoMineral.NexoMineral;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class NodoMineralTest {
@@ -56,5 +57,38 @@ public class NodoMineralTest {
         assertThrows(NodoMineralSinMineralParaRecolectarException.class,()->{
             int mineralRecolectado = nodoMineral.recolectarMineralUsandoRecolectorDeMineral();
         });
+    }
+
+    @Test
+    void test05SeConstruyeUnNexoMineralEnUnNodoMineralYDespuesDeCuatroTurnosAlRecolectarMineralesDevuelveElResultadoIndicado() {
+        // Arrange
+        NexoMineral nexoMineral = new NexoMineral(250, 250, -4, 50, 0, 10);
+        NodoMineral nodoMineral = new NodoMineral(2000);
+        nodoMineral.construirRecolectorDeMineral(nexoMineral);
+
+        nexoMineral.avanzarTurno();
+        nexoMineral.avanzarTurno();
+        nexoMineral.avanzarTurno();
+        nexoMineral.avanzarTurno();
+
+        // Act
+        int resultado = nodoMineral.recolectarMineralUsandoRecolectorDeMineral();
+
+        // Assert
+        assertEquals(resultado, 10);
+    }
+
+    @Test
+    void test06SeConstruyeUnZanganoEnUnNodoMineralYDespuesDeCuatroTurnosAlRecolectarMineralesDevuelveElResultadoIndicado() {
+        // Arrange
+        Zangano zangano = new Zangano(10);
+        NodoMineral nodoMineral = new NodoMineral(2000);
+        nodoMineral.construirRecolectorDeMineral(zangano);
+
+        // Act
+        int resultado = nodoMineral.recolectarMineralUsandoRecolectorDeMineral();
+
+        // Assert
+        assertEquals(resultado, 10);
     }
 }

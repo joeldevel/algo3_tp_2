@@ -24,7 +24,7 @@ public class NexoMineralTest {
     }
 
     @Test
-    void test02SeConstruyeunNexoMineralEnUnCristalYDespuesDeCuatroTurnosAlRecolectarMineralesDevuelveElResultadoIndicado() {
+    void test02SeConstruyeUnNexoMineralEnUnNodoMineralYDespuesDeCuatroTurnosAlRecolectarMineralesDevuelveElResultadoIndicado() {
         // Arrange
         NexoMineral nexoMineral = new NexoMineral(250, 250, -4, 50, 0, 10);
         NodoMineral nodoMineral = new NodoMineral(2000);
