@@ -2,27 +2,20 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-public abstract class EdificioProtoss {
+public abstract class EdificioProtoss extends Edificio {
 
-    protected Vida vida;
-    protected Tiempo tiempo;
-    protected ArrayList<RequisitoDeConstruccion> requisitos;
-    protected ArrayList<CostoDeConstruccion> costos;
     protected Escudo escudo;
-   /* protected int costoMineral;
-    protected int costoGas;*/
-
+       
     protected EdificioProtoss(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, 
     						  ArrayList<CostoDeConstruccion> unosCostos, Escudo unEscudo) {
-    	this.vida = unaVida;
-    	this.tiempo = unTiempo;
-    	this.requisitos = unosRequisitos;
-    	this.costos = unosCostos;
+    	super(unaVida,unTiempo,unosRequisitos,unosCostos);
     	this.escudo = unEscudo;
     }
     
+    @Override
     public abstract void avanzarTurno();
 
+    @Override
     public void recibirDanio(int unDanio) {
     	if(unDanio > this.escudo.proteccion()) {
     		int danioRestante = unDanio - this.escudo.proteccion();
@@ -33,16 +26,17 @@ public abstract class EdificioProtoss {
     		this.escudo.recibirDanioPor(unDanio);
     	}
     }
+    
+    @Override
+    public void recuperarse() {
+    	this.vida.recuperarse();
+    	this.escudo.recuperarse();
+    }
 
     public int obtenerEscudo() {
         return (this.escudo.proteccion());
     }
 
-    public void recuperarEscudo() {
-        this.escudo.recuperarse();
-    }
     
-    public int obtenerVida() {
-    	return (this.vida.restante());
-    }
+    
 }

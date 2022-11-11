@@ -45,7 +45,7 @@ public class Criadero extends EdificioZerg {
 	public void avanzarTurno() {
 		
 		this.tiempo.pasarTiempo();
-		this.vida.recuperarse();
+		this.recuperarse();
 		if(this.sePuedeUtilizar()) {
 			this.estado.actualizar();
 		}

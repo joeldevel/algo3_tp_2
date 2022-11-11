@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo.Pilon;
 
 import edu.fiuba.algo3.modelo.Atacable;
+import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 
-public class Pilon implements Atacable {
+public class Pilon implements Atacable, RequisitoDeConstruccion {
     private EstadoOperativoPilon estadoOperativo;
     private int tiempoDeConstruccion;
     private int costoMineral;
@@ -53,4 +54,9 @@ public class Pilon implements Atacable {
         }
 
     }
+
+	@Override
+	public boolean esIgualA(RequisitoDeConstruccion otroRequisito) {
+		return (otroRequisito instanceof Pilon);
+	}
 }
