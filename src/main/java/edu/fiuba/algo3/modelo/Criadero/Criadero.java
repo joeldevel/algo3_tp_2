@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.Criadero;
+package edu.fiuba.algo3.modelo.Criadero;
 
 import java.util.*;
 

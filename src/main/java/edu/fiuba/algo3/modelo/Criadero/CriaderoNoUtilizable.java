@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.Criadero;
+package edu.fiuba.algo3.modelo.Criadero;
 
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.Zangano;
