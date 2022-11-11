@@ -9,9 +9,10 @@ public class SinEdificio implements Edificio {
         return null;
     }
 
-    @Override
-    public void actualizarRequisitosDeLaUbicacion(ArrayList<RequisitoDeConstruccion> requisitos) {
-
-    }
+	@Override
+	public Moho moho() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public interface Edificio {
 
-    public ArrayList<RequisitoDeConstruccion> requisitos();
+    public Moho moho();
 
-    public void actualizarRequisitosDeLaUbicacion(ArrayList<RequisitoDeConstruccion> requisitos);
+	public ArrayList<RequisitoDeConstruccion> requisitos();
 
 }

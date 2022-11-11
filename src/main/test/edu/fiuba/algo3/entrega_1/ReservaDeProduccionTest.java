@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -14,15 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReservaDeProduccionTest {
 	
-	Vida vida = new Vida(1000,10);
-	Tiempo tiempo = new Tiempo(-12);
-	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
-	ArrayList<CostoDeConstruccion> costos = new ArrayList<CostoDeConstruccion>();
-	
     @Test
     void test01SeConstruyeUnaReservaDeProduccionYRecibeDanio(){
         // Arrange
-        ReservaDeProduccion rdp = new ReservaDeProduccion(vida, tiempo, requisitos, costos);
+        ReservaDeProduccion rdp = new ReservaDeProduccion();
         rdp.recibirDanio(10);
 
         // Act
@@ -35,7 +29,7 @@ class ReservaDeProduccionTest {
     @Test
     void test02SeConstruyeUnaReservaDeProduccionQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        ReservaDeProduccion rdp = new ReservaDeProduccion(vida, tiempo, requisitos, costos);
+        ReservaDeProduccion rdp = new ReservaDeProduccion();
         rdp.recibirDanio(10);
 
         // Act
@@ -48,7 +42,7 @@ class ReservaDeProduccionTest {
     @Test
     void test03SeConstruyeUnaReservaDeProduccionYNoSeEncuentraOperativa(){
         // Arrange
-        ReservaDeProduccion rdp = new ReservaDeProduccion(vida, tiempo, requisitos, costos);
+        ReservaDeProduccion rdp = new ReservaDeProduccion();
 
         // Act and Assert
         assertThrows(EdificioNoOperativoException.class,()->{
@@ -59,19 +53,9 @@ class ReservaDeProduccionTest {
     @Test
     void test04SeConstruyeUnaReservaDeProduccionYDespuesDeDoceTurnosSeEncuentraOperativa(){
         // Arrange
-        ReservaDeProduccion rdp = new ReservaDeProduccion(vida, tiempo, requisitos, costos);
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
-        rdp.avanzarTurno();
+        ReservaDeProduccion rdp = new ReservaDeProduccion();
+        
+        rdp.avanzarTurno(12);
 
         // Act
         boolean resultado = rdp.evolucionarLarva();

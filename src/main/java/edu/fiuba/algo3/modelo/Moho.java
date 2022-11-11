@@ -4,9 +4,19 @@ public class Moho implements RequisitoDeConstruccion {
 
 	private int radio;
 	private Tiempo tiempo;
+	
+	public Moho() {
+		this.radio = 5;
+		this.tiempo = new Tiempo(0);
+	}
+	
+	public Moho(Tiempo unTiempo) {
+		this.radio = 5;
+		this.tiempo = unTiempo;
+	}
 
 	public Moho(int unRadio, Tiempo unTiempo) {
-		this.radio = 5;
+		this.radio = unRadio;
 		this.tiempo = unTiempo;
 	}
 
