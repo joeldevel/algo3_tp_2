@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.EdificioZerg;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
-import edu.fiuba.algo3.modelo.Extractor.ExtractorUtilizable;
 
 public class Espiral extends EdificioZerg {
 
