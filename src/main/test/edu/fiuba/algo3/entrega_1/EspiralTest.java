@@ -1,9 +1,5 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.EnConstruccion;
-import edu.fiuba.algo3.modelo.EstadoDeEdificio;
-import edu.fiuba.algo3.modelo.Larva;
-import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;

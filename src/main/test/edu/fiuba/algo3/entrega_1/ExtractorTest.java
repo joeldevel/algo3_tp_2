@@ -29,6 +29,8 @@ class ExtractorTest {
     @Test
     void test02UnCriaderoNoPuedeConstruirseSobreUnVolcan(){
         // ...
+
+        // Este iria en CriaderoTest creo.
     }
 
     @Test
