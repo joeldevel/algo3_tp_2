@@ -1,0 +1,46 @@
+@startuml
+
+abstract class Raza {
+    -construcciones: Construccion
+    -unidades: Unidad
+}
+
+class Zerg
+class Protoss
+
+Zerg --|> Raza
+Protoss --|> Raza
+
+abstract class Unidad {
+    -superficie: Superficie
+    -Costo: int
+    -tiempoDeConstruccion: int
+    -danio: int
+    -rangoDeAtaque: int
+    -vida: Vida
+    -escudo: Escudo
+}
+
+Raza "1"-->"*" Unidad
+
+note left: Podriamos hacer que TODAS las unidades, tanto de \nZerg como de Protoss, hereden de la clase abstracta \nUnidad y hacer que particularmente las unidades Zerg tengan escudo \nigual a cero.\n\nEsto ya que la unica diferencia entre las unidades de ambas razas es el escudo.
+
+class Zangano
+class Zerling
+class Hidralisco
+class Mutalisco
+
+Zangano ---up|> Unidad
+Zerling ---up|> Unidad
+Hidralisco ----up|> Unidad
+Mutalisco ----up|> Unidad
+
+class Zealot
+class Dragon
+class Scout
+
+Zealot ----up|> Unidad
+Dragon ---up|> Unidad
+Scout ---up|> Unidad
+
+@enduml

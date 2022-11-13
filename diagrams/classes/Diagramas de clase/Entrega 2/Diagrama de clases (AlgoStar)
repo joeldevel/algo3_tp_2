@@ -1,0 +1,38 @@
+@startuml
+
+class AlgoStar{
+    -jugadores: Jugador
+    -mapa: Mapa
+    +pedirNombre()
+    +pedirColor()
+    +pedirRaza()
+    +validarJugador()
+    +compararNombre()
+    +compararColor()
+    +compararRaza()
+    +iniciarPartida()
+    +avanzarTurno()
+}
+
+note left: El metodo para validar al jugador se encarga de comparar\nel nombre de los jugadores, el color y la raza.\n\n Ademas, el metodo para iniciar partida le delegara a Mapa la creacion\n del mapa y la creacion de las bases iniciales para cada jugador.
+
+class Jugador{
+    -raza: Raza
+    -materiales: Material
+    -ubicacionBase: Ubicacion
+}
+
+note left: Necesitamos una interfaz Material la cual\nimplementen el Gas Vespeno y el Mineral para\n poder guardar ambos materiales en una misma lista.
+
+class Mapa{
+    -areasDeTierra
+    -areasEspaciales
+    -ubicaciones: Ubicacion
+    +crearMapa()
+    +crearBase()
+}
+
+AlgoStar --> Jugador
+AlgoStar -> Mapa
+
+@enduml
