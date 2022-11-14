@@ -91,3 +91,76 @@ EdificioProtoss <|-- PuertaEstelar
 @enduml
 
 
+@startuml
+
+abstract class EstadoOperativo{
+	-edificio: Edificio
+	+{abstract}ejecutar()
+}
+
+class Operable{
+	+ejecutar()
+}
+
+class EnConstruccion{
+	+ejecutar()
+}
+
+EstadoOperativo <|-- Operable
+EstadoOperativo <|-- EnConstruccion
+
+abstract class Edificio{
+	-tiempo: Tiempo
+	-vida: Vida
+	+ejecutar()
+	+{abstract}ejecutarOperable()
+	+ejecutarEnConstruccion()
+
+}
+abstract class EdificioZerg
+abstract class EdificioProtoss{
+	-escudo: Escudo
+}
+Edificio <-- EdificioZerg
+Edificio <-- EdificioProtoss
+
+EdificioZerg <|-- Criadero
+EdificioZerg <|-- Extractor
+EdificioZerg <|-- ReservaDeProduccion
+EdificioZerg <|-- Guarida
+EdificioZerg <|-- Espiral
+EdificioProtoss <|--- NexoMineral
+EdificioProtoss <|--- Pilon
+EdificioProtoss <|--- Asimilador
+EdificioProtoss <|--- Acceso
+EdificioProtoss <|--- PuertaEstelar
+
+Edificio <-up-> EstadoOperativo
+
+@enduml
+
+
+@startuml
+
+abstract class Edificio
+abstract class EstadoOperativo
+abstract class EdificioZerg
+abstract class EdificioProtoss
+Edificio --> Estado
+Estado <|.right. EnConstruccion
+Estado <|.. EdificioZerg
+Estado <|.. EdificioProtoss
+
+
+Edificio <|-- Criadero
+Edificio <|-- Extractor
+Edificio <|-- ReservaDeProduccion
+Edificio <|-- Guarida
+Edificio <|-- Espiral
+Edificio <|-- NexoMineral
+Edificio <|-- Pilon
+Edificio <|-- Asimilador
+Edificio <|-- Acceso
+Edificio <|-- PuertaEstelar
+
+@enduml
