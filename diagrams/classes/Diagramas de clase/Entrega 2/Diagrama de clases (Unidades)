@@ -19,10 +19,13 @@ abstract class Unidad {
     -tiempoDeConstruccion: int
     -danio: int
     -rangoDeAtaque: int
-    -vidaMax: Vida
+    -vida: Vida
     -escudo: Escudo
-    +atacar()
-    +recibirDanio()
+    +atacar(unaUnidad)
+    +estaEnRango()
+    +puedeAtacar()
+    +obtenerDanio()
+    +recibirDanio(unDanio)
 }
 
 Raza "1"-->"*" Unidad

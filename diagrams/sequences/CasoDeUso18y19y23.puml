@@ -1,0 +1,31 @@
+@startuml
+
+Usuario -> Zerling: Zerling(RequisitoDeConstruccion, CostoDeConstruccion, Ubicacion, Tierra, Tiempo, 4, 1, Vida, Escudo)
+Zerling --> Usuario: unZerling
+
+Usuario -> Zealot: Zealot(RequisitoDeConstruccion, CostoDeConstruccion, Ubicacion, Tierra, Tiempo, 8, 1, Vida, Escudo)
+Zealot --> Usuario: unZealot
+
+Usuario -> Zerling: atacar(unZealot)
+
+Zerling -> Zealot: puedeAtacar()
+note right: Caso de uso 19: El metodo puedeAtacar() debe tener toda la logica para validar que\nefectivamente la unidad Zealot es una unidad del mismo tipo que el ataque de la unidad Zerling.\n\nEs decir, Zerling debe tener ataque de tipo tierra y Zealot debe ser una unidad de tierra.
+Zealot --> Zerling: true
+
+Zerling -> Zealot: estaEnRango()
+note right: Caso de uso 23: El metodo estaEnRango() debe tener toda la logica para validar que\nefectivamente la unidad atacada (Zealot) esta en el rango de la unidad que ataca (Zerling).
+Zealot --> Zerling: true
+
+Zerling -> Zerling: obtenerDanio()
+
+Zerling -> Zealot: recibirDanio(4)
+Zealot -> Escudo: recibirDanioPor(4)
+note right: Caso de uso 18
+Escudo --> Zealot
+Zealot --> Zerling
+
+Zerling --> Usuario
+
+
+
+@enduml
