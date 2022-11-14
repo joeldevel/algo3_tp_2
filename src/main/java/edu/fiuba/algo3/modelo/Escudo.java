@@ -27,7 +27,7 @@ public class Escudo {
     	}
     }
 	
-	public int proteccion() {
+	public int restante() {
 		return this.proteccionRestante;
 	}
 	

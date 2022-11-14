@@ -4,7 +4,8 @@ import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
-import edu.fiuba.algo3.modelo.ReservaDeProduccion.ReservaDeProduccion;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeProduccion;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

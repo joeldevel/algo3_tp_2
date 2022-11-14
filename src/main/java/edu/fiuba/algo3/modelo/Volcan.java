@@ -2,17 +2,20 @@ package edu.fiuba.algo3.modelo;
 
 public class Volcan {
 
+	private int cantidad;
     private RefineriaDeGas refineria;
-    private int cantidadDeGasVespenoDisponible;
 
-    public Volcan(int unaCantidadDeGasVespeno) {
+    public Volcan() {
+    	this.cantidad = 5000;
         this.refineria = null;
-        this.cantidadDeGasVespenoDisponible = unaCantidadDeGasVespeno;
     }
 
     public void construirRefineriaDeGas(RefineriaDeGas unaRefineria) {
         /* Chequear que el tipo de parametro sea RefineriaDeGas. En caso contrario, lanzar excepcion. */
 
+    	if( !(unaRefineria instanceof RefineriaDeGas)) {
+    		//lanza una excepcion de que no se puede construir el edificio en el lugar
+    	}
         if(this.refineria != null) {
             throw new VolcanYaTieneUnaRefineriaDeGasConstruidaException();
         }
@@ -20,9 +23,9 @@ public class Volcan {
         this.refineria = unaRefineria;
     }
 
-    public int extraerGasUsandoRefineria() {
+    public int extraerGas() {
 
-        if(this.cantidadDeGasVespenoDisponible == 0) {
+        if(this.gasRestante() == 0) {
             throw new VolcanSinGasVespenoParaExtraerException();
         }
 
@@ -30,19 +33,25 @@ public class Volcan {
             throw new VolcanSinRefineriaDeGasConstruidaException();
         }
 
-        return this.refineria.extraerGasUsandoRefineria(this);
+        return (this.refineria.extraerGasDe(this));
     }
-
-    public int extraerGas(int unaCantidadDeGasParaExtraer) {
+    
+    public int gasRestante() {
+    	return (this.cantidad);
+    }
+    
+    public int extraerGas(int unaCantidad) {
 
         /* Caso borde donde por ejemplo tenemos 10 de gas y nos piden 20. Deberiamos devolver esos 10 y dejar al Volcan en 0. */
-        if(this.cantidadDeGasVespenoDisponible < unaCantidadDeGasParaExtraer) {
-            unaCantidadDeGasParaExtraer = this.cantidadDeGasVespenoDisponible;
-            this.cantidadDeGasVespenoDisponible = 0;
-            return unaCantidadDeGasParaExtraer;
+        int extraido = 0;
+    	if(unaCantidad > this.cantidad) {
+            extraido = this.cantidad;
+            this.cantidad = 0;
         }
-
-        this.cantidadDeGasVespenoDisponible = this.cantidadDeGasVespenoDisponible - unaCantidadDeGasParaExtraer;
-        return unaCantidadDeGasParaExtraer;
+    	else {
+    		extraido = unaCantidad;
+    		this.cantidad -= unaCantidad;
+    	}
+    	return extraido;
     }
 }

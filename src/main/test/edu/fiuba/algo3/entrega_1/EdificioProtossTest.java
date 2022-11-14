@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.Pilon;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
-import edu.fiuba.algo3.modelo.Pilon.Pilon;
 import edu.fiuba.algo3.modelo.Pilon.PilonUtilizable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

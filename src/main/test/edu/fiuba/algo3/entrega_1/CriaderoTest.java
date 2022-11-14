@@ -8,17 +8,19 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.CriaderoSinLarvasException;
-import edu.fiuba.algo3.modelo.Larva;
+import edu.fiuba.algo3.modelo.FabricaDeEdificios;
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
 import edu.fiuba.algo3.modelo.SinGas;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
-import edu.fiuba.algo3.modelo.Zangano;
-import edu.fiuba.algo3.modelo.Criadero.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Unidades.Larva;
+import edu.fiuba.algo3.modelo.Unidades.Zangano;
+
 
 class CriaderoTest {
-
+	
 	@Test
 	void test01UnCriaderoNuevoNoDeberiaPoderSerUtilizado() {
 		

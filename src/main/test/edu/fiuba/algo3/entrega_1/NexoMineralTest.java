@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.EdificioNoOperativoException;
-import edu.fiuba.algo3.modelo.NexoMineral.NexoMineral;
 import edu.fiuba.algo3.modelo.NodoMineral;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 
 import org.junit.jupiter.api.Test;
 

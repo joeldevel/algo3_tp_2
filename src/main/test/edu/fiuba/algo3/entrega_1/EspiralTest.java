@@ -2,13 +2,14 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.CostoDeConstruccion;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
-import edu.fiuba.algo3.modelo.Larva;
+import edu.fiuba.algo3.modelo.Unidades.Larva;
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
-import edu.fiuba.algo3.modelo.ReservaDeProduccion.ReservaDeProduccion;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
-import edu.fiuba.algo3.modelo.Espiral.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeProduccion;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

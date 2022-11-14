@@ -1,0 +1,93 @@
+El modelo de edificio que teniamos
+
+@startuml
+ 
+abstract class Edificio
+abstract class EdificioZerg
+abstract class EdificioProtoss
+Edificio <|-- EdificioZerg
+Edificio <|-- EdificioProtoss
+EdificioZerg <|-- Criadero
+EdificioZerg <|-- Extractor
+EdificioZerg <|-- ReservaDeProduccion
+EdificioZerg <|-- Guarida
+EdificioZerg <|-- Espiral
+EdificioProtoss <|-- NexoMineral
+EdificioProtoss <|-- Pilon
+EdificioProtoss <|-- Asimilador
+EdificioProtoss <|-- Acceso
+EdificioProtoss <|-- PuertaEstelar
+
+interface EstadoOperativoCriadero
+EstadoOperativoCriadero <|.. CriaderoUtilizable
+EstadoOperativoCriadero <|.. CriaderoNoUtilizable
+interface EstadoOperativoExtractor
+EstadoOperativoExtractor <|.. ExtractorUtilizable
+EstadoOperativoExtractor <|.. ExtractorNoUtilizable
+interface EstadoOperativoReservaDeProduccion
+EstadoOperativoReservaDeProduccion <|.. ReservaDeProduccionUtilizable
+EstadoOperativoReservaDeProduccion <|.. ReservaDeProduccionNoUtilizable
+interface EstadoOperativoGuarida
+EstadoOperativoGuarida <|.. GuariadaUtilizable
+EstadoOperativoGuarida <|.. GuariadaNoUtilizable
+interface EstadoOperativoEspiral
+EstadoOperativoEspiral <|.. EspiralUtilizable
+EstadoOperativoEspiral <|.. EspiralNoUtilizable
+interface EstadoOperativoNexoMineral
+EstadoOperativoNexoMineral <|..NexoMineralUtilizable
+EstadoOperativoNexoMineral <|..NexoMineralNoUtilizable
+interface EstadoOperativoPilon
+EstadoOperativoPilon <|.. PilonUtilizable
+EstadoOperativoPilon <|.. PilonNoUtilizable
+interface EstadoOperativoAsimilador
+EstadoOperativoAsimilador <|.. AsimiladorUtilizable
+EstadoOperativoAsimilador <|.. AsimiladorNoUtilizable
+interface EstadoOperativoAcceso
+EstadoOperativoAcceso <|.. AccesoUtilizable
+EstadoOperativoAcceso <|.. AccesoNoUtilizable
+interface EstadoOperativoPuertaEstelar
+EstadoOperativoPuertaEstelar <|.. PuertaEstelarUtilizable
+EstadoOperativoPuertaEstelar <|.. PuertaEstelarNoUtilizable
+
+Criadero --> EstadoOperativoCriadero
+Extractor --> EstadoOperativoExtractor
+ReservaDeProduccion --> EstadoOperativoReservaDeProduccion
+Guarida --> EstadoOperativoGuarida
+Espiral --> EstadoOperativoEspiral
+
+NexoMineral --> EstadoOperativoNexoMineral
+Pilon --> EstadoOperativoPilon
+Asimilador --> EstadoOperativoAsimilador
+Acceso --> EstadoOperativoAcceso
+PuertaEstelar --> EstadoOperativoPuertaEstelar
+
+
+@enduml
+
+
+El nuevo modelo de Edificio
+@startuml
+
+class Edificio
+interface Estado
+abstract class EdificioZerg
+abstract class EdificioProtoss
+Edificio --> Estado
+Estado <|.right. EnConstruccion
+Estado <|.. EdificioZerg
+Estado <|.. EdificioProtoss
+
+EdificioZerg <|-- Criadero
+EdificioZerg <|-- Extractor
+EdificioZerg <|-- ReservaDeProduccion
+EdificioZerg <|-- Guarida
+EdificioZerg <|-- Espiral
+EdificioProtoss <|-- NexoMineral
+EdificioProtoss <|-- Pilon
+EdificioProtoss <|-- Asimilador
+EdificioProtoss <|-- Acceso
+EdificioProtoss <|-- PuertaEstelar
+
+@enduml
+
+
