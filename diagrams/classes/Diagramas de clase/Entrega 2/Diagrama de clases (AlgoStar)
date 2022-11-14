@@ -3,33 +3,38 @@
 class AlgoStar{
     -jugadores: Jugador
     -mapa: Mapa
-    +pedirNombre()
-    +pedirColor()
-    +pedirRaza()
+    +AlgoStar(cantidadDeBases)
+    +guardarMapa(unMapa)
+    +pedirNombre(unNombre)
+    +pedirColor(unColor)
+    +pedirRaza(unaRaza)
     +validarJugador()
-    +compararNombre()
-    +compararColor()
-    +compararRaza()
+    +guardarJugador(unJugador)
     +iniciarPartida()
     +avanzarTurno()
 }
 
-note left: El metodo para validar al jugador se encarga de comparar\nel nombre de los jugadores, el color y la raza.\n\n Ademas, el metodo para iniciar partida le delegara a Mapa la creacion\n del mapa y la creacion de las bases iniciales para cada jugador.
+note left: El metodo para validar al jugador se encarga de comparar\nel nombre de los jugadores, el color y la raza.
 
 class Jugador{
+    -nombre: unNombre
+    -color: unColor
     -raza: Raza
     -materiales: Material
     -ubicacionBase: Ubicacion
+    +Jugador(unNombre, unColor, unaRaza, unaUbicacion, unaCantidadDeMineral)
 }
 
-note left: Necesitamos una interfaz Material la cual\nimplementen el Gas Vespeno y el Mineral para\n poder guardar ambos materiales en una misma lista.
+note left: Necesitamos una interfaz Material la cual\nimplementen el Gas Vespeno y el Mineral para\npoder guardar ambos materiales en una misma lista.\n\nEl atributo que guardara la raza tendra dentro los edificios\ny las unidades correspondientes.
 
 class Mapa{
+    -tamaño: int
     -areasDeTierra
     -areasEspaciales
     -ubicaciones: Ubicacion
-    +crearMapa()
+    +Mapa(cantidadDeBases)
     +crearBase()
+    +obtenerUbicacionBase()
 }
 
 AlgoStar --> Jugador

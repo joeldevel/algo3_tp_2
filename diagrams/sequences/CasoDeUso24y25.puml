@@ -1,0 +1,47 @@
+@startuml
+
+Usuario -> AlgoStar: AlgoStar(cantidadDeBases)
+note left: Los tamaños de los mapas se definen por la cantidad de bases que\npresenten, entonces tiene sentido que AlgoStar reciba la cantidad de bases.
+
+AlgoStar -> Mapa: Mapa(cantidadDeBases)
+
+Mapa -> Mapa: calcularTamaño(cantidadDeBases)
+
+loop Para n bases
+Mapa -> Mapa: crearBase()
+note right: Se llama base a un lugar en el mapa donde\nencontraremos muchos cristales juntos y un volcán de gas.\n\nQuizas conviene tener una clase Base y que dentro almacene\ntoda la informacion.
+end
+
+Mapa --> AlgoStar: unMapa
+AlgoStar -> AlgoStar: guardarMapa()
+
+loop Para dos jugadores
+AlgoStar -> AlgoStar: pedirNombre("Alan")
+AlgoStar -> AlgoStar: validarNombre("Alan")
+AlgoStar --> AlgoStar: true
+note left: El metodo validarNombre se encarga de validar que\nel mismo tenga al menos 6 caracteres y que ademas\nlos jugadores no tengan el mismo nombre.
+AlgoStar -> AlgoStar: pedirColor("Rojo")
+AlgoStar -> AlgoStar: validarColor("Rojo")
+AlgoStar --> AlgoStar: true
+note left: El metodo validarColor se encarga de validar que\nlos jugadores no tengan el mismo color.
+AlgoStar -> AlgoStar: pedirRaza("Zerg")
+AlgoStar -> AlgoStar: validarRaza("Zerg")
+AlgoStar --> AlgoStar: true
+note left: El metodo validarRaza se encarga de validar que\nlos jugadores no tengan la misma raza.
+
+AlgoStar -> Mapa: obtenerUbicacionBase()
+note right: Debe tener la logica para obtener bases en extremos opuestos del mapa.
+Mapa --> AlgoStar: ubicacionBase
+
+AlgoStar -> Jugador: Jugador("Alan", "Rojo", Zerg, ubicacionBase, unaCantidadDeMineral)
+
+note left: Una vez validada la informacion del jugador, se lo crea y se lo guarda.
+
+Jugador --> AlgoStar: unJugador
+AlgoStar -> AlgoStar: guardarJugador()
+end
+
+AlgoStar -> AlgoStar: iniciarPartida()
+note left: Una vez completado la inicializacion del juego, pasamos a iniciar la partida\ny a partir de aqui cada jugador elige las acciones que desea hacer en su\nturno y luego le pasa el turno a su contrincante.
+
+@enduml

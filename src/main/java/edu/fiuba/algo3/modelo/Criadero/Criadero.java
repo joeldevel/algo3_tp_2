@@ -15,7 +15,6 @@ import edu.fiuba.algo3.modelo.Zangano;
 public class Criadero extends EdificioZerg {
 
 	private EstadoOperativoCriadero estado;
-	
 
 	public Criadero() {
 		

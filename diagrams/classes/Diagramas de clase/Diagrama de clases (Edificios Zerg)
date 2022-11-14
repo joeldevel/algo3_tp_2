@@ -22,21 +22,18 @@ abstract class Raza{
 class Zerg
 
 abstract class EdificioZerg {
-    -vidaMaxima: int
-    -vidaRestante: int
-    -tiempoDeConstruccion: int
-    -costoMineral: int
-    -costoGas: int
+    -requisitos: RequisitoDeConstruccion
+    -costos: CostoDeConstruccion
+    -tiempoDeConstruccion: Tiempo
+    -vida: Vida
     +Edificio()
-    +avanzarTurno(){abstract}
     +recuperarVida()
-    +recibirDanio(unDanio)
-    +obtenerVida()
+    +recibirDanio()
 }
 
 class ReservaDeProduccion {
     -estadoOperativo: EstadoOperativo
-    +ReservaDeProduccion(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas)
+    +ReservaDeProduccion()
     +setComportamientoUtilizable(nuevoEstadoOperativo)
 }
 interface EstadoOperativoReservaDeProduccion
@@ -49,17 +46,16 @@ class ReservaDeProduccionNoUtilizable {
 
 class Criadero {
     -estadoOperativo: EstadoOperativo
-    -maxLarvas: int
-    +Criadero(Tiempo, EstadoOperativo, Moho)
-    +setComportamientoUtilizable()
+    +Criadero()
+    +setComportamientoUtilizable(nuevoEstadoOperativo)
     +contarLarvas()
     +evolucionar(Larva)
-    +generarLarva(): Larva
+    +generarLarva()
 }
 interface EstadoOperativoCriadero{
     +contarLarvas()
     +evolucionar(Larva)
-    +generarLarva(): Larva
+    +generarLarva()
 }
 class CriaderoUtilizable {
 }
@@ -67,8 +63,7 @@ class CriaderoNoUtilizable
 
 class Extractor{
     -estadoOperativo: EstadoOperativo
-    -cantidadExtraible: int
-    +Extractor(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas, unaCantidadExtraible)
+    +Extractor()
     +setComportamientoUtilizable(nuevoEstadoOperativo)
 	+extraerGasUsandoRefineria()
 	+guardarZangano(unZangano)
@@ -78,10 +73,7 @@ interface EstadoOperativoExtractor{
     +guardarZangano(unZangano)
 }
 class ExtractorUtilizable {
-    -cantidadExtraible: int
-    -cantidadMaximaDeZanganos: int
-    -zanganos: Zangano
-    +ExtractorUtilizable(unaCantidadExtraible)
+    +ExtractorUtilizable()
     +extraerGas()
     +guardarZangano()
 }
@@ -93,7 +85,7 @@ class ExtractorNoUtilizable {
 
 class Guarida {
     -estadoOperativo: EstadoOperativo
-    +Guarida(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas)
+    +Guarida()
     +setComportamientoUtilizable(nuevoEstadoOperativo)
 }
 interface EstadoOperativoGuarida
@@ -106,7 +98,7 @@ class GuaridaNoUtilizable {
 
 class Espiral {
     -estadoOperativo: EstadoOperativo
-    +Espiral(unaVida, unTiempoDeConstruccion, unCostoMineral, unCostoGas)
+    +Espiral()
     +setComportamientoUtilizable(nuevoEstadoOperativo)
 }
 interface EstadoOperativoEspiral
