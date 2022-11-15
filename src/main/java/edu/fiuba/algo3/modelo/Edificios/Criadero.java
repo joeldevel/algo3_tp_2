@@ -17,17 +17,20 @@ public class Criadero extends EdificioZerg {
 	private ArrayList<Larva> larvas;
 		
 	public Criadero() {	
-		super(new Vida(500,10));
+		super(new Tiempo(-4),new Vida(500,10));
 		this.maxLarvas = 3;
 		this.larvas = new ArrayList<Larva>() {{ add(new Larva()); add(new Larva()); add(new Larva());}};
 	}
 
 	@Override
-	public Edificio construir() {
-		return (new Criadero());
+	public void ejecutaOperable() {
+		// TODO Auto-generated method stub
+		
 	}
 	
+	
 	public int contarLarvas() {
+		this.estado.ejecutar();
 		return (this.larvas.size());
 	}
 
@@ -46,6 +49,7 @@ public class Criadero extends EdificioZerg {
 			this.larvas.add(new Larva());
 		}
 	}
-	
+
+
 	
 }

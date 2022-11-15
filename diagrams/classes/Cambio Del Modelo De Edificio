@@ -164,3 +164,45 @@ Edificio <|-- Acceso
 Edificio <|-- PuertaEstelar
 
 @enduml
+
+
+@startuml
+
+Usuario -> Criadero: contarLarvas()
+
+Criadero -> Operable: ejecutar()
+
+Operable -> Criadero: ejecutarOperable()
+
+Criadero --> Usuario: cantidadDeLarvas
+
+@enduml
+
+@startuml
+
+Usuario -> Criadero: contarLarvas()
+
+Criadero -> EnConstruccion: ejecutar()
+
+EnConstruccion -> Criadero: ejecutarEnConstruccion()
+
+Criadero -> Usuario: Excepcion / No hace nada
+
+@enduml
+
+
+@startuml
+
+Usuario -> Criadero: contarLarvas()
+
+Criadero -> Operable: ejecutar()
+
+Operable -> Criadero: ejecutarOperable(ContarLarvasCommand)
+
+Criadero -> ContarLarvasCommand: contarLarvas()
+
+ContarLarvasCommand --> Criadero: cantidadDeLarvas
+
+Criadero --> Usuario: cantidadDeLarvas
+
+@enduml

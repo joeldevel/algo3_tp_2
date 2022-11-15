@@ -2,19 +2,26 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Estado;
 import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Vida;
 
-public interface Edificio {
+public abstract class Edificio {
 	
-	public boolean sePuedeUtilizar();
 	
-	/*
-	private Tiempo tiempo;
-	private Estado estado;
+	protected Tiempo tiempo;
+	protected Vida vida;
+	protected EstadoOperativo estado;
 	
-	public Edificio(Tiempo unTiempo,Estado unEstado) {
+	public Edificio(Tiempo unTiempo,Vida unaVida) {
 		this.tiempo = unTiempo;
-		this.estado = unEstado;
+		this.vida = unaVida;
+		this.estado = new EnConstruccion(this);
 	}
+	
+	public void ejecutaEnConstruccion() {
+		
+	}
+	
+	public abstract void ejecutaOperable();
 	
 	public void avanzarTurno() {
 		this.tiempo.pasarTiempo();
