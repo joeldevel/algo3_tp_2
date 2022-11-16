@@ -1,10 +1,11 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
+import edu.fiuba.algo3.modelo.JUGADOR_COLOR;
+import edu.fiuba.algo3.modelo.JUGADOR_RAZA;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static edu.fiuba.algo3.util.Constantes.*;
 
 public class Caso25VerificarRequisitosJugador {
 
