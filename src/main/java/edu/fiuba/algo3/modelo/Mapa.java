@@ -13,11 +13,13 @@ public class Mapa {
     }
 
     private void crearBase() {
+        for (int i = 1; i <= this.cantidadDeBases; ++i) {
 
+        }
     }
 
     public boolean basesEstanEnExtremosOpuestos() {
-        // Comparar bases si son iguales
+        // Comparar bases si son iguales.
 
         return true;
     }

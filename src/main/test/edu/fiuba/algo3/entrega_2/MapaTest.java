@@ -9,7 +9,7 @@ public class MapaTest {
     @Test
     void test01CreoUnaNuevaPartidaYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
 
-        Mapa mapa = new Mapa(2);
+        Mapa mapa = new Mapa(6);
 
         assertTrue(mapa.basesEstanEnExtremosOpuestos());
     }
