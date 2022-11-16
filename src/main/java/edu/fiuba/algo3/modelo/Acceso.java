@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Pilon.Pilon;
 
-public class Acceso {
+public class Acceso implements RequisitoDeConstruccion {
 
     private int x, y;
 
@@ -21,4 +21,9 @@ public class Acceso {
         // ver tambien las otras condiciones
         return ( Math.pow((this.x - pilon.getX()), 2) + Math.pow((this.y - pilon.getY()), 2) <= 9);
     }
+
+	@Override
+	public boolean esIgualA(RequisitoDeConstruccion otroRequisito) {
+		return (otroRequisito instanceof Acceso);
+	}
 }

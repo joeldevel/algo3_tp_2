@@ -7,7 +7,7 @@ public class Vida {
     private int recuperacion;
 
     public Vida(int unaVida, int unaRecuperacion) {
-    	if((unaVida <= 0) || (unaRecuperacion <= 0)) {
+    	if((unaVida <= 0) || (unaRecuperacion < 0)) {
     		throw new ValorInvalidoParaVidaError();
     	}
         this.vidaMax = unaVida;

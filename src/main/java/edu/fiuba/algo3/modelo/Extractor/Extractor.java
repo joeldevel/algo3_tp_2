@@ -4,10 +4,19 @@ import edu.fiuba.algo3.modelo.*;
 
 import java.util.ArrayList;
 
-public class Extractor extends EdificioZerg implements RefineriaDeGas, Edificio {
+public class Extractor extends EdificioZerg implements RefineriaDeGas {
 
-    private EstadoOperativoExtractor estadoOperativo;
     private int cantidadExtraible;
+    private EstadoOperativoExtractor estadoOperativo;
+    
+    public Extractor() {
+    	super(new Vida(750,10), new Tiempo(-6), 
+    		  new ArrayList<RequisitoDeConstruccion>() {{ add(new Moho()); add(new GasVespeno());}},
+  			  new ArrayList<CostoDeConstruccion>());
+    	this.cantidadExtraible = 10;
+    	this.setComportamientoUtilizable(new ExtractorNoUtilizable());
+        
+    }
 
     public Extractor(Vida unaVida, Tiempo unTiempo, ArrayList<RequisitoDeConstruccion> unosRequisitos, 
     				 ArrayList<CostoDeConstruccion> unosCostos, int unaCantidadExtraible){
@@ -47,8 +56,9 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas, Edificio 
         return this.requisitos;
     }
 
-    @Override
-    public void actualizarRequisitosDeLaUbicacion(ArrayList<RequisitoDeConstruccion> requisitos) {
-
-    }
+	@Override
+	public Moho moho() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

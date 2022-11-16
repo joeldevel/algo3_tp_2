@@ -15,7 +15,7 @@ class AsimiladorTest {
         volcan.construirRefineriaDeGas(asimilador);
 
         assertThrows(EdificioNoOperativoException.class,()->{
-            int gasExtraido = volcan.extraerGasUsandoRefineria();
+            volcan.extraerGasUsandoRefineria();
         });
     }
 
@@ -25,12 +25,8 @@ class AsimiladorTest {
         Asimilador asimilador = new Asimilador();
         Volcan volcan = new Volcan(5000);
         volcan.construirRefineriaDeGas(asimilador);
-        asimilador.avanzarTurno();
-        asimilador.avanzarTurno();
-        asimilador.avanzarTurno();
-        asimilador.avanzarTurno();
-        asimilador.avanzarTurno();
-        asimilador.avanzarTurno();
+        
+        asimilador.avanzarTurno(6);
 
         // Act
         int resultado = volcan.extraerGasUsandoRefineria();

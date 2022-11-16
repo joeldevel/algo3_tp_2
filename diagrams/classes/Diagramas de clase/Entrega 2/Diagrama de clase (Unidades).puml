@@ -1,0 +1,55 @@
+@startuml
+
+abstract class Raza {
+    -construcciones: Construccion
+    -unidades: Unidad
+}
+
+class Zerg
+class Protoss
+
+Zerg --|> Raza
+Protoss --|> Raza
+
+abstract class Unidad {
+    -requisitos: RequisitoDeConstruccion
+    -costos: CostoDeConstruccion
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -tiempoDeConstruccion: int
+    -danio: int
+    -rangoDeAtaque: int
+    -vida: Vida
+    -escudo: Escudo
+    +atacar(unaUnidad)
+    +estaEnRango()
+    +puedeAtacar()
+    +obtenerDanio()
+    +recibirDanio(unDanio)
+}
+
+Raza "1"-->"*" Unidad
+
+note left: Podriamos hacer que TODAS las unidades, tanto de \nZerg como de Protoss, hereden de la clase abstracta \nUnidad y hacer que particularmente las unidades Zerg tengan escudo \nigual a cero.\n\nEsto ya que la unica diferencia entre las unidades de ambas razas es el escudo.\n\nLa ubicacion nos va a permitir saber si una unidad esta en el rango de otra\no en el rango de un edificio.
+
+class Zangano
+class Zerling
+class Hidralisco
+class Mutalisco {
+    +evolucionar()
+}
+
+Zangano ---up|> Unidad
+Zerling ---up|> Unidad
+Hidralisco ----up|> Unidad
+Mutalisco ----up|> Unidad
+
+class Zealot
+class Dragon
+class Scout
+
+Zealot ----up|> Unidad
+Dragon ---up|> Unidad
+Scout ---up|> Unidad
+
+@enduml

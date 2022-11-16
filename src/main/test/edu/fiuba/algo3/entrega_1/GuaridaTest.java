@@ -14,15 +14,10 @@ import java.util.ArrayList;
 
 class GuaridaTest {
 	
-	Vida vida = new Vida(1250,10);
-	Tiempo tiempo = new Tiempo(-12);
-	ArrayList<RequisitoDeConstruccion> requisitos = new ArrayList<RequisitoDeConstruccion>();
-	ArrayList<CostoDeConstruccion> costos = new ArrayList<CostoDeConstruccion>();
-
     @Test
     void test01SeConstruyeUnaGuaridaYNoSeEncuentraOperativa(){
         // Arrange
-        Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
+        Guarida guarida = new Guarida();
 
         // Act and Assert
         assertThrows(EdificioNoOperativoException.class,()->{
@@ -33,7 +28,7 @@ class GuaridaTest {
     @Test
     void test02SeConstruyeUnaGuaridaYRecibeDanioAunSinEstarOperativaYElResultadoEsElIndicado(){
         // Arrange
-        Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
+        Guarida guarida = new Guarida();
         guarida.recibirDanio(10);
 
         // Act
@@ -46,19 +41,9 @@ class GuaridaTest {
     @Test
     void test03SeConstruyeUnaGuaridaYDespuesDeDoceTurnosSeEncuentraOperativa(){
         // Arrange
-        Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
+        Guarida guarida = new Guarida();
+        
+        guarida.avanzarTurno(12);
 
         // Act
         boolean resultado = guarida.evolucionarLarva();
@@ -70,19 +55,9 @@ class GuaridaTest {
     @Test
     void test04SeConstruyeUnaGuaridaYDespuesDeDoceTurnosRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
+        Guarida guarida = new Guarida();
+        
+        guarida.avanzarTurno(12);
 
         guarida.recibirDanio(10);
 
@@ -96,19 +71,10 @@ class GuaridaTest {
     @Test
     void test05SeConstruyeUnaGuaridaYDespuesDeDoceTurnosRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
-        guarida.avanzarTurno();
+        Guarida guarida = new Guarida();
+        
+        guarida.avanzarTurno(12);
+        
         guarida.recibirDanio(10);
 
         // Act
@@ -120,9 +86,9 @@ class GuaridaTest {
 
 
     @Test
-    void test01SeConstruyeUnaGuaridaYRecibeDanio(){
+    void test06SeConstruyeUnaGuaridaYRecibeDanio(){
         // Arrange
-        Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
+        Guarida guarida = new Guarida();
         guarida.recibirDanio(10);
 
         // Act
@@ -133,9 +99,9 @@ class GuaridaTest {
     }
 
     @Test
-    void test02SeConstruyeUnaGuaridaQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
+    void test07SeConstruyeUnaGuaridaQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Guarida guarida = new Guarida(vida, tiempo, requisitos, costos);
+        Guarida guarida = new Guarida();
         guarida.recibirDanio(10);
 
         // Act
