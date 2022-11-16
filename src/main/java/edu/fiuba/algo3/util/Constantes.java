@@ -15,4 +15,11 @@ public class Constantes {
     public static final int COSTO_GAS_GUARIDA = 100;
     public static final int COSTO_MINERAL_ESPIRAL = 150;
     public static final int COSTO_GAS_ESPIRAL = 100;
+
+    public static final int JUGADOR_MIN_NOMBRE = 6;
+
+    public enum JUGADOR_COLOR {ROJO, VERDE, AZUL}
+
+    public enum JUGADOR_RAZA {PROTOSS, ZERG}
+
 }
