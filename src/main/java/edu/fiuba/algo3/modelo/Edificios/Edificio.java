@@ -9,7 +9,7 @@ public abstract class Edificio {
 	
 	protected Tiempo tiempo;
 	protected Vida vida;
-	protected EstadoOperativo estado;
+	protected Estado estado;
 	
 	public Edificio(Tiempo unTiempo,Vida unaVida) {
 		this.tiempo = unTiempo;

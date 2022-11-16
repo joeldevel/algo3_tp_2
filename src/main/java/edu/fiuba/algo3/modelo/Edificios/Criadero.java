@@ -28,10 +28,10 @@ public class Criadero extends EdificioZerg {
 		
 	}
 	
-	
 	public int contarLarvas() {
-		this.estado.ejecutar();
-		return (this.larvas.size());
+		Comando comando = new ContarLarvasComand();
+		return comando.ejecutar();
+		//return (this.larvas.size());
 	}
 
 	public Zangano crearZangano() {

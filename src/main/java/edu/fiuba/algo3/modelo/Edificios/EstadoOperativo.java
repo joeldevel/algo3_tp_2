@@ -8,10 +8,7 @@ public abstract class EstadoOperativo {
 		this.edificio = unEdificio;
 	}
 	
-	public void ejecutar() {
-		
-	}
-	
-	
+	public abstract void ejecutar();
 
+	
 }

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 public class EnConstruccion extends EstadoOperativo{
 	
+	
 	public EnConstruccion(Edificio unEdificio) {
 		super(unEdificio);
 	}
@@ -10,6 +11,7 @@ public class EnConstruccion extends EstadoOperativo{
 	public void ejecutar() {
 		this.edificio.ejecutaEnConstruccion();
 	}
+	
 
 	/*
 	@Override

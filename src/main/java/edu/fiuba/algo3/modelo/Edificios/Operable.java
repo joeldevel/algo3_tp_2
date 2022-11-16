@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Edificios;
+	
 
-public class Operable extends EstadoOperativo {
+public abstract class Operable extends EstadoOperativo {
 	
 	public Operable(Edificio unEdificio) {
 		super(unEdificio);
@@ -10,4 +11,6 @@ public class Operable extends EstadoOperativo {
 	public void ejecutar() {
 		this.edificio.ejecutaOperable();
 	}
+
+	
 }
