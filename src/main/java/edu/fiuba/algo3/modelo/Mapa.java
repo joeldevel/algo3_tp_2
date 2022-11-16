@@ -33,7 +33,7 @@ public class Mapa {
         if (this.cantidadDeJugadores == 0) {
             throw new MapaSinJugadoresException();
         }
-        // Comparar bases si son iguales o equidistantes.
+        /* Comparar bases si son iguales o equidistantes. */
 
         return true;
     }
