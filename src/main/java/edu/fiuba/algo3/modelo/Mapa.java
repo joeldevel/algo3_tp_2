@@ -7,6 +7,7 @@ public class Mapa {
     private int cantidadDeBases;
 
     private ArrayList<Base> bases;
+    // private ArrayList<ArrayList<Integer> bases; Esto es una Matriz.
 
     public Mapa(int unaCantidadDeBases) {
         this.cantidadDeBases = unaCantidadDeBases;
