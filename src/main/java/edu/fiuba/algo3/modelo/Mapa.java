@@ -10,6 +10,7 @@ public class Mapa {
 
     public Mapa(int unaCantidadDeBases) {
         this.cantidadDeBases = unaCantidadDeBases;
+        this.crearBase();
     }
 
     private void calcularTamanio() {
@@ -17,7 +18,7 @@ public class Mapa {
     }
 
     private void crearBase() {
-        new ArrayList<Base>();
+        bases = new ArrayList<Base>();
         for (int i = 1; i <= this.cantidadDeBases; ++i) {
             bases.add(new Base());
         }
