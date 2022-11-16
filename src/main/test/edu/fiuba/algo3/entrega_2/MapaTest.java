@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
+import edu.fiuba.algo3.modelo.Excepciones.MapaSinJugadoresException;
 import edu.fiuba.algo3.modelo.Mapa;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +14,7 @@ public class MapaTest {
         Mapa mapa = new Mapa(0, 6);
 
         // Act and Assert
-        assertThrows(EdificioNoOperativoException.class,()->{
+        assertThrows(MapaSinJugadoresException.class,()->{
             mapa.basesEstanEnExtremosOpuestos();
         });
     }

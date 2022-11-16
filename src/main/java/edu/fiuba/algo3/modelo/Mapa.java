@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
+import edu.fiuba.algo3.modelo.Excepciones.MapaSinJugadoresException;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class Mapa {
 
     public boolean basesEstanEnExtremosOpuestos() {
         if (this.cantidadDeJugadores == 0) {
-            throw new EdificioNoOperativoException();
+            throw new MapaSinJugadoresException();
         }
         // Comparar bases si son iguales o equidistantes.
 
