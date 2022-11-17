@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
 import java.util.ArrayList;
 
 public class Mapa {
@@ -10,6 +11,10 @@ public class Mapa {
     // private ArrayList<ArrayList<Integer> bases; Esto es una Matriz.
 
     public Mapa(int unaCantidadDeBases) {
+        if (unaCantidadDeBases < 2) {
+            throw new CantidadInsuficienteDeBasesException();
+        }
+
         this.cantidadDeBases = unaCantidadDeBases;
         this.crearBase();
     }
