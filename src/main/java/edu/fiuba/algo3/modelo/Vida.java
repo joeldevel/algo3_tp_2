@@ -4,15 +4,13 @@ public class Vida {
 
     private int vidaMax;
     private int vidaRestante;
-    private int recuperacion;
 
-    public Vida(int unaVida, int unaRecuperacion) {
-    	if((unaVida <= 0) || (unaRecuperacion < 0)) {
+    public Vida(int unaVida) {
+    	if(unaVida <= 0) {
     		throw new ValorInvalidoParaVidaError();
     	}
         this.vidaMax = unaVida;
         this.vidaRestante = unaVida;
-        this.recuperacion = unaRecuperacion;
     }
     
     public void recibirDanioPor(int unaCantidad) {
@@ -32,12 +30,16 @@ public class Vida {
     }
     
     public void recuperarse() {
-    	if(this.vidaRestante + this.recuperacion <= this.vidaMax) {
-    		this.vidaRestante += this.recuperacion;
+    	if(this.vidaRestante + this.recuperacion() <= this.vidaMax) {
+    		this.vidaRestante += this.recuperacion();
     	}
-    	else if(this.vidaRestante + this.recuperacion > this.vidaMax) {
+    	else if(this.vidaRestante + this.recuperacion() > this.vidaMax) {
     		this.vidaRestante = this.vidaMax;
     	}
+    }
+    
+    private int recuperacion(){
+    	return ((int)(this.vidaMax * 0.05));
     }
     
     

@@ -16,8 +16,8 @@ public class Zealot implements Atacante,Atacable {
 	private Ataque ataque;
 	
 	public Zealot(Ubicacion unaUbicacion) {
-		this.vida = new Vida(100,5);
-		this.escudo = new Escudo(60,5);
+		this.vida = new Vida(100);
+		this.escudo = new Escudo(60);
 		this.ubicacion = unaUbicacion;
 		this.ataque = new Ataque(8,1);
 	}

@@ -14,7 +14,7 @@ public class Zerling implements Atacante,Atacable{
 	private Ataque ataque;
 	
 	public Zerling(Ubicacion unaUbicacion) {
-		this.vida = new Vida(35,5);
+		this.vida = new Vida(35);
 		this.ubicacion = unaUbicacion;
 		this.ataque = new Ataque(4,1);
 	}

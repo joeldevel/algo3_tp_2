@@ -14,7 +14,7 @@ public class Hidralisco implements Atacante,Atacable{
 	private Ataque ataque;
 	
 	public Hidralisco(Ubicacion unaUbicacion) {
-		this.vida = new Vida(80,5);
+		this.vida = new Vida(80);
 		this.ubicacion = unaUbicacion;
 		this.ataque = new Ataque(10,4);
 	}

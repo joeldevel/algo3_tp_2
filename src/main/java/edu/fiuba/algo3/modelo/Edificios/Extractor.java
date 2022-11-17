@@ -7,20 +7,18 @@ import java.util.ArrayList;
 
 public class Extractor extends EdificioZerg implements RefineriaDeGas {
 
+	private final int COSTO_MINERAL = 100;
+	private final int COSTO_GAS = 0;
+	
 	private int maxExtraible;
     private int maxZanganos;
     private ArrayList<Zangano> zanganos;
     
     public Extractor(){
-    	super(new Vida(750,10));
+    	super(new Tiempo(-6),new Vida(750));
     	this.maxExtraible = 10;
     	this.maxZanganos = 3;
         this.zanganos = new ArrayList<Zangano>();
-    }
-    
-    @Override
-    public Edificio construir() {
-    	return (new Extractor());
     }
 
     public void guardarZangano(Zangano zangano) {
@@ -43,6 +41,12 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	
 	public void reestablecerExtraible() {
 		this.maxExtraible = 10;
+	}
+
+	@Override
+	public void ejecutaOperable() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

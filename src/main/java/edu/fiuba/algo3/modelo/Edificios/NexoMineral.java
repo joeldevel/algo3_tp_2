@@ -4,16 +4,13 @@ import edu.fiuba.algo3.modelo.*;
 
 public class NexoMineral extends EdificioProtoss implements Minero {
 
-    
+	private final int COSTO_MINERAL = 50;
+	private final int COSTO_GAS = 0;
+	
     public NexoMineral() {
-        super(new Vida(250,10), new Escudo(250,10));
+        super(new Tiempo(-4),new Vida(250), new Escudo(250));
     }
     
-    @Override
-    public Edificio construir() {
-    	return (new NexoMineral());
-    }
-
 	@Override
 	public int extraerMineralDe(NodoMineral unNodoMineral) {
 		// TODO Auto-generated method stub
@@ -21,10 +18,9 @@ public class NexoMineral extends EdificioProtoss implements Minero {
 	}
 
 	@Override
-	public void recibirDanio(int unDanio) {
+	public void ejecutaOperable() {
 		// TODO Auto-generated method stub
 		
 	}
-
     
 }

@@ -12,13 +12,16 @@ import edu.fiuba.algo3.modelo.Unidades.Zangano;
  * larvas a otro tipo de unidad zerg. Sino una buna idea es usar el patron Factory Method */
 
 public class Criadero extends EdificioZerg {
-
+	
+	private final int COSTO_MINERAL = 50;
+	private final int COSTO_GAS = 0;
+	
 	private int maxLarvas;
 	private ArrayList<Larva> larvas;
 	private ArrayList<Zangano> zanganos;
 		
 	public Criadero() {	
-		super(new Tiempo(-4),new Vida(500,10));
+		super(new Tiempo(-4),new Vida(500));
 		this.maxLarvas = 3;
 		this.larvas = new ArrayList<Larva>() {{ add(new Larva()); add(new Larva()); add(new Larva());}};
 		this.zanganos = new ArrayList<Zangano>();

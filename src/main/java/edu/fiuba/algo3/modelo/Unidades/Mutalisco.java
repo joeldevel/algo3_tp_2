@@ -14,7 +14,7 @@ public class Mutalisco implements Atacante,Atacable {
 	private Ataque ataque;
 	
 	public Mutalisco(Ubicacion unaUbicacion) {
-		this.vida = new Vida(120,5);
+		this.vida = new Vida(120);
 		this.ubicacion = unaUbicacion;
 		this.ataque = new Ataque(9,3);
 	}

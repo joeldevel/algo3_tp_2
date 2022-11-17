@@ -16,8 +16,8 @@ public class Dragon implements Atacante,Atacable {
 	private Ataque ataque;
 	
 	public Dragon(Ubicacion unaUbicacion) {
-		this.vida = new Vida(100,5);
-		this.escudo = new Escudo(80,5);
+		this.vida = new Vida(100);
+		this.escudo = new Escudo(80);
 		this.ubicacion = unaUbicacion;
 		this.ataque = new Ataque(20,4);
 	}

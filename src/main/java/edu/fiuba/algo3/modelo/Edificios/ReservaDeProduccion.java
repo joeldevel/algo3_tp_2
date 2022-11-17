@@ -5,18 +5,18 @@ import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.Larva;
 
 public class ReservaDeProduccion extends EdificioZerg {
-	
-    public ReservaDeProduccion(){
-        super(new Vida(1000,10));
+
+    private final int COSTO_MINERAL = 150;
+    private final int COSTO_GAS = 0;
+    	
+    public ReservaDeProduccion() {
+    	super(new Tiempo(-12),new Vida(1000));    	
     }
     
-    @Override
-    public Edificio construir() {
-    	return (new ReservaDeProduccion());
-    }
-
-	public void evolucionarLarva(Larva unaLarva) {
-		//
+	@Override
+	public void ejecutaOperable() {
+		// TODO Auto-generated method stub
+		
 	}
 		
 }

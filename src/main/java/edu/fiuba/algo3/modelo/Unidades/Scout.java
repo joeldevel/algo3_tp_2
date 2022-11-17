@@ -16,8 +16,8 @@ public class Scout implements Atacante,Atacable {
 	private Ataque ataque;
 	
 	public Scout(Ubicacion unaUbicacion) {
-		this.vida = new Vida(150,5);
-		this.escudo = new Escudo(100,5);
+		this.vida = new Vida(150);
+		this.escudo = new Escudo(100);
 		this.ubicacion = unaUbicacion;
 		this.ataque = new Ataque(14,4);
 	}

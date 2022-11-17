@@ -14,7 +14,7 @@ public class Guardian implements Atacante,Atacable {
 	private Ataque ataque;
 	
 	public Guardian(Ubicacion unaUbicacion) {
-		this.vida = new Vida(100,5);
+		this.vida = new Vida(100);
 		this.ubicacion = unaUbicacion;
 		this.ataque = new Ataque(25,10);
 	}
