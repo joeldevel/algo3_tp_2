@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Areas.AreaEspacial;
+import edu.fiuba.algo3.modelo.Areas.AreaTerrestre;
+import edu.fiuba.algo3.modelo.Areas.Base;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
 import java.util.ArrayList;
 
@@ -7,11 +10,16 @@ public class Mapa {
 
     private int cantidadDeBases;
 
+    static final int cantidadDeJugadores = 2;
+
     private ArrayList<Base> bases;
-    // private ArrayList<ArrayList<Integer> bases; Esto es una Matriz.
+
+    private ArrayList<AreaTerrestre> areasTerrestres;
+
+    private ArrayList<AreaEspacial> areasEspaciales;
 
     public Mapa(int unaCantidadDeBases) {
-        if (unaCantidadDeBases < 2) {
+        if (unaCantidadDeBases < cantidadDeJugadores) {
             throw new CantidadInsuficienteDeBasesException();
         }
 
@@ -25,8 +33,16 @@ public class Mapa {
 
     private void crearBase() {
         bases = new ArrayList<Base>();
-        for (int i = 1; i <= this.cantidadDeBases; ++i) {
-            bases.add(new Base());
+        areasTerrestres = new ArrayList<AreaTerrestre>();
+        areasEspaciales = new ArrayList<AreaEspacial>();
+
+        for (int i = 0; i < this.cantidadDeBases; ++i) {
+            bases.add(new Base(i, i));
+
+            if (i < (this.cantidadDeBases - 1)) {
+                areasTerrestres.add(new AreaTerrestre(i, i + 1));
+                areasEspaciales.add(new AreaEspacial(i + 1, i));
+            }
         }
     }
 
