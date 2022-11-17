@@ -15,33 +15,32 @@ public class Criadero extends EdificioZerg {
 
 	private int maxLarvas;
 	private ArrayList<Larva> larvas;
+	private ArrayList<Zangano> zanganos;
 		
 	public Criadero() {	
 		super(new Tiempo(-4),new Vida(500,10));
 		this.maxLarvas = 3;
 		this.larvas = new ArrayList<Larva>() {{ add(new Larva()); add(new Larva()); add(new Larva());}};
+		this.zanganos = new ArrayList<Zangano>();
 	}
 
 	@Override
 	public void ejecutaOperable() {
-		// TODO Auto-generated method stub
-		
+		this.crearLarva();
 	}
 	
 	public int contarLarvas() {
-		Comando comando = new ContarLarvasComand();
-		return comando.ejecutar();
-		//return (this.larvas.size());
+		return (this.larvas.size());
 	}
 
-	public Zangano crearZangano() {
+	public void crearZangano() {
 		if(this.larvas.isEmpty()) {
 			throw new CriaderoSinLarvasException();
 		}
 		Larva unaLarva = this.larvas.get(0);
 		Zangano zangano = unaLarva.evolucionar();
 		this.larvas.remove(0);
-		return zangano;
+		zanganos.add(zangano);
 	}
 	
 	public void crearLarva() {
