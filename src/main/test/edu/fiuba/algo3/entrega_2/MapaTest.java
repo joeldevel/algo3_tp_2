@@ -35,4 +35,9 @@ public class MapaTest {
         // Assert
         assertTrue(resultado);
     }
+
+    @Test
+    void void04CreoUnMapaNuevoConTresBasesYLaQueSobraQuedaEquidistanteALasBasesDeLosJugadores() {
+
+    }
 }

@@ -23,7 +23,7 @@ import edu.fiuba.algo3.modelo.ReservaDeProduccion.ReservaDeProduccion;
 
 class UbicacionTest {
 	
-	
+	/*
     @Test
     void test01EnUnaUbicacionSinMohoYSinGasSeDeberiaPoderConstruirUnCriadero() {
 
@@ -35,7 +35,7 @@ class UbicacionTest {
         assertTrue(ubicacion.sePuedeConstruir(criadero));
 
     }
-    
+
     @Test
     void test02EnUnaUbicacionConMohoYConGasNoSeDeberiaPoderConstruirUnCriadero() {
     	
@@ -118,10 +118,10 @@ class UbicacionTest {
     	assertFalse(ubicacion.sePuedeConstruir(extractor));
     }
 
-    /* en esta parte habria que probar mas edificios, como por ejemplo guarida
+    en esta parte habria que probar mas edificios, como por ejemplo guarida
      * donde un requisito de construccion es una reserva de produccion, o un espiral
      * donde una requisito de construccion es una guarida
-     * */
+     *
 
     @Test
     void test09UnaUbicacionNuevaComienzaSinEdificios() {
@@ -144,6 +144,7 @@ class UbicacionTest {
 
         assertTrue(ubicacion.sePuedeConstruir(reserva));
     }
+    falta probar con otros edificios que se puede construir aun cuando criadero
 
-    /* falta probar con otros edificios que se puede construir aun cuando criadero*/
+	 */
 }
