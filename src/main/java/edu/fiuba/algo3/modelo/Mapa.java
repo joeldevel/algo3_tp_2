@@ -12,6 +12,8 @@ public class Mapa {
 
     static final int cantidadDeJugadores = 2;
 
+    private Base baseJugadorUno, baseJugadorDos;
+
     private ArrayList<Base> bases;
 
     private ArrayList<AreaTerrestre> areasTerrestres;
@@ -24,26 +26,27 @@ public class Mapa {
         }
 
         this.cantidadDeBases = unaCantidadDeBases;
-        this.crearBase();
+        this.bases = new ArrayList<Base>();
+        this.areasTerrestres = new ArrayList<AreaTerrestre>();
+        this.areasEspaciales = new ArrayList<AreaEspacial>();
+
+        this.crearAreas();
     }
 
-    private void calcularTamanio() {
+    private void crearAreas() {
+        int i;
 
-    }
-
-    private void crearBase() {
-        bases = new ArrayList<Base>();
-        areasTerrestres = new ArrayList<AreaTerrestre>();
-        areasEspaciales = new ArrayList<AreaEspacial>();
-
-        for (int i = 0; i < this.cantidadDeBases; ++i) {
-            bases.add(new Base(i, i));
+        for (i = 0; i < this.cantidadDeBases; ++i) {
+            this.bases.add(new Base(i, i));
 
             if (i < (this.cantidadDeBases - 1)) {
-                areasTerrestres.add(new AreaTerrestre(i, i + 1));
-                areasEspaciales.add(new AreaEspacial(i + 1, i));
+                this.areasTerrestres.add(new AreaTerrestre(i, i + 1));
+                this.areasEspaciales.add(new AreaEspacial(i + 1, i));
             }
         }
+
+        //baseJugadorUno = this.bases.get(0);
+        //baseJugadorDos = this.bases.get(i);
     }
 
     public boolean basesEstanEnExtremosOpuestos() {
@@ -52,3 +55,4 @@ public class Mapa {
         return true;
     }
 }
+
