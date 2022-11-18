@@ -19,4 +19,12 @@ public class Base {
         this.ubicacion = new Ubicacion(x, y);
         nodosMinerales = new ArrayList<NodoMineral>() {{ add(new NodoMineral(2000)); add(new NodoMineral(2000)); add(new NodoMineral(2000));}};
     }
+
+    public int getX() {
+        return this.ubicacion.getX();
+    }
+
+    public int getY() {
+        return this.ubicacion.getY();
+    }
 }

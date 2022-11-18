@@ -8,11 +8,13 @@ import java.util.ArrayList;
 
 public class Mapa {
 
-    private int cantidadDeBases;
-
     static final int cantidadDeJugadores = 2;
 
+    private int cantidadDeBases;
+
     private Base baseJugadorUno, baseJugadorDos;
+
+    private int baseJugadorUnoPosicionX, baseJugadorUnoPosicionY, baseJugadorDosPosicionX, baseJugadorDosPosicionY;
 
     private ArrayList<Base> bases;
 
@@ -30,6 +32,11 @@ public class Mapa {
         this.areasTerrestres = new ArrayList<AreaTerrestre>();
         this.areasEspaciales = new ArrayList<AreaEspacial>();
 
+        this.baseJugadorUnoPosicionX = 0;
+        this.baseJugadorUnoPosicionY = 0;
+        this.baseJugadorDosPosicionX = unaCantidadDeBases - 1;
+        this.baseJugadorDosPosicionY = unaCantidadDeBases - 1;
+
         this.crearAreas();
     }
 
@@ -45,14 +52,16 @@ public class Mapa {
             }
         }
 
-        //baseJugadorUno = this.bases.get(0);
-        //baseJugadorDos = this.bases.get(i);
+        this.baseJugadorUno = this.bases.get(0);
+        this.baseJugadorDos = this.bases.get(i - 1);
     }
 
     public boolean basesEstanEnExtremosOpuestos() {
-        /* Comparar bases si son iguales o equidistantes. */
+        if ((this.baseJugadorUno.getX() == baseJugadorUnoPosicionX) && (this.baseJugadorUno.getY() == baseJugadorUnoPosicionY) && (this.baseJugadorDos.getX() == baseJugadorDosPosicionX) && (this.baseJugadorDos.getY() == baseJugadorDosPosicionY)) {
+            return true;
+        }
 
-        return true;
+        return false;
     }
 }
 
