@@ -7,18 +7,20 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 0;
 	
-    protected int maxExtraible;
+    private int maxExtraible;
+    private int extraido;
+    private Volcan volcan;
     
-    public Asimilador() {
+    public Asimilador(Volcan unVolcan) {
     	super(new Tiempo(-6),new Vida(450),new Escudo(450));
     	this.maxExtraible = 20;
+    	this.extraido = 0;
+    	this.volcan = unVolcan;
     }
     
     @Override
 	public int extraerGasDe(Volcan unVolcan) {
-		int cantidadAExtraer = this.maxExtraible;
-		this.maxExtraible = 0;
-		return (unVolcan.extraerGas(cantidadAExtraer));
+		return (unVolcan.extraerGas(this.maxExtraible));
 	}
 	
 	public void reestrablecerExtraible() {
@@ -26,8 +28,19 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	}
 
 	@Override
-	public void ejecutaOperable() {
-		// TODO Auto-generated method stub
-		
+    public void ejecutaOperable() {
+        this.extraido += this.extraerGasDe(this.volcan);
+    }
+	
+	@Override
+    public int obtenerGas() {
+		int cantidadExtraida = this.extraido;
+		this.extraido = 0;
+        return cantidadExtraida;
+    }
+
+	@Override
+	public boolean tieneRefineria() {
+		return true;
 	}
 }

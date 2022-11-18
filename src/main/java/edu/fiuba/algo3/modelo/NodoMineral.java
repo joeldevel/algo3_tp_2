@@ -1,47 +1,53 @@
 package edu.fiuba.algo3.modelo;
 
-public class NodoMineral {
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
+import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMineralException;
+import edu.fiuba.algo3.modelo.Unidades.Zangano;
+
+public class NodoMineral implements Mineral {
 
     private Minero minero;
-    private int cantidadDeMineralDisponible;
+    private int cantidadDeMineral;
 
-    public NodoMineral(int unaCantidadDeMineral) {
-        this.minero = null;
-        this.cantidadDeMineralDisponible = unaCantidadDeMineral;
+    public NodoMineral() {
+        this.minero = new SinMinero(this);
+        this.cantidadDeMineral = 2000;
     }
 
-    public void construirRecolectorDeMineral(Minero unMinero) {
-        /* Chequear que el tipo de parametro sea RecolectorDeMineral. En caso contrario, lanzar excepcion. */
-        if(this.minero != null) {
-            throw new NodoMineralYaTieneUnRecolectorDeMineralException();
-        }
-
-        this.minero = unMinero;
+    public void construirNexo() {
+    	if(this.minero.tieneMinero()) {
+    		throw new NodoMineralYaTieneUnRecolectorDeMineralException();
+    	}
+    	this.minero = new NexoMineral(this);
+    }
+    
+    public void asignarZangano(Zangano unZangano) {
+    	unZangano.conNodo(this);
+    	this.minero = unZangano;
     }
 
-    public int recolectarMineralUsandoRecolectorDeMineral() {
-
-        if(this.cantidadDeMineralDisponible == 0) {
-            throw new NodoMineralSinMineralParaRecolectarException();
-        }
-
-        if(this.minero == null) {
-            throw new NodoMineralSinRecolectorDeMineralConstruidoException();
-        }
-
-        return this.minero.recolectarMineralUsandoRecolectorDeMineral(this);
+    @Override
+    public int mineralRestante() {
+    	return (this.cantidadDeMineral);
     }
+    
+    @Override
+    public int recolectarMineral(int unaCantidad) {
 
-    public int recolectarMineral(int unaCantidadDeMineralParaExtraer) {
-
-        /* Caso borde donde por ejemplo tenemos 10 de mineral y nos piden 30. Deberiamos devolver esos 10 y dejar al Nodo Mineral en 0. */
-        if(this.cantidadDeMineralDisponible < unaCantidadDeMineralParaExtraer) {
-            unaCantidadDeMineralParaExtraer = this.cantidadDeMineralDisponible;
-            this.cantidadDeMineralDisponible = 0;
-            return unaCantidadDeMineralParaExtraer;
+    	/* Caso borde donde por ejemplo tenemos 10 de mineral y nos piden 30. Deberiamos devolver esos 10 y dejar al Nodo Mineral en 0. */
+    	if(this.mineralRestante() == 0) {
+    		throw new NodoMineralSinMineralParaRecolectarException();
+    	}
+    	int recolectado = 0;
+    	if(unaCantidad > this.mineralRestante()) {
+        	recolectado = this.mineralRestante();
+        	this.cantidadDeMineral = 0;
         }
-
-        this.cantidadDeMineralDisponible = this.cantidadDeMineralDisponible - unaCantidadDeMineralParaExtraer;
-        return unaCantidadDeMineralParaExtraer;
+    	else {
+    		recolectado = unaCantidad;
+    		this.cantidadDeMineral -= unaCantidad;
+    	}
+    	return recolectado;
     }
 }

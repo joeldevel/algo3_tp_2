@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoError;
+
 public class Escudo {
 
 	private int proteccionMax;

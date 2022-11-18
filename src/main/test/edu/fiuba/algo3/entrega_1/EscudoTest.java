@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Escudo;
-import edu.fiuba.algo3.modelo.ValorInvalidoDeDanioError;
-import edu.fiuba.algo3.modelo.ValorInvalidoParaEscudoError;
-import edu.fiuba.algo3.modelo.ValorInvalidoParaVidaError;
 import edu.fiuba.algo3.modelo.Vida;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoError;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaVidaError;
 
 class EscudoTest {
 

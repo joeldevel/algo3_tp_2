@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.CostoDeConstruccion;
-import edu.fiuba.algo3.modelo.CriaderoSinLarvasException;
 import edu.fiuba.algo3.modelo.FabricaDeEdificios;
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
@@ -15,6 +14,7 @@ import edu.fiuba.algo3.modelo.SinGas;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Excepciones.CriaderoSinLarvasException;
 import edu.fiuba.algo3.modelo.Unidades.Larva;
 import edu.fiuba.algo3.modelo.Unidades.Zangano;
 
