@@ -5,10 +5,8 @@ note left: Los tamaños de los mapas se definen por la cantidad de bases que\npr
 
 AlgoStar -> Mapa: Mapa(cantidadDeBases)
 
-Mapa -> Mapa: calcularTamaño(cantidadDeBases)
-
 loop Para n bases
-Mapa -> Mapa: crearBase()
+Mapa -> Mapa: crearAreas()
 note right: Se llama base a un lugar en el mapa donde\nencontraremos muchos cristales juntos y un volcán de gas.\n\nQuizas conviene tener una clase Base y que dentro almacene\ntoda la informacion.
 end
 

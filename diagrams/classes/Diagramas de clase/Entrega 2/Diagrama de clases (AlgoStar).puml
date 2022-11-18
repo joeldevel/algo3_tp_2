@@ -28,13 +28,14 @@ class Jugador{
 note left: Necesitamos una interfaz Material la cual\nimplementen el Gas Vespeno y el Mineral para\npoder guardar ambos materiales en una misma lista.\n\nEl atributo que guardara la raza tendra dentro los edificios\ny las unidades correspondientes.
 
 class Mapa{
-    -tamaño: int
-    -areasDeTierra
+    -cantidadDeBases
+    -bases
+    -areasTerrestres
     -areasEspaciales
     -ubicaciones: Ubicacion
     +Mapa(cantidadDeBases)
-    +crearBase()
-    +obtenerUbicacionBase()
+    +crearAreas()
+    +basesEstanEnExtremosOpuestos()
 }
 
 AlgoStar --> Jugador
