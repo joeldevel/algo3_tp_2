@@ -25,7 +25,15 @@ public class MapaTest {
     }
 
     @Test
-    void test03CreoUnaMapaNuevoConDosBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
+    void test03IntentoCrearUnMapaNuevoConUnaBaseNegativaYLanzaError() {
+        // Arrange, Act and Assert
+        assertThrows(CantidadInsuficienteDeBasesException.class,()->{
+            Mapa mapa = new Mapa( -1);
+        });
+    }
+
+    @Test
+    void test04CreoUnaMapaNuevoConDosBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
         // Arrange
         Mapa mapa = new Mapa( 2);
 
@@ -37,7 +45,7 @@ public class MapaTest {
     }
 
     @Test
-    void test04CreoUnaMapaNuevoConTresBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
+    void test05CreoUnaMapaNuevoConTresBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
         // Arrange
         Mapa mapa = new Mapa( 3);
 
@@ -49,7 +57,7 @@ public class MapaTest {
     }
 
     @Test
-    void test05CreoUnaMapaNuevoConCuatroBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
+    void test06CreoUnaMapaNuevoConCuatroBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
         // Arrange
         Mapa mapa = new Mapa( 4);
 
@@ -61,7 +69,27 @@ public class MapaTest {
     }
 
     @Test
-    void void06CreoUnMapaNuevoConTresBasesYLaQueSobraQuedaEquidistanteALasBasesDeLosJugadores() {
+    void test07CreoUnaMapaNuevoConCincoBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
+        // Arrange
+        Mapa mapa = new Mapa( 5);
 
+        // Act
+        boolean resultado = mapa.basesEstanEnExtremosOpuestos();
+
+        // Assert
+        assertTrue(resultado);
     }
+
+    @Test
+    void test08CreoUnaMapaNuevoConSeisBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
+        // Arrange
+        Mapa mapa = new Mapa( 6);
+
+        // Act
+        boolean resultado = mapa.basesEstanEnExtremosOpuestos();
+
+        // Assert
+        assertTrue(resultado);
+    }
+
 }
