@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.CriaderoSinLarvasException;
 import edu.fiuba.algo3.modelo.Unidades.Larva;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.Zangano;
 
 /* el criadero deberia implementar una interfaz evolucionador por ejemplo, que habilite a evolucionar las
@@ -17,14 +18,15 @@ public class Criadero extends EdificioZerg {
 	private final int COSTO_GAS = 0;
 	
 	private int maxLarvas;
-	private ArrayList<Larva> larvas;
-	private ArrayList<Zangano> zanganos;
+	private ArrayList<Unidad> larvas;
+	private ArrayList<Unidad> zanganos;
 		
 	public Criadero() {	
 		super(new Tiempo(-4),new Vida(500));
 		this.maxLarvas = 3;
-		this.larvas = new ArrayList<Larva>() {{ add(new Larva()); add(new Larva()); add(new Larva());}};
-		this.zanganos = new ArrayList<Zangano>();
+		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Larva())); add(new Unidad(new Larva())); 
+												 add(new Unidad(new Larva()));}};
+		this.zanganos = new ArrayList<Unidad>();
 	}
 
 	@Override
@@ -40,18 +42,28 @@ public class Criadero extends EdificioZerg {
 		if(this.larvas.isEmpty()) {
 			throw new CriaderoSinLarvasException();
 		}
-		Larva unaLarva = this.larvas.get(0);
-		Zangano zangano = unaLarva.evolucionar();
+		Unidad unaUnidad = this.larvas.get(0);
+		unaUnidad.cambiarTipo(new Zangano());
 		this.larvas.remove(0);
-		zanganos.add(zangano);
+		zanganos.add(unaUnidad);
 	}
 	
 	public void crearLarva() {
 		if(this.contarLarvas()<this.maxLarvas) {
-			this.larvas.add(new Larva());
+			this.larvas.add(new Unidad(new Larva()));
 		}
 	}
-
-
+	
+	public ArrayList<Unidad> obtenerLarvas(){
+		ArrayList<Unidad> aDevolver = this.larvas;
+		this.larvas.clear();
+		return aDevolver;
+	}
+	
+	public ArrayList<Unidad> obtenerZanganos(){
+		ArrayList<Unidad> aDevolver = this.zanganos;
+		this.zanganos.clear();
+		return aDevolver;
+	}
 	
 }

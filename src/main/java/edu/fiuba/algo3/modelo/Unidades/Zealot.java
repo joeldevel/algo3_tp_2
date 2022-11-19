@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Zealot implements Atacante,Atacable {
+public class Zealot implements TipoDeUnidad,Atacante,Atacable {
 	
 	private Vida vida;
 	private Escudo escudo;
@@ -19,6 +19,13 @@ public class Zealot implements Atacante,Atacable {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(60);
 		this.ubicacion = unaUbicacion;
+		this.ataque = new Ataque(8,1);
+	}
+	
+	public Zealot() {
+		this.vida = new Vida(100);
+		this.escudo = new Escudo(60);
+		this.ubicacion = new Ubicacion();
 		this.ataque = new Ataque(8,1);
 	}
 

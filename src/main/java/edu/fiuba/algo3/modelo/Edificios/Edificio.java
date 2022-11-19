@@ -21,6 +21,13 @@ public abstract class Edificio implements Atacable,Recuperable{
 		this.estado = new EnConstruccion(this);
 	}
 	
+	public Edificio(Tiempo unTiempo,Vida unaVida, Ubicacion unaUbicacion) {
+		this.tiempo = unTiempo;
+		this.vida = unaVida;
+		this.ubicacion = unaUbicacion;
+		this.estado = new EnConstruccion(this);
+	}
+	
 	public void ejecutaEnConstruccion() {
 		if(this.tiempo.restante() == 0) {
 			this.estado = new Operable(this);

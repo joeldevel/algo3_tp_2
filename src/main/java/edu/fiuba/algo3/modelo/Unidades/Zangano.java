@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Minero;
 import edu.fiuba.algo3.modelo.NodoMineral;
 import edu.fiuba.algo3.modelo.SinNodo;
 
-public class Zangano implements Minero {
+public class Zangano implements TipoDeUnidad,Minero {
 
 	private int cantidadRecolectableDeMineral;
     private int cantidadRecolectada;

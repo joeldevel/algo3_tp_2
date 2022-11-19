@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Hidralisco implements Atacante,Atacable{
+public class Hidralisco implements TipoDeUnidad,Atacante,Atacable{
 	
 	private Vida vida;
 	private Ubicacion ubicacion;
@@ -16,6 +16,12 @@ public class Hidralisco implements Atacante,Atacable{
 	public Hidralisco(Ubicacion unaUbicacion) {
 		this.vida = new Vida(80);
 		this.ubicacion = unaUbicacion;
+		this.ataque = new Ataque(10,4);
+	}
+	
+	public Hidralisco() {
+		this.vida = new Vida(80);
+		this.ubicacion = new Ubicacion();
 		this.ataque = new Ataque(10,4);
 	}
 

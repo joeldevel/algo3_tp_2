@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Mutalisco implements Atacante,Atacable {
+public class Mutalisco implements TipoDeUnidad,Atacante,Atacable {
 	
 	private Vida vida;
 	private Ubicacion ubicacion;
@@ -16,6 +16,12 @@ public class Mutalisco implements Atacante,Atacable {
 	public Mutalisco(Ubicacion unaUbicacion) {
 		this.vida = new Vida(120);
 		this.ubicacion = unaUbicacion;
+		this.ataque = new Ataque(9,3);
+	}
+	
+	public Mutalisco() {
+		this.vida = new Vida(120);
+		this.ubicacion = new Ubicacion();
 		this.ataque = new Ataque(9,3);
 	}
 

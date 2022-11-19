@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Zerling implements Atacante,Atacable{
+public class Zerling implements TipoDeUnidad,Atacante,Atacable{
 
 	private Vida vida;
 	private Ubicacion ubicacion;
@@ -16,6 +16,12 @@ public class Zerling implements Atacante,Atacable{
 	public Zerling(Ubicacion unaUbicacion) {
 		this.vida = new Vida(35);
 		this.ubicacion = unaUbicacion;
+		this.ataque = new Ataque(4,1);
+	}
+	
+	public Zerling() {
+		this.vida = new Vida(35);
+		this.ubicacion = new Ubicacion();
 		this.ataque = new Ataque(4,1);
 	}
 
