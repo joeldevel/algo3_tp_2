@@ -37,7 +37,31 @@ public class MapaTest {
     }
 
     @Test
-    void void04CreoUnMapaNuevoConTresBasesYLaQueSobraQuedaEquidistanteALasBasesDeLosJugadores() {
+    void test04CreoUnaMapaNuevoConTresBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
+        // Arrange
+        Mapa mapa = new Mapa( 3);
+
+        // Act
+        boolean resultado = mapa.basesEstanEnExtremosOpuestos();
+
+        // Assert
+        assertTrue(resultado);
+    }
+
+    @Test
+    void test05CreoUnaMapaNuevoConCuatroBasesYLaBaseDelPrimerJugadorEstaAlExtremoOpuestoDeLaDelSegundo() {
+        // Arrange
+        Mapa mapa = new Mapa( 4);
+
+        // Act
+        boolean resultado = mapa.basesEstanEnExtremosOpuestos();
+
+        // Assert
+        assertTrue(resultado);
+    }
+
+    @Test
+    void void06CreoUnMapaNuevoConTresBasesYLaQueSobraQuedaEquidistanteALasBasesDeLosJugadores() {
 
     }
 }
