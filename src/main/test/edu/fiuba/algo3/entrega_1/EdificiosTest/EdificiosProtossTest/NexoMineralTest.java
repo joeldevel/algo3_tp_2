@@ -2,10 +2,8 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
-import edu.fiuba.algo3.modelo.Recursos.Recursos.NodoMineral;
-
-import edu.fiuba.algo3.modelo.Recursos.Recursos.Recursos;
-import edu.fiuba.algo3.modelo.Recursos.Recursos.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +13,7 @@ public class NexoMineralTest {
     @Test
     void test01SeConstruyeUnNexoMineralEnUnNodoMineralYNoSeEncuentraOperativo() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -30,7 +28,7 @@ public class NexoMineralTest {
     @Test
     void test02SeConstruyeUnNexoMineralEnUnNodoMineralYSeAvanzanCincoTurnosDevuelveElResultadoIndicado() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -45,7 +43,7 @@ public class NexoMineralTest {
     @Test
     void test03SeConstruyeUnNexoMineralYRecibeDanio() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -60,7 +58,7 @@ public class NexoMineralTest {
     @Test
     void test04SeConstruyeUnNexoMineralQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -76,7 +74,7 @@ public class NexoMineralTest {
     @Test
     void test05SeConstruyeUnNexoMineralQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -92,7 +90,7 @@ public class NexoMineralTest {
     @Test
     void test06SeConstruyeUnNexoMineralQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -107,7 +105,7 @@ public class NexoMineralTest {
 
     @Test
     void test07SeIntentaConstruirUnNexoMineralSinRecursosYSeLanzaUnaExcepcion() {
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 49);
 

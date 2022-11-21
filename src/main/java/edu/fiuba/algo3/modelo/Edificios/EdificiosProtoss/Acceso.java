@@ -19,7 +19,7 @@ public class Acceso extends EdificioProtoss {
 	private ArrayList<Unidad> zealots;
 	private ArrayList<Unidad> dragones;
 	
-    protected Acceso(Recursos recursosJugador) {
+    public Acceso(Recursos recursosJugador) {
 		super(new Tiempo(-8),new Vida(500), new Escudo(500));
 		this.zealots = new ArrayList<Unidad>();
 		this.dragones = new ArrayList<Unidad>();

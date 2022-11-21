@@ -39,7 +39,7 @@ public class EdificioRequiereRecursosTest {
     public void creacionNexoMineralSinRecursosSuficientesTest() {
         JugadorProtoss jugadorProtoss = new JugadorProtoss();
         jugadorProtoss.incrementarMineral(49);
-        Assertions.assertThrows(CantidadInsuficienteDeRecursosException.class, () -> jugadorProtoss.crearNexoMineral());
+        Assertions.assertThrows(CantidadInsuficienteDeRecursosException.class, () -> jugadorProtoss.crearNexo());
 
     }
 
@@ -48,7 +48,7 @@ public class EdificioRequiereRecursosTest {
     public void creacionNexoMineralConRecursosSuficientesTest() {
         JugadorProtoss jugadorProtoss = new JugadorProtoss();
         jugadorProtoss.incrementarMineral(50);
-        Assertions.assertDoesNotThrow(jugadorProtoss::crearNexoMineral);
+        Assertions.assertDoesNotThrow(jugadorProtoss::crearNexo);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class EdificioRequiereRecursosTest {
     public void creacionNexoMineralConRecursosSuficientesYLuegoSinRecursosTest() {
         JugadorProtoss jugadorProtoss = new JugadorProtoss();
         jugadorProtoss.incrementarMineral(50);
-        Assertions.assertDoesNotThrow(jugadorProtoss::crearNexoMineral);
-        Assertions.assertThrows(CantidadInsuficienteDeRecursosException.class, () -> jugadorProtoss.crearNexoMineral());
+        Assertions.assertDoesNotThrow(jugadorProtoss::crearNexo);
+        Assertions.assertThrows(CantidadInsuficienteDeRecursosException.class, () -> jugadorProtoss.crearNexo());
     }
 
     @Test

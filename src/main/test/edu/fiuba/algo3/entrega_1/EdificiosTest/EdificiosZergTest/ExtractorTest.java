@@ -3,8 +3,8 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Extractor;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
-import edu.fiuba.algo3.modelo.Recursos.Recursos.Recursos;
-import edu.fiuba.algo3.modelo.Recursos.Recursos.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ class ExtractorTest {
     @Test
     void test01SeConstruyeUnExtractorEnUnVolcanYNoSeEncuentraOperativo(){
         // Arrange
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
@@ -35,7 +35,7 @@ class ExtractorTest {
     @Test
     void test03SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSeisTurnosSinTenerZanganosDevuelveElResultadoIndicado(){
         // Arrange
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
@@ -50,11 +50,11 @@ class ExtractorTest {
     @Test
     void test04SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConUnZanganoDevuelveElResultadoIndicado(){
         // Arrange
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano zangano =  new Zangano(10);
+        Zangano zangano =  new Zangano();
         extractor.guardarZangano(zangano);
 
         // Act
@@ -67,13 +67,13 @@ class ExtractorTest {
     @Test
     void test05SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConDosZanganosDevuelveElResultadoIndicado(){
         // Arrange
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano =  new Zangano(10);
+        Zangano primerZangano =  new Zangano();
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano(10);
+        Zangano SegundoZangano =  new Zangano();
         extractor.guardarZangano(SegundoZangano);
 
         // Act
@@ -86,15 +86,15 @@ class ExtractorTest {
     @Test
     void test06SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConTresZanganosDevuelveElResultadoIndicado(){
         // Arrange
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano =  new Zangano(10);
+        Zangano primerZangano =  new Zangano();
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano(10);
+        Zangano SegundoZangano =  new Zangano();
         extractor.guardarZangano(SegundoZangano);
-        Zangano TercerZangano =  new Zangano(10);
+        Zangano TercerZangano =  new Zangano();
         extractor.guardarZangano(TercerZangano);
 
         // Act
@@ -106,17 +106,17 @@ class ExtractorTest {
 
     @Test
     void test07SeConstruyeUnExtractorEnUnVolcanSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano =  new Zangano(10);
+        Zangano primerZangano =  new Zangano();
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano(10);
+        Zangano SegundoZangano =  new Zangano();
         extractor.guardarZangano(SegundoZangano);
-        Zangano TercerZangano =  new Zangano(10);
+        Zangano TercerZangano =  new Zangano();
         extractor.guardarZangano(TercerZangano);
-        Zangano CuartoZangano =  new Zangano(10);
+        Zangano CuartoZangano =  new Zangano();
 
         assertThrows(CantidadMaximaDeZanganosEnExtractorException.class,()->{
             extractor.guardarZangano(CuartoZangano);
@@ -126,7 +126,7 @@ class ExtractorTest {
     @Test
     void test08SeConstruyeUnExtractorYRecibeDanio(){
         // Arrange
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
@@ -142,7 +142,7 @@ class ExtractorTest {
     @Test
     void test09SeConstruyeUnExtractorQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         Extractor extractor = new Extractor(volcan, recursosJugador);
@@ -157,7 +157,7 @@ class ExtractorTest {
 
     @Test
     void test10SeIntentaConstruirUnExtractorSinRecursosYSeLanzaUnaExcepcion() {
-        Volcan volcan = new Volcan(5000);
+        Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 99);
 
