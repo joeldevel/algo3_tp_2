@@ -16,10 +16,10 @@ public class DragonTest {
         Zerling zerling = new Zerling(); // Unidad de tierra
 
         // Act
-        dragon.atacarA(zerling);
+        dragon.atacar(zerling);
 
         // Assert
-        assertEquals(15, zerling.obtenerVida()); // Solo se considera el ataque de tierra del Dragon
+        assertEquals(15, zerling.vidaRestante()); // Solo se considera el ataque de tierra del Dragon
     }
 
     @Test
@@ -29,9 +29,9 @@ public class DragonTest {
         Mutalisco mutalisco = new Mutalisco(); // Unidad de aire
 
         // Act
-        dragon.atacarA(mutalisco);
+        dragon.atacar(mutalisco);
 
         // Assert
-        assertEquals(100, mutalisco.obtenerVida()); // Solo se considera el ataque de aire del Dragon
+        assertEquals(100, mutalisco.vidaRestante()); // Solo se considera el ataque de aire del Dragon
     }
 }

@@ -16,22 +16,22 @@ public class ZerlingTest {
         Zealot zealot = new Zealot(); // Unidad de tierra
 
         // Act
-        zerling.atacarA(zealot);
+        zerling.atacar(zealot);
 
         // Assert
-        assertEquals(56, zealot.obtenerEscudo());
+        assertEquals(56, zealot.escudoRestante());
     }
 
     @Test
-    void test02UnZerlingAtacaAUnScoutYElEscudoDelMutaliscoNoDisminuyeYaQueNoSonCompatibles(){
+    void test02UnZerlingAtacaAUnScoutYElEscudoDelScoutNoDisminuyeYaQueNoSonCompatibles(){
         // Arrange
         Zerling zerling = new Zerling(); // Ataque de tierra
         Scout scout = new Scout(); // Unidad de aire
 
         // Act
-        zerling.atacarA(scout);
+        zerling.atacar(scout);
 
         // Assert
-        assertEquals(100, scout.obtenerEscudo());
+        assertEquals(100, scout.escudoRestante());
     }
 }

@@ -16,10 +16,10 @@ public class ZealotTest {
         Zerling zerling = new Zerling(); // Unidad de tierra
 
         // Act
-        zealot.atacarA(zerling);
+        zealot.atacar(zerling);
 
         // Assert
-        assertEquals(27, zerling.obtenerVida());
+        assertEquals(27, zerling.vidaRestante());
     }
 
     @Test
@@ -29,9 +29,9 @@ public class ZealotTest {
         Mutalisco mutalisco = new Mutalisco(); // Unidad de aire
 
         // Act
-        zealot.atacarA(mutalisco);
+        zealot.atacar(mutalisco);
 
         // Assert
-        assertEquals(120, mutalisco.obtenerVida());
+        assertEquals(120, mutalisco.vidaRestante());
     }
 }

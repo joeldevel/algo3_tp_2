@@ -16,10 +16,10 @@ public class ScoutTest {
         Zerling zerling = new Zerling(); // Unidad de tierra
 
         // Act
-        scout.atacarA(zerling);
+        scout.atacar(zerling);
 
         // Assert
-        assertEquals(27, zerling.obtenerVida()); // Solo se considera el ataque de tierra del Scout
+        assertEquals(27, zerling.vidaRestante()); // Solo se considera el ataque de tierra del Scout
     }
 
     @Test
@@ -29,9 +29,9 @@ public class ScoutTest {
         Guardian guardian = new Guardian(); // Unidad de aire
 
         // Act
-        scout.atacarA(guardian);
+        scout.atacar(guardian);
 
         // Assert
-        assertEquals(86, guardian.obtenerVida()); // Solo se considera el ataque de aire del Scout
+        assertEquals(86, guardian.vidaRestante()); // Solo se considera el ataque de aire del Scout
     }
 }

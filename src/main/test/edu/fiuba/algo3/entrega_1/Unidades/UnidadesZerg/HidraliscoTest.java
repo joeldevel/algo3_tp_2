@@ -16,10 +16,10 @@ public class HidraliscoTest {
         Zealot zealot = new Zealot(); // Unidad de tierra
 
         // Act
-        hidralisco.atacarA(zealot);
+        hidralisco.atacar(zealot);
 
         // Assert
-        assertEquals(50, zealot.obtenerEscudo()); // Solo se considera el ataque de tierra del Hidralisco
+        assertEquals(50, zealot.escudoRestante()); // Solo se considera el ataque de tierra del Hidralisco
     }
 
     @Test
@@ -29,9 +29,9 @@ public class HidraliscoTest {
         Scout scout = new Scout(); // Unidad de aire
 
         // Act
-        hidralisco.atacarA(scout);
+        hidralisco.atacar(scout);
 
         // Assert
-        assertEquals(90, scout.obtenerEscudo()); // Solo se considera el ataque de aire del Hidralisco
+        assertEquals(90, scout.escudoRestante()); // Solo se considera el ataque de aire del Hidralisco
     }
 }

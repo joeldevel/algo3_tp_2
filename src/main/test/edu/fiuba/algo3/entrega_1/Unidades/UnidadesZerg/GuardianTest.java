@@ -16,10 +16,10 @@ public class GuardianTest {
         Zealot zealot = new Zealot(); // Unidad de tierra
 
         // Act
-        guardian.atacarA(zealot);
+        guardian.atacar(zealot);
 
         // Assert
-        assertEquals(35, zealot.obtenerEscudo());
+        assertEquals(35, zealot.escudoRestante());
     }
 
     @Test
@@ -29,9 +29,9 @@ public class GuardianTest {
         Scout scout = new Scout(); // Unidad de aire
 
         // Act
-        guardian.atacarA(scout);
+        guardian.atacar(scout);
 
         // Assert
-        assertEquals(100, scout.obtenerEscudo());
+        assertEquals(100, scout.escudoRestante());
     }
 }

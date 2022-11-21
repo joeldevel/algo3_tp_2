@@ -16,22 +16,22 @@ public class MutaliscoTest {
         Zealot zealot = new Zealot(); // Unidad de tierra
 
         // Act
-        mutalisco.atacarA(zealot);
+        mutalisco.atacar(zealot);
 
         // Assert
-        assertEquals(51, zealot.obtenerEscudo()); // Solo se considera el ataque de tierra del Mutalisco
+        assertEquals(51, zealot.escudoRestante()); // Solo se considera el ataque de tierra del Mutalisco
     }
 
     @Test
-    void test01UnMutaliscoAtacaAUnScoutYElEscudoDelZealotDisminuyeLoIndicado(){
+    void test01UnMutaliscoAtacaAUnScoutYElEscudoDelScoutDisminuyeLoIndicado(){
         // Arrange
         Mutalisco mutalisco = new Mutalisco(); // Ataque de tierra y aire
         Scout scout = new Scout(); // Unidad de tierra
 
         // Act
-        mutalisco.atacarA(scout);
+        mutalisco.atacar(scout);
 
         // Assert
-        assertEquals(91, scout.obtenerEscudo()); // Solo se considera el ataque de aire del Mutalisco
+        assertEquals(91, scout.escudoRestante()); // Solo se considera el ataque de aire del Mutalisco
     }
 }

@@ -22,6 +22,12 @@ public class Guardian implements Atacante,Atacable {
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
 	}
 
+	public Guardian() {
+		this.vida = new Vida(100);
+		this.ubicacion = new Ubicacion();
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
+	}
+
 	@Override
 	public void recibirAtaque(int unAtaque) {
 		this.vida.recibirDanioPor(unAtaque);
