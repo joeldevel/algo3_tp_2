@@ -9,6 +9,7 @@ public class AlgoStar {
     private JUGADOR_COLOR colorJugador2;
     private JUGADOR_RAZA razaJugador1;
     private JUGADOR_RAZA razaJugador2;
+    private boolean iniciado;
 
     public AlgoStar() {
         this.nombreJugador1 = "";
@@ -17,6 +18,7 @@ public class AlgoStar {
         this.razaJugador2 = null;
         this.colorJugador1 = null;
         this.colorJugador2 = null;
+        this.iniciado = false;
     }
 
     public boolean validarNombre(String nombre) {
@@ -94,5 +96,16 @@ public class AlgoStar {
         }
 
         return false;
+    }
+
+    public void finalizar() {
+        if(this.iniciado == false) {
+            throw new RuntimeException("El juego no ha iniciado");
+        }
+        this.iniciado = false;
+    }
+
+    public void iniciar() {
+        this.iniciado = true;
     }
 }
