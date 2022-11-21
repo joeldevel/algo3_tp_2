@@ -57,7 +57,7 @@ public class Mapa {
     }
 
     public boolean basesEstanEnExtremosOpuestos() {
-        if ((this.baseJugadorUno.getX() == baseJugadorUnoPosicionX) && (this.baseJugadorUno.getY() == baseJugadorUnoPosicionY) && (this.baseJugadorDos.getX() == baseJugadorDosPosicionX) && (this.baseJugadorDos.getY() == baseJugadorDosPosicionY)) {
+        if ((this.baseJugadorUno.obtenerX() == baseJugadorUnoPosicionX) && (this.baseJugadorUno.obtenerY() == baseJugadorUnoPosicionY) && (this.baseJugadorDos.obtenerX() == baseJugadorDosPosicionX) && (this.baseJugadorDos.obtenerY() == baseJugadorDosPosicionY)) {
             return true;
         }
 

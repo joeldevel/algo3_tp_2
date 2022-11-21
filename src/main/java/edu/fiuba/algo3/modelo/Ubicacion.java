@@ -17,15 +17,16 @@ public class Ubicacion {
 
     public int distanciaCon(Ubicacion otraUbicacion) {
         int distancia = 0;
-        distancia = (int) Math.ceil(Math.sqrt(Math.pow(( posX - otraUbicacion.posX),2) + Math.pow((posY - otraUbicacion.posY),2)));
+        distancia = (int) Math.ceil(Math.sqrt(Math.pow((posX - otraUbicacion.posX),2) + Math.pow((posY - otraUbicacion.posY),2)));
         return distancia;
     }
 
-    public int getX() {
-        return posX;
+    public int obtenerX() {
+        return (this.posX);
     }
 
-    public int getY() {
-        return posY;
+    public int obtenerY() {
+        return (this.posY);
     }
+
 }
