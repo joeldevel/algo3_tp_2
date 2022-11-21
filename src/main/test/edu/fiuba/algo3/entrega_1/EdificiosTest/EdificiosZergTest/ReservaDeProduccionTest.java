@@ -1,10 +1,8 @@
 package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeProduccion;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Recursos.Recursos.Recursos;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

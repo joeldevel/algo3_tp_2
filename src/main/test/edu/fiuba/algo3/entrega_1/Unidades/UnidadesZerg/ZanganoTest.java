@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.entrega_1.Unidades.UnidadesZerg;
 
-import edu.fiuba.algo3.modelo.Recursos.NodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Recursos.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

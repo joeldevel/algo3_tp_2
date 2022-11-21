@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
-import edu.fiuba.algo3.modelo.Unidades.Dragon;
-import edu.fiuba.algo3.modelo.Unidades.Guardian;
-import edu.fiuba.algo3.modelo.Unidades.Hidralisco;
-import edu.fiuba.algo3.modelo.Unidades.Mutalisco;
-import edu.fiuba.algo3.modelo.Unidades.Scout;
-import edu.fiuba.algo3.modelo.Unidades.Zealot;
-import edu.fiuba.algo3.modelo.Unidades.Zerling;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 
 
 /* Verificar que una unidad no pueda dañar a la otra o a un edificio si no esta en el rango de ataque de la misma*/

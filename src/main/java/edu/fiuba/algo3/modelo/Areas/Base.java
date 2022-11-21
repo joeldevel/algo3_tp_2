@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.Areas;
 
-import edu.fiuba.algo3.modelo.NodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Volcan;
+import Volcan;
 
 import java.util.ArrayList;
 
