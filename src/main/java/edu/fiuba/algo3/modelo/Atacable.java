@@ -7,4 +7,6 @@ public interface Atacable {
 	public Ubicacion ubicacion();
 
 	public Superficie obtenerSuperficie();
+
+	void atacar(Atacable unAtacable);
 }

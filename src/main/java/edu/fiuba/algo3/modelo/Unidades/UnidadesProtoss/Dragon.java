@@ -17,12 +17,14 @@ public class Dragon implements TipoDeUnidad,Atacante,Atacable {
 	private Vida vida;
 	private Escudo escudo;
 	private Ubicacion ubicacion;
+	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	
 	public Dragon(Ubicacion unaUbicacion) {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(80);
 		this.ubicacion = unaUbicacion;
+		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
 												 add(new Ataque(20,new Superficie("Aire"),4));}};
 	}
@@ -36,26 +38,30 @@ public class Dragon implements TipoDeUnidad,Atacante,Atacable {
 	}
 
 	@Override
-	public void recibirAtaque(int unAtaque) {
-		if(unAtaque > this.escudo.restante()) {
-			int danioRestante = this.escudo.restante() - unAtaque;
+	public void recibirAtaque(int unDanio) {
+		if(unDanio > this.escudo.restante()) {
+			int danioRestante = this.escudo.restante() - unDanio;
 			this.vida.recibirDanioPor(danioRestante);
 		}
-		this.escudo.recibirDanioPor(unAtaque);
+		this.escudo.recibirDanioPor(unDanio);
 		
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
-		if(! (this.estaEnRangoDeAtaque(unAtacable))) {
-			throw new AtacableFueraDeRangoError();
-		}
-		unAtacable.recibirAtaque(this.ataque.danio());
-	}
+    public void atacar(Atacable unAtacable) {
+
+        for (Ataque ataque : ataques) {
+            if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
+                throw new AtacableFueraDeRangoError();
+            }
+
+            ataque.atacarA(unAtacable);
+        }
+    }
 	
-	public boolean estaEnRangoDeAtaque(Atacable unAtacable) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= this.ataque.rango());
-	}
+	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
+        return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+    }
 	
 	@Override
 	public Ubicacion ubicacion() {
@@ -68,6 +74,16 @@ public class Dragon implements TipoDeUnidad,Atacante,Atacable {
 	
 	public int escudoRestante() {
 		return (this.escudo.restante());
+	}
+
+	@Override
+	public Superficie obtenerSuperficie() {
+		return (this.superficie);
+	}
+
+	@Override
+	public void recuperarse() {
+		this.escudo.recuperarse();
 	}
 
 

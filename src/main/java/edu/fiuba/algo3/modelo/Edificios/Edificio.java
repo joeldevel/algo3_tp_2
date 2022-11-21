@@ -13,10 +13,10 @@ public abstract class Edificio extends Raza implements Recuperable{
 	protected Superficie superficie;
 	protected EstadoOperativo estado;
 	
-	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion, Superficie unaSuperficie) {
+	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion) {
 		super(unTiempo,unaUbicacion);
 		this.vida = unaVida;
-		this.superficie = unaSuperficie;
+		this.superficie = new Superficie("Tierra");
 		this.estado = new EnConstruccion(this);
 	}
 	

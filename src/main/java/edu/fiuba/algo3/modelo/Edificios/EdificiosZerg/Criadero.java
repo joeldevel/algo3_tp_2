@@ -4,7 +4,9 @@ import java.util.*;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.CriaderoSinLarvasException;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Larva;
@@ -16,21 +18,22 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 
 public class Criadero extends EdificioZerg {
 	
-	private final int COSTO_MINERAL = 50;
+	private final int COSTO_MINERAL = 200;
 	private final int COSTO_GAS = 0;
 	
 	private int maxLarvas;
 	private ArrayList<Unidad> larvas;
 	private ArrayList<Unidad> zanganos;
 		
-	public Criadero(Recursos recursosJugador) {	
-		super(new Tiempo(-4),new Vida(500));
+	public Criadero(Recursos recursosJugador, Ubicacion unaUbicacion) {	
+		super(new Tiempo(-4),new Vida(500),unaUbicacion);
 		
 		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 		
 		this.maxLarvas = 3;
-		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Larva())); add(new Unidad(new Larva())); 
-												 add(new Unidad(new Larva()));}};
+		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva())); 
+												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva())); 
+												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));}};
 		this.zanganos = new ArrayList<Unidad>();
 	}
 
@@ -55,7 +58,7 @@ public class Criadero extends EdificioZerg {
 	
 	public void crearLarva() {
 		if(this.contarLarvas()<this.maxLarvas) {
-			this.larvas.add(new Unidad(new Larva()));
+			this.larvas.add(new Unidad(new Tiempo(0),this.ubicacion(),new Larva()));
 		}
 	}
 	
@@ -69,6 +72,12 @@ public class Criadero extends EdificioZerg {
 		ArrayList<Unidad> aDevolver = this.zanganos;
 		this.zanganos.clear();
 		return aDevolver;
+	}
+
+	@Override
+	public void atacar(Atacable unAtacable) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
