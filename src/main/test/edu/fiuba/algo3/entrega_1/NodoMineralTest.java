@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConstruidoException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMineralException;
-import edu.fiuba.algo3.modelo.Unidades.Zangano;
-
+import edu.fiuba.algo3.modelo.Recursos.NodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,23 +15,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class NodoMineralTest {
 
     @Test
-    void test01SeCreaUnNodoMineralSinUnRecolectorDeMineralYAlIntentarRecolectarMineralSeLanzaExcepcion(){
+    void test01SeCreaUnNodoMineralSinUnMineroYAlIntentarRecolectarMineralSeLanzaExcepcion(){
         NodoMineral nodoMineral = new NodoMineral(2000);
+        int unaCantidadExtraible = 50;
 
         assertThrows(NodoMineralSinRecolectorDeMineralConstruidoException.class,()->{
-            int mineralRecolectado = nodoMineral.recolectarMineralUsandoRecolectorDeMineral();
+            int mineralRecolectado = nodoMineral.recolectarMineral(unaCantidadExtraible);
         });
     }
 
     @Test
     void test02SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnNexoMineralConstruidoYSeLanzaUnaExcepcion(){
         NodoMineral nodoMineral = new NodoMineral(2000);
-        NexoMineral primerNexoMineral = new NexoMineral(250, 250, -4, 50, 0, 10);
-        NexoMineral segundoNexoMineral = new NexoMineral(250, 250, -4, 50, 0, 10);
-        nodoMineral.construirRecolectorDeMineral(primerNexoMineral);
+        Recursos recursosJugador = new Recursos();
+        recursosJugador.guardar(0, 100);
+        NexoMineral primerNexoMineral = new NexoMineral(nodoMineral, recursosJugador);
 
         assertThrows(NodoMineralYaTieneUnRecolectorDeMineralException.class,()->{
-            nodoMineral.construirRecolectorDeMineral(segundoNexoMineral);
+            NexoMineral segundoNexoMineral = new NexoMineral(nodoMineral, recursosJugador);
         });
     }
 
@@ -39,11 +40,13 @@ public class NodoMineralTest {
     void test03SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnZanganoYSeLanzaUnaExcepcion(){
         NodoMineral nodoMineral = new NodoMineral(2000);
         Zangano zangano = new Zangano(10);
-        NexoMineral nexoMineral = new NexoMineral(250, 250, -4, 50, 0, 10);
-        nodoMineral.construirRecolectorDeMineral(zangano);
+        zangano.conNodo(nodoMineral);
+
+        Recursos recursosJugador = new Recursos();
+        recursosJugador.guardar(0, 50);
 
         assertThrows(NodoMineralYaTieneUnRecolectorDeMineralException.class,()->{
-            nodoMineral.construirRecolectorDeMineral(nexoMineral);
+            NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
         });
     }
 
@@ -51,49 +54,42 @@ public class NodoMineralTest {
     void test04SeConstruyeUnNexoMineralEnUnNodoMineralSinMineralYAlIntentarRecolectarSeLanzaUnaExcepcion(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(0);
-        NexoMineral nexoMineral = new NexoMineral(250, 250, -4, 50, 0, 10);
-        nodoMineral.construirRecolectorDeMineral(nexoMineral);
-        nexoMineral.avanzarTurno();
-        nexoMineral.avanzarTurno();
-        nexoMineral.avanzarTurno();
-        nexoMineral.avanzarTurno();
+        Recursos recursosJugador = new Recursos();
+        recursosJugador.guardar(0, 50);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
 
         // Act & Assert
         assertThrows(NodoMineralSinMineralParaRecolectarException.class,()->{
-            int mineralRecolectado = nodoMineral.recolectarMineralUsandoRecolectorDeMineral();
+            nexoMineral.avanzarTurno(5);
         });
     }
 
     @Test
     void test05SeConstruyeUnNexoMineralEnUnNodoMineralYDespuesDeCuatroTurnosAlRecolectarMineralesDevuelveElResultadoIndicado() {
         // Arrange
-        NexoMineral nexoMineral = new NexoMineral(250, 250, -4, 50, 0, 10);
         NodoMineral nodoMineral = new NodoMineral(2000);
-        nodoMineral.construirRecolectorDeMineral(nexoMineral);
-
-        nexoMineral.avanzarTurno();
-        nexoMineral.avanzarTurno();
-        nexoMineral.avanzarTurno();
-        nexoMineral.avanzarTurno();
+        Recursos recursosJugador = new Recursos();
+        recursosJugador.guardar(0, 50);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
 
         // Act
-        int resultado = nodoMineral.recolectarMineralUsandoRecolectorDeMineral();
+        nexoMineral.avanzarTurno(5);
 
         // Assert
-        assertEquals(resultado, 10);
+        assertEquals(10, nexoMineral.obtenerMineral());
     }
 
     @Test
-    void test06SeConstruyeUnZanganoEnUnNodoMineralYDespuesDeCuatroTurnosAlRecolectarMineralesDevuelveElResultadoIndicado() {
+    void test06SeConstruyeUnZanganoEnUnNodoMineralYAlAvanzarUnTurnoElZanganoRecolectaMineralYDevuelveElResultadoIndicado() {
         // Arrange
-        Zangano zangano = new Zangano(10);
         NodoMineral nodoMineral = new NodoMineral(2000);
-        nodoMineral.construirRecolectorDeMineral(zangano);
+        Zangano zangano = new Zangano(10);
+        zangano.conNodo(nodoMineral);
 
         // Act
-        int resultado = nodoMineral.recolectarMineralUsandoRecolectorDeMineral();
+        zangano.avanzarTurno();
 
         // Assert
-        assertEquals(resultado, 10);
+        assertEquals(10, zangano.obtenerMineral());
     }
 }

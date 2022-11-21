@@ -13,43 +13,54 @@ public class Moho {
 	 * afectada por el moho, por lo que no se puede construir. Hay que ir actualiando el moho cada
 	 * vez que se avanza un turno*/
 	
-	private ArrayList<Ubicacion> ubicaciones;
+	private final int RADIO = 5;
+	
+	private ArrayList<Ubicacion> origenes;
+	private ArrayList<Ubicacion> ubicacionesAfectadas;
 	
 	public Moho() {
-		this.ubicaciones = new ArrayList<Ubicacion>();
+		this.origenes = new ArrayList<Ubicacion>();
+		this.ubicacionesAfectadas = new ArrayList<Ubicacion>();
 	}
 	
-	/*private int radio;
-	private Tiempo tiempo;
-	
-	public Moho() {
-		this.radio = 5;
-		this.tiempo = new Tiempo(0);
+	public boolean tieneOrigenes() {
+		return (!(this.origenes.isEmpty()));
 	}
 	
-	public Moho(Tiempo unTiempo) {
-		this.radio = 5;
-		this.tiempo = unTiempo;
-	}
-
-	public Moho(int unRadio, Tiempo unTiempo) {
-		this.radio = unRadio;
-		this.tiempo = unTiempo;
-	}
-
-	public int radio() {
-		return this.radio;
+	public boolean tieneUbicacionesAfectadas() {
+		return (! (this.ubicacionesAfectadas.isEmpty()));
 	}
 	
-	public void avanzarTurno() {
-		this.tiempo.pasarTiempo();
-		this.expandirRadio();
+	public void agregarOrigen(Ubicacion unaUbicacion) {
+		origenes.add(unaUbicacion);
+		this.actualizarUbicacionesAfectadas();
 	}
-
-	public void expandirRadio() {
-		if((this.tiempo.transcurrido() > 0) && (this.tiempo.transcurrido() % 2) == 0) {
-			this.radio++;
+	
+	private void actualizarUbicacionesAfectadas() {
+		
+		for(Ubicacion origenActual: this.origenes) {
+			int limiteIzquierdo = origenActual.obtenerX() - this.RADIO;
+			int limiteDerecho = origenActual.obtenerX() + this.RADIO;
+			int limiteInferior = origenActual.obtenerY() - this.RADIO;
+			int limiteSuperior = origenActual.obtenerY() + this.RADIO;
+			/* falta agregar mas verificaciones por si una ubicacion ya esta afectadad
+			 * o por ejemplo si una ubicacion cae fuera del limite del mapa
+			 * o tambien hay que cambiar lo del radio, porque por ahora es 5 pero aumenta
+			 * cada 2 turnos*/
+			for(int i = limiteIzquierdo; i <= limiteDerecho; i++) {
+				for(int j = limiteInferior; j <= limiteSuperior; j++) {
+					Ubicacion ubicacionActual = new Ubicacion(i,j);
+					if(ubicacionActual.distanciaCon(origenActual) <= this.RADIO) {
+						this.ubicacionesAfectadas.add(ubicacionActual);
+					}
+				}
+			}
 		}
-	}*/
+		
+	}
+	
+	public boolean estaAfectada(Ubicacion unaUbicacion) {
+		return (this.ubicacionesAfectadas.contains(unaUbicacion));
+	}
 
 }

@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
+import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
@@ -11,18 +14,18 @@ public class Zerling implements TipoDeUnidad,Atacante,Atacable{
 
 	private Vida vida;
 	private Ubicacion ubicacion;
-	private Ataque ataque;
+	private ArrayList<Ataque> ataques;
 	
 	public Zerling(Ubicacion unaUbicacion) {
 		this.vida = new Vida(35);
 		this.ubicacion = unaUbicacion;
-		this.ataque = new Ataque(4,1);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(4,new Superficie("Tierra"),1));}};
 	}
 	
 	public Zerling() {
 		this.vida = new Vida(35);
 		this.ubicacion = new Ubicacion();
-		this.ataque = new Ataque(4,1);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(4,new Superficie("Tierra"),1));}};
 	}
 
 	@Override
@@ -48,5 +51,11 @@ public class Zerling implements TipoDeUnidad,Atacante,Atacable{
 	
 	public int vidaRestante() {
 		return (this.vida.restante());
+	}
+
+	@Override
+	public Superficie obtenerSuperficie() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

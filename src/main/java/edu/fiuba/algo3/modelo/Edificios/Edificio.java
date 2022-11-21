@@ -1,30 +1,22 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
-import edu.fiuba.algo3.modelo.Atacable;
+import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recuperable;
+import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 
-public abstract class Edificio implements Atacable,Recuperable{
+public abstract class Edificio extends Raza implements Recuperable{
 	
-	
-	protected Tiempo tiempo;
 	protected Vida vida;
-	protected Ubicacion ubicacion;
+	protected Superficie superficie;
 	protected EstadoOperativo estado;
 	
-	public Edificio(Tiempo unTiempo,Vida unaVida) {
-		this.tiempo = unTiempo;
+	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion, Superficie unaSuperficie) {
+		super(unTiempo,unaUbicacion);
 		this.vida = unaVida;
-		this.ubicacion = new Ubicacion(0,0);
-		this.estado = new EnConstruccion(this);
-	}
-	
-	public Edificio(Tiempo unTiempo,Vida unaVida, Ubicacion unaUbicacion) {
-		this.tiempo = unTiempo;
-		this.vida = unaVida;
-		this.ubicacion = unaUbicacion;
+		this.superficie = unaSuperficie;
 		this.estado = new EnConstruccion(this);
 	}
 	
@@ -42,31 +34,19 @@ public abstract class Edificio implements Atacable,Recuperable{
 		this.recuperarse();
 	}
     
-    public void avanzarTurno(int cantidad) {
-    	if(cantidad > 0) {
-    		for(int i=0; i< cantidad; i++) {
-    			this.avanzarTurno();
-    		}
-    	}
-    }
-    
     @Override
     public abstract void recuperarse();
-    
-    public int obtenerVida() {
-    	return (this.vida.restante());
-    }
-	
-    public int tiempoDeEspera() {
-		return (this.tiempo.restante());
-	}
     
     @Override
     public abstract void recibirAtaque(int unAtaque);
     
-    @Override
-    public Ubicacion ubicacion() {
-    	return (this.ubicacion);
+    public int obtenerVida() {
+    	return (this.vida.restante());
     }
+    
+    public Superficie obtenerSuperficie(){
+   		return (this.superficie);
+   	}
+	
 
 }

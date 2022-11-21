@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
+import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
@@ -11,18 +14,20 @@ public class Hidralisco implements TipoDeUnidad,Atacante,Atacable{
 	
 	private Vida vida;
 	private Ubicacion ubicacion;
-	private Ataque ataque;
+	private ArrayList<Ataque>ataques;
 	
 	public Hidralisco(Ubicacion unaUbicacion) {
 		this.vida = new Vida(80);
 		this.ubicacion = unaUbicacion;
-		this.ataque = new Ataque(10,4);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(10,new Superficie("Tierra"),4));
+												 add(new Ataque(10,new Superficie("Aire"),4));}};
 	}
 	
 	public Hidralisco() {
 		this.vida = new Vida(80);
 		this.ubicacion = new Ubicacion();
-		this.ataque = new Ataque(10,4);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(10,new Superficie("Tierra"),4));
+		 										 add(new Ataque(10,new Superficie("Aire"),4));}};
 	}
 
 	@Override
@@ -48,6 +53,12 @@ public class Hidralisco implements TipoDeUnidad,Atacante,Atacable{
 	
 	public int vidaRestante() {
 		return (this.vida.restante());
+	}
+
+	@Override
+	public Superficie obtenerSuperficie() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -20,6 +20,14 @@ public class Ubicacion {
 		distancia = (int) Math.ceil(Math.sqrt(Math.pow((posX - otraUbicacion.posX),2) + Math.pow((posY - otraUbicacion.posY),2)));
 		return distancia;
 	}
+	
+	public int obtenerX() {
+		return (this.posX);
+	}
+	
+	public int obtenerY() {
+		return (this.posY);
+	}
 
     
 }

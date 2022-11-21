@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import java.util.*;
 
+import edu.fiuba.algo3.modelo.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.CriaderoSinLarvasException;
@@ -21,8 +22,11 @@ public class Criadero extends EdificioZerg {
 	private ArrayList<Unidad> larvas;
 	private ArrayList<Unidad> zanganos;
 		
-	public Criadero() {	
+	public Criadero(Recursos recursosJugador) {	
 		super(new Tiempo(-4),new Vida(500));
+		
+		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+		
 		this.maxLarvas = 3;
 		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Larva())); add(new Unidad(new Larva())); 
 												 add(new Unidad(new Larva()));}};

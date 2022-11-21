@@ -11,7 +11,7 @@ public class SinMinero implements Minero {
 	}
 	
 	@Override
-	public int extraerMineralDe(NodoMineral unNodoMineral) {
+	public int recolectarMineralDe(Mineral unNodoMineral) {
 		throw new NodoMineralSinRecolectorDeMineralConstruidoException();
 	}
 

@@ -4,7 +4,7 @@ package edu.fiuba.algo3.modelo;
 
 public interface Minero {
 	
-    public int extraerMineralDe(NodoMineral unNodoMineral);
+    public int recolectarMineralDe(Mineral unNodoMineral);
     
     public int obtenerMineral();
     

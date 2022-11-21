@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.Zangano;
 import java.util.ArrayList;
 
@@ -10,50 +11,52 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 0;
 	
-	private int maxExtraible;
-	private int extraido;
-    private int maxZanganos;
+	private int cantidadExtraible;
+	private int cantidadExtraida;
+    private int cantidadMaximaDeZanganos;
     private Volcan volcan;
-    private ArrayList<Zangano> zanganos;
+    private ArrayList<Unidad> zanganos;
     
-    public Extractor(Volcan unVolcan){
+    public Extractor(Volcan unVolcan, Recursos recursosJugador){
     	super(new Tiempo(-6),new Vida(750));
-    	this.maxExtraible = 10;
-    	this.extraido = 0;
-    	this.maxZanganos = 3;
-    	this.volcan = unVolcan;
-        this.zanganos = new ArrayList<Zangano>();
-    }
-
-    public void guardarZangano(Zangano zangano) {
-    	if(this.contarZanganos() == this.maxZanganos) {
-    		throw new CantidadMaximaDeZanganosEnExtractorException();
-    	}
-    	if(this.contarZanganos()<this.maxZanganos) {
-    		this.zanganos.add(zangano);
-    	}
     	
+    	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+    	
+    	this.cantidadExtraible = 10;
+    	this.cantidadExtraida = 0;
+    	this.cantidadMaximaDeZanganos = 3;
+    	this.volcan = unVolcan;
+        this.zanganos = new ArrayList<Unidad>();
+    }
+    
+    @Override
+    public void ejecutaOperable() {
+    	this.cantidadExtraida += this.extraerGasDe(this.volcan);
     }
     
     public int contarZanganos() {
     	return (this.zanganos.size());
     }
 
+    public void guardarZangano(Unidad unaUnidad) {
+    	
+    	if(this.contarZanganos() == this.cantidadMaximaDeZanganos) {
+    		throw new CantidadMaximaDeZanganosEnExtractorException();
+    	}
+    	this.zanganos.add(unaUnidad);
+    	
+    }
+
     @Override
 	public int extraerGasDe(Volcan unVolcan) {
-		return (unVolcan.extraerGas(this.maxExtraible * this.contarZanganos()));
-	}
-	
-	@Override
-	public void ejecutaOperable() {
-		this.extraido += this.extraerGasDe(this.volcan);
+		return (unVolcan.extraerGas(this.cantidadExtraible * this.contarZanganos()));
 	}
 	
 	@Override
     public int obtenerGas() {
-		int cantidadExtraida = this.extraido;
-        this.extraido = 0;
-        return cantidadExtraida;
+		int extraido = this.cantidadExtraida;
+        this.cantidadExtraida = 0;
+        return extraido;
     }
 
 	@Override

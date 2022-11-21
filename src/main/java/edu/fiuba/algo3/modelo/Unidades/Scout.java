@@ -1,9 +1,12 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
@@ -13,20 +16,22 @@ public class Scout implements TipoDeUnidad,Atacante,Atacable {
 	private Vida vida;
 	private Escudo escudo;
 	private Ubicacion ubicacion;
-	private Ataque ataque;
+	private ArrayList<Ataque> ataques;
 	
 	public Scout(Ubicacion unaUbicacion) {
 		this.vida = new Vida(150);
 		this.escudo = new Escudo(100);
 		this.ubicacion = unaUbicacion;
-		this.ataque = new Ataque(14,4);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),4));
+		 										 add(new Ataque(14,new Superficie("Aire"),4));}};
 	}
 	
 	public Scout() {
 		this.vida = new Vida(150);
 		this.escudo = new Escudo(100);
 		this.ubicacion = new Ubicacion();
-		this.ataque = new Ataque(14,4);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),4));
+		 										 add(new Ataque(14,new Superficie("Aire"),4));}};
 	}
 
 	@Override

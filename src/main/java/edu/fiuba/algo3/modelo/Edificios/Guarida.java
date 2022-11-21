@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.Hidralisco;
@@ -18,8 +19,11 @@ public class Guarida extends EdificioZerg {
     private ArrayList<Unidad> hidraliscos;
     
 	
-    public Guarida(){
+    public Guarida(Recursos recursosJugador){
         super(new Tiempo(-12),new Vida(1250));
+        
+        recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+        
         this.larvas = new ArrayList<Unidad>();
         this.hidraliscos = new ArrayList<Unidad>();
     }

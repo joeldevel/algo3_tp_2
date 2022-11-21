@@ -1,30 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
-
-import edu.fiuba.algo3.modelo.CostoDeConstruccion;
-import edu.fiuba.algo3.modelo.GasVespeno;
-import edu.fiuba.algo3.modelo.Moho;
-import edu.fiuba.algo3.modelo.RequisitoDeConstruccion;
-import edu.fiuba.algo3.modelo.SinGas;
-import edu.fiuba.algo3.modelo.SinRequisitoDeConstruccion;
-import edu.fiuba.algo3.modelo.Tiempo;
-import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Vida;
-import edu.fiuba.algo3.modelo.Edificios.Criadero;
-import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
-import edu.fiuba.algo3.modelo.Edificios.Extractor;
-import edu.fiuba.algo3.modelo.Edificios.ReservaDeProduccion;
-import edu.fiuba.algo3.modelo.Unidades.Larva;
-
 class UbicacionTest {
 	
 	
-    @Test
+    /*@Test
     void test01EnUnaUbicacionSinMohoYSinGasSeDeberiaPoderConstruirUnCriadero() {
 
         Ubicacion ubicacion = new Ubicacion();
@@ -121,7 +100,7 @@ class UbicacionTest {
     /* en esta parte habria que probar mas edificios, como por ejemplo guarida
      * donde un requisito de construccion es una reserva de produccion, o un espiral
      * donde una requisito de construccion es una guarida
-     * */
+     *
 
     @Test
     void test09UnaUbicacionNuevaComienzaSinEdificios() {
@@ -143,7 +122,7 @@ class UbicacionTest {
         ubicacion.destruirEdificio();
 
         assertTrue(ubicacion.sePuedeConstruir(reserva));
-    }
+    }/*
 
     /* falta probar con otros edificios que se puede construir aun cuando criadero*/
 }

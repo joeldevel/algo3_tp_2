@@ -4,11 +4,11 @@ import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaExcep
 
 public class SinRefineria implements RefineriaDeGas {
 	
-	private int cantidadDeGas;
+	private int cantidadExtraida;
 	private Volcan volcan;
 	
 	public SinRefineria(Volcan unVolcan) {
-		this.cantidadDeGas = 0;
+		this.cantidadExtraida = 0;
 		this.volcan = unVolcan;
 	}
 

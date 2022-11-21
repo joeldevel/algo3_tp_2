@@ -1,9 +1,12 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
@@ -13,20 +16,22 @@ public class Dragon implements TipoDeUnidad,Atacante,Atacable {
 	private Vida vida;
 	private Escudo escudo;
 	private Ubicacion ubicacion;
-	private Ataque ataque;
+	private ArrayList<Ataque> ataques;
 	
 	public Dragon(Ubicacion unaUbicacion) {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(80);
 		this.ubicacion = unaUbicacion;
-		this.ataque = new Ataque(20,4);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
+												 add(new Ataque(20,new Superficie("Aire"),4));}};
 	}
 	
 	public Dragon() {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(80);
 		this.ubicacion = new Ubicacion();
-		this.ataque = new Ataque(20,4);
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
+		 										 add(new Ataque(20,new Superficie("Aire"),4));}};
 	}
 
 	@Override

@@ -5,5 +5,7 @@ public interface Mineral {
 	public int mineralRestante();
 	
 	public int recolectarMineral(int unaCantidad);
+	
+	boolean tieneMineral();
 
 	}

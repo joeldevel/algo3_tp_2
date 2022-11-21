@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.Dragon;
@@ -17,10 +18,12 @@ public class Acceso extends EdificioProtoss{
 	private ArrayList<Unidad> zealots;
 	private ArrayList<Unidad> dragones;
 	
-    protected Acceso() {
+    protected Acceso(Recursos recursosJugador) {
 		super(new Tiempo(-8),new Vida(500), new Escudo(500));
 		this.zealots = new ArrayList<Unidad>();
 		this.dragones = new ArrayList<Unidad>();
+		
+		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 	}
 
 	@Override

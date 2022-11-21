@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.Mutalisco;
@@ -16,8 +17,11 @@ public class Espiral extends EdificioZerg {
 	private ArrayList<Unidad> larvas;
     private ArrayList<Unidad> mutaliscos;
 	
-	public Espiral(){
+	public Espiral(Recursos recursosJugador){
         super(new Tiempo(-10),new Vida(1300));
+        
+        recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+        
         this.larvas = new ArrayList<Unidad>();
         this.mutaliscos = new ArrayList<Unidad>();
     }

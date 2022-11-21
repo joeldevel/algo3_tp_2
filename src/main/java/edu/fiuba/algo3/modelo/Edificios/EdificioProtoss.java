@@ -1,12 +1,10 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
-import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Escudo;
-import edu.fiuba.algo3.modelo.Recuperable;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Vida;
 
-public abstract class EdificioProtoss extends Edificio implements Atacable,Recuperable {
+public abstract class EdificioProtoss extends Edificio {
 
     protected Escudo escudo;
        
