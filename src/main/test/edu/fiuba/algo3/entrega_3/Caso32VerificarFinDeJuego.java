@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class Caso31VerificarFinDeJuego {
+public class Caso32VerificarFinDeJuego {
 
     @Test
     @DisplayName("Un juego no iniciado no puede ser finalizado")
