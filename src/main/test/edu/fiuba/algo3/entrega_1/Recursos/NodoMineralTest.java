@@ -4,8 +4,8 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConstruidoException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMineralException;
-import edu.fiuba.algo3.modelo.Recursos.Recursos.NodoMineral;
-import edu.fiuba.algo3.modelo.Recursos.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class NodoMineralTest {
 
     @Test
     void test01SeCreaUnNodoMineralSinUnMineroYAlIntentarRecolectarMineralSeLanzaExcepcion(){
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         int unaCantidadExtraible = 50;
 
         assertThrows(NodoMineralSinRecolectorDeMineralConstruidoException.class,()->{
@@ -26,7 +26,7 @@ public class NodoMineralTest {
 
     @Test
     void test02SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnNexoMineralConstruidoYSeLanzaUnaExcepcion(){
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
         NexoMineral primerNexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -38,8 +38,8 @@ public class NodoMineralTest {
 
     @Test
     void test03SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnZanganoYSeLanzaUnaExcepcion(){
-        NodoMineral nodoMineral = new NodoMineral(2000);
-        Zangano zangano = new Zangano(10);
+        NodoMineral nodoMineral = new NodoMineral();
+        Zangano zangano = new Zangano();
         zangano.conNodo(nodoMineral);
 
         Recursos recursosJugador = new Recursos();
@@ -50,10 +50,10 @@ public class NodoMineralTest {
         });
     }
 
-    @Test
+    @Test // Hay que recolectar el mineral hasta que se quede vacio.
     void test04SeConstruyeUnNexoMineralEnUnNodoMineralSinMineralYAlIntentarRecolectarSeLanzaUnaExcepcion(){
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(0);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -67,7 +67,7 @@ public class NodoMineralTest {
     @Test
     void test05SeConstruyeUnNexoMineralEnUnNodoMineralYDespuesDeCuatroTurnosAlRecolectarMineralesDevuelveElResultadoIndicado() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
@@ -82,8 +82,8 @@ public class NodoMineralTest {
     @Test
     void test06SeConstruyeUnZanganoEnUnNodoMineralYAlAvanzarUnTurnoElZanganoRecolectaMineralYDevuelveElResultadoIndicado() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
-        Zangano zangano = new Zangano(10);
+        NodoMineral nodoMineral = new NodoMineral();
+        Zangano zangano = new Zangano();
         zangano.conNodo(nodoMineral);
 
         // Act

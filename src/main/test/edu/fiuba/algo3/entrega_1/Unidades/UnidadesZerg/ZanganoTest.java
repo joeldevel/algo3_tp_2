@@ -12,7 +12,7 @@ public class ZanganoTest {
     @Test
     void test01SeConstruyeUnZanganoEnUnNodoMineralYSeAvanzanTresTurnosDevuelveElResultadoIndicado() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral(2000);
+        NodoMineral nodoMineral = new NodoMineral();
         Zangano zangano = new Zangano();
         zangano.conNodo(nodoMineral);
 

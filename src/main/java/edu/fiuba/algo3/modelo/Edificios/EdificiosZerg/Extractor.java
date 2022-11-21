@@ -3,9 +3,11 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	private int cantidadExtraida;
     private int cantidadMaximaDeZanganos;
     private Volcan volcan;
-    private ArrayList<Unidad> zanganos;
+    private ArrayList<Zangano> zanganos;
     
     public Extractor(Volcan unVolcan, Recursos recursosJugador){
     	super(new Tiempo(-6),new Vida(750));
@@ -29,7 +31,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     	this.cantidadExtraida = 0;
     	this.cantidadMaximaDeZanganos = 3;
     	this.volcan = unVolcan;
-        this.zanganos = new ArrayList<Unidad>();
+        this.zanganos = new ArrayList<Zangano>();
     }
     
     @Override
@@ -41,12 +43,12 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     	return (this.zanganos.size());
     }
 
-    public void guardarZangano(Unidad unaUnidad) {
+    public void guardarZangano(Zangano unZangano) {
     	
     	if(this.contarZanganos() == this.cantidadMaximaDeZanganos) {
     		throw new CantidadMaximaDeZanganosEnExtractorException();
     	}
-    	this.zanganos.add(unaUnidad);
+    	this.zanganos.add(unZangano);
     	
     }
 
