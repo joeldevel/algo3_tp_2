@@ -11,15 +11,17 @@ import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Mutalisco implements TipoDeUnidad,Atacante,Atacable {
+public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	
 	private Vida vida;
 	private Ubicacion ubicacion;
+	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	
 	public Mutalisco(Ubicacion unaUbicacion) {
 		this.vida = new Vida(120);
 		this.ubicacion = unaUbicacion;
+		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
 		 										 add(new Ataque(9,new Superficie("Aire"),3));}};
 	}
@@ -27,6 +29,7 @@ public class Mutalisco implements TipoDeUnidad,Atacante,Atacable {
 	public Mutalisco() {
 		this.vida = new Vida(120);
 		this.ubicacion = new Ubicacion();
+		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
 		 										 add(new Ataque(9,new Superficie("Aire"),3));}};
 	}
@@ -37,15 +40,29 @@ public class Mutalisco implements TipoDeUnidad,Atacante,Atacable {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
-		if(! (this.estaEnRangoDeAtaque(unAtacable))) {
-			throw new AtacableFueraDeRangoError();
-		}
-		unAtacable.recibirAtaque(this.ataque.danio());
+	public Superficie obtenerSuperficie() {
+		return this.superficie;
 	}
-	
-	public boolean estaEnRangoDeAtaque(Atacable unAtacable) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= this.ataque.rango());
+
+	@Override
+	public void atacar(Atacable unAtacable) {
+
+		for (Ataque ataque : ataques) {
+			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
+				throw new AtacableFueraDeRangoError();
+			}
+
+			ataque.atacarA(unAtacable);
+		}
+	}
+
+	@Override
+	public void recuperarse() {
+		this.vida.recuperarse();
+	}
+
+	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
+		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 	
 	public Ubicacion ubicacion() {

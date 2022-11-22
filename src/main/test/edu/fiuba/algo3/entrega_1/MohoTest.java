@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.Tiempo;
 
 class MohoTest {
 
-	@Test
+	/*@Test
 	void test01UnNuevoMohoEmpiezaConRadioCinco() {
 		
 		Tiempo tiempo = new Tiempo(0);
@@ -49,6 +49,6 @@ class MohoTest {
 		}
 		
 		assertEquals(moho.radio(),10);
-	}
+	}*/
 
 }

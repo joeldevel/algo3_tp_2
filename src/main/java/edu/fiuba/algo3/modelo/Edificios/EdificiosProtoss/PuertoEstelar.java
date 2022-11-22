@@ -1,15 +1,13 @@
 package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
-import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
-import edu.fiuba.algo3.modelo.Tiempo;
 
 public class PuertoEstelar extends EdificioProtoss {
 
@@ -19,7 +17,7 @@ public class PuertoEstelar extends EdificioProtoss {
 	private ArrayList<Unidad> scouts;
 	
     public PuertoEstelar(Recursos recursosJugador){
-        super(new Tiempo(-10),new Vida(600),new Escudo(600));
+        super(new Tiempo(-10),new Vida(600),new Escudo(600), new Ubicacion());
         
         recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
@@ -34,12 +32,16 @@ public class PuertoEstelar extends EdificioProtoss {
    
     public void transportarScout() {
         /* aca debe ir la verificacion de requisitos*/
-    	this.scouts.add(new Unidad(new Scout()));
+    	//this.scouts.add(new Unidad(new Scout()));
     }
 	
 	public ArrayList<Unidad> obtenerScouts(){
 		return (this.scouts);
 	}
 
-	
+
+    @Override
+    public void atacar(Atacable unAtacable) {
+        // No hace nada
+    }
 }

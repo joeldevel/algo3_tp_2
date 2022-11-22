@@ -50,7 +50,7 @@ public class NodoMineralTest {
         });
     }
 
-    @Test // Hay que recolectar el mineral hasta que se quede vacio.
+    @Test
     void test04SeConstruyeUnNexoMineralEnUnNodoMineralSinMineralYAlIntentarRecolectarSeLanzaUnaExcepcion(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
@@ -58,9 +58,10 @@ public class NodoMineralTest {
         recursosJugador.guardar(0, 50);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
 
+
         // Act & Assert
         assertThrows(NodoMineralSinMineralParaRecolectarException.class,()->{
-            nexoMineral.avanzarTurno(5);
+            nexoMineral.avanzarTurno(205); // Avanzamos tantos turnos como sea necesario para que el Nodo no tenga mas mineral.
         });
     }
 

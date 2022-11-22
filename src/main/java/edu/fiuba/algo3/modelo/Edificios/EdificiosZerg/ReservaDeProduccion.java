@@ -2,9 +2,11 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
@@ -18,7 +20,7 @@ public class ReservaDeProduccion extends EdificioZerg {
     private ArrayList<Unidad> zerlings;
     	
     public ReservaDeProduccion(Recursos recursosJugador) {
-    	super(new Tiempo(-12),new Vida(1000)); 
+    	super(new Tiempo(-12),new Vida(1000), new Ubicacion());
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
@@ -52,5 +54,9 @@ public class ReservaDeProduccion extends EdificioZerg {
 	public ArrayList<Unidad> obtenerZerlings(){
 		return (this.zerlings);
 	}
-		
+
+	@Override
+	public void atacar(Atacable unAtacable) {
+		// No hace nada
+	}
 }

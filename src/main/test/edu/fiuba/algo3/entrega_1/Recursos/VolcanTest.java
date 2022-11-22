@@ -36,7 +36,7 @@ class VolcanTest {
         });
     }
 
-    @Test // Hay que extraer el gas del VOlcan hasta que se quede vacio.
+    @Test
     void test03SeConstruyeUnExtractorEnUnVolcanSinGasVespenoYAlIntentarExtraerSeLanzaUnaExcepcion(){
         // Arrange
         Volcan volcan = new Volcan();
@@ -48,26 +48,7 @@ class VolcanTest {
 
         // Act & Assert
         assertThrows(VolcanSinGasVespenoParaExtraerException.class,()->{
-			extractor.avanzarTurno(7);
+			extractor.avanzarTurno(507); // Avanzamos tantos turnos como sea necesario para que el Volcan no tenga mas gas.
         });
-    }
-
-    @Test // Hay que extraer el gas del Volcan hasta que solo le queden 10 unidades.
-    void test04SeConstruyeUnExtractorEnUnVolcanCon10UnidadesDeGasVespenoYConDosZanganosTrabajandoYAlExtraerGasSoloExtraemosLas10UnidadesQueLeQuedanAlVolcan() {
-        // Arrange
-        Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano = new Zangano();
-        extractor.guardarZangano(primerZangano);
-        Zangano segundoZangano = new Zangano();
-        extractor.guardarZangano(segundoZangano);
-
-        // Act
-		extractor.avanzarTurno(7);
-
-        // Assert
-        assertEquals(10, extractor.obtenerGas());
     }
 }

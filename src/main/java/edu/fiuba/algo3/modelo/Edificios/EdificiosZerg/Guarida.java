@@ -2,9 +2,11 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -19,7 +21,7 @@ public class Guarida extends EdificioZerg {
     
 	
     public Guarida(Recursos recursosJugador){
-        super(new Tiempo(-12),new Vida(1250));
+        super(new Tiempo(-12),new Vida(1250), new Ubicacion());
         
         recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
@@ -53,5 +55,10 @@ public class Guarida extends EdificioZerg {
 	
 	public ArrayList<Unidad> obtenerHidraliscos(){
 		return (this.hidraliscos);
+	}
+
+	@Override
+	public void atacar(Atacable unAtacable) {
+		// No hace nada
 	}
 }

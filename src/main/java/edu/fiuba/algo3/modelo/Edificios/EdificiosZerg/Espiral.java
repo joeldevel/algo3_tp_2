@@ -2,9 +2,11 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -18,7 +20,7 @@ public class Espiral extends EdificioZerg {
     private ArrayList<Unidad> mutaliscos;
 	
 	public Espiral(Recursos recursosJugador){
-        super(new Tiempo(-10),new Vida(1300));
+        super(new Tiempo(-10),new Vida(1300), new Ubicacion());
         
         recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
@@ -53,5 +55,9 @@ public class Espiral extends EdificioZerg {
 		return (this.mutaliscos);
 	}
 
-	
+
+	@Override
+	public void atacar(Atacable unAtacable) {
+		// No hace nada
+	}
 }

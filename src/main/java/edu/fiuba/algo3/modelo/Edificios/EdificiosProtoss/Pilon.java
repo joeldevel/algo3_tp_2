@@ -1,10 +1,8 @@
 package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
-import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
-import edu.fiuba.algo3.modelo.Tiempo;
-import edu.fiuba.algo3.modelo.Vida;
 
 public class Pilon extends EdificioProtoss {
     
@@ -14,7 +12,7 @@ public class Pilon extends EdificioProtoss {
 	private int radio;
 
     public Pilon(Recursos recursosJugador) {
-    	super(new Tiempo(-5),new Vida(300),new Escudo(300));
+    	super(new Tiempo(-5),new Vida(300),new Escudo(300), new Ubicacion());
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
@@ -32,6 +30,8 @@ public class Pilon extends EdificioProtoss {
     }
 
 
-
-    
+    @Override
+    public void atacar(Atacable unAtacable) {
+        // No hace nada
+    }
 }

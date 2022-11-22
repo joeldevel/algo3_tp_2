@@ -18,13 +18,15 @@ public class NexoMineral extends EdificioProtoss implements Minero {
 
 	
     public NexoMineral(NodoMineral unNodo, Recursos recursosJugador) {
-        super(new Tiempo(-4),new Vida(250), new Escudo(250));
+        super(new Tiempo(-4),new Vida(250), new Escudo(250), new Ubicacion());
         
         recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
         this.cantidadRecolectable = 10;
         this.cantidadRecolectada = 0;
         this.nodo = unNodo;
+
+        unNodo.construirRecolectorDeMineral(this);
     }
     
     @Override
@@ -49,4 +51,9 @@ public class NexoMineral extends EdificioProtoss implements Minero {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+    @Override
+    public void atacar(Atacable unAtacable) {
+        // No hace nada
+    }
 }

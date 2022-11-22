@@ -16,7 +16,7 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
     private Volcan volcan;
     
     public Asimilador(Volcan unVolcan, Recursos recursosJugador) {
-    	super(new Tiempo(-6),new Vida(450),new Escudo(450));
+    	super(new Tiempo(-6),new Vida(450),new Escudo(450), new Ubicacion());
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
@@ -47,5 +47,10 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	@Override
 	public boolean tieneRefineria() {
 		return true;
+	}
+
+	@Override
+	public void atacar(Atacable unAtacable) {
+		// No hace nada
 	}
 }

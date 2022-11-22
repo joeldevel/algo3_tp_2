@@ -2,11 +2,9 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
-import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
-import edu.fiuba.algo3.modelo.Tiempo;
-import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
@@ -20,7 +18,7 @@ public class Acceso extends EdificioProtoss {
 	private ArrayList<Unidad> dragones;
 	
     public Acceso(Recursos recursosJugador) {
-		super(new Tiempo(-8),new Vida(500), new Escudo(500));
+		super(new Tiempo(-8),new Vida(500), new Escudo(500), new Ubicacion());
 		this.zealots = new ArrayList<Unidad>();
 		this.dragones = new ArrayList<Unidad>();
 		
@@ -35,12 +33,12 @@ public class Acceso extends EdificioProtoss {
 	
 	public void transportarZealot() {
 		/* aca tiene que ir la verificacion de requisitos*/
-		this.zealots.add(new Unidad(new Zealot()));
+		//this.zealots.add(new Unidad(new Zealot()));
 	}
 	
 	public void transportarDragon() {
 		/* aca tiene que ir la verificacion de requisitos*/
-		this.dragones.add(new Unidad(new Dragon()));
+		//this.dragones.add(new Unidad(new Dragon()));
 	}
 	
 	public ArrayList<Unidad> obtenerZealots(){
@@ -50,5 +48,9 @@ public class Acceso extends EdificioProtoss {
 	public ArrayList<Unidad> obtenerDragones(){
 		return (this.dragones);
 	}
-		
+
+	@Override
+	public void atacar(Atacable unAtacable) {
+		// No hace nada
+	}
 }

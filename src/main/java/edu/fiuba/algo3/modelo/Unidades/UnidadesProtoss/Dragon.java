@@ -12,7 +12,7 @@ import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Dragon implements TipoDeUnidad,Atacante,Atacable {
+public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	
 	private Vida vida;
 	private Escudo escudo;
@@ -33,6 +33,7 @@ public class Dragon implements TipoDeUnidad,Atacante,Atacable {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(80);
 		this.ubicacion = new Ubicacion();
+		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
 		 										 add(new Ataque(20,new Superficie("Aire"),4));}};
 	}
