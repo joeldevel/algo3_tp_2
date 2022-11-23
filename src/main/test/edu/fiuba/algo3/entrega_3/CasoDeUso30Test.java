@@ -1,4 +1,4 @@
 package edu.fiuba.algo3.entrega_3;
 
-public class CasoDeUso27 {
+public class CasoDeUso30Test {
 }

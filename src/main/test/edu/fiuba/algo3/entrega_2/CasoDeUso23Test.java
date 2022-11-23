@@ -17,7 +17,7 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 
 /*Supuesto: una unidad Zerg solo puede daniar a una unidad o un edificio Protoss*/
 
-class CasoDeUso23 {
+class CasoDeUso23Test {
 
 	@Test
 	void test01UnaUnidadZerlingEn00NoPuedeDaniarAUnaUnidadZealotEn02() {
