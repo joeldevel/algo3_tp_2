@@ -8,8 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CasoDeUso26 {
-    //Verificar que para construir unidades se cuente con la capacidad de suministro
-    //correspondiente.
 
     @Test
     @DisplayName("Un protoss no puede construir un Zealot si no tiene al menos 2 de cupo en su casa")
