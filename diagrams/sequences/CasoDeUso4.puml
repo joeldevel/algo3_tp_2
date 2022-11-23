@@ -41,6 +41,8 @@ note left: Inicializamos el Zangano que trabajara, el Extractor y el Volcan.
 
 Usuario->Volcan: Volcan()
 Usuario->Volcan: construirRefineriaDeGas(extractor)
+Volcan->Extractor: construirEn(Volcan)
+
 Volcan-->Usuario
 
 loop seis veces

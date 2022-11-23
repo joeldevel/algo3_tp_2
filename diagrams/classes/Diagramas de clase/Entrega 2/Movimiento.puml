@@ -1,0 +1,58 @@
+@startuml
+
+abstract class Unidad{
+    -ubicacion
+    +mover()
+}
+
+note left: Delega en Movimiento el calculo de mover: this.ubicacion = this.movimiento.calcularUbicacionSiguiente(this.ubicacion).
+
+abstract class Movimiento{
+    +calcularUbicacionSiguiente(unaUbicacion): Ubicacion
+}
+
+note left: Las unidades delegan en movimiento la logica del "mover".\n\nDelega en Direccion el calculo: ubicacion = this.direccion.desplazarUbicacion(unaUbicacion).
+
+class MovimientoLineaRecta
+
+class MovimientoChocarUnidad
+
+abstract class Direccion{
+    +desplazarUbicacion(unaUbicacion): Ubicacion
+    +direccionOpuesta(): Direccion
+}
+
+note right: Encapsula calculos.
+
+class DireccionArriba
+
+class DireccionAbajo
+
+class Ubicacion {
+    +estaDentroDe(): boolean
+    +distanciaHasta(unaUbicacion): float
+}
+
+note right: Encapsula calculos.
+
+class Mapa{
+    -tamaño: int
+    -areasDeTierra
+    -areasEspaciales
+    -ubicaciones: Ubicacion
+    +Mapa(cantidadDeBases)
+    +crearBase()
+    +obtenerUbicacionBase()
+}
+
+MovimientoLineaRecta -up-|> Movimiento
+MovimientoChocarUnidad -up-|> Movimiento
+Unidad --> Movimiento
+DireccionAbajo -up-|> Direccion
+DireccionArriba -up-|> Direccion
+Movimiento -> Direccion
+Unidad -> Ubicacion
+Mapa -> Unidad
+
+
+@enduml

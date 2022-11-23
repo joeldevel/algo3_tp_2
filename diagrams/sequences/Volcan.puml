@@ -1,0 +1,28 @@
+@startuml
+
+Usuario->Volcan: Volcan(5000)
+Note left: El volcan recibe como parametro\nla cantida de Gas Vespeno inicial.
+Usuario->Extractor: Extractor()
+Extractor-->Usuario: unExtractor
+Usuario->Volcan: construirRefineriaDeGas(unExtractor)
+Usuario->Zangano: Zangano(10)
+Zangano-->Usuario: unZangano
+note left: El zangano recibe como parametro\nla cantidad de gas que puede extraer\npor turno.
+Usuario->Extractor: guardarZangano(unZangano)
+Extractor-->Usuario: true
+
+Usuario->Extractor: avanzarTurno()
+note left: Suponemos que ya se avanzaron 6 turnos\ny el mostrado en esta secuencia es el turno 7\n(con estado Operable).
+
+Extractor->Operable: ejecutar()
+Operable->Extractor: ejecutarOperable()
+Extractor->Volcan: extraerGasUsandoRefineria(10)
+note left: Este metodo de Volcan se encarga de verificar que haya Gas Vespeno\ny que haya una refineria construida.\n\nLuego procede a extraer gas y actualizar su cantidad total.
+Volcan->Volcan: extraerGas(10)
+Volcan-->Extractor: 10
+
+Usuario->Extractor: obtenerGas()
+note left: Metodo utilizado en pruebas para verificar\nque el comportamiento es el esperado
+Extractor-->Usuario: 10
+
+@enduml

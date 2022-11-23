@@ -1,0 +1,526 @@
+¿Como modelar el tema de los ataques?
+
+Pense en que las unidades puedan implementar dos tipos de interfaces
+una relacionada al ataque por aire y otra relacionada al ataque por tierra.
+
+¿Como hacer con aquellas unidades que implementan ambas interfaces?.
+
+La clase UnidadDeTierra recibira por parametro ataques por tierra.
+La clase UnidadDeAire recibira por parametro ataques por aire.
+
+@startuml
+
+interface Atacable {
+    +recibirAtaque()
+    +ubicacion(): Ubicacion
+    +obtenerSuperficie(): Superficie
+    +atacar(unAtacable)
+}
+
+note right: Tambien implementan esta interfaz todas las unidades concretas (Zerling, Dragon, etc).
+
+abstract class Raza {
+    -tiempo: Tiempo
+    -ubicacion: Ubicacion
+    +avanzarTurno() {abstract}
+    +recibirAtaque() {abstract}
+    +ubicacion(): Ubicacion
+    +tiempoDeEspera(): int
+}
+
+class Unidad {
+    -tipo: TipoDeUnidad
+    -estado: TipoDeUnidad
+    +Unidad(unTiempo, unaUbicacion, unTipo)
+    +cambiarTipo(unTipo)
+    +recibirAtaque(unDanio)
+    +obtenerSuperficie(): Superficie
+    +atacar(unAtacable)
+    +avanzarTurno()
+}
+
+note right: Inicialmente tenemos\n\nthis.estado = new EnConstruccion()\nthis.tipo = unTipo\n\nCuando se cumpla el tiempo de construccion tendremos\n\nthis.estado = this.tipo
+
+interface TipoDeUnidad {
+    +recibirAtaque(unDanio)
+    +obtenerSuperficie(): Superficie
+    +atacar(unAtacable)
+    +recuperarse()
+}
+
+class Zerling {
+    -vida: Vida
+    -Ubicacion: ubicacion
+    -Superficie: superficie
+    -ataques: ArrayList<Ataque>
+    +Zerling(unaUbicacion)
+    +recibirAtaque(unDanio)
+    +atacar(unAtacable)
+    +recuperarse()
+    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +obtenerSuperficie(): Superficie
+}
+
+class Dragon {
+    -vida: Vida
+    -escudo: Escudo
+    -Ubicacion: ubicacion
+    -Superficie: superficie
+    -ataques: ArrayList<Ataque>
+    +Dragon(unaUbicacion)
+    +recibirAtaque(unDanio)
+    +atacar(unAtacable)
+    +recuperarse()
+    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +escudoRestante(): int
+    +obtenerSuperficie(): Superficie
+}
+
+class EnConstruccion {
+    +EnConstruccion()
+    +recibirAtaque(unDanio)
+    +atacar(unAtacable)
+    +recuperarse()
+    +obtenerSuperficie(): Superficie
+}
+
+note right: Todos sus metodos no hacen nada o lanzan una excepcion.
+
+Raza ..right|> Atacable
+Unidad --up|> Raza
+Unidad --down> TipoDeUnidad
+Zerling ..up|> TipoDeUnidad
+EnConstruccion .up|> TipoDeUnidad
+Dragon ..up|> TipoDeUnidad
+
+@enduml
+
+-----------------------------------------------------------------------------------------------------
+
+@startuml
+
+interface Atacable {
+    +recibirAtaque()
+    +ubicacion(): Ubicacion
+    +obtenerSuperficie(): Superficie
+    +atacar(unAtacable)
+}
+
+abstract class Raza {
+    -tiempo: Tiempo
+    -ubicacion: Ubicacion
+    +avanzarTurno() {abstract}
+    +recibirAtaque() {abstract}
+    +ubicacion(): Ubicacion
+}
+
+class Unidad {
+    -tipo: TipoDeUnidad
+    +Unidad(unTiempo, unaUbicacion, unTipo)
+    +cambiarTipo(unTipo)
+    +recibirAtaque(unDanio)
+    +obtenerSuperficie(): Superficie
+    +atacar(unAtacable)
+    +avanzarTurno()
+}
+
+interface TipoDeUnidad {
+    +recibirAtaque(unDanio)
+    +obtenerSuperficie(): Superficie
+    +atacar(unAtacable)
+    +recuperarse()
+}
+
+class Zerling {
+    -vida: Vida
+    -Ubicacion: ubicacion
+    -Superficie: superficie
+    -ataques: ArrayList<Ataque>
+    +Zerling(unaUbicacion)
+    +recibirAtaque(unDanio)
+    +atacar(unAtacable)
+    +recuperarse()
+    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +obtenerSuperficie(): Superficie
+}
+
+class Dragon {
+    -vida: Vida
+    -escudo: Escudo
+    -Ubicacion: ubicacion
+    -Superficie: superficie
+    -ataques: ArrayList<Ataque>
+    +Dragon(unaUbicacion)
+    +recibirAtaque(unDanio)
+    +atacar(unAtacable)
+    +recuperarse()
+    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +escudoRestante(): int
+    +obtenerSuperficie(): Superficie
+}
+
+Raza ..right|> Atacable
+Unidad --up|> Raza
+Unidad --down> TipoDeUnidad
+Zerling ..up|> TipoDeUnidad
+Dragon ..up|> TipoDeUnidad
+
+@enduml
+
+-----------------------------------------------------------------------------------------------------
+
+@startuml
+
+interface Atacante{
+    +atacarA(unAtacable)
+}
+interface Atacable{
+    +recibirAtaque(unValorDeAtaque)
+}
+
+interface Evolucionable {
+    +evolucionar()
+}
+
+Unidad ..left|> Evolucionable
+
+interface Recuperable {
+    +recuperarse()
+}
+
+Unidad ..left|> Recuperable
+
+class Ataque{
+    -rango: int
+    -tipo: Superficie
+    -valor: int
+    +Ataque(unDanio, unRango)
+    +rango()
+    +atacarA(unAtacable)
+    +obtenerSuperficie()
+}
+
+Unidad -> Ataque
+
+interface Superficie {
+    +compararCon(otraSuperficie)
+}
+
+class Tierra {
+    +compararCon(otraSuperficie)
+}
+class Aire {
+    +compararCon(otraSuperficie)
+}
+
+Tierra ..up|> Superficie
+Aire ..up|> Superficie
+
+Unidad -up> Superficie
+Ataque -> Superficie
+
+abstract class Unidad {
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -costo: Mineral
+    -tiempoDeConstruccion: int
+    -ataques: ArrayList<Ataque>
+    -vida: Vida
+    +atacarA(unAtacable)
+    +recibirAtaque(unValorDeAtaque) {abstract}
+    +obtenerVida()
+    +obtenerSuperficie()
+}
+
+Unidad .up.|> Atacable
+Unidad .up.|> Atacante
+
+abstract class UnidadZerg{
+    +recibirAtaque(unValorDeAtaque)
+}
+
+abstract class UnidadProtoss {
+    -escudo: Escudo
+    +recibirAtaque(unValorDeAtaque)
+    +obtenerEscudo()
+}
+
+class Zangano
+class Zerling
+class Hidralisco
+class Mutalisco {
+    +evolucionar()
+}
+class Zealot
+class Dragon
+class Scout
+
+
+UnidadProtoss -up-|> Unidad
+UnidadZerg -up-|> Unidad
+
+Zangano ---up|> UnidadZerg
+Zerling ---up|> UnidadZerg
+Hidralisco ---up|> UnidadZerg
+Mutalisco ---up|> UnidadZerg
+
+Zealot ---up|> UnidadProtoss
+Dragon ---up|> UnidadProtoss
+Scout ---up|> UnidadProtoss
+
+@enduml
+
+----------------------------------------------------------------------------------------------------------------------
+
+@startuml
+
+interface Atacante{
+    +atacarA(unAtacable)
+}
+interface Atacable{
+    +recibirAtaque(unValorDeAtaque)
+}
+
+interface Evolucionable {
+    +evolucionar()
+}
+
+Unidad ..left|> Evolucionable
+
+interface Recuperable {
+    +recuperarse()
+}
+
+Unidad ..left|> Recuperable
+
+class Ataque{
+    -rango: int
+    -tipo: Superficie
+    -valor: int
+    +Ataque(unDanio, unRango)
+    +rango()
+    +atacarA(unAtacable)
+    +obtenerSuperficie()
+}
+
+Unidad -> Ataque
+
+interface Superficie {
+    +compararCon(otraSuperficie)
+}
+
+class Tierra {
+    +compararCon(otraSuperficie)
+}
+class Aire {
+    +compararCon(otraSuperficie)
+}
+
+Tierra ..up|> Superficie
+Aire ..up|> Superficie
+
+Unidad -up> Superficie
+Ataque -> Superficie
+
+abstract class Unidad {
+    -tipo: Unidad
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    -vida: Vida
+    +atacarA(unAtacable)
+    +recibirAtaque(unValorDeAtaque) {abstract}
+    +obtenerVida()
+    +obtenerSuperficie()
+}
+
+Unidad .up.|> Atacable
+Unidad .up.|> Atacante
+
+class UnidadZerg{
+    +recibirAtaque(unValorDeAtaque)
+}
+
+class UnidadProtoss {
+    -escudo: Escudo
+    +recibirAtaque(unValorDeAtaque)
+    +obtenerEscudo()
+}
+
+class Zangano
+class Zerling
+class Hidralisco
+class Mutalisco {
+    +evolucionar()
+}
+class Zealot
+class Dragon
+class Scout
+
+
+UnidadProtoss -up-|> Unidad
+UnidadZerg -up-|> Unidad
+
+Zangano <-up- UnidadZerg
+Zerling <-up- UnidadZerg
+Hidralisco <-up- UnidadZerg
+Mutalisco <-up- UnidadZerg
+
+Zealot <-up- UnidadProtoss
+Dragon <-up- UnidadProtoss
+Scout <-up- UnidadProtoss
+
+@enduml
+
+--------------------------------------
+
+El metodo recibirAtaque(unAtaque) lo implementan los Atacables.
+El metodo atacar(unAtacable) lo implementan los Atacantes.
+
+@startuml
+
+class Zangano {
+    -vida: Vida
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    +recibirAtaque(unAtaque)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+}
+
+class Zerling {
+    -vida: Vida
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+}
+
+class Hidralisco {
+    -vida: Vida
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+}
+
+class Guardian {
+    -vida: Vida
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+}
+
+class Mutalisco {
+    -vida: Vida
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    +evolucionar()
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+}
+
+class Zealot {
+    -vida: Vida
+    -escudo: Escudo
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +escudoRestante(): int
+}
+
+class Dragon {
+    -vida: Vida
+    -escudo: Escudo
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +escudoRestante(): int
+}
+
+class Scout {
+    -vida: Vida
+    -escudo: Escudo
+    -ubicacion: Ubicacion
+    -superficie: Superficie
+    -ataques: ArrayList<Ataque>
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +escudoRestante(): int
+}
+
+interface Atacable {
+    +recibirAtaque(unAtaque)
+}
+
+Scout ....|> Atacable
+Dragon ....|> Atacable
+Zealot ....|> Atacable
+Mutalisco ....|> Atacable
+Guardian ....|> Atacable
+Hidralisco ....|> Atacable
+Zerling ....|> Atacable
+Zangano ....|> Atacable
+
+interface Atacante {
+    +atacar(UnAtacable)
+}
+
+Scout ....up|> Atacante
+Dragon ....up|> Atacante
+Zealot ....up|> Atacante
+Mutalisco ....up|> Atacante
+Guardian ....up|> Atacante
+Hidralisco ....up|> Atacante
+Zerling ...up|> Atacante
+
+class Unidad {
+    -tipo: Unidad
+    -ubicacion: Ubicacion
+    +recibirAtaque(unAtaque)
+    +atacar(UnAtacable)
+    +estaEnRangoDeAtaque(unAtacable): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+}
+
+@enduml
