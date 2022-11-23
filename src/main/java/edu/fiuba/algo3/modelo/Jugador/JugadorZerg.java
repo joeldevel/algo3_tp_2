@@ -13,6 +13,7 @@ public class JugadorZerg implements IJugador {
     private int cantidadDeZanganos;
     private int cantidadDeZerlings;
     private int cantidadDeHidraliscos;
+    private int cantidadDeMutaliscos;
 
     public JugadorZerg() {
         this.cantidadMineral = 0;
@@ -21,6 +22,7 @@ public class JugadorZerg implements IJugador {
         this.cantidadDeZanganos = 0;
         this.cantidadDeZerlings = 0;
         this.cantidadDeHidraliscos = 0;
+        this.cantidadDeMutaliscos = 0;
     }
 
     public void crearCriadero() {
@@ -82,14 +84,17 @@ public class JugadorZerg implements IJugador {
     }
 
     public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {
-        if(tipoUnidad == UNIDADES_ZERG.ZANGANO) {
+        if (tipoUnidad == UNIDADES_ZERG.ZANGANO) {
             return this.cantidadDeZanganos;
         }
-        if(tipoUnidad == UNIDADES_ZERG.ZERLING) {
+        if (tipoUnidad == UNIDADES_ZERG.ZERLING) {
             return this.cantidadDeZerlings;
         }
-        if(tipoUnidad == UNIDADES_ZERG.HIDRALISCO) {
+        if (tipoUnidad == UNIDADES_ZERG.HIDRALISCO) {
             return this.cantidadDeHidraliscos;
+        }
+        if (tipoUnidad == UNIDADES_ZERG.MUTALISCO) {
+            return this.cantidadDeMutaliscos;
         }
         return 0;
     }
@@ -108,5 +113,13 @@ public class JugadorZerg implements IJugador {
         }
         this.cupo -= 2;
         this.cantidadDeHidraliscos++;
+    }
+
+    public void crearMutalisco() {
+        if (this.cupo < 4) {
+            throw new SinCupoSuficienteException("Se necesita 4 cupos");
+        }
+        this.cupo -= 4;
+        this.cantidadDeMutaliscos++;
     }
 }
