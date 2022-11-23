@@ -250,4 +250,46 @@ public class CasoDeUso26Test {
         Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 5);
         Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearZerling());
     }
+
+    @Test
+    @DisplayName("Un zerg no puede construir un Hidralisco si no tiene al menos 2 de cupo en su casa")
+    public void zergSinRecursosHidraliscoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearHidralisco());
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir un Hidralisco si tiene al menos 2 de cupos en su casa")
+    public void zergConRecursosHidraliscoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearHidralisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 1);
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir 2 Hidraliscos si tiene al menos 4 de cupo en su casa")
+    public void zergConRecursosConstruyeDosHidraliscosTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearHidralisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearHidralisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 2);
+    }
+
+    @Test
+    @DisplayName("Contruir Hidraliscos reduce la cantidad de cupos disponibles")
+    public void zergConRecursosConstruyeDosHidraliscosYNoPuedeConstruirUnTerceroTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearHidralisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearHidralisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 2);
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearHidralisco());
+    }
 }
