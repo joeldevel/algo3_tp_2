@@ -19,6 +19,8 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
+	private boolean estaInvisible;
+	private int cantidadDeBajas;
 	
 	public Zealot(Ubicacion unaUbicacion) {
 		this.vida = new Vida(100);
@@ -26,6 +28,8 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),1));}};
+		this.estaInvisible = false;
+		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
 	
 	public Zealot() {
@@ -34,16 +38,19 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),1));}};
+		this.estaInvisible = false;
+		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
 
 	@Override
 	public void recibirAtaque(int unAtaque) {
-		if(unAtaque > this.escudo.restante()) {
-			int danioRestante = this.escudo.restante() - unAtaque;
-			this.vida.recibirDanioPor(danioRestante);
+		if (estaInvisible == false) {
+			if (unAtaque > this.escudo.restante()) {
+				int danioRestante = this.escudo.restante() - unAtaque;
+					this.vida.recibirDanioPor(danioRestante);
+			}
+			this.escudo.recibirDanioPor(unAtaque);
 		}
-		this.escudo.recibirDanioPor(unAtaque);
-		
 	}
 
 	@Override
@@ -53,7 +60,6 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 
 	@Override
 	public void atacar(Atacable unAtacable) {
-
 		for (Ataque ataque : ataques) {
 			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
 				throw new AtacableFueraDeRangoError();
@@ -70,6 +76,12 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
 		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+	}
+
+	public void hacerseInvisible() {
+		if (cantidadDeBajas >= 3) {
+			estaInvisible = true;
+		}
 	}
 	
 	@Override
