@@ -7,9 +7,11 @@ Usuario -> Zealot: Zealot()
 Zealot --> Usuario: unZealot
 
 Usuario -> Zerling: atacarA(unZealot)
-
-Zerling -> Ataque: atacarA(unZealot)
-note left: Cada unidad tiene como atributo su ataque.\nZerling implementa Atacante y entiende el mensaje.\n\nataque.atacarA(unZealot)
+Zerling -> Zerling: estaEnRangoDeAtaque(unZealot, unAtaque)
+note left: Utilizando las ubicaciones se calcula la distancia\nentre las unidades y luego se compara dicha distancia\ncon el rango de ataque. Si esta en rango devuelve true.
+Zerling --> Zerling: true
+Zerling -> Ataque: atacar(unZealot)
+note left: Cada unidad tiene como atributo su ataque.\nZerling implementa Atacante y entiende el mensaje.\n\nataque.atacar(unZealot)
 Ataque -> Zealot: obtenerSuperficie()
 note left: Le pedimos a Zealot su superficie\n(es una unidad de tipo Tierra) para\nverificar que sea una combinacion valida.
 Zealot --> Ataque: Tierra

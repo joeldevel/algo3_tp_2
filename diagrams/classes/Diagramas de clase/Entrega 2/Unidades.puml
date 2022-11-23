@@ -28,6 +28,8 @@ abstract class Raza {
     +tiempoDeEspera(): int
 }
 
+note left: Esta clase abstracta tambien la implementan los edificios.
+
 class Unidad {
     -tipo: TipoDeUnidad
     -estado: TipoDeUnidad
