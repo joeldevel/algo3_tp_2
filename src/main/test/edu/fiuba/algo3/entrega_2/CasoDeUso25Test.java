@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CasoDeUso25 {
+public class CasoDeUso25Test {
 
     @Test
     @DisplayName("Un nombre debe tener longitud mínima")
