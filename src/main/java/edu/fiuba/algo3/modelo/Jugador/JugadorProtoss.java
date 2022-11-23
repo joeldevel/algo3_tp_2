@@ -34,7 +34,7 @@ public class JugadorProtoss implements IJugador {
             throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
         }
         this.cantidadMineral -= COSTO_PILON;
-        this.cupo += 5;
+        this.incrementarCupo(5);
     }
 
     public void incrementarMineral(int cantidad) {
@@ -113,5 +113,15 @@ public class JugadorProtoss implements IJugador {
         }
         this.cupo -= 4;
         this.cantidadDeScouts++;
+    }
+
+    public int cupo() {
+        return this.cupo;
+    }
+
+    private void incrementarCupo(int incremento) {
+        if (this.cupo + incremento <= 200) {
+            this.cupo += incremento;
+        }
     }
 }
