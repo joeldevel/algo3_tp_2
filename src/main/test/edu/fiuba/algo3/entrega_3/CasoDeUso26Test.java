@@ -2,7 +2,9 @@ package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Jugador.UNIDADES_PROTOSS;
+import edu.fiuba.algo3.modelo.Jugador.UNIDADES_ZERG;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -94,7 +96,6 @@ public class CasoDeUso26Test {
         Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.DRAGON) == 1);
     }
 
-    // Scout -> 4
     @Test
     @DisplayName("Un protoss no puede construir un Scout si no tiene al menos 4 de cupo en su casa")
     public void protossSinRecursosScoutTest() {
@@ -138,5 +139,60 @@ public class CasoDeUso26Test {
         Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 2);
         Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearScout());
         Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 2);
+    }
+
+    /* UNIDADES ZERG */
+    @Test
+    @DisplayName("Un zerg no puede construir un Zángano si no tiene al menos 1 de cupo en su casa")
+    public void zergSinRecursosZanganoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearZangano());
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir un Zángano si tiene al menos 1 de cupo en su casa")
+    public void zergConRecursosZanganoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 1);
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir 5  si tiene al menos 5 de cupo en su casa")
+    public void zergConRecursosConstruyeDosTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 2);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 3);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 4);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 5);
+    }
+
+    @Test
+    @DisplayName("Contruir Zánganos reduce la cantidad de cupos disponibles")
+    public void zergConRecursosConstruyeCincoZanganosYNoPuedeConstruirUnSextoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 2);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 3);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 4);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZangano);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 5);
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearZangano());
     }
 }
