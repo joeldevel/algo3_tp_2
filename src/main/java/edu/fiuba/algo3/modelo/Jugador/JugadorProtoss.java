@@ -18,6 +18,7 @@ public class JugadorProtoss implements IJugador {
     private int cupo;
     private int cantidadDeZealots;
     private int cantidadDeDragones;
+    private int cantidadDeScouts;
 
     public JugadorProtoss() {
         this.cantidadMineral = 0;
@@ -25,6 +26,7 @@ public class JugadorProtoss implements IJugador {
         this.cupo = 0;
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
+        this.cantidadDeScouts = 0;
     }
 
     public void crearPilon() {
@@ -91,6 +93,9 @@ public class JugadorProtoss implements IJugador {
         if (tipoUnidad == UNIDADES_PROTOSS.DRAGON) {
             return this.cantidadDeDragones;
         }
+        if (tipoUnidad == UNIDADES_PROTOSS.SCOUT) {
+            return this.cantidadDeScouts;
+        }
         return 0;
     }
 
@@ -100,5 +105,13 @@ public class JugadorProtoss implements IJugador {
         }
         this.cupo -= 3;
         this.cantidadDeDragones++;
+    }
+
+    public void crearScout() {
+        if (this.cupo < 4) {
+            throw new SinCupoSuficienteException("Se necesitan 4 cupos");
+        }
+        this.cupo -= 4;
+        this.cantidadDeScouts++;
     }
 }
