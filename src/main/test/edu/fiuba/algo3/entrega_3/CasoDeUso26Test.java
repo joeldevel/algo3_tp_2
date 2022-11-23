@@ -195,4 +195,59 @@ public class CasoDeUso26Test {
         Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 5);
         Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearZangano());
     }
+
+    @Test
+    @DisplayName("Un zerg no puede construir un Zerling si no tiene al menos 1 de cupo en su casa")
+    public void zergSinRecursosZerlingTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearZerling());
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir un Zerling si tiene al menos 1 de cupo en su casa")
+    public void zergConRecursosZerlingTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 1);
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir 5 Zerlings si tiene al menos 5 de cupo en su casa")
+    public void zergConRecursosConstruyeCincoZerlingsTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 2);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 3);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 4);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 5);
+
+    }
+
+    @Test
+    @DisplayName("Contruir Zerlings reduce la cantidad de cupos disponibles")
+    public void zergConRecursosConstruyeCincoZerlingsYNoPuedeConstruirUnSextoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 2);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 3);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 4);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearZerling);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 5);
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearZerling());
+    }
 }
