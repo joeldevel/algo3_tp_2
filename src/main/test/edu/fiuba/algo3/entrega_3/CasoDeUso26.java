@@ -95,4 +95,50 @@ public class CasoDeUso26 {
         Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearDragon());
         Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.DRAGON) == 1);
     }
+
+    // Scout -> 4
+    @Test
+    @DisplayName("Un protoss no puede construir un Scout si no tiene al menos 4 de cupo en su casa")
+    public void protossSinRecursosScoutTest() {
+        JugadorProtoss jugadorProtoss = new JugadorProtoss();
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearScout());
+    }
+
+    @Test
+    @DisplayName("Un protoss puede construir un Scout si tiene al menos 4 de cupo en su casa")
+    public void protossConRecursosScoutTest() {
+        JugadorProtoss jugadorProtoss = new JugadorProtoss();
+        jugadorProtoss.incrementarMineral(100);
+        jugadorProtoss.crearPilon();
+        Assertions.assertDoesNotThrow(jugadorProtoss::crearScout);
+        Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 1);
+    }
+
+    @Test
+    @DisplayName("Un protoss puede construir dos Scout si tiene al menos 8 de cupo en su casa")
+    public void protossConRecursosConstruyeDosScoutTest() {
+        JugadorProtoss jugadorProtoss = new JugadorProtoss();
+        jugadorProtoss.incrementarMineral(200);
+        jugadorProtoss.crearPilon();
+        jugadorProtoss.crearPilon();
+        Assertions.assertDoesNotThrow(jugadorProtoss::crearScout);
+        Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 1);
+        Assertions.assertDoesNotThrow(jugadorProtoss::crearScout);
+        Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 2);
+    }
+
+    @Test
+    @DisplayName("Contruir Scouts reduce la cantidad de cupos disponibles")
+    public void protossConRecursosConstruyeDosScoutsYNoPuedeConstruirUnTerceroTest() {
+        JugadorProtoss jugadorProtoss = new JugadorProtoss();
+        jugadorProtoss.incrementarMineral(200);
+        jugadorProtoss.crearPilon();
+        jugadorProtoss.crearPilon();
+        Assertions.assertDoesNotThrow(jugadorProtoss::crearScout);
+        Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 1);
+        Assertions.assertDoesNotThrow(jugadorProtoss::crearScout);
+        Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 2);
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearScout());
+        Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 2);
+    }
 }
