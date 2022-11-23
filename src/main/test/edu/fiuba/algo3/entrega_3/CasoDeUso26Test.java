@@ -292,4 +292,48 @@ public class CasoDeUso26Test {
         Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 2);
         Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearHidralisco());
     }
+
+    @Test
+    @DisplayName("Un zerg no puede construir un Mutalisco si no tiene al menos 4 de cupo en su casa")
+    public void zergSinRecursosMutaliscoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearMutalisco());
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir un Mutalisco si tiene al menos 2 de cupos en su casa")
+    public void zergConRecursosMutaliscoTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(200);
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearMutalisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 1);
+    }
+
+    @Test
+    @DisplayName("Un zerg puede construir 2 Mutaliscos si tiene al menos 8 de cupo en su casa")
+    public void zergConRecursosConstruyeDosMutaliscosTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(400);
+        jugadorZerg.crearCriadero();
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearMutalisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearMutalisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 2);
+    }
+
+    @Test
+    @DisplayName("Contruir Mutaliscos reduce la cantidad de cupos disponibles")
+    public void zergConRecursosConstruyeDosMutaliscosYNoPuedeConstruirUnTerceroTest() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(400);
+        jugadorZerg.crearCriadero();
+        jugadorZerg.crearCriadero();
+        Assertions.assertDoesNotThrow(jugadorZerg::crearMutalisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 1);
+        Assertions.assertDoesNotThrow(jugadorZerg::crearMutalisco);
+        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 2);
+        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearMutalisco());
+    }
 }
