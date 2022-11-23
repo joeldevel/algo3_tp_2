@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CasoDeUso26 {
+public class CasoDeUso26Test {
 
     @Test
     @DisplayName("Un protoss no puede construir un Zealot si no tiene al menos 2 de cupo en su casa")
