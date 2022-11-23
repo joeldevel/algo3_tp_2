@@ -160,8 +160,8 @@ public class CasoDeUso26Test {
     }
 
     @Test
-    @DisplayName("Un zerg puede construir 5  si tiene al menos 5 de cupo en su casa")
-    public void zergConRecursosConstruyeDosTest() {
+    @DisplayName("Un zerg puede construir 5 Zánganos si tiene al menos 5 de cupo en su casa")
+    public void zergConRecursosConstruyeCincoZanganosTest() {
         JugadorZerg jugadorZerg = new JugadorZerg();
         jugadorZerg.incrementarMineral(200);
         jugadorZerg.crearCriadero();
