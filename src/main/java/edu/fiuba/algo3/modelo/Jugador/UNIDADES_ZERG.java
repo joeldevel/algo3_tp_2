@@ -1,3 +1,3 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-public enum UNIDADES_ZERG {ZANGANO, ZERLING}
+public enum UNIDADES_ZERG {ZANGANO, ZERLING, HIDRALISCO}
