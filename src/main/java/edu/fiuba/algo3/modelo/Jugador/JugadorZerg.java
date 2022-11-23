@@ -11,12 +11,14 @@ public class JugadorZerg implements IJugador {
     private int cantidadMineral;
     private int cupo;
     private int cantidadDeZanganos;
+    private int cantidadDeZerlings;
 
     public JugadorZerg() {
         this.cantidadMineral = 0;
         this.cantidadGas = 0;
         this.cupo = 0;
         this.cantidadDeZanganos = 0;
+        this.cantidadDeZerlings = 0;
     }
 
     public void crearCriadero() {
@@ -81,6 +83,17 @@ public class JugadorZerg implements IJugador {
         if(tipoUnidad == UNIDADES_ZERG.ZANGANO) {
             return this.cantidadDeZanganos;
         }
+        if(tipoUnidad == UNIDADES_ZERG.ZERLING) {
+            return this.cantidadDeZerlings;
+        }
         return 0;
+    }
+
+    public void crearZerling() {
+        if (this.cupo < 1) {
+            throw new SinCupoSuficienteException("Se necesita 1 cupo");
+        }
+        this.cupo -= 1;
+        this.cantidadDeZerlings++;
     }
 }
