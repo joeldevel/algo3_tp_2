@@ -7,6 +7,7 @@ import static edu.fiuba.algo3.util.Constantes.*;
 
 public class JugadorZerg implements IJugador {
 
+    private static final int MAX_POBLACION = 200;
     private int cantidadGas;
     private int cantidadMineral;
     private int cupo;
@@ -14,6 +15,7 @@ public class JugadorZerg implements IJugador {
     private int cantidadDeZerlings;
     private int cantidadDeHidraliscos;
     private int cantidadDeMutaliscos;
+    private int poblacion;
 
     public JugadorZerg() {
         this.cantidadMineral = 0;
@@ -23,6 +25,7 @@ public class JugadorZerg implements IJugador {
         this.cantidadDeZerlings = 0;
         this.cantidadDeHidraliscos = 0;
         this.cantidadDeMutaliscos = 0;
+        this.poblacion = 0;
     }
 
     public void crearCriadero() {
@@ -76,11 +79,15 @@ public class JugadorZerg implements IJugador {
     }
 
     public void crearZangano() {
+        if (!this.sePuedeCrearUnidad(1)) {
+            return;
+        }
         if (this.cupo < 1) {
             throw new SinCupoSuficienteException("Se necesita 1 cupo");
         }
         this.cupo -= 1;
         this.cantidadDeZanganos++;
+        this.incrementarPoblacion(1);
     }
 
     public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {
@@ -100,27 +107,39 @@ public class JugadorZerg implements IJugador {
     }
 
     public void crearZerling() {
+        if (!this.sePuedeCrearUnidad(1)) {
+            return;
+        }
         if (this.cupo < 1) {
             throw new SinCupoSuficienteException("Se necesita 1 cupo");
         }
         this.cupo -= 1;
         this.cantidadDeZerlings++;
+        this.incrementarPoblacion(1);
     }
 
     public void crearHidralisco() {
+        if (!this.sePuedeCrearUnidad(2)) {
+            return;
+        }
         if (this.cupo < 2) {
             throw new SinCupoSuficienteException("Se necesita 2 cupos");
         }
         this.cupo -= 2;
         this.cantidadDeHidraliscos++;
+        this.incrementarPoblacion(2);
     }
 
     public void crearMutalisco() {
+        if (!this.sePuedeCrearUnidad(4)) {
+            return;
+        }
         if (this.cupo < 4) {
             throw new SinCupoSuficienteException("Se necesita 4 cupos");
         }
         this.cupo -= 4;
         this.cantidadDeMutaliscos++;
+        this.incrementarPoblacion(4);
     }
 
     public int cupo() {
@@ -131,5 +150,16 @@ public class JugadorZerg implements IJugador {
         if (this.cupo + incremento <= 200) {
             this.cupo += incremento;
         }
+    }
+
+    private void incrementarPoblacion(int incremento) {
+        if (this.poblacion + incremento <= 200) {
+            this.poblacion += incremento;
+        }
+    }
+
+
+    private boolean sePuedeCrearUnidad(int cupo) {
+        return this.poblacion + cupo <= MAX_POBLACION;
     }
 }
