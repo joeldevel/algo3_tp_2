@@ -16,6 +16,7 @@ public class JugadorProtoss implements IJugador {
     private int cantidadMineral;
     private int cantidadGas;
     private int cupo;
+    private int poblacion;
     private int cantidadDeZealots;
     private int cantidadDeDragones;
     private int cantidadDeScouts;
@@ -27,6 +28,7 @@ public class JugadorProtoss implements IJugador {
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
+        this.poblacion = 0;
     }
 
     public void crearPilon() {
@@ -79,11 +81,15 @@ public class JugadorProtoss implements IJugador {
     }
 
     public void crearZealot() {
+        if (!this.sePuedeCrearUnidad(2)) {
+            return;
+        }
         if (this.cupo < 2) {
             throw new SinCupoSuficienteException("Se necesitan 2 cupos");
         }
         this.cupo -= 2;
         this.cantidadDeZealots++;
+        this.incrementarPoblacion(2);
     }
 
     public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
@@ -100,19 +106,27 @@ public class JugadorProtoss implements IJugador {
     }
 
     public void crearDragon() {
+        if (!this.sePuedeCrearUnidad(3)) {
+            return;
+        }
         if (this.cupo < 3) {
             throw new SinCupoSuficienteException("Se necesitan 3 cupos");
         }
         this.cupo -= 3;
         this.cantidadDeDragones++;
+        this.incrementarPoblacion(3);
     }
 
     public void crearScout() {
+        if (!this.sePuedeCrearUnidad(4)) {
+            return;
+        }
         if (this.cupo < 4) {
             throw new SinCupoSuficienteException("Se necesitan 4 cupos");
         }
         this.cupo -= 4;
         this.cantidadDeScouts++;
+        this.incrementarPoblacion(4);
     }
 
     public int cupo() {
@@ -123,5 +137,16 @@ public class JugadorProtoss implements IJugador {
         if (this.cupo + incremento <= 200) {
             this.cupo += incremento;
         }
+    }
+
+    private void incrementarPoblacion(int incremento) {
+        if (this.poblacion + incremento <= 200) {
+            this.poblacion += incremento;
+        }
+    }
+
+
+    private boolean sePuedeCrearUnidad(int cupo) {
+        return this.poblacion + cupo <= MAX_POBLACION;
     }
 }
