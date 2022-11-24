@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Jugador.UNIDADES_PROTOSS;
+import edu.fiuba.algo3.modelo.Jugador.UNIDADES_ZERG;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -73,5 +75,89 @@ public class CasoDeUso30Test {
         jugadorProtoss.crearPilon(); // aumenta cupo
         jugadorProtoss.crearScout();
         Assertions.assertEquals(0, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT));
+    }
+
+    @Test
+    @DisplayName("Un zerg con 200 de población completa no puede crear un Zángano más")
+    public void zergAlLimiteDeSuministrosNoPuedeConstruirUnZangano() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(8000);
+        for (int i = 0; i < 40; i++) {
+            jugadorZerg.crearCriadero();
+        }
+        jugadorZerg.incrementarMineral(25 * 200);
+        for (int i = 0; i < 200; i++) {
+            jugadorZerg.crearZangano();
+        }
+        jugadorZerg.incrementarMineral(200);
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+        jugadorZerg.crearCriadero();
+        jugadorZerg.crearZangano();
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+    }
+
+    @Test
+    @DisplayName("Un zerg con 200 de población completa no puede crear un Zerling más")
+    public void zergAlLimiteDeSuministrosNoPuedeConstruirUnZerling() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(8000);
+        for (int i = 0; i < 40; i++) {
+            jugadorZerg.crearCriadero();
+        }
+        jugadorZerg.incrementarMineral(25 * 200);
+        for (int i = 0; i < 200; i++) {
+            jugadorZerg.crearZangano();
+        }
+        jugadorZerg.incrementarMineral(200);
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+        Assertions.assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING));
+        jugadorZerg.crearCriadero();
+        jugadorZerg.crearZerling();
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+        Assertions.assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING));
+    }
+
+    @Test
+    @DisplayName("Un zerg con 200 de población completa no puede crear un Hidralisco más")
+    public void zergAlLimiteDeSuministrosNoPuedeConstruirUnHidralisco() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(8000);
+        for (int i = 0; i < 40; i++) {
+            jugadorZerg.crearCriadero();
+        }
+        jugadorZerg.incrementarMineral(25 * 200);
+        for (int i = 0; i < 200; i++) {
+            jugadorZerg.crearZangano();
+        }
+        jugadorZerg.incrementarMineral(200 + 75);
+        jugadorZerg.incrementarGas(25);
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+        Assertions.assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO));
+        jugadorZerg.crearCriadero();
+        jugadorZerg.crearHidralisco();
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+        Assertions.assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO));
+    }
+
+    @Test
+    @DisplayName("Un zerg con 200 de población completa no puede crear un Mutalisco más")
+    public void zergAlLimiteDeSuministrosNoPuedeConstruirUnMutalisco() {
+        JugadorZerg jugadorZerg = new JugadorZerg();
+        jugadorZerg.incrementarMineral(8000);
+        for (int i = 0; i < 40; i++) {
+            jugadorZerg.crearCriadero();
+        }
+        jugadorZerg.incrementarMineral(25 * 200);
+        for (int i = 0; i < 200; i++) {
+            jugadorZerg.crearZangano();
+        }
+        jugadorZerg.incrementarMineral(200 + 100);
+        jugadorZerg.incrementarGas(100);
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+        Assertions.assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO));
+        jugadorZerg.crearCriadero();
+        jugadorZerg.crearMutalisco();
+        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
+        Assertions.assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO));
     }
 }
