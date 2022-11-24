@@ -60,4 +60,9 @@ public class Espiral extends EdificioZerg {
 	public void atacar(Atacable unAtacable) {
 		// No hace nada
 	}
+
+	@Override
+	public boolean compararSuperficie(String otraSuperficie) {
+		return false;
+	}
 }

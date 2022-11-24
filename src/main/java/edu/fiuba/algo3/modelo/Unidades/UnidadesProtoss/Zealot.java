@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Zealot implements TipoDeUnidad, Atacante, Atacable {
-	
+
 	private Vida vida;
 	private Escudo escudo;
 	private Ubicacion ubicacion;
@@ -21,23 +21,27 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 	private ArrayList<Ataque> ataques;
 	private boolean estaInvisible;
 	private int cantidadDeBajas;
-	
+
 	public Zealot(Ubicacion unaUbicacion) {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(60);
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),1));}};
+		this.ataques = new ArrayList<Ataque>() {{
+			add(new Ataque(8, new Superficie("Tierra"), 1));
+		}};
 		this.estaInvisible = false;
 		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
-	
+
 	public Zealot() {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(60);
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),1));}};
+		this.ataques = new ArrayList<Ataque>() {{
+			add(new Ataque(8, new Superficie("Tierra"), 1));
+		}};
 		this.estaInvisible = false;
 		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
@@ -47,7 +51,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 		if (estaInvisible == false) {
 			if (unAtaque > this.escudo.restante()) {
 				int danioRestante = this.escudo.restante() - unAtaque;
-					this.vida.recibirDanioPor(danioRestante);
+				this.vida.recibirDanioPor(danioRestante);
 			}
 			this.escudo.recibirDanioPor(unAtaque);
 		}
@@ -61,7 +65,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public void atacar(Atacable unAtacable) {
 		for (Ataque ataque : ataques) {
-			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
+			if (!(this.estaEnRangoDeAtaque(unAtacable, ataque))) {
 				throw new AtacableFueraDeRangoError();
 			}
 
@@ -83,18 +87,22 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 			estaInvisible = true;
 		}
 	}
-	
+
 	@Override
 	public Ubicacion ubicacion() {
 		return (this.ubicacion);
 	}
-	
+
 	public int vidaRestante() {
 		return (this.vida.restante());
 	}
-	
+
 	public int escudoRestante() {
 		return (this.escudo.restante());
 	}
 
+	@Override
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
 }

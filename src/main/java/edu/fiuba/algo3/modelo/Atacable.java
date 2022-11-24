@@ -9,4 +9,6 @@ public interface Atacable {
 	public Superficie obtenerSuperficie();
 
 	void atacar(Atacable unAtacable);
+
+	boolean compararSuperficie(String otraSuperficie);
 }

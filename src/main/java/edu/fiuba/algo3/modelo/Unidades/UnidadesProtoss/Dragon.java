@@ -59,7 +59,7 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
             ataque.atacarA(unAtacable);
         }
     }
-	
+
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
         return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
     }
@@ -77,6 +77,7 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 		return (this.escudo.restante());
 	}
 
+	// ¿Borrar?
 	@Override
 	public Superficie obtenerSuperficie() {
 		return (this.superficie);
@@ -87,5 +88,8 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 		this.escudo.recuperarse();
 	}
 
-
+	@Override
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
 }

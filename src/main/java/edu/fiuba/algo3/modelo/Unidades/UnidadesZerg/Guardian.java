@@ -68,4 +68,9 @@ public class Guardian implements Atacante, Atacable {
 	public void recuperarse() {
 		this.vida.recuperarse();
 	}
+
+	@Override
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
 }

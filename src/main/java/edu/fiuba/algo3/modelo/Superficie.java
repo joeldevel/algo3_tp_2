@@ -12,6 +12,15 @@ public class Superficie {
         return this.tipo;
     }
 
+    public boolean atacableTieneLaMismaSuperficie(Atacable unAtacable) {
+        return (unAtacable.compararSuperficie(this.tipo));
+    }
+
+    public boolean compararTipos(String unTipo) {
+        return (this.tipo == unTipo);
+    }
+
+    // ¿Borrar?
     public boolean esIgualA(Superficie otraSuperficie) {
         return (this.tipo == otraSuperficie.obteneTipo());
     }

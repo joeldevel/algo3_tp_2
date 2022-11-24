@@ -87,5 +87,9 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 		return (this.escudo.restante());
 	}
 
+	@Override
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
 	
 }

@@ -97,4 +97,9 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	public void recuperarse() {
 		this.vida.recuperarse();
 	}
+
+	@Override
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
 }

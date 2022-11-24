@@ -48,4 +48,9 @@ public class AmoSupremo implements TipoDeUnidad, Atacable  {
     public void recuperarse() {
         this.vida.recuperarse();
     }
+
+    @Override
+    public boolean compararSuperficie(String unTipoDeSuperficie) {
+        return this.superficie.compararTipos(unTipoDeSuperficie);
+    }
 }

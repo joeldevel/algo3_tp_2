@@ -79,5 +79,10 @@ public class Criadero extends EdificioZerg {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	@Override
+	public boolean compararSuperficie(String otraSuperficie) {
+		return false;
+	}
+
 }

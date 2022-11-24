@@ -36,6 +36,11 @@ public class Unidad extends Raza{
 	}
 
 	@Override
+	public boolean compararSuperficie(String otraSuperficie) {
+		return false;
+	}
+
+	@Override
 	public void avanzarTurno() {
 		this.tipo.recuperarse();
 		

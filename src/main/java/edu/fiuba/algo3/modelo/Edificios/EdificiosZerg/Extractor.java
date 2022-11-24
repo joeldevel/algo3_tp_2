@@ -75,4 +75,9 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	public void atacar(Atacable unAtacable) {
 		// No hace nada.
 	}
+
+	@Override
+	public boolean compararSuperficie(String otraSuperficie) {
+		return false;
+	}
 }

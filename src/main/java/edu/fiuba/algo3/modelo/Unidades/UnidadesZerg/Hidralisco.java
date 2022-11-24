@@ -72,4 +72,9 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable{
 	public Superficie obtenerSuperficie() {
 		return this.superficie;
 	}
+
+	@Override
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
 }
