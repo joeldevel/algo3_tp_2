@@ -12,6 +12,7 @@ import static edu.fiuba.algo3.util.Constantes.*;
 
 public class JugadorProtoss implements IJugador {
     public static final int MAX_POBLACION = 200;
+    private int cantidadDePilones;
 
     private int cantidadMineral;
     private int cantidadGas;
@@ -29,12 +30,14 @@ public class JugadorProtoss implements IJugador {
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
         this.poblacion = 0;
+        this.cantidadDePilones = 0;
     }
 
     public void crearPilon() {
         if (this.cantidadMineral < COSTO_PILON) {
             throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
         }
+        this.cantidadDePilones++;
         this.cantidadMineral -= COSTO_PILON;
         this.incrementarCupo(5);
     }
@@ -148,5 +151,12 @@ public class JugadorProtoss implements IJugador {
 
     private boolean sePuedeCrearUnidad(int cupo) {
         return this.poblacion + cupo <= MAX_POBLACION;
+    }
+
+    public void destruirPilon() {
+        if (this.cantidadDePilones > 0) {
+            this.cantidadDePilones--;
+            this.cupo-=5;
+        }
     }
 }
