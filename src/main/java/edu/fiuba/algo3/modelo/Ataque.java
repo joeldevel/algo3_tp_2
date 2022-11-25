@@ -16,10 +16,6 @@ public class Ataque {
 		return (this.rango);
 	}
 	
-	public int danio() {
-		return (this.danio);
-	}
-	
 	public void atacarA(Atacable unAtacable) {
 
         // En caso de que el ataque y la unidad atacada no sean compatibles, devuelve false y entonces no se hace nada.
@@ -28,15 +24,9 @@ public class Ataque {
 		if(this.superficie.atacableTieneLaMismaSuperficie(unAtacable)){
             unAtacable.recibirAtaque(this.danio);
         }
-
-        /*if(this.superficie.esIgualA(unAtacable.obtenerSuperficie())) {
-            unAtacable.recibirAtaque(this.danio);
-        }*/
     }
 	
 	public Superficie obtenerSuperficie() {
         return this.superficie;
     }
-
 }
-

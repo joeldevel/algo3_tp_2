@@ -8,7 +8,7 @@ public class Superficie {
         this.tipo = unTipoDeSuperficie;
     }
     
-    public String obteneTipo() {
+    public String obtenerTipo() {
         return this.tipo;
     }
 
@@ -17,11 +17,6 @@ public class Superficie {
     }
 
     public boolean compararTipos(String unTipo) {
-        return (this.tipo == unTipo);
-    }
-
-    // ¿Borrar?
-    public boolean esIgualA(Superficie otraSuperficie) {
-        return (this.tipo == otraSuperficie.obteneTipo());
+        return (this.tipo.equals(unTipo));
     }
 }

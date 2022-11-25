@@ -26,7 +26,4 @@ public class Tiempo {
 	public int transcurrido() {
 		return this.transcurrido;
 	}
-	
-	
-
 }
