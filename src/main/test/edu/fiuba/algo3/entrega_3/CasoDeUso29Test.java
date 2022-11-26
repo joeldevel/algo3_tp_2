@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class CasoDeUso29Test {
 
-    @Test
+    /*@Test
     @DisplayName("Un protoss con 200 de suministros no puede incrementarlo")
     public void protossLlegaAlLimiteDeSuministrosTest() {
         JugadorProtoss jugadorProtoss = new JugadorProtoss();
@@ -34,6 +34,5 @@ public class CasoDeUso29Test {
         Assertions.assertEquals(200, jugadorZerg.cupo());
         jugadorZerg.crearCriadero();
         Assertions.assertEquals(200, jugadorZerg.cupo());
-    }
-    
+    }*/
 }

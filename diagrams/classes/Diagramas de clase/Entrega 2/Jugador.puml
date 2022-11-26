@@ -1,0 +1,55 @@
+@startuml
+
+interface Jugador
+
+class JugadorZerg{
+    -nombre: unNombre
+    -color: unColor
+    -unidades: Raza
+    -edificios: Raza
+    -recursos: Recursos
+    -ubicacionBase: Ubicacion
+    -poblacion: int
+    +Jugador(unNombre, unColor, unaUbicacion)
+    +crearCriadero(unaUbicacion)
+    +crearReservaDeReproduccion(unaUbicacion)
+    +crearExtractor(unaUbicacion, unVolcan)
+    +crearGuarida(unaUbicacion)
+    +crearEspiral(unaUbicacion)
+
+}
+
+class JugadorProtoss{
+    -nombre: unNombre
+    -color: unColor
+    -unidades: Raza
+    -edificios: Raza
+    -recursos: Recursos
+    -ubicacionBase: Ubicacion
+    -poblacion: int
+    +Jugador(unNombre, unColor, unaUbicacion)
+    +crearNexoMineral(unaUbicacion, unNodo)
+    +crearPilon(unaUbicacion)
+    +crearAsimilador(unaUbicacion, unVolcan)
+    +crearAcceso(unaUbicacion)
+    +crearPuertoEstelar(unaUbicacion)
+
+}
+
+class Recursos {
+    -cantidadDeGas: int
+    -cantidadDeMineral: int
+    +Recursos()
+    +guardar(cantidadDeGas, cantidadDeMineral)
+    +utilizar(cantidadDeGas, cantidadDeMineral)
+    +obtenerGas()
+    +obtenerMineral()
+}
+
+JugadorZerg ..up|> Jugador
+JugadorProtoss ..up|> Jugador
+
+JugadorZerg -down-> Recursos
+JugadorProtoss -down-> Recursos
+
+@enduml

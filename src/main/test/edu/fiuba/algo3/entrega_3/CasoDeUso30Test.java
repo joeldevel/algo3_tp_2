@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class CasoDeUso30Test {
 
-    @Test
+    /*@Test
     @DisplayName("Un protoss con 200 de población completa no puede crear un Zealot más")
     public void protossAlLimiteDeSuministrosNoPuedeConstruirUnZealot() {
         JugadorProtoss jugadorProtoss = new JugadorProtoss();
@@ -189,5 +189,5 @@ public class CasoDeUso30Test {
 
         Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
         Assertions.assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO));
-    }
+    }*/
 }

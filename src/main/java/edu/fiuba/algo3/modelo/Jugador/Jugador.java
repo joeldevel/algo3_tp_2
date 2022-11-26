@@ -1,4 +1,4 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-public interface IJugador {
+public interface Jugador {
 }

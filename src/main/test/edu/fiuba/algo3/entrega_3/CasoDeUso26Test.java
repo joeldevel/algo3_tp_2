@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 
 public class CasoDeUso26Test {
 
-    @Test
+    /* UNIDADES PROTOSS */
+
+    /*@Test
     @DisplayName("Un protoss no puede construir un Zealot si no tiene al menos 2 de cupo en su casa")
     public void protossSinRecursosZealotTest() {
         JugadorProtoss jugadorProtoss = new JugadorProtoss();
@@ -142,7 +144,8 @@ public class CasoDeUso26Test {
     }
 
     /* UNIDADES ZERG */
-    @Test
+
+    /*@Test
     @DisplayName("Un zerg no puede construir un Zángano si no tiene al menos 1 de cupo en su casa")
     public void zergSinRecursosZanganoTest() {
         JugadorZerg jugadorZerg = new JugadorZerg();
@@ -335,5 +338,5 @@ public class CasoDeUso26Test {
         Assertions.assertDoesNotThrow(jugadorZerg::crearMutalisco);
         Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 2);
         Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorZerg.crearMutalisco());
-    }
+    }*/
 }

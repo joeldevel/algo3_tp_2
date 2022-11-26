@@ -1,81 +1,87 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeRecursosException;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
+import edu.fiuba.algo3.modelo.Raza;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 
-import static edu.fiuba.algo3.util.Constantes.*;
+import java.util.ArrayList;
 
-public class JugadorZerg implements IJugador {
+// La poblacion aumenta a medida que se crean los edificios correspondientes.
+// El cupo aumenta a metida que se crean unidades.
+// Siempre debe cumplirse que cupo <= poblacion <= MAX_POBLACION.
+
+public class JugadorZerg implements Jugador {
 
     private static final int MAX_POBLACION = 200;
-    private int cantidadGas;
-    private int cantidadMineral;
+    private static final int CANT_MINERAL_INICIAL = 200;
+
+    private String nombre;
+    private String color;
+    private ArrayList<Raza> unidades;
+    private ArrayList<Raza> edificios;
+    private Recursos recursos;
+    private int poblacion;
     private int cupo;
+
     private int cantidadDeZanganos;
     private int cantidadDeZerlings;
     private int cantidadDeHidraliscos;
     private int cantidadDeMutaliscos;
-    private int poblacion;
 
-    public JugadorZerg() {
-        this.cantidadMineral = 0;
-        this.cantidadGas = 0;
+    public JugadorZerg(String unNombre, String unColor) {
+        this.nombre = unNombre;
+        this.color = unColor;
+        this.unidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Raza>();
+        this.recursos = new Recursos();
+        this.recursos.guardar(0, CANT_MINERAL_INICIAL);
+        this.poblacion = 0;
         this.cupo = 0;
+
         this.cantidadDeZanganos = 0;
         this.cantidadDeZerlings = 0;
         this.cantidadDeHidraliscos = 0;
         this.cantidadDeMutaliscos = 0;
+    }
+
+    // Constructor utilizado unicamente para pruebas debido a los recursos.
+    public JugadorZerg(String unNombre, String unColor, Recursos unosRecursos) {
+        this.nombre = unNombre;
+        this.color = unColor;
+        this.unidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Raza>();
+        this.recursos = unosRecursos;
         this.poblacion = 0;
+        this.cupo = 0;
+
+        this.cantidadDeZanganos = 0;
+        this.cantidadDeZerlings = 0;
+        this.cantidadDeHidraliscos = 0;
+        this.cantidadDeMutaliscos = 0;
     }
 
-    public void crearCriadero() {
-        if (this.cantidadMineral < COSTO_MINERAL_CRIADERO) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_MINERAL_CRIADERO;
-        this.incrementarCupo(5);
+    public void crearCriadero(Ubicacion unaUbicacion) {
+        this.edificios.add(new Criadero(this.recursos, unaUbicacion));
+        this.incrementarPoblacion(5);
     }
 
-    public void incrementarMineral(int cantidad) {
-        if (cantidad > 0) {
-            this.cantidadMineral += cantidad;
-        }
+    public void crearReservaDeProduccion(Ubicacion unaUbicacion) {
+        this.edificios.add(new ReservaDeProduccion(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
-    public void crearExtractor() {
-        if (this.cantidadMineral < COSTO_MINERAL_EXTRACTOR) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_MINERAL_EXTRACTOR;
+    public void crearExtractor(Ubicacion unaUbicacion, Volcan unVolcan) {
+        this.edificios.add(new Extractor(unVolcan, this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
-    public void crearReservaDeProduccion() {
-        if (this.cantidadMineral < COSTO_MINERAL_RESERVA_PRODUCCION) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_MINERAL_RESERVA_PRODUCCION;
+    public void crearGuarida(Ubicacion unaUbicacion) {
+        this.edificios.add(new Guarida(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
-    public void crearGuarida() {
-        if (this.cantidadMineral < COSTO_MINERAL_GUARIDA || this.cantidadGas < COSTO_GAS_GUARIDA) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_MINERAL_GUARIDA;
-        this.cantidadGas -= COSTO_GAS_GUARIDA;
-    }
-
-    public void incrementarGas(int cantidad) {
-        if (cantidad > 0) {
-            this.cantidadGas += cantidad;
-        }
-    }
-
-    public void crearEspiral() {
-        if (this.cantidadMineral < COSTO_MINERAL_ESPIRAL || this.cantidadGas < COSTO_GAS_ESPIRAL) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_MINERAL_ESPIRAL;
-        this.cantidadGas -= COSTO_GAS_ESPIRAL;
+    public void crearEspiral(Ubicacion unaUbicacion) {
+        this.edificios.add(new Espiral(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
     public void crearZangano() {
@@ -88,22 +94,6 @@ public class JugadorZerg implements IJugador {
         this.cupo -= 1;
         this.cantidadDeZanganos++;
         this.incrementarPoblacion(1);
-    }
-
-    public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {
-        if (tipoUnidad == UNIDADES_ZERG.ZANGANO) {
-            return this.cantidadDeZanganos;
-        }
-        if (tipoUnidad == UNIDADES_ZERG.ZERLING) {
-            return this.cantidadDeZerlings;
-        }
-        if (tipoUnidad == UNIDADES_ZERG.HIDRALISCO) {
-            return this.cantidadDeHidraliscos;
-        }
-        if (tipoUnidad == UNIDADES_ZERG.MUTALISCO) {
-            return this.cantidadDeMutaliscos;
-        }
-        return 0;
     }
 
     public void crearZerling() {
@@ -142,6 +132,22 @@ public class JugadorZerg implements IJugador {
         this.incrementarPoblacion(4);
     }
 
+    public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {
+        if (tipoUnidad == UNIDADES_ZERG.ZANGANO) {
+            return this.cantidadDeZanganos;
+        }
+        if (tipoUnidad == UNIDADES_ZERG.ZERLING) {
+            return this.cantidadDeZerlings;
+        }
+        if (tipoUnidad == UNIDADES_ZERG.HIDRALISCO) {
+            return this.cantidadDeHidraliscos;
+        }
+        if (tipoUnidad == UNIDADES_ZERG.MUTALISCO) {
+            return this.cantidadDeMutaliscos;
+        }
+        return 0;
+    }
+
     public int cupo() {
         return this.cupo;
     }
@@ -157,7 +163,6 @@ public class JugadorZerg implements IJugador {
             this.poblacion += incremento;
         }
     }
-
 
     private boolean sePuedeCrearUnidad(int cupo) {
         return this.poblacion + cupo <= MAX_POBLACION;

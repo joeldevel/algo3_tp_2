@@ -1,86 +1,90 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeRecursosException;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
-import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
+import edu.fiuba.algo3.modelo.Raza;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static edu.fiuba.algo3.util.Constantes.*;
+// La poblacion aumenta a medida que se crean los edificios correspondientes.
+// El cupo aumenta a metida que se crean unidades.
+// Siempre debe cumplirse que cupo <= poblacion <= MAX_POBLACION.
 
-public class JugadorProtoss implements IJugador {
-    public static final int MAX_POBLACION = 200;
-    private int cantidadDePilones;
+public class JugadorProtoss implements Jugador {
 
-    private int cantidadMineral;
-    private int cantidadGas;
-    private int cupo;
+    private static final int MAX_POBLACION = 200;
+    private static final int CANT_MINERAL_INICIAL = 200;
+
+    private String nombre;
+    private String color;
+    private ArrayList<Raza> unidades;
+    private ArrayList<Raza> edificios;
+    private Recursos recursos;
     private int poblacion;
+    private int cupo;
+
+    private int cantidadDePilones;
     private int cantidadDeZealots;
     private int cantidadDeDragones;
     private int cantidadDeScouts;
 
-    public JugadorProtoss() {
-        this.cantidadMineral = 0;
-        this.cantidadGas = 0;
+    public JugadorProtoss(String unNombre, String unColor) {
+        this.nombre = unNombre;
+        this.color = unColor;
+        this.unidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Raza>();
+        this.recursos = new Recursos();
+        this.recursos.guardar(0, CANT_MINERAL_INICIAL);
+        this.poblacion = 0;
         this.cupo = 0;
+
+        this.cantidadDePilones = 0;
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
+    }
+
+    // Constructor utilizado unicamente para pruebas debido a los recursos.
+    public JugadorProtoss(String unNombre, String unColor, Recursos unosRecursos) {
+        this.nombre = unNombre;
+        this.color = unColor;
+        this.unidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Raza>();
+        this.recursos = unosRecursos;
         this.poblacion = 0;
+        this.cupo = 0;
+
         this.cantidadDePilones = 0;
+        this.cantidadDeZealots = 0;
+        this.cantidadDeDragones = 0;
+        this.cantidadDeScouts = 0;
     }
 
-    public void crearPilon() {
-        if (this.cantidadMineral < COSTO_PILON) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
+    public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
+        this.edificios.add(new NexoMineral(unNodo, this.recursos)); // Falta refactorizar para recibir la ubicacion.
+    }
+
+    public void crearPilon(Ubicacion unaUbicacion) {
+        this.edificios.add(new Pilon(this.recursos)); // Falta refactorizar para recibir la ubicacion.
         this.cantidadDePilones++;
-        this.cantidadMineral -= COSTO_PILON;
-        this.incrementarCupo(5);
+        this.incrementarPoblacion(5);
     }
 
-    public void incrementarMineral(int cantidad) {
-        if (cantidad > 0) {
-            this.cantidadMineral += cantidad;
-        }
+    public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
+        this.edificios.add(new Asimilador(unVolcan, this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
-    public void crearNexo() {
-        if (this.cantidadMineral < COSTO_NEXO) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_NEXO;
+    public void crearAcceso(Ubicacion unaUbicacion) {
+        this.edificios.add(new Acceso(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
-    public void crearAsimilador() {
-        if (this.cantidadMineral < COSTO_ASIMILADOR) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_ASIMILADOR;
-    }
-
-    public void crearAcceso() {
-        if (this.cantidadMineral < COSTO_ACCESO) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_ACCESO;
-    }
-
-    public void crearPuertoEstelar() {
-        if (this.cantidadMineral < COSTO_MINERAL_PUERTO || this.cantidadGas < COSTO_GAS_PUERTO) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_MINERAL_PUERTO;
-        this.cantidadGas -= COSTO_GAS_PUERTO;
-    }
-
-    public void incrementarGas(int cantidad) {
-        if (cantidad > 0) {
-            this.cantidadGas += cantidad;
-        }
+    public void crearPuertoEstelar(Ubicacion unaUbicacion) {
+        this.edificios.add(new PuertoEstelar(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
     public void crearZealot() {
@@ -93,19 +97,6 @@ public class JugadorProtoss implements IJugador {
         this.cupo -= 2;
         this.cantidadDeZealots++;
         this.incrementarPoblacion(2);
-    }
-
-    public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
-        if (tipoUnidad == UNIDADES_PROTOSS.ZEALOT) {
-            return this.cantidadDeZealots;
-        }
-        if (tipoUnidad == UNIDADES_PROTOSS.DRAGON) {
-            return this.cantidadDeDragones;
-        }
-        if (tipoUnidad == UNIDADES_PROTOSS.SCOUT) {
-            return this.cantidadDeScouts;
-        }
-        return 0;
     }
 
     public void crearDragon() {
@@ -132,6 +123,19 @@ public class JugadorProtoss implements IJugador {
         this.incrementarPoblacion(4);
     }
 
+    public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
+        if (tipoUnidad == UNIDADES_PROTOSS.ZEALOT) {
+            return this.cantidadDeZealots;
+        }
+        if (tipoUnidad == UNIDADES_PROTOSS.DRAGON) {
+            return this.cantidadDeDragones;
+        }
+        if (tipoUnidad == UNIDADES_PROTOSS.SCOUT) {
+            return this.cantidadDeScouts;
+        }
+        return 0;
+    }
+
     public int cupo() {
         return this.cupo;
     }
@@ -147,7 +151,6 @@ public class JugadorProtoss implements IJugador {
             this.poblacion += incremento;
         }
     }
-
 
     private boolean sePuedeCrearUnidad(int cupo) {
         return this.poblacion + cupo <= MAX_POBLACION;
