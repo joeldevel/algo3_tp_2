@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
+import edu.fiuba.algo3.modelo.Revelable;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Superficie;
@@ -12,7 +13,7 @@ import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Zealot implements TipoDeUnidad, Atacante, Atacable {
+public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	private Vida vida;
 	private Escudo escudo;
@@ -86,6 +87,11 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 		if (cantidadDeBajas >= 3) {
 			estaInvisible = true;
 		}
+	}
+
+	@Override
+	public void serRevelado() {
+		estaInvisible = false;
 	}
 
 	@Override
