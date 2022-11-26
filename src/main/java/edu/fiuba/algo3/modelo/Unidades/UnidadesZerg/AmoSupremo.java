@@ -1,14 +1,19 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
+import edu.fiuba.algo3.modelo.Revelo;
+import edu.fiuba.algo3.modelo.Revelador;
 
 
-public class AmoSupremo implements TipoDeUnidad, Atacable  {
+public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
     private Vida vida;
     private Ubicacion ubicacion;
     private Superficie superficie;
+
+    private Revelo revelo;
 
     public AmoSupremo(Ubicacion unaUbicacion) {
         this.vida = new Vida(200);
@@ -20,6 +25,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable  {
         this.vida = new Vida(200);
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
+        this.revelo = new Revelo(new Superficie("Aire"), 4);
     }
 
     @Override
@@ -43,6 +49,19 @@ public class AmoSupremo implements TipoDeUnidad, Atacable  {
     @Override
     public void atacar(Atacable unAtacable) {
         // Amo Supremo no entiende este mensaje.
+    }
+
+    @Override
+    public void revelar(Revelable unRevelable) {
+        if (!(this.estaEnRangoDeRevelo(unRevelable, revelo))) {
+            throw new RevelableFueraDeRangoError();
+        }
+
+        revelo.revelarA(unRevelable);
+    }
+
+    public boolean estaEnRangoDeRevelo(Revelable unRevelable, Revelo unRevelo) {
+        return (this.ubicacion.distanciaCon(unRevelable.ubicacion()) <= unRevelo.rango());
     }
 
     public void recuperarse() {

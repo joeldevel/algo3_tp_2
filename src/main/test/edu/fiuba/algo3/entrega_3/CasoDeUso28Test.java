@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +23,18 @@ public class CasoDeUso28Test {
         assertEquals(60, zealot.escudoRestante());
     }
 
-    /*@Test
+    @Test
     void test02UnAmoSupremoRevelaAUnZealotYAlAtacarloUnZerlingElEscudoDelZealotDisminuye(){
         // Arrange
+        AmoSupremo amoSupremo = new AmoSupremo();
         Zerling zerling = new Zerling();
         Zealot zealot = new Zealot();
 
         // Act
+        amoSupremo.revelar(zealot);
         zerling.atacar(zealot);
 
         // Assert
         assertEquals(56, zealot.escudoRestante());
-    }*/
+    }
 }
