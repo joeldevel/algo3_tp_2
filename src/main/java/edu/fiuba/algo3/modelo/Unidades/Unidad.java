@@ -46,11 +46,12 @@ public class Unidad extends Raza{
 
 		this.tiempo.pasarTiempo();
 
-		// Cambiar
-		if(this.tiempoDeEspera() == 0) {
+		if(this.tiempo.transcurrido() == 0) {
 			this.setComportamientoEstado(this.tipo);
-			this.estado.recuperarse();
 		}
 
+		else if(this.tiempo.transcurrido() > 0) {
+			this.estado.recuperarse();
+		}
 	}
 }

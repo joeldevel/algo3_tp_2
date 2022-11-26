@@ -75,7 +75,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear un nexo mineral reduce los recursos según lo esperado")
-    public void creacionNexoMineralConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test06creacionNexoMineralConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -85,7 +85,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un asimilador con menos de 100M")
-    public void creacionAsimiladorSinRecursosSuficientesTest() {
+    public void test07creacionAsimiladorSinRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,99);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -94,7 +94,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear un asimilador con al menos de 100M")
-    public void creacionAsimiladorConRecursosSuficientesTest() {
+    public void test08creacionAsimiladorConRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -103,7 +103,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear un asimilador reduce los recursos según lo esperado")
-    public void creacionAsimiladorConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test09creacionAsimiladorConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -113,7 +113,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un acceso con menos de 150M")
-    public void creacionAccesoSinRecursosSuficientesTest() {
+    public void test10creacionAccesoSinRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,149);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -122,7 +122,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear un acceso con al menos de 150M")
-    public void creacionAccesoConRecursosSuficientesTest() {
+    public void test11creacionAccesoConRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -131,7 +131,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear un acceso reduce los recursos según lo esperado")
-    public void creacionAccesoConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test12creacionAccesoConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -141,7 +141,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un puerto estelar con menos de 150M ")
-    public void creacionPuertoEstelarSinMineralSuficienteTest() {
+    public void test12creacionPuertoEstelarSinMineralSuficienteTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(150,149);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -150,7 +150,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un puerto estelar con menos de 150G ")
-    public void creacionPuertoEstelarSinGasSuficienteTest() {
+    public void test13creacionPuertoEstelarSinGasSuficienteTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(149,150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -159,7 +159,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear un puerto estelar con al menos de 150M y 150G")
-    public void creacionPuertoEstelarConMineralYGasSuficienteTest() {
+    public void test14creacionPuertoEstelarConMineralYGasSuficienteTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(150,150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -168,7 +168,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear un puerto estelar reduce los recursos según lo esperado")
-    public void creacionPuertoEstelarReduceRecursosTest() {
+    public void test15creacionPuertoEstelarReduceRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(150,150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
@@ -180,7 +180,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un criadero con menos de 200M")
-    public void creacionCriaderoSinRecursosSuficientesTest() {
+    public void test16creacionCriaderoSinRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,199);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -189,7 +189,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear un criadero con al menos 200M")
-    public void creacionCriaderoConRecursosSuficientesTest() {
+    public void test17creacionCriaderoConRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -198,7 +198,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear un criadero reduce los recursos según lo esperado")
-    public void creacionCriaderoConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test18creacionCriaderoConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -208,7 +208,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un extractor con menos de 100M")
-    public void creacionExtractorSinRecursosSuficientesTest() {
+    public void test19creacionExtractorSinRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,99);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -217,7 +217,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear un extractor con al menos 100M")
-    public void creacionExtractorConRecursosSuficientesTest() {
+    public void test20creacionExtractorConRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,100);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -226,7 +226,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear un extractor reduce los recursos según lo esperado")
-    public void creacionExtractorConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test21creacionExtractorConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,100);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -236,7 +236,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear una reserva con menos de 150M")
-    public void creacionReservaSinRecursosSuficientesTest() {
+    public void test22creacionReservaSinRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,149);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -245,7 +245,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear una reserva con al menos 150M")
-    public void creacionReservaConRecursosSuficientesTest() {
+    public void test23creacionReservaConRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -254,7 +254,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear una reserva reduce los recursos según lo esperado")
-    public void creacionReservaConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test24creacionReservaConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -264,7 +264,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear una guarida con menos de 200M")
-    public void creacionGuaridaSinMineralSuficienteTest() {
+    public void test25creacionGuaridaSinMineralSuficienteTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(100,199);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -273,7 +273,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear una guarida con menos de 100G")
-    public void creacionGuaridaSinGasSuficientesTest() {
+    public void test26creacionGuaridaSinGasSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(99,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -282,7 +282,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear una guarida con al menos 200M y 100G")
-    public void creacionGuaridaConRecursosSuficientesTest() {
+    public void test27creacionGuaridaConRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -291,7 +291,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear una guarida reduce los recursos según lo esperado")
-    public void creacionGuaridaConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test28creacionGuaridaConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -301,7 +301,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un espiral con menos de 150M")
-    public void creacionEspiralSinMineralSuficienteTest() {
+    public void test29creacionEspiralSinMineralSuficienteTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(100,149);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -310,7 +310,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("No se puede crear un espiral con menos de 100G")
-    public void creacionEspiralSinGasSuficientesTest() {
+    public void test30creacionEspiralSinGasSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(99,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -319,7 +319,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Se puede crear un espiral con al menos 150M y 100G")
-    public void creacionEspiralConRecursosSuficientesTest() {
+    public void test31creacionEspiralConRecursosSuficientesTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(100,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
@@ -328,7 +328,7 @@ public class EdificioRequiereRecursosTest {
 
     @Test
     @DisplayName("Crear un espiral reduce los recursos según lo esperado")
-    public void creacionEspiralConRecursosSuficientesYLuegoSinRecursosTest() {
+    public void test32creacionEspiralConRecursosSuficientesYLuegoSinRecursosTest() {
         Recursos recursos = new Recursos();
         recursos.guardar(100,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
