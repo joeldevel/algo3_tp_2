@@ -1,15 +1,19 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.AlgoStar;
 
-import static edu.fiuba.algo3.util.Constantes.*;
+import edu.fiuba.algo3.modelo.JUGADOR_COLOR;
+import edu.fiuba.algo3.modelo.JUGADOR_RAZA;
 
 public class AlgoStar {
+
+    public static final int JUGADOR_MIN_NOMBRE = 6;
+
     private String nombreJugador1;
     private String nombreJugador2;
     private JUGADOR_COLOR colorJugador1;
     private JUGADOR_COLOR colorJugador2;
     private JUGADOR_RAZA razaJugador1;
     private JUGADOR_RAZA razaJugador2;
-    private boolean iniciado;
+    private AlgoStarEstado estado;
 
     public AlgoStar() {
         this.nombreJugador1 = "";
@@ -18,7 +22,7 @@ public class AlgoStar {
         this.razaJugador2 = null;
         this.colorJugador1 = null;
         this.colorJugador2 = null;
-        this.iniciado = false;
+        this.setComportamientoEstado(new AlgoStarIniciado());
     }
 
     public boolean validarNombre(String nombre) {
@@ -98,14 +102,15 @@ public class AlgoStar {
         return false;
     }
 
-    public void finalizar() {
-        if(this.iniciado == false) {
-            throw new RuntimeException("El juego no ha iniciado");
-        }
-        this.iniciado = false;
+    public void avanzarTurno() {
+        this.estado.avanzarTurno();
     }
 
-    public void iniciar() {
-        this.iniciado = true;
+    public void setComportamientoEstado(AlgoStarEstado nuevoEstado) {
+        this.estado = nuevoEstado;
+    }
+
+    public void finalizarAlgoStar() {
+        this.setComportamientoEstado(new AlgoStarFinalizado());
     }
 }
