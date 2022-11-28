@@ -16,6 +16,10 @@ public class Superficie {
         return (unAtacable.compararSuperficie(this.tipo));
     }
 
+    public boolean revelableTieneLaMismaSuperficie(Revelable unRevelable) {
+        return (unRevelable.compararSuperficie(this.tipo));
+    }
+
     public boolean compararTipos(String unTipo) {
         return (this.tipo.equals(unTipo));
     }
