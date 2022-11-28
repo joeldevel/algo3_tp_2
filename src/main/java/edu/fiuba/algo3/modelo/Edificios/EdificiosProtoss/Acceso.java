@@ -16,6 +16,14 @@ public class Acceso extends EdificioProtoss {
 	
 	private ArrayList<Unidad> zealots;
 	private ArrayList<Unidad> dragones;
+
+	public Acceso(Recursos recursosJugador, Ubicacion unaUbicacion) {
+		super(new Tiempo(-8),new Vida(500), new Escudo(500), unaUbicacion);
+		this.zealots = new ArrayList<Unidad>();
+		this.dragones = new ArrayList<Unidad>();
+
+		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+	}
 	
     public Acceso(Recursos recursosJugador) {
 		super(new Tiempo(-8),new Vida(500), new Escudo(500), new Ubicacion());
@@ -55,7 +63,7 @@ public class Acceso extends EdificioProtoss {
 	}
 
 	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return false;
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
 }

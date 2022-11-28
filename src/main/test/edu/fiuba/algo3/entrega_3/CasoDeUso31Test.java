@@ -1,12 +1,5 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
-import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
-import edu.fiuba.algo3.modelo.Jugador.UNIDADES_PROTOSS;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 public class CasoDeUso31Test {
 
     /*@Test
