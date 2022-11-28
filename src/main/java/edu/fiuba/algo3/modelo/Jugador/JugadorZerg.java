@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
-import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -17,6 +16,10 @@ public class JugadorZerg implements Jugador {
 
     private static final int MAX_POBLACION = 200;
     private static final int CANT_MINERAL_INICIAL = 200;
+    private static final int CUPO_ZANGANO = 1;
+    private static final int CUPO_ZERLING = 1;
+    private static final int CUPO_HIDRALISCO = 2;
+    private static final int CUPO_MUTALISCO = 4;
 
     private String nombre;
     private String color;
@@ -84,52 +87,48 @@ public class JugadorZerg implements Jugador {
         this.edificios.add(new Espiral(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearZangano() {
-        if (!this.sePuedeCrearUnidad(1)) {
-            return;
+
+        if (!this.hayCupoDisponible(CUPO_ZANGANO)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
         }
-        if (this.cupo < 1) {
-            throw new SinCupoSuficienteException("Se necesita 1 cupo");
-        }
-        this.cupo -= 1;
+
         this.cantidadDeZanganos++;
-        this.incrementarPoblacion(1);
+        this.incrementarCupo(CUPO_ZANGANO);
     }
 
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearZerling() {
-        if (!this.sePuedeCrearUnidad(1)) {
-            return;
+
+        if (!this.hayCupoDisponible(CUPO_ZERLING)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
         }
-        if (this.cupo < 1) {
-            throw new SinCupoSuficienteException("Se necesita 1 cupo");
-        }
-        this.cupo -= 1;
+
         this.cantidadDeZerlings++;
-        this.incrementarPoblacion(1);
+        this.incrementarCupo(CUPO_ZERLING);
     }
 
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearHidralisco() {
-        if (!this.sePuedeCrearUnidad(2)) {
-            return;
+
+        if (!this.hayCupoDisponible(CUPO_HIDRALISCO)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
         }
-        if (this.cupo < 2) {
-            throw new SinCupoSuficienteException("Se necesita 2 cupos");
-        }
-        this.cupo -= 2;
+
         this.cantidadDeHidraliscos++;
-        this.incrementarPoblacion(2);
+        this.incrementarCupo(CUPO_HIDRALISCO);
     }
 
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearMutalisco() {
-        if (!this.sePuedeCrearUnidad(4)) {
-            return;
+
+        if (!this.hayCupoDisponible(CUPO_MUTALISCO)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
         }
-        if (this.cupo < 4) {
-            throw new SinCupoSuficienteException("Se necesita 4 cupos");
-        }
-        this.cupo -= 4;
+
         this.cantidadDeMutaliscos++;
-        this.incrementarPoblacion(4);
+        this.incrementarCupo(CUPO_MUTALISCO);
     }
 
     public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {
@@ -148,23 +147,25 @@ public class JugadorZerg implements Jugador {
         return 0;
     }
 
-    public int cupo() {
-        return this.cupo;
+    public int poblacion() {
+        return this.poblacion;
     }
 
-    private void incrementarCupo(int incremento) {
-        if (this.cupo + incremento <= 200) {
-            this.cupo += incremento;
+    // El cupo debe ser siempre menor al valor de poblacion.
+    private void incrementarCupo(int unIncremento) {
+        if (this.cupo + unIncremento <= this.poblacion) {
+            this.cupo += unIncremento;
         }
     }
 
-    private void incrementarPoblacion(int incremento) {
-        if (this.poblacion + incremento <= 200) {
-            this.poblacion += incremento;
+    // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    private void incrementarPoblacion(int unIncremento) {
+        if (this.poblacion + unIncremento <= MAX_POBLACION) {
+            this.poblacion += unIncremento;
         }
     }
 
-    private boolean sePuedeCrearUnidad(int cupo) {
-        return this.poblacion + cupo <= MAX_POBLACION;
+    private boolean hayCupoDisponible(int unCupo) {
+        return (this.cupo + unCupo <= this.poblacion);
     }
 }

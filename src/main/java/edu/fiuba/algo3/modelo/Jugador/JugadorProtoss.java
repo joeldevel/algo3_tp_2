@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
-import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
@@ -89,6 +88,7 @@ public class JugadorProtoss implements Jugador {
         this.edificios.add(new PuertoEstelar(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearZealot() {
 
         if (!this.hayCupoDisponible(CUPO_ZEALOT)) {
@@ -99,6 +99,7 @@ public class JugadorProtoss implements Jugador {
         this.incrementarCupo(CUPO_ZEALOT);
     }
 
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearDragon() {
         if (!this.hayCupoDisponible(CUPO_DRAGON)) {
             throw new CupoSuperaElNumeroDePoblacionException();
@@ -108,16 +109,14 @@ public class JugadorProtoss implements Jugador {
         this.incrementarCupo(CUPO_DRAGON);
     }
 
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearScout() {
-        if (!this.hayCupoDisponible(4)) {
-            return;
+        if (!this.hayCupoDisponible(CUPO_SCOUT)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
         }
-        if (this.cupo < 4) {
-            throw new SinCupoSuficienteException("Se necesitan 4 cupos");
-        }
-        this.cupo -= 4;
+
         this.cantidadDeScouts++;
-        this.incrementarPoblacion(4);
+        this.incrementarCupo(CUPO_SCOUT);
     }
 
     public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
@@ -133,8 +132,8 @@ public class JugadorProtoss implements Jugador {
         return 0;
     }
 
-    public int cupo() {
-        return this.cupo;
+    public int poblacion() {
+        return this.poblacion;
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.
