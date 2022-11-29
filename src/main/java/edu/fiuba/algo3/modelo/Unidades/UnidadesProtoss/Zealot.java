@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
@@ -110,5 +111,15 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	@Override
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
+
+	@Override
+	public void evolucionarAGuardian(Unidad unaUnidad) {
+		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+	}
+
+	@Override
+	public void evolucionarADevorador(Unidad unaUnidad) {
+		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
 	}
 }

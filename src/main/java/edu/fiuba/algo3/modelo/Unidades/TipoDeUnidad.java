@@ -13,4 +13,8 @@ public interface TipoDeUnidad {
 	void atacar(Atacable unAtacable);
 
 	void recuperarse();
+
+    void evolucionarAGuardian(Unidad unaUnidad);
+
+	void evolucionarADevorador(Unidad unaUnidad);
 }

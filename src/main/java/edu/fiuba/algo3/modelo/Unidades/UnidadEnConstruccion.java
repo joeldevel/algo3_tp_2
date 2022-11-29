@@ -40,4 +40,14 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     public void recuperarse() {
         throw new UnidadEnConstruccionException();
     }
+
+    @Override
+    public void evolucionarAGuardian(Unidad unaUnidad) {
+        throw new UnidadEnConstruccionException();
+    }
+
+    @Override
+    public void evolucionarADevorador(Unidad unaUnidad) {
+        throw new UnidadEnConstruccionException();
+    }
 }

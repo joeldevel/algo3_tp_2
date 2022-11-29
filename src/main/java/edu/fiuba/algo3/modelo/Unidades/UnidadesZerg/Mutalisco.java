@@ -79,15 +79,11 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
 
-	/*public void evolucionarAGuardian(Unidad unaUnidad) {
+	public void evolucionarAGuardian(Unidad unaUnidad) {
 		unaUnidad.setComportamientoEstado(new Guardian(this.ubicacion));
 	}
 
 	public void evolucionarADevorador(Unidad unaUnidad) {
 		unaUnidad.setComportamientoEstado(new Devorador(this.ubicacion));
 	}
-
-	public void evolucionarA(Evolucion unaEvolucion, Unidad unaUnidad) {
-		unaUnidad.setComportamientoEstado(unaEvolucion);
-	}*/
 }

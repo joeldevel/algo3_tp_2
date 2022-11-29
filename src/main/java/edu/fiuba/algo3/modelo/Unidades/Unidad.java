@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 
 public class Unidad extends Raza{
 
@@ -53,5 +55,13 @@ public class Unidad extends Raza{
 		else if(this.tiempo.transcurrido() > 0) {
 			this.estado.recuperarse();
 		}
+	}
+
+	public void evolucionarAGuardian() {
+		this.estado.evolucionarAGuardian(this);
+	}
+
+	public void evolucionarADevorador() {
+		this.estado.evolucionarADevorador(this);
 	}
 }

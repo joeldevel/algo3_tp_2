@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class Larva implements TipoDeUnidad {
 	
@@ -34,4 +35,13 @@ public class Larva implements TipoDeUnidad {
 		
 	}
 
+	@Override
+	public void evolucionarAGuardian(Unidad unaUnidad) {
+		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+	}
+
+	@Override
+	public void evolucionarADevorador(Unidad unaUnidad) {
+		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+	}
 }

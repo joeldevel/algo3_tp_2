@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
@@ -68,5 +69,15 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {
         return this.superficie.compararTipos(unTipoDeSuperficie);
+    }
+
+    @Override
+    public void evolucionarAGuardian(Unidad unaUnidad) {
+        // No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+    }
+
+    @Override
+    public void evolucionarADevorador(Unidad unaUnidad) {
+        // No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
     }
 }

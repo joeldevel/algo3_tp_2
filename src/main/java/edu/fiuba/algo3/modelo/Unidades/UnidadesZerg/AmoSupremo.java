@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Revelo;
 import edu.fiuba.algo3.modelo.Revelador;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 
 public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
@@ -71,5 +72,15 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {
         return this.superficie.compararTipos(unTipoDeSuperficie);
+    }
+
+    @Override
+    public void evolucionarAGuardian(Unidad unaUnidad) {
+        // No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+    }
+
+    @Override
+    public void evolucionarADevorador(Unidad unaUnidad) {
+        // No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
     }
 }
