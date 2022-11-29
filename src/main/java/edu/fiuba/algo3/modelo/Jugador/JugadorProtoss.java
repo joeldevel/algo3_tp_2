@@ -72,7 +72,7 @@ public class JugadorProtoss implements Jugador {
     }
 
     public void crearPilon(Ubicacion unaUbicacion) {
-        this.edificios.add(new Pilon(this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new Pilon(this.recursos, unaUbicacion));
         this.cantidadDePilones++;
         this.incrementarPoblacion(5);
     }
@@ -82,7 +82,7 @@ public class JugadorProtoss implements Jugador {
     }
 
     public void crearAcceso(Ubicacion unaUbicacion) {
-        this.edificios.add(new Acceso(this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new Acceso(this.recursos, unaUbicacion));
     }
 
     public void crearPuertoEstelar(Ubicacion unaUbicacion) {

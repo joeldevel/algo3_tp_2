@@ -25,7 +25,8 @@ public class Pilon extends EdificioProtoss {
     	super(new Tiempo(-5),new Vida(300), new Escudo(300),unaUbicacion);
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-    	
+
+    	this.edificios = new ArrayList<>();
         this.radio = 3;
     }
     

@@ -14,9 +14,9 @@ class CasoDeUso02 {
 
 	Recursos recursos = new Recursos(10000,10000);
 	
-	@Test
+	/*@Test
 	void test() {
 		fail("Not yet implemented");
-	}
+	}*/
 
 }
