@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
@@ -77,4 +78,16 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
+
+	/*public void evolucionarAGuardian(Unidad unaUnidad) {
+		unaUnidad.setComportamientoEstado(new Guardian(this.ubicacion));
+	}
+
+	public void evolucionarADevorador(Unidad unaUnidad) {
+		unaUnidad.setComportamientoEstado(new Devorador(this.ubicacion));
+	}
+
+	public void evolucionarA(Evolucion unaEvolucion, Unidad unaUnidad) {
+		unaUnidad.setComportamientoEstado(unaEvolucion);
+	}*/
 }

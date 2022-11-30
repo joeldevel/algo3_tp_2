@@ -39,7 +39,7 @@ public class Guarida extends EdificioZerg {
 		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
 		while(this.contarLarvas() != 0) {
 			Unidad actual = larvas.get(0);
-			actual.cambiarTipo(new Hidralisco());
+			actual.setComportamientoEstado(new Hidralisco());
 			hidraliscos.add(actual);
 			larvas.remove(0);
 		}
@@ -63,7 +63,7 @@ public class Guarida extends EdificioZerg {
 	}
 
 	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return false;
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
 }

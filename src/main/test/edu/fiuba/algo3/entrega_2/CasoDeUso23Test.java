@@ -1,6 +1,12 @@
 package edu.fiuba.algo3.entrega_2;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
@@ -12,12 +18,13 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 
-
 /* Verificar que una unidad no pueda dañar a la otra o a un edificio si no esta en el rango de ataque de la misma*/
 
 /*Supuesto: una unidad Zerg solo puede daniar a una unidad o un edificio Protoss*/
 
 class CasoDeUso23Test {
+
+	/* Unidades Zerg */
 
 	@Test
 	void test01UnaUnidadZerlingEn00NoPuedeDaniarAUnaUnidadZealotEn02() {
@@ -316,6 +323,8 @@ class CasoDeUso23Test {
 			guardian.atacar(zealot);
 		});		
 	}
+
+	/* Unidades Protoss */
 	
 	@Test
 	void test22UnaUnidadZealotEn00NoPuedeAtacarAUnaUnidadZerlingEn02() {
@@ -498,5 +507,68 @@ class CasoDeUso23Test {
 			scout.atacar(zerling);
 		});		
 	}
-	
+
+	/* Unidades Zerg y edificios Protoss */
+
+	@Test
+	void test35UnaUnidadZerlingEn00NoPuedeDaniarAUnAccesoEn02() {
+
+		Ubicacion ubicacion1 = new Ubicacion(0,0);
+		Zerling zerling = new Zerling(ubicacion1);
+
+		Ubicacion ubicacion2 = new Ubicacion(0,2);
+		Recursos recursos = new Recursos(0, 150);
+		Acceso acceso = new Acceso(recursos, ubicacion2);
+
+		assertThrows(AtacableFueraDeRangoError.class, ()->{
+			zerling.atacar(acceso);
+		});
+	}
+
+	@Test
+	void test36UnaUnidadZerlingEn00PuedeAtacarAUnAccesoEn01() {
+
+		Ubicacion ubicacion1 = new Ubicacion(0,0);
+		Zerling zerling = new Zerling(ubicacion1);
+
+		Ubicacion ubicacion2 = new Ubicacion(0,1);
+		Recursos recursos = new Recursos(0, 150);
+		Acceso acceso = new Acceso(recursos, ubicacion2);
+
+		zerling.atacar(acceso);
+
+		assertEquals(496, acceso.obtenerEscudo());
+	}
+
+	/* Unidades Protoss y edificios Zerg */
+
+	@Test
+	void test37UnaUnidadZealotEn00NoPuedeAtacarAUnCriaderoEn02() {
+
+		Ubicacion ubicacion1 = new Ubicacion(0,0);
+		Zealot zealot = new Zealot(ubicacion1);
+
+		Ubicacion ubicacion2 = new Ubicacion(0,2);
+		Recursos recursos = new Recursos(0, 200);
+		Criadero criadero = new Criadero(recursos, ubicacion2);
+
+		assertThrows(AtacableFueraDeRangoError.class, ()->{
+			zealot.atacar(criadero);
+		});
+	}
+
+	@Test
+	void test38UnaUnidadZealotEn00PuedeAtacarAUnCriaderoEn01() {
+
+		Ubicacion ubicacion1 = new Ubicacion(0,0);
+		Zealot zealot = new Zealot(ubicacion1);
+
+		Ubicacion ubicacion2 = new Ubicacion(0,1);
+		Recursos recursos = new Recursos(0, 200);
+		Criadero criadero = new Criadero(recursos, ubicacion2);
+
+		zealot.atacar(criadero);
+
+		assertEquals(492, criadero.obtenerVida());
+	}
 }

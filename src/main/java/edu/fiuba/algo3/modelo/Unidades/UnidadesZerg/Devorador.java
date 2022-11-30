@@ -1,36 +1,51 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
+import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
-import edu.fiuba.algo3.modelo.Revelo;
-import edu.fiuba.algo3.modelo.Revelador;
 
+import java.util.ArrayList;
 
-public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
+public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
     private Vida vida;
     private Ubicacion ubicacion;
     private Superficie superficie;
+    private ArrayList<Ataque> ataques;
 
-    private Revelo revelo;
-
-    public AmoSupremo(Ubicacion unaUbicacion) {
+    public Devorador(Ubicacion unaUbicacion) {
         this.vida = new Vida(200);
         this.ubicacion = unaUbicacion;
         this.superficie = new Superficie("Aire");
+        this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};
     }
 
-    public AmoSupremo() {
+    public Devorador() {
         this.vida = new Vida(200);
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
-        this.revelo = new Revelo(new Superficie("Aire"), 4);
+        this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};
     }
 
     @Override
     public void recibirAtaque(int unAtaque) {
         this.vida.recibirDanioPor(unAtaque);
+    }
+
+    @Override
+    public void atacar(Atacable unAtacable) {
+
+        for (Ataque ataque : ataques) {
+            if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
+                throw new AtacableFueraDeRangoError();
+            }
+
+            ataque.atacarA(unAtacable);
+        }
+    }
+
+    public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
+        return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
     }
 
     public Ubicacion ubicacion() {
@@ -44,24 +59,6 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     @Override
     public Superficie obtenerSuperficie() {
         return this.superficie;
-    }
-
-    @Override
-    public void atacar(Atacable unAtacable) {
-        // Amo Supremo no entiende este mensaje.
-    }
-
-    @Override
-    public void revelar(Revelable unRevelable) {
-        if (!(this.estaEnRangoDeRevelo(unRevelable, revelo))) {
-            throw new RevelableFueraDeRangoError();
-        }
-
-        revelo.revelarA(unRevelable);
-    }
-
-    public boolean estaEnRangoDeRevelo(Revelable unRevelable, Revelo unRevelo) {
-        return (this.ubicacion.distanciaCon(unRevelable.ubicacion()) <= unRevelo.rango());
     }
 
     public void recuperarse() {

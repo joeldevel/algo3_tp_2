@@ -37,7 +37,7 @@ public class ReservaDeProduccion extends EdificioZerg {
 		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
 		while(this.contarLarvas() != 0) {
 			Unidad actual = larvas.get(0);
-			actual.cambiarTipo(new Zerling());
+			actual.setComportamientoEstado(new Zerling());
 			zerlings.add(actual);
 			larvas.remove(0);
 		}
@@ -61,7 +61,7 @@ public class ReservaDeProduccion extends EdificioZerg {
 	}
 
 	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return false;
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
 }

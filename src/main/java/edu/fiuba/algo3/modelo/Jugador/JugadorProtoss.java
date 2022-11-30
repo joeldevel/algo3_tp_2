@@ -1,98 +1,123 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeRecursosException;
-import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
-import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
+import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Raza;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static edu.fiuba.algo3.util.Constantes.*;
+// La poblacion aumenta a medida que se crean los edificios correspondientes.
+// El cupo aumenta a metida que se crean unidades.
+// Siempre debe cumplirse que cupo <= poblacion <= MAX_POBLACION.
 
-public class JugadorProtoss implements IJugador {
-    public static final int MAX_POBLACION = 200;
-    private int cantidadDePilones;
+public class JugadorProtoss implements Jugador {
 
-    private int cantidadMineral;
-    private int cantidadGas;
-    private int cupo;
+    private static final int MAX_POBLACION = 200;
+    private static final int CANT_MINERAL_INICIAL = 200;
+    private static final int CUPO_ZEALOT = 2;
+    private static final int CUPO_DRAGON = 3;
+    private static final int CUPO_SCOUT = 4;
+
+    private String nombre;
+    private String color;
+    private ArrayList<Raza> unidades;
+    private ArrayList<Raza> edificios;
+    private Recursos recursos;
     private int poblacion;
+    private int cupo;
+
+    private int cantidadDePilones;
     private int cantidadDeZealots;
     private int cantidadDeDragones;
     private int cantidadDeScouts;
 
-    public JugadorProtoss() {
-        this.cantidadMineral = 0;
-        this.cantidadGas = 0;
+    public JugadorProtoss(String unNombre, String unColor) {
+        this.nombre = unNombre;
+        this.color = unColor;
+        this.unidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Raza>();
+        this.recursos = new Recursos();
+        this.recursos.guardar(0, CANT_MINERAL_INICIAL);
+        this.poblacion = 0;
         this.cupo = 0;
+
+        this.cantidadDePilones = 0;
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
+    }
+
+    // Constructor utilizado unicamente para simplificar pruebas.
+    public JugadorProtoss(String unNombre, String unColor, Recursos unosRecursos) {
+        this.nombre = unNombre;
+        this.color = unColor;
+        this.unidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Raza>();
+        this.recursos = unosRecursos;
         this.poblacion = 0;
+        this.cupo = 0;
+
         this.cantidadDePilones = 0;
+        this.cantidadDeZealots = 0;
+        this.cantidadDeDragones = 0;
+        this.cantidadDeScouts = 0;
     }
 
-    public void crearPilon() {
-        if (this.cantidadMineral < COSTO_PILON) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
+    public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
+        this.edificios.add(new NexoMineral(unNodo, this.recursos)); // Falta refactorizar para recibir la ubicacion.
+    }
+
+    public void crearPilon(Ubicacion unaUbicacion) {
+        this.edificios.add(new Pilon(this.recursos, unaUbicacion));
         this.cantidadDePilones++;
-        this.cantidadMineral -= COSTO_PILON;
-        this.incrementarCupo(5);
+        this.incrementarPoblacion(5);
     }
 
-    public void incrementarMineral(int cantidad) {
-        if (cantidad > 0) {
-            this.cantidadMineral += cantidad;
-        }
+    public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
+        this.edificios.add(new Asimilador(unVolcan, this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
-    public void crearNexo() {
-        if (this.cantidadMineral < COSTO_NEXO) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_NEXO;
+    public void crearAcceso(Ubicacion unaUbicacion) {
+        this.edificios.add(new Acceso(this.recursos, unaUbicacion));
     }
 
-    public void crearAsimilador() {
-        if (this.cantidadMineral < COSTO_ASIMILADOR) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_ASIMILADOR;
+    public void crearPuertoEstelar(Ubicacion unaUbicacion) {
+        this.edificios.add(new PuertoEstelar(this.recursos)); // Falta refactorizar para recibir la ubicacion.
     }
 
-    public void crearAcceso() {
-        if (this.cantidadMineral < COSTO_ACCESO) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_ACCESO;
-    }
-
-    public void crearPuertoEstelar() {
-        if (this.cantidadMineral < COSTO_MINERAL_PUERTO || this.cantidadGas < COSTO_GAS_PUERTO) {
-            throw new CantidadInsuficienteDeRecursosException("No hay recursos suficientes");
-        }
-        this.cantidadMineral -= COSTO_MINERAL_PUERTO;
-        this.cantidadGas -= COSTO_GAS_PUERTO;
-    }
-
-    public void incrementarGas(int cantidad) {
-        if (cantidad > 0) {
-            this.cantidadGas += cantidad;
-        }
-    }
-
+    // Falta el llamado al constructor de la unidad y guardarla.
     public void crearZealot() {
-        if (!this.sePuedeCrearUnidad(2)) {
-            return;
+
+        if (!this.hayCupoDisponible(CUPO_ZEALOT)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
         }
-        if (this.cupo < 2) {
-            throw new SinCupoSuficienteException("Se necesitan 2 cupos");
-        }
-        this.cupo -= 2;
+
         this.cantidadDeZealots++;
-        this.incrementarPoblacion(2);
+        this.incrementarCupo(CUPO_ZEALOT);
+    }
+
+    // Falta el llamado al constructor de la unidad y guardarla.
+    public void crearDragon() {
+        if (!this.hayCupoDisponible(CUPO_DRAGON)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
+        }
+
+        this.cantidadDeDragones++;
+        this.incrementarCupo(CUPO_DRAGON);
+    }
+
+    // Falta el llamado al constructor de la unidad y guardarla.
+    public void crearScout() {
+        if (!this.hayCupoDisponible(CUPO_SCOUT)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
+        }
+
+        this.cantidadDeScouts++;
+        this.incrementarCupo(CUPO_SCOUT);
     }
 
     public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
@@ -108,49 +133,26 @@ public class JugadorProtoss implements IJugador {
         return 0;
     }
 
-    public void crearDragon() {
-        if (!this.sePuedeCrearUnidad(3)) {
-            return;
-        }
-        if (this.cupo < 3) {
-            throw new SinCupoSuficienteException("Se necesitan 3 cupos");
-        }
-        this.cupo -= 3;
-        this.cantidadDeDragones++;
-        this.incrementarPoblacion(3);
+    public int poblacion() {
+        return this.poblacion;
     }
 
-    public void crearScout() {
-        if (!this.sePuedeCrearUnidad(4)) {
-            return;
-        }
-        if (this.cupo < 4) {
-            throw new SinCupoSuficienteException("Se necesitan 4 cupos");
-        }
-        this.cupo -= 4;
-        this.cantidadDeScouts++;
-        this.incrementarPoblacion(4);
-    }
-
-    public int cupo() {
-        return this.cupo;
-    }
-
-    private void incrementarCupo(int incremento) {
-        if (this.cupo + incremento <= 200) {
-            this.cupo += incremento;
+    // El cupo debe ser siempre menor al valor de poblacion.
+    private void incrementarCupo(int unIncremento) {
+        if (this.cupo + unIncremento <= this.poblacion) {
+            this.cupo += unIncremento;
         }
     }
 
-    private void incrementarPoblacion(int incremento) {
-        if (this.poblacion + incremento <= 200) {
-            this.poblacion += incremento;
+    // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    private void incrementarPoblacion(int unIncremento) {
+        if (this.poblacion + unIncremento <= MAX_POBLACION) {
+            this.poblacion += unIncremento;
         }
     }
 
-
-    private boolean sePuedeCrearUnidad(int cupo) {
-        return this.poblacion + cupo <= MAX_POBLACION;
+    private boolean hayCupoDisponible(int unCupo) {
+        return (this.cupo + unCupo <= this.poblacion);
     }
 
     public void destruirPilon() {

@@ -51,7 +51,7 @@ public class Criadero extends EdificioZerg {
 			throw new CriaderoSinLarvasException();
 		}
 		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.cambiarTipo(new Zangano());
+		unaUnidad.setComportamientoEstado(new Zangano());
 		this.larvas.remove(0);
 		zanganos.add(unaUnidad);
 	}
@@ -81,8 +81,7 @@ public class Criadero extends EdificioZerg {
 	}
 
 	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return false;
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
-
 }

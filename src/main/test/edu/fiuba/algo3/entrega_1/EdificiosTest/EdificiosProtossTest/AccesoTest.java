@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador);
+        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
 
         // Falta implementar la logica de Acceso.
     }
@@ -25,7 +26,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador);
+        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
 
         // Falta implementar la logica de Acceso.
     }
@@ -35,7 +36,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador);
+        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
 
         // Act
         acceso.recibirAtaque(10);
@@ -49,7 +50,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador);
+        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
         acceso.recibirAtaque(10);
 
         // Act
@@ -64,7 +65,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador);
+        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 500 de daño y luego 300 de vida.
 
         // Act
@@ -79,7 +80,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador);
+        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -95,7 +96,7 @@ public class AccesoTest {
         recursosJugador.guardar(0, 149);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Acceso acceso = new Acceso(recursosJugador);
+            Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
         });
     }
 }

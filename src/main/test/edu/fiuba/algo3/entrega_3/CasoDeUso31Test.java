@@ -1,15 +1,8 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.Excepciones.SinCupoSuficienteException;
-import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
-import edu.fiuba.algo3.modelo.Jugador.UNIDADES_PROTOSS;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 public class CasoDeUso31Test {
 
-    @Test
+    /*@Test
     @DisplayName("Al destruir el único pilon disponible el suministro disminuye y no se puede crear otro Zealot")
     public void disminucionDeSuministrosAlDestruitPilonNoSePuedeCrearZealotTest() {
         JugadorProtoss jugadorProtoss = new JugadorProtoss();
@@ -62,5 +55,5 @@ public class CasoDeUso31Test {
 
         Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearScout());
         Assertions.assertEquals(0, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT));
-    }
+    }*/
 }

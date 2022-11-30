@@ -7,10 +7,11 @@ import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Guardian implements Atacante, Atacable {
+public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 
 	private Vida vida;
 	private Ubicacion ubicacion;

@@ -58,7 +58,7 @@ public class NexoMineral extends EdificioProtoss implements Minero {
     }
 
     @Override
-    public boolean compararSuperficie(String otraSuperficie) {
-        return false;
+    public boolean compararSuperficie(String unTipoDeSuperficie) {
+        return this.superficie.compararTipos(unTipoDeSuperficie);
     }
 }

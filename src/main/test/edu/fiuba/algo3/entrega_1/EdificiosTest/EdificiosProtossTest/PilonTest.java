@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ public class PilonTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador);
+        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
 
         // Falta implementar la logica de Pilon.
     }
@@ -25,7 +26,7 @@ public class PilonTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador);
+        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
 
         // Falta implementar la logica de Pilon.
     }
@@ -35,7 +36,7 @@ public class PilonTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador);
+        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
 
         // Act
         pilon.recibirAtaque(10);
@@ -49,7 +50,7 @@ public class PilonTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador);
+        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
         pilon.recibirAtaque(10);
 
         // Act
@@ -64,7 +65,7 @@ public class PilonTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador);
+        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
         pilon.recibirAtaque(500); // Le sacamos todo el escudo con 300 de daño y luego 200 de vida.
 
         // Act
@@ -79,7 +80,7 @@ public class PilonTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador);
+        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
         pilon.recibirAtaque(500); // Le sacamos todo el escudo con 300 de daño y luego 200 de vida.
 
         // Act
@@ -95,7 +96,7 @@ public class PilonTest {
         recursosJugador.guardar(0, 99);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Pilon pilon = new Pilon(recursosJugador);
+            Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
         });
     }
 }
