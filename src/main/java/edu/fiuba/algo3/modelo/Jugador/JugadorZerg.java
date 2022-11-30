@@ -20,6 +20,7 @@ public class JugadorZerg implements Jugador {
     private static final int MAX_POBLACION = 200;
     private static final int CAP_POBLACION = 5;
     private static final int CANT_MINERAL_INICIAL = 200;
+    private static final int CUPO_AMO = 0;
     private static final int CUPO_ZANGANO = 1;
     private static final int CUPO_ZERLING = 1;
     private static final int CUPO_HIDRALISCO = 2;
@@ -30,10 +31,13 @@ public class JugadorZerg implements Jugador {
     private Recursos recursos;
     private int cupo;
 
+    private int cantidadDeAmos;
     private int cantidadDeZanganos;
     private int cantidadDeZerlings;
     private int cantidadDeHidraliscos;
     private int cantidadDeMutaliscos;
+    private int cantidadDeGuardianes;
+    private int cantidadDeDevoradores;
 
     private ArrayList<Edificio> edificios;
     private ArrayList<Edificio> criaderos;
@@ -47,10 +51,13 @@ public class JugadorZerg implements Jugador {
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
         this.cupo = 0;
 
+        this.cantidadDeAmos = 0;
         this.cantidadDeZanganos = 0;
         this.cantidadDeZerlings = 0;
         this.cantidadDeHidraliscos = 0;
         this.cantidadDeMutaliscos = 0;
+        this.cantidadDeGuardianes = 0;
+        this.cantidadDeDevoradores = 0;
 
         this.edificios = new ArrayList<Edificio>();
         this.criaderos = new ArrayList<Edificio>();
@@ -65,10 +72,13 @@ public class JugadorZerg implements Jugador {
         this.recursos = unosRecursos;
         this.cupo = 0;
 
+        this.cantidadDeAmos = 0;
         this.cantidadDeZanganos = 0;
         this.cantidadDeZerlings = 0;
         this.cantidadDeHidraliscos = 0;
         this.cantidadDeMutaliscos = 0;
+        this.cantidadDeGuardianes = 0;
+        this.cantidadDeDevoradores = 0;
 
         this.edificios = new ArrayList<Edificio>();
         this.criaderos = new ArrayList<Edificio>();
@@ -97,6 +107,17 @@ public class JugadorZerg implements Jugador {
 
     public void crearEspiral(Ubicacion unaUbicacion) {
         this.edificios.add(new Espiral(this.recursos, unaUbicacion));
+    }
+
+    // Falta enviar el mensaje que permite instanciar Amo Supremo.
+    public void crearAmoSupremo() {
+
+        if (!this.hayCupoDisponible(CUPO_AMO)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
+        }
+
+        this.cantidadDeAmos++;
+        this.incrementarCupo(CUPO_AMO);
     }
 
     // Falta enviar el mensaje al edificio Criadero que permite instanciar Zangano.
@@ -140,6 +161,28 @@ public class JugadorZerg implements Jugador {
         }
 
         this.cantidadDeMutaliscos++;
+        this.incrementarCupo(CUPO_MUTALISCO);
+    }
+
+    // Falta enviar el mensaje que permite instanciar Guardian (evolucion de Mutalisco).
+    public void crearGuardian() {
+
+        if (!this.hayCupoDisponible(CUPO_MUTALISCO)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
+        }
+
+        this.cantidadDeGuardianes++;
+        this.incrementarCupo(CUPO_MUTALISCO);
+    }
+
+    // Falta enviar el mensaje que permite instanciar Devorador (evolucion de Mutalisco).
+    public void crearDevorador() {
+
+        if (!this.hayCupoDisponible(CUPO_MUTALISCO)) {
+            throw new CupoSuperaElNumeroDePoblacionException();
+        }
+
+        this.cantidadDeDevoradores++;
         this.incrementarCupo(CUPO_MUTALISCO);
     }
 
