@@ -1,5 +1,8 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.vistas.PantallaDeInicio;
+import edu.fiuba.algo3.vistas.PantallaMapa;
+import edu.fiuba.algo3.vistas.PantallaNombreJugadores;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,12 +16,25 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
+//        var javaVersion = SystemInfo.javaVersion();
+//        var javafxVersion = SystemInfo.javafxVersion();
+//
+//        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+//        var scene = new Scene(new StackPane(label), 640, 480);
+//        stage.setScene(scene);
+//        stage.show();
 
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
+        stage.setFullScreen(true);
+        PantallaMapa pantallaMapa = new PantallaMapa(stage);
+        PantallaNombreJugadores nombreJugadores= new PantallaNombreJugadores(stage, pantallaMapa.getScene());
+        Scene scene2 = nombreJugadores.getScene();
+
+        PantallaDeInicio inicio  = new PantallaDeInicio(stage, scene2);
+
+        stage.setScene(inicio.getScene());
+
+        stage.setFullScreenExitHint("Presiona Esc para salir de pantalla completa");
+
         stage.show();
     }
 
