@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador);
+        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
 
         // Falta la logica de Guarida.
     }
@@ -24,7 +25,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador);
+        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
 
         // Act
         guarida.recibirAtaque(10);
@@ -53,7 +54,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador);
+        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
         guarida.avanzarTurno(12);
 
         // Act
@@ -68,7 +69,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador);
+        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
         guarida.avanzarTurno(12);
         guarida.recibirAtaque(10);
 
@@ -85,7 +86,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador);
+        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
 
         // Act
         guarida.recibirAtaque(10);
@@ -99,7 +100,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador);
+        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
         guarida.recibirAtaque(10);
 
         // Act
@@ -115,7 +116,7 @@ class GuaridaTest {
         recursosJugador.guardar(100, 199);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Guarida guarida = new Guarida(recursosJugador);
+            Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
         });
     }
 }

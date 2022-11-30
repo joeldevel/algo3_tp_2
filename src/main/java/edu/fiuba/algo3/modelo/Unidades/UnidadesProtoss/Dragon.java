@@ -73,7 +73,7 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	public int vidaRestante() {
 		return (this.vida.restante());
 	}
-	
+
 	public int escudoRestante() {
 		return (this.escudo.restante());
 	}

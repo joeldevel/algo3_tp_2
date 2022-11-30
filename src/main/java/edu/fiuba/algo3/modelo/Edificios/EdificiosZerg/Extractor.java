@@ -17,18 +17,18 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	private final int COSTO_GAS = 0;
 	
 	private int cantidadExtraible;
-	private int cantidadExtraida;
+	private Recursos recursosJugador;
     private int cantidadMaximaDeZanganos;
     private Volcan volcan;
     private ArrayList<Zangano> zanganos;
     
-    public Extractor(Volcan unVolcan, Recursos recursosJugador){
-    	super(new Tiempo(-6),new Vida(750), new Ubicacion());
+    public Extractor(Volcan unVolcan, Recursos recursosJugador, Ubicacion unaUbicacion){
+    	super(new Tiempo(-6),new Vida(750), unaUbicacion);
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
     	this.cantidadExtraible = 10;
-    	this.cantidadExtraida = 0;
+    	this.recursosJugador = recursosJugador;
     	this.cantidadMaximaDeZanganos = 3;
     	this.volcan = unVolcan;
         this.zanganos = new ArrayList<Zangano>();
@@ -38,7 +38,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     
     @Override
     public void ejecutaOperable() {
-    	this.cantidadExtraida += this.extraerGasDe(this.volcan);
+    	this.recursosJugador.guardar(this.extraerGasDe(this.volcan), 0);
     }
     
     public int contarZanganos() {
@@ -61,9 +61,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	
 	@Override
     public int obtenerGas() {
-		int extraido = this.cantidadExtraida;
-        this.cantidadExtraida = 0;
-        return extraido;
+		return this.recursosJugador.obtenerGas();
     }
 
 	@Override

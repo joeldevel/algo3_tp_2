@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeProduccion;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ class ReservaDeProduccionTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
 
         // Act
         rdp.recibirAtaque(10);
@@ -28,7 +29,7 @@ class ReservaDeProduccionTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
         rdp.recibirAtaque(10);
 
         // Act
@@ -43,7 +44,7 @@ class ReservaDeProduccionTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 150);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
 
         // Falta la logica de la Reserva de Produccion.
     }
@@ -69,7 +70,7 @@ class ReservaDeProduccionTest {
         recursosJugador.guardar(0, 149);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador);
+            ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
         });
     }
 }

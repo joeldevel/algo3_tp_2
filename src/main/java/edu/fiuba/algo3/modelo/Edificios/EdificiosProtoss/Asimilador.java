@@ -12,16 +12,16 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	private final int COSTO_GAS = 0;
 	
     private int cantidadExtraible;
-    private int cantidadExtraida;
+    private Recursos recursosJugador;
     private Volcan volcan;
     
-    public Asimilador(Volcan unVolcan, Recursos recursosJugador) {
-    	super(new Tiempo(-6),new Vida(450),new Escudo(450), new Ubicacion());
+    public Asimilador(Volcan unVolcan, Recursos recursosJugador, Ubicacion unaUbicacion) {
+    	super(new Tiempo(-6),new Vida(450),new Escudo(450), unaUbicacion);
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
     	this.cantidadExtraible = 20;
-    	this.cantidadExtraida = 0;
+    	this.recursosJugador = recursosJugador;
     	this.volcan = unVolcan;
     	
     	unVolcan.construirRefineriaDeGas(this);
@@ -29,7 +29,7 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
     
     @Override
     public void ejecutaOperable() {
-    	this.cantidadExtraida += this.extraerGasDe(this.volcan);
+    	this.recursosJugador.guardar(this.extraerGasDe(this.volcan), 0);
     }
     
     @Override
@@ -39,9 +39,7 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	
 	@Override
     public int obtenerGas() {
-		int extraido = this.cantidadExtraida;
-		this.cantidadExtraida = 0;
-        return extraido;
+		return this.recursosJugador.obtenerGas();
     }
 
 	@Override

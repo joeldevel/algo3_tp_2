@@ -83,7 +83,7 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	public int vidaRestante() {
 		return (this.vida.restante());
 	}
-	
+
 	public int escudoRestante() {
 		return (this.escudo.restante());
 	}
@@ -102,5 +102,4 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	public void evolucionarADevorador(Unidad unaUnidad) {
 		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
 	}
-	
 }

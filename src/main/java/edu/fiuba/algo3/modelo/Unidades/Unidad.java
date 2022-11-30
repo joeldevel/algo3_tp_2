@@ -64,4 +64,8 @@ public class Unidad extends Raza{
 	public void evolucionarADevorador() {
 		this.estado.evolucionarADevorador(this);
 	}
+
+	public int obtenerVida() {
+		return this.estado.vidaRestante();
+	}
 }

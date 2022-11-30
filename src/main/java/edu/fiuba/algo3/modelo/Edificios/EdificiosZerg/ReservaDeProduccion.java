@@ -19,8 +19,8 @@ public class ReservaDeProduccion extends EdificioZerg {
     private ArrayList<Unidad> larvas;
     private ArrayList<Unidad> zerlings;
     	
-    public ReservaDeProduccion(Recursos recursosJugador) {
-    	super(new Tiempo(-12),new Vida(1000), new Ubicacion());
+    public ReservaDeProduccion(Recursos recursosJugador, Ubicacion unaUbicacion) {
+    	super(new Tiempo(-12),new Vida(1000), unaUbicacion);
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	

@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorExc
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
 
         // Act
         int resultado = extractor.obtenerGas();
@@ -38,7 +39,7 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
 
         // Act
         extractor.avanzarTurno(6);
@@ -53,8 +54,8 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano zangano =  new Zangano();
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
+        Zangano zangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(zangano);
 
         // Act
@@ -70,10 +71,10 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano =  new Zangano();
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
+        Zangano primerZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano();
+        Zangano SegundoZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(SegundoZangano);
 
         // Act
@@ -89,12 +90,12 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano =  new Zangano();
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
+        Zangano primerZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano();
+        Zangano SegundoZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(SegundoZangano);
-        Zangano TercerZangano =  new Zangano();
+        Zangano TercerZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(TercerZangano);
 
         // Act
@@ -109,14 +110,14 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano =  new Zangano();
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
+        Zangano primerZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(primerZangano);
-        Zangano SegundoZangano =  new Zangano();
+        Zangano SegundoZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(SegundoZangano);
-        Zangano TercerZangano =  new Zangano();
+        Zangano TercerZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(TercerZangano);
-        Zangano CuartoZangano =  new Zangano();
+        Zangano CuartoZangano =  new Zangano(recursosJugador);
 
         assertThrows(CantidadMaximaDeZanganosEnExtractorException.class,()->{
             extractor.guardarZangano(CuartoZangano);
@@ -129,7 +130,7 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
         extractor.recibirAtaque(10);
 
         // Act
@@ -145,7 +146,7 @@ class ExtractorTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
         extractor.recibirAtaque(10);
 
         // Act
@@ -162,7 +163,7 @@ class ExtractorTest {
         recursosJugador.guardar(0, 99);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Extractor extractor = new Extractor(volcan, recursosJugador);
+            Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
         });
     }
 }

@@ -50,4 +50,9 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     public void evolucionarADevorador(Unidad unaUnidad) {
         throw new UnidadEnConstruccionException();
     }
+
+    @Override
+    public int vidaRestante() {
+        throw new UnidadEnConstruccionException();
+    }
 }

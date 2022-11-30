@@ -20,8 +20,8 @@ public class Guarida extends EdificioZerg {
     private ArrayList<Unidad> hidraliscos;
     
 	
-    public Guarida(Recursos recursosJugador){
-        super(new Tiempo(-12),new Vida(1250), new Ubicacion());
+    public Guarida(Recursos recursosJugador, Ubicacion unaUbicacion){
+        super(new Tiempo(-12),new Vida(1250), unaUbicacion);
         
         recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

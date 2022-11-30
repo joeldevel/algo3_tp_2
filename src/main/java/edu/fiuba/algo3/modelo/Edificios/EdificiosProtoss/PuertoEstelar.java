@@ -16,8 +16,8 @@ public class PuertoEstelar extends EdificioProtoss {
 	
 	private ArrayList<Unidad> scouts;
 	
-    public PuertoEstelar(Recursos recursosJugador){
-        super(new Tiempo(-10),new Vida(600),new Escudo(600), new Ubicacion());
+    public PuertoEstelar(Recursos recursosJugador, Ubicacion unaUbicacion){
+        super(new Tiempo(-10),new Vida(600),new Escudo(600), unaUbicacion);
         
         recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

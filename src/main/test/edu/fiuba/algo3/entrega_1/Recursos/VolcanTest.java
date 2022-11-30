@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaExcep
 import edu.fiuba.algo3.modelo.Excepciones.VolcanYaTieneUnaRefineriaDeGasConstruidaException;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import org.junit.jupiter.api.Test;
 
@@ -29,10 +30,10 @@ class VolcanTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 200);
-        Extractor primerExtractor = new Extractor(volcan, recursosJugador);
+        Extractor primerExtractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
 
         assertThrows(VolcanYaTieneUnaRefineriaDeGasConstruidaException.class,()->{
-            Extractor segundoExtractor = new Extractor(volcan, recursosJugador);
+            Extractor segundoExtractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
         });
     }
 
@@ -42,8 +43,8 @@ class VolcanTest {
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador);
-        Zangano primerZangano =  new Zangano();
+        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
+        Zangano primerZangano =  new Zangano(recursosJugador);
         extractor.guardarZangano(primerZangano);
 
         // Act & Assert

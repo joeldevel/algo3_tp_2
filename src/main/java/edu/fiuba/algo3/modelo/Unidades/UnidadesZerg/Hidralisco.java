@@ -12,7 +12,7 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
-public class Hidralisco implements TipoDeUnidad, Atacante, Atacable{
+public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 	
 	private Vida vida;
 	private Ubicacion ubicacion;

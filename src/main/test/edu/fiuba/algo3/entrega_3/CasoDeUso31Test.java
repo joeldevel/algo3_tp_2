@@ -1,59 +1,64 @@
 package edu.fiuba.algo3.entrega_3;
 
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class CasoDeUso31Test {
 
-    /*@Test
-    @DisplayName("Al destruir el único pilon disponible el suministro disminuye y no se puede crear otro Zealot")
-    public void disminucionDeSuministrosAlDestruitPilonNoSePuedeCrearZealotTest() {
-        JugadorProtoss jugadorProtoss = new JugadorProtoss();
-        jugadorProtoss.incrementarMineral(100 + 100);
+    /* Protoss */
 
-        jugadorProtoss.crearPilon();
+    @Test
+    public void test01AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnZealot() {
+        Recursos recursos = new Recursos(0, 200);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
         jugadorProtoss.crearZealot();
-
-        Assertions.assertEquals(1, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT));
-
-        jugadorProtoss.destruirPilon();
-
-        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearZealot());
-        Assertions.assertEquals(1, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT));
+        pilon.recibirAtaque(600);
+        jugadorProtoss.avanzarTurno();
+        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
     }
 
     @Test
-    @DisplayName("Al destruir el único pilon disponible el suministro disminuye y no se puede crear un Dragon")
-    public void disminucionDeSuministrosAlDestruitPilonNoSePuedeCrearDragonTest() {
-        JugadorProtoss jugadorProtoss = new JugadorProtoss();
-        jugadorProtoss.incrementarMineral(100 + 125);
-        jugadorProtoss.incrementarGas(50);
-
-        jugadorProtoss.crearPilon();
+    public void test02AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnDragon() {
+        Recursos recursos = new Recursos(0, 200);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
         jugadorProtoss.crearZealot();
-
-        Assertions.assertEquals(1, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT));
-
-        jugadorProtoss.destruirPilon();
-
-        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearDragon());
-        Assertions.assertEquals(0, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.DRAGON));
+        pilon.recibirAtaque(600);
+        jugadorProtoss.avanzarTurno();
+        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
     }
 
     @Test
-    @DisplayName("Al destruir un pilon  el suministro disminuye y no se puede crear un Scout")
-    public void disminucionDeSuministrosAlDestruitPilonNoSePuedeCrearScoutTest() {
-        JugadorProtoss jugadorProtoss = new JugadorProtoss();
-        jugadorProtoss.incrementarMineral(200 + 225 + 300);
-        jugadorProtoss.incrementarGas(100 + 150);
+    public void test03AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnScout() {
+        Recursos recursos = new Recursos(0, 200);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
+        jugadorProtoss.crearZealot();
+        pilon.recibirAtaque(600);
+        jugadorProtoss.avanzarTurno();
+        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
+    }
 
-        jugadorProtoss.crearPilon();
-        jugadorProtoss.crearPilon();
-        jugadorProtoss.crearDragon();
-        jugadorProtoss.crearDragon();
+    /* Zerg */
 
-        Assertions.assertEquals(2, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.DRAGON));
-
-        jugadorProtoss.destruirPilon();
-
-        Assertions.assertThrows(SinCupoSuficienteException.class, () -> jugadorProtoss.crearScout());
-        Assertions.assertEquals(0, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT));
-    }*/
+    @Test
+    public void test04AlDestruirUnCriaderoDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnZangano() {
+        Recursos recursos = new Recursos(0, 200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Criadero criadero = jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.crearZangano();
+        criadero.recibirAtaque(500);
+        jugadorZerg.avanzarTurno();
+        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+    }
 }
+

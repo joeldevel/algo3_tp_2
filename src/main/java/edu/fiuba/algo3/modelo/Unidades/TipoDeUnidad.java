@@ -17,4 +17,6 @@ public interface TipoDeUnidad {
     void evolucionarAGuardian(Unidad unaUnidad);
 
 	void evolucionarADevorador(Unidad unaUnidad);
+
+	int vidaRestante();
 }

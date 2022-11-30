@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
 
         // Falta implementar la logica de Puerto Estelar.
     }
@@ -24,7 +25,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
 
         // Falta implementar la logica de Puerto Estelar.
     }
@@ -34,7 +35,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
 
         // Act
         puertoEstelar.recibirAtaque(10);
@@ -48,7 +49,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
         puertoEstelar.recibirAtaque(10);
 
         // Act
@@ -63,7 +64,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
         puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -78,7 +79,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
         puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -94,7 +95,7 @@ class PuertoEstelarTest {
         recursosJugador.guardar(149, 150);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador);
+            PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
         });
     }
 }

@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.SinNodoMineral;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -18,26 +19,26 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	private Superficie superficie;
 
 	private int cantidadRecolectableDeMineral;
-    private int cantidadRecolectada;
+    private Recursos recursosJugador;
     private Mineral nodo;
 
-	public Zangano(Ubicacion unaUbicacion) {
+	public Zangano(Ubicacion unaUbicacion, Recursos recursosJugador) {
 		this.vida = new Vida(25);
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 
 		this.cantidadRecolectableDeMineral = 10;
-		this.cantidadRecolectada = 0;
+		this.recursosJugador = recursosJugador;
 		this.nodo = new SinNodoMineral();
 	}
 
-    public Zangano() {
+    public Zangano(Recursos recursosJugador) {
 		this.vida = new Vida(25);
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 
         this.cantidadRecolectableDeMineral = 10;
-        this.cantidadRecolectada = 0;
+		this.recursosJugador = recursosJugador;
         this.nodo = new SinNodoMineral();
     }
     
@@ -48,7 +49,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	public void avanzarTurno() {
 		if(nodo.tieneMineral()) {
-			this.cantidadRecolectada += this.recolectarMineralDe(this.nodo);
+			this.recursosJugador.guardar(0, this.recolectarMineralDe(this.nodo));
 		}
 	}
 
@@ -59,9 +60,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public int obtenerMineral() {
-		int recolectado = this.cantidadRecolectada;
-		this.cantidadRecolectada = 0;
-		return recolectado;
+		return this.recursosJugador.obtenerMineral();
 	}
 
 	@Override

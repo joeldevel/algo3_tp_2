@@ -25,9 +25,9 @@ public class CasoDeUso29Test {
             jugadorProtoss.crearPilon(new Ubicacion(i,0));
         }
 
-        assertEquals(200, jugadorProtoss.poblacion());
+        assertEquals(200, jugadorProtoss.calcularPoblacion());
         jugadorProtoss.crearPilon(new Ubicacion(1,1));
-        assertEquals(200, jugadorProtoss.poblacion());
+        assertEquals(200, jugadorProtoss.calcularPoblacion());
     }
 
     @Test
@@ -40,8 +40,8 @@ public class CasoDeUso29Test {
             jugadorZerg.crearCriadero(new Ubicacion(i,0));
         }
 
-        assertEquals(200, jugadorZerg.poblacion());
+        assertEquals(200, jugadorZerg.calcularPoblacion());
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        assertEquals(200, jugadorZerg.poblacion());
+        assertEquals(200, jugadorZerg.calcularPoblacion());
     }
 }

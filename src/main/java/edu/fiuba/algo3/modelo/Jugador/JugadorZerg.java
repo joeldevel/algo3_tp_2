@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
-import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.*;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class JugadorZerg implements Jugador {
 
     private static final int MAX_POBLACION = 200;
+    private static final int CAP_POBLACION = 5;
     private static final int CANT_MINERAL_INICIAL = 200;
     private static final int CUPO_ZANGANO = 1;
     private static final int CUPO_ZERLING = 1;
@@ -24,10 +27,7 @@ public class JugadorZerg implements Jugador {
 
     private String nombre;
     private String color;
-    private ArrayList<Raza> unidades;
-    private ArrayList<Raza> edificios;
     private Recursos recursos;
-    private int poblacion;
     private int cupo;
 
     private int cantidadDeZanganos;
@@ -35,60 +35,71 @@ public class JugadorZerg implements Jugador {
     private int cantidadDeHidraliscos;
     private int cantidadDeMutaliscos;
 
+    private ArrayList<Edificio> edificios;
+    private ArrayList<Edificio> criaderos;
+    private ArrayList<Unidad> amosSupremos;
+    private ArrayList<Unidad> unidades;
+
     public JugadorZerg(String unNombre, String unColor) {
         this.nombre = unNombre;
         this.color = unColor;
-        this.unidades = new ArrayList<Raza>();
-        this.edificios = new ArrayList<Raza>();
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
-        this.poblacion = 0;
         this.cupo = 0;
 
         this.cantidadDeZanganos = 0;
         this.cantidadDeZerlings = 0;
         this.cantidadDeHidraliscos = 0;
         this.cantidadDeMutaliscos = 0;
+
+        this.edificios = new ArrayList<Edificio>();
+        this.criaderos = new ArrayList<Edificio>();
+        this.amosSupremos = new ArrayList<Unidad>();
+        this.unidades = new ArrayList<Unidad>();
     }
 
     // Constructor utilizado unicamente para pruebas debido a los recursos.
     public JugadorZerg(String unNombre, String unColor, Recursos unosRecursos) {
         this.nombre = unNombre;
         this.color = unColor;
-        this.unidades = new ArrayList<Raza>();
-        this.edificios = new ArrayList<Raza>();
         this.recursos = unosRecursos;
-        this.poblacion = 0;
         this.cupo = 0;
 
         this.cantidadDeZanganos = 0;
         this.cantidadDeZerlings = 0;
         this.cantidadDeHidraliscos = 0;
         this.cantidadDeMutaliscos = 0;
+
+        this.edificios = new ArrayList<Edificio>();
+        this.criaderos = new ArrayList<Edificio>();
+        this.amosSupremos = new ArrayList<Unidad>();
+        this.unidades = new ArrayList<Unidad>();
     }
 
-    public void crearCriadero(Ubicacion unaUbicacion) {
-        this.edificios.add(new Criadero(this.recursos, unaUbicacion));
-        this.incrementarPoblacion(5);
+    public Criadero crearCriadero(Ubicacion unaUbicacion) {
+        Criadero criadero = new Criadero(this.recursos, unaUbicacion);
+        this.edificios.add(criadero);
+        this.criaderos.add(criadero);
+        return criadero;
     }
 
     public void crearReservaDeProduccion(Ubicacion unaUbicacion) {
-        this.edificios.add(new ReservaDeProduccion(this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new ReservaDeProduccion(this.recursos, unaUbicacion));
     }
 
     public void crearExtractor(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.edificios.add(new Extractor(unVolcan, this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new Extractor(unVolcan, this.recursos, unaUbicacion));
     }
 
     public void crearGuarida(Ubicacion unaUbicacion) {
-        this.edificios.add(new Guarida(this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new Guarida(this.recursos, unaUbicacion));
     }
 
     public void crearEspiral(Ubicacion unaUbicacion) {
-        this.edificios.add(new Espiral(this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new Espiral(this.recursos, unaUbicacion));
     }
 
-    // Falta el llamado al constructor de la unidad y guardarla.
+    // Falta enviar el mensaje al edificio Criadero que permite instanciar Zangano.
     public void crearZangano() {
 
         if (!this.hayCupoDisponible(CUPO_ZANGANO)) {
@@ -99,7 +110,7 @@ public class JugadorZerg implements Jugador {
         this.incrementarCupo(CUPO_ZANGANO);
     }
 
-    // Falta el llamado al constructor de la unidad y guardarla.
+    // Falta enviar el mensaje al edificio ReservaDeReproduccion que permite instanciar Zerling.
     public void crearZerling() {
 
         if (!this.hayCupoDisponible(CUPO_ZERLING)) {
@@ -110,7 +121,7 @@ public class JugadorZerg implements Jugador {
         this.incrementarCupo(CUPO_ZERLING);
     }
 
-    // Falta el llamado al constructor de la unidad y guardarla.
+    // Falta enviar el mensaje al edificio Guarida que permite instanciar Hidralisco.
     public void crearHidralisco() {
 
         if (!this.hayCupoDisponible(CUPO_HIDRALISCO)) {
@@ -121,7 +132,7 @@ public class JugadorZerg implements Jugador {
         this.incrementarCupo(CUPO_HIDRALISCO);
     }
 
-    // Falta el llamado al constructor de la unidad y guardarla.
+    // Falta enviar el mensaje al edificio Espiral que permite instanciar Mutalisco.
     public void crearMutalisco() {
 
         if (!this.hayCupoDisponible(CUPO_MUTALISCO)) {
@@ -148,25 +159,54 @@ public class JugadorZerg implements Jugador {
         return 0;
     }
 
-    public int poblacion() {
-        return this.poblacion;
+    // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    public int calcularPoblacion() {
+        int poblacion = (this.criaderos.size() * CAP_POBLACION) + (this.amosSupremos.size() * CAP_POBLACION);
+
+        if (poblacion >= MAX_POBLACION) {
+            return MAX_POBLACION;
+        }
+
+        return poblacion;
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.
     private void incrementarCupo(int unIncremento) {
-        if (this.cupo + unIncremento <= this.poblacion) {
+        if (this.cupo + unIncremento <= this.calcularPoblacion()) {
             this.cupo += unIncremento;
         }
     }
 
-    // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    private void incrementarPoblacion(int unIncremento) {
-        if (this.poblacion + unIncremento <= MAX_POBLACION) {
-            this.poblacion += unIncremento;
-        }
+    private boolean hayCupoDisponible(int unCupo) {
+        return (this.cupo + unCupo <= this.calcularPoblacion());
     }
 
-    private boolean hayCupoDisponible(int unCupo) {
-        return (this.cupo + unCupo <= this.poblacion);
+    public void avanzarTurno() {
+
+        ArrayList<Edificio> edificiosABorrar = new ArrayList<Edificio>(); // Necesitamos una lista por fuera ya que no se puede modificar la lista en medio de la iteracion.
+
+        for (Edificio edificio : this.edificios) {
+            if (edificio.obtenerVida() == 0) {
+                edificiosABorrar.add(edificio);
+            } else {
+                edificio.avanzarTurno(); // Pilon energiza, Asimilador recolecta gas, Nexo Mineral recolecta mineral, se recuperan, pasa el tiempo de construccion.
+            }
+        }
+
+        this.edificios.removeAll(edificiosABorrar);
+        this.criaderos.removeAll(edificiosABorrar); // Borramos los Criaderos de su lista concreta para poder calcular la poblacion correctamente.
+
+        ArrayList<Unidad> unidadesABorrar = new ArrayList<Unidad>();
+
+        for (Unidad unidad : this.unidades) {
+            if (unidad.obtenerVida() == 0) {
+                unidadesABorrar.add(unidad);
+            } else {
+                unidad.avanzarTurno(); // Se recuperan, pasa el tiempo de construccion.
+            }
+        }
+
+        this.unidades.removeAll(unidadesABorrar);
+        this.amosSupremos.removeAll(unidadesABorrar); // Borramos los Amos Supremos de su lista concreta para poder calcular la poblacion correctamente.
     }
 }

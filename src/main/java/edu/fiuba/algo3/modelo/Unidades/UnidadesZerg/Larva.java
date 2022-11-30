@@ -44,4 +44,9 @@ public class Larva implements TipoDeUnidad {
 	public void evolucionarADevorador(Unidad unaUnidad) {
 		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
 	}
+
+	@Override
+	public int vidaRestante() {
+		return 0;
+	}
 }

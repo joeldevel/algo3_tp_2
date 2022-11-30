@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
 
         // Act
         nexoMineral.avanzarTurno(1);
@@ -31,7 +32,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
 
         // Act
         nexoMineral.avanzarTurno(5);
@@ -46,7 +47,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
 
         // Act
         nexoMineral.recibirAtaque(10);
@@ -61,7 +62,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
         nexoMineral.recibirAtaque(10);
 
         // Act
@@ -77,7 +78,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
         nexoMineral.recibirAtaque(400); // Le sacamos todo el escudo con 250 de daño y luego 150 de vida.
 
         // Act
@@ -93,7 +94,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
         nexoMineral.recibirAtaque(400); // Le sacamos todo el escudo con 250 de daño y luego 150 de vida.
 
         // Act
@@ -110,7 +111,7 @@ public class NexoMineralTest {
         recursosJugador.guardar(0, 49);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador);
+            NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
         });
     }
 }

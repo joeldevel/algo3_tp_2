@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ class EspiralTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador);
+        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
 
         // Act
         espiral.recibirAtaque(10);
@@ -28,7 +29,7 @@ class EspiralTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador);
+        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
         espiral.recibirAtaque(10);
 
         // Act
@@ -43,7 +44,7 @@ class EspiralTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador);
+        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
 
         // Falta la logica de Espiral.
     }
@@ -53,7 +54,7 @@ class EspiralTest {
         // Arrange
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador);
+        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
         
        // Falta la logica de Espiral.
     }
@@ -64,7 +65,7 @@ class EspiralTest {
         recursosJugador.guardar(100, 149);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Espiral espiral = new Espiral(recursosJugador);
+            Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
         });
     }
 }

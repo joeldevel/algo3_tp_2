@@ -13,17 +13,17 @@ public class NexoMineral extends EdificioProtoss implements Minero {
 	private final int COSTO_GAS = 0;
 	
 	private int cantidadRecolectable;
-    private int cantidadRecolectada;
+    private Recursos recursosJugador;
     private NodoMineral nodo;
 
 	
-    public NexoMineral(NodoMineral unNodo, Recursos recursosJugador) {
-        super(new Tiempo(-4),new Vida(250), new Escudo(250), new Ubicacion());
+    public NexoMineral(NodoMineral unNodo, Recursos recursosJugador, Ubicacion unaubicacion) {
+        super(new Tiempo(-4),new Vida(250), new Escudo(250), unaubicacion);
         
         recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
         this.cantidadRecolectable = 10;
-        this.cantidadRecolectada = 0;
+        this.recursosJugador = recursosJugador;
         this.nodo = unNodo;
 
         unNodo.construirRecolectorDeMineral(this);
@@ -31,7 +31,7 @@ public class NexoMineral extends EdificioProtoss implements Minero {
     
     @Override
     public void ejecutaOperable() {
-    	this.cantidadRecolectada += this.recolectarMineralDe(this.nodo);
+    	this.recursosJugador.guardar(0, this.recolectarMineralDe(this.nodo));
     }
     
 	@Override
@@ -41,9 +41,7 @@ public class NexoMineral extends EdificioProtoss implements Minero {
     
 	@Override
     public int obtenerMineral() {
-		int recolectado = this.cantidadRecolectada;
-        this.cantidadRecolectada = 0;
-        return recolectado;
+		return this.recursosJugador.obtenerMineral();
     }
 
 	@Override

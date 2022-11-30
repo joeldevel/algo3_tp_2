@@ -51,7 +51,7 @@ public class Criadero extends EdificioZerg {
 			throw new CriaderoSinLarvasException();
 		}
 		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoEstado(new Zangano());
+		unaUnidad.setComportamientoEstado(new Zangano(new Recursos())); // Hay que pasarle los recursos del jugador correspondientes, no una nueva instancia.
 		this.larvas.remove(0);
 		zanganos.add(unaUnidad);
 	}
