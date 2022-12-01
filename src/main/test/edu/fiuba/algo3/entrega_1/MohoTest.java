@@ -30,7 +30,7 @@ class MohoTest {
 		Moho moho = new Moho();
 		Recursos recursos = new Recursos(0,200);
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		
 		assertTrue(moho.tieneUbicacionesAfectadas());
@@ -42,7 +42,7 @@ class MohoTest {
 		Moho moho = new Moho();
 		Recursos recursos = new Recursos(0,200);
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		
 		assertTrue(moho.estaAfectadaLaUbicacion(new Ubicacion(-5,0)));
@@ -68,7 +68,7 @@ class MohoTest {
 		Moho moho = new Moho();
 		Recursos recursos = new Recursos(0,200);
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		moho.avanzarTurno(2);
 		
@@ -82,9 +82,9 @@ class MohoTest {
 		Moho moho = new Moho();
 		Recursos recursos = new Recursos(0,400);
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
-		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,20), jugadorZerg);
+		Criadero otroCriadero = new Criadero(new Ubicacion(0,20), jugadorZerg);
 		moho.agregarCriadero(otroCriadero);
 		
 		assertEquals(moho.contarUbicacionesAfectadas(), 162);
@@ -96,9 +96,9 @@ class MohoTest {
 		Moho moho = new Moho();
 		Recursos recursos = new Recursos(0,400);
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
-		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,10), jugadorZerg);
+		Criadero otroCriadero = new Criadero(new Ubicacion(0,10), jugadorZerg);
 		moho.agregarCriadero(otroCriadero);
 		
 		/* el (0,5) se comparte con los 2 origenes, por eso es 161 y no 162
@@ -112,10 +112,10 @@ class MohoTest {
 		Moho moho = new Moho();
 		Recursos recursos = new Recursos(0,400);
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		moho.avanzarTurno(2);
-		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,20), jugadorZerg);
+		Criadero otroCriadero = new Criadero(new Ubicacion(0,20), jugadorZerg);
 		moho.agregarCriadero(otroCriadero);
 		
 		assertEquals(moho.contarUbicacionesAfectadas(),194);
@@ -127,7 +127,7 @@ class MohoTest {
 		Moho moho = new Moho();
 		Recursos recursos = new Recursos(0,200);
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		moho.eliminarCriaderoEnUbicacion(new Ubicacion(0,0));
 		

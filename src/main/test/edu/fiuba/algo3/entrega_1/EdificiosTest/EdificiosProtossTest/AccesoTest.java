@@ -18,7 +18,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Acceso.
     }
@@ -28,7 +28,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Acceso.
     }
@@ -38,7 +38,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         acceso.recibirAtaque(10);
@@ -52,7 +52,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(10);
 
         // Act
@@ -67,7 +67,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 500 de daño y luego 300 de vida.
 
         // Act
@@ -82,7 +82,7 @@ public class AccesoTest {
         // Arrange
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -98,7 +98,7 @@ public class AccesoTest {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
+            Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

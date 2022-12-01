@@ -21,10 +21,10 @@ public class Espiral extends EdificioZerg {
 	private ArrayList<Unidad> larvas;
     private ArrayList<Unidad> mutaliscos;
 	
-	public Espiral(Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador){
+	public Espiral(Ubicacion unaUbicacion, Jugador unJugador){
         super(new Tiempo(-10), new Vida(1300), unaUbicacion, unJugador);
         
-        recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
         this.larvas = new ArrayList<Unidad>();
         this.mutaliscos = new ArrayList<Unidad>();

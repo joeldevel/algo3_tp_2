@@ -523,7 +523,7 @@ class CasoDeUso23Test {
 		Ubicacion ubicacion2 = new Ubicacion(0,2);
 		Recursos recursos = new Recursos(0, 150);
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-		Acceso acceso = new Acceso(recursos, ubicacion2, jugadorProtoss);
+		Acceso acceso = new Acceso(ubicacion2, jugadorProtoss);
 
 		assertThrows(AtacableFueraDeRangoError.class, ()->{
 			zerling.atacar(acceso);
@@ -539,7 +539,7 @@ class CasoDeUso23Test {
 		Ubicacion ubicacion2 = new Ubicacion(0,1);
 		Recursos recursos = new Recursos(0, 150);
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-		Acceso acceso = new Acceso(recursos, ubicacion2, jugadorProtoss);
+		Acceso acceso = new Acceso(ubicacion2, jugadorProtoss);
 
 		zerling.atacar(acceso);
 
@@ -557,7 +557,7 @@ class CasoDeUso23Test {
 		Ubicacion ubicacion2 = new Ubicacion(0,2);
 		Recursos recursos = new Recursos(0, 200);
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-		Criadero criadero = new Criadero(recursos, ubicacion2, jugadorProtoss);
+		Criadero criadero = new Criadero(ubicacion2, jugadorProtoss);
 
 		assertThrows(AtacableFueraDeRangoError.class, ()->{
 			zealot.atacar(criadero);
@@ -573,7 +573,7 @@ class CasoDeUso23Test {
 		Ubicacion ubicacion2 = new Ubicacion(0,1);
 		Recursos recursos = new Recursos(0, 200);
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-		Criadero criadero = new Criadero(recursos, ubicacion2, jugadorProtoss);
+		Criadero criadero = new Criadero(ubicacion2, jugadorProtoss);
 
 		zealot.atacar(criadero);
 

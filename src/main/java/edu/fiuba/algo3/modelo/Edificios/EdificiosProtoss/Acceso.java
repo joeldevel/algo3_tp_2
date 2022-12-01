@@ -26,14 +26,14 @@ public class Acceso extends EdificioProtoss {
 	private ArrayList<Unidad> zealotsProductivo;
 	private ArrayList<Unidad> dragonesProductivo;
 	
-    public Acceso(Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador) {
+    public Acceso(Ubicacion unaUbicacion, Jugador unJugador) {
 		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador);
 		this.zealotsPedido = new ArrayList<Unidad>();
 		this.dragonesPedido = new ArrayList<Unidad>();
 		this.zealotsProductivo = new ArrayList<Unidad>();
 		this.dragonesProductivo = new ArrayList<Unidad>();
 		
-		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 	}
 
 	@Override

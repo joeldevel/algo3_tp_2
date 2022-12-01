@@ -21,26 +21,26 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	private Superficie superficie;
 
 	private int cantidadRecolectableDeMineral;
-    private Recursos recursosJugador;
+    private Jugador jugador;
     private Mineral nodo;
 
-	public Zangano(Ubicacion unaUbicacion, Recursos recursosJugador) {
+	public Zangano(Ubicacion unaUbicacion, Jugador unJugador) {
 		this.vida = new Vida(25);
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 
 		this.cantidadRecolectableDeMineral = 10;
-		this.recursosJugador = recursosJugador;
+		this.jugador = unJugador;
 		this.nodo = new SinNodoMineral();
 	}
 
-    public Zangano(Recursos recursosJugador) {
+    public Zangano(Jugador unJugador) {
 		this.vida = new Vida(25);
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 
         this.cantidadRecolectableDeMineral = 10;
-		this.recursosJugador = recursosJugador;
+		this.jugador = unJugador;
         this.nodo = new SinNodoMineral();
     }
     
@@ -51,7 +51,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	public void avanzarTurno() {
 		if(nodo.tieneMineral()) {
-			this.recursosJugador.guardar(0, this.recolectarMineralDe(this.nodo));
+			this.jugador.guardar(0, this.recolectarMineralDe(this.nodo));
 		}
 	}
 
@@ -62,7 +62,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public int obtenerMineral() {
-		return this.recursosJugador.obtenerMineral();
+		return this.jugador.obtenerMineral();
 	}
 
 	@Override

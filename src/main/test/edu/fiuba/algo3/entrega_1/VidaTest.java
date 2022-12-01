@@ -25,7 +25,7 @@ class VidaTest {
 
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
-		Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 		
 		vida.recibirDanioPor(10, pilon, jugadorProtoss);
 		
@@ -41,7 +41,7 @@ class VidaTest {
 
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
-		Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
 		vida.recibirDanioPor(100, pilon, jugadorProtoss);
 		
@@ -57,7 +57,7 @@ class VidaTest {
 
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
-		Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
 		vida.recibirDanioPor(200, pilon, jugadorProtoss);
 		
@@ -89,7 +89,7 @@ class VidaTest {
 
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
-		Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
 		vida.recibirDanioPor(50, pilon, jugadorProtoss);
 		vida.recuperarse();
@@ -106,7 +106,7 @@ class VidaTest {
 
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
-		Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
 		vida.recibirDanioPor(100, pilon, jugadorProtoss);
 		vida.recuperarse();
@@ -123,7 +123,7 @@ class VidaTest {
 
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
-		Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
 		vida.recibirDanioPor(1000, pilon, jugadorProtoss);
 		vida.recuperarse();
@@ -150,7 +150,7 @@ class VidaTest {
 
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
-		Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 		
 		assertThrows(ValorInvalidoDeDanioError.class,()->{
 			vida.recibirDanioPor(-100, pilon, jugadorProtoss);

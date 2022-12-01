@@ -31,10 +31,10 @@ class VolcanTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Extractor primerExtractor = new Extractor(volcan, recursos, new Ubicacion(0,0), jugadorZerg);
+        Extractor primerExtractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         assertThrows(VolcanYaTieneUnaRefineriaDeGasConstruidaException.class,()->{
-            Extractor segundoExtractor = new Extractor(volcan, recursos, new Ubicacion(0,0), jugadorZerg);
+            Extractor segundoExtractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         });
     }
 
@@ -44,8 +44,8 @@ class VolcanTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0,100);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Extractor extractor = new Extractor(volcan, recursos, new Ubicacion(0,0), jugadorZerg);
-        Zangano primerZangano =  new Zangano(recursos);
+        Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
+        Zangano primerZangano =  new Zangano(jugadorZerg);
         extractor.guardarZangano(primerZangano);
 
         // Act & Assert

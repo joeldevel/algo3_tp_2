@@ -32,10 +32,10 @@ public class NodoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0,100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral primerNexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral primerNexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         assertThrows(NodoMineralYaTieneUnRecolectorDeMineralException.class,()->{
-            NexoMineral segundoNexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+            NexoMineral segundoNexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 
@@ -44,11 +44,14 @@ public class NodoMineralTest {
         Recursos recursos = new Recursos(0,50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NodoMineral nodoMineral = new NodoMineral();
-        Zangano zangano = new Zangano(recursos);
+
+        Recursos recursosZerg = new Recursos(0,0);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursosZerg);
+        Zangano zangano = new Zangano(jugadorZerg);
         zangano.conNodo(nodoMineral);
 
         assertThrows(NodoMineralYaTieneUnRecolectorDeMineralException.class,()->{
-            NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+            NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 
@@ -58,7 +61,7 @@ public class NodoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0,50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
 
         // Act & Assert
@@ -73,7 +76,7 @@ public class NodoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0,50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.avanzarTurno(5);
@@ -87,7 +90,8 @@ public class NodoMineralTest {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0,0);
-        Zangano zangano = new Zangano(recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Zangano zangano = new Zangano(jugadorZerg);
         zangano.conNodo(nodoMineral);
 
         // Act

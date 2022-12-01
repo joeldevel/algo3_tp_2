@@ -24,10 +24,10 @@ public class Pilon extends EdificioProtoss {
 	/* ver si el pilon tiene una referencia a los edificios o si el jugadores le pasa a todos los pilones 
 	 * que tenga los edificios que tiene*/
 
-    public Pilon(Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador) {
+    public Pilon(Ubicacion unaUbicacion, Jugador unJugador) {
     	super(new Tiempo(-5), new Vida(300), new Escudo(300), unaUbicacion, unJugador);
     	
-    	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+    	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
     	this.edificios = new ArrayList<>();
         this.radio = 3;

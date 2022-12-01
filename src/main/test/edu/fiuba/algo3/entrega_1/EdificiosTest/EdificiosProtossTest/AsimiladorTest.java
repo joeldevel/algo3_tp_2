@@ -16,7 +16,7 @@ class AsimiladorTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         assertEquals(0, asimilador.obtenerGas());
     }
@@ -27,7 +27,7 @@ class AsimiladorTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.avanzarTurno(7);
@@ -42,7 +42,7 @@ class AsimiladorTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.avanzarTurno(10);
@@ -57,7 +57,7 @@ class AsimiladorTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.recibirAtaque(10);
@@ -72,7 +72,7 @@ class AsimiladorTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.recibirAtaque(10);
 
         // Act
@@ -88,7 +88,7 @@ class AsimiladorTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.recibirAtaque(600); // Le sacamos todo el escudo con 450 de daño y luego 150 de vida.
 
         // Act
@@ -104,7 +104,7 @@ class AsimiladorTest {
         Volcan volcan = new Volcan();
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.recibirAtaque(600); // Le sacamos todo el escudo con 450 de daño y luego 150 de vida.
 
         // Act
@@ -121,7 +121,7 @@ class AsimiladorTest {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
+            Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

@@ -25,7 +25,7 @@ class CasoDeUso01 {
 	@Test
 	void test01UnNuevoCriaderoComienzaCon3Larvas() {
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		
 		assertEquals(criadero.contarLarvas(),3);
 	}
@@ -34,7 +34,7 @@ class CasoDeUso01 {
 	void test02UnCriaderoOperativoCreaUnZanganoDeberiaTener2Larvas() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -46,7 +46,7 @@ class CasoDeUso01 {
 	void test03UnCriaderoOperativoCreaUnZanganoYLuegoDeUnTurnoDeberiaTener3Larvas() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -59,7 +59,7 @@ class CasoDeUso01 {
 	void test04UnCriaderoOperativoCrea2ZanganosDeberiaTenerUnaLarva() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -72,7 +72,7 @@ class CasoDeUso01 {
 	void test05UnCriaderoOperativoCrea2ZanganosYLuegoDeUnTurnoDeberiaTener2Larvas() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -86,7 +86,7 @@ class CasoDeUso01 {
 	void test06UnCriaderoOperativoCrea3ZanganosNoDeberiaTenerLarvas() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -100,7 +100,7 @@ class CasoDeUso01 {
 	void test07UnCriaderoOperativoCrea3ZanganosYLuegoDeUnTurnoDeberiaTenerUnaLarva() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -115,7 +115,7 @@ class CasoDeUso01 {
 	void test08UnCriaderoOperativoCrea2ZanganosYLuegoDe2TurnosVuelveATener3larvas() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -130,7 +130,7 @@ class CasoDeUso01 {
 	void test09UnCriaderoOperativoCrea3ZanganosYLuegoDe3TurnosVuelveATener3Larvas() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();
@@ -145,7 +145,7 @@ class CasoDeUso01 {
 	void test10UnCriaderoOperativoNuncaRegeneraMasDe3Larvas() {
 
 		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0), jugadorZerg);
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 		criadero.avanzarTurno(4);
 		
 		criadero.crearZangano();

@@ -16,7 +16,7 @@ class EspiralTest {
         // Arrange
         Recursos recursos = new Recursos(100,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
 
         // Act
         espiral.recibirAtaque(10);
@@ -30,7 +30,7 @@ class EspiralTest {
         // Arrange
         Recursos recursos = new Recursos(100,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
         espiral.recibirAtaque(10);
 
         // Act
@@ -45,7 +45,7 @@ class EspiralTest {
         // Arrange
         Recursos recursos = new Recursos(100,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
 
         // Falta la logica de Espiral.
     }
@@ -55,7 +55,7 @@ class EspiralTest {
         // Arrange
         Recursos recursos = new Recursos(100,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
         
        // Falta la logica de Espiral.
     }
@@ -66,7 +66,7 @@ class EspiralTest {
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
+            Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
         });
     }
 }

@@ -21,10 +21,10 @@ public class ReservaDeProduccion extends EdificioZerg {
     private ArrayList<Unidad> larvas;
     private ArrayList<Unidad> zerlings;
     	
-    public ReservaDeProduccion(Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador) {
+    public ReservaDeProduccion(Ubicacion unaUbicacion, Jugador unJugador) {
     	super(new Tiempo(-12), new Vida(1000), unaUbicacion, unJugador);
     	
-    	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+    	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
     	this.larvas = new ArrayList<Unidad>();
     	this.zerlings = new ArrayList<Unidad>();

@@ -67,26 +67,46 @@ public class JugadorProtoss implements Jugador {
         this.entidades = new ArrayList<Raza>();
     }
 
+    @Override
+    public void guardar(int costoGas, int costoMineral) {
+        this.recursos.guardar(costoGas, costoMineral);
+    }
+
+    @Override
+    public void utilizar(int costoGas, int costoMineral) {
+        this.recursos.utilizar(costoGas, costoMineral);
+    }
+
+    @Override
+    public int obtenerGas() {
+        return this.recursos.obtenerGas();
+    }
+
+    @Override
+    public int obtenerMineral() {
+        return this.recursos.obtenerMineral();
+    }
+
     public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
-        this.entidades.add(new NexoMineral(unNodo, this.recursos, unaUbicacion, this));
+        this.entidades.add(new NexoMineral(unNodo, unaUbicacion, this));
     }
 
     public Pilon crearPilon(Ubicacion unaUbicacion) {
-        Pilon pilon = new Pilon(this.recursos, unaUbicacion, this);
+        Pilon pilon = new Pilon(unaUbicacion, this);
         this.entidades.add(pilon);
         return pilon;
     }
 
     public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.entidades.add(new Asimilador(unVolcan, this.recursos, unaUbicacion, this));
+        this.entidades.add(new Asimilador(unVolcan, unaUbicacion, this));
     }
 
     public void crearAcceso(Ubicacion unaUbicacion) {
-        this.entidades.add(new Acceso(this.recursos, unaUbicacion, this));
+        this.entidades.add(new Acceso(unaUbicacion, this));
     }
 
     public void crearPuertoEstelar(Ubicacion unaUbicacion) {
-        this.entidades.add(new PuertoEstelar(this.recursos, unaUbicacion, this));
+        this.entidades.add(new PuertoEstelar(unaUbicacion, this));
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.

@@ -16,7 +16,7 @@ class ReservaDeProduccionTest {
         // Arrange
         Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
 
         // Act
         rdp.recibirAtaque(10);
@@ -30,7 +30,7 @@ class ReservaDeProduccionTest {
         // Arrange
         Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
         rdp.recibirAtaque(10);
 
         // Act
@@ -45,7 +45,7 @@ class ReservaDeProduccionTest {
         // Arrange
         Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
 
         // Falta la logica de la Reserva de Produccion.
     }
@@ -71,7 +71,7 @@ class ReservaDeProduccionTest {
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
+            ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
         });
     }
 }

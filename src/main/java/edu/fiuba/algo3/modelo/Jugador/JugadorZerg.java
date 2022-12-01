@@ -80,26 +80,46 @@ public class JugadorZerg implements Jugador {
         this.entidades = new ArrayList<Raza>();
     }
 
+    @Override
+    public void guardar(int costoGas, int costoMineral) {
+        this.recursos.guardar(costoGas, costoMineral);
+    }
+
+    @Override
+    public void utilizar(int costoGas, int costoMineral) {
+        this.recursos.utilizar(costoGas, costoMineral);
+    }
+
+    @Override
+    public int obtenerGas() {
+        return this.recursos.obtenerGas();
+    }
+
+    @Override
+    public int obtenerMineral() {
+        return this.recursos.obtenerMineral();
+    }
+
     public Criadero crearCriadero(Ubicacion unaUbicacion) {
-        Criadero criadero = new Criadero(this.recursos, unaUbicacion, this);
+        Criadero criadero = new Criadero(unaUbicacion, this);
         this.entidades.add(criadero);
         return criadero;
     }
 
     public void crearReservaDeProduccion(Ubicacion unaUbicacion) {
-        this.entidades.add(new ReservaDeProduccion(this.recursos, unaUbicacion, this));
+        this.entidades.add(new ReservaDeProduccion(unaUbicacion, this));
     }
 
     public void crearExtractor(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.entidades.add(new Extractor(unVolcan, this.recursos, unaUbicacion, this));
+        this.entidades.add(new Extractor(unVolcan, unaUbicacion, this));
     }
 
     public void crearGuarida(Ubicacion unaUbicacion) {
-        this.entidades.add(new Guarida(this.recursos, unaUbicacion, this));
+        this.entidades.add(new Guarida(unaUbicacion, this));
     }
 
     public void crearEspiral(Ubicacion unaUbicacion) {
-        this.entidades.add(new Espiral(this.recursos, unaUbicacion, this));
+        this.entidades.add(new Espiral(unaUbicacion, this));
     }
 
     // Falta enviar el mensaje que permite instanciar Amo Supremo.

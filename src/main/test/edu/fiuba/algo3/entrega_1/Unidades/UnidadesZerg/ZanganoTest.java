@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1.Unidades.UnidadesZerg;
 
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
@@ -14,8 +15,9 @@ public class ZanganoTest {
     void test01SeConstruyeUnZanganoEnUnNodoMineralYSeAvanzanTresTurnosDevuelveElResultadoIndicado() {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        Zangano zangano = new Zangano(recursosJugador);
+        Recursos recursos = new Recursos();
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Zangano zangano = new Zangano(jugadorZerg);
         zangano.conNodo(nodoMineral);
 
         // Act
@@ -30,8 +32,9 @@ public class ZanganoTest {
     @Test
     void test02UnZanganoQueNoEstaTrabajandoEnUnNodoMineralNoDeberiaRecolecarMineral() {
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        Zangano zangano = new Zangano(recursosJugador);
+        Recursos recursos = new Recursos();
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Zangano zangano = new Zangano(jugadorZerg);
 
         // Act
         zangano.avanzarTurno();
@@ -46,8 +49,9 @@ public class ZanganoTest {
     void test03UnZanganoEsAtacadoPorUnZealotYLaVidaDelZanganotDisminuyeLoIndicado(){
         // Arrange
         Zealot zealot = new Zealot(); // Ataque de tierra
-        Recursos recursosJugador = new Recursos();
-        Zangano zangano = new Zangano(recursosJugador); // Unidad de tierra
+        Recursos recursos = new Recursos();
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Zangano zangano = new Zangano(jugadorZerg); // Unidad de tierra
 
         // Act
         zealot.atacar(zangano);

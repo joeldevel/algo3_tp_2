@@ -27,10 +27,10 @@ public class Criadero extends EdificioZerg {
 	private ArrayList<Unidad> larvas;
 	private ArrayList<Unidad> zanganos;
 		
-	public Criadero(Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador) {
+	public Criadero(Ubicacion unaUbicacion, Jugador unJugador) {
 		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador);
 		
-		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
 		this.maxLarvas = 3;
 		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva(), unJugador));
@@ -58,7 +58,7 @@ public class Criadero extends EdificioZerg {
 			throw new CriaderoSinLarvasException();
 		}
 		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoEstado(new Zangano(new Recursos())); // Hay que pasarle los recursos del jugador correspondientes, no una nueva instancia.
+		unaUnidad.setComportamientoEstado(new Zangano(this.jugador));
 		this.larvas.remove(0);
 		zanganos.add(unaUnidad);
 	}

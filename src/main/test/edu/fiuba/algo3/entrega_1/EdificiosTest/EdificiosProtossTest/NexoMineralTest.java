@@ -18,7 +18,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.avanzarTurno(1);
@@ -33,7 +33,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.avanzarTurno(5);
@@ -48,7 +48,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.recibirAtaque(10);
@@ -63,7 +63,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.recibirAtaque(10);
 
         // Act
@@ -79,7 +79,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.recibirAtaque(400); // Le sacamos todo el escudo con 250 de daño y luego 150 de vida.
 
         // Act
@@ -95,7 +95,7 @@ public class NexoMineralTest {
         NodoMineral nodoMineral = new NodoMineral();
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.recibirAtaque(400); // Le sacamos todo el escudo con 250 de daño y luego 150 de vida.
 
         // Act
@@ -112,7 +112,7 @@ public class NexoMineralTest {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
+            NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

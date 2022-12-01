@@ -17,7 +17,7 @@ public class PilonTest {
         // Arrange
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Pilon.
     }
@@ -27,7 +27,7 @@ public class PilonTest {
         // Arrange
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Pilon.
     }
@@ -37,7 +37,7 @@ public class PilonTest {
         // Arrange
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         pilon.recibirAtaque(10);
@@ -51,7 +51,7 @@ public class PilonTest {
         // Arrange
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         pilon.recibirAtaque(10);
 
         // Act
@@ -66,7 +66,7 @@ public class PilonTest {
         // Arrange
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         pilon.recibirAtaque(500); // Le sacamos todo el escudo con 300 de daño y luego 200 de vida.
 
         // Act
@@ -81,7 +81,7 @@ public class PilonTest {
         // Arrange
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         pilon.recibirAtaque(500); // Le sacamos todo el escudo con 300 de daño y luego 200 de vida.
 
         // Act
@@ -97,7 +97,7 @@ public class PilonTest {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
+            Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

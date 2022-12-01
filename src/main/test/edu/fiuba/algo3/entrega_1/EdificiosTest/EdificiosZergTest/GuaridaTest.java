@@ -16,7 +16,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursos = new Recursos(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
 
         // Falta la logica de Guarida.
     }
@@ -26,7 +26,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursos = new Recursos(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
 
         // Act
         guarida.recibirAtaque(10);
@@ -55,7 +55,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursos = new Recursos(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
         guarida.avanzarTurno(12);
 
         // Act
@@ -70,7 +70,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursos = new Recursos(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
         guarida.avanzarTurno(12);
         guarida.recibirAtaque(10);
 
@@ -87,7 +87,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursos = new Recursos(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
 
         // Act
         guarida.recibirAtaque(10);
@@ -101,7 +101,7 @@ class GuaridaTest {
         // Arrange
         Recursos recursos = new Recursos(100,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
         guarida.recibirAtaque(10);
 
         // Act
@@ -117,7 +117,7 @@ class GuaridaTest {
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
+            Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
         });
     }
 }

@@ -16,7 +16,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursos = new Recursos(150,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
 
         // Falta implementar la logica de Puerto Estelar.
     }
@@ -26,7 +26,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursos = new Recursos(150,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
 
         // Falta implementar la logica de Puerto Estelar.
     }
@@ -36,7 +36,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursos = new Recursos(150,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
 
         // Act
         puertoEstelar.recibirAtaque(10);
@@ -50,7 +50,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursos = new Recursos(150,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
         puertoEstelar.recibirAtaque(10);
 
         // Act
@@ -65,7 +65,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursos = new Recursos(150,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
         puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -80,7 +80,7 @@ class PuertoEstelarTest {
         // Arrange
         Recursos recursos = new Recursos(150,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
         puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -96,7 +96,7 @@ class PuertoEstelarTest {
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
+            PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
         });
     }
 }
