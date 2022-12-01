@@ -14,6 +14,8 @@ import edu.fiuba.algo3.modelo.Vida;
 
 public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
+	public static final int CUPO_ZANGANO = 1;
+
 	private Vida vida;
 	private Ubicacion ubicacion;
 	private Superficie superficie;

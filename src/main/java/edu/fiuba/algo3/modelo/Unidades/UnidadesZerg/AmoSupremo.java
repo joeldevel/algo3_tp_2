@@ -10,6 +10,8 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
+    public static final int CUPO_AMO = 0;
+
     private Vida vida;
     private Ubicacion ubicacion;
     private Superficie superficie;

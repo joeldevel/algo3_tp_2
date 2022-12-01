@@ -15,6 +15,8 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Scout implements TipoDeUnidad, Atacante, Atacable {
 
+	public static final int CUPO_SCOUT = 4;
+
 	private Vida vida;
 	private Escudo escudo;
 	private Ubicacion ubicacion;

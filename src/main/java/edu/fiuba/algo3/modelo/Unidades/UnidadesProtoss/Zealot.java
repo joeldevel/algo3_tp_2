@@ -16,6 +16,8 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
+	public static final int CUPO_ZEALOT = 2;
+
 	private Vida vida;
 	private Escudo escudo;
 	private Ubicacion ubicacion;

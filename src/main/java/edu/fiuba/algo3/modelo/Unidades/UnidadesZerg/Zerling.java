@@ -14,6 +14,8 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Zerling implements TipoDeUnidad, Atacante, Atacable{
 
+	public static final int CUPO_ZERLING = 1;
+
 	private Vida vida;
 	private Ubicacion ubicacion;
 	private Superficie superficie;

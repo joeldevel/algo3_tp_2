@@ -7,9 +7,16 @@ import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.*;
 
 import java.util.ArrayList;
+
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.CUPO_AMO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.CUPO_DEVORADOR;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.CUPO_GUARDIAN;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.CUPO_HIDRALISCO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.CUPO_MUTALISCO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CUPO_ZANGANO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.CUPO_ZERLING;
 
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.
@@ -20,11 +27,6 @@ public class JugadorZerg implements Jugador {
     private static final int MAX_POBLACION = 200;
     private static final int CAP_POBLACION = 5;
     private static final int CANT_MINERAL_INICIAL = 200;
-    private static final int CUPO_AMO = 0;
-    private static final int CUPO_ZANGANO = 1;
-    private static final int CUPO_ZERLING = 1;
-    private static final int CUPO_HIDRALISCO = 2;
-    private static final int CUPO_MUTALISCO = 4;
 
     private String nombre;
     private String color;
@@ -167,23 +169,23 @@ public class JugadorZerg implements Jugador {
     // Falta enviar el mensaje que permite instanciar Guardian (evolucion de Mutalisco).
     public void crearGuardian() {
 
-        if (!this.hayCupoDisponible(CUPO_MUTALISCO)) {
+        if (!this.hayCupoDisponible(CUPO_GUARDIAN)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeGuardianes++;
-        this.incrementarCupo(CUPO_MUTALISCO);
+        this.incrementarCupo(CUPO_GUARDIAN);
     }
 
     // Falta enviar el mensaje que permite instanciar Devorador (evolucion de Mutalisco).
     public void crearDevorador() {
 
-        if (!this.hayCupoDisponible(CUPO_MUTALISCO)) {
+        if (!this.hayCupoDisponible(CUPO_DEVORADOR)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDevoradores++;
-        this.incrementarCupo(CUPO_MUTALISCO);
+        this.incrementarCupo(CUPO_DEVORADOR);
     }
 
     public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {

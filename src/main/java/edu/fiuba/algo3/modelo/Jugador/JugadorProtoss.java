@@ -11,6 +11,10 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.CUPO_DRAGON;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.CUPO_SCOUT;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.CUPO_ZEALOT;
+
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.
 // Siempre debe cumplirse que cupo <= poblacion <= MAX_POBLACION.
@@ -20,9 +24,6 @@ public class JugadorProtoss implements Jugador {
     private static final int MAX_POBLACION = 200;
     private static final int CAP_POBLACION = 5;
     private static final int CANT_MINERAL_INICIAL = 200;
-    private static final int CUPO_ZEALOT = 2;
-    private static final int CUPO_DRAGON = 3;
-    private static final int CUPO_SCOUT = 4;
 
     private String nombre;
     private String color;

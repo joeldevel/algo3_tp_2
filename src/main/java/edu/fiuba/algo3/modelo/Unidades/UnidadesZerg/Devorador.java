@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
+    public static final int CUPO_DEVORADOR = 4;
+
     private Vida vida;
     private Ubicacion ubicacion;
     private Superficie superficie;
