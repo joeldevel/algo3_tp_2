@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int CUPO_MUTALISCO = 4;
+	public static final int SUMINISTRO_MUTALISCO = 4;
 	
 	private Vida vida;
 	private Ubicacion ubicacion;

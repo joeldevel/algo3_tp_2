@@ -11,9 +11,9 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.CUPO_DRAGON;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.CUPO_SCOUT;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.CUPO_ZEALOT;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.SUMINISTRO_DRAGON;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.SUMINISTRO_SCOUT;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.SUMINISTRO_ZEALOT;
 
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.
@@ -96,32 +96,32 @@ public class JugadorProtoss implements Jugador {
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
     public void crearZealot() {
 
-        if (!this.hayCupoDisponible(CUPO_ZEALOT)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_ZEALOT)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZealots++;
-        this.incrementarCupo(CUPO_ZEALOT);
+        this.incrementarCupo(SUMINISTRO_ZEALOT);
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Dragon.
     public void crearDragon() {
-        if (!this.hayCupoDisponible(CUPO_DRAGON)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_DRAGON)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDragones++;
-        this.incrementarCupo(CUPO_DRAGON);
+        this.incrementarCupo(SUMINISTRO_DRAGON);
     }
 
     // Falta enviar el mensaje al edificio PuertoEstelar que permite instanciar Scout.
     public void crearScout() {
-        if (!this.hayCupoDisponible(CUPO_SCOUT)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_SCOUT)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeScouts++;
-        this.incrementarCupo(CUPO_SCOUT);
+        this.incrementarCupo(SUMINISTRO_SCOUT);
     }
 
     public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {

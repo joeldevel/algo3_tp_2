@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int CUPO_GUARDIAN = 4;
+	public static final int SUMINISTRO_GUARDIAN = 4;
 
 	private Vida vida;
 	private Ubicacion ubicacion;

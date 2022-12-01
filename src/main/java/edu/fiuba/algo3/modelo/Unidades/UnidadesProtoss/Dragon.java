@@ -15,7 +15,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int CUPO_DRAGON = 3;
+	public static final int SUMINISTRO_DRAGON = 3;
 	
 	private Vida vida;
 	private Escudo escudo;

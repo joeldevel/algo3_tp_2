@@ -11,12 +11,12 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import java.util.ArrayList;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.CUPO_AMO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.CUPO_DEVORADOR;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.CUPO_GUARDIAN;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.CUPO_HIDRALISCO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.CUPO_MUTALISCO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CUPO_ZANGANO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.CUPO_ZERLING;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.SUMINISTRO_DEVORADOR;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.SUMINISTRO_GUARDIAN;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO_HIDRALISCO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.SUMINISTRO_MUTALISCO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.SUMINISTRO_ZANGANO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
 
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.
@@ -125,67 +125,67 @@ public class JugadorZerg implements Jugador {
     // Falta enviar el mensaje al edificio Criadero que permite instanciar Zangano.
     public void crearZangano() {
 
-        if (!this.hayCupoDisponible(CUPO_ZANGANO)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_ZANGANO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZanganos++;
-        this.incrementarCupo(CUPO_ZANGANO);
+        this.incrementarCupo(SUMINISTRO_ZANGANO);
     }
 
     // Falta enviar el mensaje al edificio ReservaDeReproduccion que permite instanciar Zerling.
     public void crearZerling() {
 
-        if (!this.hayCupoDisponible(CUPO_ZERLING)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_ZERLING)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZerlings++;
-        this.incrementarCupo(CUPO_ZERLING);
+        this.incrementarCupo(SUMINISTRO_ZERLING);
     }
 
     // Falta enviar el mensaje al edificio Guarida que permite instanciar Hidralisco.
     public void crearHidralisco() {
 
-        if (!this.hayCupoDisponible(CUPO_HIDRALISCO)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_HIDRALISCO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeHidraliscos++;
-        this.incrementarCupo(CUPO_HIDRALISCO);
+        this.incrementarCupo(SUMINISTRO_HIDRALISCO);
     }
 
     // Falta enviar el mensaje al edificio Espiral que permite instanciar Mutalisco.
     public void crearMutalisco() {
 
-        if (!this.hayCupoDisponible(CUPO_MUTALISCO)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_MUTALISCO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeMutaliscos++;
-        this.incrementarCupo(CUPO_MUTALISCO);
+        this.incrementarCupo(SUMINISTRO_MUTALISCO);
     }
 
     // Falta enviar el mensaje que permite instanciar Guardian (evolucion de Mutalisco).
     public void crearGuardian() {
 
-        if (!this.hayCupoDisponible(CUPO_GUARDIAN)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_GUARDIAN)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeGuardianes++;
-        this.incrementarCupo(CUPO_GUARDIAN);
+        this.incrementarCupo(SUMINISTRO_GUARDIAN);
     }
 
     // Falta enviar el mensaje que permite instanciar Devorador (evolucion de Mutalisco).
     public void crearDevorador() {
 
-        if (!this.hayCupoDisponible(CUPO_DEVORADOR)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_DEVORADOR)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDevoradores++;
-        this.incrementarCupo(CUPO_DEVORADOR);
+        this.incrementarCupo(SUMINISTRO_DEVORADOR);
     }
 
     public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {

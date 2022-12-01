@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int CUPO_HIDRALISCO = 2;
+	public static final int SUMINISTRO_HIDRALISCO = 2;
 	
 	private Vida vida;
 	private Ubicacion ubicacion;
