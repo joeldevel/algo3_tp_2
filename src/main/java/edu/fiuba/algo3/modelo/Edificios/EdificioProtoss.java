@@ -34,7 +34,7 @@ public abstract class EdificioProtoss extends Edificio {
     		int danioRestante = unAtaque - this.escudo.restante();
     		this.vida.recibirDanioPor(danioRestante, this, this.jugador);
     	}
-    	this.escudo.recibirDanioPor(unAtaque, this, this.jugador);
+    	this.escudo.recibirDanioPor(unAtaque);
     }
 
     public void energizar() {

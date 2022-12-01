@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,9 @@ class PuertoEstelarTest {
     @Test
     void test01SeConstruyeUnPuertoEstelarYNoSeEncuentraOperativo(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(150,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Falta implementar la logica de Puerto Estelar.
     }
@@ -23,9 +24,9 @@ class PuertoEstelarTest {
     @Test
     void test02SeConstruyeUnPuertoEstelarYDespuesDeDiezTurnosSeEncuentraOperativo(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(150,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Falta implementar la logica de Puerto Estelar.
     }
@@ -33,9 +34,9 @@ class PuertoEstelarTest {
     @Test
     void test03SeConstruyeUnPuertoEstelarYRecibeDanio() {
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(150,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Act
         puertoEstelar.recibirAtaque(10);
@@ -47,9 +48,9 @@ class PuertoEstelarTest {
     @Test
     void test04SeConstruyeUnPuertoEstelarQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(150,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
         puertoEstelar.recibirAtaque(10);
 
         // Act
@@ -62,9 +63,9 @@ class PuertoEstelarTest {
     @Test
     void test05SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(150,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
         puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -77,9 +78,9 @@ class PuertoEstelarTest {
     @Test
     void test06SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(150, 150);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(150,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
         puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -91,11 +92,11 @@ class PuertoEstelarTest {
 
     @Test
     void test07SeIntentaConstruirUnPuertoEstelarSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(149, 150);
+        Recursos recursos = new Recursos(149,149);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            PuertoEstelar puertoEstelar = new PuertoEstelar(recursosJugador, new Ubicacion(0,0));
+            PuertoEstelar puertoEstelar = new PuertoEstelar(recursos, new Ubicacion(0,0), jugadorZerg);
         });
     }
 }

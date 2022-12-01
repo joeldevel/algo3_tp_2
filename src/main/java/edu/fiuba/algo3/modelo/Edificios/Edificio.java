@@ -20,8 +20,6 @@ public abstract class Edificio extends Raza implements Recuperable{
 		this.superficie = new Superficie("Tierra");
 		this.estado = new EnConstruccion(this);
 	}
-
-	public abstract int obtenerPoblacion();
 	
 	public void ejecutaEnConstruccion() {
 		if(this.tiempo.restante() == 0) {

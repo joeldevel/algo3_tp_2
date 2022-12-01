@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -34,8 +35,7 @@ public class JugadorProtoss implements Jugador {
     private int cantidadDeDragones;
     private int cantidadDeScouts;
 
-    private ArrayList<Edificio> edificios;
-    private ArrayList<Unidad> unidades;
+    private ArrayList<Raza> entidades;
 
     public JugadorProtoss(String unNombre, String unColor) {
         this.nombre = unNombre;
@@ -49,8 +49,7 @@ public class JugadorProtoss implements Jugador {
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
 
-        this.edificios = new ArrayList<Edificio>();
-        this.unidades = new ArrayList<Unidad>();
+        this.entidades = new ArrayList<Raza>();
     }
 
     // Constructor utilizado unicamente para simplificar pruebas.
@@ -65,30 +64,29 @@ public class JugadorProtoss implements Jugador {
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
 
-        this.edificios = new ArrayList<Edificio>();
-        this.unidades = new ArrayList<Unidad>();
+        this.entidades = new ArrayList<Raza>();
     }
 
     public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
-        this.edificios.add(new NexoMineral(unNodo, this.recursos, unaUbicacion, this));
+        this.entidades.add(new NexoMineral(unNodo, this.recursos, unaUbicacion, this));
     }
 
     public Pilon crearPilon(Ubicacion unaUbicacion) {
         Pilon pilon = new Pilon(this.recursos, unaUbicacion, this);
-        this.edificios.add(pilon);
+        this.entidades.add(pilon);
         return pilon;
     }
 
     public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.edificios.add(new Asimilador(unVolcan, this.recursos, unaUbicacion, this));
+        this.entidades.add(new Asimilador(unVolcan, this.recursos, unaUbicacion, this));
     }
 
     public void crearAcceso(Ubicacion unaUbicacion) {
-        this.edificios.add(new Acceso(this.recursos, unaUbicacion, this));
+        this.entidades.add(new Acceso(this.recursos, unaUbicacion, this));
     }
 
     public void crearPuertoEstelar(Ubicacion unaUbicacion) {
-        this.edificios.add(new PuertoEstelar(this.recursos, unaUbicacion, this));
+        this.entidades.add(new PuertoEstelar(this.recursos, unaUbicacion, this));
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
@@ -139,8 +137,8 @@ public class JugadorProtoss implements Jugador {
     public int calcularPoblacion() {
         int poblacion = 0;
 
-        for (Edificio edificio : this.edificios) {
-            poblacion += edificio.obtenerPoblacion();
+        for (Raza entidad : this.entidades) {
+            poblacion += entidad.obtenerPoblacion();
         }
 
         if (poblacion >= MAX_POBLACION) {
@@ -163,18 +161,14 @@ public class JugadorProtoss implements Jugador {
 
     public void avanzarTurno() {
 
-        for(Edificio edificio : this.edificios) {
-            edificio.avanzarTurno(); // Pilon energiza, Asimilador recolecta gas, NexoMineral recolecta mineral, se recuperan, pasa el tiempo de construccion.
-        }
-
-        for(Unidad unidad : this.unidades) {
-            unidad.avanzarTurno(); // Se recuperan, pasa el tiempo de construccion.
+        for (Raza entidad : this.entidades) {
+            entidad.avanzarTurno(); // Edificios: Pilon energiza, Asimilador recolecta gas, Nexo Mineral recolecta mineral, se recuperan, pasa el tiempo de construccion. Unidades: Se recuperan, pasa el tiempo de construccion.
         }
     }
 
     @Override
-    public void eliminarEdificio(Edificio unEdificio) {
-        this.poblacion -= unEdificio.obtenerPoblacion();
-        this.edificios.remove(unEdificio);
+    public void eliminar(Raza unaEntidad) {
+        this.poblacion -= unaEntidad.obtenerPoblacion();
+        this.entidades.remove(unaEntidad);
     }
 }

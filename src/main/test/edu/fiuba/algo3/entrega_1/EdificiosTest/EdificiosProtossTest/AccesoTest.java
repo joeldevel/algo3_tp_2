@@ -2,6 +2,8 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
@@ -14,9 +16,9 @@ public class AccesoTest {
     @Test
     void test01SeConstruyeUnAccesoYNoSeEncuentraOperativo(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 150);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Acceso.
     }
@@ -24,9 +26,9 @@ public class AccesoTest {
     @Test
     void test02SeConstruyeUnAccesoYDespuesDeOchoTurnosSeEncuentraOperativo(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 150);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Acceso.
     }
@@ -34,9 +36,9 @@ public class AccesoTest {
     @Test
     void test03SeConstruyeUnPuertoEstelarYRecibeDanio() {
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 150);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         acceso.recibirAtaque(10);
@@ -48,9 +50,9 @@ public class AccesoTest {
     @Test
     void test04SeConstruyeUnPuertoEstelarQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 150);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(10);
 
         // Act
@@ -63,9 +65,9 @@ public class AccesoTest {
     @Test
     void test05SeConstruyeUnAccesoQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 150);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 500 de daño y luego 300 de vida.
 
         // Act
@@ -78,9 +80,9 @@ public class AccesoTest {
     @Test
     void test06SeConstruyeUnAccesoQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 150);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
 
         // Act
@@ -92,11 +94,11 @@ public class AccesoTest {
 
     @Test
     void test07SeIntentaConstruirUnAccesoSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 149);
+        Recursos recursos = new Recursos(0, 149);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Acceso acceso = new Acceso(recursosJugador, new Ubicacion(0,0));
+            Acceso acceso = new Acceso(recursos, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

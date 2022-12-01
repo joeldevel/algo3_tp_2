@@ -3,6 +3,8 @@ package edu.fiuba.algo3.entrega_1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Moho;
@@ -26,7 +28,9 @@ class MohoTest {
 	void test02SeAgregaUnNuevoCriaderoAUnNuevoMohoDebeTenerUbicacionesAfectadas() {
 		
 		Moho moho = new Moho();
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0));
+		Recursos recursos = new Recursos(0,200);
+		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		
 		assertTrue(moho.tieneUbicacionesAfectadas());
@@ -36,7 +40,9 @@ class MohoTest {
 	void test03SeAgregaUnCriaderoAUnNuevoNodoSeVerificanLasUbicacionesAfectadas() {
 		
 		Moho moho = new Moho();
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0));
+		Recursos recursos = new Recursos(0,200);
+		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		
 		assertTrue(moho.estaAfectadaLaUbicacion(new Ubicacion(-5,0)));
@@ -60,7 +66,9 @@ class MohoTest {
 	void test04SeAgregaUnCriaderoAUnNuevoMohoYLuegoDe2TurnosSeAgreganMasUbicacionesAfectadas() {
 		
 		Moho moho = new Moho();
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0));
+		Recursos recursos = new Recursos(0,200);
+		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		moho.avanzarTurno(2);
 		
@@ -72,9 +80,11 @@ class MohoTest {
 	void test05SeAgreganDosCriaderosAUnNuevoMohoYSeVerificanLasUbicacionesAfectadas() {
 		
 		Moho moho = new Moho();
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0));
+		Recursos recursos = new Recursos(0,400);
+		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
-		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,20));
+		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,20), jugadorZerg);
 		moho.agregarCriadero(otroCriadero);
 		
 		assertEquals(moho.contarUbicacionesAfectadas(), 162);
@@ -84,9 +94,11 @@ class MohoTest {
 	void test06SeAgreganDosCriaderosCercanosAUnNuevoMohoYSeVerificanLasUbicacionesAfectadas() {
 		
 		Moho moho = new Moho();
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0));
+		Recursos recursos = new Recursos(0,400);
+		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
-		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,10));
+		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,10), jugadorZerg);
 		moho.agregarCriadero(otroCriadero);
 		
 		/* el (0,5) se comparte con los 2 origenes, por eso es 161 y no 162
@@ -98,10 +110,12 @@ class MohoTest {
 	void test07SeAgreganOrigenesEnTurnosDiferentesYSeVerificaLaCantidadDeUbicacionesAfectadas() {
 		
 		Moho moho = new Moho();
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0));
+		Recursos recursos = new Recursos(0,400);
+		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		moho.avanzarTurno(2);
-		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,20));
+		Criadero otroCriadero = new Criadero(recursos, new Ubicacion(0,20), jugadorZerg);
 		moho.agregarCriadero(otroCriadero);
 		
 		assertEquals(moho.contarUbicacionesAfectadas(),194);
@@ -111,7 +125,9 @@ class MohoTest {
 	void test08SiSeDestruyeUnCriaderoSeVerificaQueLasUbicacionesAfectadasNoDesaparecen() {
 		
 		Moho moho = new Moho();
-		Criadero criadero = new Criadero(recursos,new Ubicacion(0,0));
+		Recursos recursos = new Recursos(0,200);
+		JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+		Criadero criadero = new Criadero(recursos, new Ubicacion(0,0), jugadorZerg);
 		moho.agregarCriadero(criadero);
 		moho.eliminarCriaderoEnUbicacion(new Ubicacion(0,0));
 		

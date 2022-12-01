@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Asimilador;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -13,9 +14,9 @@ class AsimiladorTest {
     @Test
     void test01SeConstruyeUnAsimiladorEnUnVolcanYNoSeEncuentraOperativo(){
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
 
         assertEquals(0, asimilador.obtenerGas());
     }
@@ -24,9 +25,9 @@ class AsimiladorTest {
     void test02SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanSieteTurnosYSeDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.avanzarTurno(7);
@@ -39,9 +40,9 @@ class AsimiladorTest {
     void test03SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanDiezTurnosYSeDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.avanzarTurno(10);
@@ -54,9 +55,9 @@ class AsimiladorTest {
     void test04SeConstruyeUnaAsimiladorYRecibeDanio(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.recibirAtaque(10);
@@ -69,9 +70,9 @@ class AsimiladorTest {
     void test05SeConstruyeUnExtractorQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
         asimilador.recibirAtaque(10);
 
         // Act
@@ -85,9 +86,9 @@ class AsimiladorTest {
     void test06SeConstruyeUnExtractorQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
         asimilador.recibirAtaque(600); // Le sacamos todo el escudo con 450 de daño y luego 150 de vida.
 
         // Act
@@ -101,9 +102,9 @@ class AsimiladorTest {
     void test07SeConstruyeUnExtractorQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
         asimilador.recibirAtaque(600); // Le sacamos todo el escudo con 450 de daño y luego 150 de vida.
 
         // Act
@@ -116,11 +117,11 @@ class AsimiladorTest {
     @Test
     void test08SeIntentaConstruirUnAsimiladorSinRecursosYSeLanzaUnaExcepcion() {
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 99);
+        Recursos recursos = new Recursos(0, 99);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Asimilador asimilador = new Asimilador(volcan, recursosJugador, new Ubicacion(0,0));
+            Asimilador asimilador = new Asimilador(volcan, recursos, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

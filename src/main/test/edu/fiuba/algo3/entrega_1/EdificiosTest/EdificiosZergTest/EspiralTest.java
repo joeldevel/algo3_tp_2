@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,9 @@ class EspiralTest {
     @Test
     void test01SeConstruyeUnaEspiralYRecibeDanio(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Act
         espiral.recibirAtaque(10);
@@ -27,9 +28,9 @@ class EspiralTest {
     @Test
     void test02SeConstruyeUnaEspiralQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
         espiral.recibirAtaque(10);
 
         // Act
@@ -42,9 +43,9 @@ class EspiralTest {
     @Test
     void test03SeConstruyeUnaEspiralYNoSeEncuentraOperativa(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Falta la logica de Espiral.
     }
@@ -52,20 +53,20 @@ class EspiralTest {
     @Test
     void test04SeConstruyeUnaEspiralYDespuesDeDiezTurnosSeEncuentraOperativa(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 150);
-        Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
         
        // Falta la logica de Espiral.
     }
 
     @Test
     void test05SeIntentaConstruirUnaEspiralSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 149);
+        Recursos recursos = new Recursos(99,149);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Espiral espiral = new Espiral(recursosJugador, new Ubicacion(0,0));
+            Espiral espiral = new Espiral(recursos, new Ubicacion(0,0), jugadorZerg);
         });
     }
 }

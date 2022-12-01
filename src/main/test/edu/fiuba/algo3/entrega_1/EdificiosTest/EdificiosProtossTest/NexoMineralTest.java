@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -15,9 +16,9 @@ public class NexoMineralTest {
     void test01SeConstruyeUnNexoMineralEnUnNodoMineralYNoSeEncuentraOperativo() {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 50);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.avanzarTurno(1);
@@ -30,9 +31,9 @@ public class NexoMineralTest {
     void test02SeConstruyeUnNexoMineralEnUnNodoMineralYSeAvanzanCincoTurnosDevuelveElResultadoIndicado() {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 50);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.avanzarTurno(5);
@@ -45,9 +46,9 @@ public class NexoMineralTest {
     void test03SeConstruyeUnNexoMineralYRecibeDanio() {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 50);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.recibirAtaque(10);
@@ -60,9 +61,9 @@ public class NexoMineralTest {
     void test04SeConstruyeUnNexoMineralQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 50);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.recibirAtaque(10);
 
         // Act
@@ -76,9 +77,9 @@ public class NexoMineralTest {
     void test05SeConstruyeUnNexoMineralQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 50);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.recibirAtaque(400); // Le sacamos todo el escudo con 250 de daño y luego 150 de vida.
 
         // Act
@@ -92,9 +93,9 @@ public class NexoMineralTest {
     void test06SeConstruyeUnNexoMineralQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 50);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 50);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.recibirAtaque(400); // Le sacamos todo el escudo con 250 de daño y luego 150 de vida.
 
         // Act
@@ -107,11 +108,11 @@ public class NexoMineralTest {
     @Test
     void test07SeIntentaConstruirUnNexoMineralSinRecursosYSeLanzaUnaExcepcion() {
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 49);
+        Recursos recursos = new Recursos(0, 49);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursosJugador, new Ubicacion(0,0));
+            NexoMineral nexoMineral = new NexoMineral(nodoMineral, recursos, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

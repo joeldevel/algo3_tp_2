@@ -1,20 +1,20 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
-import edu.fiuba.algo3.modelo.Atacable;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.SinNodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
-import edu.fiuba.algo3.modelo.Superficie;
-import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Vida;
 
 public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	public static final int SUMINISTRO_ZANGANO = 1;
+	private final int POBLACION = 0;
 
 	private Vida vida;
 	private Ubicacion ubicacion;
@@ -73,6 +73,11 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	public int vidaRestante() {
 		return (this.vida.restante());
+	}
+
+	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
 	}
 
 	@Override

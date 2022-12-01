@@ -63,11 +63,6 @@ public class ReservaDeProduccion extends EdificioZerg {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
-		// No hace nada
-	}
-
-	@Override
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}

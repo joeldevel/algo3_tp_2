@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.Atacable;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -12,9 +13,13 @@ public class Larva implements TipoDeUnidad {
 	}
 
 	@Override
+	public int obtenerPoblacion() {
+		return 0;
+	}
+
+	@Override
 	public void recibirAtaque(int unDanio) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -26,7 +31,6 @@ public class Larva implements TipoDeUnidad {
 	@Override
 	public void atacar(Atacable unAtacable) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -49,4 +53,11 @@ public class Larva implements TipoDeUnidad {
 	public int vidaRestante() {
 		return 0;
 	}
+
+	@Override
+	public boolean compararSuperficie(String otraSuperficie) {
+		return false;
+	}
+
+
 }

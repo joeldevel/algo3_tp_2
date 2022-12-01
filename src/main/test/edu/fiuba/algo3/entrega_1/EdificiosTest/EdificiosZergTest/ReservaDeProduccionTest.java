@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeProduccion;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,9 @@ class ReservaDeProduccionTest {
     @Test
     void test01SeConstruyeUnaReservaDeProduccionYRecibeDanio(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Act
         rdp.recibirAtaque(10);
@@ -27,9 +28,9 @@ class ReservaDeProduccionTest {
     @Test
     void test02SeConstruyeUnaReservaDeProduccionQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
         rdp.recibirAtaque(10);
 
         // Act
@@ -42,9 +43,9 @@ class ReservaDeProduccionTest {
     @Test
     void test03SeConstruyeUnaReservaDeProduccionYNoSeEncuentraOperativa(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 150);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0,150);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Falta la logica de la Reserva de Produccion.
     }
@@ -66,11 +67,11 @@ class ReservaDeProduccionTest {
 
     @Test
     void test05SeIntentaConstruirUnaGuaridaSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 149);
+        Recursos recursos = new Recursos(0,149);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            ReservaDeProduccion rdp = new ReservaDeProduccion(recursosJugador, new Ubicacion(0,0));
+            ReservaDeProduccion rdp = new ReservaDeProduccion(recursos, new Ubicacion(0,0), jugadorZerg);
         });
     }
 }

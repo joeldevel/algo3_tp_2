@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class NexoMineral extends EdificioProtoss implements Minero {
 
@@ -56,11 +57,6 @@ public class NexoMineral extends EdificioProtoss implements Minero {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
-    @Override
-    public void atacar(Atacable unAtacable) {
-        // No hace nada
-    }
 
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {

@@ -13,6 +13,8 @@ public abstract class Raza implements Atacable{
 		this.ubicacion = unaUbicacion;
 		this.jugador = unJugador;
 	}
+
+	public abstract int obtenerPoblacion();
 	
 	public abstract void avanzarTurno();
     
@@ -27,9 +29,6 @@ public abstract class Raza implements Atacable{
     public int tiempoDeEspera() {
 		return (this.tiempo.restante());
 	}
-
-    @Override
-    public abstract void recibirAtaque(int unAtaque);
 
     @Override
    	public Ubicacion ubicacion() {

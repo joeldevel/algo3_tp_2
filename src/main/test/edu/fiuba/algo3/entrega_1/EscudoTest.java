@@ -14,7 +14,7 @@ class EscudoTest {
 
 	@Test
 	void test01UnEscudoRecibeDanioDeberiaReducirLaProteccion() {
-		
+
 		Escudo escudo = new Escudo(100);
 		
 		escudo.recibirDanioPor(50);
@@ -26,7 +26,7 @@ class EscudoTest {
 	void test02UnEscudoRecibeDanioPorElValorDeSuProteccionMaximaSuProteccionRestanteDeberiaSerCero() {
 		
 		Escudo escudo = new Escudo(100);
-		
+
 		escudo.recibirDanioPor(100);
 		
 		assertEquals(escudo.restante(),0);
@@ -36,7 +36,7 @@ class EscudoTest {
 	void test03UnEscudoRecibeDanioPorEncimaDeSuProteccionMaximaSuProteccionRestanteDeberiaSerCero() {
 		
 		Escudo escudo = new Escudo(100);
-		
+
 		escudo.recibirDanioPor(1000);
 		
 		assertEquals(escudo.restante(),0);
@@ -54,7 +54,7 @@ class EscudoTest {
 	void test05UnEscudoRecibeDanioYSeRecuperaDeberiaAumentarSuProteccion() {
 		
 		Escudo escudo = new Escudo(100);
-		
+
 		escudo.recibirDanioPor(50);
 		escudo.recuperarse();
 		
@@ -65,7 +65,7 @@ class EscudoTest {
 	void test06UnEscudoRecibeDanioPorElValorDeSuProteccionMaximaYSeRecuperaSuProteccionDeberiaSerSuRecuperacion() {
 		
 		Escudo escudo = new Escudo(100);
-		
+
 		escudo.recibirDanioPor(100);
 		escudo.recuperarse();
 		
@@ -76,7 +76,7 @@ class EscudoTest {
 	void test7UnEscudoRecibeDanioPorEncimaDeSuProteccionMaximaYSeRecuperaSuProteccionDeberiaSerSuRecuperacion() {
 		
 		Escudo escudo = new Escudo(100);
-		
+
 		escudo.recibirDanioPor(100);
 		escudo.recuperarse();
 		

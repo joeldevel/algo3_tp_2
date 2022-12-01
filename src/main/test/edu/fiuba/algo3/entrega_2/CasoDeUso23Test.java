@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Tiempo;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
@@ -518,7 +522,8 @@ class CasoDeUso23Test {
 
 		Ubicacion ubicacion2 = new Ubicacion(0,2);
 		Recursos recursos = new Recursos(0, 150);
-		Acceso acceso = new Acceso(recursos, ubicacion2);
+		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+		Acceso acceso = new Acceso(recursos, ubicacion2, jugadorProtoss);
 
 		assertThrows(AtacableFueraDeRangoError.class, ()->{
 			zerling.atacar(acceso);
@@ -533,7 +538,8 @@ class CasoDeUso23Test {
 
 		Ubicacion ubicacion2 = new Ubicacion(0,1);
 		Recursos recursos = new Recursos(0, 150);
-		Acceso acceso = new Acceso(recursos, ubicacion2);
+		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+		Acceso acceso = new Acceso(recursos, ubicacion2, jugadorProtoss);
 
 		zerling.atacar(acceso);
 
@@ -550,7 +556,8 @@ class CasoDeUso23Test {
 
 		Ubicacion ubicacion2 = new Ubicacion(0,2);
 		Recursos recursos = new Recursos(0, 200);
-		Criadero criadero = new Criadero(recursos, ubicacion2);
+		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+		Criadero criadero = new Criadero(recursos, ubicacion2, jugadorProtoss);
 
 		assertThrows(AtacableFueraDeRangoError.class, ()->{
 			zealot.atacar(criadero);
@@ -565,7 +572,8 @@ class CasoDeUso23Test {
 
 		Ubicacion ubicacion2 = new Ubicacion(0,1);
 		Recursos recursos = new Recursos(0, 200);
-		Criadero criadero = new Criadero(recursos, ubicacion2);
+		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+		Criadero criadero = new Criadero(recursos, ubicacion2, jugadorProtoss);
 
 		zealot.atacar(criadero);
 

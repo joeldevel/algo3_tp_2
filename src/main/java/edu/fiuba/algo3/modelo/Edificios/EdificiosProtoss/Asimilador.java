@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 
@@ -52,11 +53,6 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	@Override
 	public boolean tieneRefineria() {
 		return true;
-	}
-
-	@Override
-	public void atacar(Atacable unAtacable) {
-		// No hace nada
 	}
 
 	@Override

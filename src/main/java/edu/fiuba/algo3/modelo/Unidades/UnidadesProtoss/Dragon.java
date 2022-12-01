@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -16,6 +17,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int SUMINISTRO_DRAGON = 3;
+	private final int POBLACION = 0;
 	
 	private Vida vida;
 	private Escudo escudo;
@@ -42,31 +44,35 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
+
+	@Override
 	public void recibirAtaque(int unDanio) {
 		if(unDanio > this.escudo.restante()) {
 			int danioRestante = this.escudo.restante() - unDanio;
 			this.vida.recibirDanioPor(danioRestante);
 		}
 		this.escudo.recibirDanioPor(unDanio);
-		
 	}
 
 	@Override
-    public void atacar(Atacable unAtacable) {
+	public void atacar(Atacable unAtacable) {
 
-        for (Ataque ataque : ataques) {
-            if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
-                throw new AtacableFueraDeRangoError();
-            }
+		for (Ataque ataque : ataques) {
+			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
+				throw new AtacableFueraDeRangoError();
+			}
 
-            ataque.atacarA(unAtacable);
-        }
-    }
+			ataque.atacarA(unAtacable);
+		}
+	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
         return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
     }
-	
+
 	@Override
 	public Ubicacion ubicacion() {
 		return (this.ubicacion);

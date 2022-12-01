@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Raza;
 
 public interface Jugador {
-    void eliminarEdificio(Edificio unEdificio);
+    void eliminar(Raza unaEntidad);
 }
 

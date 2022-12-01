@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosProtossTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,9 @@ public class PilonTest {
     @Test
     void test01SeConstruyeUnPilonYNoSeEncuentraOperativo(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Pilon.
     }
@@ -24,9 +25,9 @@ public class PilonTest {
     @Test
     void test02SeConstruyeUnPilonYDespuesDeOchoTurnosSeEncuentraOperativo(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Falta implementar la logica de Pilon.
     }
@@ -34,9 +35,9 @@ public class PilonTest {
     @Test
     void test03SeConstruyeUnPilonYRecibeDanio() {
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         pilon.recibirAtaque(10);
@@ -48,9 +49,9 @@ public class PilonTest {
     @Test
     void test04SeConstruyeUnPilonQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
         pilon.recibirAtaque(10);
 
         // Act
@@ -63,9 +64,9 @@ public class PilonTest {
     @Test
     void test05SeConstruyeUnPilonQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
         pilon.recibirAtaque(500); // Le sacamos todo el escudo con 300 de daño y luego 200 de vida.
 
         // Act
@@ -78,9 +79,9 @@ public class PilonTest {
     @Test
     void test06SeConstruyeUnPilonQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0, 100);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
         pilon.recibirAtaque(500); // Le sacamos todo el escudo con 300 de daño y luego 200 de vida.
 
         // Act
@@ -92,11 +93,11 @@ public class PilonTest {
 
     @Test
     void test07SeIntentaConstruirUnPilonSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 99);
+        Recursos recursos = new Recursos(0, 99);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Pilon pilon = new Pilon(recursosJugador, new Ubicacion(0,0));
+            Pilon pilon = new Pilon(recursos, new Ubicacion(0,0), jugadorProtoss);
         });
     }
 }

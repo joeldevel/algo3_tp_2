@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -15,6 +16,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int SUMINISTRO_HIDRALISCO = 2;
+	private final int POBLACION = 0;
 	
 	private Vida vida;
 	private Ubicacion ubicacion;
@@ -38,8 +40,13 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void recibirAtaque(int unAtaque) {
-		this.vida.recibirDanioPor(unAtaque);
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
+
+	@Override
+	public void recibirAtaque(int unDanio) {
+		this.vida.recibirDanioPor(unDanio);
 	}
 
 	@Override

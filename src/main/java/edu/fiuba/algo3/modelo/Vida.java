@@ -17,17 +17,29 @@ public class Vida {
         this.vidaMax = unaVida;
         this.vidaRestante = unaVida;
     }
+
+	public void recibirDanioPor(int unaCantidad) {
+		if(unaCantidad < 0) {
+			throw new ValorInvalidoDeDanioError();
+		}
+		if(this.vidaRestante >= unaCantidad) {
+			this.vidaRestante -= unaCantidad;
+		}
+		else if(this.vidaRestante < unaCantidad){
+			this.vidaRestante = 0;
+		}
+	}
     
-    public void recibirDanioPor(int unaCantidad, Edificio unEdificio, Jugador unJugador) {
+    public void recibirDanioPor(int unaCantidad, Raza unaEntidad, Jugador unJugador) {
     	if(unaCantidad < 0) {
     		throw new ValorInvalidoDeDanioError();
     	}
-    	if(this.vidaRestante >= unaCantidad) {
+    	if(this.vidaRestante > unaCantidad) {
     		this.vidaRestante -= unaCantidad;
     	}
-    	else if(this.vidaRestante < unaCantidad){
+    	else if(this.vidaRestante <= unaCantidad){
     		this.vidaRestante = 0;
-			unJugador.eliminarEdificio(unEdificio);
+			unJugador.eliminar(unaEntidad);
     	}
     }
     

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Extractor;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanSinGasVespenoParaExtraerException;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaException;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanYaTieneUnaRefineriaDeGasConstruidaException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -28,12 +29,12 @@ class VolcanTest {
     @Test
     void test02SeIntentaConstruirUnExtractorEnUnVolcanDondeYaHayUnExtractorConstruidoYSeLanzaUnaExcepcion(){
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 200);
-        Extractor primerExtractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(0,200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Extractor primerExtractor = new Extractor(volcan, recursos, new Ubicacion(0,0), jugadorZerg);
 
         assertThrows(VolcanYaTieneUnaRefineriaDeGasConstruidaException.class,()->{
-            Extractor segundoExtractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
+            Extractor segundoExtractor = new Extractor(volcan, recursos, new Ubicacion(0,0), jugadorZerg);
         });
     }
 
@@ -41,10 +42,10 @@ class VolcanTest {
     void test03SeConstruyeUnExtractorEnUnVolcanSinGasVespenoYAlIntentarExtraerSeLanzaUnaExcepcion(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(0, 100);
-        Extractor extractor = new Extractor(volcan, recursosJugador, new Ubicacion(0,0));
-        Zangano primerZangano =  new Zangano(recursosJugador);
+        Recursos recursos = new Recursos(0,100);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Extractor extractor = new Extractor(volcan, recursos, new Ubicacion(0,0), jugadorZerg);
+        Zangano primerZangano =  new Zangano(recursos);
         extractor.guardarZangano(primerZangano);
 
         // Act & Assert

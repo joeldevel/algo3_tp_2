@@ -22,7 +22,6 @@ public class CasoDeUso31Test {
         Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
         jugadorProtoss.crearZealot();
         pilon.recibirAtaque(600);
-        jugadorProtoss.avanzarTurno();
         assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
     }
 
@@ -33,7 +32,6 @@ public class CasoDeUso31Test {
         Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
         jugadorProtoss.crearZealot();
         pilon.recibirAtaque(600);
-        jugadorProtoss.avanzarTurno();
         assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
     }
 
@@ -44,7 +42,6 @@ public class CasoDeUso31Test {
         Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
         jugadorProtoss.crearZealot();
         pilon.recibirAtaque(600);
-        jugadorProtoss.avanzarTurno();
         assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
     }
 
@@ -57,8 +54,6 @@ public class CasoDeUso31Test {
         Criadero criadero = jugadorZerg.crearCriadero(new Ubicacion(0,0));
         jugadorZerg.crearZangano();
         criadero.recibirAtaque(500);
-        jugadorZerg.avanzarTurno();
         assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
     }
 }
-

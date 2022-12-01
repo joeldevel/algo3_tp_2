@@ -46,12 +46,6 @@ public class PuertoEstelar extends EdificioProtoss {
 		return (this.scouts);
 	}
 
-
-    @Override
-    public void atacar(Atacable unAtacable) {
-        // No hace nada
-    }
-
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {
         return this.superficie.compararTipos(unTipoDeSuperficie);

@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Revelo;
 import edu.fiuba.algo3.modelo.Revelador;
@@ -11,6 +13,7 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
     public static final int CUPO_AMO = 0;
+    private final int POBLACION = 5;
 
     private Vida vida;
     private Ubicacion ubicacion;
@@ -31,9 +34,15 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
         this.revelo = new Revelo(new Superficie("Aire"), 4);
     }
 
+
     @Override
-    public void recibirAtaque(int unAtaque) {
-        this.vida.recibirDanioPor(unAtaque);
+    public int obtenerPoblacion() {
+        return POBLACION;
+    }
+
+    @Override
+    public void recibirAtaque(int unDanio) {
+        this.vida.recibirDanioPor(unDanio);
     }
 
     public Ubicacion ubicacion() {

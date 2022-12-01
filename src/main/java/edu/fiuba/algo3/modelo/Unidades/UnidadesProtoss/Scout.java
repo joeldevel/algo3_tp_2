@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -16,6 +17,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 public class Scout implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int SUMINISTRO_SCOUT = 4;
+	private final int POBLACION = 0;
 
 	private Vida vida;
 	private Escudo escudo;
@@ -42,13 +44,17 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void recibirAtaque(int unAtaque) {
-		if(unAtaque > this.escudo.restante()) {
-			int danioRestante = this.escudo.restante() - unAtaque;
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
+
+	@Override
+	public void recibirAtaque(int unDanio) {
+		if(unDanio > this.escudo.restante()) {
+			int danioRestante = this.escudo.restante() - unDanio;
 			this.vida.recibirDanioPor(danioRestante);
 		}
-		this.escudo.recibirDanioPor(unAtaque);
-		
+		this.escudo.recibirDanioPor(unDanio);
 	}
 
 	@Override

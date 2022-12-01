@@ -23,7 +23,7 @@ public class MutaliscoTest {
     }
 
     @Test
-    void test01UnMutaliscoAtacaAUnScoutYElEscudoDelScoutDisminuyeLoIndicado(){
+    void test02UnMutaliscoAtacaAUnScoutYElEscudoDelScoutDisminuyeLoIndicado(){
         // Arrange
         Mutalisco mutalisco = new Mutalisco(); // Ataque de tierra y aire
         Scout scout = new Scout(); // Unidad de tierra

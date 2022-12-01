@@ -1,20 +1,18 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
-import edu.fiuba.algo3.modelo.Atacable;
-import edu.fiuba.algo3.modelo.Raza;
-import edu.fiuba.algo3.modelo.Superficie;
-import edu.fiuba.algo3.modelo.Tiempo;
-import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 
-public class Unidad extends Raza{
+public class Unidad extends Raza implements Atacante {
 
 	private TipoDeUnidad estado;
 	private TipoDeUnidad tipo;
+	private Jugador jugador;
     
-	public Unidad(Tiempo unTiempo, Ubicacion unaUbicacion, TipoDeUnidad unTipo) {
-		super(unTiempo,unaUbicacion);
+	public Unidad(Tiempo unTiempo, Ubicacion unaUbicacion, TipoDeUnidad unTipo, Jugador unJugador) {
+		super(unTiempo, unaUbicacion, unJugador);
 		this.estado = new UnidadEnConstruccion();
 		this.tipo = unTipo;
 	}
@@ -41,6 +39,11 @@ public class Unidad extends Raza{
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
 		return false;
+	}
+
+	@Override
+	public int obtenerPoblacion() {
+		return this.estado.obtenerPoblacion();
 	}
 
 	@Override

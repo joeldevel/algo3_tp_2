@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
     public static final int SUMINISTRO_DEVORADOR = 4;
+    private final int POBLACION = 0;
 
     private Vida vida;
     private Ubicacion ubicacion;
@@ -31,8 +33,13 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void recibirAtaque(int unAtaque) {
-        this.vida.recibirDanioPor(unAtaque);
+    public int obtenerPoblacion() {
+        return POBLACION;
+    }
+
+    @Override
+    public void recibirAtaque(int unDanio) {
+        this.vida.recibirDanioPor(unDanio);
     }
 
     @Override

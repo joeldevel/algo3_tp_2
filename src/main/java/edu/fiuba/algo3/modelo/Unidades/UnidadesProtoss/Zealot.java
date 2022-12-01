@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Revelable;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
@@ -17,6 +18,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	public static final int SUMINISTRO_ZEALOT = 2;
+	private final int POBLACION = 0;
 
 	private Vida vida;
 	private Escudo escudo;
@@ -51,13 +53,18 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	@Override
-	public void recibirAtaque(int unAtaque) {
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
+
+	@Override
+	public void recibirAtaque(int unDanio) {
 		if (estaInvisible == false) {
-			if (unAtaque > this.escudo.restante()) {
-				int danioRestante = this.escudo.restante() - unAtaque;
+			if (unDanio > this.escudo.restante()) {
+				int danioRestante = this.escudo.restante() - unDanio;
 				this.vida.recibirDanioPor(danioRestante);
 			}
-			this.escudo.recibirDanioPor(unAtaque);
+			this.escudo.recibirDanioPor(unDanio);
 		}
 	}
 
@@ -68,8 +75,9 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void atacar(Atacable unAtacable) {
+
 		for (Ataque ataque : ataques) {
-			if (!(this.estaEnRangoDeAtaque(unAtacable, ataque))) {
+			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
 				throw new AtacableFueraDeRangoError();
 			}
 

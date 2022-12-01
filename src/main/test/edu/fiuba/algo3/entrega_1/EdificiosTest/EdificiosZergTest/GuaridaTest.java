@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1.EdificiosTest.EdificiosZergTest;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,9 @@ class GuaridaTest {
     @Test
     void test01SeConstruyeUnaGuaridaYNoSeEncuentraOperativa(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Falta la logica de Guarida.
     }
@@ -23,9 +24,9 @@ class GuaridaTest {
     @Test
     void test02SeConstruyeUnaGuaridaYRecibeDanioAunSinEstarOperativaYElResultadoEsElIndicado(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Act
         guarida.recibirAtaque(10);
@@ -52,9 +53,9 @@ class GuaridaTest {
     @Test
     void test04SeConstruyeUnaGuaridaYDespuesDeDoceTurnosRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
         guarida.avanzarTurno(12);
 
         // Act
@@ -67,9 +68,9 @@ class GuaridaTest {
     @Test
     void test05SeConstruyeUnaGuaridaYDespuesDeDoceTurnosRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
         guarida.avanzarTurno(12);
         guarida.recibirAtaque(10);
 
@@ -84,9 +85,9 @@ class GuaridaTest {
     @Test
     void test06SeConstruyeUnaGuaridaYRecibeDanio(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
 
         // Act
         guarida.recibirAtaque(10);
@@ -98,9 +99,9 @@ class GuaridaTest {
     @Test
     void test07SeConstruyeUnaGuaridaQueRecibeDanioYAlAvanzarElTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 200);
-        Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
+        Recursos recursos = new Recursos(100,200);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
         guarida.recibirAtaque(10);
 
         // Act
@@ -112,11 +113,11 @@ class GuaridaTest {
 
     @Test
     void test08SeIntentaConstruirUnaGuaridaSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursosJugador = new Recursos();
-        recursosJugador.guardar(100, 199);
+        Recursos recursos = new Recursos(99,199);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            Guarida guarida = new Guarida(recursosJugador, new Ubicacion(0,0));
+            Guarida guarida = new Guarida(recursos, new Ubicacion(0,0), jugadorZerg);
         });
     }
 }
