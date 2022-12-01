@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Energia;
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
@@ -12,8 +13,8 @@ public abstract class EdificioProtoss extends Edificio {
     protected Escudo escudo;
     protected Energia energia;
        
-    protected EdificioProtoss(Tiempo unTiempo,Vida unaVida,Escudo unEscudo,Ubicacion unaUbicacion) {
-    	super(unTiempo,unaVida,unaUbicacion);
+    protected EdificioProtoss(Tiempo unTiempo,Vida unaVida,Escudo unEscudo,Ubicacion unaUbicacion, Jugador unJugador) {
+    	super(unTiempo, unaVida, unaUbicacion, unJugador);
     	this.escudo = unEscudo;
     	this.energia = new Energia();
     }
@@ -31,9 +32,9 @@ public abstract class EdificioProtoss extends Edificio {
     public void recibirAtaque(int unAtaque) {
     	if(unAtaque > this.escudo.restante()) {
     		int danioRestante = unAtaque - this.escudo.restante();
-    		this.vida.recibirDanioPor(danioRestante);
+    		this.vida.recibirDanioPor(danioRestante, this, this.jugador);
     	}
-    	this.escudo.recibirDanioPor(unAtaque);
+    	this.escudo.recibirDanioPor(unAtaque, this, this.jugador);
     }
 
     public void energizar() {

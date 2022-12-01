@@ -22,12 +22,12 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.SUMINISTRO_
 public class JugadorProtoss implements Jugador {
 
     private static final int MAX_POBLACION = 200;
-    private static final int CAP_POBLACION = 5;
     private static final int CANT_MINERAL_INICIAL = 200;
 
     private String nombre;
     private String color;
     private Recursos recursos;
+    private int poblacion;
     private int cupo;
 
     private int cantidadDeZealots;
@@ -35,7 +35,6 @@ public class JugadorProtoss implements Jugador {
     private int cantidadDeScouts;
 
     private ArrayList<Edificio> edificios;
-    private ArrayList<Edificio> pilones;
     private ArrayList<Unidad> unidades;
 
     public JugadorProtoss(String unNombre, String unColor) {
@@ -43,6 +42,7 @@ public class JugadorProtoss implements Jugador {
         this.color = unColor;
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
+        this.poblacion = 0;
         this.cupo = 0;
 
         this.cantidadDeZealots = 0;
@@ -50,7 +50,6 @@ public class JugadorProtoss implements Jugador {
         this.cantidadDeScouts = 0;
 
         this.edificios = new ArrayList<Edificio>();
-        this.pilones = new ArrayList<Edificio>();
         this.unidades = new ArrayList<Unidad>();
     }
 
@@ -59,6 +58,7 @@ public class JugadorProtoss implements Jugador {
         this.nombre = unNombre;
         this.color = unColor;
         this.recursos = unosRecursos;
+        this.poblacion = 0;
         this.cupo = 0;
 
         this.cantidadDeZealots = 0;
@@ -66,31 +66,29 @@ public class JugadorProtoss implements Jugador {
         this.cantidadDeScouts = 0;
 
         this.edificios = new ArrayList<Edificio>();
-        this.pilones = new ArrayList<Edificio>();
         this.unidades = new ArrayList<Unidad>();
     }
 
     public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
-        this.edificios.add(new NexoMineral(unNodo, this.recursos, unaUbicacion));
+        this.edificios.add(new NexoMineral(unNodo, this.recursos, unaUbicacion, this));
     }
 
     public Pilon crearPilon(Ubicacion unaUbicacion) {
-        Pilon pilon = new Pilon(this.recursos, unaUbicacion);
+        Pilon pilon = new Pilon(this.recursos, unaUbicacion, this);
         this.edificios.add(pilon);
-        this.pilones.add(pilon);
         return pilon;
     }
 
     public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.edificios.add(new Asimilador(unVolcan, this.recursos, unaUbicacion));
+        this.edificios.add(new Asimilador(unVolcan, this.recursos, unaUbicacion, this));
     }
 
     public void crearAcceso(Ubicacion unaUbicacion) {
-        this.edificios.add(new Acceso(this.recursos, unaUbicacion));
+        this.edificios.add(new Acceso(this.recursos, unaUbicacion, this));
     }
 
     public void crearPuertoEstelar(Ubicacion unaUbicacion) {
-        this.edificios.add(new PuertoEstelar(this.recursos, unaUbicacion));
+        this.edificios.add(new PuertoEstelar(this.recursos, unaUbicacion, this));
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
@@ -139,9 +137,13 @@ public class JugadorProtoss implements Jugador {
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
     public int calcularPoblacion() {
-        int poblacion = (this.pilones.size() * CAP_POBLACION);
+        int poblacion = 0;
 
-        if(poblacion >= MAX_POBLACION) {
+        for (Edificio edificio : this.edificios) {
+            poblacion += edificio.obtenerPoblacion();
+        }
+
+        if (poblacion >= MAX_POBLACION) {
             return MAX_POBLACION;
         }
 
@@ -161,29 +163,18 @@ public class JugadorProtoss implements Jugador {
 
     public void avanzarTurno() {
 
-        ArrayList<Edificio> edificiosABorrar = new ArrayList<Edificio>(); // Necesitamos una lista por fuera ya que no se puede modificar la lista en medio de la iteracion.
-
         for(Edificio edificio : this.edificios) {
-            if(edificio.obtenerVida() == 0) {
-                edificiosABorrar.add(edificio);
-            } else {
-                edificio.avanzarTurno(); // Pilon energiza, Asimilador recolecta gas, NexoMineral recolecta mineral, se recuperan, pasa el tiempo de construccion.
-            }
+            edificio.avanzarTurno(); // Pilon energiza, Asimilador recolecta gas, NexoMineral recolecta mineral, se recuperan, pasa el tiempo de construccion.
         }
-
-        this.edificios.removeAll(edificiosABorrar);
-        this.pilones.removeAll(edificiosABorrar); // Borramos los pilones de su lista concreta para poder calcular la poblacion correctamente.
-
-        ArrayList<Unidad> unidadesABorrar = new ArrayList<Unidad>();
 
         for(Unidad unidad : this.unidades) {
-            if(unidad.obtenerVida() == 0) {
-                unidadesABorrar.add(unidad);
-            } else {
-                unidad.avanzarTurno(); // Se recuperan, pasa el tiempo de construccion.
-            }
+            unidad.avanzarTurno(); // Se recuperan, pasa el tiempo de construccion.
         }
+    }
 
-        this.unidades.removeAll(unidadesABorrar);
+    @Override
+    public void eliminarEdificio(Edificio unEdificio) {
+        this.poblacion -= unEdificio.obtenerPoblacion();
+        this.edificios.remove(unEdificio);
     }
 }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recuperable;
 import edu.fiuba.algo3.modelo.Superficie;
@@ -13,12 +14,14 @@ public abstract class Edificio extends Raza implements Recuperable{
 	protected Superficie superficie;
 	protected EstadoOperativo estado;
 	
-	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion) {
-		super(unTiempo,unaUbicacion);
+	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion, Jugador unJugador) {
+		super(unTiempo, unaUbicacion, unJugador);
 		this.vida = unaVida;
 		this.superficie = new Superficie("Tierra");
 		this.estado = new EnConstruccion(this);
 	}
+
+	public abstract int obtenerPoblacion();
 	
 	public void ejecutaEnConstruccion() {
 		if(this.tiempo.restante() == 0) {

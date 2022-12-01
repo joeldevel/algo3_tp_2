@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoError;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 public class Escudo {
 
@@ -16,7 +18,7 @@ public class Escudo {
         this.proteccionRestante = unaProteccion;
     }
 	
-	public void recibirDanioPor(int unaCantidad) {
+	public void recibirDanioPor(int unaCantidad, Edificio unEdificio, Jugador unJugador) {
     	if(unaCantidad < 0) {
     		throw new ValorInvalidoDeDanioError();
     	}
@@ -25,6 +27,7 @@ public class Escudo {
     	}
     	else if(this.proteccionRestante < unaCantidad){
     		this.proteccionRestante = 0;
+    		unJugador.eliminarEdificio(unEdificio);
     	}
     }
 	

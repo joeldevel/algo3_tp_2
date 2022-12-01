@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 import java.util.*;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -17,7 +18,8 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
  * larvas a otro tipo de unidad zerg. Sino una buna idea es usar el patron Factory Method */
 
 public class Criadero extends EdificioZerg {
-	
+
+	private final int POBLACION = 5;
 	private final int COSTO_MINERAL = 200;
 	private final int COSTO_GAS = 0;
 	
@@ -25,16 +27,21 @@ public class Criadero extends EdificioZerg {
 	private ArrayList<Unidad> larvas;
 	private ArrayList<Unidad> zanganos;
 		
-	public Criadero(Recursos recursosJugador, Ubicacion unaUbicacion) {	
-		super(new Tiempo(-4),new Vida(500),unaUbicacion);
+	public Criadero(Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador) {
+		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador);
 		
 		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-		
+
 		this.maxLarvas = 3;
 		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva())); 
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva())); 
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));}};
 		this.zanganos = new ArrayList<Unidad>();
+	}
+
+	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
 	}
 
 	@Override

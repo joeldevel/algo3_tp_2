@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class Extractor extends EdificioZerg implements RefineriaDeGas {
 
+	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 0;
 	
@@ -22,8 +24,8 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     private Volcan volcan;
     private ArrayList<Zangano> zanganos;
     
-    public Extractor(Volcan unVolcan, Recursos recursosJugador, Ubicacion unaUbicacion){
-    	super(new Tiempo(-6),new Vida(750), unaUbicacion);
+    public Extractor(Volcan unVolcan, Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador){
+    	super(new Tiempo(-6), new Vida(750), unaUbicacion, unJugador);
     	
     	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
@@ -35,6 +37,11 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 
 		unVolcan.construirRefineriaDeGas(this);
     }
+
+	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
     
     @Override
     public void ejecutaOperable() {

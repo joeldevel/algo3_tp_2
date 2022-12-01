@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
@@ -16,6 +17,7 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 
 public class Acceso extends EdificioProtoss {
 
+	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 0;
 	
@@ -24,14 +26,19 @@ public class Acceso extends EdificioProtoss {
 	private ArrayList<Unidad> zealotsProductivo;
 	private ArrayList<Unidad> dragonesProductivo;
 	
-    public Acceso(Recursos recursosJugador, Ubicacion unaUbicacion) {
-		super(new Tiempo(-8),new Vida(500),new Escudo(500),unaUbicacion);
+    public Acceso(Recursos recursosJugador, Ubicacion unaUbicacion, Jugador unJugador) {
+		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador);
 		this.zealotsPedido = new ArrayList<Unidad>();
 		this.dragonesPedido = new ArrayList<Unidad>();
 		this.zealotsProductivo = new ArrayList<Unidad>();
 		this.dragonesProductivo = new ArrayList<Unidad>();
 		
 		recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+	}
+
+	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
 	}
 
 	@Override
