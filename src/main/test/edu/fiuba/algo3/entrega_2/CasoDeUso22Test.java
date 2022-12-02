@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entidades.Unidades;
+package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.Excepciones.UnidadEnConstruccionException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class UnidadTest {
+public class CasoDeUso22Test {
 
     JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
     JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
