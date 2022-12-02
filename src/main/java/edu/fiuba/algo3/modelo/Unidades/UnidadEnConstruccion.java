@@ -23,7 +23,17 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
+    public void setComportamientoUnidad(Unidad unaUnidad) {
+        throw new UnidadEnConstruccionException();
+    }
+
+    @Override
     public int obtenerPoblacion() {
+        return 0;
+    }
+
+    @Override
+    public int obtenerSuministro() {
         return 0;
     }
 

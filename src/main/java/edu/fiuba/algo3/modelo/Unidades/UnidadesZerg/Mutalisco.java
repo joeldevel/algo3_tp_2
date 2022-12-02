@@ -20,9 +20,11 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 100;
+	public static final int CONSTRUCCION_MUTALISCO = -7;
 	
 	private Vida vida;
 	private Jugador jugador;
+	private Unidad unidad;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
@@ -32,6 +34,7 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 
 		this.vida = new Vida(120);
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
@@ -43,10 +46,15 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 
 		this.vida = new Vida(120);
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
 		 										 add(new Ataque(9,new Superficie("Aire"),3));}};
+	}
+
+	public void setComportamientoUnidad(Unidad unaUnidad) {
+		this.unidad = unaUnidad;
 	}
 
 	@Override
@@ -55,9 +63,15 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
-		this.vida.recibirDanioPor(unDanio);
+	public int obtenerSuministro() {
+		return SUMINISTRO_MUTALISCO;
 	}
+
+	@Override
+	public void recibirAtaque(int unDanio) {
+		this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
+	}
+
 
 	@Override
 	public Superficie obtenerSuperficie() {

@@ -21,10 +21,12 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 125;
 	private final int COSTO_GAS = 50;
+	public static final int CONSTRUCCION_DRAGON = -6;
 	
 	private Vida vida;
 	private Escudo escudo;
 	private Jugador jugador;
+	private Unidad unidad;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
@@ -35,6 +37,7 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(80);
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
@@ -47,10 +50,15 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(80);
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
 		 										 add(new Ataque(20,new Superficie("Aire"),4));}};
+	}
+
+	public void setComportamientoUnidad(Unidad unaUnidad) {
+		this.unidad = unaUnidad;
 	}
 
 	@Override
@@ -59,10 +67,15 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
+	public int obtenerSuministro() {
+		return SUMINISTRO_DRAGON;
+	}
+
+	@Override
 	public void recibirAtaque(int unDanio) {
 		if(unDanio > this.escudo.restante()) {
 			int danioRestante = this.escudo.restante() - unDanio;
-			this.vida.recibirDanioPor(danioRestante);
+			this.vida.recibirDanioPor(danioRestante, this.unidad, this.jugador);
 		}
 		this.escudo.recibirDanioPor(unDanio);
 	}

@@ -7,7 +7,11 @@ import edu.fiuba.algo3.modelo.Superficie;
 
 public interface TipoDeUnidad {
 
+	void setComportamientoUnidad(Unidad unaUnidad);
+
 	int obtenerPoblacion();
+
+	int obtenerSuministro();
 
 	void recibirAtaque(int unDanio);
 

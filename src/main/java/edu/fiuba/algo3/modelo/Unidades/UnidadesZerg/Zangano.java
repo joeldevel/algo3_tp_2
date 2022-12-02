@@ -18,9 +18,11 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 25;
 	private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_ZANGANO = -1;
 
 	private Vida vida;
 	private Jugador jugador;
+	private Unidad unidad;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 
@@ -36,6 +38,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 		this.cantidadRecolectableDeMineral = 10;
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.nodo = new SinNodoMineral();
 	}
 
@@ -48,8 +51,13 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
         this.cantidadRecolectableDeMineral = 10;
 		this.jugador = unJugador;
+		this.unidad = null;
         this.nodo = new SinNodoMineral();
     }
+
+	public void setComportamientoUnidad(Unidad unaUnidad) {
+		this.unidad = unaUnidad;
+	}
     
     public void conNodo(NodoMineral unNodo) {
     	this.nodo = unNodo;
@@ -88,9 +96,15 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
-		this.vida.recibirDanioPor(unDanio);
+	public int obtenerSuministro() {
+		return this.SUMINISTRO_ZANGANO;
 	}
+
+	@Override
+	public void recibirAtaque(int unDanio) {
+		this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
+	}
+
 
 	@Override
 	public Ubicacion ubicacion() {

@@ -13,13 +13,15 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
-    public static final int CUPO_AMO = 0;
+    public static final int SUMINISTRO_AMO = 0;
     private final int POBLACION = 5;
     private final int COSTO_MINERAL = 50;
     private final int COSTO_GAS = 0;
+    public static final int CONSTRUCCION_AMO = -5;
 
     private Vida vida;
     private Jugador jugador;
+    private Unidad unidad;
     private Ubicacion ubicacion;
     private Superficie superficie;
 
@@ -30,6 +32,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
         this.vida = new Vida(200);
         this.jugador = unJugador;
+        this.unidad = null;
         this.ubicacion = unaUbicacion;
         this.superficie = new Superficie("Aire");
         this.revelo = new Revelo(new Superficie("Aire"), 4);
@@ -40,11 +43,15 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
         this.vida = new Vida(200);
         this.jugador = unJugador;
+        this.unidad = null;
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
         this.revelo = new Revelo(new Superficie("Aire"), 4);
     }
 
+    public void setComportamientoUnidad(Unidad unaUnidad) {
+        this.unidad = unaUnidad;
+    }
 
     @Override
     public int obtenerPoblacion() {
@@ -52,8 +59,13 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     }
 
     @Override
+    public int obtenerSuministro() {
+        return SUMINISTRO_AMO;
+    }
+
+    @Override
     public void recibirAtaque(int unDanio) {
-        this.vida.recibirDanioPor(unDanio);
+        this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
     }
 
     public Ubicacion ubicacion() {

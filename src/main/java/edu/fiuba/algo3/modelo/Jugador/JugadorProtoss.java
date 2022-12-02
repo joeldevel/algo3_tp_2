@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
-import edu.fiuba.algo3.modelo.Edificio;
+import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -159,7 +160,7 @@ public class JugadorProtoss implements Jugador {
     public int calcularPoblacion() {
         int poblacion = 0;
 
-        for (Edificio edificio : this.edificios) {
+        for (Raza edificio : this.edificios) {
             poblacion += edificio.obtenerPoblacion();
         }
 
@@ -172,6 +173,17 @@ public class JugadorProtoss implements Jugador {
         }
 
         return poblacion;
+    }
+
+    // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    public int calcularCupo() {
+        int cupo = 0;
+
+        for (Unidad unidad : this.unidades) {
+            cupo += unidad.obtenerSuministro();
+        }
+
+        return cupo;
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.

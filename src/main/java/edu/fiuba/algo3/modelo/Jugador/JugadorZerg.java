@@ -1,22 +1,27 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
-import edu.fiuba.algo3.modelo.Edificio;
+import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 
 import java.util.ArrayList;
 
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.CUPO_AMO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.SUMINISTRO_AMO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.SUMINISTRO_DEVORADOR;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.SUMINISTRO_GUARDIAN;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO_HIDRALISCO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.SUMINISTRO_MUTALISCO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.SUMINISTRO_ZANGANO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
+
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.CONSTRUCCION_AMO;
 
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.
@@ -126,15 +131,20 @@ public class JugadorZerg implements Jugador {
         this.edificios.add(new Espiral(unaUbicacion, this));
     }
 
-    // Falta enviar el mensaje que permite instanciar Amo Supremo.
-    public void crearAmoSupremo() {
+    public Unidad crearAmoSupremo(Ubicacion unaUbicacion) {
 
-        if (!this.hayCupoDisponible(CUPO_AMO)) {
+        if (!this.hayCupoDisponible(SUMINISTRO_AMO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
+        AmoSupremo tipoAmoSupremo = new AmoSupremo(unaUbicacion, this);
+        Unidad amoSupremo = new Unidad(new Tiempo(CONSTRUCCION_AMO), unaUbicacion, tipoAmoSupremo);
+        this.unidades.add(amoSupremo);
+
         this.cantidadDeAmos++;
-        this.incrementarCupo(CUPO_AMO);
+        this.incrementarCupo(SUMINISTRO_AMO);
+
+        return amoSupremo;
     }
 
     // Falta enviar el mensaje al edificio Criadero que permite instanciar Zangano.
@@ -223,7 +233,7 @@ public class JugadorZerg implements Jugador {
     public int calcularPoblacion() {
         int poblacion = 0;
 
-        for (Edificio edificio : this.edificios) {
+        for (Raza edificio : this.edificios) {
             poblacion += edificio.obtenerPoblacion();
         }
 
@@ -236,6 +246,17 @@ public class JugadorZerg implements Jugador {
         }
 
         return poblacion;
+    }
+
+    // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    public int calcularCupo() {
+        int cupo = 0;
+
+        for (Unidad unidad : this.unidades) {
+            cupo += unidad.obtenerSuministro();
+        }
+
+        return cupo;
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.
@@ -262,13 +283,11 @@ public class JugadorZerg implements Jugador {
 
     @Override
     public void eliminarEdificio(Edificio unEdificio) {
-        this.poblacion -= unEdificio.obtenerPoblacion();
         this.edificios.remove(unEdificio);
     }
 
     @Override
     public void eliminarUnidad(Unidad unaUnidad) {
-        this.poblacion -= unaUnidad.obtenerPoblacion();
         this.unidades.remove(unaUnidad);
     }
 }

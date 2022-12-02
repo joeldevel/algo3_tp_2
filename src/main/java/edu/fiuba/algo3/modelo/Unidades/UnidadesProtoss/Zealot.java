@@ -22,10 +22,12 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_ZEALOT = -4;
 
 	private Vida vida;
 	private Escudo escudo;
 	private Jugador jugador;
+	private Unidad unidad;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
@@ -38,6 +40,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(60);
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{
@@ -53,6 +56,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(60);
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{
@@ -62,9 +66,18 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
 
+	public void setComportamientoUnidad(Unidad unaUnidad) {
+		this.unidad = unaUnidad;
+	}
+
 	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;
+	}
+
+	@Override
+	public int obtenerSuministro() {
+		return SUMINISTRO_ZEALOT;
 	}
 
 	@Override
@@ -72,7 +85,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		if (estaInvisible == false) {
 			if (unDanio > this.escudo.restante()) {
 				int danioRestante = this.escudo.restante() - unDanio;
-				this.vida.recibirDanioPor(danioRestante);
+				this.vida.recibirDanioPor(danioRestante, this.unidad, this.jugador);
 			}
 			this.escudo.recibirDanioPor(unDanio);
 		}

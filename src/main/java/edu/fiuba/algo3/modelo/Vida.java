@@ -3,6 +3,8 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaVidaError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 
 public class Vida {
 
@@ -26,6 +28,19 @@ public class Vida {
 		}
 		else if(this.vidaRestante < unaCantidad){
 			this.vidaRestante = 0;
+		}
+	}
+
+	public void recibirDanioPor(int unaCantidad, Unidad unaUnidad, Jugador unJugador) {
+		if(unaCantidad < 0) {
+			throw new ValorInvalidoDeDanioError();
+		}
+		if(this.vidaRestante > unaCantidad) {
+			this.vidaRestante -= unaCantidad;
+		}
+		else if(this.vidaRestante <= unaCantidad){
+			this.vidaRestante = 0;
+			unJugador.eliminarUnidad(unaUnidad);
 		}
 	}
     

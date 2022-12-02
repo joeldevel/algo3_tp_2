@@ -8,8 +8,6 @@ public interface Atacable {
 
 	void recibirAtaque(int unDanio);
 
-	//void recibirAtaque(int unDanio, Unidad unaUnidad);
-
 	public Ubicacion ubicacion();
 
 	public Superficie obtenerSuperficie();

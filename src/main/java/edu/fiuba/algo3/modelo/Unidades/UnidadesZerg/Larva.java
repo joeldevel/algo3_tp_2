@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.Atacable;
+import edu.fiuba.algo3.modelo.Ataque;
+import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -12,14 +14,21 @@ public class Larva implements TipoDeUnidad {
 		
 	}
 
+	public void setComportamientoUnidad(Unidad unaUnidad) {
+	}
+
 	@Override
 	public int obtenerPoblacion() {
 		return 0;
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
+	public int obtenerSuministro() {
+		return 0;
+	}
 
+	@Override
+	public void recibirAtaque(int unDanio) {
 	}
 
 	@Override

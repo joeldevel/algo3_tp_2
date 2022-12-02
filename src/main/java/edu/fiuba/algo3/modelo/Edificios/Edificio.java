@@ -1,13 +1,9 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Recuperable;
-import edu.fiuba.algo3.modelo.Superficie;
-import edu.fiuba.algo3.modelo.Tiempo;
-import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Vida;
 
-public abstract class Edificio extends edu.fiuba.algo3.modelo.Edificio implements Recuperable{
+public abstract class Edificio extends Raza implements Recuperable{
 	
 	protected Vida vida;
 	protected Jugador jugador;

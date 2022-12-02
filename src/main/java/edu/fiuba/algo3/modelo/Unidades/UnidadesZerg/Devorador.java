@@ -15,9 +15,11 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     private final int POBLACION = 0;
     private final int COSTO_MINERAL = 150;
     private final int COSTO_GAS = 50;
+    public static final int CONSTRUCCION_DEVORADOR = -4;
 
     private Vida vida;
     private Jugador jugador;
+    private Unidad unidad;
     private Ubicacion ubicacion;
     private Superficie superficie;
     private ArrayList<Ataque> ataques;
@@ -27,6 +29,7 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
         this.vida = new Vida(200);
         this.jugador = unJugador;
+        this.unidad = null;
         this.ubicacion = unaUbicacion;
         this.superficie = new Superficie("Aire");
         this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};
@@ -37,9 +40,14 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
         this.vida = new Vida(200);
         this.jugador = unJugador;
+        this.unidad = null;
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
         this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};
+    }
+
+    public void setComportamientoUnidad(Unidad unaUnidad) {
+        this.unidad = unaUnidad;
     }
 
     @Override
@@ -48,9 +56,15 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void recibirAtaque(int unDanio) {
-        this.vida.recibirDanioPor(unDanio);
+    public int obtenerSuministro() {
+        return SUMINISTRO_DEVORADOR;
     }
+
+    @Override
+    public void recibirAtaque(int unDanio) {
+        this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
+    }
+
 
     @Override
     public void atacar(Atacable unAtacable) {

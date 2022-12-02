@@ -20,9 +20,11 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 50;
 	private final int COSTO_GAS = 100;
+	public static final int CONSTRUCCION_GUARDIAN = -4;
 
 	private Vida vida;
 	private Jugador jugador;
+	private Unidad unidad;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
@@ -32,6 +34,7 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 
 		this.vida = new Vida(100);
 		this.jugador = unJugador;
+		this.unidad = null;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
@@ -47,14 +50,23 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
 	}
 
+	public void setComportamientoUnidad(Unidad unaUnidad) {
+		this.unidad = unaUnidad;
+	}
+
 	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;
 	}
 
 	@Override
+	public int obtenerSuministro() {
+		return SUMINISTRO_GUARDIAN;
+	}
+
+	@Override
 	public void recibirAtaque(int unDanio) {
-		this.vida.recibirDanioPor(unDanio);
+		this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
 	}
 
 	@Override
