@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -17,22 +18,31 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int SUMINISTRO_MUTALISCO = 4;
 	private final int POBLACION = 0;
+	private final int COSTO_MINERAL = 100;
+	private final int COSTO_GAS = 100;
 	
 	private Vida vida;
+	private Jugador jugador;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	
-	public Mutalisco(Ubicacion unaUbicacion) {
+	public Mutalisco(Ubicacion unaUbicacion, Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(120);
+		this.jugador = unJugador;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
 		 										 add(new Ataque(9,new Superficie("Aire"),3));}};
 	}
 	
-	public Mutalisco() {
+	public Mutalisco(Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(120);
+		this.jugador = unJugador;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
@@ -89,10 +99,10 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		unaUnidad.setComportamientoEstado(new Guardian(this.ubicacion));
+		unaUnidad.setComportamientoEstado(new Guardian(this.ubicacion, this.jugador));
 	}
 
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		unaUnidad.setComportamientoEstado(new Devorador(this.ubicacion));
+		unaUnidad.setComportamientoEstado(new Devorador(this.ubicacion, this.jugador));
 	}
 }

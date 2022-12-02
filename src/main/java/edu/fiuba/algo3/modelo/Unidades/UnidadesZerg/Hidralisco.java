@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -17,22 +18,31 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int SUMINISTRO_HIDRALISCO = 2;
 	private final int POBLACION = 0;
+	private final int COSTO_MINERAL = 50;
+	private final int COSTO_GAS = 100;
 	
 	private Vida vida;
+	private Jugador jugador;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque>ataques;
 	
-	public Hidralisco(Ubicacion unaUbicacion) {
+	public Hidralisco(Ubicacion unaUbicacion, Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(80);
+		this.jugador = unJugador;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(10,new Superficie("Tierra"),4));
 												 add(new Ataque(10,new Superficie("Aire"),4));}};
 	}
 	
-	public Hidralisco() {
+	public Hidralisco(Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(80);
+		this.jugador = unJugador;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(10,new Superficie("Tierra"),4));

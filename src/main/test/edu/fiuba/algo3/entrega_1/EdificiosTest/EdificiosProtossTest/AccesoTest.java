@@ -65,7 +65,7 @@ public class AccesoTest {
     @Test
     void test05SeConstruyeUnAccesoQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
-        Recursos recursos = new Recursos(0, 150);
+        Recursos recursos = new Recursos(10000, 10000);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 500 de daño y luego 300 de vida.
@@ -80,7 +80,7 @@ public class AccesoTest {
     @Test
     void test06SeConstruyeUnAccesoQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
-        Recursos recursos = new Recursos(0, 150);
+        Recursos recursos = new Recursos(10000, 10000);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.

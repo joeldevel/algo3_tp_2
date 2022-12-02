@@ -33,9 +33,9 @@ public class Criadero extends EdificioZerg {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
 		this.maxLarvas = 3;
-		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva(), unJugador));
-												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva(), unJugador));
-												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva(), unJugador));}};
+		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
+												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
+												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));}};
 		this.zanganos = new ArrayList<Unidad>();
 	}
 
@@ -58,14 +58,14 @@ public class Criadero extends EdificioZerg {
 			throw new CriaderoSinLarvasException();
 		}
 		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoEstado(new Zangano(this.jugador));
+		unaUnidad.setComportamientoEstado(new Zangano(this.ubicacion, this.jugador));
 		this.larvas.remove(0);
 		zanganos.add(unaUnidad);
 	}
 	
 	public void crearLarva() {
 		if(this.contarLarvas()<this.maxLarvas) {
-			this.larvas.add(new Unidad(new Tiempo(0),this.ubicacion(),new Larva(), this.jugador));
+			this.larvas.add(new Unidad(new Tiempo(0),this.ubicacion(),new Larva()));
 		}
 	}
 	

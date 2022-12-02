@@ -45,7 +45,7 @@ public class Guarida extends EdificioZerg {
 		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
 		while(this.contarLarvas() != 0) {
 			Unidad actual = larvas.get(0);
-			actual.setComportamientoEstado(new Hidralisco());
+			actual.setComportamientoEstado(new Hidralisco(this.ubicacion, this.jugador));
 			hidraliscos.add(actual);
 			larvas.remove(0);
 		}

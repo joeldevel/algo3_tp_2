@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -17,21 +18,30 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int SUMINISTRO_GUARDIAN = 4;
 	private final int POBLACION = 0;
+	private final int COSTO_MINERAL = 50;
+	private final int COSTO_GAS = 100;
 
 	private Vida vida;
+	private Jugador jugador;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	
-	public Guardian(Ubicacion unaUbicacion) {
+	public Guardian(Ubicacion unaUbicacion, Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(100);
+		this.jugador = unJugador;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
 	}
 
-	public Guardian() {
+	public Guardian(Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(100);
+		this.jugador = unJugador;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};

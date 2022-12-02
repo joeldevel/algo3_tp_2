@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -18,25 +19,34 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int SUMINISTRO_SCOUT = 4;
 	private final int POBLACION = 0;
+	private final int COSTO_MINERAL = 300;
+	private final int COSTO_GAS = 150;
 
 	private Vida vida;
 	private Escudo escudo;
+	private Jugador jugador;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	
-	public Scout(Ubicacion unaUbicacion) {
+	public Scout(Ubicacion unaUbicacion, Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(150);
 		this.escudo = new Escudo(100);
+		this.jugador = unJugador;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),4));
 		 										 add(new Ataque(14,new Superficie("Aire"),4));}};
 	}
 	
-	public Scout() {
+	public Scout(Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(150);
 		this.escudo = new Escudo(100);
+		this.jugador = unJugador;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),4));

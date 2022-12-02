@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.entrega_1.Unidades.UnidadesProtoss;
 
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
@@ -12,8 +16,11 @@ public class DragonTest {
     @Test
     void test01UnDragonAtacaAUnZerlingYLaVidaDelZerlingDisminuyeLoIndicado(){
         // Arrange
-        Dragon dragon = new Dragon(); // Ataque de tierra y aire
-        Zerling zerling = new Zerling(); // Unidad de tierra
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Dragon dragon = new Dragon(new Ubicacion(0,0), jugadorProtoss); // Ataque de tierra y aire
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+        Zerling zerling = new Zerling(new Ubicacion(0,0), jugadorZerg); // Unidad de tierra
 
         // Act
         dragon.atacar(zerling);
@@ -25,8 +32,10 @@ public class DragonTest {
     @Test
     void test02UnDragonAtacaAUnMutaliscoYLaVidaDelMutaliscoDisminuyeLoIndicado(){
         // Arrange
-        Dragon dragon = new Dragon(); // Ataque de tierra y aire
-        Mutalisco mutalisco = new Mutalisco(); // Unidad de aire
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Dragon dragon = new Dragon(new Ubicacion(0,0), jugadorProtoss); // Ataque de tierra y aire
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+        Mutalisco mutalisco = new Mutalisco(new Ubicacion(0,0), jugadorZerg); // Unidad de aire
 
         // Act
         dragon.atacar(mutalisco);

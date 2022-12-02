@@ -2,10 +2,11 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
-import edu.fiuba.algo3.modelo.Raza;
+import edu.fiuba.algo3.modelo.Edificio;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,8 @@ public class JugadorZerg implements Jugador {
     private int cantidadDeGuardianes;
     private int cantidadDeDevoradores;
 
-    private ArrayList<Raza> entidades;
+    private ArrayList<Edificio> edificios;
+    private ArrayList<Unidad> unidades;
 
     public JugadorZerg(String unNombre, String unColor) {
         this.nombre = unNombre;
@@ -58,7 +60,8 @@ public class JugadorZerg implements Jugador {
         this.cantidadDeGuardianes = 0;
         this.cantidadDeDevoradores = 0;
 
-        this.entidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Edificio>();
+        this.unidades = new ArrayList<Unidad>();
     }
 
     // Constructor utilizado unicamente para pruebas debido a los recursos.
@@ -77,7 +80,8 @@ public class JugadorZerg implements Jugador {
         this.cantidadDeGuardianes = 0;
         this.cantidadDeDevoradores = 0;
 
-        this.entidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Edificio>();
+        this.unidades = new ArrayList<Unidad>();
     }
 
     @Override
@@ -102,24 +106,24 @@ public class JugadorZerg implements Jugador {
 
     public Criadero crearCriadero(Ubicacion unaUbicacion) {
         Criadero criadero = new Criadero(unaUbicacion, this);
-        this.entidades.add(criadero);
+        this.edificios.add(criadero);
         return criadero;
     }
 
     public void crearReservaDeProduccion(Ubicacion unaUbicacion) {
-        this.entidades.add(new ReservaDeProduccion(unaUbicacion, this));
+        this.edificios.add(new ReservaDeProduccion(unaUbicacion, this));
     }
 
     public void crearExtractor(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.entidades.add(new Extractor(unVolcan, unaUbicacion, this));
+        this.edificios.add(new Extractor(unVolcan, unaUbicacion, this));
     }
 
     public void crearGuarida(Ubicacion unaUbicacion) {
-        this.entidades.add(new Guarida(unaUbicacion, this));
+        this.edificios.add(new Guarida(unaUbicacion, this));
     }
 
     public void crearEspiral(Ubicacion unaUbicacion) {
-        this.entidades.add(new Espiral(unaUbicacion, this));
+        this.edificios.add(new Espiral(unaUbicacion, this));
     }
 
     // Falta enviar el mensaje que permite instanciar Amo Supremo.
@@ -219,8 +223,12 @@ public class JugadorZerg implements Jugador {
     public int calcularPoblacion() {
         int poblacion = 0;
 
-        for (Raza entidad : this.entidades) {
-            poblacion += entidad.obtenerPoblacion();
+        for (Edificio edificio : this.edificios) {
+            poblacion += edificio.obtenerPoblacion();
+        }
+
+        for (Unidad unidad : this.unidades) {
+            poblacion += unidad.obtenerPoblacion();
         }
 
         if (poblacion >= MAX_POBLACION) {
@@ -243,14 +251,24 @@ public class JugadorZerg implements Jugador {
 
     public void avanzarTurno() {
 
-        for (Raza entidad : this.entidades) {
-            entidad.avanzarTurno(); // Edificios: Criadero expande el moho, Extractor recolecta gas, Zangano recolecta mineral, se recuperan, pasa el tiempo de construccion. Unidades: Se recuperan, pasa el tiempo de construccion.
+        for (Edificio edificio : this.edificios) {
+            edificio.avanzarTurno(); // Edificios: Criadero expande el moho, Extractor recolecta gas, Zangano recolecta mineral, se recuperan, pasa el tiempo de construccion.
+        }
+
+        for (Unidad unidad : this.unidades) {
+            unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
         }
     }
 
     @Override
-    public void eliminar(Raza unaEntidad) {
-        this.poblacion -= unaEntidad.obtenerPoblacion();
-        this.entidades.remove(unaEntidad);
+    public void eliminarEdificio(Edificio unEdificio) {
+        this.poblacion -= unEdificio.obtenerPoblacion();
+        this.edificios.remove(unEdificio);
+    }
+
+    @Override
+    public void eliminarUnidad(Unidad unaUnidad) {
+        this.poblacion -= unaUnidad.obtenerPoblacion();
+        this.unidades.remove(unaUnidad);
     }
 }

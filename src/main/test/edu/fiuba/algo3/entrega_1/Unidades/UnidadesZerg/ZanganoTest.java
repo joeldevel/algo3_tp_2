@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.entrega_1.Unidades.UnidadesZerg;
 
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import org.junit.jupiter.api.Test;
@@ -15,9 +17,9 @@ public class ZanganoTest {
     void test01SeConstruyeUnZanganoEnUnNodoMineralYSeAvanzanTresTurnosDevuelveElResultadoIndicado() {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursos = new Recursos();
+        Recursos recursos = new Recursos(0, 25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Zangano zangano = new Zangano(jugadorZerg);
+        Zangano zangano = new Zangano(new Ubicacion(0,0), jugadorZerg);
         zangano.conNodo(nodoMineral);
 
         // Act
@@ -32,9 +34,9 @@ public class ZanganoTest {
     @Test
     void test02UnZanganoQueNoEstaTrabajandoEnUnNodoMineralNoDeberiaRecolecarMineral() {
         // Arrange
-        Recursos recursos = new Recursos();
+        Recursos recursos = new Recursos(0, 25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Zangano zangano = new Zangano(jugadorZerg);
+        Zangano zangano = new Zangano(new Ubicacion(0,0), jugadorZerg);
 
         // Act
         zangano.avanzarTurno();
@@ -48,10 +50,11 @@ public class ZanganoTest {
     @Test
     void test03UnZanganoEsAtacadoPorUnZealotYLaVidaDelZanganotDisminuyeLoIndicado(){
         // Arrange
-        Zealot zealot = new Zealot(); // Ataque de tierra
-        Recursos recursos = new Recursos();
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Zealot zealot = new Zealot(new Ubicacion(0,0), jugadorProtoss); // Ataque de tierra
+        Recursos recursos = new Recursos(0, 25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Zangano zangano = new Zangano(jugadorZerg); // Unidad de tierra
+        Zangano zangano = new Zangano(new Ubicacion(0,0), jugadorZerg); // Unidad de tierra
 
         // Act
         zealot.atacar(zangano);

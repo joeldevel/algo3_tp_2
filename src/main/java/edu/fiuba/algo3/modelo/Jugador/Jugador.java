@@ -1,12 +1,14 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Raza;
+import edu.fiuba.algo3.modelo.Edificio;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public interface Jugador {
     void guardar(int costoGas, int costoMineral);
     void utilizar(int costoGas, int costoMineral);
     int obtenerGas();
     int obtenerMineral();
-    void eliminar(Raza unaEntidad);
+    void eliminarEdificio(Edificio unEdificio);
+    void eliminarUnidad(Unidad unaUnidad);
 }
 

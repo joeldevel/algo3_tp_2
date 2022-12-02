@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.entrega_1.Unidades.UnidadesProtoss;
 
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
@@ -12,8 +16,10 @@ public class ScoutTest {
     @Test
     void test01UnScoutAtacaAUnZerlingYLaVidaDelZerlingDisminuyeLoIndicado(){
         // Arrange
-        Scout scout = new Scout(); // Ataque de tierra y aire
-        Zerling zerling = new Zerling(); // Unidad de tierra
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Scout scout = new Scout(new Ubicacion(0,0), jugadorProtoss); // Ataque de tierra y aire
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+        Zerling zerling = new Zerling(new Ubicacion(0,0), jugadorZerg); // Unidad de tierra
 
         // Act
         scout.atacar(zerling);
@@ -25,8 +31,10 @@ public class ScoutTest {
     @Test
     void test02UnScoutAtacaAUnGuardianYLaVidaDelGuardianDisminuyeLoIndicado(){
         // Arrange
-        Scout scout = new Scout(); // Ataque de tierra y aire
-        Guardian guardian = new Guardian(); // Unidad de aire
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Scout scout = new Scout(new Ubicacion(0,0), jugadorProtoss); // Ataque de tierra y aire
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+        Guardian guardian = new Guardian(new Ubicacion(0,0), jugadorZerg); // Unidad de aire
 
         // Act
         scout.atacar(guardian);

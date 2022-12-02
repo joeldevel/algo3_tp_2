@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
@@ -15,16 +16,20 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	public static final int SUMINISTRO_ZANGANO = 1;
 	private final int POBLACION = 0;
+	private final int COSTO_MINERAL = 25;
+	private final int COSTO_GAS = 0;
 
 	private Vida vida;
+	private Jugador jugador;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 
 	private int cantidadRecolectableDeMineral;
-    private Jugador jugador;
     private Mineral nodo;
 
 	public Zangano(Ubicacion unaUbicacion, Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(25);
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
@@ -35,6 +40,8 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	}
 
     public Zangano(Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(25);
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");

@@ -42,7 +42,7 @@ class VolcanTest {
     void test03SeConstruyeUnExtractorEnUnVolcanSinGasVespenoYAlIntentarExtraerSeLanzaUnaExcepcion(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,100);
+        Recursos recursos = new Recursos(0,125);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         Zangano primerZangano =  new Zangano(jugadorZerg);

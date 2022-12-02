@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
@@ -12,21 +13,30 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
     public static final int SUMINISTRO_DEVORADOR = 4;
     private final int POBLACION = 0;
+    private final int COSTO_MINERAL = 150;
+    private final int COSTO_GAS = 50;
 
     private Vida vida;
+    private Jugador jugador;
     private Ubicacion ubicacion;
     private Superficie superficie;
     private ArrayList<Ataque> ataques;
 
-    public Devorador(Ubicacion unaUbicacion) {
+    public Devorador(Ubicacion unaUbicacion, Jugador unJugador) {
+        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
         this.vida = new Vida(200);
+        this.jugador = unJugador;
         this.ubicacion = unaUbicacion;
         this.superficie = new Superficie("Aire");
         this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};
     }
 
-    public Devorador() {
+    public Devorador(Jugador unJugador) {
+        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
         this.vida = new Vida(200);
+        this.jugador = unJugador;
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
         this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};

@@ -53,7 +53,7 @@ class ExtractorTest {
     void test04SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConUnZanganoDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,100);
+        Recursos recursos = new Recursos(0,125);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         Zangano zangano =  new Zangano(jugadorZerg);
@@ -70,7 +70,7 @@ class ExtractorTest {
     void test05SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConDosZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,100);
+        Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         Zangano primerZangano =  new Zangano(jugadorZerg);
@@ -89,7 +89,7 @@ class ExtractorTest {
     void test06SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConTresZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,100);
+        Recursos recursos = new Recursos(0,175);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         Zangano primerZangano =  new Zangano(jugadorZerg);
@@ -109,7 +109,7 @@ class ExtractorTest {
     @Test
     void test07SeConstruyeUnExtractorEnUnVolcanSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
         Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,100);
+        Recursos recursos = new Recursos(0,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         Zangano primerZangano =  new Zangano(jugadorZerg);

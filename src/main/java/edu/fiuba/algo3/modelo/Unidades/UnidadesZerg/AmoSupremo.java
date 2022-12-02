@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Revelo;
 import edu.fiuba.algo3.modelo.Revelador;
@@ -14,21 +15,31 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
     public static final int CUPO_AMO = 0;
     private final int POBLACION = 5;
+    private final int COSTO_MINERAL = 50;
+    private final int COSTO_GAS = 0;
 
     private Vida vida;
+    private Jugador jugador;
     private Ubicacion ubicacion;
     private Superficie superficie;
 
     private Revelo revelo;
 
-    public AmoSupremo(Ubicacion unaUbicacion) {
+    public AmoSupremo(Ubicacion unaUbicacion, Jugador unJugador) {
+        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
         this.vida = new Vida(200);
+        this.jugador = unJugador;
         this.ubicacion = unaUbicacion;
         this.superficie = new Superficie("Aire");
+        this.revelo = new Revelo(new Superficie("Aire"), 4);
     }
 
-    public AmoSupremo() {
+    public AmoSupremo(Jugador unJugador) {
+        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
         this.vida = new Vida(200);
+        this.jugador = unJugador;
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
         this.revelo = new Revelo(new Superficie("Aire"), 4);
@@ -65,7 +76,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
     @Override
     public void revelar(Revelable unRevelable) {
-        if (!(this.estaEnRangoDeRevelo(unRevelable, revelo))) {
+        if (!(this.estaEnRangoDeRevelo(unRevelable, this.revelo))) {
             throw new RevelableFueraDeRangoError();
         }
 

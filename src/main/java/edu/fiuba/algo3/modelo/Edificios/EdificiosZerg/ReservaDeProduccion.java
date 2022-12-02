@@ -44,7 +44,7 @@ public class ReservaDeProduccion extends EdificioZerg {
 		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
 		while(this.contarLarvas() != 0) {
 			Unidad actual = larvas.get(0);
-			actual.setComportamientoEstado(new Zerling());
+			actual.setComportamientoEstado(new Zerling(this.ubicacion, this.jugador));
 			zerlings.add(actual);
 			larvas.remove(0);
 		}

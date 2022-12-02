@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
-import edu.fiuba.algo3.modelo.Raza;
+import edu.fiuba.algo3.modelo.Edificio;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -35,7 +34,8 @@ public class JugadorProtoss implements Jugador {
     private int cantidadDeDragones;
     private int cantidadDeScouts;
 
-    private ArrayList<Raza> entidades;
+    private ArrayList<Edificio> edificios;
+    private ArrayList<Unidad> unidades;
 
     public JugadorProtoss(String unNombre, String unColor) {
         this.nombre = unNombre;
@@ -49,7 +49,8 @@ public class JugadorProtoss implements Jugador {
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
 
-        this.entidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Edificio>();
+        this.unidades = new ArrayList<Unidad>();
     }
 
     // Constructor utilizado unicamente para simplificar pruebas.
@@ -64,7 +65,8 @@ public class JugadorProtoss implements Jugador {
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
 
-        this.entidades = new ArrayList<Raza>();
+        this.edificios = new ArrayList<Edificio>();
+        this.unidades = new ArrayList<Unidad>();
     }
 
     @Override
@@ -88,25 +90,25 @@ public class JugadorProtoss implements Jugador {
     }
 
     public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
-        this.entidades.add(new NexoMineral(unNodo, unaUbicacion, this));
+        this.edificios.add(new NexoMineral(unNodo, unaUbicacion, this));
     }
 
     public Pilon crearPilon(Ubicacion unaUbicacion) {
         Pilon pilon = new Pilon(unaUbicacion, this);
-        this.entidades.add(pilon);
+        this.edificios.add(pilon);
         return pilon;
     }
 
     public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.entidades.add(new Asimilador(unVolcan, unaUbicacion, this));
+        this.edificios.add(new Asimilador(unVolcan, unaUbicacion, this));
     }
 
     public void crearAcceso(Ubicacion unaUbicacion) {
-        this.entidades.add(new Acceso(unaUbicacion, this));
+        this.edificios.add(new Acceso(unaUbicacion, this));
     }
 
     public void crearPuertoEstelar(Ubicacion unaUbicacion) {
-        this.entidades.add(new PuertoEstelar(unaUbicacion, this));
+        this.edificios.add(new PuertoEstelar(unaUbicacion, this));
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
@@ -157,8 +159,12 @@ public class JugadorProtoss implements Jugador {
     public int calcularPoblacion() {
         int poblacion = 0;
 
-        for (Raza entidad : this.entidades) {
-            poblacion += entidad.obtenerPoblacion();
+        for (Edificio edificio : this.edificios) {
+            poblacion += edificio.obtenerPoblacion();
+        }
+
+        for (Unidad unidad : this.unidades) {
+            poblacion += unidad.obtenerPoblacion();
         }
 
         if (poblacion >= MAX_POBLACION) {
@@ -181,14 +187,24 @@ public class JugadorProtoss implements Jugador {
 
     public void avanzarTurno() {
 
-        for (Raza entidad : this.entidades) {
-            entidad.avanzarTurno(); // Edificios: Pilon energiza, Asimilador recolecta gas, Nexo Mineral recolecta mineral, se recuperan, pasa el tiempo de construccion. Unidades: Se recuperan, pasa el tiempo de construccion.
+        for (Edificio edificio : this.edificios) {
+            edificio.avanzarTurno(); // Edificios: Criadero expande el moho, Extractor recolecta gas, Zangano recolecta mineral, se recuperan, pasa el tiempo de construccion.
+        }
+
+        for (Unidad unidad : this.unidades) {
+            unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
         }
     }
 
     @Override
-    public void eliminar(Raza unaEntidad) {
-        this.poblacion -= unaEntidad.obtenerPoblacion();
-        this.entidades.remove(unaEntidad);
+    public void eliminarEdificio(Edificio unEdificio) {
+        this.poblacion -= unEdificio.obtenerPoblacion();
+        this.edificios.remove(unEdificio);
+    }
+
+    @Override
+    public void eliminarUnidad(Unidad unaUnidad) {
+        this.poblacion -= unaUnidad.obtenerPoblacion();
+        this.unidades.remove(unaUnidad);
     }
 }

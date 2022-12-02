@@ -1,18 +1,14 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 
-public class Unidad extends Raza implements Atacante {
+public class Unidad extends Edificio implements Atacante {
 
 	private TipoDeUnidad estado;
 	private TipoDeUnidad tipo;
-	private Jugador jugador;
     
-	public Unidad(Tiempo unTiempo, Ubicacion unaUbicacion, TipoDeUnidad unTipo, Jugador unJugador) {
-		super(unTiempo, unaUbicacion, unJugador);
+	public Unidad(Tiempo unTiempo, Ubicacion unaUbicacion, TipoDeUnidad unTipo) {
+		super(unTiempo, unaUbicacion);
 		this.estado = new UnidadEnConstruccion();
 		this.tipo = unTipo;
 	}

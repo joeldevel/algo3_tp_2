@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Revelable;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
@@ -19,18 +20,24 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	public static final int SUMINISTRO_ZEALOT = 2;
 	private final int POBLACION = 0;
+	private final int COSTO_MINERAL = 150;
+	private final int COSTO_GAS = 0;
 
 	private Vida vida;
 	private Escudo escudo;
+	private Jugador jugador;
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	private boolean estaInvisible;
 	private int cantidadDeBajas;
 
-	public Zealot(Ubicacion unaUbicacion) {
+	public Zealot(Ubicacion unaUbicacion, Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(60);
+		this.jugador = unJugador;
 		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{
@@ -40,9 +47,12 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
 
-	public Zealot() {
+	public Zealot(Jugador unJugador) {
+		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+
 		this.vida = new Vida(100);
 		this.escudo = new Escudo(60);
+		this.jugador = unJugador;
 		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{

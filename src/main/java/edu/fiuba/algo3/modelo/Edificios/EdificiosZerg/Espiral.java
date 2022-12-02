@@ -44,7 +44,7 @@ public class Espiral extends EdificioZerg {
 		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
 		while(this.contarLarvas() != 0) {
 			Unidad actual = larvas.get(0);
-			actual.setComportamientoEstado(new Mutalisco());
+			actual.setComportamientoEstado(new Mutalisco(this.ubicacion, this.jugador));
 			mutaliscos.add(actual);
 			larvas.remove(0);
 		}

@@ -21,13 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UnidadTest {
 
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+
     @Test
     void test01SeCreaUnaUnidadConTipoZerlingYSeEncuentraEnConstruccion(){
         // Arrange
-        Zerling tipoZerling = new Zerling();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad zerling = new Unidad(new Tiempo(-2), new Ubicacion(0,0), tipoZerling, jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
+        Unidad zerling = new Unidad(new Tiempo(-2), new Ubicacion(0,0), tipoZerling);
 
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
@@ -38,10 +39,8 @@ public class UnidadTest {
     @Test
     void test02SeCreaUnaUnidadConTipoZerlingYLuegoDeDosTurnosRecibeUnAtaqueYSeEncuentraOperativo(){
         // Arrange
-        Zerling tipoZerling = new Zerling();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad zerling = new Unidad(new Tiempo(-2), new Ubicacion(0,0), tipoZerling, jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
+        Unidad zerling = new Unidad(new Tiempo(-2), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
         // Act
@@ -54,10 +53,8 @@ public class UnidadTest {
     @Test
     void test03SeCreaUnaUnidadConTipoHidraliscoYSeEncuentraEnConstruccion(){
         // Arrange
-        Hidralisco tipoHidralisco = new Hidralisco();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad hidralisco = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoHidralisco, jugadorZerg);
+        Hidralisco tipoHidralisco = new Hidralisco(jugadorZerg);
+        Unidad hidralisco = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoHidralisco);
 
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
@@ -68,10 +65,8 @@ public class UnidadTest {
     @Test
     void test04SeCreaUnaUnidadConTipoHidraliscoYLuegoDeCuatroTurnosRecibeUnAtaqueYSeEncuentraOperativo(){
         // Arrange
-        Hidralisco tipoHidralisco = new Hidralisco();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad hidralisco = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoHidralisco, jugadorZerg);
+        Hidralisco tipoHidralisco = new Hidralisco(jugadorZerg);
+        Unidad hidralisco = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoHidralisco);
         hidralisco.avanzarTurno(4);
 
         // Act
@@ -84,10 +79,8 @@ public class UnidadTest {
     @Test
     void test05SeCreaUnaUnidadConTipoMutaliscoYSeEncuentraEnConstruccion(){
         // Arrange
-        Mutalisco tipoMutalisco = new Mutalisco();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad mutalisco = new Unidad(new Tiempo(-7), new Ubicacion(0,0), tipoMutalisco, jugadorZerg);
+        Mutalisco tipoMutalisco = new Mutalisco(jugadorZerg);
+        Unidad mutalisco = new Unidad(new Tiempo(-7), new Ubicacion(0,0), tipoMutalisco);
 
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
@@ -98,10 +91,8 @@ public class UnidadTest {
     @Test
     void test06SeCreaUnaUnidadConTipoMutaliscoYLuegoDeSieteTurnosRecibeUnAtaqueYSeEncuentraOperativo(){
         // Arrange
-        Mutalisco tipoMutalisco = new Mutalisco();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad mutalisco = new Unidad(new Tiempo(-7), new Ubicacion(0,0), tipoMutalisco, jugadorZerg);
+        Mutalisco tipoMutalisco = new Mutalisco(jugadorZerg);
+        Unidad mutalisco = new Unidad(new Tiempo(-7), new Ubicacion(0,0), tipoMutalisco);
         mutalisco.avanzarTurno(7);
 
         // Act
@@ -114,10 +105,8 @@ public class UnidadTest {
     @Test
     void test07SeCreaUnaUnidadConTipoGuardianYSeEncuentraEnConstruccion(){
         // Arrange
-        Guardian tipoGuardian = new Guardian();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad guardian = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoGuardian, jugadorZerg);
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad guardian = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoGuardian);
 
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
@@ -128,10 +117,8 @@ public class UnidadTest {
     @Test
     void test08SeCreaUnaUnidadConTipoGuardianYLuegoDeCuatroTurnosRecibeUnAtaqueYSeEncuentraOperativo(){
         // Arrange
-        Guardian tipoGuardian = new Guardian();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Unidad guardian = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoGuardian, jugadorZerg);
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad guardian = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoGuardian);
         guardian.avanzarTurno(4);
 
         // Act
@@ -144,10 +131,8 @@ public class UnidadTest {
     @Test
     void test09SeCreaUnaUnidadConTipoZealotYSeEncuentraEnConstruccion(){
         // Arrange
-        Zealot tipoZealot = new Zealot();
-        Recursos recursos = new Recursos(0,100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Unidad zealot = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoZealot, jugadorProtoss);
+        Zealot tipoZealot = new Zealot(jugadorProtoss);
+        Unidad zealot = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoZealot);
 
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
@@ -158,10 +143,8 @@ public class UnidadTest {
     @Test
     void test10SeCreaUnaUnidadConTipoZealotYLuegoDeCuatroTurnosRecibeUnAtaqueYSeEncuentraOperativo(){
         // Arrange
-        Zealot tipoZealot = new Zealot();
-        Recursos recursos = new Recursos(0,100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Unidad zealot = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoZealot, jugadorProtoss);
+        Zealot tipoZealot = new Zealot(jugadorProtoss);
+        Unidad zealot = new Unidad(new Tiempo(-4), new Ubicacion(0,0), tipoZealot);
         zealot.avanzarTurno(4);
 
         // Act
@@ -174,10 +157,8 @@ public class UnidadTest {
     @Test
     void test11SeCreaUnaUnidadConTipoDragonYSeEncuentraEnConstruccion(){
         // Arrange
-        Dragon tipoDragon = new Dragon();
-        Recursos recursos = new Recursos(0,100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Unidad dragon = new Unidad(new Tiempo(-6), new Ubicacion(0,0), tipoDragon, jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
+        Unidad dragon = new Unidad(new Tiempo(-6), new Ubicacion(0,0), tipoDragon);
 
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
@@ -188,10 +169,8 @@ public class UnidadTest {
     @Test
     void test12SeCreaUnaUnidadConTipoDragonYLuegoDeSeisTurnosRecibeUnAtaqueYSeEncuentraOperativo(){
         // Arrange
-        Dragon tipoDragon = new Dragon();
-        Recursos recursos = new Recursos(0,100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Unidad dragon = new Unidad(new Tiempo(-6), new Ubicacion(0,0), tipoDragon, jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
+        Unidad dragon = new Unidad(new Tiempo(-6), new Ubicacion(0,0), tipoDragon);
         dragon.avanzarTurno(6);
 
         // Act
@@ -204,10 +183,8 @@ public class UnidadTest {
     @Test
     void test13SeCreaUnaUnidadConTipoScoutYSeEncuentraEnConstruccion(){
         // Arrange
-        Scout tipoScout = new Scout();
-        Recursos recursos = new Recursos(0,100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Unidad scout = new Unidad(new Tiempo(-9), new Ubicacion(0,0), tipoScout, jugadorProtoss);
+        Scout tipoScout = new Scout(jugadorProtoss);
+        Unidad scout = new Unidad(new Tiempo(-9), new Ubicacion(0,0), tipoScout);
 
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
@@ -218,10 +195,8 @@ public class UnidadTest {
     @Test
     void test14SeCreaUnaUnidadConTipoScoutYLuegoDeNueveTurnosRecibeUnAtaqueYSeEncuentraOperativo(){
         // Arrange
-        Scout tipoScout = new Scout();
-        Recursos recursos = new Recursos(0,100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Unidad scout = new Unidad(new Tiempo(-9), new Ubicacion(0,0), tipoScout, jugadorProtoss);
+        Scout tipoScout = new Scout(jugadorProtoss);
+        Unidad scout = new Unidad(new Tiempo(-9), new Ubicacion(0,0), tipoScout);
         scout.avanzarTurno(9);
 
         // Act

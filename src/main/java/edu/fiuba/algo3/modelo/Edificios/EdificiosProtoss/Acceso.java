@@ -50,14 +50,14 @@ public class Acceso extends EdificioProtoss {
 	private void crearZealot() {
 		/* solo crea los zealots que se almacenan en pedido */
 		while(this.zealotsPedido.size() < 5) {
-			this.zealotsPedido.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.ubicacion), this.jugador));
+			this.zealotsPedido.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.ubicacion, this.jugador)));
 		}
 	}
 	
 	private void crearDragon() {
 		/* solo crea los zealots que se almacenan en pedido */
 		while(this.dragonesPedido.size() < 5) {
-			this.dragonesPedido.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.ubicacion), this.jugador));
+			this.dragonesPedido.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.ubicacion, this.jugador)));
 		}
 	}
 	

@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.entrega_3;
 
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco;
@@ -13,8 +17,10 @@ public class CasoDeUso28Test {
     @Test
     void test01UnZerlingAtacaAUnZealotYElEscudoDelZealotNoDisminuyePorqueEstaInvisible(){
         // Arrange
-        Zerling zerling = new Zerling();
-        Zealot zealot = new Zealot();
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+        Zerling zerling = new Zerling(new Ubicacion(0,0), jugadorZerg); // Ataque de tierra
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Zealot zealot = new Zealot(new Ubicacion(0,0), jugadorProtoss); // Unidad de tierra
 
         // Act
         zealot.hacerseInvisible(); //Falta implementar lo de matar a tres unidades o edificios.
@@ -27,9 +33,11 @@ public class CasoDeUso28Test {
     @Test
     void test02UnAmoSupremoRevelaAUnZealotYAlAtacarloUnZerlingElEscudoDelZealotDisminuye(){
         // Arrange
-        AmoSupremo amoSupremo = new AmoSupremo();
-        Zerling zerling = new Zerling();
-        Zealot zealot = new Zealot();
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+        AmoSupremo amoSupremo = new AmoSupremo(new Ubicacion(0,0), jugadorZerg);
+        Zerling zerling = new Zerling(new Ubicacion(0,0), jugadorZerg); // Ataque de tierra
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Zealot zealot = new Zealot(new Ubicacion(0,0), jugadorProtoss); // Unidad de tierra
 
         // Act
         amoSupremo.revelar(zealot);
@@ -42,9 +50,11 @@ public class CasoDeUso28Test {
     @Test
     void test03UnAmoSupremoRevelaAUnZealotYAlAtacarloUnMutaliscoElEscudoDelZealotDisminuye(){
         // Arrange
-        AmoSupremo amoSupremo = new AmoSupremo();
-        Mutalisco mutalisco = new Mutalisco();
-        Zealot zealot = new Zealot();
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
+        AmoSupremo amoSupremo = new AmoSupremo(new Ubicacion(0,0), jugadorZerg);
+        Mutalisco mutalisco = new Mutalisco(new Ubicacion(0,0), jugadorZerg);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+        Zealot zealot = new Zealot(new Ubicacion(0,0), jugadorProtoss); // Unidad de tierra
 
         // Act
         amoSupremo.revelar(zealot);

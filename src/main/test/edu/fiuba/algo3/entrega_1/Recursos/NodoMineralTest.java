@@ -45,7 +45,7 @@ public class NodoMineralTest {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NodoMineral nodoMineral = new NodoMineral();
 
-        Recursos recursosZerg = new Recursos(0,0);
+        Recursos recursosZerg = new Recursos(0,25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursosZerg);
         Zangano zangano = new Zangano(jugadorZerg);
         zangano.conNodo(nodoMineral);
@@ -89,7 +89,7 @@ public class NodoMineralTest {
     void test06SeConstruyeUnZanganoEnUnNodoMineralYAlAvanzarUnTurnoElZanganoRecolectaMineralYDevuelveElResultadoIndicado() {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursos = new Recursos(0,0);
+        Recursos recursos = new Recursos(0,25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Zangano zangano = new Zangano(jugadorZerg);
         zangano.conNodo(nodoMineral);
