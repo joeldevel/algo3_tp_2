@@ -29,7 +29,7 @@ public class JugadorProtoss implements Jugador {
     private String color;
     private Recursos recursos;
     private int poblacion;
-    private int cupo;
+    private int suministro;
 
     private int cantidadDeZealots;
     private int cantidadDeDragones;
@@ -44,7 +44,7 @@ public class JugadorProtoss implements Jugador {
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
         this.poblacion = 0;
-        this.cupo = 0;
+        this.suministro = 0;
 
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
@@ -60,7 +60,7 @@ public class JugadorProtoss implements Jugador {
         this.color = unColor;
         this.recursos = unosRecursos;
         this.poblacion = 0;
-        this.cupo = 0;
+        this.suministro = 0;
 
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
@@ -115,32 +115,32 @@ public class JugadorProtoss implements Jugador {
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
     public void crearZealot() {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_ZEALOT)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZealots++;
-        this.incrementarCupo(SUMINISTRO_ZEALOT);
+        this.incrementarSuministro(SUMINISTRO_ZEALOT);
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Dragon.
     public void crearDragon() {
-        if (!this.hayCupoDisponible(SUMINISTRO_DRAGON)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_DRAGON)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDragones++;
-        this.incrementarCupo(SUMINISTRO_DRAGON);
+        this.incrementarSuministro(SUMINISTRO_DRAGON);
     }
 
     // Falta enviar el mensaje al edificio PuertoEstelar que permite instanciar Scout.
     public void crearScout() {
-        if (!this.hayCupoDisponible(SUMINISTRO_SCOUT)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_SCOUT)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeScouts++;
-        this.incrementarCupo(SUMINISTRO_SCOUT);
+        this.incrementarSuministro(SUMINISTRO_SCOUT);
     }
 
     public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
@@ -176,7 +176,7 @@ public class JugadorProtoss implements Jugador {
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    public int calcularCupo() {
+    public int calcularSuministro() {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
@@ -187,14 +187,14 @@ public class JugadorProtoss implements Jugador {
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.
-    private void incrementarCupo(int unIncremento) {
-        if (this.cupo + unIncremento <= this.calcularPoblacion()) {
-            this.cupo += unIncremento;
+    private void incrementarSuministro(int unIncremento) {
+        if (this.suministro + unIncremento <= this.calcularPoblacion()) {
+            this.suministro += unIncremento;
         }
     }
 
-    private boolean hayCupoDisponible(int unCupo) {
-        return (this.cupo + unCupo <= this.calcularPoblacion());
+    private boolean haySuministroDisponible(int unSuministro) {
+        return (this.suministro + unSuministro <= this.calcularPoblacion());
     }
 
     public void avanzarTurno() {
@@ -210,13 +210,12 @@ public class JugadorProtoss implements Jugador {
 
     @Override
     public void eliminarEdificio(Edificio unEdificio) {
-        this.poblacion -= unEdificio.obtenerPoblacion();
         this.edificios.remove(unEdificio);
     }
 
     @Override
     public void eliminarUnidad(Unidad unaUnidad) {
-        this.poblacion -= unaUnidad.obtenerPoblacion();
+        this.suministro -= unaUnidad.obtenerSuministro();
         this.unidades.remove(unaUnidad);
     }
 }

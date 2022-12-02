@@ -2,7 +2,6 @@ package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.modelo.Excepciones.AlgoStarFinalizadoException;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CasoDeUso32Test {
 
     @Test
-    @DisplayName("Un juego iniciado puede ser finalizado")
     public void test01AlgoStarInicializadoEsFinalizado() {
         AlgoStar juego = new AlgoStar();
         juego.finalizarAlgoStar();

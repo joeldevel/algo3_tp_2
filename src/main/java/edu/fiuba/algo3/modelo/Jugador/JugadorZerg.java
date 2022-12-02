@@ -36,7 +36,7 @@ public class JugadorZerg implements Jugador {
     private String color;
     private Recursos recursos;
     private int poblacion;
-    private int cupo;
+    private int suministro;
 
     private int cantidadDeAmos;
     private int cantidadDeZanganos;
@@ -55,7 +55,7 @@ public class JugadorZerg implements Jugador {
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
         this.poblacion = 0;
-        this.cupo = 0;
+        this.suministro = 0;
 
         this.cantidadDeAmos = 0;
         this.cantidadDeZanganos = 0;
@@ -75,7 +75,7 @@ public class JugadorZerg implements Jugador {
         this.color = unColor;
         this.recursos = unosRecursos;
         this.poblacion = 0;
-        this.cupo = 0;
+        this.suministro = 0;
 
         this.cantidadDeAmos = 0;
         this.cantidadDeZanganos = 0;
@@ -133,7 +133,7 @@ public class JugadorZerg implements Jugador {
 
     public Unidad crearAmoSupremo(Ubicacion unaUbicacion) {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_AMO)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_AMO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
@@ -142,7 +142,7 @@ public class JugadorZerg implements Jugador {
         this.unidades.add(amoSupremo);
 
         this.cantidadDeAmos++;
-        this.incrementarCupo(SUMINISTRO_AMO);
+        this.incrementarSuministro(SUMINISTRO_AMO);
 
         return amoSupremo;
     }
@@ -150,67 +150,67 @@ public class JugadorZerg implements Jugador {
     // Falta enviar el mensaje al edificio Criadero que permite instanciar Zangano.
     public void crearZangano() {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_ZANGANO)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_ZANGANO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZanganos++;
-        this.incrementarCupo(SUMINISTRO_ZANGANO);
+        this.incrementarSuministro(SUMINISTRO_ZANGANO);
     }
 
     // Falta enviar el mensaje al edificio ReservaDeReproduccion que permite instanciar Zerling.
     public void crearZerling() {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_ZERLING)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_ZERLING)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZerlings++;
-        this.incrementarCupo(SUMINISTRO_ZERLING);
+        this.incrementarSuministro(SUMINISTRO_ZERLING);
     }
 
     // Falta enviar el mensaje al edificio Guarida que permite instanciar Hidralisco.
     public void crearHidralisco() {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_HIDRALISCO)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeHidraliscos++;
-        this.incrementarCupo(SUMINISTRO_HIDRALISCO);
+        this.incrementarSuministro(SUMINISTRO_HIDRALISCO);
     }
 
     // Falta enviar el mensaje al edificio Espiral que permite instanciar Mutalisco.
     public void crearMutalisco() {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_MUTALISCO)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeMutaliscos++;
-        this.incrementarCupo(SUMINISTRO_MUTALISCO);
+        this.incrementarSuministro(SUMINISTRO_MUTALISCO);
     }
 
     // Falta enviar el mensaje que permite instanciar Guardian (evolucion de Mutalisco).
     public void crearGuardian() {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_GUARDIAN)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_GUARDIAN)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeGuardianes++;
-        this.incrementarCupo(SUMINISTRO_GUARDIAN);
+        this.incrementarSuministro(SUMINISTRO_GUARDIAN);
     }
 
     // Falta enviar el mensaje que permite instanciar Devorador (evolucion de Mutalisco).
     public void crearDevorador() {
 
-        if (!this.hayCupoDisponible(SUMINISTRO_DEVORADOR)) {
+        if (!this.haySuministroDisponible(SUMINISTRO_DEVORADOR)) {
             throw new CupoSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDevoradores++;
-        this.incrementarCupo(SUMINISTRO_DEVORADOR);
+        this.incrementarSuministro(SUMINISTRO_DEVORADOR);
     }
 
     public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {
@@ -249,7 +249,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    public int calcularCupo() {
+    public int calcularSuministro() {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
@@ -260,14 +260,14 @@ public class JugadorZerg implements Jugador {
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.
-    private void incrementarCupo(int unIncremento) {
-        if (this.cupo + unIncremento <= this.calcularPoblacion()) {
-            this.cupo += unIncremento;
+    private void incrementarSuministro(int unIncremento) {
+        if (this.suministro + unIncremento <= this.calcularPoblacion()) {
+            this.suministro += unIncremento;
         }
     }
 
-    private boolean hayCupoDisponible(int unCupo) {
-        return (this.cupo + unCupo <= this.calcularPoblacion());
+    private boolean haySuministroDisponible(int unSuministro) {
+        return (this.suministro + unSuministro <= this.calcularPoblacion());
     }
 
     public void avanzarTurno() {
@@ -288,6 +288,7 @@ public class JugadorZerg implements Jugador {
 
     @Override
     public void eliminarUnidad(Unidad unaUnidad) {
+        this.suministro -= unaUnidad.obtenerSuministro();
         this.unidades.remove(unaUnidad);
     }
 }
