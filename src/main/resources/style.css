@@ -2,6 +2,19 @@
     font-family: Syncopate;
     src: url('fonts/Syncopate-Bold.ttf');
 }
+/* variables */
+* {
+    -fx-dark-bg: #000;
+    -fx-light-text: #fff;
+}
+
+.text-light {
+    -fx-fill: -fx-light-text;
+}
+
+.label-light {
+   -fx-text-fill: -fx-light-text;
+}
 
 .title {
     -fx-font-family: Syncopate, sans-serif;
@@ -66,7 +79,7 @@
 
 .nombre-jugador {
     -fx-font-size: 20px;
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-light-text;
 }
 
 /* botones */
@@ -89,5 +102,65 @@
 
 .btn-aceptar:hover {
     -fx-background-color: crimson;
+}
 
+.btn-salir {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.btn-salir:hover {
+    -fx-background-color: linear-gradient(red, #be1d00);
+    -fx-effect: dropshadow(three-pass-box, crimson , 20, 0.3, 0, 0);
+}
+
+/***** pantalla de juego *****/
+
+.fondo-mapa {
+    -fx-background-image: url("images/field.png"); /* temporal*/
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.panel-superior {
+    -fx-background-color: -fx-dark-bg;
+}
+
+.panel-control-inferior {
+    -fx-background-color: -fx-dark-bg;
+}
+
+.panel-lateral {
+    -fx-background-color: -fx-dark-bg;
+}
+
+.seccion-panel-jugador-titulo {
+    -fx-font-size: 10px;
+}
+
+.seccion-panel-jugador-contenido {
+    -fx-font-size: 30px;
+}
+
+/* todo: cambiar este nombre por algo mejor*/
+.btn-bicho {
+     -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #395306;
+}
+
+.btn-bicho-disabled: {
+    -fx-background: grey;
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+}
+
+.btn-bicho:hover {
+     -fx-background-color: orangered;
 }
