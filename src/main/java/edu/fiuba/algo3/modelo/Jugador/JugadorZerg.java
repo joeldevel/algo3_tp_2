@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
-import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -134,7 +134,7 @@ public class JugadorZerg implements Jugador {
     public Unidad crearAmoSupremo(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_AMO)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         AmoSupremo tipoAmoSupremo = new AmoSupremo(unaUbicacion, this);
@@ -151,7 +151,7 @@ public class JugadorZerg implements Jugador {
     public void crearZangano() {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZANGANO)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZanganos++;
@@ -162,7 +162,7 @@ public class JugadorZerg implements Jugador {
     public void crearZerling() {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZERLING)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZerlings++;
@@ -173,7 +173,7 @@ public class JugadorZerg implements Jugador {
     public void crearHidralisco() {
 
         if (!this.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeHidraliscos++;
@@ -184,7 +184,7 @@ public class JugadorZerg implements Jugador {
     public void crearMutalisco() {
 
         if (!this.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeMutaliscos++;
@@ -195,7 +195,7 @@ public class JugadorZerg implements Jugador {
     public void crearGuardian() {
 
         if (!this.haySuministroDisponible(SUMINISTRO_GUARDIAN)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeGuardianes++;
@@ -206,7 +206,7 @@ public class JugadorZerg implements Jugador {
     public void crearDevorador() {
 
         if (!this.haySuministroDisponible(SUMINISTRO_DEVORADOR)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDevoradores++;
@@ -249,7 +249,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    public int calcularSuministro() {
+    /*public int calcularSuministro() {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
@@ -257,6 +257,11 @@ public class JugadorZerg implements Jugador {
         }
 
         return cupo;
+    }*/
+
+    // Este metodo sera reemplazado por el de arriba cuando se termine el codigo relacionado a la creacion de unidades.
+    public int calcularSuministro() {
+        return this.suministro;
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.

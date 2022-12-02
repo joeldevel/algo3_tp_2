@@ -2,17 +2,15 @@ package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Atacable;
-import edu.fiuba.algo3.modelo.Atacante;
-import edu.fiuba.algo3.modelo.Ataque;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
-import edu.fiuba.algo3.modelo.Superficie;
-import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
+
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.CONSTRUCCION_DEVORADOR;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.CONSTRUCCION_GUARDIAN;
 
 public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 
@@ -113,10 +111,10 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		unaUnidad.setComportamientoEstado(new Guardian(this.ubicacion, this.jugador));
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_GUARDIAN), new Guardian(this.ubicacion, this.jugador));
 	}
 
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		unaUnidad.setComportamientoEstado(new Devorador(this.ubicacion, this.jugador));
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_DEVORADOR), new Devorador(this.ubicacion, this.jugador));
 	}
 }

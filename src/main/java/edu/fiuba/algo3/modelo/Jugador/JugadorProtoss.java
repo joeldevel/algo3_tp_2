@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
-import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
@@ -116,7 +116,7 @@ public class JugadorProtoss implements Jugador {
     public void crearZealot() {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZealots++;
@@ -126,7 +126,7 @@ public class JugadorProtoss implements Jugador {
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Dragon.
     public void crearDragon() {
         if (!this.haySuministroDisponible(SUMINISTRO_DRAGON)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDragones++;
@@ -136,7 +136,7 @@ public class JugadorProtoss implements Jugador {
     // Falta enviar el mensaje al edificio PuertoEstelar que permite instanciar Scout.
     public void crearScout() {
         if (!this.haySuministroDisponible(SUMINISTRO_SCOUT)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeScouts++;
@@ -176,7 +176,7 @@ public class JugadorProtoss implements Jugador {
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    public int calcularSuministro() {
+    /*public int calcularSuministro() {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
@@ -184,6 +184,11 @@ public class JugadorProtoss implements Jugador {
         }
 
         return cupo;
+    }*/
+
+    // Este metodo sera reemplazado por el de arriba cuando se termine el codigo relacionado a la creacion de unidades.
+    public int calcularSuministro() {
+        return this.suministro;
     }
 
     // El cupo debe ser siempre menor al valor de poblacion.

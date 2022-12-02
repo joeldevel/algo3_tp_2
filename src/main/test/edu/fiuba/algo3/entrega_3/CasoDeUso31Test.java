@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
-import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -59,7 +59,7 @@ public class CasoDeUso31Test {
         pilon.recibirAtaque(600);
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CasoDeUso31Test {
         pilon.recibirAtaque(600);
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
     }
 
     @Test
@@ -85,7 +85,7 @@ public class CasoDeUso31Test {
         pilon.recibirAtaque(600);
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
     }
 
     /* Zerg */
@@ -149,7 +149,7 @@ public class CasoDeUso31Test {
         criadero.recibirAtaque(500);
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
     }
 
     @Test
@@ -167,6 +167,6 @@ public class CasoDeUso31Test {
         amoSupremo.recibirAtaque(200);
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
     }
 }

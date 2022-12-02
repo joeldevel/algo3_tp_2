@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -32,7 +32,7 @@ public class CasoDeUso30Test {
         jugadorProtoss.crearPilon(new Ubicacion(1,1));
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class CasoDeUso30Test {
         jugadorProtoss.crearPilon(new Ubicacion(1,1));
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CasoDeUso30Test {
         jugadorProtoss.crearPilon(new Ubicacion(1,1));
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
     }
 
     /* Zerg */
@@ -94,7 +94,7 @@ public class CasoDeUso30Test {
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
     }
 
     @Test
@@ -114,7 +114,7 @@ public class CasoDeUso30Test {
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling());
     }
 
     @Test
@@ -134,7 +134,7 @@ public class CasoDeUso30Test {
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco());
     }
 
     @Test
@@ -154,6 +154,6 @@ public class CasoDeUso30Test {
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
 
         // Act & Assert
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco());
     }
 }
