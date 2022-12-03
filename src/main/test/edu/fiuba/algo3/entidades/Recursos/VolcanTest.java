@@ -40,22 +40,4 @@ class VolcanTest {
             Extractor segundoExtractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         });
     }
-
-    @Test
-    void test03SeConstruyeUnExtractorEnUnVolcanSinGasVespenoYAlIntentarExtraerSeLanzaUnaExcepcion(){
-        // Arrange
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,125);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
-
-        Zangano tipoZangano =  new Zangano(jugadorZerg);
-        Unidad zangano = new Unidad(new Tiempo(CONSTRUCCION_ZANGANO), new Ubicacion(0,0), tipoZangano);
-        extractor.guardarZangano(zangano);
-
-        // Act & Assert
-        assertThrows(VolcanSinGasVespenoParaExtraerException.class,()->{
-			extractor.avanzarTurno(507); // Avanzamos tantos turnos como sea necesario para que el Volcan no tenga mas gas.
-        });
-    }
 }
