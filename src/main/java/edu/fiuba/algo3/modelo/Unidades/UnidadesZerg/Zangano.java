@@ -101,8 +101,8 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
-		this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
+	public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
+		this.vida.recibirDanioPor(unDanio, unidadAtacante, this.unidad, this.jugador);
 	}
 
 
@@ -117,7 +117,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
+	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 		// Zangano no entiende este mensaje.
 	}
 

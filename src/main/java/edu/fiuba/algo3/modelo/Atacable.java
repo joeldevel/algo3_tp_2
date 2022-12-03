@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public interface Atacable {
 
-	void recibirAtaque(int unDanio);
+	void recibirAtaque(int unDanio, Unidad unidadAtacante);
 
 	public Ubicacion ubicacion();
 

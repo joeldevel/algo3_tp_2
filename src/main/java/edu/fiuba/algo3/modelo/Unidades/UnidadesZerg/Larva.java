@@ -34,7 +34,7 @@ public class Larva implements TipoDeUnidad {
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
+	public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class Larva implements TipoDeUnidad {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
+	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 		// TODO Auto-generated method stub
 	}
 

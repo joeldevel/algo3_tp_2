@@ -24,7 +24,7 @@ public class CasoDeUso22Test {
     JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
     JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
 
-    @Test
+    /*@Test
     void test01SeCreaUnaUnidadConTipoZerlingYSeEncuentraEnConstruccion(){
         // Arrange
         Zerling tipoZerling = new Zerling(jugadorZerg);
@@ -204,5 +204,5 @@ public class CasoDeUso22Test {
 
         // Assert
         assertEquals(90, tipoScout.escudoRestante());
-    }
+    }*/
 }

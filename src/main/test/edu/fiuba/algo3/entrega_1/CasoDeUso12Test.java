@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasoDeUso12Test {
 
-    @Test
+    /*@Test
     void test01SeConstruyeUnAccesoQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         Recursos recursos = new Recursos(10000, 10000);
@@ -41,11 +41,11 @@ public class CasoDeUso12Test {
 
         // Assert
         assertEquals(200, acceso.obtenerVida());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test03SeConstruyeUnExtractorQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         Volcan volcan = new Volcan();
@@ -75,11 +75,11 @@ public class CasoDeUso12Test {
 
         // Assert
         assertEquals(300, asimilador.obtenerVida());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test05SeConstruyeUnNexoMineralQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
@@ -109,11 +109,11 @@ public class CasoDeUso12Test {
 
         // Assert
         assertEquals(100, nexoMineral.obtenerVida());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test07SeConstruyeUnPilonQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);
@@ -141,11 +141,11 @@ public class CasoDeUso12Test {
 
         // Assert
         assertEquals(100, pilon.obtenerVida());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test09SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
@@ -173,5 +173,5 @@ public class CasoDeUso12Test {
 
         // Assert
         assertEquals(400, puertoEstelar.obtenerVida());
-    }
+    }*/
 }

@@ -2,21 +2,26 @@ package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Excepciones.UnidadEnConstruccionException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco;
 import org.junit.jupiter.api.Test;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.CONSTRUCCION_DRAGON;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.CONSTRUCCION_DEVORADOR;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.CONSTRUCCION_MUTALISCO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso27Test {
+
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000, 1000));
 
     @Test
     void test01SeCreaUnaUnidadConTipoDevoradorYSeEncuentraEnConstruccion(){
@@ -26,9 +31,13 @@ public class CasoDeUso27Test {
         Devorador tipoDevorador = new Devorador(jugadorZerg);
         Unidad devorador = new Unidad(new Tiempo(CONSTRUCCION_DEVORADOR), new Ubicacion(0,0), tipoDevorador);
 
+        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
+        dragon.avanzarTurno(6);
+
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
-            devorador.recibirAtaque(10);
+            dragon.atacar(devorador);
         });
     }
 
@@ -41,11 +50,15 @@ public class CasoDeUso27Test {
         Unidad devorador = new Unidad(new Tiempo(CONSTRUCCION_DEVORADOR), new Ubicacion(0,0), tipoDevorador);
         devorador.avanzarTurno(4);
 
+        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
+        dragon.avanzarTurno(6);
+
         // Act
-        devorador.recibirAtaque(10);
+        dragon.atacar(devorador);
 
         // Assert
-        assertEquals(190, devorador.vidaRestante());
+        assertEquals(180, devorador.vidaRestante());
     }
 
     @Test
@@ -59,11 +72,15 @@ public class CasoDeUso27Test {
         unidad.evolucionarADevorador();
         unidad.avanzarTurno(4);
 
+        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
+        dragon.avanzarTurno(6);
+
         // Act
-        unidad.recibirAtaque(10);
+        dragon.atacar(unidad);
 
         // Assert
-        assertEquals(190, unidad.vidaRestante());
+        assertEquals(180, unidad.vidaRestante());
     }
 
     @Test

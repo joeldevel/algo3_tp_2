@@ -10,7 +10,7 @@ public class ZealotInvisible implements EstadoDeZealot {
     public ZealotInvisible() {
     }
 
-    public void recibirAtaque(int unDanio, Vida unaVida, Escudo unEscudo, Unidad unaUnidad, Jugador unJugador) {
+    public void recibirAtaque(int unDanio, Vida unaVida, Escudo unEscudo, Unidad unidadAtacante, Unidad unaUnidad, Jugador unJugador) {
         // No hace nada.
     }
 }

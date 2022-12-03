@@ -34,8 +34,8 @@ public class Unidad extends Raza {
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
-		this.estado.recibirAtaque(unDanio);
+	public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
+		this.estado.recibirAtaque(unDanio, unidadAtacante);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class Unidad extends Raza {
 	}
 
 	public void atacar(Atacable unAtacable) {
-		this.estado.atacar(unAtacable);
+		this.estado.atacar(unAtacable, this);
 	}
 
 	@Override

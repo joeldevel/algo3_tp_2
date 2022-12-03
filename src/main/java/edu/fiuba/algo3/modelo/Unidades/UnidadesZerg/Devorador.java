@@ -67,20 +67,20 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void recibirAtaque(int unDanio) {
-        this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
+    public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
+        this.vida.recibirDanioPor(unDanio, unidadAtacante, this.unidad, this.jugador);
     }
 
 
     @Override
-    public void atacar(Atacable unAtacable) {
+    public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 
         for (Ataque ataque : ataques) {
             if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
                 throw new AtacableFueraDeRangoError();
             }
 
-            ataque.atacarA(unAtacable);
+            ataque.atacarA(unAtacable, unidadAtacante);
         }
     }
 

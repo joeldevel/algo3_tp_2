@@ -7,5 +7,5 @@ import edu.fiuba.algo3.modelo.Vida;
 
 public interface EstadoDeZealot {
 
-    void recibirAtaque(int unDanio, Vida unaVida, Escudo unEscudo, Unidad unaUnidad, Jugador unJugador);
+    void recibirAtaque(int unDanio, Vida unaVida, Escudo unEscudo, Unidad unidadAtacante, Unidad unaUnidad, Jugador unJugador);
 }

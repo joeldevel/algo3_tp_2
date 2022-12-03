@@ -70,8 +70,8 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     }
 
     @Override
-    public void recibirAtaque(int unDanio) {
-        this.vida.recibirDanioPor(unDanio, this.unidad, this.jugador);
+    public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
+        this.vida.recibirDanioPor(unDanio, unidadAtacante, this.unidad, this.jugador);
     }
 
     public Ubicacion ubicacion() {
@@ -88,7 +88,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     }
 
     @Override
-    public void atacar(Atacable unAtacable) {
+    public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
         // Amo Supremo no entiende este mensaje.
     }
 

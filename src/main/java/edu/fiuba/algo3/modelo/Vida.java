@@ -31,7 +31,7 @@ public class Vida {
 		}
 	}
 
-	public void recibirDanioPor(int unaCantidad, Unidad unaUnidad, Jugador unJugador) {
+	public void recibirDanioPor(int unaCantidad, Unidad unidadAtacante, Unidad unidadAtacada, Jugador unJugador) {
 		if(unaCantidad < 0) {
 			throw new ValorInvalidoDeDanioError();
 		}
@@ -40,11 +40,11 @@ public class Vida {
 		}
 		else if(this.vidaRestante <= unaCantidad){
 			this.vidaRestante = 0;
-			unJugador.eliminarUnidad(unaUnidad);
+			unJugador.eliminarUnidad(unidadAtacada);
 		}
 	}
     
-    public void recibirDanioPor(int unaCantidad, Edificio unEdificio, Jugador unJugador) {
+    public void recibirDanioPor(int unaCantidad, Unidad unidadAtacante, Edificio edificioAtacado, Jugador unJugador) {
     	if(unaCantidad < 0) {
     		throw new ValorInvalidoDeDanioError();
     	}
@@ -53,7 +53,7 @@ public class Vida {
     	}
     	else if(this.vidaRestante <= unaCantidad){
     		this.vidaRestante = 0;
-			unJugador.eliminarEdificio(unEdificio);
+			unJugador.eliminarEdificio(edificioAtacado);
     	}
     }
     

@@ -89,8 +89,8 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
-		this.estado.recibirAtaque(unDanio, this.vida, this.escudo, this.unidad, this.jugador);
+	public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
+		this.estado.recibirAtaque(unDanio, this.vida, this.escudo, unidadAtacante, this.unidad, this.jugador);
 	}
 
 	@Override
@@ -99,13 +99,13 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
+	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 		for (Ataque ataque : ataques) {
 			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
 				throw new AtacableFueraDeRangoError();
 			}
 
-			ataque.atacarA(unAtacable);
+			ataque.atacarA(unAtacable, unidadAtacante);
 		}
 	}
 

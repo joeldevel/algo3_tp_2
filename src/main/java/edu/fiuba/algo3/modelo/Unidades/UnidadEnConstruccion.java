@@ -49,7 +49,7 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void recibirAtaque(int unDanio) {
+    public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
         throw new UnidadEnConstruccionException();
     }
 
@@ -59,7 +59,7 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void atacar(Atacable unAtacable) {
+    public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
         throw new UnidadEnConstruccionException();
     }
 

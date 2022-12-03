@@ -2,21 +2,26 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Excepciones.UnidadEnConstruccionException;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco;
 import org.junit.jupiter.api.Test;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.CONSTRUCCION_DRAGON;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.CONSTRUCCION_GUARDIAN;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.CONSTRUCCION_MUTALISCO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso21Test {
+
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000, 1000));
 
     @Test
     void test01SeCreaUnaUnidadConTipoGuardianYSeEncuentraEnConstruccion(){
@@ -26,9 +31,13 @@ public class CasoDeUso21Test {
         Guardian tipoGuardian = new Guardian(jugadorZerg);
         Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
 
+        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
+        dragon.avanzarTurno(6);
+
         // Act & Assert
         assertThrows(UnidadEnConstruccionException.class,()->{
-            unidad.recibirAtaque(10);
+            dragon.atacar(unidad);
         });
     }
 
@@ -41,11 +50,15 @@ public class CasoDeUso21Test {
         Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
         unidad.avanzarTurno(4);
 
+        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
+        dragon.avanzarTurno(6);
+
         // Act
-        unidad.recibirAtaque(10);
+        dragon.atacar(unidad);
 
         // Assert
-        assertEquals(90, unidad.vidaRestante());
+        assertEquals(80, unidad.vidaRestante());
     }
 
     @Test
@@ -59,11 +72,15 @@ public class CasoDeUso21Test {
         unidad.evolucionarAGuardian();
         unidad.avanzarTurno(4);
 
+        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
+        dragon.avanzarTurno(6);
+
         // Act
-        unidad.recibirAtaque(10);
+        dragon.atacar(unidad);
 
         // Assert
-        assertEquals(90, unidad.vidaRestante());
+        assertEquals(80, unidad.vidaRestante());
     }
 
     @Test

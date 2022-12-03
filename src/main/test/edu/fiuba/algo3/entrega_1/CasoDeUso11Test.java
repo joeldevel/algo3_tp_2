@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasoDeUso11Test {
 
-    @Test
+    /*Test
     void test01SeConstruyeUnAccesoQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 150);
@@ -71,11 +71,11 @@ public class CasoDeUso11Test {
 
         // Assert
         assertEquals(500, acceso.obtenerEscudo());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test05SeConstruyeUnAsimiladorQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Volcan volcan = new Volcan();
@@ -137,11 +137,11 @@ public class CasoDeUso11Test {
 
         // Assert
         assertEquals(450, asimilador.obtenerEscudo());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test09SeConstruyeUnNexoMineralQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
@@ -203,11 +203,11 @@ public class CasoDeUso11Test {
 
         // Assert
         assertEquals(250, nexoMineral.obtenerEscudo());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test13SeConstruyeUnPilonQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);
@@ -265,11 +265,11 @@ public class CasoDeUso11Test {
 
         // Assert
         assertEquals(300, pilon.obtenerEscudo());
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    @Test
+    /*@Test
     void test17SeConstruyeUnPuertoEstelarQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
@@ -327,5 +327,5 @@ public class CasoDeUso11Test {
 
         // Assert
         assertEquals(600, puertoEstelar.obtenerEscudo());
-    }
+    }*/
 }

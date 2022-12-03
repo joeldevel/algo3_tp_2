@@ -16,11 +16,11 @@ public interface TipoDeUnidad {
 
 	int obtenerSuministro();
 
-	void recibirAtaque(int unDanio);
+	void recibirAtaque(int unDanio, Unidad unidadAtacante);
 
 	Superficie obtenerSuperficie();
 
-	void atacar(Atacable unAtacable);
+	void atacar(Atacable unAtacable, Unidad unidadAtacante);
 
 	void recuperarse();
 

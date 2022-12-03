@@ -78,23 +78,23 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void recibirAtaque(int unDanio) {
+	public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
 		if(unDanio > this.escudo.restante()) {
 			int danioRestante = this.escudo.restante() - unDanio;
-			this.vida.recibirDanioPor(danioRestante, this.unidad, this.jugador);
+			this.vida.recibirDanioPor(danioRestante, unidadAtacante, this.unidad, this.jugador);
 		}
 		this.escudo.recibirDanioPor(unDanio);
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
+	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 
 		for (Ataque ataque : ataques) {
 			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
 				throw new AtacableFueraDeRangoError();
 			}
 
-			ataque.atacarA(unAtacable);
+			ataque.atacarA(unAtacable, unidadAtacante);
 		}
 	}
 

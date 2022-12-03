@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public abstract class Edificio extends Raza implements Recuperable{
 	
@@ -36,7 +37,7 @@ public abstract class Edificio extends Raza implements Recuperable{
     public abstract void recuperarse();
     
     @Override
-    public abstract void recibirAtaque(int unAtaque);
+    public abstract void recibirAtaque(int unAtaque, Unidad unidadAtacante);
     
     public int obtenerVida() {
     	return (this.vida.restante());

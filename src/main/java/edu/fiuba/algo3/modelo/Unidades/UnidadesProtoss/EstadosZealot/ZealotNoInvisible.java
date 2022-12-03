@@ -10,10 +10,10 @@ public class ZealotNoInvisible implements EstadoDeZealot {
     public ZealotNoInvisible() {
     }
 
-    public void recibirAtaque(int unDanio, Vida unaVida, Escudo unEscudo, Unidad unaUnidad, Jugador unJugador) {
+    public void recibirAtaque(int unDanio, Vida unaVida, Escudo unEscudo, Unidad unidadAtacante, Unidad unaUnidad, Jugador unJugador) {
         if (unDanio > unEscudo.restante()) {
             int danioRestante = unEscudo.restante() - unDanio;
-            unaVida.recibirDanioPor(danioRestante, unaUnidad, unJugador);
+            unaVida.recibirDanioPor(danioRestante, unidadAtacante, unaUnidad, unJugador);
         }
         unEscudo.recibirDanioPor(unDanio);
     }
