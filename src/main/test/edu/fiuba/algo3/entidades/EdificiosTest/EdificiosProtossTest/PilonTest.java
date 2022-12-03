@@ -13,16 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PilonTest {
 
     @Test
-    void test01SeConstruyeUnPilonYNoSeEncuentraOperativo(){
-        // Arrange
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
-
-        // Falta implementar la logica de Pilon.
-    }
-
-    @Test
     void test02SeConstruyeUnPilonYDespuesDeOchoTurnosSeEncuentraOperativo(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);

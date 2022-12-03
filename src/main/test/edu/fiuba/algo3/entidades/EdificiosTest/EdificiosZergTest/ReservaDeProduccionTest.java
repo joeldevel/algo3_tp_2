@@ -40,16 +40,6 @@ class ReservaDeProduccionTest {
         assertEquals(1000, rdp.obtenerVida());
     }
 
-    @Test
-    void test03SeConstruyeUnaReservaDeProduccionYNoSeEncuentraOperativa(){
-        // Arrange
-        Recursos recursos = new Recursos(0,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
-
-        // Falta la logica de la Reserva de Produccion.
-    }
-
     /*@Test
     void test04SeConstruyeUnaReservaDeProduccionYDespuesDeDoceTurnosSeEncuentraOperativa(){
         // Arrange

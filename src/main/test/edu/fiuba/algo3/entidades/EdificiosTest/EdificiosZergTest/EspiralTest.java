@@ -41,16 +41,6 @@ class EspiralTest {
     }
 
     @Test
-    void test03SeConstruyeUnaEspiralYNoSeEncuentraOperativa(){
-        // Arrange
-        Recursos recursos = new Recursos(100,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
-
-        // Falta la logica de Espiral.
-    }
-
-    @Test
     void test04SeConstruyeUnaEspiralYDespuesDeDiezTurnosSeEncuentraOperativa(){
         // Arrange
         Recursos recursos = new Recursos(100,150);

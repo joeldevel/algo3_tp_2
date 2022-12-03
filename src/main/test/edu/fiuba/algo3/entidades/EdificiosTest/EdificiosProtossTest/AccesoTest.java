@@ -13,16 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AccesoTest {
 
     @Test
-    void test01SeConstruyeUnAccesoYNoSeEncuentraOperativo(){
-        // Arrange
-        Recursos recursos = new Recursos(0, 150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-
-        // Falta implementar la logica de Acceso.
-    }
-
-    @Test
     void test02SeConstruyeUnAccesoYDespuesDeOchoTurnosSeEncuentraOperativo(){
         // Arrange
         Recursos recursos = new Recursos(0, 150);

@@ -13,21 +13,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExtractorTest {
-	
-    @Test
-    void test01SeConstruyeUnExtractorEnUnVolcanYNoSeEncuentraOperativo(){
-        // Arrange
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
-
-        // Act
-        int resultado = extractor.obtenerGas();
-
-        // Assert
-        assertEquals(0, resultado);
-    }
 
     @Test
     void test02UnCriaderoNoPuedeConstruirseSobreUnVolcan(){

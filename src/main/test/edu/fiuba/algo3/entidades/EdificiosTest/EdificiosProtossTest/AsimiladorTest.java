@@ -10,16 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AsimiladorTest {
-
-    @Test
-    void test01SeConstruyeUnAsimiladorEnUnVolcanYNoSeEncuentraOperativo(){
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
-
-        assertEquals(0, asimilador.obtenerGas());
-    }
+    
 
     @Test
     void test02SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanSieteTurnosYSeDevuelveElResultadoIndicado(){

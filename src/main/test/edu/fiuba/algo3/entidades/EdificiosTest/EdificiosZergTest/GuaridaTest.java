@@ -10,16 +10,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GuaridaTest {
-	
-    @Test
-    void test01SeConstruyeUnaGuaridaYNoSeEncuentraOperativa(){
-        // Arrange
-        Recursos recursos = new Recursos(100,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
-
-        // Falta la logica de Guarida.
-    }
 
     @Test
     void test02SeConstruyeUnaGuaridaYRecibeDanioAunSinEstarOperativaYElResultadoEsElIndicado(){

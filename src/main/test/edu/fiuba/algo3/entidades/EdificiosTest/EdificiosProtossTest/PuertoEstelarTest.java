@@ -12,16 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class PuertoEstelarTest {
 
     @Test
-    void test01SeConstruyeUnPuertoEstelarYNoSeEncuentraOperativo(){
-        // Arrange
-        Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
-
-        // Falta implementar la logica de Puerto Estelar.
-    }
-
-    @Test
     void test02SeConstruyeUnPuertoEstelarYDespuesDeDiezTurnosSeEncuentraOperativo(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
