@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entidades.EdificiosTest.EdificiosZergTest;
+package edu.fiuba.algo3.entidades;
 
 class CriaderoTest {
 

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_2;
+package edu.fiuba.algo3.entidades;
 
 import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
 import edu.fiuba.algo3.modelo.Mapa;

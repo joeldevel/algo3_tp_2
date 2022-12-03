@@ -33,7 +33,7 @@ public class CasoDeUso04Test {
         extractor.avanzarTurno(6);
 
         // Assert
-        assertEquals(0, extractor.obtenerGas());
+        assertEquals(0, jugadorZerg.obtenerGas());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class CasoDeUso04Test {
         extractor.avanzarTurno(7);
 
         // Assert
-        assertEquals(10, extractor.obtenerGas());
+        assertEquals(10, jugadorZerg.obtenerGas());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class CasoDeUso04Test {
         extractor.avanzarTurno(7);
 
         // Assert
-        assertEquals(20, extractor.obtenerGas());
+        assertEquals(20, jugadorZerg.obtenerGas());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class CasoDeUso04Test {
         extractor.avanzarTurno(7);
 
         // Assert
-        assertEquals(30, extractor.obtenerGas());
+        assertEquals(30, jugadorZerg.obtenerGas());
     }
 
     @Test
@@ -144,7 +144,7 @@ public class CasoDeUso04Test {
         asimilador.avanzarTurno(7);
 
         // Assert
-        assertEquals(20, asimilador.obtenerGas());
+        assertEquals(20, jugadorProtoss.obtenerGas());
     }
 
     @Test
@@ -159,6 +159,6 @@ public class CasoDeUso04Test {
         asimilador.avanzarTurno(10);
 
         // Assert
-        assertEquals(80, asimilador.obtenerGas());
+        assertEquals(80, jugadorProtoss.obtenerGas());
     }
 }

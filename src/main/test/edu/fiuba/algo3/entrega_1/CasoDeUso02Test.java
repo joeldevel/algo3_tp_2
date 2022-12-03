@@ -30,6 +30,15 @@ class CasoDeUso02Test {
 		// Falta implementar la logica de Acceso.
 	}
 
+	@Test
+	void test02SeConstruyeUnAccesoYDespuesDeOchoTurnosSeEncuentraOperativo(){
+		// Arrange
+		Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+		acceso.avanzarTurno(8);
+
+		// Falta implementar la logica de Acceso.
+	}
+
 	/* ------------------------------------------------------------------------------------------------------------ */
 
 	@Test
@@ -71,12 +80,30 @@ class CasoDeUso02Test {
 		// Falta implementar la logica de Pilon.
 	}
 
+	@Test
+	void test02SeConstruyeUnPilonYDespuesDeCincoTurnosSeEncuentraOperativo(){
+		// Arrange
+		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
+		pilon.avanzarTurno(5);
+
+		// Falta implementar la logica de Pilon.
+	}
+
 	/* ------------------------------------------------------------------------------------------------------------ */
 
 	@Test
 	void test05SeConstruyeUnPuertoEstelarYNoSeEncuentraOperativo(){
 		// Arrange
 		PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
+
+		// Falta implementar la logica de Puerto Estelar.
+	}
+
+	@Test
+	void test02SeConstruyeUnPuertoEstelarYDespuesDeDiezTurnosSeEncuentraOperativo(){
+		// Arrange
+		PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
+		puertoEstelar.avanzarTurno(10);
 
 		// Falta implementar la logica de Puerto Estelar.
 	}
@@ -89,6 +116,15 @@ class CasoDeUso02Test {
 	void test06SeConstruyeUnCriaderoYNoSeEncuentraOperativo(){
 		// Arrange
 		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
+		// Falta implementar la logica de Criadero.
+	}
+
+	@Test
+	void test02SeConstruyeUnCriaderoYDespuesDeCuatroTurnosSeEncuentraOperativo(){
+		// Arrange
+		Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+		criadero.avanzarTurno(4);
 
 		// Falta implementar la logica de Criadero.
 	}
@@ -119,15 +155,41 @@ class CasoDeUso02Test {
 		// Falta la logica de Guarida.
 	}
 
+	/*@Test
+    void test03SeConstruyeUnaGuaridaYDespuesDeDoceTurnosSeEncuentraOperativa(){
+        // Arrange
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+        guarida.avanzarTurno(12);
+
+        // Act
+        boolean resultado = guarida.evolucionarLarva();
+
+        // Assert
+        assertTrue(resultado);
+    }*/
+
 	/* ------------------------------------------------------------------------------------------------------------ */
 
 	@Test
-	void test09SeConstruyeUnaReservaDeProduccionYNoSeEncuentraOperativa(){
+	void test09SeConstruyeUnaReservaDeReproduccionYNoSeEncuentraOperativa(){
 		// Arrange
 		ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
 
 		// Falta la logica de la Reserva de Produccion.
 	}
+
+	/*@Test
+    void test04SeConstruyeUnaReservaDeReproduccionYDespuesDeDoceTurnosSeEncuentraOperativa(){
+        // Arrange
+        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+        rdp.avanzarTurno(12);
+
+        // Act
+        boolean resultado = rdp.evolucionarLarva();
+
+        // Assert
+        assertTrue(resultado);
+    }*/
 
 	/* ------------------------------------------------------------------------------------------------------------ */
 
@@ -135,6 +197,15 @@ class CasoDeUso02Test {
 	void test10SeConstruyeUnaEspiralYNoSeEncuentraOperativa(){
 		// Arrange
 		Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+
+		// Falta la logica de Espiral.
+	}
+
+	@Test
+	void test04SeConstruyeUnaEspiralYDespuesDeDiezTurnosSeEncuentraOperativa(){
+		// Arrange
+		Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+		espiral.avanzarTurno(10);
 
 		// Falta la logica de Espiral.
 	}

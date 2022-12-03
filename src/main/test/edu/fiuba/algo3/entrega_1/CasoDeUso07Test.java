@@ -30,7 +30,7 @@ public class CasoDeUso07Test {
         nexoMineral.avanzarTurno(5);
 
         // Assert
-        assertEquals(10, nexoMineral.obtenerMineral());
+        assertEquals(10, jugadorProtoss.obtenerMineral());
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
