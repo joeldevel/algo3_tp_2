@@ -21,7 +21,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	private int cantidadExtraible;
     private int cantidadMaximaDeZanganos;
     private Volcan volcan;
-    private ArrayList<Zangano> zanganos;
+    private ArrayList<Unidad> zanganos;
     
     public Extractor(Volcan unVolcan, Ubicacion unaUbicacion, Jugador unJugador){
     	super(new Tiempo(-6), new Vida(750), unaUbicacion, unJugador);
@@ -31,7 +31,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     	this.cantidadExtraible = 10;
     	this.cantidadMaximaDeZanganos = 3;
     	this.volcan = unVolcan;
-        this.zanganos = new ArrayList<Zangano>();
+        this.zanganos = new ArrayList<Unidad>();
 
 		unVolcan.construirRefineriaDeGas(this);
     }
@@ -50,7 +50,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     	return (this.zanganos.size());
     }
 
-    public void guardarZangano(Zangano unZangano) {
+    public void guardarZangano(Unidad unZangano) {
     	
     	if(this.contarZanganos() == this.cantidadMaximaDeZanganos) {
     		throw new CantidadMaximaDeZanganosEnExtractorException();
