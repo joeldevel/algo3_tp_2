@@ -23,35 +23,6 @@ public class PilonTest {
     }
 
     @Test
-    void test03SeConstruyeUnPilonYRecibeDanio() {
-        // Arrange
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
-
-        // Act
-        pilon.recibirAtaque(10);
-
-        // Assert
-        assertEquals(290, pilon.obtenerEscudo());
-    }
-
-    @Test
-    void test04SeConstruyeUnPilonQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
-        // Arrange
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
-        pilon.recibirAtaque(10);
-
-        // Act
-        pilon.avanzarTurno(1);
-
-        // Assert
-        assertEquals(300, pilon.obtenerEscudo());
-    }
-
-    @Test
     void test05SeConstruyeUnPilonQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);

@@ -13,37 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class NexoMineralTest {
 
     @Test
-    void test03SeConstruyeUnNexoMineralYRecibeDanio() {
-        // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
-
-        // Act
-        nexoMineral.recibirAtaque(10);
-
-        // Assert
-        assertEquals(240, nexoMineral.obtenerEscudo());
-    }
-
-    @Test
-    void test04SeConstruyeUnNexoMineralQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
-        // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
-        nexoMineral.recibirAtaque(10);
-
-        // Act
-        nexoMineral.avanzarTurno(1);
-
-        // Assert
-        assertEquals(250, nexoMineral.obtenerEscudo());
-    }
-
-    @Test
     void test05SeConstruyeUnNexoMineralQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();

@@ -22,35 +22,6 @@ class PuertoEstelarTest {
     }
 
     @Test
-    void test03SeConstruyeUnPuertoEstelarYRecibeDanio() {
-        // Arrange
-        Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
-
-        // Act
-        puertoEstelar.recibirAtaque(10);
-
-        // Assert
-        assertEquals(590, puertoEstelar.obtenerEscudo());
-    }
-
-    @Test
-    void test04SeConstruyeUnPuertoEstelarQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente() {
-        // Arrange
-        Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
-        puertoEstelar.recibirAtaque(10);
-
-        // Act
-        puertoEstelar.avanzarTurno(1);
-
-        // Assert
-        assertEquals(600, puertoEstelar.obtenerEscudo());
-    }
-
-    @Test
     void test05SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
         Recursos recursos = new Recursos(150,150);

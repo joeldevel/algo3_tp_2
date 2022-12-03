@@ -10,40 +10,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AsimiladorTest {
-    
-
-
-
-    @Test
-    void test04SeConstruyeUnaAsimiladorYRecibeDanio(){
-        // Arrange
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
-
-        // Act
-        asimilador.recibirAtaque(10);
-
-        // Assert
-        assertEquals(440, asimilador.obtenerEscudo());
-    }
-
-    @Test
-    void test05SeConstruyeUnExtractorQueRecibeDanioYAlAvanzarElTurnoRecuperaSuEscudoCorrectamente(){
-        // Arrange
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
-        asimilador.recibirAtaque(10);
-
-        // Act
-        asimilador.avanzarTurno(1);
-
-        // Assert
-        assertEquals(450, asimilador.obtenerEscudo());
-    }
 
     @Test
     void test06SeConstruyeUnExtractorQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
