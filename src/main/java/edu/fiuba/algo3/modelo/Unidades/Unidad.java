@@ -48,7 +48,7 @@ public class Unidad extends Raza {
 
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
-		return false;
+		return this.estado.compararSuperficie(otraSuperficie);
 	}
 
 	// Se delega al tipo y no al estado, porque aunque este en construccion ya aumenta la poblacion.
@@ -79,7 +79,7 @@ public class Unidad extends Raza {
 		this.estado.evolucionarADevorador(this);
 	}
 
-	public int obtenerVida() {
+	public int vidaRestante() {
 		return this.estado.vidaRestante();
 	}
 }

@@ -45,7 +45,7 @@ public class CasoDeUso27Test {
         devorador.recibirAtaque(10);
 
         // Assert
-        assertEquals(190, devorador.obtenerVida());
+        assertEquals(190, devorador.vidaRestante());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class CasoDeUso27Test {
         unidad.recibirAtaque(10);
 
         // Assert
-        assertEquals(190, unidad.obtenerVida());
+        assertEquals(190, unidad.vidaRestante());
     }
 
     @Test
