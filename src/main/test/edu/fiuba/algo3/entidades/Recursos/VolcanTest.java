@@ -18,26 +18,4 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class VolcanTest {
-
-    @Test
-    void test01SeCreaUnVolcanSinUnaRefineriaDeGasYAlIntentarExtraerGasSeLanzaExcepcion(){
-        Volcan volcan = new Volcan();
-        int unaCantidadExtraible = 50;
-
-        assertThrows(VolcanSinRefineriaDeGasConstruidaException.class,()->{
-            int gasExtraido = volcan.extraerGas(unaCantidadExtraible);
-        });
-    }
-
-    @Test
-    void test02SeIntentaConstruirUnExtractorEnUnVolcanDondeYaHayUnExtractorConstruidoYSeLanzaUnaExcepcion(){
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        Extractor primerExtractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
-
-        assertThrows(VolcanYaTieneUnaRefineriaDeGasConstruidaException.class,()->{
-            Extractor segundoExtractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
-        });
-    }
 }
