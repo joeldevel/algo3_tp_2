@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Revelable;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
@@ -66,6 +67,11 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		}};
 		this.estado = new ZealotNoInvisible();
 		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
+	}
+
+	@Override
+	public void conNodo(NodoMineral nodo) {
+		// Zealot no entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -139,6 +145,11 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	@Override
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
+
+	@Override
+	public void avanzarTurno() {
+		// No hace nada.
 	}
 
 	@Override

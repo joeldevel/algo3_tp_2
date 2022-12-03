@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Excepciones.UnidadEnConstruccionException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 
@@ -19,6 +20,16 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
 
     @Override
     public boolean compararSuperficie(String otraSuperficie) {
+        throw new UnidadEnConstruccionException();
+    }
+
+    @Override
+    public void avanzarTurno() {
+        throw new UnidadEnConstruccionException();
+    }
+
+    @Override
+    public void conNodo(NodoMineral nodo) {
         throw new UnidadEnConstruccionException();
     }
 

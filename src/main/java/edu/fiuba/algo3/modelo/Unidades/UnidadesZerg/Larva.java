@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -12,6 +13,11 @@ public class Larva implements TipoDeUnidad {
 	
 	public Larva() {
 		
+	}
+
+	@Override
+	public void conNodo(NodoMineral nodo) {
+		// Larva no entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -66,6 +72,11 @@ public class Larva implements TipoDeUnidad {
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
 		return false;
+	}
+
+	@Override
+	public void avanzarTurno() {
+		// No hace nada.
 	}
 
 

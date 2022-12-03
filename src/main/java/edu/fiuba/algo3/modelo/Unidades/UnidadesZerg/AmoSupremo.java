@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Revelo;
 import edu.fiuba.algo3.modelo.Revelador;
@@ -47,6 +48,11 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
         this.revelo = new Revelo(new Superficie("Aire"), 4);
+    }
+
+    @Override
+    public void conNodo(NodoMineral nodo) {
+        // Amo Supremo no entiende este mensaje.
     }
 
     public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -106,6 +112,11 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {
         return this.superficie.compararTipos(unTipoDeSuperficie);
+    }
+
+    @Override
+    public void avanzarTurno() {
+        // No hace nada.
     }
 
     @Override

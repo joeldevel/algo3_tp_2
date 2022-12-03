@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
@@ -49,6 +50,11 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
 		 										 add(new Ataque(9,new Superficie("Aire"),3));}};
+	}
+
+	@Override
+	public void conNodo(NodoMineral nodo) {
+		// Mutalisco no entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -108,6 +114,11 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
+
+	@Override
+	public void avanzarTurno() {
+		// No hace nada.
 	}
 
 	public void evolucionarAGuardian(Unidad unaUnidad) {

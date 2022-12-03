@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -55,6 +56,11 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
 		 										 add(new Ataque(20,new Superficie("Aire"),4));}};
+	}
+
+	@Override
+	public void conNodo(NodoMineral nodo) {
+		// Dragon no entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -123,6 +129,11 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
+	}
+
+	@Override
+	public void avanzarTurno() {
+		// No hace nada.
 	}
 
 	@Override

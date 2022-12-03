@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-public class CasoDeUso3 {
+public class CasoDeUso03Test {
 
     /*@Test
-    void test01SeIntentaCrearUnEspiralSobreUnVolcanYLanzaUnaExcepcion(){
+    void test01SeIntentaConstruirUnEspiralSobreUnVolcanYLanzaUnaExcepcion(){
         Volcan volcan = new Volcan();
         Recursos recursosJugador = new Recursos();
         recursosJugador.guardar(100, 150);

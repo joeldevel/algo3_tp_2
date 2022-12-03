@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 
 public class Unidad extends Raza {
 
@@ -68,6 +69,7 @@ public class Unidad extends Raza {
 
 		else if(this.tiempo.transcurrido() > 0) {
 			this.estado.recuperarse();
+			this.estado.avanzarTurno();
 		}
 	}
 
@@ -81,5 +83,9 @@ public class Unidad extends Raza {
 
 	public int vidaRestante() {
 		return this.estado.vidaRestante();
+	}
+
+	public void conNodo(NodoMineral nodo) {
+		this.estado.conNodo(nodo);
 	}
 }

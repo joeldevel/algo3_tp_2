@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
@@ -44,6 +45,11 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
         this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};
+    }
+
+    @Override
+    public void conNodo(NodoMineral nodo) {
+        // Devorador no entiende este mensaje.
     }
 
     public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -102,6 +108,11 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {
         return this.superficie.compararTipos(unTipoDeSuperficie);
+    }
+
+    @Override
+    public void avanzarTurno() {
+        // No hace nada.
     }
 
     @Override

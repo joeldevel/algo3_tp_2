@@ -15,11 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExtractorTest {
 
     @Test
-    void test02UnCriaderoNoPuedeConstruirseSobreUnVolcan(){
-        // ...
-    }
-
-    @Test
     void test08SeConstruyeUnExtractorYRecibeDanio(){
         // Arrange
         Volcan volcan = new Volcan();
