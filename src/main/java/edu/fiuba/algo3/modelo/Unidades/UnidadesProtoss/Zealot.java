@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Revelable;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
@@ -14,7 +13,10 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Vida;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.EstadoDeZealot;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotInvisible;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
 public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
@@ -31,7 +33,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
-	private boolean estaInvisible;
+	private EstadoDeZealot estado;
 	private int cantidadDeBajas;
 
 	public Zealot(Ubicacion unaUbicacion, Jugador unJugador) {
@@ -46,7 +48,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		this.ataques = new ArrayList<Ataque>() {{
 			add(new Ataque(8, new Superficie("Tierra"), 1));
 		}};
-		this.estaInvisible = false;
+		this.estado = new ZealotNoInvisible();
 		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
 
@@ -62,7 +64,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		this.ataques = new ArrayList<Ataque>() {{
 			add(new Ataque(8, new Superficie("Tierra"), 1));
 		}};
-		this.estaInvisible = false;
+		this.estado = new ZealotNoInvisible();
 		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
 	}
 
@@ -82,13 +84,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void recibirAtaque(int unDanio) {
-		if (estaInvisible == false) {
-			if (unDanio > this.escudo.restante()) {
-				int danioRestante = this.escudo.restante() - unDanio;
-				this.vida.recibirDanioPor(danioRestante, this.unidad, this.jugador);
-			}
-			this.escudo.recibirDanioPor(unDanio);
-		}
+		this.estado.recibirAtaque(unDanio, this.vida, this.escudo, this.unidad, this.jugador);
 	}
 
 	@Override
@@ -98,7 +94,6 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void atacar(Atacable unAtacable) {
-
 		for (Ataque ataque : ataques) {
 			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
 				throw new AtacableFueraDeRangoError();
@@ -119,13 +114,13 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	public void hacerseInvisible() {
 		if (cantidadDeBajas >= 3) {
-			estaInvisible = true;
+			estado = new ZealotInvisible();
 		}
 	}
 
 	@Override
 	public void serRevelado() {
-		estaInvisible = false;
+		estado = new ZealotNoInvisible();
 	}
 
 	@Override
