@@ -21,34 +21,4 @@ public class AccesoTest {
 
         // Falta implementar la logica de Acceso.
     }
-
-    @Test
-    void test05SeConstruyeUnAccesoQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
-        // Arrange
-        Recursos recursos = new Recursos(10000, 10000);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        acceso.recibirAtaque(800); // Le sacamos todo el escudo con 500 de daño y luego 300 de vida.
-
-        // Act
-        acceso.avanzarTurno(25); // Recupera (500 x 0.05) = 25 de escudo por turno.
-
-        // Assert
-        assertEquals(500, acceso.obtenerEscudo());
-    }
-
-    @Test
-    void test06SeConstruyeUnAccesoQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
-        // Arrange
-        Recursos recursos = new Recursos(10000, 10000);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        acceso.recibirAtaque(800); // Le sacamos todo el escudo con 500 de daño y luego 300 de vida.
-
-        // Act
-        acceso.avanzarTurno(25);
-
-        // Assert
-        assertEquals(200, acceso.obtenerVida());
-    }
 }

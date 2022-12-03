@@ -10,36 +10,4 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AsimiladorTest {
-
-    @Test
-    void test06SeConstruyeUnExtractorQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
-        // Arrange
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
-        asimilador.recibirAtaque(600); // Le sacamos todo el escudo con 450 de daño y luego 150 de vida.
-
-        // Act
-        asimilador.avanzarTurno(25); // Recupera (450 x 0.05) = 22 de escudo por turno.
-
-        // Assert
-        assertEquals(450, asimilador.obtenerEscudo());
-    }
-
-    @Test
-    void test07SeConstruyeUnExtractorQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
-        // Arrange
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
-        asimilador.recibirAtaque(600); // Le sacamos todo el escudo con 450 de daño y luego 150 de vida.
-
-        // Act
-        asimilador.avanzarTurno(25);
-
-        // Assert
-        assertEquals(300, asimilador.obtenerVida());
-    }
 }

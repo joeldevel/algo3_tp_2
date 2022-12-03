@@ -21,33 +21,4 @@ class PuertoEstelarTest {
         // Falta implementar la logica de Puerto Estelar.
     }
 
-    @Test
-    void test05SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
-        // Arrange
-        Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
-        puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
-
-        // Act
-        puertoEstelar.avanzarTurno(25); // Recupera (600 x 0.05) = 30 de escudo por turno.
-
-        // Assert
-        assertEquals(600, puertoEstelar.obtenerEscudo());
-    }
-
-    @Test
-    void test06SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
-        // Arrange
-        Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
-        puertoEstelar.recibirAtaque(800); // Le sacamos todo el escudo con 600 de daño y luego 200 de vida.
-
-        // Act
-        puertoEstelar.avanzarTurno(25);
-
-        // Assert
-        assertEquals(400, puertoEstelar.obtenerVida());
-    }
 }
