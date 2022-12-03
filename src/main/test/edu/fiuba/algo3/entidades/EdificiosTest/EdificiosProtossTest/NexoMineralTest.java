@@ -74,15 +74,4 @@ public class NexoMineralTest {
         // Assert
         assertEquals(100, nexoMineral.obtenerVida());
     }
-
-    @Test
-    void test07SeIntentaConstruirUnNexoMineralSinRecursosYSeLanzaUnaExcepcion() {
-        NodoMineral nodoMineral = new NodoMineral();
-        Recursos recursos = new Recursos(0, 49);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-
-        assertThrows(SinRecursosSuficientesException.class,()->{
-            NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
-        });
-    }
 }

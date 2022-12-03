@@ -79,14 +79,4 @@ class PuertoEstelarTest {
         // Assert
         assertEquals(400, puertoEstelar.obtenerVida());
     }
-
-    @Test
-    void test07SeIntentaConstruirUnPuertoEstelarSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursos = new Recursos(149,149);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-
-        assertThrows(SinRecursosSuficientesException.class,()->{
-            PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
-        });
-    }
 }

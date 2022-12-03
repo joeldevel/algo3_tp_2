@@ -80,14 +80,4 @@ public class AccesoTest {
         // Assert
         assertEquals(200, acceso.obtenerVida());
     }
-
-    @Test
-    void test07SeIntentaConstruirUnAccesoSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursos = new Recursos(0, 149);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-
-        assertThrows(SinRecursosSuficientesException.class,()->{
-            Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        });
-    }
 }

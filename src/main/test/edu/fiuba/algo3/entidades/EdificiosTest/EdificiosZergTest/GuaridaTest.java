@@ -100,14 +100,4 @@ class GuaridaTest {
         // Assert
         assertEquals(1250, guarida.obtenerVida());
     }
-
-    @Test
-    void test08SeIntentaConstruirUnaGuaridaSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursos = new Recursos(99,199);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-
-        assertThrows(SinRecursosSuficientesException.class,()->{
-            Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
-        });
-    }
 }

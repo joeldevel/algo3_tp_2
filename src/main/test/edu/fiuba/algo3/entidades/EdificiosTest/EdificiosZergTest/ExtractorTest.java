@@ -45,15 +45,4 @@ class ExtractorTest {
         // Assert
         assertEquals(extractor.obtenerVida(), 750);
     }
-
-    @Test
-    void test10SeIntentaConstruirUnExtractorSinRecursosYSeLanzaUnaExcepcion() {
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0,99);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-
-        assertThrows(SinRecursosSuficientesException.class,()->{
-            Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
-        });
-    }
 }

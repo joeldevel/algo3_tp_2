@@ -76,15 +76,4 @@ class AsimiladorTest {
         // Assert
         assertEquals(300, asimilador.obtenerVida());
     }
-
-    @Test
-    void test08SeIntentaConstruirUnAsimiladorSinRecursosYSeLanzaUnaExcepcion() {
-        Volcan volcan = new Volcan();
-        Recursos recursos = new Recursos(0, 99);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-
-        assertThrows(SinRecursosSuficientesException.class,()->{
-            Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
-        });
-    }
 }

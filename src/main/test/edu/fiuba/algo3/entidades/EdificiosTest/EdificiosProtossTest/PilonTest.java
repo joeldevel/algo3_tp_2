@@ -80,14 +80,4 @@ public class PilonTest {
         // Assert
         assertEquals(100, pilon.obtenerVida());
     }
-
-    @Test
-    void test07SeIntentaConstruirUnPilonSinRecursosYSeLanzaUnaExcepcion() {
-        Recursos recursos = new Recursos(0, 99);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-
-        assertThrows(SinRecursosSuficientesException.class,()->{
-            Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
-        });
-    }
 }
