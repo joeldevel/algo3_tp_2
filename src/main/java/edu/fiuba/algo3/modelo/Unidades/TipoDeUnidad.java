@@ -30,7 +30,11 @@ public interface TipoDeUnidad {
 
 	int vidaRestante();
 
+	int escudoRestante();
+
 	boolean compararSuperficie(String otraSuperficie);
 
     void avanzarTurno();
+
+	void hacerseInvisible();
 }

@@ -88,4 +88,12 @@ public class Unidad extends Raza {
 	public void conNodo(NodoMineral nodo) {
 		this.estado.conNodo(nodo);
 	}
+
+	public int escudoRestante() {
+		return (this.estado.escudoRestante());
+	}
+
+	public void hacerseInvisible() {
+		this.estado.hacerseInvisible();
+	}
 }

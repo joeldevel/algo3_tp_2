@@ -30,15 +30,15 @@ public class CasoDeUso28Test {
 
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos);
         Zealot tipoZealot = new Zealot(jugadorProtoss);
-        Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0,0), tipoZerling);
+        Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0,0), tipoZealot);
         zealot.avanzarTurno(4);
 
         // Act
-        tipoZealot.hacerseInvisible(); //Falta implementar lo de matar a tres unidades o edificios.
+        zealot.hacerseInvisible(); //Falta implementar lo de matar a tres unidades o edificios.
         zerling.atacar(zealot);
 
         // Assert
-        assertEquals(60, tipoZealot.escudoRestante());
+        assertEquals(60, zealot.escudoRestante());
     }
 
     /*@Test

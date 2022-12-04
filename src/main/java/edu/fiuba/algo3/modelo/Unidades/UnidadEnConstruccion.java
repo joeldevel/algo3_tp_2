@@ -82,4 +82,14 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     public int vidaRestante() {
         throw new UnidadEnConstruccionException();
     }
+
+    @Override
+    public int escudoRestante() {
+        throw new UnidadEnConstruccionException();
+    }
+
+    @Override
+    public void hacerseInvisible() {
+        throw new UnidadEnConstruccionException();
+    }
 }

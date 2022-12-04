@@ -69,6 +69,14 @@ public class Larva implements TipoDeUnidad {
 		return 0;
 	}
 
+	public int escudoRestante() {
+		return 0;
+	}
+
+	public void hacerseInvisible() {
+		// No entiende este mensaje.
+	}
+
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
 		return false;

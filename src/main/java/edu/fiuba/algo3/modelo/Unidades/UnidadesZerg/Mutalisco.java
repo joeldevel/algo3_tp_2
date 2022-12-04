@@ -111,6 +111,14 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 		return (this.vida.restante());
 	}
 
+	public int escudoRestante() {
+		return 0;
+	}
+
+	public void hacerseInvisible() {
+		// No entiende este mensaje.
+	}
+
 	@Override
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);

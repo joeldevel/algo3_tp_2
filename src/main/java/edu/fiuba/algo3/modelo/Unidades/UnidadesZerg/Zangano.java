@@ -90,6 +90,14 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 		return (this.vida.restante());
 	}
 
+	public int escudoRestante() {
+		return 0;
+	}
+
+	public void hacerseInvisible() {
+		// No entiende este mensaje.
+	}
+
 	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;

@@ -82,6 +82,14 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
         return (this.vida.restante());
     }
 
+    public int escudoRestante() {
+        return 0;
+    }
+
+    public void hacerseInvisible() {
+        // No entiende este mensaje.
+    }
+
     @Override
     public Superficie obtenerSuperficie() {
         return this.superficie;
