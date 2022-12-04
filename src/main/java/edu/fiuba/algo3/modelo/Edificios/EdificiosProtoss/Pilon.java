@@ -60,9 +60,9 @@ public class Pilon extends EdificioProtoss {
 	public boolean compararSuperficie(String otraSuperficie) {
 		return (this.superficie.compararTipos(otraSuperficie));
 	}
-    
 
-
-
-    
+	@Override
+	public void serRevelado() {
+		// No hace nada.
+	}
 }

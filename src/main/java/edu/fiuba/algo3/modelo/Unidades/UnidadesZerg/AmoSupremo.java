@@ -136,4 +136,9 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     public void evolucionarADevorador(Unidad unaUnidad) {
         // No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
     }
+
+    @Override
+    public void serRevelado() {
+        // No hace nada.
+    }
 }

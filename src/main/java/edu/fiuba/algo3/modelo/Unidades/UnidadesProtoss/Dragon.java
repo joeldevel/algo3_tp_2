@@ -2,18 +2,12 @@ package edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Atacable;
-import edu.fiuba.algo3.modelo.Atacante;
-import edu.fiuba.algo3.modelo.Ataque;
-import edu.fiuba.algo3.modelo.Escudo;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
-import edu.fiuba.algo3.modelo.Superficie;
-import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Dragon implements TipoDeUnidad, Atacante, Atacable {
@@ -148,5 +142,15 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
 		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+	}
+
+	@Override
+	public void revelar(Revelable unRevelable) {
+		// No hace nada.
+	}
+
+	@Override
+	public void serRevelado() {
+		// No hace nada.
 	}
 }

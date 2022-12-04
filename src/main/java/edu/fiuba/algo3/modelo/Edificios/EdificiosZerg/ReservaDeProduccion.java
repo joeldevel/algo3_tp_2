@@ -66,4 +66,9 @@ public class ReservaDeProduccion extends EdificioZerg {
 	public boolean compararSuperficie(String unTipoDeSuperficie) {
 		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
+
+	@Override
+	public void serRevelado() {
+		// No hace nada.
+	}
 }

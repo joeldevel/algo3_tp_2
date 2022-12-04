@@ -136,4 +136,14 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	public void evolucionarADevorador(Unidad unaUnidad) {
 		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_DEVORADOR), new Devorador(this.ubicacion, this.jugador));
 	}
+
+	@Override
+	public void revelar(Revelable unRevelable) {
+		// No hace nada.
+	}
+
+	@Override
+	public void serRevelado() {
+		// No hace nada.
+	}
 }

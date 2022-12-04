@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Unidades;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
 public class Unidad extends Raza {
 
@@ -95,5 +96,13 @@ public class Unidad extends Raza {
 
 	public void hacerseInvisible() {
 		this.estado.hacerseInvisible();
+	}
+
+	public void revelar(Revelable unRevelable) {
+		this.estado.revelar(unRevelable);
+	}
+
+	public void serRevelado() {
+		this.estado.serRevelado();
 	}
 }

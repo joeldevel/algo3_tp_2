@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
-public abstract class Raza implements Atacable{
+public abstract class Raza implements Atacable, Revelable{
 	
 	protected Tiempo tiempo;
 	protected Ubicacion ubicacion;

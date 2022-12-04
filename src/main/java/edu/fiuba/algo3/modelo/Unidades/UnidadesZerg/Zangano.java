@@ -148,4 +148,14 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	public void evolucionarADevorador(Unidad unaUnidad) {
 		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
 	}
+
+	@Override
+	public void revelar(Revelable unRevelable) {
+		// No hace nada.
+	}
+
+	@Override
+	public void serRevelado() {
+		// No hace nada.
+	}
 }

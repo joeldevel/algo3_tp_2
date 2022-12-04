@@ -161,4 +161,9 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	public void evolucionarADevorador(Unidad unaUnidad) {
 		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
 	}
+
+	@Override
+	public void revelar(Revelable unRevelable) {
+		// No hace nada.
+	}
 }
