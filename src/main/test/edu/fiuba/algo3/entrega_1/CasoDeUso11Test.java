@@ -6,25 +6,35 @@ import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 import org.junit.jupiter.api.Test;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.CONSTRUCCION_GUARDIAN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasoDeUso11Test {
 
-    /*Test
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000, 1000));
+
+    @Test
     void test01SeConstruyeUnAccesoQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        acceso.recibirAtaque(10);
+        unidad.atacar(acceso);
 
         // Assert
-        assertEquals(490, acceso.obtenerEscudo());
+        assertEquals(475, acceso.obtenerEscudo());
     }
 
     @Test
@@ -33,7 +43,11 @@ public class CasoDeUso11Test {
         Recursos recursos = new Recursos(0, 150);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        acceso.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(acceso);
 
         // Act
         acceso.avanzarTurno(1);
@@ -50,11 +64,15 @@ public class CasoDeUso11Test {
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.avanzarTurno(8);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        acceso.recibirAtaque(10);
+        unidad.atacar(acceso);
 
         // Assert
-        assertEquals(490, acceso.obtenerEscudo());
+        assertEquals(475, acceso.obtenerEscudo());
     }
 
     @Test
@@ -64,18 +82,22 @@ public class CasoDeUso11Test {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.avanzarTurno(8);
-        acceso.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(acceso);
 
         // Act
         acceso.avanzarTurno(1);
 
         // Assert
         assertEquals(500, acceso.obtenerEscudo());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    /*@Test
+    @Test
     void test05SeConstruyeUnAsimiladorQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Volcan volcan = new Volcan();
@@ -83,11 +105,15 @@ public class CasoDeUso11Test {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        asimilador.recibirAtaque(10);
+        unidad.atacar(asimilador);
 
         // Assert
-        assertEquals(440, asimilador.obtenerEscudo());
+        assertEquals(425, asimilador.obtenerEscudo());
     }
 
     @Test
@@ -97,10 +123,14 @@ public class CasoDeUso11Test {
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
-        asimilador.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(asimilador);
 
         // Act
-        asimilador.avanzarTurno(1);
+        asimilador.avanzarTurno(2);
 
         // Assert
         assertEquals(450, asimilador.obtenerEscudo());
@@ -115,11 +145,15 @@ public class CasoDeUso11Test {
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.avanzarTurno(6);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        asimilador.recibirAtaque(10);
+        unidad.atacar(asimilador);
 
         // Assert
-        assertEquals(440, asimilador.obtenerEscudo());
+        assertEquals(425, asimilador.obtenerEscudo());
     }
 
     @Test
@@ -130,18 +164,22 @@ public class CasoDeUso11Test {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.avanzarTurno(6);
-        asimilador.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(asimilador);
 
         // Act
-        asimilador.avanzarTurno(1);
+        asimilador.avanzarTurno(2);
 
         // Assert
         assertEquals(450, asimilador.obtenerEscudo());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    /*@Test
+    @Test
     void test09SeConstruyeUnNexoMineralQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         NodoMineral nodoMineral = new NodoMineral();
@@ -149,11 +187,15 @@ public class CasoDeUso11Test {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        nexoMineral.recibirAtaque(10);
+        unidad.atacar(nexoMineral);
 
         // Assert
-        assertEquals(240, nexoMineral.obtenerEscudo());
+        assertEquals(225, nexoMineral.obtenerEscudo());
     }
 
     @Test
@@ -163,10 +205,14 @@ public class CasoDeUso11Test {
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
-        nexoMineral.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(nexoMineral);
 
         // Act
-        nexoMineral.avanzarTurno(1);
+        nexoMineral.avanzarTurno(3);
 
         // Assert
         assertEquals(250, nexoMineral.obtenerEscudo());
@@ -181,11 +227,15 @@ public class CasoDeUso11Test {
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.avanzarTurno(4);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        nexoMineral.recibirAtaque(10);
+        unidad.atacar(nexoMineral);
 
         // Assert
-        assertEquals(240, nexoMineral.obtenerEscudo());
+        assertEquals(225, nexoMineral.obtenerEscudo());
     }
 
     @Test
@@ -196,29 +246,37 @@ public class CasoDeUso11Test {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.avanzarTurno(4);
-        nexoMineral.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(nexoMineral);
 
         // Act
-        nexoMineral.avanzarTurno(1);
+        nexoMineral.avanzarTurno(3);
 
         // Assert
         assertEquals(250, nexoMineral.obtenerEscudo());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    /*@Test
+    @Test
     void test13SeConstruyeUnPilonQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        pilon.recibirAtaque(10);
+        unidad.atacar(pilon);
 
         // Assert
-        assertEquals(290, pilon.obtenerEscudo());
+        assertEquals(275, pilon.obtenerEscudo());
     }
 
     @Test
@@ -227,10 +285,14 @@ public class CasoDeUso11Test {
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
-        pilon.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(pilon);
 
         // Act
-        pilon.avanzarTurno(1);
+        pilon.avanzarTurno(2);
 
         // Assert
         assertEquals(300, pilon.obtenerEscudo());
@@ -244,11 +306,15 @@ public class CasoDeUso11Test {
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         pilon.avanzarTurno(5);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        pilon.recibirAtaque(10);
+        unidad.atacar(pilon);
 
         // Assert
-        assertEquals(290, pilon.obtenerEscudo());
+        assertEquals(275, pilon.obtenerEscudo());
     }
 
     @Test
@@ -258,38 +324,50 @@ public class CasoDeUso11Test {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         pilon.avanzarTurno(5);
-        pilon.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(pilon);
 
         // Act
-        pilon.avanzarTurno(1);
+        pilon.avanzarTurno(2);
 
         // Assert
         assertEquals(300, pilon.obtenerEscudo());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    /*@Test
+    @Test
     void test17SeConstruyeUnPuertoEstelarQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
 
         // Act
-        puertoEstelar.recibirAtaque(10);
+        unidad.atacar(puertoEstelar);
 
         // Assert
-        assertEquals(590, puertoEstelar.obtenerEscudo());
+        assertEquals(575, puertoEstelar.obtenerEscudo());
     }
 
     @Test
     void test18SeConstruyeUnPuertoEstelarQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
-        puertoEstelar.recibirAtaque(10);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(puertoEstelar);
 
         // Act
         puertoEstelar.avanzarTurno(1);
@@ -302,30 +380,38 @@ public class CasoDeUso11Test {
     void test19SeConstruyeUnPuertoEstelarQueLuegoDeDiezTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
         puertoEstelar.avanzarTurno(10);
 
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+
         // Act
-        puertoEstelar.recibirAtaque(10);
+        unidad.atacar(puertoEstelar);
 
         // Assert
-        assertEquals(590, puertoEstelar.obtenerEscudo());
+        assertEquals(575, puertoEstelar.obtenerEscudo());
     }
 
     @Test
     void test20SeConstruyeUnPuertoEstelarQueLuegoDeDiezTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorZerg);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
         puertoEstelar.avanzarTurno(10);
-        puertoEstelar.recibirAtaque(10);
+
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
+        unidad.atacar(puertoEstelar);
 
         // Act
         puertoEstelar.avanzarTurno(1);
 
         // Assert
         assertEquals(600, puertoEstelar.obtenerEscudo());
-    }*/
+    }
 }
