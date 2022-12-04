@@ -24,10 +24,6 @@ public abstract class Raza implements Atacable, Revelable{
     		}
     	}
     }
-    
-    public int tiempoDeEspera() {
-		return (this.tiempo.restante());
-	}
 
     @Override
    	public Ubicacion ubicacion() {

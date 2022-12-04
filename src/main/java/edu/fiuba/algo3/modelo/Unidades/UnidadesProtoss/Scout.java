@@ -81,11 +81,6 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public Superficie obtenerSuperficie() {
-		return this.superficie;
-	}
-
-	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 
 		for (Ataque ataque : ataques) {

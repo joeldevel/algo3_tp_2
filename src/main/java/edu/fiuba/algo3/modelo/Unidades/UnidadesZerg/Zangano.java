@@ -120,11 +120,6 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	}
 
 	@Override
-	public Superficie obtenerSuperficie() {
-		return this.superficie;
-	}
-
-	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 		// Zangano no entiende este mensaje.
 	}

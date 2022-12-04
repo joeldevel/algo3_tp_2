@@ -95,11 +95,6 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	@Override
-	public Superficie obtenerSuperficie() {
-		return this.superficie;
-	}
-
-	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 		for (Ataque ataque : ataques) {
 			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {

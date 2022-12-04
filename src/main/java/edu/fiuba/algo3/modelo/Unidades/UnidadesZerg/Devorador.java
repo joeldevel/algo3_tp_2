@@ -104,11 +104,6 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
         // No entiende este mensaje.
     }
 
-    @Override
-    public Superficie obtenerSuperficie() {
-        return this.superficie;
-    }
-
     public void recuperarse() {
         this.vida.recuperarse();
     }

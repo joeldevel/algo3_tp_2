@@ -113,12 +113,6 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 		// No entiende este mensaje.
 	}
 
-	// ¿Borrar?
-	@Override
-	public Superficie obtenerSuperficie() {
-		return (this.superficie);
-	}
-
 	@Override
 	public void recuperarse() {
 		this.escudo.recuperarse();

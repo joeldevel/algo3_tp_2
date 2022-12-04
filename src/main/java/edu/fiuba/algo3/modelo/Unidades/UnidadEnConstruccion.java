@@ -51,11 +51,6 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public Superficie obtenerSuperficie() {
-        throw new UnidadEnConstruccionException();
-    }
-
-    @Override
     public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
         throw new UnidadEnConstruccionException();
     }

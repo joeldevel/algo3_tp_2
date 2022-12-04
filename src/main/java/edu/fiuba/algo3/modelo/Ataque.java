@@ -28,8 +28,4 @@ public class Ataque {
             unAtacable.recibirAtaque(this.danio, unidadAtacante);
         }
     }
-	
-	public Superficie obtenerSuperficie() {
-        return this.superficie;
-    }
 }

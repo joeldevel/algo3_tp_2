@@ -39,12 +39,6 @@ public class Larva implements TipoDeUnidad {
 	}
 
 	@Override
-	public Superficie obtenerSuperficie() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 		// TODO Auto-generated method stub
 	}

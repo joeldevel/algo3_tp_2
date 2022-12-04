@@ -7,10 +7,6 @@ public class Superficie {
     public Superficie(String unTipoDeSuperficie) {
         this.tipo = unTipoDeSuperficie;
     }
-    
-    public String obtenerTipo() {
-        return this.tipo;
-    }
 
     public boolean atacableTieneLaMismaSuperficie(Atacable unAtacable) {
         return (unAtacable.compararSuperficie(this.tipo));

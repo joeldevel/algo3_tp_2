@@ -76,12 +76,6 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 		this.vida.recibirDanioPor(unDanio, unidadAtacante, this.unidad, this.jugador);
 	}
 
-
-	@Override
-	public Superficie obtenerSuperficie() {
-		return this.superficie;
-	}
-
 	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 

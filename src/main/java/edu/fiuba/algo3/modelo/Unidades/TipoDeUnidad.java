@@ -20,8 +20,6 @@ public interface TipoDeUnidad {
 
 	void recibirAtaque(int unDanio, Unidad unidadAtacante);
 
-	Superficie obtenerSuperficie();
-
 	void atacar(Atacable unAtacable, Unidad unidadAtacante);
 
 	void recuperarse();

@@ -39,11 +39,6 @@ public class Unidad extends Raza {
 		this.estado.recibirAtaque(unDanio, unidadAtacante);
 	}
 
-	@Override
-	public Superficie obtenerSuperficie() {
-		return (this.estado.obtenerSuperficie());
-	}
-
 	public void atacar(Atacable unAtacable) {
 		this.estado.atacar(unAtacable, this);
 	}

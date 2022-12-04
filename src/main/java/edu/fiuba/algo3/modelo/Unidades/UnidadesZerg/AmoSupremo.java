@@ -98,11 +98,6 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     }
 
     @Override
-    public Superficie obtenerSuperficie() {
-        return this.superficie;
-    }
-
-    @Override
     public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
         // Amo Supremo no entiende este mensaje.
     }
