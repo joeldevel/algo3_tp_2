@@ -43,4 +43,6 @@ public interface TipoDeUnidad {
 	void revelar(Revelable unRevelable);
 
 	void serRevelado();
+
+	void contarBaja();
 }

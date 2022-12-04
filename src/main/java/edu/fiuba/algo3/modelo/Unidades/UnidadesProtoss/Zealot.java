@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
+import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBajasException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Revelable;
@@ -50,7 +51,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 			add(new Ataque(8, new Superficie("Tierra"), 1));
 		}};
 		this.estado = new ZealotNoInvisible();
-		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
+		this.cantidadDeBajas = 0;
 	}
 
 	public Zealot(Jugador unJugador) {
@@ -66,7 +67,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 			add(new Ataque(8, new Superficie("Tierra"), 1));
 		}};
 		this.estado = new ZealotNoInvisible();
-		this.cantidadDeBajas = 3; //Falta implementar, deberia ser 0.
+		this.cantidadDeBajas = 0;
 	}
 
 	@Override
@@ -121,6 +122,8 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	public void hacerseInvisible() {
 		if (cantidadDeBajas >= 3) {
 			estado = new ZealotInvisible();
+		} else {
+			throw new CantidadInsuficienteDeBajasException();
 		}
 	}
 
@@ -165,5 +168,10 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	@Override
 	public void revelar(Revelable unRevelable) {
 		// No hace nada.
+	}
+
+	@Override
+	public void contarBaja() {
+		cantidadDeBajas += 1;
 	}
 }

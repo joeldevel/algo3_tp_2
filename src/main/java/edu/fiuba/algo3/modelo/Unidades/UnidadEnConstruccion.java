@@ -98,4 +98,8 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     public void serRevelado() {
         throw new UnidadEnConstruccionException();
     }
+
+    public void contarBaja() {
+        throw new UnidadEnConstruccionException();
+    }
 }

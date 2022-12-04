@@ -105,4 +105,8 @@ public class Unidad extends Raza {
 	public void serRevelado() {
 		this.estado.serRevelado();
 	}
+
+	public void contarBaja() {
+		this.estado.contarBaja();
+	}
 }

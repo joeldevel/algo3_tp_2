@@ -11,6 +11,8 @@ import edu.fiuba.algo3.modelo.Revelo;
 import edu.fiuba.algo3.modelo.Revelador;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
+import java.util.ArrayList;
+
 
 public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
@@ -25,8 +27,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     private Unidad unidad;
     private Ubicacion ubicacion;
     private Superficie superficie;
-
-    private Revelo revelo;
+    private ArrayList<Revelo> revelos;
 
     public AmoSupremo(Ubicacion unaUbicacion, Jugador unJugador) {
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
@@ -36,7 +37,10 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
         this.unidad = null;
         this.ubicacion = unaUbicacion;
         this.superficie = new Superficie("Aire");
-        this.revelo = new Revelo(new Superficie("Aire"), 4);
+        this.revelos = new ArrayList<Revelo>() {{
+            add(new Revelo(new Superficie("Tierra"), 4));
+            add(new Revelo(new Superficie("Aire"), 4));
+        }};
     }
 
     public AmoSupremo(Jugador unJugador) {
@@ -47,7 +51,10 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
         this.unidad = null;
         this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
-        this.revelo = new Revelo(new Superficie("Aire"), 4);
+        this.revelos = new ArrayList<Revelo>() {{
+            add(new Revelo(new Superficie("Tierra"), 4));
+            add(new Revelo(new Superficie("Aire"), 4));
+        }};
     }
 
     @Override
@@ -102,11 +109,14 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
     @Override
     public void revelar(Revelable unRevelable) {
-        if (!(this.estaEnRangoDeRevelo(unRevelable, this.revelo))) {
-            throw new RevelableFueraDeRangoError();
-        }
 
-        revelo.revelarA(unRevelable);
+        for (Revelo revelo : revelos) {
+            if(! (this.estaEnRangoDeRevelo(unRevelable, revelo))) {
+                throw new RevelableFueraDeRangoError();
+            }
+
+            revelo.revelarA(unRevelable);
+        }
     }
 
     public boolean estaEnRangoDeRevelo(Revelable unRevelable, Revelo unRevelo) {
@@ -139,6 +149,11 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
     @Override
     public void serRevelado() {
+        // No hace nada.
+    }
+
+    @Override
+    public void contarBaja() {
         // No hace nada.
     }
 }

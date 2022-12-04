@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
+import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBajasException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -31,13 +32,28 @@ public class CasoDeUso28Test {
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
+        Zerling tipoZerling1 = new Zerling(jugadorZerg);
+        Unidad zerling1 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling1);
+        zerling1.avanzarTurno(2);
+        Zerling tipoZerling2 = new Zerling(jugadorZerg);
+        Unidad zerling2 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling2);
+        zerling2.avanzarTurno(2);
+        Zerling tipoZerling3 = new Zerling(jugadorZerg);
+        Unidad zerling3 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling3);
+        zerling3.avanzarTurno(2);
+
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos);
         Zealot tipoZealot = new Zealot(jugadorProtoss);
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0,0), tipoZealot);
         zealot.avanzarTurno(4);
 
         // Act
-        zealot.hacerseInvisible(); //Falta implementar lo de matar a tres unidades o edificios.
+        for(int i = 0; i < 5; i++) {
+            zealot.atacar(zerling1);
+            zealot.atacar(zerling2);
+            zealot.atacar(zerling3);
+        }
+        zealot.hacerseInvisible();
         zerling.atacar(zealot);
 
         // Assert
@@ -57,12 +73,28 @@ public class CasoDeUso28Test {
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
+        Zerling tipoZerling1 = new Zerling(jugadorZerg);
+        Unidad zerling1 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling1);
+        zerling1.avanzarTurno(2);
+        Zerling tipoZerling2 = new Zerling(jugadorZerg);
+        Unidad zerling2 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling2);
+        zerling2.avanzarTurno(2);
+        Zerling tipoZerling3 = new Zerling(jugadorZerg);
+        Unidad zerling3 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling3);
+        zerling3.avanzarTurno(2);
+
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos);
         Zealot tipoZealot = new Zealot(jugadorProtoss);
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0,0), tipoZealot);
         zealot.avanzarTurno(4);
 
         // Act
+        for(int i = 0; i < 5; i++) {
+            zealot.atacar(zerling1);
+            zealot.atacar(zerling2);
+            zealot.atacar(zerling3);
+        }
+        zealot.hacerseInvisible();
         amoSupremo.revelar(zealot);
         zerling.atacar(zealot);
 
@@ -83,12 +115,28 @@ public class CasoDeUso28Test {
         Unidad mutalisco = new Unidad(new Tiempo(CONSTRUCCION_MUTALISCO), new Ubicacion(0,0), tipoMutalisco);
         mutalisco.avanzarTurno(7);
 
+        Zerling tipoZerling1 = new Zerling(jugadorZerg);
+        Unidad zerling1 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling1);
+        zerling1.avanzarTurno(2);
+        Zerling tipoZerling2 = new Zerling(jugadorZerg);
+        Unidad zerling2 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling2);
+        zerling2.avanzarTurno(2);
+        Zerling tipoZerling3 = new Zerling(jugadorZerg);
+        Unidad zerling3 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling3);
+        zerling3.avanzarTurno(2);
+
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos);
         Zealot tipoZealot = new Zealot(jugadorProtoss);
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0,0), tipoZealot);
         zealot.avanzarTurno(4);
 
         // Act
+        for(int i = 0; i < 5; i++) {
+            zealot.atacar(zerling1);
+            zealot.atacar(zerling2);
+            zealot.atacar(zerling3);
+        }
+        zealot.hacerseInvisible();
         amoSupremo.revelar(zealot);
         mutalisco.atacar(zealot);
 
@@ -109,12 +157,28 @@ public class CasoDeUso28Test {
         Unidad hidralisco = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(0,0), tipoHidralisco);
         hidralisco.avanzarTurno(4);
 
+        Zerling tipoZerling1 = new Zerling(jugadorZerg);
+        Unidad zerling1 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling1);
+        zerling1.avanzarTurno(2);
+        Zerling tipoZerling2 = new Zerling(jugadorZerg);
+        Unidad zerling2 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling2);
+        zerling2.avanzarTurno(2);
+        Zerling tipoZerling3 = new Zerling(jugadorZerg);
+        Unidad zerling3 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling3);
+        zerling3.avanzarTurno(2);
+
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos);
         Zealot tipoZealot = new Zealot(jugadorProtoss);
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0,0), tipoZealot);
         zealot.avanzarTurno(4);
 
         // Act
+        for(int i = 0; i < 5; i++) {
+            zealot.atacar(zerling1);
+            zealot.atacar(zerling2);
+            zealot.atacar(zerling3);
+        }
+        zealot.hacerseInvisible();
         amoSupremo.revelar(zealot);
         hidralisco.atacar(zealot);
 
@@ -132,19 +196,65 @@ public class CasoDeUso28Test {
         Unidad amoSupremo = new Unidad(new Tiempo(CONSTRUCCION_AMO), new Ubicacion(0,0), tipoAmoSupremo);
         amoSupremo.avanzarTurno(5);
 
+        Zerling tipoZerling1 = new Zerling(jugadorZerg);
+        Unidad zerling1 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling1);
+        zerling1.avanzarTurno(2);
+        Zerling tipoZerling2 = new Zerling(jugadorZerg);
+        Unidad zerling2 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling2);
+        zerling2.avanzarTurno(2);
+        Zerling tipoZerling3 = new Zerling(jugadorZerg);
+        Unidad zerling3 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling3);
+        zerling3.avanzarTurno(2);
+
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos);
         Zealot tipoZealot = new Zealot(jugadorProtoss);
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(10,10), tipoZealot);
         zealot.avanzarTurno(4);
 
         // Act and Assert
+        for(int i = 0; i < 5; i++) {
+            zealot.atacar(zerling1);
+            zealot.atacar(zerling2);
+            zealot.atacar(zerling3);
+        }
+        zealot.hacerseInvisible();
+
         assertThrows(RevelableFueraDeRangoError.class,()->{
             amoSupremo.revelar(zealot);
         });
     }
 
+    @Test
+    void test06UnZealotIntentaHacerseInvisibleSinTenerTresBajasYSaleUnError() {
+        // Arrange
+        Recursos recursos = new Recursos(1000,1000);
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos);
+        Zealot tipoZealot = new Zealot(jugadorProtoss);
+        Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(10,10), tipoZealot);
+        zealot.avanzarTurno(4);
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", recursos);
+        Zerling tipoZerling1 = new Zerling(jugadorZerg);
+        Unidad zerling1 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling1);
+        zerling1.avanzarTurno(2);
+        Zerling tipoZerling2 = new Zerling(jugadorZerg);
+        Unidad zerling2 = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling2);
+        zerling2.avanzarTurno(2);
+
+        // Act and Assert
+        for(int i = 0; i < 5; i++) {
+            zealot.atacar(zerling1);
+            zealot.atacar(zerling2);
+        }
+
+        assertThrows(CantidadInsuficienteDeBajasException.class,()->{
+            zealot.hacerseInvisible();
+        });
+    }
+
     /*@Test
-    void test06UnZealotReveladoPorUnAmoSupremoVuelveASerInvisibleCuandoEsteUltimoEsDestruido() {
+    void test07UnZealotReveladoPorUnAmoSupremoVuelveASerInvisibleCuandoEsteUltimoEsDestruido() {
         // Arrange
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
         AmoSupremo amoSupremo = new AmoSupremo(new Ubicacion(0,0), jugadorZerg);

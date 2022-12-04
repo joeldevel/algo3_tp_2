@@ -158,4 +158,9 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	public void serRevelado() {
 		// No hace nada.
 	}
+
+	@Override
+	public void contarBaja() {
+		// No hace nada.
+	}
 }

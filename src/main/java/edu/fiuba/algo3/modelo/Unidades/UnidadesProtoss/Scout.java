@@ -152,4 +152,9 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	public void serRevelado() {
 		// No hace nada.
 	}
+
+	@Override
+	public void contarBaja() {
+		// No hace nada.
+	}
 }

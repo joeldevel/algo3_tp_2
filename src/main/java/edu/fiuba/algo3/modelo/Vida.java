@@ -41,6 +41,7 @@ public class Vida {
 		else if(this.vidaRestante <= unaCantidad){
 			this.vidaRestante = 0;
 			unJugador.eliminarUnidad(unidadAtacada);
+			unidadAtacante.contarBaja();
 		}
 	}
     
