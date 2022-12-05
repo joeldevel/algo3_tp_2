@@ -210,7 +210,7 @@ public class CasoDeUso12Test {
     @Test
     void test09SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzar25TurnosRecuperaSuEscudoTotalmente(){
         // Arrange
-        Recursos recursos = new Recursos(150,150);
+        Recursos recursos = new Recursos(10000,10000);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
 
@@ -232,7 +232,7 @@ public class CasoDeUso12Test {
     @Test
     void test10SeConstruyeUnPuertoEstelarQueRecibeDanioHastaQuitarleTodoElEscudoYParteDeLaVidaYAlAvanzarElTurnoNoRecuperaSuVida(){
         // Arrange
-        Recursos recursos = new Recursos(150,150);
+        Recursos recursos = new Recursos(10000,10000);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
 

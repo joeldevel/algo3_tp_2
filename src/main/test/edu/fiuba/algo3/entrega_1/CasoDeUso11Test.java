@@ -398,7 +398,7 @@ public class CasoDeUso11Test {
     @Test
     void test20SeConstruyeUnPuertoEstelarQueLuegoDeDiezTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Recursos recursos = new Recursos(150,150);
+        Recursos recursos = new Recursos(10000,10000);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
         puertoEstelar.avanzarTurno(10);
