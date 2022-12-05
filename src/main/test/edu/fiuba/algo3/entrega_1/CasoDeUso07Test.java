@@ -21,7 +21,7 @@ public class CasoDeUso07Test {
     @Test
     void test01SeConstruyeUnNexoMineralEnUnNodoMineralYSeAvanzanCincoTurnosDevuelveElResultadoIndicado() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
@@ -40,7 +40,7 @@ public class CasoDeUso07Test {
     @Test
     void test02SeConstruyeUnZanganoEnUnNodoMineralYSeAvanzanTresTurnosDevuelveElResultadoIndicado() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Zangano tipoZangano =  new Zangano(jugadorZerg);

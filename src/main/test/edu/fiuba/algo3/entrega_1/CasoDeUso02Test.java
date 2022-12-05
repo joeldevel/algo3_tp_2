@@ -43,7 +43,7 @@ class CasoDeUso02Test {
 
 	@Test
 	void test02SeConstruyeUnAsimiladorEnUnVolcanYNoSeEncuentraOperativoYaQueAlAvanzarUnTurnoNoExtraeGas(){
-		Volcan volcan = new Volcan();
+		Volcan volcan = new Volcan(new Ubicacion(0,0));
 		Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 		asimilador.avanzarTurno();
 
@@ -59,7 +59,7 @@ class CasoDeUso02Test {
 	@Test
 	void test03SeConstruyeUnNexoMineralEnUnNodoMineralYNoSeEncuentraOperativoYaQueAlAvanzarUnTurnoNoRecolectaMineral() {
 		// Arrange
-		NodoMineral nodoMineral = new NodoMineral();
+		NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
 		NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 		nexoMineral.avanzarTurno();
 
@@ -134,7 +134,7 @@ class CasoDeUso02Test {
 	@Test
 	void test07SeConstruyeUnExtractorEnUnVolcanYNoSeEncuentraOperativoYaQueAlAvanzarUnTurnoNoExtraeGas(){
 		// Arrange
-		Volcan volcan = new Volcan();
+		Volcan volcan = new Volcan(new Ubicacion(0,0));
 		Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 		extractor.avanzarTurno();
 
