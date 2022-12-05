@@ -10,7 +10,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Extractor;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeProduccion;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 
@@ -34,7 +34,7 @@ public class FabricaDeEdificios {
 			}
 			if((unEdificio == "ReservaDeProduccion") && (unMapa.verificarConstruccionZerg(unaUbicacion, jugadorZerg, jugadorProtoss))) {
 				
-				jugadorZerg.agregarEdificio(new ReservaDeProduccion(unaUbicacion,jugadorZerg));
+				jugadorZerg.agregarEdificio(new ReservaDeReproduccion(unaUbicacion,jugadorZerg));
 			}
 			if((unEdificio == "Guarida") && (unMapa.verificarConstruccionZerg(unaUbicacion,jugadorZerg,jugadorProtoss)) && 
 			   (jugadorZerg.verificarEdificio("ReservaDeProduccion"))) {

@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 
-class CasoDeUso17 {
+class CasoDeUso17Test {
 	
 	/*Verificar las "correlativas" de construccion */
 

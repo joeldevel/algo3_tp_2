@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeProduccion;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -117,7 +117,7 @@ public class CasoDeUso30Test {
         }
 
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        ReservaDeProduccion reserva = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling(reserva));

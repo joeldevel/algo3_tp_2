@@ -340,7 +340,7 @@ public class CasoDeUso10Test {
         // Arrange
         Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+        ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
         Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
@@ -358,7 +358,7 @@ public class CasoDeUso10Test {
         // Arrange
         Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+        ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
         Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
@@ -377,7 +377,7 @@ public class CasoDeUso10Test {
         // Arrange
         Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+        ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
         rdp.avanzarTurno(12);
 
         Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
@@ -396,7 +396,7 @@ public class CasoDeUso10Test {
         // Arrange
         Recursos recursos = new Recursos(0,150);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+        ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
         rdp.avanzarTurno(12);
 
         Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire

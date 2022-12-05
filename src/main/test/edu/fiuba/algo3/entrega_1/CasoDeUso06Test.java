@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.Ubicacion;
 
-class CasoDeUso06 {
+class CasoDeUso06Test {
 	
 	/*Verificar el crecimiento del moho acorde a lo estipulado*/
 

@@ -173,7 +173,7 @@ class CasoDeUso02Test {
 	@Test
 	void test09SeConstruyeUnaReservaDeReproduccionYNoSeEncuentraOperativa(){
 		// Arrange
-		ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+		ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
 		// Falta la logica de la Reserva de Produccion.
 	}

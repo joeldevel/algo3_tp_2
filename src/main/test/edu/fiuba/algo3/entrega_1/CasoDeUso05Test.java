@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 
-class CasoDeUso05 {
+class CasoDeUso05Test {
 
 	/* Verificar que no se puedan construir edificios fuera del rango de un pilon o fuera del moho*/
 

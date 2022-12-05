@@ -113,7 +113,7 @@ public class JugadorZerg implements Jugador {
     }
 
     public void crearReservaDeProduccion(Ubicacion unaUbicacion) {
-        this.edificios.add(new ReservaDeProduccion(unaUbicacion, this));
+        this.edificios.add(new ReservaDeReproduccion(unaUbicacion, this));
     }
 
     public void crearExtractor(Ubicacion unaUbicacion, Volcan unVolcan) {

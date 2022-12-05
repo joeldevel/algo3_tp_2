@@ -120,7 +120,7 @@ public class CasoDeUso08Test {
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         assertThrows(SinRecursosSuficientesException.class,()->{
-            ReservaDeProduccion rdp = new ReservaDeProduccion(new Ubicacion(0,0), jugadorZerg);
+            ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
         });
     }
 }

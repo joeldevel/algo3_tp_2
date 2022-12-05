@@ -12,7 +12,7 @@ import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 
-public class ReservaDeProduccion extends EdificioZerg {
+public class ReservaDeReproduccion extends EdificioZerg {
 
 	private final int POBLACION = 0;
     private final int COSTO_MINERAL = 150;
@@ -21,7 +21,7 @@ public class ReservaDeProduccion extends EdificioZerg {
     private ArrayList<Unidad> larvas;
     private ArrayList<Unidad> zerlings;
     	
-    public ReservaDeProduccion(Ubicacion unaUbicacion, Jugador unJugador) {
+    public ReservaDeReproduccion(Ubicacion unaUbicacion, Jugador unJugador) {
     	super(new Tiempo(-12), new Vida(1000), unaUbicacion, unJugador,"ReservaDeProduccion");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
