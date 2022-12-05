@@ -1,23 +1,24 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
-import edu.fiuba.algo3.modelo.Raza;
-import edu.fiuba.algo3.modelo.Recuperable;
-import edu.fiuba.algo3.modelo.Superficie;
-import edu.fiuba.algo3.modelo.Tiempo;
-import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Vida;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public abstract class Edificio extends Raza implements Recuperable{
 	
 	protected Vida vida;
+	protected Jugador jugador;
 	protected Superficie superficie;
 	protected EstadoOperativo estado;
+	protected String identificador;
 	
-	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion) {
-		super(unTiempo,unaUbicacion);
+	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion, Jugador unJugador,String unIdentificador) {
+		super(unTiempo, unaUbicacion);
+		this.jugador = unJugador;
 		this.vida = unaVida;
 		this.superficie = new Superficie("Tierra");
 		this.estado = new EnConstruccion(this);
+		this.identificador = unIdentificador;
 	}
 	
 	public void ejecutaEnConstruccion() {
@@ -38,7 +39,7 @@ public abstract class Edificio extends Raza implements Recuperable{
     public abstract void recuperarse();
     
     @Override
-    public abstract void recibirAtaque(int unAtaque);
+    public abstract void recibirAtaque(int unAtaque, Unidad unidadAtacante);
     
     public int obtenerVida() {
     	return (this.vida.restante());
@@ -47,6 +48,17 @@ public abstract class Edificio extends Raza implements Recuperable{
     public Superficie obtenerSuperficie(){
    		return (this.superficie);
    	}
+    
+    public int distanciaCon(Edificio otroEdificio) {
+    	return (this.ubicacion.distanciaCon(otroEdificio.ubicacion()));
+    }
+    
+    public boolean estaEn(Ubicacion unaUbicacion) {
+    	return (this.ubicacion.esIgualA(unaUbicacion));
+    }
 	
-
+    public boolean esUn(String unEdificio) {
+    	return (this.identificador == unEdificio);
+    }
+	
 }

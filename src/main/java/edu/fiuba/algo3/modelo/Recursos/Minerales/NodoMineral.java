@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Recursos.Minerales;
 
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConstruidoException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMineralException;
@@ -11,10 +12,12 @@ public class NodoMineral implements Mineral {
 
     private Minero minero;
     private int cantidadDeMineralDisponible;
+    private Ubicacion ubicacion;
 
-    public NodoMineral() {
+    public NodoMineral(Ubicacion unaUbicacion) {
         this.minero = new SinMinero(this);
         this.cantidadDeMineralDisponible = 2000;
+        this.ubicacion = unaUbicacion;
     }
 
     public void construirRecolectorDeMineral(Minero unMinero) {
@@ -52,6 +55,10 @@ public class NodoMineral implements Mineral {
     @Override
     public boolean tieneMineral() {
         return true;
+    }
+    
+    public boolean estaEn(Ubicacion unaUbicacion) {
+    	return (this.ubicacion.esIgualA(unaUbicacion));
     }
     
 }

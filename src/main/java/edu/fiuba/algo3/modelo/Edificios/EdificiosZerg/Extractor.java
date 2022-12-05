@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
@@ -13,39 +14,43 @@ import java.util.ArrayList;
 
 public class Extractor extends EdificioZerg implements RefineriaDeGas {
 
+	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 0;
 	
 	private int cantidadExtraible;
-	private int cantidadExtraida;
     private int cantidadMaximaDeZanganos;
     private Volcan volcan;
-    private ArrayList<Zangano> zanganos;
+    private ArrayList<Unidad> zanganos;
     
-    public Extractor(Volcan unVolcan, Recursos recursosJugador){
-    	super(new Tiempo(-6),new Vida(750), new Ubicacion());
+    public Extractor(Volcan unVolcan, Ubicacion unaUbicacion, Jugador unJugador){
+    	super(new Tiempo(-6), new Vida(750), unaUbicacion, unJugador,"Extractor");
     	
-    	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+    	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
     	this.cantidadExtraible = 10;
-    	this.cantidadExtraida = 0;
     	this.cantidadMaximaDeZanganos = 3;
     	this.volcan = unVolcan;
-        this.zanganos = new ArrayList<Zangano>();
+        this.zanganos = new ArrayList<Unidad>();
 
 		unVolcan.construirRefineriaDeGas(this);
     }
+
+	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
     
     @Override
     public void ejecutaOperable() {
-    	this.cantidadExtraida += this.extraerGasDe(this.volcan);
+    	this.jugador.guardar(this.extraerGasDe(this.volcan), 0);
     }
     
     public int contarZanganos() {
     	return (this.zanganos.size());
     }
 
-    public void guardarZangano(Zangano unZangano) {
+    public void guardarZangano(Unidad unZangano) {
     	
     	if(this.contarZanganos() == this.cantidadMaximaDeZanganos) {
     		throw new CantidadMaximaDeZanganosEnExtractorException();
@@ -61,9 +66,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	
 	@Override
     public int obtenerGas() {
-		int extraido = this.cantidadExtraida;
-        this.cantidadExtraida = 0;
-        return extraido;
+		return this.jugador.obtenerGas();
     }
 
 	@Override
@@ -72,12 +75,12 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
-		// No hace nada.
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
 
 	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return false;
+	public void serRevelado() {
+		// No hace nada.
 	}
 }

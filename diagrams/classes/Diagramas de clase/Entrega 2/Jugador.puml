@@ -1,0 +1,82 @@
+@startuml
+
+interface Jugador
+
+class JugadorZerg{
+    -nombre: unNombre
+    -color: unColor
+    -unidades: ArrayList<Raza>
+    -edificios: ArrayList<Raza>
+    -recursos: Recursos
+    -poblacion: int
+    -cupo: int
+    -cantidadDeZanganos: int
+    -cantidadDeZerlings: int
+    -cantidadDeHidraliscos: int
+    -cantidadDeMutaliscos: int
+    +JugadorZerg(unNombre, unColor)
+    +crearCriadero(unaUbicacion)
+    +crearReservaDeReproduccion(unaUbicacion)
+    +crearExtractor(unaUbicacion, unVolcan)
+    +crearGuarida(unaUbicacion)
+    +crearEspiral(unaUbicacion)
+    +crearZangano()
+    +crearZerling()
+    +crearHidralisco()
+    +crearMutalisco()
+    +cantidadDeUnidades(tipoUnidad)
+    +poblacion()
+    +incrementarCupo()
+    +incrementarPoblacion(unIncremento)
+    +hayCupoDisponible(unCupo)
+}
+
+note left: Constantes\n\nMAX_POBLACION = 200\nCANT_MINERAL_INICIAL = 200\nCUPO_ZANGANO = 1\nCUPO_ZERLING = 1\nCUPO_HIDRALISCO = 2\nCUPO_MUTALISCO = 4
+
+class JugadorProtoss{
+    -nombre: unNombre
+    -color: unColor
+    -unidades: ArrayList<Raza>
+    -edificios: ArrayList<Raza>
+    -recursos: Recursos
+    -poblacion: int
+    -cupo: int
+    -cantidadDePilones: int
+    -cantidadDeZealots: int
+    -cantidadDeDragones: int
+    -cantidadDeScouts: int
+    +JugadorProtoss(unNombre, unColor)
+    +crearNexoMineral(unaUbicacion, unNodo)
+    +crearPilon(unaUbicacion)
+    +crearAsimilador(unaUbicacion, unVolcan)
+    +crearAcceso(unaUbicacion)
+    +crearPuertoEstelar(unaUbicacion)
+    +crearZealot()
+    +crearDragon()
+    +crearScout()
+    +cantidadDeUnidades(tipoUnidad)
+    +poblacion()
+    +incrementarCupo()
+    +incrementarPoblacion(unIncremento)
+    +hayCupoDisponible(unCupo)
+}
+
+note left: Constantes\n\nMAX_POBLACION = 200\nCANT_MINERAL_INICIAL = 200\nCUPO_ZEALOT = 2\nCUPO_DRAGON = 3\nCUPO_SCOUT = 4
+
+class Recursos {
+    -cantidadDeGas: int
+    -cantidadDeMineral: int
+    +Recursos()
+    +guardar(cantidadDeGas, cantidadDeMineral)
+    +utilizar(cantidadDeGas, cantidadDeMineral)
+    +obtenerGas()
+    +obtenerMineral()
+}
+
+JugadorZerg ..up|> Jugador
+JugadorProtoss ..up|> Jugador
+
+JugadorZerg -down-> Recursos
+JugadorProtoss -down-> Recursos
+
+@enduml

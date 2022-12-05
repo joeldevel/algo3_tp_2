@@ -7,21 +7,16 @@ public class Superficie {
     public Superficie(String unTipoDeSuperficie) {
         this.tipo = unTipoDeSuperficie;
     }
-    
-    public String obteneTipo() {
-        return this.tipo;
-    }
 
     public boolean atacableTieneLaMismaSuperficie(Atacable unAtacable) {
         return (unAtacable.compararSuperficie(this.tipo));
     }
 
-    public boolean compararTipos(String unTipo) {
-        return (this.tipo == unTipo);
+    public boolean revelableTieneLaMismaSuperficie(Revelable unRevelable) {
+        return (unRevelable.compararSuperficie(this.tipo));
     }
 
-    // ¿Borrar?
-    public boolean esIgualA(Superficie otraSuperficie) {
-        return (this.tipo == otraSuperficie.obteneTipo());
+    public boolean compararTipos(String unTipo) {
+        return (this.tipo.equals(unTipo));
     }
 }

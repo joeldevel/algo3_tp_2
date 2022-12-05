@@ -15,7 +15,4 @@ public class Constantes {
     public static final int COSTO_GAS_GUARIDA = 100;
     public static final int COSTO_MINERAL_ESPIRAL = 150;
     public static final int COSTO_GAS_ESPIRAL = 100;
-
-    public static final int JUGADOR_MIN_NOMBRE = 6;
-
 }

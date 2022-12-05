@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.AlgoStar;
+import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.modelo.JUGADOR_COLOR;
 import edu.fiuba.algo3.modelo.JUGADOR_RAZA;
 import org.junit.jupiter.api.Assertions;

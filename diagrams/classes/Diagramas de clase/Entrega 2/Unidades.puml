@@ -83,7 +83,7 @@ class Dragon {
     +obtenerSuperficie(): Superficie
 }
 
-class EnConstruccion {
+class UnidadEnConstruccion {
     +EnConstruccion()
     +recibirAtaque(unDanio)
     +atacar(unAtacable)
@@ -93,93 +93,17 @@ class EnConstruccion {
 
 note right: Todos sus metodos no hacen nada o lanzan una excepcion.
 
-Raza ..right|> Atacable
-Unidad --up|> Raza
-Unidad --down> TipoDeUnidad
-Zerling ..up|> TipoDeUnidad
-EnConstruccion .up|> TipoDeUnidad
-Dragon ..up|> TipoDeUnidad
-
-@enduml
-
------------------------------------------------------------------------------------------------------
-
-@startuml
-
-interface Atacable {
-    +recibirAtaque()
-    +ubicacion(): Ubicacion
-    +obtenerSuperficie(): Superficie
-    +atacar(unAtacable)
-}
-
-abstract class Raza {
-    -tiempo: Tiempo
-    -ubicacion: Ubicacion
-    +avanzarTurno() {abstract}
-    +recibirAtaque() {abstract}
-    +ubicacion(): Ubicacion
-}
-
-class Unidad {
-    -tipo: TipoDeUnidad
-    +Unidad(unTiempo, unaUbicacion, unTipo)
-    +cambiarTipo(unTipo)
-    +recibirAtaque(unDanio)
-    +obtenerSuperficie(): Superficie
-    +atacar(unAtacable)
-    +avanzarTurno()
-}
-
-interface TipoDeUnidad {
-    +recibirAtaque(unDanio)
-    +obtenerSuperficie(): Superficie
-    +atacar(unAtacable)
-    +recuperarse()
-}
-
-class Zerling {
-    -vida: Vida
-    -Ubicacion: ubicacion
-    -Superficie: superficie
-    -ataques: ArrayList<Ataque>
-    +Zerling(unaUbicacion)
-    +recibirAtaque(unDanio)
-    +atacar(unAtacable)
-    +recuperarse()
-    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
-    +ubicacion(): Ubicacion
-    +vidaRestante(): int
-    +obtenerSuperficie(): Superficie
-}
-
-class Dragon {
-    -vida: Vida
-    -escudo: Escudo
-    -Ubicacion: ubicacion
-    -Superficie: superficie
-    -ataques: ArrayList<Ataque>
-    +Dragon(unaUbicacion)
-    +recibirAtaque(unDanio)
-    +atacar(unAtacable)
-    +recuperarse()
-    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
-    +ubicacion(): Ubicacion
-    +vidaRestante(): int
-    +escudoRestante(): int
-    +obtenerSuperficie(): Superficie
-}
-
 class Superficie {
     -tipo: String
-    +compararCon(otraSuperficie)
+    +atacableTieneLaMismaSuperficie(unAtacable)
+    +compararTipos(unTipo)
 }
 
 class Ataque{
     -rango: int
     -tipo: Superficie
     -valor: int
-    +Ataque(unDanio, unRango)
+    +Ataque(unDanio, unaSuperficie, unRango)
     +rango()
     +atacarA(unAtacable)
     +obtenerSuperficie()
@@ -189,6 +113,7 @@ Raza ..right|> Atacable
 Unidad --up|> Raza
 Unidad --down> TipoDeUnidad
 Zerling ..up|> TipoDeUnidad
+UnidadEnConstruccion .up|> TipoDeUnidad
 Dragon ..up|> TipoDeUnidad
 Zerling -> Ataque
 Dragon -left> Ataque

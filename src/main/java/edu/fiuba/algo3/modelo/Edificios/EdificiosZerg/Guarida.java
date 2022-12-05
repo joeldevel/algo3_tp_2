@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -13,6 +14,7 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class Guarida extends EdificioZerg {
 
+	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 200;
 	private final int COSTO_GAS = 100;
 	
@@ -20,15 +22,19 @@ public class Guarida extends EdificioZerg {
     private ArrayList<Unidad> hidraliscos;
     
 	
-    public Guarida(Recursos recursosJugador){
-        super(new Tiempo(-12),new Vida(1250), new Ubicacion());
+    public Guarida(Ubicacion unaUbicacion, Jugador unJugador){
+        super(new Tiempo(-12), new Vida(1250), unaUbicacion, unJugador,"Guarida");
         
-        recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
         this.larvas = new ArrayList<Unidad>();
         this.hidraliscos = new ArrayList<Unidad>();
     }
-    
+
+	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
 
 	@Override
 	public void ejecutaOperable() {
@@ -39,7 +45,7 @@ public class Guarida extends EdificioZerg {
 		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
 		while(this.contarLarvas() != 0) {
 			Unidad actual = larvas.get(0);
-			actual.cambiarTipo(new Hidralisco());
+			actual.setComportamientoEstado(new Hidralisco(this.ubicacion, this.jugador));
 			hidraliscos.add(actual);
 			larvas.remove(0);
 		}
@@ -58,12 +64,12 @@ public class Guarida extends EdificioZerg {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
-		// No hace nada
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
 
 	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return false;
+	public void serRevelado() {
+		// No hace nada.
 	}
 }

@@ -12,6 +12,12 @@ public class Recursos {
         this.cantidadDeMineral = 0;
     }
 
+    // Constructor utilizado unicamente para simplificar pruebas.
+    public Recursos(int unaCantidadDeGas, int unaCantidadDeMineral) {
+        this.cantidadDeGas = unaCantidadDeGas;
+        this.cantidadDeMineral = unaCantidadDeMineral;
+    }
+
     public void guardar(int unaCantidadDeGas, int unaCantidadDeMineral) {
         this.cantidadDeGas += unaCantidadDeGas;
         this.cantidadDeMineral += unaCantidadDeMineral;

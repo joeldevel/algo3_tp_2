@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+
 public class Ubicacion {
 
     protected int posX;
@@ -27,6 +28,10 @@ public class Ubicacion {
 	
 	public int obtenerY() {
 		return (this.posY);
+	}
+	
+	public boolean esIgualA(Ubicacion otraUbicacion) {
+		return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
 	}
 
     
