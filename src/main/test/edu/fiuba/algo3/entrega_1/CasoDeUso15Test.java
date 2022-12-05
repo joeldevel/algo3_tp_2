@@ -26,7 +26,7 @@ public class CasoDeUso15Test {
     @Test
     void test01SeConstruyeUnAsimiladorEnUnVolcanYEstandoYaOperativoSeAvanzan251TurnosYElVolcanSeQuedaSinGasVespeno(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
@@ -41,7 +41,7 @@ public class CasoDeUso15Test {
     @Test
     void test02SeConstruyeUnNexoMineralEnUnNodoMineralYEstandoYaOperativoSeAvanzan201TurnosYElNodoMineralSeQuedaSinMineral() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
@@ -60,7 +60,7 @@ public class CasoDeUso15Test {
     @Test
     void test03SeConstruyeUnExtractorEnUnVolcanYEstandoYaOperativoSeAvanzan168TurnosYElVolcanSeQuedaSinGasVespeno(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,175);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
@@ -85,7 +85,7 @@ public class CasoDeUso15Test {
     @Test
     void test04SeConstruyeUnZanganoEnUnNodoMineralYEstandoYaOperativoSeAvanzan201TurnosYElNodoMineralSeQuedaSinMineral() {
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Zangano tipoZangano =  new Zangano(jugadorZerg);

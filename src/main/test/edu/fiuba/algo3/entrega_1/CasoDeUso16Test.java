@@ -23,7 +23,7 @@ public class CasoDeUso16Test {
 
     @Test
     void test01SeCreaUnNodoMineralSinUnMineroYAlIntentarRecolectarMineralSeLanzaExcepcion(){
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         int unaCantidadExtraible = 50;
 
         assertThrows(NodoMineralSinRecolectorDeMineralConstruidoException.class,()->{
@@ -33,7 +33,7 @@ public class CasoDeUso16Test {
 
     @Test
     void test02SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnNexoMineralConstruidoYSeLanzaUnaExcepcion(){
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral primerNexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
@@ -47,7 +47,7 @@ public class CasoDeUso16Test {
     void test03SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnZanganoYSeLanzaUnaExcepcion(){
         Recursos recursos = new Recursos(0,50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
 
         Recursos recursosZerg = new Recursos(0,25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursosZerg);
@@ -65,7 +65,7 @@ public class CasoDeUso16Test {
 
     @Test
     void test01SeCreaUnVolcanSinUnaRefineriaDeGasYAlIntentarExtraerGasSeLanzaExcepcion(){
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         int unaCantidadExtraible = 50;
 
         assertThrows(VolcanSinRefineriaDeGasConstruidaException.class,()->{
@@ -75,7 +75,7 @@ public class CasoDeUso16Test {
 
     @Test
     void test02SeIntentaConstruirUnExtractorEnUnVolcanDondeYaHayUnExtractorConstruidoYSeLanzaUnaExcepcion(){
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,200);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor primerExtractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
