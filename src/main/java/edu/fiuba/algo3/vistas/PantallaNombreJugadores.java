@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.vistas.eventos.CrearJugadorHandler;
+import edu.fiuba.algo3.vistas.eventos.IniciarPartidaHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -153,11 +154,9 @@ public class PantallaNombreJugadores {
         jugador1Listo.setOnAction(crearJugador1Handler);
         jugador2Listo.setOnAction(crearJugador2Handler);
 
-        this.continuar.setOnAction(e -> {
-            System.out.println("yendo al mapa");
-            stage.setScene(proxima);
+        IniciarPartidaHandler iniciarPartidaHandler = new IniciarPartidaHandler(stage, proxima);
+        this.continuar.setOnAction(iniciarPartidaHandler);
 
-        });
     }
 
     public Scene getScene() {
