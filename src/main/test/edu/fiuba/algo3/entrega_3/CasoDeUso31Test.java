@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_3;
 
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
@@ -30,8 +32,6 @@ public class CasoDeUso31Test {
     @Test
     public void test01ConstruirTresPilonesAumentaElNumeroDePoblacionDeLaFormaIndicada() {
         // Arrange
-        Recursos recursos = new Recursos(0, 600);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         // Act
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
@@ -45,8 +45,6 @@ public class CasoDeUso31Test {
     @Test
     public void test02ConstruirTresPilonesYDestruirUnoDisminuyeElNumeroDePoblacionDeLaFormaIndicada() {
         // Arrange
-        Recursos recursos = new Recursos(0, 600);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
         jugadorProtoss.crearPilon(new Ubicacion(0,1));
         Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,2));
@@ -68,10 +66,9 @@ public class CasoDeUso31Test {
     @Test
     public void test03AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnZealot() {
         // Arrange
-        Recursos recursos = new Recursos(0, 200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearZealot();
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.crearZealot(acceso);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
         Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
@@ -82,16 +79,15 @@ public class CasoDeUso31Test {
         }
 
         // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot(acceso));
     }
 
     @Test
     public void test04AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnDragon() {
         // Arrange
-        Recursos recursos = new Recursos(0, 200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearZealot();
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.crearZealot(acceso);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
         Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
@@ -102,16 +98,15 @@ public class CasoDeUso31Test {
         }
 
         // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
     }
 
     @Test
     public void test05AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnScout() {
         // Arrange
-        Recursos recursos = new Recursos(0, 200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Pilon pilon = jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearZealot();
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.crearZealot(acceso);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
         Unidad guardian = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
@@ -121,8 +116,10 @@ public class CasoDeUso31Test {
             guardian.atacar(pilon);
         }
 
+        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+
         // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
     }
 
     /* Zerg */
@@ -130,8 +127,6 @@ public class CasoDeUso31Test {
     @Test
     public void test06ConstruirTresCriaderosAumentaElNumeroDePoblacionDeLaFormaIndicada() {
         // Arrange
-        Recursos recursos = new Recursos(0, 600);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         // Act
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
@@ -145,8 +140,6 @@ public class CasoDeUso31Test {
     @Test
     public void test07ConstruirTresCriaderosYDestruirUnoDisminuyeElNumeroDePoblacionDeLaFormaIndicada() {
         // Arrange
-        Recursos recursos = new Recursos(0, 600);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
         jugadorZerg.crearCriadero(new Ubicacion(0,1));
         Criadero criadero = jugadorZerg.crearCriadero(new Ubicacion(0,2));
@@ -167,8 +160,6 @@ public class CasoDeUso31Test {
     @Test
     public void test08ConstruirTresCriaderosYTresAmosSupremosAumentaElNumeroDePoblacionDeLaFormaIndicada() {
         // Arrange
-        Recursos recursos = new Recursos(0, 750);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         // Act
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
@@ -185,10 +176,9 @@ public class CasoDeUso31Test {
     @Test
     public void test09SeConstruyeUnCriaderoYUnZanganoYAlDestruirElCriaderoDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnSegundoZangano() {
         // Arrange
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Criadero criadero = jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        jugadorZerg.crearZangano();
+        Criadero criaderoUnidad = new Criadero(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.crearZangano(criaderoUnidad);
 
         Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
@@ -199,21 +189,20 @@ public class CasoDeUso31Test {
         }
 
         // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criaderoUnidad));
     }
 
     @Test
     public void test10SeConstruyeUnAmoSupremoYUnZanganoYAlDestruirElAmoSupremoDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnSegundoZangano() {
         // Arrange
-        Recursos recursos = new Recursos(0, 50);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Unidad amoSupremo = jugadorZerg.crearAmoSupremo(new Ubicacion(0,0));
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
         jugadorZerg.avanzarTurno();
         jugadorZerg.avanzarTurno();
         jugadorZerg.avanzarTurno();
         jugadorZerg.avanzarTurno();
         jugadorZerg.avanzarTurno();
-        jugadorZerg.crearZangano();
+        jugadorZerg.crearZangano(criadero);
 
         Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
@@ -224,6 +213,6 @@ public class CasoDeUso31Test {
         }
 
         // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
     }
 }

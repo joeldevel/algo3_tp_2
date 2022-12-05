@@ -35,7 +35,6 @@ public class JugadorZerg implements Jugador {
     private String nombre;
     private String color;
     private Recursos recursos;
-    private int poblacion;
     private int suministro;
 
     private int cantidadDeAmos;
@@ -54,7 +53,6 @@ public class JugadorZerg implements Jugador {
         this.color = unColor;
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
-        this.poblacion = 0;
         this.suministro = 0;
 
         this.cantidadDeAmos = 0;
@@ -74,7 +72,6 @@ public class JugadorZerg implements Jugador {
         this.nombre = unNombre;
         this.color = unColor;
         this.recursos = unosRecursos;
-        this.poblacion = 0;
         this.suministro = 0;
 
         this.cantidadDeAmos = 0;
@@ -148,7 +145,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio Criadero que permite instanciar Zangano.
-    public void crearZangano() {
+    public void crearZangano(Edificio unCriadero) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZANGANO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
@@ -159,7 +156,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio ReservaDeReproduccion que permite instanciar Zerling.
-    public void crearZerling() {
+    public void crearZerling(Edificio unaReservaDeReproduccion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZERLING)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
@@ -170,7 +167,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio Guarida que permite instanciar Hidralisco.
-    public void crearHidralisco() {
+    public void crearHidralisco(Edificio unaGuarida) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
@@ -181,7 +178,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio Espiral que permite instanciar Mutalisco.
-    public void crearMutalisco() {
+    public void crearMutalisco(Edificio unaEspiral) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
@@ -192,7 +189,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // Falta enviar el mensaje que permite instanciar Guardian (evolucion de Mutalisco).
-    public void crearGuardian() {
+    public void evolucionarMutaliscoAGuardian(Unidad unMutalisco) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_GUARDIAN)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
@@ -203,7 +200,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // Falta enviar el mensaje que permite instanciar Devorador (evolucion de Mutalisco).
-    public void crearDevorador() {
+    public void evolucionarMutaliscoADevorador(Unidad unMutalisco) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_DEVORADOR)) {
             throw new SuministroSuperaElNumeroDePoblacionException();

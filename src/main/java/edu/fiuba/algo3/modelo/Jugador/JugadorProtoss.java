@@ -28,7 +28,6 @@ public class JugadorProtoss implements Jugador {
     private String nombre;
     private String color;
     private Recursos recursos;
-    private int poblacion;
     private int suministro;
 
     private int cantidadDeZealots;
@@ -43,7 +42,6 @@ public class JugadorProtoss implements Jugador {
         this.color = unColor;
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
-        this.poblacion = 0;
         this.suministro = 0;
 
         this.cantidadDeZealots = 0;
@@ -59,7 +57,6 @@ public class JugadorProtoss implements Jugador {
         this.nombre = unNombre;
         this.color = unColor;
         this.recursos = unosRecursos;
-        this.poblacion = 0;
         this.suministro = 0;
 
         this.cantidadDeZealots = 0;
@@ -113,7 +110,7 @@ public class JugadorProtoss implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
-    public void crearZealot() {
+    public void crearZealot(Edificio unAcceso) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
@@ -124,7 +121,7 @@ public class JugadorProtoss implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Dragon.
-    public void crearDragon() {
+    public void crearDragon(Edificio unAcceso) {
         if (!this.haySuministroDisponible(SUMINISTRO_DRAGON)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
@@ -134,7 +131,7 @@ public class JugadorProtoss implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio PuertoEstelar que permite instanciar Scout.
-    public void crearScout() {
+    public void crearScout(Edificio unPuertoEstelar) {
         if (!this.haySuministroDisponible(SUMINISTRO_SCOUT)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
