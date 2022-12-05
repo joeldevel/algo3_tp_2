@@ -100,7 +100,7 @@ public class CasoDeUso11Test {
     @Test
     void test05SeConstruyeUnAsimiladorQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
@@ -119,7 +119,7 @@ public class CasoDeUso11Test {
     @Test
     void test06SeConstruyeUnAsimiladorQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
@@ -139,7 +139,7 @@ public class CasoDeUso11Test {
     @Test
     void test07SeConstruyeUnAsimiladorQueLuegoDeSeisTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
@@ -159,7 +159,7 @@ public class CasoDeUso11Test {
     @Test
     void test08SeConstruyeUnAsimiladorQueLuegoDeSeisTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
@@ -182,7 +182,7 @@ public class CasoDeUso11Test {
     @Test
     void test09SeConstruyeUnNexoMineralQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
@@ -201,7 +201,7 @@ public class CasoDeUso11Test {
     @Test
     void test10SeConstruyeUnNexoMineralQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
@@ -221,7 +221,7 @@ public class CasoDeUso11Test {
     @Test
     void test11SeConstruyeUnNexoMineralQueLuegoDeCuatroTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
@@ -241,7 +241,7 @@ public class CasoDeUso11Test {
     @Test
     void test12SeConstruyeUnNexoMineralQueLuegoDeCuatroTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);

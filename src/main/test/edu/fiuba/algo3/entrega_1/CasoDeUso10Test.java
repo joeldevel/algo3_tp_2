@@ -178,7 +178,7 @@ public class CasoDeUso10Test {
     @Test
     void test09SeConstruyeUnExtractorQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
@@ -197,7 +197,7 @@ public class CasoDeUso10Test {
     @Test
     void test10SeConstruyeUnExtractorQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
@@ -217,7 +217,7 @@ public class CasoDeUso10Test {
     @Test
     void test11SeConstruyeUnExtractorQueLuegoDeSeisTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
@@ -237,7 +237,7 @@ public class CasoDeUso10Test {
     @Test
     void test12SeConstruyeUnExtractorQueLuegoDeSeisTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);

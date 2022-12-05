@@ -29,7 +29,7 @@ public class CasoDeUso08Test {
 
     @Test
     void test08SeIntentaConstruirUnAsimiladorSinRecursosYSeLanzaUnaExcepcion() {
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 99);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
@@ -40,7 +40,7 @@ public class CasoDeUso08Test {
 
     @Test
     void test07SeIntentaConstruirUnNexoMineralSinRecursosYSeLanzaUnaExcepcion() {
-        NodoMineral nodoMineral = new NodoMineral();
+        NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 49);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
@@ -95,7 +95,7 @@ public class CasoDeUso08Test {
 
     @Test
     void test10SeIntentaConstruirUnExtractorSinRecursosYSeLanzaUnaExcepcion() {
-        Volcan volcan = new Volcan();
+        Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,99);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
