@@ -1,11 +1,15 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,304 +21,375 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CasoDeUso26Test {
 
-    /* UNIDADES PROTOSS */
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(1000, 1000));
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(1000, 1000));
+
+    /* Protoss */
 
     @Test
-    @DisplayName("Un jugador Protoss no puede construir un Zealot si no tiene al menos 2 de poblacion libre")
-    public void test01protossSinRecursosZealotTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
+    public void test01JugadorProtossSinPoblacionIntentaCrearUnZealotYNoPuede() {
+        // Arrange
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot(acceso));
     }
 
     @Test
-    @DisplayName("Un jugador Protoss puede construir un Zealot si tiene al menos 2 de poblacion libre")
-    public void test02protossConRecursosZealotTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test02JugadorProtossConUnPilonConstruidoPuedeConstruirUnZealotYTieneElSuministroIndicado() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorProtoss.crearZealot());
-        assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT) == 1);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act
+        jugadorProtoss.crearZealot(acceso);
+
+        // Assert
+        assertEquals(2, jugadorProtoss.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Un jugador Protoss puede construir dos Zealot si tiene al menos 4 de poblacion libre")
-    public void test03protossConRecursosConstruyeDosZealotTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test03JugadorProtossConUnPilonConstruidoPuedeConstruirDosZealotYTieneElSuministroIndicado() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorProtoss.crearZealot());
-        assertDoesNotThrow(() -> jugadorProtoss.crearZealot());
-        assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT) == 2);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act
+        jugadorProtoss.crearZealot(acceso);
+        jugadorProtoss.crearZealot(acceso);
+
+        // Assert
+        assertEquals(4, jugadorProtoss.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Contruir Zealots reduce la cantidad de cupos disponibles")
-    public void test04protossConRecursosConstruyeDosZealotsYNoPuedeConstruirUnTerceroTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test04JugadorProtossConUnPilonConstruidoPuedeConstruirDosZealotYNoPuedeConstruirUnTercerZealot() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorProtoss.crearZealot());
-        assertDoesNotThrow(() -> jugadorProtoss.crearZealot());
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.crearZealot(acceso);
+        jugadorProtoss.crearZealot(acceso);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot(acceso));
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+
+    @Test
+    public void test05JugadorProtossSinPoblacionIntentaCrearUnDragonYNoPuede() {
+        // Arrange
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
     }
 
     @Test
-    @DisplayName("Un jugador Protoss no puede construir un Dragon si no tiene al menos 3 de poblacion libre")
-    public void test05protossSinRecursosDragonTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
-    }
-
-    @Test
-    @DisplayName("Un jugador Protoss puede construir un Dragon si tiene al menos 3 de poblacion libre")
-    public void test06protossConRecursosDragonTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test06JugadorProtossConUnPilonConstruidoPuedeConstruirUnDragonYTieneElSuministroIndicado() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorProtoss.crearDragon());
-        assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.DRAGON) == 1);
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act
+        jugadorProtoss.crearDragon(acceso);
+
+        // Assert
+        assertEquals(3, jugadorProtoss.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Un jugador Pprotoss puede construir dos Dragones si tiene al menos 6 de poblacion libre")
-    public void protossConRecursosConstruyeDosDragonesTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test07JugadorProtossConDosPilonesConstruidosPuedeConstruirDosDragonesYTieneElSuministroIndicado() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearPilon(new Ubicacion(1,1));
-        assertDoesNotThrow(() -> jugadorProtoss.crearDragon());
-        assertDoesNotThrow(() -> jugadorProtoss.crearDragon());
-        Assertions.assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.DRAGON) == 2);
+        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act
+        jugadorProtoss.crearDragon(acceso);
+        jugadorProtoss.crearDragon(acceso);
+
+        // Assert
+        assertEquals(6, jugadorProtoss.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Contruir Dragones reduce la cantidad de cupos disponibles")
-    public void protossConRecursosConstruyeUnDragonYNoPuedeConstruirUnSegundoTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test08JugadorProtossConDosPilonConstruidosPuedeConstruirTresDragonesYNoPuedeConstruirUnCuartoDragon() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorProtoss.crearDragon());
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
+        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.crearDragon(acceso);
+        jugadorProtoss.crearDragon(acceso);
+        jugadorProtoss.crearDragon(acceso);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+
+    @Test
+    public void test09JugadorProtossSinPoblacionIntentaCrearUnScoutYNoPuede() {
+        // Arrange
+        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
     }
 
     @Test
-    @DisplayName("Un jugador Protoss no puede construir un Scout si no tiene al menos 4 de poblacion libre")
-    public void protossSinRecursosScoutTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
-    }
-
-    @Test
-    @DisplayName("Un jugador Protoss puede construir un Scout si tiene al menos 4 de poblacion libre")
-    public void protossConRecursosScoutTest() {
-        Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test10JugadorProtossConUnPilonConstruidoPuedeConstruirUnScoutYTieneElSuministroIndicado() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorProtoss.crearScout());
-        assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 1);
+        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act
+        jugadorProtoss.crearScout(puerto);
+
+        // Assert
+        assertEquals(4, jugadorProtoss.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Un jugador Protoss puede construir dos Scout si tiene al menos 8 de poblacion libre")
-    public void protossConRecursosConstruyeDosScoutTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test11JugadorProtossConDosPilonesConstruidosPuedeConstruirDosScoutYTieneElSuministroIndicado() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearPilon(new Ubicacion(1,1));
-        assertDoesNotThrow(() -> jugadorProtoss.crearScout());
-        assertDoesNotThrow(() -> jugadorProtoss.crearScout());
-        assertTrue(jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT) == 2);
+        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act
+        jugadorProtoss.crearScout(puerto);
+        jugadorProtoss.crearScout(puerto);
+
+        // Assert
+        assertEquals(8, jugadorProtoss.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Contruir Scouts reduce la cantidad de cupos disponibles")
-    public void protossConRecursosConstruyeDosScoutsYNoPuedeConstruirUnTerceroTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    public void test12JugadorProtossConDosPilonConstruidosPuedeConstruirDosScoutYNoPuedeConstruirUnTercerScout() {
+        // Arrange
         jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearPilon(new Ubicacion(1,1));
-        assertDoesNotThrow(() -> jugadorProtoss.crearScout());
-        assertDoesNotThrow(() -> jugadorProtoss.crearScout());
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
+        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.crearScout(puerto);
+        jugadorProtoss.crearScout(puerto);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
     }
 
-    /* UNIDADES ZERG */
+    /* Zerg */
 
     @Test
-    @DisplayName("Un jugador Zerg no puede construir un Zángano si no tiene al menos 1 poblacion libre")
-    public void zergSinRecursosZanganoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+    public void test13JugadorZergSinPoblacionIntentaCrearUnZanganoYNoPuede() {
+        // Arrange
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
     }
 
     @Test
-    @DisplayName("Un jugador Zerg puede construir un Zángano si tiene al menos 1 de poblacion libre")
-    public void zergConRecursosZanganoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test14JugadorZergConUnCriaderoConstruidoPuedeConstruirUnZanganoYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 1);
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
+        // Act
+        jugadorZerg.crearZangano(criadero);
+
+        // Assert
+        assertEquals(1, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Un jugador Zerg puede construir 5 Zánganos si tiene al menos 5 de poblacion libre")
-    public void zergConRecursosConstruyeCincoZanganosTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test15JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZanganosYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO) == 5);
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
+        // Act
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+
+        // Assert
+        assertEquals(5, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Contruir Zánganos reduce la cantidad de cupos disponibles")
-    public void zergConRecursosConstruyeCincoZanganosYNoPuedeConstruirUnSextoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test16JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZanganosYNoPuedeConstruirUnSextoZangano() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertDoesNotThrow(() -> jugadorZerg.crearZangano());
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.crearZangano(criadero);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+
+    @Test
+    public void test17JugadorZergSinPoblacionIntentaCrearUnZerlingYNoPuede() {
+        // Arrange
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling(reserva));
     }
 
     @Test
-    @DisplayName("Un jugador Zerg no puede construir un Zerling si no tiene al menos 1 de poblacion libre")
-    public void zergSinRecursosZerlingTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling());
-    }
-
-    @Test
-    @DisplayName("Un jugador Zerg puede construir un Zerling si tiene al menos 1 de poblacion libre")
-    public void zergConRecursosZerlingTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test18JugadorZergConUnCriaderoConstruidoPuedeConstruirUnZerlingYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 1);
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
+
+        // Act
+        jugadorZerg.crearZerling(reserva);
+
+        // Assert
+        assertEquals(1, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Un jugador Zerg puede construir 5 Zerlings si tiene al menos 5 de poblacion libre")
-    public void zergConRecursosConstruyeCincoZerlingsTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test19JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZerlingsYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        Assertions.assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING) == 5);
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
+        // Act
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+
+        // Assert
+        assertEquals(5, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Contruir Zerlings reduce la cantidad de cupos disponibles")
-    public void zergConRecursosConstruyeCincoZerlingsYNoPuedeConstruirUnSextoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test20JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZerlingsYNoPuedeConstruirUnSextoZerling() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertDoesNotThrow(() -> jugadorZerg.crearZerling());
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling());
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.crearZerling(reserva);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling(reserva));
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+
+    @Test
+    public void test21JugadorZergSinPoblacionIntentaCrearUnHidraliscoYNoPuede() {
+        // Arrange
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco(guarida));
     }
 
     @Test
-    @DisplayName("Un jugador Zerg no puede construir un Hidralisco si no tiene al menos 2 de poblacion libre")
-    public void zergSinRecursosHidraliscoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco());
-    }
-
-    @Test
-    @DisplayName("Un jugador Zerg puede construir un Hidralisco si tiene al menos 2 de poblacion libre")
-    public void zergConRecursosHidraliscoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test22JugadorZergConUnCriaderoConstruidoPuedeConstruirUnHidraliscoYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearHidralisco());
-        assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 1);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+
+        // Act
+        jugadorZerg.crearHidralisco(guarida);
+
+        // Assert
+        assertEquals(2, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Un jugador Zerg puede construir 2 Hidraliscos si tiene al menos 4 de poblacion libre")
-    public void zergConRecursosConstruyeDosHidraliscosTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test23JugadorZergConUnCriaderoConstruidoPuedeConstruirDosHidraliscosYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearHidralisco());
-        assertDoesNotThrow(() -> jugadorZerg.crearHidralisco());
-        assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO) == 2);
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+
+        // Act
+        jugadorZerg.crearHidralisco(guarida);
+        jugadorZerg.crearHidralisco(guarida);
+
+        // Assert
+        assertEquals(4, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Contruir Hidraliscos reduce la cantidad de cupos disponibles")
-    public void zergConRecursosConstruyeDosHidraliscosYNoPuedeConstruirUnTerceroTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test24JugadorZergConUnCriaderoConstruidoPuedeConstruirDosHidraliscosYNoPuedeConstruirUnTercerHidralisco() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearHidralisco());
-        assertDoesNotThrow(() -> jugadorZerg.crearHidralisco());
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco());
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.crearHidralisco(guarida);
+        jugadorZerg.crearHidralisco(guarida);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco(guarida));
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+
+    @Test
+    public void test25JugadorZergSinPoblacionIntentaCrearUnMutaliscoYNoPuede() {
+        // Arrange
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco(espiral));
     }
 
     @Test
-    @DisplayName("Un jugador Zerg no puede construir un Mutalisco si no tiene al menos 4 de poblacion libre")
-    public void zergSinRecursosMutaliscoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco());
-    }
-
-    @Test
-    @DisplayName("Un jugador Zerg puede construir un Mutalisco si tiene al menos 2 de poblacion libre")
-    public void zergConRecursosMutaliscoTest() {
-        Recursos recursos = new Recursos(0, 200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test26JugadorZergConUnCriaderoConstruidoPuedeConstruirUnMutaliscoYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        assertDoesNotThrow(() -> jugadorZerg.crearMutalisco());
-        assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 1);
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+
+        // Act
+        jugadorZerg.crearMutalisco(espiral);
+
+        // Assert
+        assertEquals(4, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Un jugador Zerg puede construir 2 Mutaliscos si tiene al menos 8 de poblacion libre")
-    public void zergConRecursosConstruyeDosMutaliscosTest() {
-        Recursos recursos = new Recursos(0, 400);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test27JugadorZergConDosCriaderosConstruidosPuedeConstruirDosMutaliscosYTieneElSuministroIndicado() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        assertDoesNotThrow(() -> jugadorZerg.crearMutalisco());
-        assertDoesNotThrow(() -> jugadorZerg.crearMutalisco());
-        assertTrue(jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO) == 2);
+        jugadorZerg.crearCriadero(new Ubicacion(0,1));
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+
+        // Act
+        jugadorZerg.crearMutalisco(espiral);
+        jugadorZerg.crearMutalisco(espiral);
+
+        // Assert
+        assertEquals(8, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    @DisplayName("Contruir Mutaliscos reduce la cantidad de cupos disponibles")
-    public void zergConRecursosConstruyeDosMutaliscosYNoPuedeConstruirUnTerceroTest() {
-        Recursos recursos = new Recursos(0, 400);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    public void test28JugadorZergConDosCriaderosConstruidosPuedeConstruirDosMutaliscosYNoPuedeConstruirUnTercerMutalisco() {
+        // Arrange
         jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        assertDoesNotThrow(() -> jugadorZerg.crearMutalisco());
-        assertDoesNotThrow(() -> jugadorZerg.crearMutalisco());
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco());
+        jugadorZerg.crearCriadero(new Ubicacion(0,1));
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.crearMutalisco(espiral);
+        jugadorZerg.crearMutalisco(espiral);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco(espiral));
     }
 }

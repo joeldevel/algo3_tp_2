@@ -1,14 +1,16 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 // Creacion de la clase recursos.
@@ -17,142 +19,147 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso30Test {
 
-    @Test
-    @DisplayName("Un jugador Protoss con 200 de población completa no puede crear un Zealot más")
-    public void test01ProtossAlLimiteDeSuministrosNoPuedeConstruirUnZealot() {
-        Recursos recursos = new Recursos(0, 14200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000));
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000));
 
+    /* Protoss */
+
+    @Test
+    public void test01JugadorProtossAlLimiteDeSuministroNoPuedeConstruirUnZealot() {
+        // Arrange
         for (int i = 0; i < 40; i++) {
             jugadorProtoss.crearPilon(new Ubicacion(i,0));
         }
 
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
         for (int i = 0; i < 100; i++) {
-            jugadorProtoss.crearZealot();
+            jugadorProtoss.crearZealot(acceso);
         }
 
-        assertEquals(100, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT));
         jugadorProtoss.crearPilon(new Ubicacion(1,1));
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot());
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot(acceso));
     }
 
     @Test
-    @DisplayName("Un jugador Protoss con 200 de población completa no puede crear un Dragon más")
-    public void test02ProtossAlLimiteDeSuministrosNoPuedeConstruirUnDragon() {
-        Recursos recursos = new Recursos(0, 14200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-
+    public void test02JugadorProtossAlLimiteDeSuministroNoPuedeConstruirUnDragon() {
+        // Arrange
         for (int i = 0; i < 40; i++) {
             jugadorProtoss.crearPilon(new Ubicacion(i,0));
         }
 
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
         for (int i = 0; i < 100; i++) {
-            jugadorProtoss.crearZealot();
+            jugadorProtoss.crearZealot(acceso);
         }
 
-        assertEquals(0, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.DRAGON));
-        assertEquals(100, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT));
         jugadorProtoss.crearPilon(new Ubicacion(1,1));
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon());
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
     }
 
     @Test
-    @DisplayName("Un jugador Protoss con 200 de población completa no puede crear un Scout más")
-    public void test03ProtossAlLimiteDeSuministrosNoPuedeConstruirUnScout() {
-        Recursos recursos = new Recursos(0, 14200);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
-
+    public void test03JugadorProtossAlLimiteDeSuministroNoPuedeConstruirUnScout() {
+        // Arrange
         for (int i = 0; i < 40; i++) {
             jugadorProtoss.crearPilon(new Ubicacion(i,0));
         }
 
+        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+
         for (int i = 0; i < 100; i++) {
-            jugadorProtoss.crearZealot();
+            jugadorProtoss.crearZealot(acceso);
         }
 
-
-        assertEquals(0, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.SCOUT));
-        assertEquals(100, jugadorProtoss.cantidadDeUnidades(UNIDADES_PROTOSS.ZEALOT));
         jugadorProtoss.crearPilon(new Ubicacion(1,1));
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout());
+        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
     }
 
-    @Test
-    @DisplayName("Un jugaor Zerg con 200 de población completa no puede crear un Zángano más")
-    public void test04ZergAlLimiteDeSuministrosNoPuedeConstruirUnZangano() {
-        Recursos recursos = new Recursos(0, 13200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+    /* Zerg */
 
+    @Test
+    public void test04JugadorZergAlLimiteDeSuministroNoPuedeConstruirUnZangano() {
+        // Arrange
         for (int i = 0; i < 40; i++) {
             jugadorZerg.crearCriadero(new Ubicacion(i,0));
         }
 
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
         for (int i = 0; i < 200; i++) {
-            jugadorZerg.crearZangano();
+            jugadorZerg.crearZangano(criadero);
         }
 
-        Assertions.assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano());
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
     }
 
     @Test
-    @DisplayName("Un jugador Zerg con 200 de población completa no puede crear un Zerling más")
-    public void test05ZergAlLimiteDeSuministrosNoPuedeConstruirUnZerling() {
-        Recursos recursos = new Recursos(0, 13200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-
+    public void test05JugadorZergAlLimiteDeSuministroNoPuedeConstruirUnZerling() {
+        // Arrange
         for (int i = 0; i < 40; i++) {
             jugadorZerg.crearCriadero(new Ubicacion(i,0));
         }
 
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
         for (int i = 0; i < 200; i++) {
-            jugadorZerg.crearZangano();
+            jugadorZerg.crearZangano(criadero);
         }
 
-        assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
-        assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZERLING));
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling());
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling(reserva));
     }
 
     @Test
-    @DisplayName("Un jugador Zerg con 200 de población completa no puede crear un Hidralisco más")
-    public void test06ZergAlLimiteDeSuministrosNoPuedeConstruirUnHidralisco() {
-        Recursos recursos = new Recursos(0, 13200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-
+    public void test06JugadorZergAlLimiteDeSuministroNoPuedeConstruirUnHidralisco() {
+        // Arrange
         for (int i = 0; i < 40; i++) {
             jugadorZerg.crearCriadero(new Ubicacion(i,0));
         }
 
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
         for (int i = 0; i < 200; i++) {
-            jugadorZerg.crearZangano();
+            jugadorZerg.crearZangano(criadero);
         }
 
-        assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
-        assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.HIDRALISCO));
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco());
+        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco(guarida));
     }
 
     @Test
-    @DisplayName("Un jugador Zerg con 200 de población completa no puede crear un Mutalisco más")
-    public void test07ZergAlLimiteDeSuministrosNoPuedeConstruirUnMutalisco() {
-        Recursos recursos = new Recursos(0, 13200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
-
+    public void test07JugadorZergAlLimiteDeSuministroNoPuedeConstruirUnMutalisco() {
+        // Arrange
         for (int i = 0; i < 40; i++) {
             jugadorZerg.crearCriadero(new Ubicacion(i,0));
         }
 
+        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+
         for (int i = 0; i < 200; i++) {
-            jugadorZerg.crearZangano();
+            jugadorZerg.crearZangano(criadero);
         }
 
-        assertEquals(200, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.ZANGANO));
-        assertEquals(0, jugadorZerg.cantidadDeUnidades(UNIDADES_ZERG.MUTALISCO));
         jugadorZerg.crearCriadero(new Ubicacion(1,1));
-        assertThrows(CupoSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco());
+        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+
+        // Act & Assert
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco(espiral));
     }
 }

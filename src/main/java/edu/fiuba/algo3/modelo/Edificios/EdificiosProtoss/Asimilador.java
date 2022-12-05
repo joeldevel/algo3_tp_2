@@ -2,34 +2,40 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 
+	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 0;
 	
     private int cantidadExtraible;
-    private int cantidadExtraida;
     private Volcan volcan;
     
-    public Asimilador(Volcan unVolcan, Recursos recursosJugador) {
-    	super(new Tiempo(-6),new Vida(450),new Escudo(450), new Ubicacion());
+    public Asimilador(Volcan unVolcan, Ubicacion unaUbicacion, Jugador unJugador) {
+    	super(new Tiempo(-6), new Vida(450), new Escudo(450), unaUbicacion, unJugador,"Asimilador");
     	
-    	recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+    	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
     	this.cantidadExtraible = 20;
-    	this.cantidadExtraida = 0;
     	this.volcan = unVolcan;
     	
     	unVolcan.construirRefineriaDeGas(this);
     }
+
+	@Override
+	public int obtenerPoblacion() {
+		return POBLACION;
+	}
     
     @Override
     public void ejecutaOperable() {
-    	this.cantidadExtraida += this.extraerGasDe(this.volcan);
+    	this.jugador.guardar(this.extraerGasDe(this.volcan), 0);
     }
     
     @Override
@@ -39,9 +45,7 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	
 	@Override
     public int obtenerGas() {
-		int extraido = this.cantidadExtraida;
-		this.cantidadExtraida = 0;
-        return extraido;
+		return this.jugador.obtenerGas();
     }
 
 	@Override
@@ -50,12 +54,12 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	}
 
 	@Override
-	public void atacar(Atacable unAtacable) {
-		// No hace nada
+	public boolean compararSuperficie(String unTipoDeSuperficie) {
+		return this.superficie.compararTipos(unTipoDeSuperficie);
 	}
 
 	@Override
-	public boolean compararSuperficie(String unTipoDeSuperficie) {
-		return this.superficie.compararTipos(unTipoDeSuperficie);
+	public void serRevelado() {
+		// No hace nada.
 	}
 }

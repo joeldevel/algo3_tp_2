@@ -2,6 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaVidaError;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 
 public class Vida {
 
@@ -15,16 +18,31 @@ public class Vida {
         this.vidaMax = unaVida;
         this.vidaRestante = unaVida;
     }
+
+	public void recibirDanioPor(int unaCantidad, Unidad unidadAtacante, Unidad unidadAtacada, Jugador unJugadorAtacado) {
+		if(unaCantidad < 0) {
+			throw new ValorInvalidoDeDanioError();
+		}
+		if(this.vidaRestante > unaCantidad) {
+			this.vidaRestante -= unaCantidad;
+		}
+		else if(this.vidaRestante <= unaCantidad){
+			this.vidaRestante = 0;
+			unJugadorAtacado.eliminarUnidad(unidadAtacada);
+			unidadAtacante.contarBaja();
+		}
+	}
     
-    public void recibirDanioPor(int unaCantidad) {
+    public void recibirDanioPor(int unaCantidad, Unidad unidadAtacante, Edificio edificioAtacado, Jugador unJugadorAtacado) {
     	if(unaCantidad < 0) {
     		throw new ValorInvalidoDeDanioError();
     	}
-    	if(this.vidaRestante >= unaCantidad) {
+    	if(this.vidaRestante > unaCantidad) {
     		this.vidaRestante -= unaCantidad;
     	}
-    	else if(this.vidaRestante < unaCantidad){
+    	else if(this.vidaRestante <= unaCantidad){
     		this.vidaRestante = 0;
+			unJugadorAtacado.eliminarEdificio(edificioAtacado);
     	}
     }
     
@@ -44,7 +62,4 @@ public class Vida {
     private int recuperacion(){
     	return ((int)(this.vidaMax * 0.05));
     }
-    
-    
-
 }

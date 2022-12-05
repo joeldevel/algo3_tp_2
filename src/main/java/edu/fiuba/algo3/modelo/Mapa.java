@@ -3,7 +3,15 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Areas.AreaEspacial;
 import edu.fiuba.algo3.modelo.Areas.AreaTerrestre;
 import edu.fiuba.algo3.modelo.Areas.Base;
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
+
 import java.util.ArrayList;
 
 public class Mapa {
@@ -15,6 +23,11 @@ public class Mapa {
     private Base baseJugadorUno, baseJugadorDos;
 
     private int baseJugadorUnoPosicionX, baseJugadorUnoPosicionY, baseJugadorDosPosicionX, baseJugadorDosPosicionY;
+    
+    private Moho moho;
+    private ArrayList<Pilon> pilones;
+    private ArrayList<Volcan> volcanes;
+    private ArrayList<NodoMineral> nodosMinerales;
 
     private ArrayList<Base> bases;
 
@@ -31,6 +44,11 @@ public class Mapa {
         this.bases = new ArrayList<Base>();
         this.areasTerrestres = new ArrayList<AreaTerrestre>();
         this.areasEspaciales = new ArrayList<AreaEspacial>();
+        
+        this.moho = new Moho();
+        this.pilones = new ArrayList<Pilon>();
+        this.volcanes = new ArrayList<Volcan>();
+        this.nodosMinerales = new ArrayList<NodoMineral>();
 
         this.baseJugadorUnoPosicionX = 0;
         this.baseJugadorUnoPosicionY = 0;
@@ -63,4 +81,95 @@ public class Mapa {
 
         return false;
     }
+    
+    public boolean verificarUbicacionLibre(Ubicacion unaUbicacion, Jugador unJugador, Jugador otroJugador) {
+    	return (!unJugador.tieneEdificioEnUbicacion(unaUbicacion) && 
+    			!otroJugador.tieneEdificioEnUbicacion(unaUbicacion));
+    }
+    
+   public boolean verificarConstruccionZerg(Ubicacion unaUbicacion, JugadorZerg jugadorZerg, JugadorProtoss jugadorProtoss) {
+	   return ( (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) && 
+				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
+   }
+   
+   public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion,JugadorZerg jugadorZerg,JugadorProtoss jugadorProtoss) {
+	   return ( (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) && 
+				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
+   }
+   
+   public boolean estaAfectadaPorPilonLaUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Pilon actual: pilones) {
+			if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+   
+   public boolean verificarVolcanEnUbicacion(Ubicacion unaUbicacion) {
+	   boolean verificado = false;
+	   for(Volcan actual: this.volcanes) {
+		   if(actual.estaEn(unaUbicacion)) {
+			   verificado = true;
+		   }
+	   }
+	   return verificado;
+   }
+   
+   public Volcan volcanEnUbicacion(Ubicacion unaUbicacion) {
+	   Volcan buscado = null;
+	   for(Volcan actual: this.volcanes) {
+		   if(actual.estaEn(unaUbicacion)) {
+			   buscado = actual;
+		   }
+	   }
+	   return buscado;
+   }
+   
+   public boolean verificarNodoMineralEnUbicacion(Ubicacion unaUbicacion) {
+	   boolean verificado = false;
+	   for(NodoMineral actual: this.nodosMinerales) {
+		   if(actual.estaEn(unaUbicacion)) {
+			   verificado = true;
+		   }
+	   }
+	   return verificado;
+   }
+   
+   public NodoMineral nodoEnUbicacion(Ubicacion unaUbicacion) {
+	   NodoMineral buscado = null;
+	   for(NodoMineral actual: this.nodosMinerales) {
+		   if(actual.estaEn(unaUbicacion)) {
+			   buscado = actual;
+		   }
+	   }
+	   return buscado;
+   }
+   
+   public boolean verificarUbicacionAfectadaPorMoho(Ubicacion unaUbicacion) {
+	   return (this.moho.estaAfectadaLaUbicacion(unaUbicacion));
+   }
+   
+   public void agregarOrigenAMoho(Ubicacion unaUbicacion) {
+	   this.moho.agregarOrigen(unaUbicacion);
+   }
+   
+   public void agregarPilon(Pilon unPilon) {
+	   this.pilones.add(unPilon);
+   }
+   
+   public void agregarVolcan(Ubicacion unaUbicacion) {
+	   if(!(this.verificarVolcanEnUbicacion(unaUbicacion))) {
+		   this.volcanes.add(new Volcan(unaUbicacion));
+	   }
+   }
+   
+   public void agregarNodoMineral(Ubicacion unaUbicacion) {
+	   if(!(this.verificarNodoMineralEnUbicacion(unaUbicacion))) {
+		   this.nodosMinerales.add(new NodoMineral(unaUbicacion));
+	   }
+   }
+   
+    
 }

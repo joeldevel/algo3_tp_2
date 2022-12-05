@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Recursos.Gas;
 
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanSinGasVespenoParaExtraerException;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaException;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanYaTieneUnaRefineriaDeGasConstruidaException;
@@ -8,10 +9,12 @@ public class Volcan {
 
 	private RefineriaDeGas refineria;
     private int cantidadDeGasVespenoDisponible;
+    private Ubicacion ubicacion;
 
-    public Volcan() {
+    public Volcan(Ubicacion unaUbicacion) {
     	this.refineria = new SinRefineria(this);
         this.cantidadDeGasVespenoDisponible = 5000;
+        this.ubicacion = unaUbicacion;
     }
 
     public void construirRefineriaDeGas(RefineriaDeGas unaRefineriaDeGas) {
@@ -45,5 +48,9 @@ public class Volcan {
 
         this.cantidadDeGasVespenoDisponible = this.cantidadDeGasVespenoDisponible - unaCantidadDeGasParaExtraer;
         return unaCantidadDeGasParaExtraer;
+    }
+    
+    public boolean estaEn(Ubicacion unaUbicacion) {
+    	return (this.ubicacion.esIgualA(unaUbicacion));
     }
 }

@@ -1,14 +1,20 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
-import edu.fiuba.algo3.modelo.Excepciones.CupoSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
+
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.SUMINISTRO_DRAGON;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.SUMINISTRO_SCOUT;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.SUMINISTRO_ZEALOT;
 
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.
@@ -18,106 +24,120 @@ public class JugadorProtoss implements Jugador {
 
     private static final int MAX_POBLACION = 200;
     private static final int CANT_MINERAL_INICIAL = 200;
-    private static final int CUPO_ZEALOT = 2;
-    private static final int CUPO_DRAGON = 3;
-    private static final int CUPO_SCOUT = 4;
 
     private String nombre;
     private String color;
-    private ArrayList<Raza> unidades;
-    private ArrayList<Raza> edificios;
     private Recursos recursos;
-    private int poblacion;
-    private int cupo;
+    private int suministro;
 
-    private int cantidadDePilones;
     private int cantidadDeZealots;
     private int cantidadDeDragones;
     private int cantidadDeScouts;
 
+    private ArrayList<Edificio> edificios;
+    private ArrayList<Unidad> unidades;
+
     public JugadorProtoss(String unNombre, String unColor) {
         this.nombre = unNombre;
         this.color = unColor;
-        this.unidades = new ArrayList<Raza>();
-        this.edificios = new ArrayList<Raza>();
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
-        this.poblacion = 0;
-        this.cupo = 0;
+        this.suministro = 0;
 
-        this.cantidadDePilones = 0;
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
+
+        this.edificios = new ArrayList<Edificio>();
+        this.unidades = new ArrayList<Unidad>();
     }
 
     // Constructor utilizado unicamente para simplificar pruebas.
     public JugadorProtoss(String unNombre, String unColor, Recursos unosRecursos) {
         this.nombre = unNombre;
         this.color = unColor;
-        this.unidades = new ArrayList<Raza>();
-        this.edificios = new ArrayList<Raza>();
         this.recursos = unosRecursos;
-        this.poblacion = 0;
-        this.cupo = 0;
+        this.suministro = 0;
 
-        this.cantidadDePilones = 0;
         this.cantidadDeZealots = 0;
         this.cantidadDeDragones = 0;
         this.cantidadDeScouts = 0;
+
+        this.edificios = new ArrayList<Edificio>();
+        this.unidades = new ArrayList<Unidad>();
+    }
+
+    @Override
+    public void guardar(int costoGas, int costoMineral) {
+        this.recursos.guardar(costoGas, costoMineral);
+    }
+
+    @Override
+    public void utilizar(int costoGas, int costoMineral) {
+        this.recursos.utilizar(costoGas, costoMineral);
+    }
+
+    @Override
+    public int obtenerGas() {
+        return this.recursos.obtenerGas();
+    }
+
+    @Override
+    public int obtenerMineral() {
+        return this.recursos.obtenerMineral();
     }
 
     public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
-        this.edificios.add(new NexoMineral(unNodo, this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new NexoMineral(unNodo, unaUbicacion, this));
     }
 
-    public void crearPilon(Ubicacion unaUbicacion) {
-        this.edificios.add(new Pilon(this.recursos, unaUbicacion));
-        this.cantidadDePilones++;
-        this.incrementarPoblacion(5);
+    public Pilon crearPilon(Ubicacion unaUbicacion) {
+        Pilon pilon = new Pilon(unaUbicacion, this);
+        this.edificios.add(pilon);
+        return pilon;
     }
 
     public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.edificios.add(new Asimilador(unVolcan, this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new Asimilador(unVolcan, unaUbicacion, this));
     }
 
     public void crearAcceso(Ubicacion unaUbicacion) {
-        this.edificios.add(new Acceso(this.recursos, unaUbicacion));
+        this.edificios.add(new Acceso(unaUbicacion, this));
     }
 
     public void crearPuertoEstelar(Ubicacion unaUbicacion) {
-        this.edificios.add(new PuertoEstelar(this.recursos)); // Falta refactorizar para recibir la ubicacion.
+        this.edificios.add(new PuertoEstelar(unaUbicacion, this));
     }
 
-    // Falta el llamado al constructor de la unidad y guardarla.
-    public void crearZealot() {
+    // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
+    public void crearZealot(Edificio unAcceso) {
 
-        if (!this.hayCupoDisponible(CUPO_ZEALOT)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+        if (!this.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeZealots++;
-        this.incrementarCupo(CUPO_ZEALOT);
+        this.incrementarSuministro(SUMINISTRO_ZEALOT);
     }
 
-    // Falta el llamado al constructor de la unidad y guardarla.
-    public void crearDragon() {
-        if (!this.hayCupoDisponible(CUPO_DRAGON)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+    // Falta enviar el mensaje al edificio Acceso que permite instanciar Dragon.
+    public void crearDragon(Edificio unAcceso) {
+        if (!this.haySuministroDisponible(SUMINISTRO_DRAGON)) {
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeDragones++;
-        this.incrementarCupo(CUPO_DRAGON);
+        this.incrementarSuministro(SUMINISTRO_DRAGON);
     }
 
-    // Falta el llamado al constructor de la unidad y guardarla.
-    public void crearScout() {
-        if (!this.hayCupoDisponible(CUPO_SCOUT)) {
-            throw new CupoSuperaElNumeroDePoblacionException();
+    // Falta enviar el mensaje al edificio PuertoEstelar que permite instanciar Scout.
+    public void crearScout(Edificio unPuertoEstelar) {
+        if (!this.haySuministroDisponible(SUMINISTRO_SCOUT)) {
+            throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
         this.cantidadDeScouts++;
-        this.incrementarCupo(CUPO_SCOUT);
+        this.incrementarSuministro(SUMINISTRO_SCOUT);
     }
 
     public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
@@ -133,32 +153,100 @@ public class JugadorProtoss implements Jugador {
         return 0;
     }
 
-    public int poblacion() {
-        return this.poblacion;
-    }
+    // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    public int calcularPoblacion() {
+        int poblacion = 0;
 
-    // El cupo debe ser siempre menor al valor de poblacion.
-    private void incrementarCupo(int unIncremento) {
-        if (this.cupo + unIncremento <= this.poblacion) {
-            this.cupo += unIncremento;
+        for (Raza edificio : this.edificios) {
+            poblacion += edificio.obtenerPoblacion();
         }
+
+        for (Unidad unidad : this.unidades) {
+            poblacion += unidad.obtenerPoblacion();
+        }
+
+        if (poblacion >= MAX_POBLACION) {
+            return MAX_POBLACION;
+        }
+
+        return poblacion;
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    private void incrementarPoblacion(int unIncremento) {
-        if (this.poblacion + unIncremento <= MAX_POBLACION) {
-            this.poblacion += unIncremento;
+    /*public int calcularSuministro() {
+        int cupo = 0;
+
+        for (Unidad unidad : this.unidades) {
+            cupo += unidad.obtenerSuministro();
+        }
+
+        return cupo;
+    }*/
+
+    // Este metodo sera reemplazado por el de arriba cuando se termine el codigo relacionado a la creacion de unidades.
+    public int calcularSuministro() {
+        return this.suministro;
+    }
+
+    // El cupo debe ser siempre menor al valor de poblacion.
+    private void incrementarSuministro(int unIncremento) {
+        if (this.suministro + unIncremento <= this.calcularPoblacion()) {
+            this.suministro += unIncremento;
         }
     }
 
-    private boolean hayCupoDisponible(int unCupo) {
-        return (this.cupo + unCupo <= this.poblacion);
+    private boolean haySuministroDisponible(int unSuministro) {
+        return (this.suministro + unSuministro <= this.calcularPoblacion());
     }
 
-    public void destruirPilon() {
-        if (this.cantidadDePilones > 0) {
-            this.cantidadDePilones--;
-            this.cupo-=5;
+    public void avanzarTurno() {
+
+        for (Edificio edificio : this.edificios) {
+            edificio.avanzarTurno(); // Edificios: Criadero expande el moho, Extractor recolecta gas, Zangano recolecta mineral, se recuperan, pasa el tiempo de construccion.
+        }
+
+        for (Unidad unidad : this.unidades) {
+            unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
         }
     }
+
+    @Override
+    public void eliminarEdificio(Edificio unEdificio) {
+        this.edificios.remove(unEdificio);
+    }
+
+    @Override
+    public void eliminarUnidad(Unidad unaUnidad) {
+        this.suministro -= unaUnidad.obtenerSuministro();
+        this.unidades.remove(unaUnidad);
+    }
+    
+    @Override
+	public boolean tieneEdificioEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+	
+	public void agregarEdificio(Edificio unEdificio) {
+		this.edificios.add(unEdificio);
+	}
+	
+	public Recursos obtenerRecursos() {
+		return (this.recursos);
+	}
+	
+	public boolean verificarEdificio(String unEdificio) {
+		boolean verificado = false;
+		for(Edificio actual: this.edificios) {
+			if(actual.esUn(unEdificio)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
 }

@@ -2,36 +2,42 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class NexoMineral extends EdificioProtoss implements Minero {
 
+    private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 50;
 	private final int COSTO_GAS = 0;
 	
 	private int cantidadRecolectable;
-    private int cantidadRecolectada;
     private NodoMineral nodo;
 
 	
-    public NexoMineral(NodoMineral unNodo, Recursos recursosJugador) {
-        super(new Tiempo(-4),new Vida(250), new Escudo(250), new Ubicacion());
+    public NexoMineral(NodoMineral unNodo, Ubicacion unaubicacion, Jugador unJugador) {
+        super(new Tiempo(-4), new Vida(250), new Escudo(250), unaubicacion, unJugador,"NexoMineral");
         
-        recursosJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
         this.cantidadRecolectable = 10;
-        this.cantidadRecolectada = 0;
         this.nodo = unNodo;
 
         unNodo.construirRecolectorDeMineral(this);
     }
+
+    @Override
+    public int obtenerPoblacion() {
+        return POBLACION;
+    }
     
     @Override
     public void ejecutaOperable() {
-    	this.cantidadRecolectada += this.recolectarMineralDe(this.nodo);
+    	this.jugador.guardar(0, this.recolectarMineralDe(this.nodo));
     }
     
 	@Override
@@ -41,9 +47,7 @@ public class NexoMineral extends EdificioProtoss implements Minero {
     
 	@Override
     public int obtenerMineral() {
-		int recolectado = this.cantidadRecolectada;
-        this.cantidadRecolectada = 0;
-        return recolectado;
+		return this.jugador.obtenerMineral();
     }
 
 	@Override
@@ -53,12 +57,12 @@ public class NexoMineral extends EdificioProtoss implements Minero {
 	}
 
     @Override
-    public void atacar(Atacable unAtacable) {
-        // No hace nada
+    public boolean compararSuperficie(String unTipoDeSuperficie) {
+        return this.superficie.compararTipos(unTipoDeSuperficie);
     }
 
     @Override
-    public boolean compararSuperficie(String unTipoDeSuperficie) {
-        return this.superficie.compararTipos(unTipoDeSuperficie);
+    public void serRevelado() {
+        // No hace nada.
     }
 }

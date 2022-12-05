@@ -9,24 +9,17 @@ public class Moho {
  
 	private ArrayList<Origen> origenes;
 	private ArrayList<Ubicacion> ubicacionesAfectadas;
-	private ArrayList<Criadero> criaderos;
 	
 	public Moho() {
 		this.origenes = new ArrayList<Origen>();
 		this.ubicacionesAfectadas = new ArrayList<Ubicacion>();
-		this.criaderos = new ArrayList<Criadero>();
 	}
 	
 	public boolean tieneUbicacionesAfectadas() {
 		return (! (this.ubicacionesAfectadas.isEmpty()));
 	}
 	
-	public void agregarCriadero(Criadero unCriadero) {
-		this.criaderos.add(unCriadero);
-		this.agregarOrigen(unCriadero.ubicacion());
-	}
-	
-	private void agregarOrigen(Ubicacion unaUbicacion) {
+	public void agregarOrigen(Ubicacion unaUbicacion) {
 		Origen nuevoOrigen = new Origen(unaUbicacion,new Tiempo(0),5);
 		origenes.add(nuevoOrigen);
 		this.actualizarUbicacionesAfectadas();
@@ -71,29 +64,10 @@ public class Moho {
 	}
 	
 	public void avanzarTurno() {
-		if(!(this.criaderos.isEmpty())) {
-			for(Origen actual: this.origenes) {
-				actual.avanzarTurno();
-			}
-			this.actualizarUbicacionesAfectadas();			
+		for(Origen actual: this.origenes) {
+			actual.avanzarTurno();
 		}
+		this.actualizarUbicacionesAfectadas();			
 	}
 	
-	public void eliminarCriaderoEnUbicacion(Ubicacion unaUbicacion) {
-		int posicion = 0;
-		if(!(this.criaderos.isEmpty())) {
-			for(Criadero actual: this.criaderos) {
-				if(unaUbicacion.esIgualA(actual.ubicacion())) {
-					this.criaderos.indexOf(actual);
-				}
-			}
-		}
-		this.criaderos.remove(posicion);
-		this.origenes.remove(posicion);
-	}
-	
-	public int contarCriaderos() {
-		return (this.criaderos.size());
-	}
-
 }
