@@ -22,7 +22,7 @@ public class Espiral extends EdificioZerg {
     private ArrayList<Unidad> mutaliscos;
 	
 	public Espiral(Ubicacion unaUbicacion, Jugador unJugador){
-        super(new Tiempo(-10), new Vida(1300), unaUbicacion, unJugador);
+        super(new Tiempo(-10), new Vida(1300), unaUbicacion, unJugador,"Espiral");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

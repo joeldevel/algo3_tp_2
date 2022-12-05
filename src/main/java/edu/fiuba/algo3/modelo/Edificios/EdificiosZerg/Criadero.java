@@ -28,7 +28,7 @@ public class Criadero extends EdificioZerg {
 	private ArrayList<Unidad> zanganos;
 		
 	public Criadero(Ubicacion unaUbicacion, Jugador unJugador) {
-		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador);
+		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador,"Criadero");
 		
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 

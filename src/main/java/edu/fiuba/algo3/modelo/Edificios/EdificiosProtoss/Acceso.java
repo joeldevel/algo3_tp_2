@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
@@ -27,7 +28,7 @@ public class Acceso extends EdificioProtoss {
 	private ArrayList<Unidad> dragonesProductivo;
 	
     public Acceso(Ubicacion unaUbicacion, Jugador unJugador) {
-		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador);
+		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador,"Acceso");
 		this.zealotsPedido = new ArrayList<Unidad>();
 		this.dragonesPedido = new ArrayList<Unidad>();
 		this.zealotsProductivo = new ArrayList<Unidad>();
@@ -43,8 +44,10 @@ public class Acceso extends EdificioProtoss {
 
 	@Override
 	public void ejecutaOperable() {
-		this.crearZealot();
-		this.crearDragon();
+		if(this.estaEnergizado()) {
+			this.crearZealot();
+			this.crearDragon();			
+		}
 	}
 	
 	private void crearZealot() {
@@ -62,12 +65,18 @@ public class Acceso extends EdificioProtoss {
 	}
 	
 	public void transportarZealots(Recursos recursosDelJugador) {
+		if(! (this.estaEnergizado())) {
+			throw new EdificioNoEnergizadoError();
+		}
 		/* hay que verificar que el jugador tenga los recursos, una vez verificado se pasa
 		 * de pedido a produccion, y cuando pase el tiempo de creacion el jugador puede
 		 * puede obtener la unidad*/
 	}
 	
 	public void transportarDragones(Recursos recursosDelJugador) {
+		if(! (this.estaEnergizado())) {
+			throw new EdificioNoEnergizadoError();
+		}
 		/* hay que verificar que el jugador tenga los recursos, una vez verificado se pasa
 		 * de pedido a produccion, y cuando pase el tiempo de creacion el jugador puede
 		 * puede obtener la unidad*/

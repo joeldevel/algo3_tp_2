@@ -10,13 +10,15 @@ public abstract class Edificio extends Raza implements Recuperable{
 	protected Jugador jugador;
 	protected Superficie superficie;
 	protected EstadoOperativo estado;
+	protected String identificador;
 	
-	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion, Jugador unJugador) {
+	public Edificio(Tiempo unTiempo, Vida unaVida, Ubicacion unaUbicacion, Jugador unJugador,String unIdentificador) {
 		super(unTiempo, unaUbicacion);
 		this.jugador = unJugador;
 		this.vida = unaVida;
 		this.superficie = new Superficie("Tierra");
 		this.estado = new EnConstruccion(this);
+		this.identificador = unIdentificador;
 	}
 	
 	public void ejecutaEnConstruccion() {
@@ -46,6 +48,17 @@ public abstract class Edificio extends Raza implements Recuperable{
     public Superficie obtenerSuperficie(){
    		return (this.superficie);
    	}
+    
+    public int distanciaCon(Edificio otroEdificio) {
+    	return (this.ubicacion.distanciaCon(otroEdificio.ubicacion()));
+    }
+    
+    public boolean estaEn(Ubicacion unaUbicacion) {
+    	return (this.ubicacion.esIgualA(unaUbicacion));
+    }
 	
-
+    public boolean esUn(String unEdificio) {
+    	return (this.identificador == unEdificio);
+    }
+	
 }

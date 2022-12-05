@@ -15,9 +15,9 @@ public class Base {
     private Ubicacion ubicacion;
 
     public Base(int x, int y) {
-        this.volcan = new Volcan();
+        this.volcan = new Volcan(ubicacion);
         this.ubicacion = new Ubicacion(x, y);
-        nodosMinerales = new ArrayList<NodoMineral>() {{ add(new NodoMineral()); add(new NodoMineral()); add(new NodoMineral());}};
+        nodosMinerales = new ArrayList<NodoMineral>() {{ add(new NodoMineral(ubicacion)); add(new NodoMineral(ubicacion)); add(new NodoMineral(ubicacion));}};
     }
 
     public int obtenerX() {

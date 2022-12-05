@@ -23,7 +23,7 @@ public class Guarida extends EdificioZerg {
     
 	
     public Guarida(Ubicacion unaUbicacion, Jugador unJugador){
-        super(new Tiempo(-12), new Vida(1250), unaUbicacion, unJugador);
+        super(new Tiempo(-12), new Vida(1250), unaUbicacion, unJugador,"Guarida");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

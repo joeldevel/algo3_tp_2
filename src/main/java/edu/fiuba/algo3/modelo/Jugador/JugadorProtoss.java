@@ -220,4 +220,33 @@ public class JugadorProtoss implements Jugador {
         this.suministro -= unaUnidad.obtenerSuministro();
         this.unidades.remove(unaUnidad);
     }
+    
+    @Override
+	public boolean tieneEdificioEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+	
+	public void agregarEdificio(Edificio unEdificio) {
+		this.edificios.add(unEdificio);
+	}
+	
+	public Recursos obtenerRecursos() {
+		return (this.recursos);
+	}
+	
+	public boolean verificarEdificio(String unEdificio) {
+		boolean verificado = false;
+		for(Edificio actual: this.edificios) {
+			if(actual.esUn(unEdificio)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
 }

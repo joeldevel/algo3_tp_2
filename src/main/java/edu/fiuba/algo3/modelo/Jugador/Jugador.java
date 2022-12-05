@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
+import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
@@ -10,5 +11,6 @@ public interface Jugador {
     int obtenerMineral();
     void eliminarEdificio(Edificio unEdificio);
     void eliminarUnidad(Unidad unaUnidad);
+    public boolean tieneEdificioEnUbicacion(Ubicacion unaUbicacion);
 }
 

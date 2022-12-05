@@ -25,7 +25,7 @@ public class Pilon extends EdificioProtoss {
 	 * que tenga los edificios que tiene*/
 
     public Pilon(Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(new Tiempo(-5), new Vida(300), new Escudo(300), unaUbicacion, unJugador);
+    	super(new Tiempo(-5), new Vida(300), new Escudo(300), unaUbicacion, unJugador,"Pilon");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
@@ -64,5 +64,9 @@ public class Pilon extends EdificioProtoss {
 	@Override
 	public void serRevelado() {
 		// No hace nada.
+	}
+	
+	public void agregarEdificio(EdificioProtoss unEdificio) {
+		this.edificios.add(unEdificio);
 	}
 }

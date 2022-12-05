@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -16,14 +17,16 @@ public class PuertoEstelar extends EdificioProtoss {
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 150;
 	
-	private ArrayList<Unidad> scouts;
+	private ArrayList<Unidad> scoutsPedido;
+	private ArrayList<Unidad> scoutsProductivo;
 	
     public PuertoEstelar(Ubicacion unaUbicacion, Jugador unJugador){
-        super(new Tiempo(-10), new Vida(600), new Escudo(600), unaUbicacion, unJugador);
+        super(new Tiempo(-10), new Vida(600), new Escudo(600), unaUbicacion, unJugador,"PuertoEstelar");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
-        this.scouts = new ArrayList<Unidad>();
+        this.scoutsPedido = new ArrayList<Unidad>();
+        this.scoutsProductivo = new ArrayList<Unidad>();
     }
 
     @Override
@@ -33,17 +36,27 @@ public class PuertoEstelar extends EdificioProtoss {
     
     @Override
     public void ejecutaOperable() {
-    	// TODO Auto-generated method stub
-    	
+    	if(this.estaEnergizado()) {
+    		this.crearScout();
+    	}
+    }
+    
+    private void crearScout() {
+    	while(this.scoutsPedido.size() < 5) {
+    		this.scoutsPedido.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.ubicacion,this.jugador)));
+    	}
     }
    
     public void transportarScout() {
+    	if(! (this.estaEnergizado())) {
+    		throw new EdificioNoEnergizadoError();
+    	}
         /* aca debe ir la verificacion de requisitos*/
     	//this.scouts.add(new Unidad(new Scout()));
     }
 	
-	public ArrayList<Unidad> obtenerScouts(){
-		return (this.scouts);
+    public ArrayList<Unidad> obtenerScouts(){
+		return (this.scoutsProductivo);
 	}
 
     @Override

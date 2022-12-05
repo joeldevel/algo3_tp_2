@@ -18,7 +18,7 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
     private Volcan volcan;
     
     public Asimilador(Volcan unVolcan, Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(new Tiempo(-6), new Vida(450), new Escudo(450), unaUbicacion, unJugador);
+    	super(new Tiempo(-6), new Vida(450), new Escudo(450), unaUbicacion, unJugador,"Asimilador");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	

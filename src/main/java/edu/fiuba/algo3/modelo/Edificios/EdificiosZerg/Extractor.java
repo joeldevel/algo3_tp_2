@@ -24,7 +24,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     private ArrayList<Unidad> zanganos;
     
     public Extractor(Volcan unVolcan, Ubicacion unaUbicacion, Jugador unJugador){
-    	super(new Tiempo(-6), new Vida(750), unaUbicacion, unJugador);
+    	super(new Tiempo(-6), new Vida(750), unaUbicacion, unJugador,"Extractor");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	

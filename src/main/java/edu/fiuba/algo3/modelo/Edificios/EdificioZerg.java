@@ -8,8 +8,8 @@ import edu.fiuba.algo3.modelo.Vida;
 
 public abstract class EdificioZerg extends Edificio {
 
-    protected EdificioZerg(Tiempo unTiempo,Vida unaVida, Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(unTiempo, unaVida, unaUbicacion, unJugador);
+    protected EdificioZerg(Tiempo unTiempo,Vida unaVida, Ubicacion unaUbicacion, Jugador unJugador,String unIdentificador) {
+    	super(unTiempo, unaVida, unaUbicacion, unJugador,unIdentificador);
     }
     
     @Override

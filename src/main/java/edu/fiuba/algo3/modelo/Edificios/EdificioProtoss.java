@@ -14,8 +14,8 @@ public abstract class EdificioProtoss extends Edificio {
     protected Escudo escudo;
     protected Energia energia;
        
-    protected EdificioProtoss(Tiempo unTiempo,Vida unaVida,Escudo unEscudo,Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(unTiempo, unaVida, unaUbicacion, unJugador);
+    protected EdificioProtoss(Tiempo unTiempo,Vida unaVida,Escudo unEscudo,Ubicacion unaUbicacion, Jugador unJugador, String unIdentificador) {
+    	super(unTiempo, unaVida, unaUbicacion, unJugador, unIdentificador);
     	this.escudo = unEscudo;
     	this.energia = new Energia();
     }
@@ -40,6 +40,10 @@ public abstract class EdificioProtoss extends Edificio {
 
     public void energizar() {
     	this.energia.prenderEnergia();
+    }
+    
+    public boolean estaEnergizado() {
+    	return (this.energia.tieneEnergia());
     }
     
     
