@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.vistas.PantallaDeInicio;
 import edu.fiuba.algo3.vistas.PantallaDeJuego;
 import edu.fiuba.algo3.vistas.PantallaMapa;
@@ -15,14 +16,18 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
+    AlgoStar juego;
+
     @Override
     public void start(Stage stage) {
+        this.juego = new AlgoStar();
+
         stage.setFullScreen(true);
         PantallaDeJuego pantallaDeJuego = new PantallaDeJuego();
-        PantallaNombreJugadores nombreJugadores= new PantallaNombreJugadores(stage, pantallaDeJuego.getScene());
+        PantallaNombreJugadores nombreJugadores = new PantallaNombreJugadores(juego, stage, pantallaDeJuego.getScene());
         Scene scene2 = nombreJugadores.getScene();
 
-        PantallaDeInicio inicio  = new PantallaDeInicio(stage, scene2);
+        PantallaDeInicio inicio = new PantallaDeInicio(stage, scene2);
 
         stage.setScene(inicio.getScene());
 
