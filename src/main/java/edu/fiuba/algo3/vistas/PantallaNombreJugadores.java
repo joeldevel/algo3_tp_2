@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.modelo.AlgoStar;
+import edu.fiuba.algo3.vistas.eventos.CrearJugadorHandler;
+import edu.fiuba.algo3.vistas.eventos.IniciarPartidaHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -46,7 +49,7 @@ public class PantallaNombreJugadores {
 
     private Scene scene;
 
-    public PantallaNombreJugadores(Stage stage, Scene proxima) {
+    public PantallaNombreJugadores(AlgoStar juego, Stage stage, Scene proxima) {
         this.screenRoot = new FlowPane();
         this.selectPlayerRoot = new GridPane();
         this.selectPlayersPane = new HBox();
@@ -145,11 +148,15 @@ public class PantallaNombreJugadores {
         this.scene = new Scene(screenRoot);
         this.scene.getStylesheets().add("file:src/main/resources/style.css");
 
-        this.continuar.setOnAction(e -> {
-            System.out.println("yendo al mapa");
-            stage.setScene(proxima);
+        // eventos
+        CrearJugadorHandler crearJugador1Handler = new CrearJugadorHandler(juego, jugador1Listo, textFieldJ1);
+        CrearJugadorHandler crearJugador2Handler = new CrearJugadorHandler(juego, jugador2Listo, textFieldJ2);
+        jugador1Listo.setOnAction(crearJugador1Handler);
+        jugador2Listo.setOnAction(crearJugador2Handler);
 
-        });
+        IniciarPartidaHandler iniciarPartidaHandler = new IniciarPartidaHandler(stage, proxima);
+        this.continuar.setOnAction(iniciarPartidaHandler);
+
     }
 
     public Scene getScene() {
