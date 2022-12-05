@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.modelo.AlgoStar;
+import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.vistas.eventos.CrearJugadorHandler;
 import edu.fiuba.algo3.vistas.eventos.IniciarPartidaHandler;
 import javafx.geometry.Pos;
