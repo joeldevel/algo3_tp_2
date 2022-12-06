@@ -68,6 +68,21 @@ public class JugadorProtoss implements Jugador {
     }
 
     @Override
+    public boolean compararNombres(String otroNombre) {
+        return (this.nombre.equals(otroNombre));
+    }
+
+    @Override
+    public boolean compararColores(String otroColor) {
+        return (this.color.equals(otroColor));
+    }
+
+    @Override
+    public boolean compararRazas(String otraRaza) {
+        return (otraRaza.equals("Protoss"));
+    }
+
+    @Override
     public void guardar(int costoGas, int costoMineral) {
         this.recursos.guardar(costoGas, costoMineral);
     }
