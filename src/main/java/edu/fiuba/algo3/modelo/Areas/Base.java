@@ -14,10 +14,13 @@ public class Base {
 
     private Ubicacion ubicacion;
 
+    boolean estaOcupada;
+
     public Base(int x, int y) {
         this.volcan = new Volcan(ubicacion);
         this.ubicacion = new Ubicacion(x, y);
         nodosMinerales = new ArrayList<NodoMineral>() {{ add(new NodoMineral(ubicacion)); add(new NodoMineral(ubicacion)); add(new NodoMineral(ubicacion));}};
+        this.estaOcupada = false;
     }
 
     public int obtenerX() {
@@ -26,5 +29,13 @@ public class Base {
 
     public int obtenerY() {
         return this.ubicacion.obtenerY();
+    }
+
+    public void ocupar() {
+        this.estaOcupada = true;
+    }
+
+    public boolean estaOcupada() {
+        return (this.estaOcupada);
     }
 }
