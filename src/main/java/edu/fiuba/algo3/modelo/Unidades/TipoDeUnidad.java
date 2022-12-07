@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.modelo.Unidades;
 
-import edu.fiuba.algo3.modelo.Atacable;
-import edu.fiuba.algo3.modelo.Atacante;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
-import edu.fiuba.algo3.modelo.Revelable;
-import edu.fiuba.algo3.modelo.Superficie;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
 public interface TipoDeUnidad {
@@ -43,4 +40,6 @@ public interface TipoDeUnidad {
 	void serRevelado();
 
 	void contarBaja();
+
+	void moverse(Ubicacion unaUbicacion);
 }

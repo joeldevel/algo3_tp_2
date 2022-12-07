@@ -5,10 +5,14 @@ import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Mapa;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.CONSTRUCCION_ZEALOT;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 import org.junit.jupiter.api.Test;
 
 public class MapaTest {
@@ -172,5 +176,28 @@ public class MapaTest {
 
         // Assert
         assertFalse(resultado);
+    }
+
+    @Test
+    void test13MuevoUnaUnidadAUnMapaDeTresBasesYLaNuevaUbicacionEstaOcupada() {
+        // Arrange
+        Mapa mapa = new Mapa( 3);
+        Ubicacion ubicacion = new Ubicacion(0, 0);
+        Ubicacion nuevaUbicacion = new Ubicacion (1, 1);
+        Zealot tipoZealot = new Zealot(jugadorProtoss);
+        Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion, tipoZealot);
+        zealot.avanzarTurno(4);
+
+        // Act
+        mapa.ocuparUbicacion(ubicacion);
+
+        // Esto podría refactorizarse, tal vez el mapa pasarse como parámetro al zealot?
+        mapa.desocuparUbicacion(ubicacion);
+        zealot.moverse(nuevaUbicacion);
+        mapa.ocuparUbicacion(nuevaUbicacion);
+        boolean resultado = mapa.ubicacionOcupadaEn(1, 1);
+
+        // Assert
+        assertTrue(resultado);
     }
 }

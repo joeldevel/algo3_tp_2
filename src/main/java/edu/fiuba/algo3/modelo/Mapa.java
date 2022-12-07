@@ -126,6 +126,27 @@ public class Mapa {
         }
     }
 
+    // Refactorizar el código repetido.
+    public void desocuparUbicacion(Ubicacion unaUbicacion) {
+        for (Base base : bases) {
+            if (base.obtenerX() == unaUbicacion.obtenerX() && base.obtenerY() == unaUbicacion.obtenerX()) {
+                base.desocupar();
+            }
+        }
+
+        for (AreaEspacial areaEspacial : areasEspaciales) {
+            if (areaEspacial.obtenerX() == unaUbicacion.obtenerX() && areaEspacial.obtenerY() == unaUbicacion.obtenerX()) {
+                areaEspacial.desocupar();
+            }
+        }
+
+        for (AreaTerrestre areaTerrestre : areasTerrestres) {
+            if (areaTerrestre.obtenerX() == unaUbicacion.obtenerX() && areaTerrestre.obtenerY() == unaUbicacion.obtenerX()) {
+                areaTerrestre.desocupar();
+            }
+        }
+    }
+
     public boolean ubicacionOcupadaEn(int x, int y) {
         if (!existeUbicacionEn(x, y)) {
             return false;

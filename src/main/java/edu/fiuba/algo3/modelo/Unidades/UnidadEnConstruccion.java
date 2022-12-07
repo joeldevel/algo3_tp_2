@@ -97,4 +97,8 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     public void contarBaja() {
         throw new UnidadEnConstruccionException();
     }
+
+    public void moverse(Ubicacion unaUbicacion) {
+        throw new UnidadEnConstruccionException();
+    }
 }

@@ -158,4 +158,9 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	public void contarBaja() {
 		// No hace nada.
 	}
+
+	@Override
+	public void moverse(Ubicacion unaUbicacion) {
+		this.ubicacion.cambiarUbicacion(unaUbicacion.obtenerX(), unaUbicacion.obtenerY());
+	}
 }

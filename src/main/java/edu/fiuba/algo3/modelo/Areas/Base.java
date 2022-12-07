@@ -35,6 +35,10 @@ public class Base {
         this.estaOcupada = true;
     }
 
+    public void desocupar() {
+        this.estaOcupada = false;
+    }
+
     public boolean estaOcupada() {
         return (this.estaOcupada);
     }

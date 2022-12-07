@@ -169,4 +169,9 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	public void contarBaja() {
 		cantidadDeBajas += 1;
 	}
+
+	@Override
+	public void moverse(Ubicacion unaUbicacion) {
+		this.ubicacion.cambiarUbicacion(unaUbicacion.obtenerX(), unaUbicacion.obtenerY());
+	}
 }

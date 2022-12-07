@@ -145,4 +145,9 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	public void contarBaja() {
 		// No hace nada.
 	}
+
+	@Override
+	public void moverse(Ubicacion unaUbicacion) {
+		this.ubicacion.cambiarUbicacion(unaUbicacion.obtenerX(), unaUbicacion.obtenerY());
+	}
 }

@@ -34,5 +34,8 @@ public class Ubicacion {
 		return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
 	}
 
-    
+    public void cambiarUbicacion(int x, int y) {
+		this.posX = x;
+		this.posY = y;
+	}
 }

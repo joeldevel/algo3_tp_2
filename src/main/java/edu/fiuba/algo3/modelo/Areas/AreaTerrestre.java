@@ -25,6 +25,10 @@ public class AreaTerrestre {
         this.estaOcupada = true;
     }
 
+    public void desocupar() {
+        this.estaOcupada = false;
+    }
+
     public boolean estaOcupada() {
         return (this.estaOcupada);
     }
