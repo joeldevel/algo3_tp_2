@@ -11,7 +11,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PantallaBienvenidos extends VBox { // 20:00
@@ -44,6 +43,7 @@ public class PantallaBienvenidos extends VBox { // 20:00
 
         Button botonComenzar = new Button();
         botonComenzar.setText("Comenzar AlgoStar");
+        botonComenzar.getStyleClass().add("btn");
 
         BotonComenzarEventHandler botonComenzarEventHandler = new BotonComenzarEventHandler(stage, proximaEscena);
         botonComenzar.setOnAction(botonComenzarEventHandler);

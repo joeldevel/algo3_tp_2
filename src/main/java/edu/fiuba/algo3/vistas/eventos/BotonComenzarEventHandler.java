@@ -19,6 +19,6 @@ public class BotonComenzarEventHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         stage.setScene(proximaExcena);
         stage.setFullScreenExitHint("");
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
     }
 }

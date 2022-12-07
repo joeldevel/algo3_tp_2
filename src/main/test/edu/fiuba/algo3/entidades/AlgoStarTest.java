@@ -38,4 +38,46 @@ public class AlgoStarTest {
         // Assert
         assertEquals(true, jugador.compararNombres(jugadorEsperado));
     }
+
+    @Test
+    public void test03SeIniciaAlgoStarYSeAvanzaElTurnoDosVecesYElTurnoLoTieneElJugadorIndicado() {
+        // Arrange
+        AlgoStar juego = new AlgoStar();
+        juego.crearJugador("JugadorZerg", "Azul", "Zerg");
+        juego.crearJugador("JugadorProtoss", "Rojo", "Protoss");
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        String jugadorEsperado = "JugadorZerg";
+
+        // Act
+        Jugador jugador = juego.obtenerJugadorTurno();
+
+        // Assert
+        assertEquals(true, jugador.compararNombres(jugadorEsperado));
+    }
+
+    @Test
+    public void test04SeIniciaAlgoStarYSeAvanzaElTurnoDiezVecesYElTurnoLoTieneElJugadorIndicado() {
+        // Arrange
+        AlgoStar juego = new AlgoStar();
+        juego.crearJugador("JugadorZerg", "Azul", "Zerg");
+        juego.crearJugador("JugadorProtoss", "Rojo", "Protoss");
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        String jugadorEsperado = "JugadorZerg";
+
+        // Act
+        Jugador jugador = juego.obtenerJugadorTurno();
+
+        // Assert
+        assertEquals(true, jugador.compararNombres(jugadorEsperado));
+    }
 }

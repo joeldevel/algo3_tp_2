@@ -27,10 +27,18 @@ public class AlgoStarIniciado implements AlgoStarEstado {
     public void avanzarTurno() {
 
         // Iteramos los jugadores y como se avanza el turno seteamos al jugador correspondiente.
-        for(Jugador jugador: this.jugadores) {
+        /*for(Jugador jugador: this.jugadores) {
             if(!jugador.compararRazas(this.jugadorTurno.obtenerRaza())) {
+                System.out.println("Entro");
                 this.setJugador(jugador);
             }
+        }*/
+
+        if(this.jugadores.get(0) == this.jugadorTurno) {
+            this.setJugador(this.jugadores.get(1));
+        }
+        else {
+            this.setJugador(this.jugadores.get(0));
         }
     }
 }

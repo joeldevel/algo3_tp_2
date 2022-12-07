@@ -32,7 +32,7 @@ public class AlgoStar {
         //this.colorJugador2 = null;
 
         this.jugadores = new ArrayList<Jugador>();
-        this.estado = null;
+        this.setComportamientoEstado(new AlgoStarNoIniciado());
     }
 
     public Jugador obtenerJugadorTurno() {

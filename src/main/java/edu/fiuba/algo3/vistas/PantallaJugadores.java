@@ -9,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -102,9 +101,11 @@ public class PantallaJugadores extends VBox { // 20:00
 
         Button botonValidarJ1 = new Button();
         botonValidarJ1.setText("Validar informacion");
+        botonValidarJ1.getStyleClass().add("btn");
 
         Button botonValidarJ2 = new Button();
         botonValidarJ2.setText("Validar informacion");
+        botonValidarJ2.getStyleClass().add("btn");
 
         // Contenedores por jugador
 
@@ -133,6 +134,7 @@ public class PantallaJugadores extends VBox { // 20:00
 
         Button botonContinuar = new Button();
         botonContinuar.setText("Continuar");
+        botonContinuar.getStyleClass().add("btn");
 
         BotonComenzarEventHandler botonComenzarEventHandler = new BotonComenzarEventHandler(stage, proximaEscena);
         botonContinuar.setOnAction(botonComenzarEventHandler);
@@ -142,7 +144,7 @@ public class PantallaJugadores extends VBox { // 20:00
                 //proximaPantalla.setMenu(algoStar);
                 stage.setScene(proximaEscena);
                 stage.setFullScreenExitHint("");
-                stage.setFullScreen(false);
+                stage.setFullScreen(true);
             }
         });
 
