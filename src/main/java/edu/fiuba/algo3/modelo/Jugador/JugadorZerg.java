@@ -87,6 +87,11 @@ public class JugadorZerg implements Jugador {
     }
 
     @Override
+    public String obtenerRaza() {
+        return "Zerg";
+    }
+
+    @Override
     public boolean compararNombres(String otroNombre) {
         return (this.nombre.equals(otroNombre));
     }

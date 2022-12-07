@@ -32,7 +32,11 @@ public class AlgoStar {
         //this.colorJugador2 = null;
 
         this.jugadores = new ArrayList<Jugador>();
-        this.setComportamientoEstado(new AlgoStarIniciado());
+        this.estado = null;
+    }
+
+    public Jugador obtenerJugadorTurno() {
+        return (this.estado.obtenerJugadorTurno());
     }
 
     public void crearJugador(String unNombre, String unColor, String unaRaza) {
@@ -44,6 +48,8 @@ public class AlgoStar {
         else if(unaRaza.equals("Protoss")) {
             this.jugadores.add(new JugadorProtoss(unNombre, unColor));
         }
+
+        this.setComportamientoEstado(new AlgoStarIniciado(jugadores));
     }
 
     public boolean validarNombre(String unNombre) {

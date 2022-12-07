@@ -68,6 +68,11 @@ public class JugadorProtoss implements Jugador {
     }
 
     @Override
+    public String obtenerRaza() {
+        return "Protoss";
+    }
+
+    @Override
     public boolean compararNombres(String otroNombre) {
         return (this.nombre.equals(otroNombre));
     }
