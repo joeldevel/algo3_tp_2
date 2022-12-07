@@ -61,6 +61,7 @@ public class PantallaJugadores extends VBox { // 20:00
 
         TextField textoNombreJ1 = new TextField();
         textoNombreJ1.setPromptText("Ingrese el nombre deseado");
+        textoNombreJ1.getStyleClass().add("btn");
 
         Label etiquetaNombreJ1 = new Label();
         etiquetaNombreJ1.setText("Ingrese el nombre del Jugador 1");
@@ -81,6 +82,7 @@ public class PantallaJugadores extends VBox { // 20:00
 
         TextField textoNombreJ2 = new TextField();
         textoNombreJ2.setPromptText("Ingrese el nombre deseado");
+        textoNombreJ2.getStyleClass().add("btn");
 
         Label etiquetaNombreJ2 = new Label();
         etiquetaNombreJ2.setText("Ingrese el nombre del Jugador 2");
