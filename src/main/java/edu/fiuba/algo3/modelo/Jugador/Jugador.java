@@ -18,5 +18,6 @@ public interface Jugador {
     void eliminarEdificio(Edificio unEdificio);
     void eliminarUnidad(Unidad unaUnidad);
     public boolean tieneEdificioEnUbicacion(Ubicacion unaUbicacion);
+    String getNombre();
 }
 
