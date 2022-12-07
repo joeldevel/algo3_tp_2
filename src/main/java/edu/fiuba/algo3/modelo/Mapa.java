@@ -81,6 +81,78 @@ public class Mapa {
 
         return false;
     }
+
+    public boolean existeUbicacionEn(int x, int y) {
+        boolean existencia = false;
+
+        for (Base base : bases) {
+            if (base.obtenerX() == x && base.obtenerY() == y) {
+                existencia = true;
+            }
+        }
+
+        for (AreaEspacial areaEspacial : areasEspaciales) {
+            if (areaEspacial.obtenerX() == x && areaEspacial.obtenerY() == y) {
+                existencia = true;
+            }
+        }
+
+        for (AreaTerrestre areaTerrestre : areasTerrestres) {
+            if (areaTerrestre.obtenerX() == x && areaTerrestre.obtenerY() == y) {
+                existencia = true;
+            }
+        }
+
+        return existencia;
+    }
+
+    public void ocuparUbicacion(Ubicacion unaUbicacion) {
+        for (Base base : bases) {
+            if (base.obtenerX() == unaUbicacion.obtenerX() && base.obtenerY() == unaUbicacion.obtenerX()) {
+                base.ocupar();
+            }
+        }
+
+        for (AreaEspacial areaEspacial : areasEspaciales) {
+            if (areaEspacial.obtenerX() == unaUbicacion.obtenerX() && areaEspacial.obtenerY() == unaUbicacion.obtenerX()) {
+                areaEspacial.ocupar();
+            }
+        }
+
+        for (AreaTerrestre areaTerrestre : areasTerrestres) {
+            if (areaTerrestre.obtenerX() == unaUbicacion.obtenerX() && areaTerrestre.obtenerY() == unaUbicacion.obtenerX()) {
+                areaTerrestre.ocupar();
+            }
+        }
+    }
+
+    public boolean ubicacionOcupadaEn(int x, int y) {
+        if (!existeUbicacionEn(x, y)) {
+            return false;
+        }
+
+        boolean ocupada = false;
+
+        for (Base base : bases) {
+            if (base.obtenerX() == x && base.obtenerY() == y) {
+                ocupada = base.estaOcupada();
+            }
+        }
+
+        for (AreaEspacial areaEspacial : areasEspaciales) {
+            if (areaEspacial.obtenerX() == x && areaEspacial.obtenerY() == y) {
+                ocupada = areaEspacial.estaOcupada();
+            }
+        }
+
+        for (AreaTerrestre areaTerrestre : areasTerrestres) {
+            if (areaTerrestre.obtenerX() == x && areaTerrestre.obtenerY() == y) {
+                ocupada = areaTerrestre.estaOcupada();
+            }
+        }
+
+        return ocupada;
+    }
     
     public boolean verificarUbicacionLibre(Ubicacion unaUbicacion, Jugador unJugador, Jugador otroJugador) {
     	return (!unJugador.tieneEdificioEnUbicacion(unaUbicacion) && 
@@ -170,6 +242,4 @@ public class Mapa {
 		   this.nodosMinerales.add(new NodoMineral(unaUbicacion));
 	   }
    }
-   
-    
 }

@@ -2,10 +2,7 @@ package edu.fiuba.algo3;
 
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
-import edu.fiuba.algo3.vistas.PantallaDeInicio;
-import edu.fiuba.algo3.vistas.PantallaDeJuego;
-import edu.fiuba.algo3.vistas.PantallaMapa;
-import edu.fiuba.algo3.vistas.PantallaNombreJugadores;
+import edu.fiuba.algo3.vistas.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -17,29 +14,39 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    AlgoStar juego;
-
-    @Override
-    public void start(Stage stage) {
-        this.juego = new AlgoStar();
-        juego.crearJugador("juancito", "rojo", "Zerg");
-        juego.crearJugador("genoveva", "amarelo", "Protoss");
-        stage.setFullScreen(true);
-        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego(juego);
-        PantallaNombreJugadores nombreJugadores = new PantallaNombreJugadores(juego, stage, pantallaDeJuego.getScene());
-        Scene scene2 = nombreJugadores.getScene();
-
-        PantallaDeInicio inicio = new PantallaDeInicio(stage, scene2);
-
-        stage.setScene(inicio.getScene());
-
-        stage.setFullScreenExitHint("Presiona Esc para salir de pantalla completa");
-
-        stage.show();
-    }
-
     public static void main(String[] args) {
         launch();
     }
 
+    @Override
+    public void start(Stage stage) {
+
+        stage.setTitle("AlgoStar");
+
+        AlgoStar algoStar = crearModelo();
+
+        // Pantalla de juego
+        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar);
+
+        // Pantalla donde se ingresa la inforamacion de los jugadores
+        PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, pantallaDeJuego.getScene(), algoStar, pantallaDeJuego);
+        Scene escenaJugadores = new Scene(pantallaJugadores, 500, 500);
+
+        // Pantalla de bienvenida
+        PantallaBienvenidos pantallaBienvenidos = new PantallaBienvenidos(stage, escenaJugadores);
+        Scene escenaBienvenidos = new Scene(pantallaBienvenidos, 500, 500);
+        escenaBienvenidos.getStylesheets().add("file:src/main/resources/style.css");
+
+        stage.setScene(escenaBienvenidos);
+        stage.setFullScreenExitHint("Presiona ESC para salir de pantalla completa");
+        stage.setFullScreen(true);
+
+        stage.show();
+        
+    }
+
+    private AlgoStar crearModelo() {
+        AlgoStar algoStar = new AlgoStar();
+        return algoStar;
+    }
 }
