@@ -17,13 +17,15 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    AlgoStar juego;
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) {
-        this.juego = new AlgoStar();
+        stage.setTitle("AlgoStar");
+        AlgoStar juego = crearModelo();
 
-        stage.setFullScreen(true);
         PantallaDeJuego pantallaDeJuego = new PantallaDeJuego();
         PantallaNombreJugadores nombreJugadores = new PantallaNombreJugadores(juego, stage, pantallaDeJuego.getScene());
         Scene scene2 = nombreJugadores.getScene();
@@ -31,14 +33,14 @@ public class App extends Application {
         PantallaDeInicio inicio = new PantallaDeInicio(stage, scene2);
 
         stage.setScene(inicio.getScene());
-
         stage.setFullScreenExitHint("Presiona Esc para salir de pantalla completa");
+        stage.setFullScreen(false);
 
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
+    private AlgoStar crearModelo() {
+        AlgoStar algoStar = new AlgoStar();
+        return algoStar;
     }
-
 }
