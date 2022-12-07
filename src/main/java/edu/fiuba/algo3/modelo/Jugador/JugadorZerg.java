@@ -324,8 +324,13 @@ public class JugadorZerg implements Jugador {
 		}
 		return verificado;
 	}
-	
-	public Recursos obtenerRecursos() {
+
+    @Override
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public Recursos obtenerRecursos() {
 		return (this.recursos);
 	}
 	

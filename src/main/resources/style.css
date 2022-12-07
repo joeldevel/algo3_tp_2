@@ -116,6 +116,13 @@
     -fx-effect: dropshadow(three-pass-box, crimson , 20, 0.3, 0, 0);
 }
 
+.btn-turno {
+    -fx-background-color: linear-gradient( #58f850 ,  #0f90fc);
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
 /***** pantalla de juego *****/
 
 .fondo-mapa {

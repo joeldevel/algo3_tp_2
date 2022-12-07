@@ -22,9 +22,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         this.juego = new AlgoStar();
-
+        juego.crearJugador("juancito", "rojo", "Zerg");
+        juego.crearJugador("genoveva", "amarelo", "Protoss");
         stage.setFullScreen(true);
-        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego();
+        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego(juego);
         PantallaNombreJugadores nombreJugadores = new PantallaNombreJugadores(juego, stage, pantallaDeJuego.getScene());
         Scene scene2 = nombreJugadores.getScene();
 

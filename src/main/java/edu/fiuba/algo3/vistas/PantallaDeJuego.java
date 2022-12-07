@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 
 public class PantallaDeJuego {
     //layouts
@@ -23,7 +24,7 @@ public class PantallaDeJuego {
     private final Label labelTituloJugador1;
     private final Label labelTituloJugador2;
     private final Button botonSalir;
-    private final Text topText;
+    private final Label labelNombreJugador;
     private final GridPane buildingsPane;
     //sprites
     private final Image hidralisco;
@@ -35,6 +36,11 @@ public class PantallaDeJuego {
     private final Image extractor;
     private final Image guarida;
     private final Image espiral;
+    private final Button botonTurno;
+    private SimpleStringProperty stringUnidadesJugador;
+    private SimpleStringProperty stringGasJugador;
+    private SimpleStringProperty stringMineralJugador;
+    private SimpleStringProperty stringNombreJugador;
     // botones
     private Button unidad1;
     private Button unidad2;
@@ -48,8 +54,17 @@ public class PantallaDeJuego {
 
     private String unidadACrear;
 
+    private Label labelMineralJugador;
+    private Label labelGasJugador;
+    private Label labelUnidadesJugador;
 
-    public PantallaDeJuego() {
+
+    public PantallaDeJuego(AlgoStar juego) {
+        // strings
+        this.stringNombreJugador = new SimpleStringProperty(juego.obtenerJugadorTurno().getNombre());
+        this.stringMineralJugador = new SimpleStringProperty(String.valueOf(juego.obtenerJugadorTurno().obtenerMineral()));
+        this.stringGasJugador = new SimpleStringProperty(String.valueOf(juego.obtenerJugadorTurno().obtenerGas()));
+        this.stringUnidadesJugador = new SimpleStringProperty("0");
         // sprites
         this.hidralisco = new Image("file:src/main/resources/images/sprites/zerg/hidralisco/hidralisco01.png");
         this.mutalisco = new Image("file:src/main/resources/images/sprites/zerg/mutalisco/mutalisco01.png");
@@ -81,15 +96,17 @@ public class PantallaDeJuego {
         // salir
         this.botonSalir = new Button("Salir");
         this.botonSalir.getStyleClass().add("btn-salir");
-
+        // pasar turno
+        this.botonTurno = new Button("Avanzar Turno");
+        botonTurno.getStyleClass().add("btn-turno");
         // controles, mejora: pasar a usar una lista de botones
         this.crearBotonesUnidades();
         buttonsPane.setVgap(4);
         buttonsPane.setHgap(4);
-        unidad1.setOnMouseClicked(e->this.unidadACrear="HIDRALISCO");
-        unidad2.setOnMouseClicked(e->this.unidadACrear="MUTALISCO");
-        unidad3.setOnMouseClicked(e->this.unidadACrear="ZERLING");
-        unidad4.setOnMouseClicked(e->this.unidadACrear="ZANGANO");
+        unidad1.setOnMouseClicked(e -> this.unidadACrear = "HIDRALISCO");
+        unidad2.setOnMouseClicked(e -> this.unidadACrear = "MUTALISCO");
+        unidad3.setOnMouseClicked(e -> this.unidadACrear = "ZERLING");
+        unidad4.setOnMouseClicked(e -> this.unidadACrear = "ZANGANO");
 
         buttonsPane.add(unidad1, 1, 1);
         buttonsPane.add(unidad2, 2, 1);
@@ -101,11 +118,11 @@ public class PantallaDeJuego {
         buildingsPane.setHgap(4);
         buildingsPane.setVgap(4);
 
-        edificio1.setOnMouseClicked(e->this.unidadACrear="CRIADERO");
-        edificio2.setOnMouseClicked(e->this.unidadACrear="RESERVA");
-        edificio3.setOnMouseClicked(e->this.unidadACrear="EXTRACTOR");
-        edificio4.setOnMouseClicked(e->this.unidadACrear="GUARIDA");
-        edificio5.setOnMouseClicked(e->this.unidadACrear="ESPIRAL");
+        edificio1.setOnMouseClicked(e -> this.unidadACrear = "CRIADERO");
+        edificio2.setOnMouseClicked(e -> this.unidadACrear = "RESERVA");
+        edificio3.setOnMouseClicked(e -> this.unidadACrear = "EXTRACTOR");
+        edificio4.setOnMouseClicked(e -> this.unidadACrear = "GUARIDA");
+        edificio5.setOnMouseClicked(e -> this.unidadACrear = "ESPIRAL");
 
         buildingsPane.add(edificio1, 1, 1);
         buildingsPane.add(edificio2, 2, 1);
@@ -114,15 +131,35 @@ public class PantallaDeJuego {
         buildingsPane.add(edificio5, 5, 1);
 
 
-
+        // pasar turno
+        botonTurno.setOnAction(e -> {
+            juego.avanzarTurno();
+            stringNombreJugador.set(juego.obtenerJugadorTurno().getNombre());
+            stringGasJugador.set(String.valueOf(juego.obtenerJugadorTurno().obtenerGas() + (int)(Math.floor(Math.random() * 10))));
+            stringMineralJugador.set(String.valueOf(juego.obtenerJugadorTurno().obtenerMineral() ));
+//            System.out.println("turno despus de avanzar = " + juego.obtenerJugadorTurno().getNombre());
+        });
         // boton salida
         botonSalir.setOnAction(e -> Platform.exit());
 
         // top
-        this.topText = new Text("Turno Jugador 1");
-        topText.getStyleClass().addAll("title", "text-light");
+        this.labelNombreJugador = new Label();
+        this.labelGasJugador = new Label();
+        this.labelMineralJugador = new Label();
+        this.labelUnidadesJugador = new Label();
+        labelNombreJugador.textProperty().bindBidirectional(stringNombreJugador);
+        labelMineralJugador.textProperty().bindBidirectional(stringMineralJugador);
+        labelGasJugador.textProperty().bindBidirectional(stringGasJugador);
+        labelUnidadesJugador.textProperty().bindBidirectional(stringUnidadesJugador);
+
+        labelNombreJugador.setMinWidth(200);
+        labelNombreJugador.setMaxWidth(200);
+//        labelNombreJugador.getStyleClass().addAll("title", "label-light");
         topPane.setRight(botonSalir);
-        topPane.setCenter(topText);
+//        topPane.setCenter(labelNombreJugador);
+
+        topPane.setCenter(new PanelDatosJugador(labelNombreJugador, labelMineralJugador, labelGasJugador, labelUnidadesJugador).getPanel());
+        topPane.setLeft(botonTurno);
         topPane.setMinHeight(70);
         topPane.setPadding(new Insets(10));
         topPane.getStyleClass().add("panel-superior");
@@ -139,10 +176,7 @@ public class PantallaDeJuego {
 
         // poner secciones
         rootPane.setTop(topPane);
-        rootPane.setLeft(new PanelDatosJugador("pepino", "200", "5", "30").getPanel());
         rootPane.setBottom(bottomContainer);
-        rootPane.setRight(new PanelDatosJugador("pingocho", "1780", "3", "20").getPanel());
-
         rootPane.setCenter(mapa);
 
         this.scene = new Scene(rootPane);
@@ -152,7 +186,7 @@ public class PantallaDeJuego {
         mapa.setOnMouseClicked(e -> {
             System.out.println("x: " + e.getX());
             System.out.println("y: " + e.getY());
-            if (this.unidadACrear!=null) {
+            if (this.unidadACrear != null) {
                 ImageView temp = this.spriteParaMapa();
                 temp.relocate(e.getX(), e.getY());
                 mapa.getChildren().add(temp);
@@ -162,31 +196,31 @@ public class PantallaDeJuego {
     }
 
     private ImageView spriteParaMapa() {
-        if(this.unidadACrear=="MUTALISCO") {
+        if (this.unidadACrear == "MUTALISCO") {
             return new ImageView(this.mutalisco);
         }
-        if(this.unidadACrear=="HIDRALISCO") {
+        if (this.unidadACrear == "HIDRALISCO") {
             return new ImageView(this.hidralisco);
         }
-        if(this.unidadACrear=="ZERLING") {
+        if (this.unidadACrear == "ZERLING") {
             return new ImageView(this.zerling);
         }
-        if(this.unidadACrear=="ZANGANO") {
+        if (this.unidadACrear == "ZANGANO") {
             return new ImageView(this.zangano);
         }
-        if(this.unidadACrear=="CRIADERO") {
+        if (this.unidadACrear == "CRIADERO") {
             return new ImageView(this.criadero);
         }
-        if(this.unidadACrear=="RESERVA") {
+        if (this.unidadACrear == "RESERVA") {
             return new ImageView(this.reserva);
         }
-        if(this.unidadACrear=="EXTRACTOR") {
+        if (this.unidadACrear == "EXTRACTOR") {
             return new ImageView(this.extractor);
         }
-        if(this.unidadACrear=="GUARIDA") {
+        if (this.unidadACrear == "GUARIDA") {
             return new ImageView(this.guarida);
         }
-        if(this.unidadACrear=="ESPIRAL") {
+        if (this.unidadACrear == "ESPIRAL") {
             return new ImageView(this.espiral);
         }
         return null;
@@ -236,46 +270,49 @@ public class PantallaDeJuego {
 
 class PanelDatosJugador {
 
-    private String jugador;
-    private String recursos;
-    private String construcciones;
-    private String unidades;
+    private Label jugador;
+    private Label gas;
+    private Label mineral;
+    private Label unidades;
 
-    private VBox panel;
+    private HBox panel;
 
     // ver si los tipos de datos son correctos, tal vez usar un map para las construcciones y unidades
-    PanelDatosJugador(String jugador, String recursos, String construcciones, String unidades) {
+    PanelDatosJugador(Label jugador, Label gas, Label mineral, Label unidades) {
         this.jugador = jugador;
-        this.recursos = recursos;
-        this.construcciones = construcciones;
+        this.gas = gas;
+        this.mineral = mineral;
         this.unidades = unidades;
-        this.panel = new VBox();
+        this.panel = new HBox();
 
 
         panel.getChildren().addAll(
-                this.seccionPanel(jugador, ""),
-                this.seccionPanel("Recursos:", recursos),
-                this.seccionPanel("Edificios: ", construcciones),
+                this.seccionPanel("Jugador", jugador),
+                this.seccionPanel("Gas:", gas),
+                this.seccionPanel("Mineral: ", mineral),
                 this.seccionPanel("Unidades: ", unidades)
         );
-        this.panel.setMaxWidth(100);
-        this.panel.getStyleClass().add("panel-lateral");
+//        this.panel.setMinWidth(300);
+//        this.panel.setMaxWidth(300);
+        this.panel.setAlignment(Pos.CENTER);
+        this.panel.getStyleClass().add("panel-lateral");// cambiar a otro estilo
     }
 
-    public VBox getPanel() {
+    public HBox getPanel() {
         return this.panel;
     }
 
-    private VBox seccionPanel(String etiqueta, String contenido) {
+    private VBox seccionPanel(String etiqueta, Label contenido) {
         VBox contenedor = new VBox();
         contenedor.setPadding(new Insets(6));
         contenedor.setSpacing(10);
         Label titulo = new Label(etiqueta);
         titulo.getStyleClass().addAll("title", "label-light");
         titulo.getStyleClass().add("seccion-panel-jugador-titulo");
-        Label labelContenido = new Label(contenido);
-        labelContenido.getStyleClass().addAll("seccion-panel-jugador-contenido", "label-light");
-        contenedor.getChildren().addAll(titulo, labelContenido);
+//        Label labelContenido = new Label(contenido);
+        contenido.getStyleClass().addAll("seccion-panel-jugador-contenido", "label-light");
+        contenedor.getChildren().addAll(titulo, contenido);
+        contenedor.setAlignment(Pos.CENTER);
         return contenedor;
     }
 }
