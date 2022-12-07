@@ -68,6 +68,16 @@ public class JugadorProtoss implements Jugador {
     }
 
     @Override
+    public String obtenerNombre() {
+        return (this.nombre);
+    }
+
+    @Override
+    public String obtenerColor() {
+        return (this.color);
+    }
+
+    @Override
     public String obtenerRaza() {
         return "Protoss";
     }

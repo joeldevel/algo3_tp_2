@@ -162,7 +162,7 @@
     -fx-text-fill: #395306;
 }
 
-.btn-bicho-disabled: {
+.btn-bicho-disabled {
     -fx-background: grey;
     -fx-background-radius: 6, 5;
     -fx-background-insets: 0, 1;

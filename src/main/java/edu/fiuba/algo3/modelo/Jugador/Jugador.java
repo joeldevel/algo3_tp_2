@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public interface Jugador {
+    String obtenerNombre();
+    String obtenerColor();
     String obtenerRaza();
     boolean compararNombres(String otroNombre);
     boolean compararColores(String otroColor);
