@@ -261,8 +261,13 @@ public class JugadorProtoss implements Jugador {
 		}
 		return verificado;
 	}
-	
-	public void agregarEdificio(Edificio unEdificio) {
+
+    @Override
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void agregarEdificio(Edificio unEdificio) {
 		this.edificios.add(unEdificio);
 	}
 	

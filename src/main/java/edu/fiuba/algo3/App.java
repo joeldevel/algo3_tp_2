@@ -26,7 +26,7 @@ public class App extends Application {
         AlgoStar algoStar = crearModelo();
 
         // Pantalla de juego
-        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego();
+        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar);
 
         // Pantalla donde se ingresa la inforamacion de los jugadores
         PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, pantallaDeJuego.getScene(), algoStar, pantallaDeJuego);
@@ -42,21 +42,7 @@ public class App extends Application {
         stage.setFullScreen(true);
 
         stage.show();
-
-        /*stage.setTitle("AlgoStar");
-        AlgoStar juego = crearModelo();
-
-        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego();
-        PantallaNombreJugadores nombreJugadores = new PantallaNombreJugadores(juego, stage, pantallaDeJuego.getScene());
-        Scene scene2 = nombreJugadores.getScene();
-
-        PantallaDeInicio inicio = new PantallaDeInicio(stage, scene2);
-
-        stage.setScene(inicio.getScene());
-        stage.setFullScreenExitHint("Presiona Esc para salir de pantalla completa");
-        stage.setFullScreen(false);
-
-        stage.show();*/
+        
     }
 
     private AlgoStar crearModelo() {
