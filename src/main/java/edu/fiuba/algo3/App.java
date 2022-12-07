@@ -2,10 +2,7 @@ package edu.fiuba.algo3;
 
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
-import edu.fiuba.algo3.vistas.PantallaDeInicio;
-import edu.fiuba.algo3.vistas.PantallaDeJuego;
-import edu.fiuba.algo3.vistas.PantallaMapa;
-import edu.fiuba.algo3.vistas.PantallaNombreJugadores;
+import edu.fiuba.algo3.vistas.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -23,7 +20,30 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+
         stage.setTitle("AlgoStar");
+
+        AlgoStar algoStar = crearModelo();
+
+        // Pantalla de juego
+        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego();
+
+        // Pantalla donde se ingresa la inforamacion de los jugadores
+        PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, pantallaDeJuego.getScene(), algoStar, pantallaDeJuego);
+        Scene escenaJugadores = new Scene(pantallaJugadores, 500, 500);
+
+        // Pantalla de bienvenida
+        PantallaBienvenidos pantallaBienvenidos = new PantallaBienvenidos(stage, escenaJugadores);
+        Scene escenaBienvenidos = new Scene(pantallaBienvenidos, 500, 500);
+        escenaBienvenidos.getStylesheets().add("file:src/main/resources/style.css");
+
+        stage.setScene(escenaBienvenidos);
+        stage.setFullScreenExitHint("Presiona ESC para salir de pantalla completa");
+        stage.setFullScreen(true);
+
+        stage.show();
+
+        /*stage.setTitle("AlgoStar");
         AlgoStar juego = crearModelo();
 
         PantallaDeJuego pantallaDeJuego = new PantallaDeJuego();
@@ -36,7 +56,7 @@ public class App extends Application {
         stage.setFullScreenExitHint("Presiona Esc para salir de pantalla completa");
         stage.setFullScreen(false);
 
-        stage.show();
+        stage.show();*/
     }
 
     private AlgoStar crearModelo() {
