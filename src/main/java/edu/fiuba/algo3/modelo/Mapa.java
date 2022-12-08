@@ -18,7 +18,8 @@ import java.util.ArrayList;
 
 public class Mapa {
 
-	private static int TAMANIO = 100;
+	private static int TAMANIO_HORIZONTAL = 100;
+	private static int TAMANIO_VERTICAL = 100;
 
     private Moho moho;
     private ArrayList<Pilon> pilones;
@@ -26,9 +27,9 @@ public class Mapa {
     private ArrayList<NodoMineral> nodosMinerales;
     private ArrayList<Edificio> edificios;
 
-    private ArrayList<AreaTerrestre> areasTerrestres;
+    //private ArrayList<AreaTerrestre> areasTerrestres;
 
-    private ArrayList<AreaEspacial> areasEspaciales;
+    private ArrayList<Ubicacion> areasEspaciales;
 
     public Mapa() {
         this.moho = new Moho();
@@ -36,11 +37,10 @@ public class Mapa {
         this.volcanes = new ArrayList<Volcan>();
         this.nodosMinerales = new ArrayList<NodoMineral>();
         this.edificios = new ArrayList<Edificio>();
-
-        this.areasTerrestres = new ArrayList<AreaTerrestre>();
-        this.areasEspaciales = new ArrayList<AreaEspacial>();
+        this.areasEspaciales = new ArrayList<Ubicacion>();
         
         this.crearBases();
+        this.crearAreas();
         
     }
 
@@ -56,126 +56,29 @@ public class Mapa {
     	this.agregarNodoMineral(new Ubicacion(80,90));
     }
     
-    public boolean ubicacionEstaDentroDeMapa(Ubicacion unaUbicacion) {
-    	return( (unaUbicacion.xDentroDeRango(0,this.TAMANIO)) && (unaUbicacion.yDentroDeRango(0,this.TAMANIO)) );
+    public void crearAreas() {
+    	/* se crean las areas manualmente*/
+    	for(int i= 40; i<60; i++) {
+    		for(int j= 40; j<60; j++) {
+    			this.areasEspaciales.add(new Ubicacion(i,j));
+    		}
+    	}
     }
     
-    /*private void crearAreas() {
-        int i;
-
-        for (i = 0; i < this.cantidadDeBases; ++i) {
-            this.bases.add(new Base(i, i));
-
-            if (i < (this.cantidadDeBases - 1)) {
-                this.areasTerrestres.add(new AreaTerrestre(i, i + 1));
-                this.areasEspaciales.add(new AreaEspacial(i + 1, i));
-            }
-        }
-
-        this.baseJugadorUno = this.bases.get(0);
-        this.baseJugadorDos = this.bases.get(i - 1);
+    public boolean ubicacionEstaDentroDeMapa(Ubicacion unaUbicacion) {
+    	return( (unaUbicacion.xDentroDeRango(0,this.TAMANIO_HORIZONTAL)) && 
+    			(unaUbicacion.yDentroDeRango(0,this.TAMANIO_VERTICAL)) );
     }
-
-    public boolean basesEstanEnExtremosOpuestos() {
-        if ((this.baseJugadorUno.obtenerX() == baseJugadorUnoPosicionX) && (this.baseJugadorUno.obtenerY() == baseJugadorUnoPosicionY) && (this.baseJugadorDos.obtenerX() == baseJugadorDosPosicionX) && (this.baseJugadorDos.obtenerY() == baseJugadorDosPosicionY)) {
-            return true;
-        }
-
-        return false;
+    
+    public boolean verificarAreaEspacial(Ubicacion ubicacion) {
+    	boolean verificado = false;
+    	for(Ubicacion actual: this.areasEspaciales) {
+    		if(actual.esIgualA(ubicacion)) {
+    			verificado = true;
+    		}
+    	}
+    	return verificado;
     }
-
-    public boolean existeUbicacionEn(int x, int y) {
-        boolean existencia = false;
-
-        for (Base base : bases) {
-            if (base.obtenerX() == x && base.obtenerY() == y) {
-                existencia = true;
-            }
-        }
-
-        for (AreaEspacial areaEspacial : areasEspaciales) {
-            if (areaEspacial.obtenerX() == x && areaEspacial.obtenerY() == y) {
-                existencia = true;
-            }
-        }
-
-        for (AreaTerrestre areaTerrestre : areasTerrestres) {
-            if (areaTerrestre.obtenerX() == x && areaTerrestre.obtenerY() == y) {
-                existencia = true;
-            }
-        }
-
-        return existencia;
-    }
-
-    public void ocuparUbicacion(Ubicacion unaUbicacion) {
-        for (Base base : bases) {
-            if (base.obtenerX() == unaUbicacion.obtenerX() && base.obtenerY() == unaUbicacion.obtenerX()) {
-                base.ocupar();
-            }
-        }
-
-        for (AreaEspacial areaEspacial : areasEspaciales) {
-            if (areaEspacial.obtenerX() == unaUbicacion.obtenerX() && areaEspacial.obtenerY() == unaUbicacion.obtenerX()) {
-                areaEspacial.ocupar();
-            }
-        }
-
-        for (AreaTerrestre areaTerrestre : areasTerrestres) {
-            if (areaTerrestre.obtenerX() == unaUbicacion.obtenerX() && areaTerrestre.obtenerY() == unaUbicacion.obtenerX()) {
-                areaTerrestre.ocupar();
-            }
-        }
-    }
-
-    // Refactorizar el código repetido.
-    public void desocuparUbicacion(Ubicacion unaUbicacion) {
-        for (Base base : bases) {
-            if (base.obtenerX() == unaUbicacion.obtenerX() && base.obtenerY() == unaUbicacion.obtenerX()) {
-                base.desocupar();
-            }
-        }
-
-        for (AreaEspacial areaEspacial : areasEspaciales) {
-            if (areaEspacial.obtenerX() == unaUbicacion.obtenerX() && areaEspacial.obtenerY() == unaUbicacion.obtenerX()) {
-                areaEspacial.desocupar();
-            }
-        }
-
-        for (AreaTerrestre areaTerrestre : areasTerrestres) {
-            if (areaTerrestre.obtenerX() == unaUbicacion.obtenerX() && areaTerrestre.obtenerY() == unaUbicacion.obtenerX()) {
-                areaTerrestre.desocupar();
-            }
-        }
-    }
-
-    public boolean ubicacionOcupadaEn(int x, int y) {
-        if (!existeUbicacionEn(x, y)) {
-            return false;
-        }
-
-        boolean ocupada = false;
-
-        for (Base base : bases) {
-            if (base.obtenerX() == x && base.obtenerY() == y) {
-                ocupada = base.estaOcupada();
-            }
-        }
-
-        for (AreaEspacial areaEspacial : areasEspaciales) {
-            if (areaEspacial.obtenerX() == x && areaEspacial.obtenerY() == y) {
-                ocupada = areaEspacial.estaOcupada();
-            }
-        }
-
-        for (AreaTerrestre areaTerrestre : areasTerrestres) {
-            if (areaTerrestre.obtenerX() == x && areaTerrestre.obtenerY() == y) {
-                ocupada = areaTerrestre.estaOcupada();
-            }
-        }
-
-        return ocupada;
-    }*/
     
     public boolean verificarUbicacionLibre(Ubicacion unaUbicacion) {
     	boolean verificado = true;
@@ -188,12 +91,12 @@ public class Mapa {
     }
     
    public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
-	   return ( (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) && 
+	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) && 
 				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
    }
    
    public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
-	   return ( (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) && 
+	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) && 
 				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
    }
    
@@ -327,5 +230,10 @@ public class Mapa {
 		   throw new SinEdificioBuscadoError();
 	   }
 	   return edificio;
+   }
+   
+   public void avanzarTurno() {
+	   this.energizarEdificios();
+	   this.moho.avanzarTurno(edificios);
    }
 }

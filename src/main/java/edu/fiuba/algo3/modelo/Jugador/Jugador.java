@@ -23,6 +23,7 @@ public interface Jugador {
     public void agregarEdificio(Edificio unEdificio);
     public boolean verificarEdificio(String nombreEdificio);
     public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugador,Mapa mapa);
+    public void avanzarTurno();
     String getNombre();
 }
 
