@@ -25,5 +25,7 @@ public interface Jugador {
     public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugador,Mapa mapa);
     public void avanzarTurno();
     String getNombre();
+
+    int calcularPoblacion();
 }
 

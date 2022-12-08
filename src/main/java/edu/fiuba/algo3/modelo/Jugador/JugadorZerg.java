@@ -265,6 +265,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    @Override
     public int calcularPoblacion() {
         int poblacion = 0;
 
