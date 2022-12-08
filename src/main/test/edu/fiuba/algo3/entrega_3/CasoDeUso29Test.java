@@ -4,6 +4,9 @@ import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +27,7 @@ public class CasoDeUso29Test {
 
         // Act
         for (int i = 0; i < 40; i++) {
-            jugadorProtoss.crearPilon(new Ubicacion(i,0));
+            jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(i,0),jugadorProtoss));
         }
 
         // Assert
@@ -38,11 +41,11 @@ public class CasoDeUso29Test {
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
 
         for (int i = 0; i < 40; i++) {
-            jugadorProtoss.crearPilon(new Ubicacion(i,0));
+            jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(i,0),jugadorProtoss));
         }
 
         // Act
-        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
 
         // Assert
         assertEquals(200, jugadorProtoss.calcularPoblacion());
@@ -58,8 +61,8 @@ public class CasoDeUso29Test {
 
         // Act
         for (int i = 0; i < 40; i++) {
-            jugadorZerg.crearCriadero(new Ubicacion(i,0));
-        }
+            jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(i,0),jugadorZerg));
+        } 
 
         // Assert
         assertEquals(200, jugadorZerg.calcularPoblacion());
@@ -87,11 +90,11 @@ public class CasoDeUso29Test {
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
 
         for (int i = 0; i < 40; i++) {
-            jugadorZerg.crearCriadero(new Ubicacion(i,0));
+            jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(i,0),jugadorZerg));
         }
 
         // Act
-        jugadorZerg.crearCriadero(new Ubicacion(1,1));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(1,1),jugadorZerg));
 
         // Assert
         assertEquals(200, jugadorZerg.calcularPoblacion());
