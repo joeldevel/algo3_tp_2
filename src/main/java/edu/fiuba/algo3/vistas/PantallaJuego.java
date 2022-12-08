@@ -44,6 +44,34 @@ public class PantallaJuego extends BorderPane { // 24:47
                 setBotonera(algoStar);
             }
         });
+
+        // Se muestra por pantalla el punto sobre el canvas donde se mueve el mouse
+
+        this.canvasCentral.setOnMouseMoved(e -> {
+            Label coordenadaX = new Label();
+            coordenadaX.setText("x: " + e.getX());
+            coordenadaX.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+            coordenadaX.setTextFill(Color.web("#ffffff"));
+
+            Label coordenadaY = new Label();
+            coordenadaY.setText("y: " + e.getY());
+            coordenadaY.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+            coordenadaY.setTextFill(Color.web("#ffffff"));
+
+            HBox contenedorHorizontalCoordenadas = new HBox(coordenadaX, coordenadaY);
+            contenedorHorizontalCoordenadas.setSpacing(10);
+            contenedorHorizontalCoordenadas.setTranslateX(500);
+            contenedorHorizontalCoordenadas.setTranslateY(10);
+
+            this.setTop(contenedorHorizontalCoordenadas);
+        });
+
+        // Se muestra por consola el punto sobre el canvas donde se hace click
+
+        this.canvasCentral.setOnMouseClicked(e -> {
+            System.out.println("x: " + e.getX());
+            System.out.println("y: " + e.getY() + "\n");
+        });
     }
 
     public void setFondo() {
@@ -179,12 +207,5 @@ public class PantallaJuego extends BorderPane { // 24:47
         // Se ubica el canvas en el centro dle BorderPane
 
         this.setCenter(canvasCentral);
-
-        // Se muestra por consola el punto sobre el canvas donde se hace click
-
-        this.canvasCentral.setOnMouseClicked(e -> {
-            System.out.println("x: " + e.getX());
-            System.out.println("y: " + e.getY() + "\n");
-        });
     }
 }
