@@ -161,6 +161,6 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion.cambiarUbicacion(unaUbicacion.obtenerX(), unaUbicacion.obtenerY());
+		this.ubicacion = unaUbicacion;
 	}
 }

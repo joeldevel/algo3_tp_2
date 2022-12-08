@@ -4,8 +4,10 @@ import edu.fiuba.algo3.modelo.Areas.AreaEspacial;
 import edu.fiuba.algo3.modelo.Areas.AreaTerrestre;
 import edu.fiuba.algo3.modelo.Areas.Base;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
+import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
@@ -16,49 +18,49 @@ import java.util.ArrayList;
 
 public class Mapa {
 
-    static final int cantidadDeJugadores = 2;
+	private static int TAMANIO = 100;
 
-    private int cantidadDeBases;
-
-    private Base baseJugadorUno, baseJugadorDos;
-
-    private int baseJugadorUnoPosicionX, baseJugadorUnoPosicionY, baseJugadorDosPosicionX, baseJugadorDosPosicionY;
-    
     private Moho moho;
     private ArrayList<Pilon> pilones;
     private ArrayList<Volcan> volcanes;
     private ArrayList<NodoMineral> nodosMinerales;
-
-    private ArrayList<Base> bases;
+    private ArrayList<Edificio> edificios;
 
     private ArrayList<AreaTerrestre> areasTerrestres;
 
     private ArrayList<AreaEspacial> areasEspaciales;
 
-    public Mapa(int unaCantidadDeBases) {
-        if (unaCantidadDeBases < cantidadDeJugadores) {
-            throw new CantidadInsuficienteDeBasesException();
-        }
-
-        this.cantidadDeBases = unaCantidadDeBases;
-        this.bases = new ArrayList<Base>();
-        this.areasTerrestres = new ArrayList<AreaTerrestre>();
-        this.areasEspaciales = new ArrayList<AreaEspacial>();
-        
+    public Mapa() {
         this.moho = new Moho();
         this.pilones = new ArrayList<Pilon>();
         this.volcanes = new ArrayList<Volcan>();
         this.nodosMinerales = new ArrayList<NodoMineral>();
+        this.edificios = new ArrayList<Edificio>();
 
-        this.baseJugadorUnoPosicionX = 0;
-        this.baseJugadorUnoPosicionY = 0;
-        this.baseJugadorDosPosicionX = unaCantidadDeBases - 1;
-        this.baseJugadorDosPosicionY = unaCantidadDeBases - 1;
-
-        this.crearAreas();
+        this.areasTerrestres = new ArrayList<AreaTerrestre>();
+        this.areasEspaciales = new ArrayList<AreaEspacial>();
+        
+        this.crearBases();
+        
     }
 
-    private void crearAreas() {
+    public void crearBases() {
+    	/* se crean bases manualmente */
+    	this.agregarVolcan(new Ubicacion(10,10));
+    	this.agregarVolcan(new Ubicacion(90,90));
+    	this.agregarNodoMineral(new Ubicacion(10,20));
+    	this.agregarNodoMineral(new Ubicacion(20,10));
+    	this.agregarNodoMineral(new Ubicacion(20,20));
+    	this.agregarNodoMineral(new Ubicacion(90,80));
+    	this.agregarNodoMineral(new Ubicacion(80,80));
+    	this.agregarNodoMineral(new Ubicacion(80,90));
+    }
+    
+    public boolean ubicacionEstaDentroDeMapa(Ubicacion unaUbicacion) {
+    	return( (unaUbicacion.xDentroDeRango(0,this.TAMANIO)) && (unaUbicacion.yDentroDeRango(0,this.TAMANIO)) );
+    }
+    
+    /*private void crearAreas() {
         int i;
 
         for (i = 0; i < this.cantidadDeBases; ++i) {
@@ -173,7 +175,7 @@ public class Mapa {
         }
 
         return ocupada;
-    }
+    }*/
     
     public boolean verificarUbicacionLibre(Ubicacion unaUbicacion, Jugador unJugador, Jugador otroJugador) {
     	return (!unJugador.tieneEdificioEnUbicacion(unaUbicacion) && 
@@ -245,7 +247,7 @@ public class Mapa {
    }
    
    public void agregarOrigenAMoho(Ubicacion unaUbicacion) {
-	   this.moho.agregarOrigen(unaUbicacion);
+	   this.moho.agregarOrigen(unaUbicacion,this.edificios);
    }
    
    public void agregarPilon(Pilon unPilon) {
@@ -262,5 +264,63 @@ public class Mapa {
 	   if(!(this.verificarNodoMineralEnUbicacion(unaUbicacion))) {
 		   this.nodosMinerales.add(new NodoMineral(unaUbicacion));
 	   }
+   }
+   
+   public void agregarAPilones(Ubicacion unaUbicacion, EdificioProtoss edificio) {
+	   for(Pilon actual: this.pilones) {
+		   if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
+			   actual.agregarEdificio(edificio);
+		   }
+	   }
+   }
+   
+   public void destruirPilonEn(Ubicacion unaUbicacion) {
+	   Pilon pilon = this.obtenerPilonEn(unaUbicacion);
+	   this.pilones.remove(pilon);
+   }
+   
+   public Pilon obtenerPilonEn(Ubicacion unaUbicacion) {
+	   Pilon pilon = null;
+	   for(Pilon actual: this.pilones) {
+		   if(actual.estaEn(unaUbicacion)) {
+			   pilon = actual;
+		   }
+	   }
+	   if(pilon == null) {
+		   throw new SinEdificioBuscadoError();
+	   }
+	   return pilon;
+   }
+   
+   public void energizarEdificios() {
+	   for(Pilon actual: this.pilones) {
+		   actual.energizarEdificios();
+	   }
+   }
+   
+   public void destruirOrigenDeMoho(Ubicacion unaUbicacion) {
+	   this.moho.destruirOrigenEn(unaUbicacion);
+   }
+   
+   public void agregarEdificio(Edificio unEdificio) {
+	   this.edificios.add(unEdificio);
+   }
+   
+   public void destruirEdificioEn(Ubicacion unaUbicacion) {
+	   Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
+	   this.edificios.remove(edificio);
+   }
+   
+   public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
+	   Edificio edificio = null;
+	   for(Edificio actual: this.edificios) {
+		   if(actual.estaEn(unaUbicacion)) {
+			   edificio = actual;
+		   }
+	   }
+	   if(edificio == null) {
+		   throw new SinEdificioBuscadoError();
+	   }
+	   return edificio;
    }
 }

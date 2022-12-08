@@ -104,6 +104,10 @@ public class Unidad extends Raza {
 	public void contarBaja() {
 		this.estado.contarBaja();
 	}
+	
+	public int tiempoRestante() {
+		return (this.tiempo.restante());
+	}
 
 	public void moverse(Ubicacion unaUbicacion) {
 		this.estado.moverse(unaUbicacion);

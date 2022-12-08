@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 public class MapaTest {
 
+	/*
     JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(1000, 1000));
 
     @Test
@@ -123,7 +124,7 @@ public class MapaTest {
         (0,0) (1,0)
 
      */
-
+/*
     @Test
     void test09AUnMapaDeTresBasesLePreguntoSiExisteLaUbicacionDeseadaYLaRespuestaEsVerdadera() {
         // Arrange
@@ -199,5 +200,5 @@ public class MapaTest {
 
         // Assert
         assertTrue(resultado);
-    }
+    }*/
 }

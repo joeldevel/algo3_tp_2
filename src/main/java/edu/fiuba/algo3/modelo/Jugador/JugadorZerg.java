@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
+import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
@@ -356,5 +357,28 @@ public class JugadorZerg implements Jugador {
 			}
 		}
 		return verificado;
+	}
+	
+	@Override
+	public void agregarUnidad(Unidad unaUnidad) {
+		this.unidades.add(unaUnidad);		
+	}
+	
+	public void destruirEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
+		this.edificios.remove(edificio);
+	}
+	
+	public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = null;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				edificio = actual;
+			}
+		}
+		if(edificio == null) {
+			throw new SinEdificioBuscadoError();
+		}
+		return edificio;
 	}
 }

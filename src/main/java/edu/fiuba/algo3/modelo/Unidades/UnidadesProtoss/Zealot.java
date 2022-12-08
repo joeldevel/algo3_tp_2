@@ -172,6 +172,6 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion.cambiarUbicacion(unaUbicacion.obtenerX(), unaUbicacion.obtenerY());
+		this.ubicacion = unaUbicacion;
 	}
 }

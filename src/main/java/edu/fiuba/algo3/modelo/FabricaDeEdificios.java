@@ -25,51 +25,71 @@ public class FabricaDeEdificios {
 				
 				Criadero criadero = new Criadero(unaUbicacion,jugadorZerg);
 				jugadorZerg.agregarEdificio(criadero);
+				unMapa.agregarEdificio(criadero);
 				unMapa.agregarOrigenAMoho(unaUbicacion);
 			}
 			if((unEdificio == "Extractor") && (unMapa.verificarConstruccionZerg(unaUbicacion, jugadorZerg, jugadorProtoss)) && 
 			   (unMapa.verificarVolcanEnUbicacion(unaUbicacion))){
 				
-				jugadorZerg.agregarEdificio(new Extractor(unMapa.volcanEnUbicacion(unaUbicacion), unaUbicacion,jugadorZerg));
+				Extractor extractor = new Extractor(unMapa.volcanEnUbicacion(unaUbicacion), unaUbicacion,jugadorZerg);
+				jugadorZerg.agregarEdificio(extractor);
+				unMapa.agregarEdificio(extractor);
 			}
-			if((unEdificio == "ReservaDeProduccion") && (unMapa.verificarConstruccionZerg(unaUbicacion, jugadorZerg, jugadorProtoss))) {
+			if((unEdificio == "ReservaDeReproduccion") && (unMapa.verificarConstruccionZerg(unaUbicacion, jugadorZerg, jugadorProtoss))) {
 				
-				jugadorZerg.agregarEdificio(new ReservaDeReproduccion(unaUbicacion,jugadorZerg));
+				ReservaDeReproduccion reserva = new ReservaDeReproduccion(unaUbicacion,jugadorZerg); 
+				jugadorZerg.agregarEdificio(reserva);
+				unMapa.agregarEdificio(reserva);
 			}
 			if((unEdificio == "Guarida") && (unMapa.verificarConstruccionZerg(unaUbicacion,jugadorZerg,jugadorProtoss)) && 
-			   (jugadorZerg.verificarEdificio("ReservaDeProduccion"))) {
+			   (jugadorZerg.verificarEdificio("ReservaDeReproduccion"))) {
 				
-				jugadorZerg.agregarEdificio(new Guarida(unaUbicacion,jugadorZerg));
+				Guarida guarida = new Guarida(unaUbicacion,jugadorZerg);
+				jugadorZerg.agregarEdificio(guarida);
+				unMapa.agregarEdificio(guarida);
 			}
 			if((unEdificio == "Espiral") && (unMapa.verificarConstruccionZerg(unaUbicacion, jugadorZerg, jugadorProtoss)) && 
 			   (jugadorZerg.verificarEdificio("Guarida"))) {
 				
-				jugadorZerg.agregarEdificio(new Espiral(unaUbicacion,jugadorZerg));
+				Espiral espiral = new Espiral(unaUbicacion,jugadorZerg);
+				jugadorZerg.agregarEdificio(espiral);
+				unMapa.agregarEdificio(espiral);
 			}
 			if((unEdificio == "NexoMineral") && (unMapa.verificarConstruccionProtoss(unaUbicacion,jugadorZerg,jugadorProtoss)) && 
 			   (unMapa.verificarNodoMineralEnUbicacion(unaUbicacion))){
 				
-				jugadorProtoss.agregarEdificio(new NexoMineral(unMapa.nodoEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss));
+				NexoMineral nexo = new NexoMineral(unMapa.nodoEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss);
+				jugadorProtoss.agregarEdificio(nexo);
+				unMapa.agregarEdificio(nexo);
 			}
 			if((unEdificio == "Pilon") && (!(unMapa.verificarUbicacionAfectadaPorMoho(unaUbicacion)))) {
 				
 				Pilon pilon = new Pilon(unaUbicacion,jugadorProtoss);
 				jugadorProtoss.agregarEdificio(pilon);
+				unMapa.agregarEdificio(pilon);
 				unMapa.agregarPilon(pilon);
 			}
 			if((unEdificio == "Asimilador") && (unMapa.verificarConstruccionProtoss(unaUbicacion,jugadorZerg,jugadorProtoss)) && 
 			   (unMapa.verificarVolcanEnUbicacion(unaUbicacion))) {
 				
-				jugadorProtoss.agregarEdificio(new Asimilador(unMapa.volcanEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss));
+				Asimilador asimilador = new Asimilador(unMapa.volcanEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss);
+				jugadorProtoss.agregarEdificio(asimilador);
+				unMapa.agregarEdificio(asimilador);
 			}
 			if((unEdificio == "Acceso") && (unMapa.verificarConstruccionProtoss(unaUbicacion,jugadorZerg,jugadorProtoss))) {
 				
-				jugadorProtoss.agregarEdificio(new Acceso(unaUbicacion,jugadorProtoss));
+				Acceso acceso = new Acceso(unaUbicacion,jugadorProtoss);
+				jugadorProtoss.agregarEdificio(acceso);
+				unMapa.agregarEdificio(acceso);
+				unMapa.agregarAPilones(unaUbicacion,acceso);
 			}
 			if((unEdificio == "PuertoEstelar") && (unMapa.verificarConstruccionProtoss(unaUbicacion,jugadorZerg,jugadorProtoss)) && 
 			   (jugadorProtoss.verificarEdificio("Acceso"))) {
 				
-				jugadorProtoss.agregarEdificio(new PuertoEstelar(unaUbicacion,jugadorProtoss));
+				PuertoEstelar puertoEstelar = new PuertoEstelar(unaUbicacion,jugadorProtoss);
+				jugadorProtoss.agregarEdificio(puertoEstelar);
+				unMapa.agregarEdificio(puertoEstelar);
+				unMapa.agregarAPilones(unaUbicacion,puertoEstelar);
 			}
 			
 		}

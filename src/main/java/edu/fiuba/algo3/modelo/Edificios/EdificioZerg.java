@@ -13,6 +13,13 @@ public abstract class EdificioZerg extends Edificio {
     }
     
     @Override
+    public void avanzarTurno() {
+		this.tiempo.pasarTiempo();
+		this.estado.ejecutar();
+		this.recuperarse();
+	}
+    
+    @Override
     public void recuperarse() {
     	this.vida.recuperarse();
     }

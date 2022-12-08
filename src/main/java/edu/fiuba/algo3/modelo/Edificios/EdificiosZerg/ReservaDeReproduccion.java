@@ -22,7 +22,7 @@ public class ReservaDeReproduccion extends EdificioZerg {
     private ArrayList<Unidad> zerlings;
     	
     public ReservaDeReproduccion(Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(new Tiempo(-12), new Vida(1000), unaUbicacion, unJugador,"ReservaDeProduccion");
+    	super(new Tiempo(-12), new Vida(1000), unaUbicacion, unJugador,"ReservaDeReproduccion");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	

@@ -154,6 +154,6 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
     @Override
     public void moverse(Ubicacion unaUbicacion) {
-        this.ubicacion.cambiarUbicacion(unaUbicacion.obtenerX(), unaUbicacion.obtenerY());
+        this.ubicacion = unaUbicacion;
     }
 }

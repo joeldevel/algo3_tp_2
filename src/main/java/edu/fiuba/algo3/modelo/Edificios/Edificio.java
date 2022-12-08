@@ -29,11 +29,7 @@ public abstract class Edificio extends Raza implements Recuperable{
 	
 	public abstract void ejecutaOperable();
 	
-	public void avanzarTurno() {
-		this.tiempo.pasarTiempo();
-		this.estado.ejecutar();
-		this.recuperarse();
-	}
+	public abstract void avanzarTurno();
     
     @Override
     public abstract void recuperarse();

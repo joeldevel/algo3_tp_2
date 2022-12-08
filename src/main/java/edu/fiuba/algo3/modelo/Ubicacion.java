@@ -33,9 +33,14 @@ public class Ubicacion {
 	public boolean esIgualA(Ubicacion otraUbicacion) {
 		return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
 	}
-
-    public void cambiarUbicacion(int x, int y) {
-		this.posX = x;
-		this.posY = y;
+	
+	public boolean xDentroDeRango(int inicio, int fin) {
+		return ( (this.posX >= inicio) && (this.posX <= fin) );
 	}
+	
+	public boolean yDentroDeRango(int inicio, int fin) {
+		return ( (this.posY >= inicio) && (this.posY <= fin) );
+	}
+
+    
 }

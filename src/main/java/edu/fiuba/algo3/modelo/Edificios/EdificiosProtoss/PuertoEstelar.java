@@ -17,16 +17,14 @@ public class PuertoEstelar extends EdificioProtoss {
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 150;
 	
-	private ArrayList<Unidad> scoutsPedido;
-	private ArrayList<Unidad> scoutsProductivo;
+	private ArrayList<Unidad> scouts;
 	
     public PuertoEstelar(Ubicacion unaUbicacion, Jugador unJugador){
         super(new Tiempo(-10), new Vida(600), new Escudo(600), unaUbicacion, unJugador,"PuertoEstelar");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
-        this.scoutsPedido = new ArrayList<Unidad>();
-        this.scoutsProductivo = new ArrayList<Unidad>();
+        this.scouts = new ArrayList<Unidad>();
     }
 
     @Override
@@ -37,26 +35,27 @@ public class PuertoEstelar extends EdificioProtoss {
     @Override
     public void ejecutaOperable() {
     	if(this.estaEnergizado()) {
-    		this.crearScout();
+    		this.pasarScoutsProductivos();
     	}
     }
     
-    private void crearScout() {
-    	while(this.scoutsPedido.size() < 5) {
-    		this.scoutsPedido.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.ubicacion,this.jugador)));
-    	}
-    }
-   
     public void transportarScout() {
     	if(! (this.estaEnergizado())) {
     		throw new EdificioNoEnergizadoError();
+    	}
+    	while(this.scouts.size() < 5) {
+    		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.ubicacion,this.jugador)));
     	}
         /* aca debe ir la verificacion de requisitos*/
     	//this.scouts.add(new Unidad(new Scout()));
     }
 	
-    public ArrayList<Unidad> obtenerScouts(){
-		return (this.scoutsProductivo);
+    private void pasarScoutsProductivos(){
+		for(Unidad actual: this.scouts) {
+			if(actual.tiempoRestante() == 0) {
+				this.jugador.agregarUnidad(actual);
+			}
+		}
 	}
 
     @Override

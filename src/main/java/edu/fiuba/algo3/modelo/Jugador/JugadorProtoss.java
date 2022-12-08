@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
+import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
@@ -283,5 +284,54 @@ public class JugadorProtoss implements Jugador {
 			}
 		}
 		return verificado;
+	}
+	
+	public void destruirEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
+		this.edificios.remove(edificio);
+	}
+	
+	public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = null;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				edificio = actual;
+			}
+		}
+		if(edificio == null) {
+			throw new SinEdificioBuscadoError();
+		}
+		return edificio;
+	}
+	
+	@Override
+	public void agregarUnidad(Unidad unaUnidad) {
+		this.unidades.add(unaUnidad);
+	}
+	
+	public Acceso obtenerAccesoEn(Ubicacion unaUbicacion) {
+		Acceso acceso = null;
+		for(Edificio actual:this.edificios) {
+			if(actual.estaEn(unaUbicacion) && actual.esUn("Acceso")) {
+				acceso = (Acceso)actual;
+			}
+		}
+		if(acceso == null) {
+			throw new SinEdificioBuscadoError();
+		}
+		return acceso;
+	}
+	
+	public PuertoEstelar obtenerPuertoEstelarEn(Ubicacion unaUbicacion) {
+		PuertoEstelar puertoEstelar = null;
+		for(Edificio actual:this.edificios) {
+			if(actual.estaEn(unaUbicacion) && actual.esUn("PuertoEstelar")) {
+				puertoEstelar = (PuertoEstelar)actual;
+			}
+		}
+		if(puertoEstelar == null) {
+			throw new SinEdificioBuscadoError();
+		}
+		return puertoEstelar;
 	}
 }
