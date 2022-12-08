@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.FabricaDeEdificios;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
@@ -117,7 +119,11 @@ public class JugadorProtoss implements Jugador {
     public int obtenerMineral() {
         return this.recursos.obtenerMineral();
     }
-
+    
+    public void construir(String edificio,Ubicacion unaUbicacion, JugadorZerg jugadorZerg, Mapa mapa) {
+    	FabricaDeEdificios.construir(edificio, unaUbicacion, jugadorZerg, this, mapa);
+    }
+    /*
     public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
         this.edificios.add(new NexoMineral(unNodo, unaUbicacion, this));
     }
@@ -138,7 +144,7 @@ public class JugadorProtoss implements Jugador {
 
     public void crearPuertoEstelar(Ubicacion unaUbicacion) {
         this.edificios.add(new PuertoEstelar(unaUbicacion, this));
-    }
+    }*/
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
     public void crearZealot(Edificio unAcceso) {

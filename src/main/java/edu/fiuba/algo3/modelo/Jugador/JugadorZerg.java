@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.FabricaDeEdificios;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -136,7 +138,12 @@ public class JugadorZerg implements Jugador {
     public int obtenerMineral() {
         return this.recursos.obtenerMineral();
     }
+    
+    public void construir(String edificio,Ubicacion unaUbicacion,JugadorProtoss jugadorProtoss,Mapa mapa) {
+    	FabricaDeEdificios.construir(edificio, unaUbicacion, this, jugadorProtoss, mapa);
+    }
 
+    /*
     public Criadero crearCriadero(Ubicacion unaUbicacion) {
         Criadero criadero = new Criadero(unaUbicacion, this);
         this.edificios.add(criadero);
@@ -157,7 +164,7 @@ public class JugadorZerg implements Jugador {
 
     public void crearEspiral(Ubicacion unaUbicacion) {
         this.edificios.add(new Espiral(unaUbicacion, this));
-    }
+    }*/
 
     public Unidad crearAmoSupremo(Ubicacion unaUbicacion) {
 
