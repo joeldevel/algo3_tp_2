@@ -27,6 +27,16 @@ public class AlgoStarIniciado implements AlgoStarEstado {
     }
 
     @Override
+    public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
+
+        if (this.jugadores.get(0).compararRazas(this.jugadorTurno.obtenerRaza())) {
+            return this.jugadores.get(1);
+        } else {
+            return this.jugadores.get(0);
+        }
+    }
+
+    @Override
     public void avanzarTurno() {
 
         if (this.jugadores.get(0) == jugadorTurno) {

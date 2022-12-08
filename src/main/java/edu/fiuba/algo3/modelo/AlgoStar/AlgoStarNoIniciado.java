@@ -10,6 +10,11 @@ public class AlgoStarNoIniciado implements AlgoStarEstado {
     }
 
     @Override
+    public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
+        return null;
+    }
+
+    @Override
     public void avanzarTurno() {
         throw new AlgoStarFinalizadoException();
     }

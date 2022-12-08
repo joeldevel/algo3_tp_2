@@ -42,6 +42,7 @@ public class PantallaJuego extends BorderPane { // 24:47
                 algoStar.avanzarTurno();
                 setInformacion(algoStar);
                 setBotonera(algoStar);
+                vistaMapa.update();
             }
         });
 

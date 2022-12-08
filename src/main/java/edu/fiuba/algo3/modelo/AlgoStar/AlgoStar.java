@@ -38,6 +38,10 @@ public class AlgoStar {
         this.mapa = new Mapa();
     }
 
+    public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
+        return this.estado.obtenerJugadorContrario(jugadorTurno);
+    }
+
     public Mapa obtenerMapa() {
         return this.mapa;
     }
