@@ -27,6 +27,9 @@ public class App extends Application {
 
         // Pantalla de juego
         PantallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar);
+        //PantallaJuego pantallaJuego = new PantallaJuego(stage, algoStar);
+        //Scene escenaJuego = new Scene(pantallaJuego, 500, 500);
+        //escenaJuego.getStylesheets().add("file:src/main/resources/style.css");
 
         // Pantalla donde se ingresa la inforamacion de los jugadores
         PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, pantallaDeJuego.getScene(), algoStar, pantallaDeJuego);
