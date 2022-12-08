@@ -23,8 +23,8 @@ public class Mapa {
 
     private Moho moho;
     private ArrayList<Pilon> pilones;
-    private ArrayList<Volcan> volcanes;
-    private ArrayList<NodoMineral> nodosMinerales;
+    public ArrayList<Volcan> volcanes;
+    public ArrayList<NodoMineral> nodosMinerales;
     private ArrayList<Edificio> edificios;
 
     //private ArrayList<AreaTerrestre> areasTerrestres;
@@ -43,6 +43,14 @@ public class Mapa {
         this.crearAreas();
         
     }
+
+    public ArrayList<Volcan> volcanes() {
+    	return this.volcanes;
+	}
+
+	public ArrayList<NodoMineral> nodosMinerales() {
+		return this.nodosMinerales;
+	}
 
     public void crearBases() {
     	/* se crean bases manualmente */

@@ -24,7 +24,7 @@ public class PantallaJugadores extends VBox { // 20:00
 
     Stage stage;
 
-    public PantallaJugadores(Stage stage, Scene proximaEscena, AlgoStar algoStar, PantallaDeJuego proximaPantalla) {
+    public PantallaJugadores(Stage stage, Scene proximaEscena, AlgoStar algoStar, PantallaJuego proximaPantalla) {
         super();
 
         this.stage = stage;
@@ -143,7 +143,8 @@ public class PantallaJugadores extends VBox { // 20:00
         botonContinuar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //proximaPantalla.setMenu(algoStar);
+                proximaPantalla.setInformacion(algoStar);
+                proximaPantalla.setBotonera(algoStar);
                 stage.setScene(proximaEscena);
                 stage.setFullScreenExitHint("");
                 stage.setFullScreen(true);

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 public class PantallaJuego extends BorderPane { // 24:47
 
+    VistaMapa vistaMapa;
     Canvas canvasCentral;
     VBox contenedorCentral;
 
@@ -166,18 +167,24 @@ public class PantallaJuego extends BorderPane { // 24:47
     // Se crea la pantalla central donde estara el mapa
     public void setCentro(AlgoStar algostar) {
 
-        this.canvasCentral = new Canvas(460, 220);
+        // Se crea el canvas donde se dibujara
+
+        this.canvasCentral = new Canvas(1000, 500); // Ancho, Altura
+
         // Se dibuja el mapa
 
-        this.contenedorCentral = new VBox(canvasCentral);
-        contenedorCentral.setAlignment(Pos.CENTER);
-        contenedorCentral.setSpacing(20);
-        contenedorCentral.setPadding((new Insets(25)));
+        this.vistaMapa = new VistaMapa(algostar.obtenerMapa(), canvasCentral);
+        this.vistaMapa.dibujar();
 
-        Image imagen = new Image("file:src/main/resources/images/fondo-blanco.png", 500, 500, true, false);
-        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        contenedorCentral.setBackground(new Background(imagenDeFondo));
+        // Se ubica el canvas en el centro dle BorderPane
 
-        this.setCenter(contenedorCentral);
+        this.setCenter(canvasCentral);
+
+        // Se muestra por consola el punto sobre el canvas donde se hace click
+
+        this.canvasCentral.setOnMouseClicked(e -> {
+            System.out.println("x: " + e.getX());
+            System.out.println("y: " + e.getY() + "\n");
+        });
     }
 }
