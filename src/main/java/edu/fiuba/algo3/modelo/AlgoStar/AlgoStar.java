@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.JUGADOR_RAZA;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class AlgoStar {
 
     private AlgoStarEstado estado;
     public ArrayList<Jugador> jugadores;
+    public Mapa mapa;
 
     public AlgoStar() {
         //this.nombreJugador1 = "";
@@ -33,6 +35,11 @@ public class AlgoStar {
 
         this.jugadores = new ArrayList<Jugador>();
         this.setComportamientoEstado(new AlgoStarNoIniciado());
+        this.mapa = new Mapa();
+    }
+
+    public Mapa obtenerMapa() {
+        return this.obtenerMapa();
     }
 
     public Jugador obtenerJugadorTurno() {

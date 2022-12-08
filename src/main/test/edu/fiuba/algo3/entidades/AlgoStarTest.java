@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entidades;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Mapa;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -79,5 +80,16 @@ public class AlgoStarTest {
 
         // Assert
         assertEquals(true, jugador.compararNombres(jugadorEsperado));
+    }
+
+    @Test
+    public void test05PruebaIntegradora() {
+        // Arrange
+        AlgoStar juego = new AlgoStar();
+        juego.crearJugador("JugadorZerg", "Azul", "Zerg");
+        juego.crearJugador("JugadorProtoss", "Rojo", "Protoss");
+
+        // Turno de JugadorZerg
+        Jugador jugador = juego.obtenerJugadorTurno();
     }
 }
