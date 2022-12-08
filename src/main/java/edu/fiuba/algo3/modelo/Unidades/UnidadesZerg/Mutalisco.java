@@ -148,6 +148,6 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 
 	@Override
 	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion.cambiarUbicacion(unaUbicacion.obtenerX(), unaUbicacion.obtenerY());
+		this.ubicacion = unaUbicacion;
 	}
 }

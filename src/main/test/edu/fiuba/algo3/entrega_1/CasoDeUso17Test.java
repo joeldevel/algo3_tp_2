@@ -19,7 +19,7 @@ class CasoDeUso17Test {
 	Recursos otrosRecursos = new Recursos(10000,10000);
 	JugadorZerg jugadorZerg = new JugadorZerg("Brian","Azul",unosRecursos);
 	JugadorProtoss jugadorProtoss = new JugadorProtoss("Cristian","Rojo",otrosRecursos);
-	Mapa mapa = new Mapa(2);
+	Mapa mapa = new Mapa();
 	
 	@Test
 	void test01SiNoHayUnaReservaDeProduccionNoSePuedeConstruirUnaGuarida() {
@@ -39,7 +39,7 @@ class CasoDeUso17Test {
 		Ubicacion ubicacion3 = new Ubicacion(2,0);
 		
 		FabricaDeEdificios.construir("Criadero", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("ReservaDeProduccion", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
+		FabricaDeEdificios.construir("ReservaDeReproduccion", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
 		FabricaDeEdificios.construir("Guarida", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
 		
 		assertTrue(jugadorZerg.verificarEdificio("Guarida"));
@@ -66,7 +66,7 @@ class CasoDeUso17Test {
 		Ubicacion ubicacion4 = new Ubicacion(3,0);
 		
 		FabricaDeEdificios.construir("Criadero", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("ReservaDeProduccion", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
+		FabricaDeEdificios.construir("ReservaDeReproduccion", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
 		FabricaDeEdificios.construir("Guarida", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
 		FabricaDeEdificios.construir("Espiral", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
 		

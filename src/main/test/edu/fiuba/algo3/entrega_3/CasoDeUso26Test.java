@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
@@ -38,7 +39,7 @@ public class CasoDeUso26Test {
     @Test
     public void test02JugadorProtossConUnPilonConstruidoPuedeConstruirUnZealotYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
@@ -51,7 +52,7 @@ public class CasoDeUso26Test {
     @Test
     public void test03JugadorProtossConUnPilonConstruidoPuedeConstruirDosZealotYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
@@ -65,7 +66,7 @@ public class CasoDeUso26Test {
     @Test
     public void test04JugadorProtossConUnPilonConstruidoPuedeConstruirDosZealotYNoPuedeConstruirUnTercerZealot() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         jugadorProtoss.crearZealot(acceso);
         jugadorProtoss.crearZealot(acceso);
@@ -88,7 +89,7 @@ public class CasoDeUso26Test {
     @Test
     public void test06JugadorProtossConUnPilonConstruidoPuedeConstruirUnDragonYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
@@ -101,8 +102,8 @@ public class CasoDeUso26Test {
     @Test
     public void test07JugadorProtossConDosPilonesConstruidosPuedeConstruirDosDragonesYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
@@ -116,8 +117,8 @@ public class CasoDeUso26Test {
     @Test
     public void test08JugadorProtossConDosPilonConstruidosPuedeConstruirTresDragonesYNoPuedeConstruirUnCuartoDragon() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         jugadorProtoss.crearDragon(acceso);
         jugadorProtoss.crearDragon(acceso);
@@ -141,7 +142,7 @@ public class CasoDeUso26Test {
     @Test
     public void test10JugadorProtossConUnPilonConstruidoPuedeConstruirUnScoutYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
         PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
@@ -154,8 +155,8 @@ public class CasoDeUso26Test {
     @Test
     public void test11JugadorProtossConDosPilonesConstruidosPuedeConstruirDosScoutYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
         PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
 
         // Act
@@ -169,8 +170,8 @@ public class CasoDeUso26Test {
     @Test
     public void test12JugadorProtossConDosPilonConstruidosPuedeConstruirDosScoutYNoPuedeConstruirUnTercerScout() {
         // Arrange
-        jugadorProtoss.crearPilon(new Ubicacion(0,0));
-        jugadorProtoss.crearPilon(new Ubicacion(0,1));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
+        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
         PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
         jugadorProtoss.crearScout(puerto);
         jugadorProtoss.crearScout(puerto);
@@ -193,7 +194,7 @@ public class CasoDeUso26Test {
     @Test
     public void test14JugadorZergConUnCriaderoConstruidoPuedeConstruirUnZanganoYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -206,7 +207,7 @@ public class CasoDeUso26Test {
     @Test
     public void test15JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZanganosYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -223,7 +224,7 @@ public class CasoDeUso26Test {
     @Test
     public void test16JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZanganosYNoPuedeConstruirUnSextoZangano() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
         jugadorZerg.crearZangano(criadero);
         jugadorZerg.crearZangano(criadero);
@@ -249,7 +250,7 @@ public class CasoDeUso26Test {
     @Test
     public void test18JugadorZergConUnCriaderoConstruidoPuedeConstruirUnZerlingYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -262,7 +263,7 @@ public class CasoDeUso26Test {
     @Test
     public void test19JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZerlingsYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -279,7 +280,7 @@ public class CasoDeUso26Test {
     @Test
     public void test20JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZerlingsYNoPuedeConstruirUnSextoZerling() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
         jugadorZerg.crearZerling(reserva);
         jugadorZerg.crearZerling(reserva);
@@ -305,7 +306,7 @@ public class CasoDeUso26Test {
     @Test
     public void test22JugadorZergConUnCriaderoConstruidoPuedeConstruirUnHidraliscoYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -318,7 +319,7 @@ public class CasoDeUso26Test {
     @Test
     public void test23JugadorZergConUnCriaderoConstruidoPuedeConstruirDosHidraliscosYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -332,7 +333,7 @@ public class CasoDeUso26Test {
     @Test
     public void test24JugadorZergConUnCriaderoConstruidoPuedeConstruirDosHidraliscosYNoPuedeConstruirUnTercerHidralisco() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
         jugadorZerg.crearHidralisco(guarida);
         jugadorZerg.crearHidralisco(guarida);
@@ -355,7 +356,7 @@ public class CasoDeUso26Test {
     @Test
     public void test26JugadorZergConUnCriaderoConstruidoPuedeConstruirUnMutaliscoYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -368,8 +369,8 @@ public class CasoDeUso26Test {
     @Test
     public void test27JugadorZergConDosCriaderosConstruidosPuedeConstruirDosMutaliscosYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        jugadorZerg.crearCriadero(new Ubicacion(0,1));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,1),jugadorZerg));
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -383,8 +384,8 @@ public class CasoDeUso26Test {
     @Test
     public void test28JugadorZergConDosCriaderosConstruidosPuedeConstruirDosMutaliscosYNoPuedeConstruirUnTercerMutalisco() {
         // Arrange
-        jugadorZerg.crearCriadero(new Ubicacion(0,0));
-        jugadorZerg.crearCriadero(new Ubicacion(0,1));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
+        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,1),jugadorZerg));
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
         jugadorZerg.crearMutalisco(espiral);
         jugadorZerg.crearMutalisco(espiral);

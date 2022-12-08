@@ -26,10 +26,14 @@ public class App extends Application {
         AlgoStar algoStar = crearModelo();
 
         // Pantalla de juego
-        PantallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar);
+        //antallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar); // Pantalla de Cristian
+        PantallaJuego pantallaJuego = new PantallaJuego(stage, algoStar);
+        Scene escenaJuego = new Scene(pantallaJuego, 500, 500);
+        escenaJuego.getStylesheets().add("file:src/main/resources/style.css");
 
         // Pantalla donde se ingresa la inforamacion de los jugadores
-        PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, pantallaDeJuego.getScene(), algoStar, pantallaDeJuego);
+        //PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, pantallaDeJuego.getScene(), algoStar, pantallaDeJuego); // Pantalla de Cristian
+        PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, escenaJuego, algoStar, pantallaJuego);
         Scene escenaJugadores = new Scene(pantallaJugadores, 500, 500);
         escenaJugadores.getStylesheets().add("file:src/main/resources/style.css");
 
@@ -43,7 +47,6 @@ public class App extends Application {
         stage.setFullScreen(true);
 
         stage.show();
-        
     }
 
     private AlgoStar crearModelo() {

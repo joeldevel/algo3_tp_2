@@ -48,4 +48,8 @@ public class Origen {
 	public boolean afectaLaUbicacion(Ubicacion unaUbicacion) {
 		return (this.ubicacion.distanciaCon(unaUbicacion) <= this.radio);
 	}
+	
+	public boolean estaEn(Ubicacion unaUbicacion) {
+		return (this.ubicacion.esIgualA(unaUbicacion));
+	}
 }

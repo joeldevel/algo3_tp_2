@@ -60,5 +60,8 @@ public class NodoMineral implements Mineral {
     public boolean estaEn(Ubicacion unaUbicacion) {
     	return (this.ubicacion.esIgualA(unaUbicacion));
     }
-    
+
+    public Ubicacion ubicacion() {
+        return this.ubicacion;
+    }
 }

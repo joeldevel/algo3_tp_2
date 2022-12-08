@@ -19,6 +19,14 @@ public abstract class EdificioProtoss extends Edificio {
     	this.escudo = unEscudo;
     	this.energia = new Energia();
     }
+    
+    @Override
+    public void avanzarTurno() {
+		this.tiempo.pasarTiempo();
+		this.estado.ejecutar();
+		this.energia.apagarEnergia();
+		this.recuperarse();
+	}
         
     @Override
     public void recuperarse() {

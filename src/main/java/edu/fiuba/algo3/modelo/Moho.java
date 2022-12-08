@@ -3,7 +3,8 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Excepciones.OrigenNoEncontradoError;
 
 public class Moho {
  
@@ -19,24 +20,35 @@ public class Moho {
 		return (! (this.ubicacionesAfectadas.isEmpty()));
 	}
 	
-	public void agregarOrigen(Ubicacion unaUbicacion) {
+	public void agregarOrigen(Ubicacion unaUbicacion,ArrayList<Edificio> edificios) {
 		Origen nuevoOrigen = new Origen(unaUbicacion,new Tiempo(0),5);
 		origenes.add(nuevoOrigen);
-		this.actualizarUbicacionesAfectadas();
+		this.actualizarUbicacionesAfectadas(edificios);
 	}
 	
-	private void actualizarUbicacionesAfectadas() {
+	private void actualizarUbicacionesAfectadas(ArrayList<Edificio> edificios) {
 		
 		for(Origen actual: this.origenes) {
 			
 			for(int i = actual.limiteIzquierdo(); i <= actual.limiteDerecho(); i++) {
 				for(int j = actual.limiteInferior(); j <= actual.limiterSuperior(); j++) {
 					Ubicacion nueva = new Ubicacion(i,j);
-					if((actual.afectaLaUbicacion(nueva)) && (!(this.estaAfectadaLaUbicacion(nueva)))) {
+					if( (actual.afectaLaUbicacion(nueva)) && (!(this.estaAfectadaLaUbicacion(nueva))) ) {
 						this.ubicacionesAfectadas.add(nueva);
 					}
 				}
 			}
+		}
+		ArrayList<Ubicacion> aBorrar = new ArrayList<Ubicacion>();
+		for(Ubicacion ubicacion: this.ubicacionesAfectadas) {
+			for(Edificio edificio: edificios) {
+				if(edificio.estaEn(ubicacion)) {
+					aBorrar.add(ubicacion);
+				}
+			}
+		}
+		for(Ubicacion ubicacion: aBorrar) {
+			this.ubicacionesAfectadas.remove(ubicacion);
 		}
 		
 	}
@@ -55,19 +67,36 @@ public class Moho {
 		return (this.ubicacionesAfectadas.size());
 	}
 	
-	public void avanzarTurno(int cantidad) {
+	public void avanzarTurno(int cantidad,ArrayList<Edificio> edificios) {
 		if(cantidad > 0) {
     		for(int i=0; i< cantidad; i++) {
-    			this.avanzarTurno();
+    			this.avanzarTurno(edificios);
     		}
     	}
 	}
 	
-	public void avanzarTurno() {
+	public void avanzarTurno(ArrayList<Edificio> edificios) {
 		for(Origen actual: this.origenes) {
 			actual.avanzarTurno();
 		}
-		this.actualizarUbicacionesAfectadas();			
+		this.actualizarUbicacionesAfectadas(edificios);			
 	}
 	
+	public void destruirOrigenEn(Ubicacion unaUbicacion) {
+		Origen origen = this.obtenerOrigenEn(unaUbicacion);
+		this.origenes.remove(origen);
+	}
+	
+	private Origen obtenerOrigenEn(Ubicacion unaUbicacion) {
+		Origen origen = null;
+		for(Origen actual: this.origenes) {
+			if(actual.estaEn(unaUbicacion)) {
+				origen = actual;
+			}
+		}
+		if(origen == null) {
+			throw new OrigenNoEncontradoError();
+		}
+		return origen;
+	}
 }
