@@ -123,6 +123,7 @@ public class JugadorProtoss implements Jugador {
     public void construir(String edificio,Ubicacion unaUbicacion, JugadorZerg jugadorZerg, Mapa mapa) {
     	FabricaDeEdificios.construir(edificio, unaUbicacion, jugadorZerg, this, mapa);
     }
+
     /*
     public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
         this.edificios.add(new NexoMineral(unNodo, unaUbicacion, this));
