@@ -39,7 +39,7 @@ public class AlgoStar {
     }
 
     public Mapa obtenerMapa() {
-        return this.obtenerMapa();
+        return this.mapa;
     }
 
     public Jugador obtenerJugadorTurno() {

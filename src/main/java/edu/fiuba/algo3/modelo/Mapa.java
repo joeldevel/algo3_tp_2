@@ -177,17 +177,22 @@ public class Mapa {
         return ocupada;
     }*/
     
-    public boolean verificarUbicacionLibre(Ubicacion unaUbicacion, Jugador unJugador, Jugador otroJugador) {
-    	return (!unJugador.tieneEdificioEnUbicacion(unaUbicacion) && 
-    			!otroJugador.tieneEdificioEnUbicacion(unaUbicacion));
+    public boolean verificarUbicacionLibre(Ubicacion unaUbicacion) {
+    	boolean verificado = true;
+    	for(Edificio actual: this.edificios) {
+    		if(actual.estaEn(unaUbicacion)) {
+    			verificado = false;
+    		}
+    	}
+    	return verificado;
     }
     
-   public boolean verificarConstruccionZerg(Ubicacion unaUbicacion, JugadorZerg jugadorZerg, JugadorProtoss jugadorProtoss) {
+   public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
 	   return ( (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) && 
 				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
    }
    
-   public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion,JugadorZerg jugadorZerg,JugadorProtoss jugadorProtoss) {
+   public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
 	   return ( (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) && 
 				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
    }

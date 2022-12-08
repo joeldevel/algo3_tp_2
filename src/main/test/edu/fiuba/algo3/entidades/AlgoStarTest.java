@@ -92,5 +92,7 @@ public class AlgoStarTest {
         // Turno de JugadorZerg
         Jugador jugador = juego.obtenerJugadorTurno();
         Mapa mapa = juego.obtenerMapa();
+        
+        jugador.construir(null, null, jugador, mapa);
     }
 }

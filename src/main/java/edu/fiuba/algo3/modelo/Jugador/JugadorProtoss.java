@@ -120,8 +120,8 @@ public class JugadorProtoss implements Jugador {
         return this.recursos.obtenerMineral();
     }
     
-    public void construir(String edificio,Ubicacion unaUbicacion, JugadorZerg jugadorZerg, Mapa mapa) {
-    	FabricaDeEdificios.construir(edificio, unaUbicacion, jugadorZerg, this, mapa);
+    public void construir(String edificio,Ubicacion unaUbicacion, Jugador jugador, Mapa mapa) {
+    	FabricaDeEdificios.construir(edificio, unaUbicacion, jugador, this, mapa);
     }
 
     /*

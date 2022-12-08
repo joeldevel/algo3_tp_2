@@ -139,7 +139,7 @@ public class JugadorZerg implements Jugador {
         return this.recursos.obtenerMineral();
     }
     
-    public void construir(String edificio,Ubicacion unaUbicacion,JugadorProtoss jugadorProtoss,Mapa mapa) {
+    public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugadorProtoss,Mapa mapa) {
     	FabricaDeEdificios.construir(edificio, unaUbicacion, this, jugadorProtoss, mapa);
     }
 
