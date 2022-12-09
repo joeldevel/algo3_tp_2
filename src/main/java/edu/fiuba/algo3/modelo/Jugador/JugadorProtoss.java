@@ -247,6 +247,8 @@ public class JugadorProtoss implements Jugador {
         for (Unidad unidad : this.unidades) {
             unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
         }
+
+        this.recursos.guardar(10, 10);
     }
 
     @Override
