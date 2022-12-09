@@ -11,12 +11,12 @@ public class AlgoStarFinalizado implements AlgoStarEstado {
 
     @Override
     public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
-        return null;
+        throw new AlgoStarFinalizadoException();
     }
 
     @Override
     public Mapa obtenerMapa() {
-        return null;
+        throw new AlgoStarFinalizadoException();
     }
 
     @Override
@@ -26,6 +26,6 @@ public class AlgoStarFinalizado implements AlgoStarEstado {
 
     @Override
     public Jugador obtenerJugadorTurno() {
-        return null;
+        throw new AlgoStarFinalizadoException();
     }
 }
