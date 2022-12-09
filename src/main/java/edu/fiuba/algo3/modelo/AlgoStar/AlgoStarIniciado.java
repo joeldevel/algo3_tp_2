@@ -11,10 +11,10 @@ public class AlgoStarIniciado implements AlgoStarEstado {
     private Jugador jugadorTurno;
     private Mapa mapa;
 
-    public AlgoStarIniciado(ArrayList<Jugador> unosJugadores) {
+    public AlgoStarIniciado(ArrayList<Jugador> unosJugadores, Mapa mapa) {
         this.jugadores = unosJugadores;
         this.jugadorTurno = unosJugadores.get(0); // Comienza el jugador 1
-        this.mapa = new Mapa();
+        this.mapa = mapa;
     }
 
     public void setJugador(Jugador unJugador) {
@@ -34,6 +34,11 @@ public class AlgoStarIniciado implements AlgoStarEstado {
         } else {
             return this.jugadores.get(0);
         }
+    }
+
+    @Override
+    public Mapa obtenerMapa() {
+        return this.mapa;
     }
 
     @Override

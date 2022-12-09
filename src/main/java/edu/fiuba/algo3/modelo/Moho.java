@@ -44,6 +44,7 @@ public class Moho {
 				}
 			}
 		}
+
 		ArrayList<Ubicacion> aBorrar = new ArrayList<Ubicacion>();
 		for(Ubicacion ubicacion: this.ubicacionesAfectadas) {
 			for(Edificio edificio: edificios) {
@@ -55,7 +56,6 @@ public class Moho {
 		for(Ubicacion ubicacion: aBorrar) {
 			this.ubicacionesAfectadas.remove(ubicacion);
 		}
-		
 	}
 	
 	public boolean estaAfectadaLaUbicacion(Ubicacion unaUbicacion) {
@@ -84,6 +84,7 @@ public class Moho {
 		for(Origen actual: this.origenes) {
 			actual.avanzarTurno();
 		}
+
 		this.actualizarUbicacionesAfectadas(edificios);			
 	}
 	

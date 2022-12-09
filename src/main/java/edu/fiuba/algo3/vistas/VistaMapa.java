@@ -28,7 +28,7 @@ public class VistaMapa {
 
         for(Ubicacion ubicacion: this.mapa.ubicacionesConMoho()) {
             this.canvas.getGraphicsContext2D().setFill(Color.GREEN);
-            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 10, 10); // Posicion x, posicion y, ancho, altura
+            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 1, 1); // Posicion x, posicion y, ancho, altura
         }
 
         for(Volcan volcan: this.mapa.volcanes()) {

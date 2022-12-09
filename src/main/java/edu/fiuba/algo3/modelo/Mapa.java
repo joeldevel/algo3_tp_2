@@ -41,7 +41,6 @@ public class Mapa {
         
         this.crearBases();
         this.crearAreas();
-        
     }
 
 	public ArrayList<Ubicacion> ubicacionesConMoho() {
@@ -93,6 +92,7 @@ public class Mapa {
     			verificado = true;
     		}
     	}
+
     	return verificado;
     }
     
@@ -107,12 +107,12 @@ public class Mapa {
     }
     
    public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) && 
+	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) &&
 				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
    }
    
    public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) && 
+	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) &&
 				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
    }
    
@@ -249,7 +249,7 @@ public class Mapa {
    }
    
    public void avanzarTurno() {
-	   this.energizarEdificios();
-	   this.moho.avanzarTurno(edificios);
+	   	this.energizarEdificios();
+	   	this.moho.avanzarTurno(this.edificios);
    }
 }

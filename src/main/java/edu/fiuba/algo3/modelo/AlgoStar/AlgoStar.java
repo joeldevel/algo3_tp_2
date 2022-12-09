@@ -34,8 +34,8 @@ public class AlgoStar {
         //this.colorJugador2 = null;
 
         this.jugadores = new ArrayList<Jugador>();
-        this.setComportamientoEstado(new AlgoStarNoIniciado());
         this.mapa = new Mapa();
+        this.setComportamientoEstado(new AlgoStarNoIniciado(mapa));
     }
 
     public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
@@ -43,7 +43,7 @@ public class AlgoStar {
     }
 
     public Mapa obtenerMapa() {
-        return this.mapa;
+        return this.estado.obtenerMapa();
     }
 
     public Jugador obtenerJugadorTurno() {
@@ -60,7 +60,7 @@ public class AlgoStar {
             this.jugadores.add(new JugadorProtoss(unNombre, unColor));
         }
 
-        this.setComportamientoEstado(new AlgoStarIniciado(jugadores));
+        this.setComportamientoEstado(new AlgoStarIniciado(this.jugadores, this.mapa));
     }
 
     public boolean validarNombre(String unNombre) {

@@ -64,7 +64,7 @@ class CasoDeUso06Test {
 		moho.agregarOrigen(new Ubicacion(0,0), edificios);
 		
 		moho.avanzarTurno(2, edificios);
-		
+
 		assertEquals(moho.contarUbicacionesAfectadas(),113);
 		
 	}
