@@ -70,8 +70,7 @@ public class FabricaDeEdificios {
 				unMapa.agregarEdificio(pilon);
 				unMapa.agregarPilon(pilon);
 			}
-			if((unEdificio == "Asimilador") && (unMapa.verificarConstruccionProtoss(unaUbicacion)) && 
-			   (unMapa.verificarVolcanEnUbicacion(unaUbicacion))) {
+			if((unEdificio == "Asimilador") && (unMapa.verificarVolcanEnUbicacion(unaUbicacion) && (unMapa.verificarConstruccionProtoss(unaUbicacion)))) {
 				
 				Asimilador asimilador = new Asimilador(unMapa.volcanEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss);
 				jugadorProtoss.agregarEdificio(asimilador);

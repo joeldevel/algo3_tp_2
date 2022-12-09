@@ -48,7 +48,7 @@ public class AlgoStarIniciado implements AlgoStarEstado {
         for(Jugador actual: this.jugadores) {
         	actual.avanzarTurno();
         }
+
         this.mapa.avanzarTurno();
-        
     }
 }
