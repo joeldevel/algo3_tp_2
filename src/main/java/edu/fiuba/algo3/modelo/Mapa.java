@@ -1,16 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Areas.AreaEspacial;
-import edu.fiuba.algo3.modelo.Areas.AreaTerrestre;
-import edu.fiuba.algo3.modelo.Areas.Base;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
-import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 
@@ -18,8 +11,8 @@ import java.util.ArrayList;
 
 public class Mapa {
 
-	private static int TAMANIO_HORIZONTAL = 100;
-	private static int TAMANIO_VERTICAL = 100;
+	private static int ANCHO = 1000;
+	private static int ALTURA = 500;
 
     private Moho moho;
     private ArrayList<Pilon> pilones;
@@ -59,30 +52,36 @@ public class Mapa {
 		return this.edificios;
 	}
 
+	public ArrayList<Ubicacion> areasEspaciales() {
+		return this.areasEspaciales;
+	}
+
     public void crearBases() {
-    	/* se crean bases manualmente */
+    	// Primer base creada manualmente
     	this.agregarVolcan(new Ubicacion(10,10));
-    	this.agregarVolcan(new Ubicacion(90,90));
     	this.agregarNodoMineral(new Ubicacion(10,20));
     	this.agregarNodoMineral(new Ubicacion(20,10));
     	this.agregarNodoMineral(new Ubicacion(20,20));
-    	this.agregarNodoMineral(new Ubicacion(90,80));
-    	this.agregarNodoMineral(new Ubicacion(80,80));
-    	this.agregarNodoMineral(new Ubicacion(80,90));
+
+		// Segunda base creada manualmente
+		this.agregarVolcan(new Ubicacion(990,490));
+		this.agregarNodoMineral(new Ubicacion(990,480));
+		this.agregarNodoMineral(new Ubicacion(980,490));
+		this.agregarNodoMineral(new Ubicacion(980,480));
     }
     
     public void crearAreas() {
-    	/* se crean las areas manualmente*/
-    	for(int i= 40; i<60; i++) {
-    		for(int j= 40; j<60; j++) {
+    	// Areas espaciales creadas manualmente
+    	for(int i = 250; i < 750; i++) {
+    		for(int j = 125; j < 375; j++) {
     			this.areasEspaciales.add(new Ubicacion(i,j));
     		}
     	}
     }
     
     public boolean ubicacionEstaDentroDeMapa(Ubicacion unaUbicacion) {
-    	return( (unaUbicacion.xDentroDeRango(0,this.TAMANIO_HORIZONTAL)) && 
-    			(unaUbicacion.yDentroDeRango(0,this.TAMANIO_VERTICAL)) );
+    	return( (unaUbicacion.xDentroDeRango(0, ANCHO)) &&
+    			(unaUbicacion.yDentroDeRango(0, ALTURA)) );
     }
     
     public boolean verificarAreaEspacial(Ubicacion ubicacion) {

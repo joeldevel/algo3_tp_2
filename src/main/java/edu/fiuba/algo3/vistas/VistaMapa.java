@@ -9,6 +9,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import static edu.fiuba.algo3.vistas.PantallaJuego.ALTURA;
+import static edu.fiuba.algo3.vistas.PantallaJuego.ANCHO;
+
 public class VistaMapa {
 
     private Mapa mapa;
@@ -48,13 +51,18 @@ public class VistaMapa {
 
         for(Edificio edificio: this.mapa.edificios()) {
             Ubicacion ubicacion = edificio.ubicacion();
-            this.canvas.getGraphicsContext2D().setFill(Color.BLACK);
+            this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
             this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 5, 5); // Posicion x, posicion y, ancho, altura
+        }
+
+        for(Ubicacion ubicacion: this.mapa.areasEspaciales()) {
+            this.canvas.getGraphicsContext2D().setFill(Color.BLACK);
+            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 1, 1); // Posicion x, posicion y, ancho, altura
         }
     }
 
     public void clean() {
-        Image imagen = new Image("file:src/main/resources/images/field2.png", 1000, 500, true, false);
+        Image imagen = new Image("file:src/main/resources/images/field2.png", ANCHO, ALTURA, false, false);
         this.canvas.getGraphicsContext2D().drawImage(imagen, 0, 0);
 
         //this.canvas.getGraphicsContext2D().setFill(Color.LIGHTBLUE);
