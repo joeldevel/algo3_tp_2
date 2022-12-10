@@ -32,6 +32,7 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.CONSTRUCCI
 
 public class JugadorZerg implements Jugador {
 
+    private static final String RAZA = "Zerg";
     private static final int MAX_POBLACION = 200;
     private static final int CANT_MINERAL_INICIAL = 200;
 
@@ -101,7 +102,7 @@ public class JugadorZerg implements Jugador {
 
     @Override
     public String obtenerRaza() {
-        return "Zerg";
+        return RAZA;
     }
 
     @Override
@@ -142,29 +143,6 @@ public class JugadorZerg implements Jugador {
     public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugadorProtoss,Mapa mapa) {
     	FabricaDeEdificios.construir(edificio, unaUbicacion, this, jugadorProtoss, mapa);
     }
-
-    /*
-    public Criadero crearCriadero(Ubicacion unaUbicacion) {
-        Criadero criadero = new Criadero(unaUbicacion, this);
-        this.edificios.add(criadero);
-        return criadero;
-    }
-
-    public void crearReservaDeProduccion(Ubicacion unaUbicacion) {
-        this.edificios.add(new ReservaDeReproduccion(unaUbicacion, this));
-    }
-
-    public void crearExtractor(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.edificios.add(new Extractor(unVolcan, unaUbicacion, this));
-    }
-
-    public void crearGuarida(Ubicacion unaUbicacion) {
-        this.edificios.add(new Guarida(unaUbicacion, this));
-    }
-
-    public void crearEspiral(Ubicacion unaUbicacion) {
-        this.edificios.add(new Espiral(unaUbicacion, this));
-    }*/
 
     public Unidad crearAmoSupremo(Ubicacion unaUbicacion) {
 
@@ -320,6 +298,8 @@ public class JugadorZerg implements Jugador {
         for (Unidad unidad : this.unidades) {
             unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
         }
+
+        this.recursos.guardar(5, 5);
     }
 
     @Override

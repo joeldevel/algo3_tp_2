@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Ubicacion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,6 +22,9 @@ public class PantallaJuego extends BorderPane { // 24:47
     VistaMapa vistaMapa;
     Canvas canvasCentral;
     VBox contenedorCentral;
+
+    private int coordenadaX;
+    private int coordenadaY;
 
     public PantallaJuego(Stage stage, AlgoStar algoStar) {
         this.setFondo();
@@ -42,6 +46,7 @@ public class PantallaJuego extends BorderPane { // 24:47
                 algoStar.avanzarTurno();
                 setInformacion(algoStar);
                 setBotonera(algoStar);
+                vistaMapa.update();
             }
         });
 
@@ -69,7 +74,9 @@ public class PantallaJuego extends BorderPane { // 24:47
         // Se muestra por consola el punto sobre el canvas donde se hace click
 
         this.canvasCentral.setOnMouseClicked(e -> {
+            this.coordenadaX = (int) e.getX();
             System.out.println("x: " + e.getX());
+            this.coordenadaY = (int) e.getY();
             System.out.println("y: " + e.getY() + "\n");
         });
     }
@@ -122,23 +129,34 @@ public class PantallaJuego extends BorderPane { // 24:47
         this.setLeft(contenedorVerticalInformacion);
     }
 
-    public void setBotonera(AlgoStar algostar) {
-        Jugador jugadorActual = algostar.obtenerJugadorTurno();
+    public void setBotonera(AlgoStar algoStar) {
+        Jugador jugadorActual = algoStar.obtenerJugadorTurno();
 
         if (jugadorActual.obtenerRaza().equals("Zerg")) {
-            this.setBotoneraZerg(jugadorActual);
+            this.setBotoneraZerg(algoStar);
         } else {
-            this.setBotoneraProtoss(jugadorActual);
+            this.setBotoneraProtoss(algoStar);
         }
     }
 
     // Se crea la botonera Zerg con los edificios y unidades correspondientes.
-    public void setBotoneraZerg(Jugador jugadorZerg) {
+    public void setBotoneraZerg(AlgoStar algoStar) {
+        Jugador jugadorZerg = algoStar.obtenerJugadorTurno();
+        Jugador jugadorProtoss = algoStar.obtenerJugadorContrario(jugadorZerg);
 
         // Edificios
 
         Button criadero = new Button();
         criadero.setText("Crear criadero ");
+
+        criadero.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                jugadorZerg.construir("Criadero", new Ubicacion(coordenadaX, coordenadaY), jugadorProtoss, algoStar.obtenerMapa());
+                vistaMapa.update();
+                setInformacion(algoStar);
+            }
+        });
 
         Button reserva = new Button();
         reserva.setText(" Crear reserva ");
@@ -164,7 +182,9 @@ public class PantallaJuego extends BorderPane { // 24:47
     }
 
     // Se crea la botonera Protoss con los edificios y unidades correspondientes.
-    public void setBotoneraProtoss(Jugador jugadorProtoss) {
+    public void setBotoneraProtoss(AlgoStar algoStar) {
+        Jugador jugadorProtoss = algoStar.obtenerJugadorTurno();
+        Jugador jugadorZerg = algoStar.obtenerJugadorContrario(jugadorProtoss);
 
         Button nexo = new Button();
         nexo.setText("   Crear nexo   ");
@@ -172,8 +192,26 @@ public class PantallaJuego extends BorderPane { // 24:47
         Button pilon = new Button();
         pilon.setText("  Crear pilon   ");
 
+        pilon.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                jugadorProtoss.construir("Pilon", new Ubicacion(coordenadaX, coordenadaY), jugadorZerg, algoStar.obtenerMapa());
+                vistaMapa.update();
+                setInformacion(algoStar);
+            }
+        });
+
         Button asimilador = new Button();
         asimilador.setText("Crear asimilador");
+
+        asimilador.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                jugadorProtoss.construir("Asimilador", new Ubicacion(coordenadaX, coordenadaY), jugadorZerg, algoStar.obtenerMapa());
+                vistaMapa.update();
+                setInformacion(algoStar);
+            }
+        });
 
         Button acceso = new Button();
         acceso.setText("  Crear acceso  ");

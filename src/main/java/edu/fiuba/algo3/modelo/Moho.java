@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Excepciones.OrigenNoEncontradoError;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 
 public class Moho {
  
@@ -14,6 +15,10 @@ public class Moho {
 	public Moho() {
 		this.origenes = new ArrayList<Origen>();
 		this.ubicacionesAfectadas = new ArrayList<Ubicacion>();
+	}
+
+	public ArrayList<Ubicacion> ubicacionesConMoho() {
+		return this.ubicacionesAfectadas;
 	}
 	
 	public boolean tieneUbicacionesAfectadas() {
@@ -39,6 +44,7 @@ public class Moho {
 				}
 			}
 		}
+
 		ArrayList<Ubicacion> aBorrar = new ArrayList<Ubicacion>();
 		for(Ubicacion ubicacion: this.ubicacionesAfectadas) {
 			for(Edificio edificio: edificios) {
@@ -50,7 +56,6 @@ public class Moho {
 		for(Ubicacion ubicacion: aBorrar) {
 			this.ubicacionesAfectadas.remove(ubicacion);
 		}
-		
 	}
 	
 	public boolean estaAfectadaLaUbicacion(Ubicacion unaUbicacion) {
@@ -79,6 +84,7 @@ public class Moho {
 		for(Origen actual: this.origenes) {
 			actual.avanzarTurno();
 		}
+
 		this.actualizarUbicacionesAfectadas(edificios);			
 	}
 	

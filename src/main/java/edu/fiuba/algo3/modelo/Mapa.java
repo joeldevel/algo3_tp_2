@@ -23,8 +23,8 @@ public class Mapa {
 
     private Moho moho;
     private ArrayList<Pilon> pilones;
-    public ArrayList<Volcan> volcanes;
-    public ArrayList<NodoMineral> nodosMinerales;
+    private ArrayList<Volcan> volcanes;
+    private ArrayList<NodoMineral> nodosMinerales;
     private ArrayList<Edificio> edificios;
 
     //private ArrayList<AreaTerrestre> areasTerrestres;
@@ -41,8 +41,11 @@ public class Mapa {
         
         this.crearBases();
         this.crearAreas();
-        
     }
+
+	public ArrayList<Ubicacion> ubicacionesConMoho() {
+		return this.moho.ubicacionesConMoho();
+	}
 
     public ArrayList<Volcan> volcanes() {
     	return this.volcanes;
@@ -50,6 +53,10 @@ public class Mapa {
 
 	public ArrayList<NodoMineral> nodosMinerales() {
 		return this.nodosMinerales;
+	}
+
+	public ArrayList<Edificio> edificios() {
+		return this.edificios;
 	}
 
     public void crearBases() {
@@ -85,6 +92,7 @@ public class Mapa {
     			verificado = true;
     		}
     	}
+
     	return verificado;
     }
     
@@ -99,12 +107,12 @@ public class Mapa {
     }
     
    public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) && 
+	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) &&
 				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
    }
    
    public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) && 
+	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) &&
 				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
    }
    
@@ -241,7 +249,7 @@ public class Mapa {
    }
    
    public void avanzarTurno() {
-	   this.energizarEdificios();
-	   this.moho.avanzarTurno(edificios);
+	   	this.energizarEdificios();
+	   	this.moho.avanzarTurno(this.edificios);
    }
 }

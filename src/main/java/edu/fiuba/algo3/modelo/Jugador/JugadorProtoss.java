@@ -25,6 +25,7 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.SUMINISTRO_
 
 public class JugadorProtoss implements Jugador {
 
+    private static final String RAZA = "Protoss";
     private static final int MAX_POBLACION = 200;
     private static final int CANT_MINERAL_INICIAL = 200;
 
@@ -82,7 +83,7 @@ public class JugadorProtoss implements Jugador {
 
     @Override
     public String obtenerRaza() {
-        return "Protoss";
+        return RAZA;
     }
 
     @Override
@@ -123,29 +124,6 @@ public class JugadorProtoss implements Jugador {
     public void construir(String edificio,Ubicacion unaUbicacion, Jugador jugador, Mapa mapa) {
     	FabricaDeEdificios.construir(edificio, unaUbicacion, jugador, this, mapa);
     }
-
-    /*
-    public void crearNexoMineral(Ubicacion unaUbicacion, NodoMineral unNodo) {
-        this.edificios.add(new NexoMineral(unNodo, unaUbicacion, this));
-    }
-
-    public Pilon crearPilon(Ubicacion unaUbicacion) {
-        Pilon pilon = new Pilon(unaUbicacion, this);
-        this.edificios.add(pilon);
-        return pilon;
-    }
-
-    public void crearAsimilador(Ubicacion unaUbicacion, Volcan unVolcan) {
-        this.edificios.add(new Asimilador(unVolcan, unaUbicacion, this));
-    }
-
-    public void crearAcceso(Ubicacion unaUbicacion) {
-        this.edificios.add(new Acceso(unaUbicacion, this));
-    }
-
-    public void crearPuertoEstelar(Ubicacion unaUbicacion) {
-        this.edificios.add(new PuertoEstelar(unaUbicacion, this));
-    }*/
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
     public void crearZealot(Edificio unAcceso) {
@@ -247,6 +225,8 @@ public class JugadorProtoss implements Jugador {
         for (Unidad unidad : this.unidades) {
             unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
         }
+
+        this.recursos.guardar(5, 5);
     }
 
     @Override

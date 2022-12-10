@@ -14,32 +14,22 @@ public class AlgoStar {
 
     public static final int JUGADOR_MIN_NOMBRE = 6;
 
-    //private String nombreJugador1;
-    //private String nombreJugador2;
-    //private JUGADOR_COLOR colorJugador1;
-    //private JUGADOR_COLOR colorJugador2;
-    //private JUGADOR_RAZA razaJugador1;
-    //private JUGADOR_RAZA razaJugador2;
-
     private AlgoStarEstado estado;
     public ArrayList<Jugador> jugadores;
     public Mapa mapa;
 
     public AlgoStar() {
-        //this.nombreJugador1 = "";
-        //this.nombreJugador2 = "";
-        //this.razaJugador1 = null;
-        //this.razaJugador2 = null;
-        //this.colorJugador1 = null;
-        //this.colorJugador2 = null;
-
         this.jugadores = new ArrayList<Jugador>();
-        this.setComportamientoEstado(new AlgoStarNoIniciado());
         this.mapa = new Mapa();
+        this.setComportamientoEstado(new AlgoStarNoIniciado(mapa));
+    }
+
+    public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
+        return this.estado.obtenerJugadorContrario(jugadorTurno);
     }
 
     public Mapa obtenerMapa() {
-        return this.mapa;
+        return this.estado.obtenerMapa();
     }
 
     public Jugador obtenerJugadorTurno() {
@@ -56,7 +46,7 @@ public class AlgoStar {
             this.jugadores.add(new JugadorProtoss(unNombre, unColor));
         }
 
-        this.setComportamientoEstado(new AlgoStarIniciado(jugadores));
+        this.setComportamientoEstado(new AlgoStarIniciado(this.jugadores, this.mapa));
     }
 
     public boolean validarNombre(String unNombre) {
@@ -72,27 +62,6 @@ public class AlgoStar {
         }
 
         return true;
-
-        /*if (nombreJugador1.length() == 0) {
-            if (nombre.trim().length() < JUGADOR_MIN_NOMBRE) {
-                return false;
-            }
-            nombreJugador1 = nombre;
-            return true;
-        }
-        // jugador 1 ya fue seteado
-        if (nombreJugador2.length() == 0) {
-            if (nombre.trim().length() < JUGADOR_MIN_NOMBRE) {
-                return false;
-            }
-            if (nombreJugador1.toLowerCase().trim().equals(nombre.toLowerCase().trim())) {
-                return false;
-            }
-            // no son iguales
-            nombreJugador2 = nombre;
-            return true;
-        }
-        return false;*/
     }
 
     public boolean validarColor(String unColor) {
@@ -103,30 +72,6 @@ public class AlgoStar {
         }
 
         return true;
-
-        /*if (colorJugador1 == null) {
-            for (JUGADOR_COLOR c : JUGADOR_COLOR.values()) {
-                if (c == color) {
-                    colorJugador1 = color;
-                    return true;
-                }
-            }
-            return false;
-        }
-        // jugador 1 ya fue seteado
-        if (colorJugador2 == null) {
-            if (color == colorJugador1) {
-                return false;
-            }
-            for (JUGADOR_COLOR c : JUGADOR_COLOR.values()) {
-                if (c == color) {
-                    colorJugador2 = color;
-                    return true;
-                }
-            }
-            return false;
-        }
-        return false;*/
     }
 
     public boolean validarRaza(String unaRaza) {
@@ -141,31 +86,6 @@ public class AlgoStar {
         }
 
         return true;
-
-        /*if (razaJugador1 == null) {
-            for (JUGADOR_RAZA r : JUGADOR_RAZA.values()) {
-                if (r == raza) {
-                    razaJugador1 = raza;
-                    return true;
-                }
-            }
-            return false;
-        }
-        // jugador 1 ya fue seteado
-        if (razaJugador2 == null) {
-            if (raza == razaJugador1) {
-                return false;
-            }
-            for (JUGADOR_RAZA r : JUGADOR_RAZA.values()) {
-                if (r == raza) {
-                    razaJugador2 = raza;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        return false;*/
     }
 
     public void avanzarTurno() {
