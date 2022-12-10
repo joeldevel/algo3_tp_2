@@ -9,6 +9,8 @@ import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
+import java.util.ArrayList;
+
 public class NexoMineral extends EdificioProtoss implements Minero {
 
     private final int POBLACION = 0;
@@ -28,6 +30,11 @@ public class NexoMineral extends EdificioProtoss implements Minero {
         this.nodo = unNodo;
 
         unNodo.construirRecolectorDeMineral(this);
+    }
+
+    @Override
+    public ArrayList<Unidad> devolverLarvas() {
+        return new ArrayList<Unidad>();
     }
 
     @Override

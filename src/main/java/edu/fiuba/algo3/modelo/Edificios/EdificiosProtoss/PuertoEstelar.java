@@ -28,6 +28,11 @@ public class PuertoEstelar extends EdificioProtoss {
     }
 
     @Override
+    public ArrayList<Unidad> devolverLarvas() {
+        return new ArrayList<Unidad>();
+    }
+
+    @Override
     public int obtenerPoblacion() {
         return POBLACION;
     }
@@ -40,22 +45,23 @@ public class PuertoEstelar extends EdificioProtoss {
     }
     
     public void transportarScout() {
-    	if(! (this.estaEnergizado())) {
+    	if(! this.estaEnergizado()) {
     		throw new EdificioNoEnergizadoError();
     	}
     	while(this.scouts.size() < 5) {
     		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.ubicacion,this.jugador)));
     	}
-        /* aca debe ir la verificacion de requisitos*/
-    	//this.scouts.add(new Unidad(new Scout()));
     }
 	
     private void pasarScoutsProductivos(){
+        ArrayList<Unidad> borrar = new ArrayList<>();
+
 		for(Unidad actual: this.scouts) {
-			if(actual.tiempoRestante() == 0) {
-				this.jugador.agregarUnidad(actual);
-			}
+		    this.jugador.agregarUnidad(actual);
+		    borrar.add(actual);
 		}
+
+        this.scouts.removeAll(borrar);
 	}
 
     @Override

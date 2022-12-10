@@ -33,6 +33,11 @@ public class Acceso extends EdificioProtoss {
 	}
 
 	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
+
+	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;
 	}
@@ -46,7 +51,7 @@ public class Acceso extends EdificioProtoss {
 	}
 	
 	public void transportarZealots() {
-		if(! (this.estaEnergizado())) {
+		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
 		}
 		while(this.zealots.size() < 5) {
@@ -54,8 +59,8 @@ public class Acceso extends EdificioProtoss {
 		}
 	}
 	
-	public void transportarDragones(Recursos recursosDelJugador) {
-		if(! (this.estaEnergizado())) {
+	public void transportarDragones() {
+		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
 		}
 		while(this.dragones.size() < 5) {
@@ -64,22 +69,25 @@ public class Acceso extends EdificioProtoss {
 	}
 	
 	private void pasarZealotsProductivos(){
+    	ArrayList<Unidad> borrar = new ArrayList<>();
+
 		for(Unidad actual: this.zealots) {
-			if(actual.tiempoRestante() == 0) {
-				this.jugador.agregarUnidad(actual);
-				this.zealots.remove(actual);
-				
-			}
+			this.jugador.agregarUnidad(actual);
+			borrar.add(actual);
 		}
+
+		this.zealots.removeAll(borrar);
 	}
 	
 	private void pasarDragonesProductivos() {
+		ArrayList<Unidad> borrar = new ArrayList<>();
+
 		for(Unidad actual: this.dragones) {
-			if(actual.tiempoRestante() == 0) {
-				this.jugador.agregarUnidad(actual);
-				this.dragones.remove(actual);
-			}
+			this.jugador.agregarUnidad(actual);
+			borrar.add(actual);
 		}
+
+		this.zealots.removeAll(borrar);
 	}
 	
 	@Override

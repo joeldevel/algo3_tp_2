@@ -37,6 +37,11 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     }
 
 	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
+
+	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;
 	}

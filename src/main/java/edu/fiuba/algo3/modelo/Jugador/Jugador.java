@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
+import java.util.ArrayList;
+
 public interface Jugador {
     String obtenerNombre();
     String obtenerColor();
@@ -24,8 +26,7 @@ public interface Jugador {
     public boolean verificarEdificio(String nombreEdificio);
     public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugador,Mapa mapa);
     public void avanzarTurno();
-    String getNombre();
-
     int calcularPoblacion();
+    ArrayList<Unidad> obtenerLarvas();
 }
 

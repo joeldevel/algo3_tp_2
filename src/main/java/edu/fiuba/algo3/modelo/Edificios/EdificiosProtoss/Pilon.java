@@ -34,6 +34,11 @@ public class Pilon extends EdificioProtoss {
     }
 
 	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
+
+	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;
 	}

@@ -4,16 +4,17 @@ import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Excepciones.UbicacionSinEdificioException;
 import edu.fiuba.algo3.modelo.FabricaDeEdificios;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Raza;
-import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.SUMINISTRO_AMO;
@@ -160,37 +161,73 @@ public class JugadorZerg implements Jugador {
         return amoSupremo;
     }
 
-    // Falta enviar el mensaje al edificio Criadero que permite instanciar Zangano.
-    public void crearZangano(Edificio unCriadero) {
+    public void crearZangano(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZANGANO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeZanganos++;
-        this.incrementarSuministro(SUMINISTRO_ZANGANO);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Criadero", unaUbicacion))) {
+            Criadero criadero = (Criadero) unMapa.obtenerEdificioEnUbicacion("Criadero", unaUbicacion);
+            criadero.crearZangano();
+            this.unidades.addAll(criadero.obtenerZanganos());
+
+            this.cantidadDeZanganos++;
+            this.incrementarSuministro(SUMINISTRO_ZANGANO);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
-    // Falta enviar el mensaje al edificio ReservaDeReproduccion que permite instanciar Zerling.
-    public void crearZerling(Edificio unaReservaDeReproduccion) {
+    public void crearZerling(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZERLING)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeZerlings++;
-        this.incrementarSuministro(SUMINISTRO_ZERLING);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion))) {
+            ReservaDeReproduccion reserva = (ReservaDeReproduccion) unMapa.obtenerEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion);
+            this.unidades.addAll(reserva.obtenerZerlings());
+
+            this.cantidadDeZerlings++;
+            this.incrementarSuministro(SUMINISTRO_ZERLING);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
-    // Falta enviar el mensaje al edificio Guarida que permite instanciar Hidralisco.
-    public void crearHidralisco(Edificio unaGuarida) {
+    public ArrayList<Unidad> obtenerLarvas() {
+        // Devolvemos las larvas del primer criadero que encontremos
+        for(Edificio edificio: this.edificios) {
+            if(edificio.esUn("Criadero")) {
+                return edificio.devolverLarvas();
+            }
+        }
+
+        return new ArrayList<Unidad>();
+    }
+
+    public void crearHidralisco(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeHidraliscos++;
-        this.incrementarSuministro(SUMINISTRO_HIDRALISCO);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Guarida", unaUbicacion))) {
+            Guarida guarida = (Guarida) unMapa.obtenerEdificioEnUbicacion("Guarida", unaUbicacion);
+            this.unidades.addAll(guarida.obtenerHidraliscos());
+
+            this.cantidadDeHidraliscos++;
+            this.incrementarSuministro(SUMINISTRO_HIDRALISCO);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
     // Falta enviar el mensaje al edificio Espiral que permite instanciar Mutalisco.
@@ -263,7 +300,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    /*public int calcularSuministro() {
+    public int calcularSuministroo() {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
@@ -271,7 +308,7 @@ public class JugadorZerg implements Jugador {
         }
 
         return cupo;
-    }*/
+    }
 
     // Este metodo sera reemplazado por el de arriba cuando se termine el codigo relacionado a la creacion de unidades.
     public int calcularSuministro() {
@@ -323,11 +360,6 @@ public class JugadorZerg implements Jugador {
 		}
 		return verificado;
 	}
-
-    @Override
-    public String getNombre() {
-        return this.nombre;
-    }
 
     public Recursos obtenerRecursos() {
 		return (this.recursos);

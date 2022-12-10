@@ -14,6 +14,8 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Larva;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CONSTRUCCION_ZANGANO;
+
 /* el criadero deberia implementar una interfaz evolucionador por ejemplo, que habilite a evolucionar las
  * larvas a otro tipo de unidad zerg. Sino una buna idea es usar el patron Factory Method */
 
@@ -57,8 +59,9 @@ public class Criadero extends EdificioZerg {
 		if(this.larvas.isEmpty()) {
 			throw new CriaderoSinLarvasException();
 		}
+
 		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoEstado(new Zangano(this.ubicacion, this.jugador));
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.ubicacion, this.jugador));
 		this.larvas.remove(0);
 		zanganos.add(unaUnidad);
 	}
@@ -68,15 +71,16 @@ public class Criadero extends EdificioZerg {
 			this.larvas.add(new Unidad(new Tiempo(0),this.ubicacion(),new Larva()));
 		}
 	}
-	
-	public ArrayList<Unidad> obtenerLarvas(){
-		ArrayList<Unidad> aDevolver = this.larvas;
+
+	@Override
+	public ArrayList<Unidad> devolverLarvas(){
+		ArrayList<Unidad> aDevolver = new ArrayList<>(this.larvas);
 		this.larvas.clear();
 		return aDevolver;
 	}
 	
 	public ArrayList<Unidad> obtenerZanganos(){
-		ArrayList<Unidad> aDevolver = this.zanganos;
+		ArrayList<Unidad> aDevolver = new ArrayList<>(this.zanganos);
 		this.zanganos.clear();
 		return aDevolver;
 	}

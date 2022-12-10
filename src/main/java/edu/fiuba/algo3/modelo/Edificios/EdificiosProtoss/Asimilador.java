@@ -8,6 +8,8 @@ import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
+import java.util.ArrayList;
+
 public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 
 	private final int POBLACION = 0;
@@ -27,6 +29,11 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
     	
     	unVolcan.construirRefineriaDeGas(this);
     }
+
+	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
 
 	@Override
 	public int obtenerPoblacion() {

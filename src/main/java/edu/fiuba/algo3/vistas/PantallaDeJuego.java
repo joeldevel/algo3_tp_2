@@ -135,7 +135,7 @@ public class PantallaDeJuego {
         // pasar turno
         botonTurno.setOnAction(e -> {
             juego.avanzarTurno();
-            stringNombreJugador.set(juego.obtenerJugadorTurno().getNombre());
+            stringNombreJugador.set(juego.obtenerJugadorTurno().obtenerNombre());
             stringGasJugador.set(String.valueOf(juego.obtenerJugadorTurno().obtenerGas() + (int)(Math.floor(Math.random() * 10))));
             stringMineralJugador.set(String.valueOf(juego.obtenerJugadorTurno().obtenerMineral() ));
 //            System.out.println("turno despus de avanzar = " + juego.obtenerJugadorTurno().getNombre());

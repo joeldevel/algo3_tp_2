@@ -27,7 +27,7 @@ public class CasoDeUso26Test {
 
     /* Protoss */
 
-    @Test
+    /*@Test
     public void test01JugadorProtossSinPoblacionIntentaCrearUnZealotYNoPuede() {
         // Arrange
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
@@ -73,11 +73,11 @@ public class CasoDeUso26Test {
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot(acceso));
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    @Test
+    /*@Test
     public void test05JugadorProtossSinPoblacionIntentaCrearUnDragonYNoPuede() {
         // Arrange
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
@@ -126,11 +126,11 @@ public class CasoDeUso26Test {
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    @Test
+    /*@Test
     public void test09JugadorProtossSinPoblacionIntentaCrearUnScoutYNoPuede() {
         // Arrange
         PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
@@ -178,11 +178,11 @@ public class CasoDeUso26Test {
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
-    }
+    }*/
 
     /* Zerg */
 
-    @Test
+    /*@Test
     public void test13JugadorZergSinPoblacionIntentaCrearUnZanganoYNoPuede() {
         // Arrange
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
@@ -234,11 +234,11 @@ public class CasoDeUso26Test {
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    @Test
+   /*@Test
     public void test17JugadorZergSinPoblacionIntentaCrearUnZerlingYNoPuede() {
         // Arrange
         ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
@@ -290,11 +290,11 @@ public class CasoDeUso26Test {
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling(reserva));
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    @Test
+    /*@Test
     public void test21JugadorZergSinPoblacionIntentaCrearUnHidraliscoYNoPuede() {
         // Arrange
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
@@ -340,7 +340,7 @@ public class CasoDeUso26Test {
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco(guarida));
-    }
+    }*/
 
     /* ------------------------------------------------------------------------------------------------------------- */
 

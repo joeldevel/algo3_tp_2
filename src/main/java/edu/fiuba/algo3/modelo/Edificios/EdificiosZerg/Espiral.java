@@ -31,6 +31,11 @@ public class Espiral extends EdificioZerg {
     }
 
 	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
+
+	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;
 	}

@@ -8,9 +8,13 @@ import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.CONSTRUCCION_HIDRALISCO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.CONSTRUCCION_ZERLING;
 
 public class Guarida extends EdificioZerg {
 
@@ -32,6 +36,11 @@ public class Guarida extends EdificioZerg {
     }
 
 	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
+
+	@Override
 	public int obtenerPoblacion() {
 		return POBLACION;
 	}
@@ -43,11 +52,18 @@ public class Guarida extends EdificioZerg {
 	
 	public void crearHidraliscos() {
 		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
-		while(this.contarLarvas() != 0) {
+		/*while(this.contarLarvas() != 0) {
 			Unidad actual = larvas.get(0);
 			actual.setComportamientoEstado(new Hidralisco(this.ubicacion, this.jugador));
 			hidraliscos.add(actual);
 			larvas.remove(0);
+		}*/
+
+		if(!this.larvas.isEmpty()) {
+			Unidad unaUnidad = this.larvas.get(0);
+			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_HIDRALISCO), new Hidralisco(this.ubicacion, this.jugador));
+			this.larvas.remove(0);
+			hidraliscos.add(unaUnidad);
 		}
 	}
 	
@@ -60,7 +76,9 @@ public class Guarida extends EdificioZerg {
 	}
 	
 	public ArrayList<Unidad> obtenerHidraliscos(){
-		return (this.hidraliscos);
+		ArrayList<Unidad> aDevolver = new ArrayList<>(this.hidraliscos);
+		this.hidraliscos.clear();
+		return aDevolver;
 	}
 
 	@Override

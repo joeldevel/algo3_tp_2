@@ -83,6 +83,29 @@ public class Mapa {
     	return( (unaUbicacion.xDentroDeRango(0, ANCHO)) &&
     			(unaUbicacion.yDentroDeRango(0, ALTURA)) );
     }
+
+    public boolean verificarEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
+    	boolean verificado = false;
+
+    	for(Edificio edificio: this.edificios) {
+    		if(edificio.esUn(unEdificio)) {
+    			verificado = edificio.estaEn(unaUbicacion);
+			}
+		}
+
+    	return verificado;
+	}
+
+	public Edificio obtenerEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
+
+		for(Edificio edificio: this.edificios) {
+			if((edificio.esUn(unEdificio)) && (edificio.estaEn(unaUbicacion))) {
+				return edificio;
+			}
+		}
+
+		return null;
+	}
     
     public boolean verificarAreaEspacial(Ubicacion ubicacion) {
     	boolean verificado = false;

@@ -2,8 +2,10 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
+import edu.fiuba.algo3.modelo.Excepciones.UbicacionSinEdificioException;
 import edu.fiuba.algo3.modelo.FabricaDeEdificios;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Raza;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.SUMINISTRO_DRAGON;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.SUMINISTRO_SCOUT;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.SUMINISTRO_ZEALOT;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
 
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.
@@ -126,34 +129,61 @@ public class JugadorProtoss implements Jugador {
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
-    public void crearZealot(Edificio unAcceso) {
+    public void crearZealot(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeZealots++;
-        this.incrementarSuministro(SUMINISTRO_ZEALOT);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Acceso", unaUbicacion))) {
+            Acceso acceso = (Acceso) unMapa.obtenerEdificioEnUbicacion("Acceso", unaUbicacion);
+            acceso.transportarZealots();
+
+            this.cantidadDeZealots++;
+            this.incrementarSuministro(SUMINISTRO_ZEALOT);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Dragon.
-    public void crearDragon(Edificio unAcceso) {
+    public void crearDragon(Ubicacion unaUbicacion, Mapa unMapa) {
         if (!this.haySuministroDisponible(SUMINISTRO_DRAGON)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeDragones++;
-        this.incrementarSuministro(SUMINISTRO_DRAGON);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Acceso", unaUbicacion))) {
+            Acceso acceso = (Acceso) unMapa.obtenerEdificioEnUbicacion("Acceso", unaUbicacion);
+            acceso.transportarDragones();
+
+            this.cantidadDeDragones++;
+            this.incrementarSuministro(SUMINISTRO_DRAGON);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
     // Falta enviar el mensaje al edificio PuertoEstelar que permite instanciar Scout.
-    public void crearScout(Edificio unPuertoEstelar) {
+    public void crearScout(Ubicacion unaUbicacion, Mapa unMapa) {
         if (!this.haySuministroDisponible(SUMINISTRO_SCOUT)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeScouts++;
-        this.incrementarSuministro(SUMINISTRO_SCOUT);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("PuertoEstelar", unaUbicacion))) {
+            PuertoEstelar puerto = (PuertoEstelar) unMapa.obtenerEdificioEnUbicacion("PuertoEstelar", unaUbicacion);
+            puerto.transportarScout();
+
+            this.cantidadDeScouts++;
+            this.incrementarSuministro(SUMINISTRO_SCOUT);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
     public int cantidadDeUnidades(UNIDADES_PROTOSS tipoUnidad) {
@@ -189,8 +219,13 @@ public class JugadorProtoss implements Jugador {
         return poblacion;
     }
 
+    @Override
+    public ArrayList<Unidad> obtenerLarvas() {
+        return new ArrayList<Unidad>();
+    }
+
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    /*public int calcularSuministro() {
+    public int calcularSuministroo() {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
@@ -198,7 +233,7 @@ public class JugadorProtoss implements Jugador {
         }
 
         return cupo;
-    }*/
+    }
 
     // Este metodo sera reemplazado por el de arriba cuando se termine el codigo relacionado a la creacion de unidades.
     public int calcularSuministro() {
@@ -250,11 +285,6 @@ public class JugadorProtoss implements Jugador {
 		}
 		return verificado;
 	}
-
-    @Override
-    public String getNombre() {
-        return this.nombre;
-    }
 
     public void agregarEdificio(Edificio unEdificio) {
 		this.edificios.add(unEdificio);
