@@ -159,14 +159,14 @@ public class PantallaJuego extends BorderPane { // 24:47
         Jugador jugadorActual = algoStar.obtenerJugadorTurno();
 
         if (jugadorActual.obtenerRaza().equals("Zerg")) {
-            this.setBotoneraZerg(algoStar);
+            this.setBottom(this.setBotoneraEdificiosZerg(algoStar));
         } else {
-            this.setBotoneraProtoss(algoStar);
+            this.setBottom(this.setBotoneraEdificiosProtoss(algoStar));
         }
     }
 
-    // Se crea la botonera Zerg con los edificios y unidades correspondientes.
-    public void setBotoneraZerg(AlgoStar algoStar) {
+    // Se crea la botonera Zerg con los edificios correspondientes.
+    public GridPane setBotoneraEdificiosZerg(AlgoStar algoStar) {
 
         Button criadero = new Button();
         criadero.setText("Crear criadero ");
@@ -211,11 +211,11 @@ public class PantallaJuego extends BorderPane { // 24:47
         GridPane.setConstraints(espiral, 0, 2);
         panel.getChildren().addAll(criadero, reserva, extractor, guarida, espiral);
 
-        this.setBottom(panel);
+        return panel;
     }
 
-    // Se crea la botonera Protoss con los edificios y unidades correspondientes.
-    public void setBotoneraProtoss(AlgoStar algoStar) {
+    // Se crea la botonera Protoss con los edificios correspondientes.
+    public GridPane setBotoneraEdificiosProtoss(AlgoStar algoStar) {
 
         Button nexo = new Button();
         nexo.setText("   Crear nexo   ");
@@ -260,7 +260,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         GridPane.setConstraints(puerto, 0, 2);
         panel.getChildren().addAll(nexo, pilon, asimilador, acceso, puerto);
 
-        this.setBottom(panel);
+        return panel;
     }
 
     // Se crea la pantalla central donde estara el mapa
