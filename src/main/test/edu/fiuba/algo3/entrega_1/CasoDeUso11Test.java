@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -17,13 +18,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasoDeUso11Test {
 
-    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000, 1000));
+    Mapa mapa = new Mapa();
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000, 1000), mapa);
 
     @Test
     void test01SeConstruyeUnAccesoQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -41,7 +43,7 @@ public class CasoDeUso11Test {
     void test02SeConstruyeUnAccesoQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(0, 150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -60,7 +62,7 @@ public class CasoDeUso11Test {
     void test03SeConstruyeUnAccesoQueLuegoDeOchoTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.avanzarTurno(8);
 
@@ -79,7 +81,7 @@ public class CasoDeUso11Test {
     void test04SeConstruyeUnAccesoQueLuegoDeOchoTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(50 + 50 + 50 + 50 + 50, 150 + 125 + 125 + 125 + 125 + 125 + 150 + 150 + 150 + 150 + 150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
         acceso.avanzarTurno(8);
 
@@ -102,7 +104,7 @@ public class CasoDeUso11Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -121,7 +123,7 @@ public class CasoDeUso11Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -141,7 +143,7 @@ public class CasoDeUso11Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.avanzarTurno(6);
 
@@ -161,7 +163,7 @@ public class CasoDeUso11Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.avanzarTurno(6);
 
@@ -184,7 +186,7 @@ public class CasoDeUso11Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -203,7 +205,7 @@ public class CasoDeUso11Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -223,7 +225,7 @@ public class CasoDeUso11Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.avanzarTurno(4);
 
@@ -243,7 +245,7 @@ public class CasoDeUso11Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.avanzarTurno(4);
 
@@ -265,7 +267,7 @@ public class CasoDeUso11Test {
     void test13SeConstruyeUnPilonQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -283,7 +285,7 @@ public class CasoDeUso11Test {
     void test14SeConstruyeUnPilonQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -302,7 +304,7 @@ public class CasoDeUso11Test {
     void test15SeConstruyeUnPilonQueLuegoDeCincoTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         pilon.avanzarTurno(5);
 
@@ -321,7 +323,7 @@ public class CasoDeUso11Test {
     void test16SeConstruyeUnPilonQueLuegoDeCincoTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
         pilon.avanzarTurno(5);
 
@@ -343,7 +345,7 @@ public class CasoDeUso11Test {
     void test17SeConstruyeUnPuertoEstelarQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -361,7 +363,7 @@ public class CasoDeUso11Test {
     void test18SeConstruyeUnPuertoEstelarQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
 
         Guardian tipoGuardian = new Guardian(jugadorZerg);
@@ -380,7 +382,7 @@ public class CasoDeUso11Test {
     void test19SeConstruyeUnPuertoEstelarQueLuegoDeDiezTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(150,150);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
         puertoEstelar.avanzarTurno(10);
 
@@ -399,7 +401,7 @@ public class CasoDeUso11Test {
     void test20SeConstruyeUnPuertoEstelarQueLuegoDeDiezTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(10000,10000);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
         puertoEstelar.avanzarTurno(10);
 

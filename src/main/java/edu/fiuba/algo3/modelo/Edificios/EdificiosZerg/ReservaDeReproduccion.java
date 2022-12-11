@@ -10,7 +10,9 @@ import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO_HIDRALISCO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.CONSTRUCCION_ZERLING;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
 
 public class ReservaDeReproduccion extends EdificioZerg {
 
@@ -45,9 +47,9 @@ public class ReservaDeReproduccion extends EdificioZerg {
 
 	public void crearZerling() {
 
-		if(!this.larvas.isEmpty()) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING)) {
 			Unidad unaUnidad = this.larvas.get(0);
-			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZERLING), new Zerling(this.ubicacion, this.jugador));
+			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZERLING), new Zerling(this.jugador), this.ubicacion);
 			this.larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
 		}

@@ -14,12 +14,9 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.SUMINISTRO_AMO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.SUMINISTRO_DEVORADOR;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.SUMINISTRO_GUARDIAN;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO_HIDRALISCO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.SUMINISTRO_MUTALISCO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.SUMINISTRO_ZANGANO;
@@ -40,53 +37,26 @@ public class JugadorZerg implements Jugador {
     private String nombre;
     private String color;
     private Recursos recursos;
-    private int suministro;
-
-    private int cantidadDeAmos;
-    private int cantidadDeZanganos;
-    private int cantidadDeZerlings;
-    private int cantidadDeHidraliscos;
-    private int cantidadDeMutaliscos;
-    private int cantidadDeGuardianes;
-    private int cantidadDeDevoradores;
-
+    private Mapa mapa;
     private ArrayList<Edificio> edificios;
     private ArrayList<Unidad> unidades;
 
-    public JugadorZerg(String unNombre, String unColor) {
+    public JugadorZerg(String unNombre, String unColor, Mapa unMapa) {
         this.nombre = unNombre;
         this.color = unColor;
         this.recursos = new Recursos();
         this.recursos.guardar(0, CANT_MINERAL_INICIAL);
-        this.suministro = 0;
-
-        this.cantidadDeAmos = 0;
-        this.cantidadDeZanganos = 0;
-        this.cantidadDeZerlings = 0;
-        this.cantidadDeHidraliscos = 0;
-        this.cantidadDeMutaliscos = 0;
-        this.cantidadDeGuardianes = 0;
-        this.cantidadDeDevoradores = 0;
-
+        this.mapa = unMapa;
         this.edificios = new ArrayList<Edificio>();
         this.unidades = new ArrayList<Unidad>();
     }
 
     // Constructor utilizado unicamente para pruebas debido a los recursos.
-    public JugadorZerg(String unNombre, String unColor, Recursos unosRecursos) {
+    public JugadorZerg(String unNombre, String unColor, Recursos unosRecursos, Mapa unMapa) {
         this.nombre = unNombre;
         this.color = unColor;
         this.recursos = unosRecursos;
-        this.suministro = 0;
-
-        this.cantidadDeAmos = 0;
-        this.cantidadDeZanganos = 0;
-        this.cantidadDeZerlings = 0;
-        this.cantidadDeHidraliscos = 0;
-        this.cantidadDeMutaliscos = 0;
-        this.cantidadDeGuardianes = 0;
-        this.cantidadDeDevoradores = 0;
-
+        this.mapa = unMapa;
         this.edificios = new ArrayList<Edificio>();
         this.unidades = new ArrayList<Unidad>();
     }
@@ -145,34 +115,26 @@ public class JugadorZerg implements Jugador {
     	FabricaDeEdificios.construir(edificio, unaUbicacion, this, jugadorProtoss, mapa);
     }
 
-    public Unidad crearAmoSupremo(Ubicacion unaUbicacion) {
+    public void crearAmoSupremo(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_AMO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        AmoSupremo tipoAmoSupremo = new AmoSupremo(unaUbicacion, this);
+        AmoSupremo tipoAmoSupremo = new AmoSupremo(this);
         Unidad amoSupremo = new Unidad(new Tiempo(CONSTRUCCION_AMO), unaUbicacion, tipoAmoSupremo);
-        this.unidades.add(amoSupremo);
-
-        this.cantidadDeAmos++;
-        this.incrementarSuministro(SUMINISTRO_AMO);
-
-        return amoSupremo;
+        this.agregarUnidad(amoSupremo);
     }
 
-    public void crearZangano(Ubicacion unaUbicacion, Mapa unMapa) {
+    public void crearZangano(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZANGANO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Criadero", unaUbicacion))) {
-            Criadero criadero = (Criadero) unMapa.obtenerEdificioEnUbicacion("Criadero", unaUbicacion);
+        if((this.mapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (this.mapa.verificarEdificioEnUbicacion("Criadero", unaUbicacion))) {
+            Criadero criadero = (Criadero) this.mapa.obtenerEdificioEnUbicacion("Criadero", unaUbicacion);
             criadero.crearZangano();
-
-            this.cantidadDeZanganos++;
-            this.incrementarSuministro(SUMINISTRO_ZANGANO);
         }
 
         else {
@@ -180,18 +142,15 @@ public class JugadorZerg implements Jugador {
         }
     }
 
-    public void crearZerling(Ubicacion unaUbicacion, Mapa unMapa) {
+    public void crearZerling(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZERLING)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion))) {
-            ReservaDeReproduccion reserva = (ReservaDeReproduccion) unMapa.obtenerEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion);
+        if((this.mapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (this.mapa.verificarEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion))) {
+            ReservaDeReproduccion reserva = (ReservaDeReproduccion) this.mapa.obtenerEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion);
             reserva.recibirLarvas(obtenerLarvas());
-
-            this.cantidadDeZerlings++;
-            this.incrementarSuministro(SUMINISTRO_ZERLING);
         }
 
         else {
@@ -210,18 +169,15 @@ public class JugadorZerg implements Jugador {
         return new ArrayList<Unidad>();
     }
 
-    public void crearHidralisco(Ubicacion unaUbicacion, Mapa unMapa) {
+    public void crearHidralisco(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Guarida", unaUbicacion))) {
-            Guarida guarida = (Guarida) unMapa.obtenerEdificioEnUbicacion("Guarida", unaUbicacion);
+        if((this.mapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (this.mapa.verificarEdificioEnUbicacion("Guarida", unaUbicacion))) {
+            Guarida guarida = (Guarida) this.mapa.obtenerEdificioEnUbicacion("Guarida", unaUbicacion);
             guarida.recibirLarvas(obtenerLarvas());
-
-            this.cantidadDeHidraliscos++;
-            this.incrementarSuministro(SUMINISTRO_HIDRALISCO);
         }
 
         else {
@@ -229,18 +185,15 @@ public class JugadorZerg implements Jugador {
         }
     }
 
-    public void crearMutalisco(Ubicacion unaUbicacion, Mapa unMapa) {
+    public void crearMutalisco(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Espiral", unaUbicacion))) {
-            Espiral espiral = (Espiral) unMapa.obtenerEdificioEnUbicacion("Espiral", unaUbicacion);
+        if((this.mapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (this.mapa.verificarEdificioEnUbicacion("Espiral", unaUbicacion))) {
+            Espiral espiral = (Espiral) this.mapa.obtenerEdificioEnUbicacion("Espiral", unaUbicacion);
             espiral.recibirLarvas(obtenerLarvas());
-
-            this.cantidadDeMutaliscos++;
-            this.incrementarSuministro(SUMINISTRO_MUTALISCO);
         }
 
         else {
@@ -248,58 +201,24 @@ public class JugadorZerg implements Jugador {
         }
     }
 
-    public void evolucionarMutaliscoAGuardian(Ubicacion unaUbicacion, Mapa unMapa) {
+    public void evolucionarMutaliscoAGuardian(Ubicacion unaUbicacion) {
 
-        if (!this.haySuministroDisponible(SUMINISTRO_GUARDIAN)) {
-            throw new SuministroSuperaElNumeroDePoblacionException();
-        }
-
-        if (!this.haySuministroDisponible(SUMINISTRO_DEVORADOR)) {
-            throw new SuministroSuperaElNumeroDePoblacionException();
-        }
-
-        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarUnidadEnUbicacion(unaUbicacion))) {
-            Unidad mutalisco = unMapa.obtenerUnidadEnUbicacion(unaUbicacion);
+        if((this.mapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (this.mapa.verificarUnidadEnUbicacion(unaUbicacion))) {
+            Unidad mutalisco = this.mapa.obtenerUnidadEnUbicacion(unaUbicacion);
             mutalisco.evolucionarAGuardian();
-
-            this.cantidadDeGuardianes++;
-            this.incrementarSuministro(SUMINISTRO_GUARDIAN);
         }
     }
 
-    public void evolucionarMutaliscoADevorador(Ubicacion unaUbicacion, Mapa unMapa) {
+    public void evolucionarMutaliscoADevorador(Ubicacion unaUbicacion) {
 
-        if (!this.haySuministroDisponible(SUMINISTRO_DEVORADOR)) {
-            throw new SuministroSuperaElNumeroDePoblacionException();
-        }
-
-        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarUnidadEnUbicacion(unaUbicacion))) {
-            Unidad mutalisco = unMapa.obtenerUnidadEnUbicacion(unaUbicacion);
+        if((this.mapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (this.mapa.verificarUnidadEnUbicacion(unaUbicacion))) {
+            Unidad mutalisco = this.mapa.obtenerUnidadEnUbicacion(unaUbicacion);
             mutalisco.evolucionarADevorador();
-
-            this.cantidadDeDevoradores++;
-            this.incrementarSuministro(SUMINISTRO_DEVORADOR);
         }
 
         else {
             throw new UbicacionSinEdificioException();
         }
-    }
-
-    public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {
-        if (tipoUnidad == UNIDADES_ZERG.ZANGANO) {
-            return this.cantidadDeZanganos;
-        }
-        if (tipoUnidad == UNIDADES_ZERG.ZERLING) {
-            return this.cantidadDeZerlings;
-        }
-        if (tipoUnidad == UNIDADES_ZERG.HIDRALISCO) {
-            return this.cantidadDeHidraliscos;
-        }
-        if (tipoUnidad == UNIDADES_ZERG.MUTALISCO) {
-            return this.cantidadDeMutaliscos;
-        }
-        return 0;
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
@@ -323,7 +242,7 @@ public class JugadorZerg implements Jugador {
     }
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    public int calcularSuministroo() {
+    public int calcularSuministro() {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
@@ -333,20 +252,8 @@ public class JugadorZerg implements Jugador {
         return cupo;
     }
 
-    // Este metodo sera reemplazado por el de arriba cuando se termine el codigo relacionado a la creacion de unidades.
-    public int calcularSuministro() {
-        return this.suministro;
-    }
-
-    // El cupo debe ser siempre menor al valor de poblacion.
-    private void incrementarSuministro(int unIncremento) {
-        if (this.suministro + unIncremento <= this.calcularPoblacion()) {
-            this.suministro += unIncremento;
-        }
-    }
-
-    private boolean haySuministroDisponible(int unSuministro) {
-        return (this.suministro + unSuministro <= this.calcularPoblacion());
+    public boolean haySuministroDisponible(int unSuministro) {
+        return (this.calcularSuministro() + unSuministro <= this.calcularPoblacion());
     }
 
     public void avanzarTurno() {
@@ -365,12 +272,13 @@ public class JugadorZerg implements Jugador {
     @Override
     public void eliminarEdificio(Edificio unEdificio) {
         this.edificios.remove(unEdificio);
+        this.mapa.destruirEdificio(unEdificio);
     }
 
     @Override
     public void eliminarUnidad(Unidad unaUnidad) {
-        this.suministro -= unaUnidad.obtenerSuministro();
         this.unidades.remove(unaUnidad);
+        this.mapa.destruirUnidad(unaUnidad);
     }
     
     @Override
@@ -404,7 +312,8 @@ public class JugadorZerg implements Jugador {
 	
 	@Override
 	public void agregarUnidad(Unidad unaUnidad) {
-		this.unidades.add(unaUnidad);		
+		this.unidades.add(unaUnidad);
+		this.mapa.agregarUnidad(unaUnidad);
 	}
 	
 	public void destruirEdificioEn(Ubicacion unaUbicacion) {

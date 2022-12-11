@@ -19,7 +19,8 @@ public class Mapa {
     private ArrayList<Pilon> pilones;
     private ArrayList<Volcan> volcanes;
     private ArrayList<NodoMineral> nodosMinerales;
-    private ArrayList<Edificio> edificios;
+	private ArrayList<Edificio> edificios;
+	private ArrayList<Unidad> unidades;
 
     //private ArrayList<AreaTerrestre> areasTerrestres;
 
@@ -31,6 +32,7 @@ public class Mapa {
         this.volcanes = new ArrayList<Volcan>();
         this.nodosMinerales = new ArrayList<NodoMineral>();
         this.edificios = new ArrayList<Edificio>();
+		this.unidades = new ArrayList<Unidad>();
         this.areasEspaciales = new ArrayList<Ubicacion>();
         
         this.crearBases();
@@ -51,6 +53,10 @@ public class Mapa {
 
 	public ArrayList<Edificio> edificios() {
 		return this.edificios;
+	}
+
+	public ArrayList<Unidad> unidades() {
+		return this.unidades;
 	}
 
 	public ArrayList<Ubicacion> areasEspaciales() {
@@ -111,20 +117,20 @@ public class Mapa {
 	public boolean verificarUnidadEnUbicacion(Ubicacion unaUbicacion) {
 		boolean verificado = false;
 
-		//for(Unidad unidad: this.unidades) {
-		//	verificado = unidad.estaEn(unaUbicacion);
-		//}
+		for(Unidad unidad: this.unidades) {
+			verificado = unidad.estaEn(unaUbicacion);
+		}
 
 		return verificado;
 	}
 
 	public Unidad obtenerUnidadEnUbicacion(Ubicacion unaUbicacion) {
 
-		//for(Unidad unidad: this.unidades) {
-		//	if(unidad.estaEn(unaUbicacion)) {
-		//		return unidad;
-		//	}
-		//}
+		for(Unidad unidad: this.unidades) {
+			if(unidad.estaEn(unaUbicacion)) {
+				return unidad;
+			}
+		}
 
 		return null;
 	}
@@ -274,9 +280,8 @@ public class Mapa {
 	   this.edificios.add(unEdificio);
    }
    
-   public void destruirEdificioEn(Ubicacion unaUbicacion) {
-	   Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
-	   this.edificios.remove(edificio);
+   public void destruirEdificio(Edificio unEdificio) {
+	   this.edificios.remove(unEdificio);
    }
    
    public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
@@ -291,6 +296,14 @@ public class Mapa {
 	   }
 	   return edificio;
    }
+
+	public void agregarUnidad(Unidad unaUnidad) {
+		this.unidades.add(unaUnidad);
+	}
+
+	public void destruirUnidad(Unidad unaUnidad) {
+		this.edificios.remove(unaUnidad);
+	}
    
    public void avanzarTurno() {
 	   	this.energizarEdificios();

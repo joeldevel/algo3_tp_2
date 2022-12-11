@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -25,19 +26,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasoDeUso18Test {
 
-    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000, 1000));
-    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000, 1000));
+    Mapa mapa = new Mapa();
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000, 1000), mapa);
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000, 1000), mapa);
 
     /* Protoss */
 
     @Test
     void test01UnDragonAtacaAUnZerlingYLaVidaDelZerlingDisminuyeLoIndicado() {
         // Arrange
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0, 0), jugadorZerg); // Unidad de tierra
+        Zerling tipoZerling = new Zerling(jugadorZerg); // Unidad de tierra
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0, 0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -51,11 +53,11 @@ public class CasoDeUso18Test {
     @Test
     void test02UnDragonAtacaAUnMutaliscoYLaVidaDelMutaliscoDisminuyeLoIndicado() {
         // Arrange
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
-        Mutalisco tipoMutalisco = new Mutalisco(new Ubicacion(0, 0), jugadorZerg); // Unidad de aire
+        Mutalisco tipoMutalisco = new Mutalisco(jugadorZerg); // Unidad de aire
         Unidad mutalisco = new Unidad(new Tiempo(CONSTRUCCION_MUTALISCO), new Ubicacion(0, 0), tipoMutalisco);
         mutalisco.avanzarTurno(7);
 
@@ -71,11 +73,11 @@ public class CasoDeUso18Test {
     @Test
     void test03UnScoutAtacaAUnZerlingYLaVidaDelZerlingDisminuyeLoIndicado() {
         // Arrange
-        Scout tipoScout = new Scout(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Scout tipoScout = new Scout(jugadorProtoss); // Ataque de tierra y aire
         Unidad scout = new Unidad(new Tiempo(CONSTRUCCION_SCOUT), new Ubicacion(0, 0), tipoScout);
         scout.avanzarTurno(9);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0, 0), jugadorZerg); // Unidad de tierra
+        Zerling tipoZerling = new Zerling(jugadorZerg); // Unidad de tierra
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0, 0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -89,11 +91,11 @@ public class CasoDeUso18Test {
     @Test
     void test04UnScoutAtacaAUnGuardianYLaVidaDelGuardianDisminuyeLoIndicado() {
         // Arrange
-        Scout tipoScout = new Scout(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Scout tipoScout = new Scout(jugadorProtoss); // Ataque de tierra y aire
         Unidad scout = new Unidad(new Tiempo(CONSTRUCCION_SCOUT), new Ubicacion(0, 0), tipoScout);
         scout.avanzarTurno(9);
 
-        Guardian tipoGuardian = new Guardian(new Ubicacion(0, 0), jugadorZerg); // Unidad de aire
+        Guardian tipoGuardian = new Guardian(jugadorZerg); // Unidad de aire
         Unidad guardian = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0, 0), tipoGuardian);
         guardian.avanzarTurno(4);
 
@@ -109,11 +111,11 @@ public class CasoDeUso18Test {
     @Test
     void test05UnZealotAtacaAUnZerlingYLaVidaDelZerlingDisminuyeLoIndicado() {
         // Arrange
-        Zealot tipoZealot = new Zealot(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra
+        Zealot tipoZealot = new Zealot(jugadorProtoss); // Ataque de tierra
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0, 0), tipoZealot);
         zealot.avanzarTurno(4);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0, 0), jugadorZerg); // Unidad de tierra
+        Zerling tipoZerling = new Zerling(jugadorZerg); // Unidad de tierra
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0, 0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -131,11 +133,11 @@ public class CasoDeUso18Test {
     @Test
     void test06UnZanganoEsAtacadoPorUnZealotYLaVidaDelZanganotDisminuyeLoIndicado() {
         // Arrange
-        Zealot tipoZealot = new Zealot(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra
+        Zealot tipoZealot = new Zealot(jugadorProtoss); // Ataque de tierra
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0, 0), tipoZealot);
         zealot.avanzarTurno(4);
 
-        Zangano tipoZangano = new Zangano(new Ubicacion(0, 0), jugadorZerg); // Unidad de tierra
+        Zangano tipoZangano = new Zangano(jugadorZerg); // Unidad de tierra
         Unidad zangano = new Unidad(new Tiempo(CONSTRUCCION_ZANGANO), new Ubicacion(0, 0), tipoZangano);
         zangano.avanzarTurno(1);
 
@@ -151,11 +153,11 @@ public class CasoDeUso18Test {
     @Test
     void test07UnZerlingAtacaAUnZealotYElEscudoDelZealotDisminuyeLoIndicado() {
         // Arrange
-        Zerling tipoZerling = new Zerling(new Ubicacion(0, 0), jugadorZerg); // Ataque de tierra
+        Zerling tipoZerling = new Zerling(jugadorZerg); // Ataque de tierra
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0, 0), tipoZerling);
         zerling.avanzarTurno(2);
 
-        Zealot tipoZealot = new Zealot(new Ubicacion(0, 0), jugadorProtoss); // Unidad de tierra
+        Zealot tipoZealot = new Zealot(jugadorProtoss); // Unidad de tierra
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0, 0), tipoZealot);
         zealot.avanzarTurno(4);
 
@@ -171,11 +173,11 @@ public class CasoDeUso18Test {
     @Test
     void test08UnHidraliscoAtacaAUnZealotYElEscudoDelZealotDisminuyeLoIndicado() {
         // Arrange
-        Hidralisco tipoHidralisco = new Hidralisco(new Ubicacion(0, 0), jugadorZerg); // Ataque de tierra y aire
+        Hidralisco tipoHidralisco = new Hidralisco(jugadorZerg); // Ataque de tierra y aire
         Unidad hidralisco = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(0, 0), tipoHidralisco);
         hidralisco.avanzarTurno(4);
 
-        Zealot tipoZealot = new Zealot(new Ubicacion(0, 0), jugadorProtoss); // Unidad de tierra
+        Zealot tipoZealot = new Zealot(jugadorProtoss); // Unidad de tierra
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0, 0), tipoZealot);
         zealot.avanzarTurno(4);
 
@@ -189,11 +191,11 @@ public class CasoDeUso18Test {
     @Test
     void test09UnHidraliscoAtacaAUnScoutYElEscudoDelScoutDisminuyeLoIndicado() {
         // Arrange
-        Hidralisco tipoHidralisco = new Hidralisco(new Ubicacion(0, 0), jugadorZerg); // Ataque de tierra y aire
+        Hidralisco tipoHidralisco = new Hidralisco(jugadorZerg); // Ataque de tierra y aire
         Unidad hidralisco = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(0, 0), tipoHidralisco);
         hidralisco.avanzarTurno(4);
 
-        Scout tipoScout = new Scout(new Ubicacion(0, 0), jugadorProtoss); // Unidad de Aire
+        Scout tipoScout = new Scout(jugadorProtoss); // Unidad de Aire
         Unidad scout = new Unidad(new Tiempo(CONSTRUCCION_SCOUT), new Ubicacion(0, 0), tipoScout);
         scout.avanzarTurno(9);
 
@@ -209,11 +211,11 @@ public class CasoDeUso18Test {
     @Test
     void test10UnMutaliscoAtacaAUnZealotYElEscudoDelZealotDisminuyeLoIndicado() {
         // Arrange
-        Mutalisco tipoMutalisco = new Mutalisco(new Ubicacion(0, 0), jugadorZerg); // Ataque de tierra y aire
+        Mutalisco tipoMutalisco = new Mutalisco(jugadorZerg); // Ataque de tierra y aire
         Unidad mutalisco = new Unidad(new Tiempo(CONSTRUCCION_MUTALISCO), new Ubicacion(0, 0), tipoMutalisco);
         mutalisco.avanzarTurno(7);
 
-        Zealot tipoZealot = new Zealot(new Ubicacion(0, 0), jugadorProtoss); // Unidad de tierra
+        Zealot tipoZealot = new Zealot(jugadorProtoss); // Unidad de tierra
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0, 0), tipoZealot);
         zealot.avanzarTurno(4);
 
@@ -227,11 +229,11 @@ public class CasoDeUso18Test {
     @Test
     void test11UnMutaliscoAtacaAUnScoutYElEscudoDelScoutDisminuyeLoIndicado() {
         // Arrange
-        Mutalisco tipoMutalisco = new Mutalisco(new Ubicacion(0, 0), jugadorZerg); // Ataque de tierra y aire
+        Mutalisco tipoMutalisco = new Mutalisco(jugadorZerg); // Ataque de tierra y aire
         Unidad mutalisco = new Unidad(new Tiempo(CONSTRUCCION_MUTALISCO), new Ubicacion(0, 0), tipoMutalisco);
         mutalisco.avanzarTurno(7);
 
-        Scout tipoScout = new Scout(new Ubicacion(0, 0), jugadorProtoss); // Unidad de Aire
+        Scout tipoScout = new Scout(jugadorProtoss); // Unidad de Aire
         Unidad scout = new Unidad(new Tiempo(CONSTRUCCION_SCOUT), new Ubicacion(0, 0), tipoScout);
         scout.avanzarTurno(9);
 
@@ -247,11 +249,11 @@ public class CasoDeUso18Test {
     @Test
     void test11UnGuardianAtacaAUnZealotYElEscudoDelZealotDisminuyeLoIndicado(){
         // Arrange
-        Guardian tipoGuardian = new Guardian(new Ubicacion(0, 0), jugadorZerg); // Ataque de tierra
+        Guardian tipoGuardian = new Guardian(jugadorZerg); // Ataque de tierra
         Unidad guardian = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0, 0), tipoGuardian);
         guardian.avanzarTurno(4);
 
-        Zealot tipoZealot = new Zealot(new Ubicacion(0, 0), jugadorProtoss); // Unidad de tierra
+        Zealot tipoZealot = new Zealot(jugadorProtoss); // Unidad de tierra
         Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), new Ubicacion(0, 0), tipoZealot);
         zealot.avanzarTurno(4);
 
@@ -267,11 +269,11 @@ public class CasoDeUso18Test {
     @Test
     void test12UnaUnidadAtacaAAmoSupremoYSuVidaDisminuyeLoIndicado(){
         // Arrange
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
-        AmoSupremo tipoAmoSupremo = new AmoSupremo(new Ubicacion(0,0), jugadorZerg); // Unidad de aire
+        AmoSupremo tipoAmoSupremo = new AmoSupremo(jugadorZerg); // Unidad de aire
         Unidad amoSupremo = new Unidad(new Tiempo(CONSTRUCCION_AMO), new Ubicacion(0, 0), tipoAmoSupremo);
         amoSupremo.avanzarTurno(5);
 

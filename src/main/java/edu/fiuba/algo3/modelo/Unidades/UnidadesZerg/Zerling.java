@@ -21,28 +21,15 @@ public class Zerling implements TipoDeUnidad, Atacante, Atacable {
 	private Vida vida;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	
-	public Zerling(Ubicacion unaUbicacion, Jugador unJugador) {
+	public Zerling(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
 		this.vida = new Vida(35);
 		this.jugador = unJugador;
 		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(4,new Superficie("Tierra"),1));}};
-	}
-	
-	public Zerling(JugadorZerg unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(35);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(4,new Superficie("Tierra"),1));}};
 	}
@@ -89,11 +76,11 @@ public class Zerling implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+		return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 	
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 	
 	public int vidaRestante() {
@@ -141,10 +128,5 @@ public class Zerling implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public void contarBaja() {
 		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

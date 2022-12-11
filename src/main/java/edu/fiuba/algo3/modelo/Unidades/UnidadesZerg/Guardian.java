@@ -21,27 +21,15 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 	private Vida vida;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	
-	public Guardian(Ubicacion unaUbicacion, Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(100);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Aire");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
-	}
-
 	public Guardian(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
 		this.vida = new Vida(100);
 		this.jugador = unJugador;
-		this.ubicacion = new Ubicacion();
+		this.unidad = null;
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
 	}
@@ -83,11 +71,11 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+		return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 	
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 	
 	public int vidaRestante() {
@@ -139,10 +127,5 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public void contarBaja() {
 		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

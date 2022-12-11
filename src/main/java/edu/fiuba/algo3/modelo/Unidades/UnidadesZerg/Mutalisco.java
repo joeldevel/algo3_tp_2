@@ -24,21 +24,8 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	private Vida vida;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
-	
-	public Mutalisco(Ubicacion unaUbicacion, Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(120);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Aire");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
-		 										 add(new Ataque(9,new Superficie("Aire"),3));}};
-	}
 	
 	public Mutalisco(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
@@ -46,7 +33,6 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 		this.vida = new Vida(120);
 		this.jugador = unJugador;
 		this.unidad = null;
-		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(9,new Superficie("Tierra"),3));
 		 										 add(new Ataque(9,new Superficie("Aire"),3));}};
@@ -94,11 +80,11 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+		return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 	
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 	
 	public int vidaRestante() {
@@ -124,11 +110,11 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_GUARDIAN), new Guardian(this.ubicacion, this.jugador));
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_GUARDIAN), new Guardian(this.jugador), this.unidad.ubicacion());
 	}
 
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_DEVORADOR), new Devorador(this.ubicacion, this.jugador));
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_DEVORADOR), new Devorador(this.jugador), this.unidad.ubicacion());
 	}
 
 	@Override
@@ -144,10 +130,5 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public void contarBaja() {
 		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

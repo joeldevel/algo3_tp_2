@@ -21,21 +21,8 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 	private Vida vida;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque>ataques;
-	
-	public Hidralisco(Ubicacion unaUbicacion, Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(80);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(10,new Superficie("Tierra"),4));
-												 add(new Ataque(10,new Superficie("Aire"),4));}};
-	}
 	
 	public Hidralisco(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
@@ -43,10 +30,9 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 		this.vida = new Vida(80);
 		this.jugador = unJugador;
 		this.unidad = null;
-		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(10,new Superficie("Tierra"),4));
-		 										 add(new Ataque(10,new Superficie("Aire"),4));}};
+												 add(new Ataque(10,new Superficie("Aire"),4));}};
 	}
 
 	@Override
@@ -91,11 +77,11 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+		return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 	
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 	
 	public int vidaRestante() {
@@ -143,10 +129,5 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public void contarBaja() {
 		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

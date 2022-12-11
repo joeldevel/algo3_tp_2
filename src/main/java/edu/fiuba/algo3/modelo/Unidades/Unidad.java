@@ -23,10 +23,12 @@ public class Unidad extends Raza {
 
 	// Este metodo se utiliza cuando cambiamos el tipo de unidad. Ej: Cuando una larva evoluciona a Zangano.
 	// Es necesario para poder setear el tiempo de construccion.
-	public void setComportamientoTipo(Tiempo unTiempo, TipoDeUnidad nuevoTipo) {
+	public void setComportamientoTipo(Tiempo unTiempo, TipoDeUnidad nuevoTipo, Ubicacion unaUbicacion) {
 		this.tiempo = unTiempo;
 		this.estado = new UnidadEnConstruccion();
 		this.tipo = nuevoTipo;
+		this.ubicacion = unaUbicacion;
+		nuevoTipo.setComportamientoUnidad(this);
 	}
 
 	// Este metodo se utiliza cuando el tiempo de construccion se cumplio.
@@ -110,6 +112,6 @@ public class Unidad extends Raza {
 	}
 
 	public void moverse(Ubicacion unaUbicacion) {
-		this.estado.moverse(unaUbicacion);
+		this.ubicacion = unaUbicacion;
 	}
 }

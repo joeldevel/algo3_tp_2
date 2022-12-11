@@ -59,7 +59,7 @@ public class Criadero extends EdificioZerg {
 		}
 
 		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.ubicacion, this.jugador));
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.jugador), this.ubicacion);
 		this.larvas.remove(0);
 		this.jugador.agregarUnidad(unaUnidad);
 	}

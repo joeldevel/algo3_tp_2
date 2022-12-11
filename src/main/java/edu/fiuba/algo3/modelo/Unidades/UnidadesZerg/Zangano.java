@@ -23,17 +23,15 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	private Vida vida;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 
 	private int cantidadRecolectableDeMineral;
     private Mineral nodo;
 
-	public Zangano(Ubicacion unaUbicacion, Jugador unJugador) {
+	public Zangano(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
 		this.vida = new Vida(25);
-		this.ubicacion = unaUbicacion;
 		this.superficie = new Superficie("Tierra");
 
 		this.cantidadRecolectableDeMineral = 10;
@@ -41,19 +39,6 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 		this.unidad = null;
 		this.nodo = new SinNodoMineral();
 	}
-
-    public Zangano(Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(25);
-		this.ubicacion = new Ubicacion();
-		this.superficie = new Superficie("Tierra");
-
-        this.cantidadRecolectableDeMineral = 10;
-		this.jugador = unJugador;
-		this.unidad = null;
-        this.nodo = new SinNodoMineral();
-    }
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
 		this.unidad = unaUnidad;
@@ -116,7 +101,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 
 	@Override
@@ -157,10 +142,5 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	@Override
 	public void contarBaja() {
 		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

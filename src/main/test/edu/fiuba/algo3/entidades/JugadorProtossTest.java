@@ -14,11 +14,11 @@ public class JugadorProtossTest {
     @Test
     public void test01JugadorProtossonstruyeUnAccesoYLuegoDeAvanzarOchoTurnosElAccesoEstaOperableYCreaUnZealot() {
         // Arrange
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000));
-
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000));
-
         Mapa mapa = new Mapa();
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
 
         jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
 
@@ -40,17 +40,17 @@ public class JugadorProtossTest {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(10, jugadorProtoss.calcularSuministroo());
+        assertEquals(10, jugadorProtoss.calcularSuministro());
     }
 
     @Test
     public void test02JugadorProtossonstruyeUnAccesoYLuegoDeAvanzarOchoTurnosElAccesoEstaOperableYCreaUnDragon() {
         // Arrange
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000));
-
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000));
-
         Mapa mapa = new Mapa();
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
 
         jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
 
@@ -72,17 +72,17 @@ public class JugadorProtossTest {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(15, jugadorProtoss.calcularSuministroo());
+        assertEquals(15, jugadorProtoss.calcularSuministro());
     }
 
     @Test
     public void test03JugadorProtossonstruyeUnPuertoEstelarYLuegoDeAvanzarDiezTurnosElPuertoEstelarEstaOperableYCreaUnScout() {
         // Arrange
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000));
-
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000));
-
         Mapa mapa = new Mapa();
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
 
         jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
 
@@ -111,6 +111,6 @@ public class JugadorProtossTest {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(20, jugadorProtoss.calcularSuministroo());
+        assertEquals(20, jugadorProtoss.calcularSuministro());
     }
 }

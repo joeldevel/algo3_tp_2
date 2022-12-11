@@ -39,11 +39,11 @@ public class AlgoStar {
     public void crearJugador(String unNombre, String unColor, String unaRaza) {
 
         if(unaRaza.equals("Zerg")) {
-            this.jugadores.add(new JugadorZerg(unNombre, unColor));
+            this.jugadores.add(new JugadorZerg(unNombre, unColor, this.mapa));
         }
 
         else if(unaRaza.equals("Protoss")) {
-            this.jugadores.add(new JugadorProtoss(unNombre, unColor));
+            this.jugadores.add(new JugadorProtoss(unNombre, unColor, this.mapa));
         }
 
         this.setComportamientoEstado(new AlgoStarIniciado(this.jugadores, this.mapa));

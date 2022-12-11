@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.modelo.Excepciones.UnidadEnConstruccionException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -28,8 +29,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso22Test {
 
-    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
-    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
+    Mapa mapa = new Mapa();
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000), mapa);
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000), mapa);
 
     @Test
     void test01SeCreaUnaUnidadConTipoZerlingYSeEncuentraEnConstruccion(){
@@ -37,7 +39,7 @@ public class CasoDeUso22Test {
         Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -54,7 +56,7 @@ public class CasoDeUso22Test {
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -71,7 +73,7 @@ public class CasoDeUso22Test {
         Hidralisco tipoHidralisco = new Hidralisco(jugadorZerg);
         Unidad hidralisco = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(0,0), tipoHidralisco);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -88,7 +90,7 @@ public class CasoDeUso22Test {
         Unidad hidralisco = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(0,0), tipoHidralisco);
         hidralisco.avanzarTurno(4);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -105,7 +107,7 @@ public class CasoDeUso22Test {
         Mutalisco tipoMutalisco = new Mutalisco(jugadorZerg);
         Unidad mutalisco = new Unidad(new Tiempo(CONSTRUCCION_MUTALISCO), new Ubicacion(0,0), tipoMutalisco);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -122,7 +124,7 @@ public class CasoDeUso22Test {
         Unidad mutalisco = new Unidad(new Tiempo(CONSTRUCCION_MUTALISCO), new Ubicacion(0,0), tipoMutalisco);
         mutalisco.avanzarTurno(7);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -139,7 +141,7 @@ public class CasoDeUso22Test {
         Guardian tipoGuardian = new Guardian(jugadorZerg);
         Unidad guardian = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -156,7 +158,7 @@ public class CasoDeUso22Test {
         Unidad guardian = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
         guardian.avanzarTurno(4);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss);
+        Dragon tipoDragon = new Dragon(jugadorProtoss);
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 

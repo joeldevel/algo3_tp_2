@@ -55,7 +55,7 @@ public class Acceso extends EdificioProtoss {
 			throw new EdificioNoEnergizadoError();
 		}
 		while(this.zealots.size() < 5) {
-			this.zealots.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.ubicacion, this.jugador)));
+			this.zealots.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador)));
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class Acceso extends EdificioProtoss {
 			throw new EdificioNoEnergizadoError();
 		}
 		while(this.dragones.size() < 5) {
-			this.dragones.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.ubicacion, this.jugador)));
+			this.dragones.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador)));
 		}
 	}
 	

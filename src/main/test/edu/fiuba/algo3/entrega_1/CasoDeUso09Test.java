@@ -24,10 +24,10 @@ class CasoDeUso09Test {
 	 * pero aun esta dentro del rango de otro que tambien lo energiza*/
 	
 	/* Los unicos edificios que necesitan energia son el acceso y el puerto estelar*/
-	
-	JugadorZerg jugadorZerg = new JugadorZerg("Brian", "Azul", new Recursos(10000,10000));
-	JugadorProtoss jugadorProtoss = new JugadorProtoss("Alan","Rojo",new Recursos(10000,10000));
+
 	Mapa mapa = new Mapa();
+	JugadorZerg jugadorZerg = new JugadorZerg("Brian", "Azul", new Recursos(10000,10000), mapa);
+	JugadorProtoss jugadorProtoss = new JugadorProtoss("Alan","Rojo",new Recursos(10000,10000), mapa);
 	
 	@Test
 	void test01SeDestruyeUnPilonDe2QueEnergizanUnAccesoDebeEstarOperativo() {

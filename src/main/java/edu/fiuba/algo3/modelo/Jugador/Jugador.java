@@ -28,5 +28,6 @@ public interface Jugador {
     public void avanzarTurno();
     int calcularPoblacion();
     ArrayList<Unidad> obtenerLarvas();
+    boolean haySuministroDisponible(int unSuministro);
 }
 

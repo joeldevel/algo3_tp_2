@@ -15,11 +15,11 @@ class CasoDeUso05Test {
 
 	/* Verificar que no se puedan construir edificios fuera del rango de un pilon o fuera del moho*/
 
+	Mapa mapa = new Mapa();
 	Recursos unosRecursos = new Recursos(10000,10000);
 	Recursos otrosRecursos = new Recursos(10000,10000);
-	JugadorZerg jugadorZerg = new JugadorZerg("Brian","Azul",unosRecursos);
-	JugadorProtoss jugadorProtoss = new JugadorProtoss("Cristian","Rojo",otrosRecursos);
-	Mapa mapa = new Mapa();
+	JugadorZerg jugadorZerg = new JugadorZerg("Brian","Azul",unosRecursos, mapa);
+	JugadorProtoss jugadorProtoss = new JugadorProtoss("Cristian","Rojo",otrosRecursos, mapa);
 	
 	@Test
 	void test01SiLaUbicacionNoEstaOcupadaDeberiaPoderConstruirUnCriadero() {

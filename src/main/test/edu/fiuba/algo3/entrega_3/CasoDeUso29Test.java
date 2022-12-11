@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
@@ -17,13 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasoDeUso29Test {
 
+    Mapa mapa = new Mapa();
+
     /* Protoss */
 
     @Test
     public void test01JugadorProtossLlegaAlLimiteDePoblacionCreandoCuarentaPilonesYElValorDePoblacionEsElIndicado() {
         // Arrange
         Recursos recursos = new Recursos(0, 4000);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
 
         // Act
         for (int i = 0; i < 40; i++) {
@@ -38,7 +41,7 @@ public class CasoDeUso29Test {
     public void test02JugadorProtossLlegaAlLimiteDePoblacionCreandoCuarentaPilonesYAlIntentarCrearOtroYaNoAumentaLaPoblacion() {
         // Arrange
         Recursos recursos = new Recursos(0, 4100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
 
         for (int i = 0; i < 40; i++) {
             jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(i,0),jugadorProtoss));
@@ -57,7 +60,7 @@ public class CasoDeUso29Test {
     public void test03JugadorZergLlegaAlLimiteDePoblacionCreandoCuarentaCriaderosYElValorDePoblacionEsElIndicado() {
         // Act
         Recursos recursos = new Recursos(0, 8000);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
 
         // Act
         for (int i = 0; i < 40; i++) {
@@ -72,7 +75,7 @@ public class CasoDeUso29Test {
     public void test04JugadorZergLlegaAlLimiteDePoblacionCreandoCuarentaAmosSupremosYElValorDePoblacionEsElIndicado() {
         // Act
         Recursos recursos = new Recursos(0, 2000);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
 
         // Act
         for (int i = 0; i < 40; i++) {
@@ -87,7 +90,7 @@ public class CasoDeUso29Test {
     public void test05JugadorZergLlegaAlLimiteDePoblacionCreandoCuarentaCriaderosYAlIntentarCrearOtroYaNoAumentaLaPoblacion() {
         // Arrange
         Recursos recursos = new Recursos(0, 8200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
 
         for (int i = 0; i < 40; i++) {
             jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(i,0),jugadorZerg));

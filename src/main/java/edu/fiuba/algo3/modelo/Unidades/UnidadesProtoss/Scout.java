@@ -22,22 +22,8 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	private Escudo escudo;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
-	
-	public Scout(Ubicacion unaUbicacion, Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(150);
-		this.escudo = new Escudo(100);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Aire");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),4));
-		 										 add(new Ataque(14,new Superficie("Aire"),4));}};
-	}
 	
 	public Scout(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
@@ -46,7 +32,6 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 		this.escudo = new Escudo(100);
 		this.jugador = unJugador;
 		this.unidad = null;
-		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Aire");
 		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),4));
 		 										 add(new Ataque(14,new Superficie("Aire"),4));}};
@@ -98,12 +83,12 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+		return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 	
 	@Override
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 	
 	public int vidaRestante() {
@@ -151,10 +136,5 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	@Override
 	public void contarBaja() {
 		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

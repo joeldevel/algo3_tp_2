@@ -32,27 +32,10 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	private Escudo escudo;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	private EstadoDeZealot estado;
 	private int cantidadDeBajas;
-
-	public Zealot(Ubicacion unaUbicacion, Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(100);
-		this.escudo = new Escudo(60);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{
-			add(new Ataque(8, new Superficie("Tierra"), 1));
-		}};
-		this.estado = new ZealotNoInvisible();
-		this.cantidadDeBajas = 0;
-	}
 
 	public Zealot(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
@@ -61,7 +44,6 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 		this.escudo = new Escudo(60);
 		this.jugador = unJugador;
 		this.unidad = null;
-		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{
 			add(new Ataque(8, new Superficie("Tierra"), 1));
@@ -111,7 +93,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+		return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 
 	public void hacerseInvisible() {
@@ -129,7 +111,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 
 	public int vidaRestante() {
@@ -168,10 +150,5 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	@Override
 	public void contarBaja() {
 		cantidadDeBajas += 1;
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

@@ -93,9 +93,4 @@ public class Larva implements TipoDeUnidad {
 	public void contarBaja() {
 		// No hace nada.
 	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		// No hace nada.
-	}
 }

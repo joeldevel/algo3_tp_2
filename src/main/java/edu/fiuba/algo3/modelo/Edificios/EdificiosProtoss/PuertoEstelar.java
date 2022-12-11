@@ -49,7 +49,7 @@ public class PuertoEstelar extends EdificioProtoss {
     		throw new EdificioNoEnergizadoError();
     	}
     	while(this.scouts.size() < 5) {
-    		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.ubicacion,this.jugador)));
+    		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador)));
     	}
     }
 	

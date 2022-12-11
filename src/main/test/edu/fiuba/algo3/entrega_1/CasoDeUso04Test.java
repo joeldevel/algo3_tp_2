@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Extractor;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -19,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso04Test {
 
+    Mapa mapa = new Mapa();
+
     /* Extractor */
 
     @Test
@@ -26,7 +29,7 @@ public class CasoDeUso04Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         // Act
@@ -41,7 +44,7 @@ public class CasoDeUso04Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,125);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoZangano =  new Zangano(jugadorZerg);
@@ -60,7 +63,7 @@ public class CasoDeUso04Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoPrimerZangano =  new Zangano(jugadorZerg);
@@ -82,7 +85,7 @@ public class CasoDeUso04Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,175);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoPrimerZangano =  new Zangano(jugadorZerg);
@@ -107,7 +110,7 @@ public class CasoDeUso04Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoPrimerZangano =  new Zangano(jugadorZerg);
@@ -137,7 +140,7 @@ public class CasoDeUso04Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
@@ -152,7 +155,7 @@ public class CasoDeUso04Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         // Act

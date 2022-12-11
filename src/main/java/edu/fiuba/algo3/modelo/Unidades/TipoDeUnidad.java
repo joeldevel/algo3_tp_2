@@ -40,6 +40,4 @@ public interface TipoDeUnidad {
 	void serRevelado();
 
 	void contarBaja();
-
-	void moverse(Ubicacion unaUbicacion);
 }

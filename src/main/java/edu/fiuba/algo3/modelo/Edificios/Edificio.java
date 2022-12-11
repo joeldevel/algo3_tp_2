@@ -50,10 +50,6 @@ public abstract class Edificio extends Raza implements Recuperable{
     public int distanciaCon(Edificio otroEdificio) {
     	return (this.ubicacion.distanciaCon(otroEdificio.ubicacion()));
     }
-    
-    public boolean estaEn(Ubicacion unaUbicacion) {
-    	return (this.ubicacion.esIgualA(unaUbicacion));
-    }
 	
     public boolean esUn(String unEdificio) {
     	return (this.identificador == unEdificio);

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -17,8 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CasoDeUso02Test {
 
-	JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(10000,10000));
-	JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(10000,10000));
+	Mapa mapa = new Mapa();
+	JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(10000,10000), mapa);
+	JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(10000,10000), mapa);
 
 	/* Protoss */
 

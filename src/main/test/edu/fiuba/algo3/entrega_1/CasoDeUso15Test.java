@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarExc
 import edu.fiuba.algo3.modelo.Excepciones.VolcanSinGasVespenoParaExtraerException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -21,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso15Test {
 
+    Mapa mapa = new Mapa();
+
     /* Protoss */
 
     @Test
@@ -28,7 +31,7 @@ public class CasoDeUso15Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.avanzarTurno(6);
 
@@ -43,7 +46,7 @@ public class CasoDeUso15Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.avanzarTurno(4);
 
@@ -62,7 +65,7 @@ public class CasoDeUso15Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,175);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         extractor.avanzarTurno(6);
 
@@ -87,7 +90,7 @@ public class CasoDeUso15Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 25);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Zangano tipoZangano =  new Zangano(jugadorZerg);
         Unidad zangano = new Unidad(new Tiempo(CONSTRUCCION_ZANGANO), new Ubicacion(0,0), tipoZangano);
         zangano.avanzarTurno(1);

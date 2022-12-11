@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.CONSTRUCCION_HIDRALISCO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO_HIDRALISCO;
 
 public class Guarida extends EdificioZerg {
 
@@ -45,9 +46,9 @@ public class Guarida extends EdificioZerg {
 	
 	public void crearHidralisco() {
 
-		if(!this.larvas.isEmpty()) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
 			Unidad unaUnidad = this.larvas.get(0);
-			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_HIDRALISCO), new Hidralisco(this.ubicacion, this.jugador));
+			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_HIDRALISCO), new Hidralisco(this.jugador), this.ubicacion);
 			this.larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
 		}

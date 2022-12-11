@@ -25,23 +25,8 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     private Vida vida;
     private Jugador jugador;
     private Unidad unidad;
-    private Ubicacion ubicacion;
     private Superficie superficie;
     private ArrayList<Revelo> revelos;
-
-    public AmoSupremo(Ubicacion unaUbicacion, Jugador unJugador) {
-        unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-        this.vida = new Vida(200);
-        this.jugador = unJugador;
-        this.unidad = null;
-        this.ubicacion = unaUbicacion;
-        this.superficie = new Superficie("Aire");
-        this.revelos = new ArrayList<Revelo>() {{
-            add(new Revelo(new Superficie("Tierra"), 4));
-            add(new Revelo(new Superficie("Aire"), 4));
-        }};
-    }
 
     public AmoSupremo(Jugador unJugador) {
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
@@ -49,7 +34,6 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
         this.vida = new Vida(200);
         this.jugador = unJugador;
         this.unidad = null;
-        this.ubicacion = new Ubicacion();
         this.superficie = new Superficie("Aire");
         this.revelos = new ArrayList<Revelo>() {{
             add(new Revelo(new Superficie("Tierra"), 4));
@@ -81,8 +65,9 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
         this.vida.recibirDanioPor(unDanio, unidadAtacante, this.unidad, this.jugador);
     }
 
+    @Override
     public Ubicacion ubicacion() {
-        return (this.ubicacion);
+        return this.unidad.ubicacion();
     }
 
     public int vidaRestante() {
@@ -115,7 +100,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     }
 
     public boolean estaEnRangoDeRevelo(Revelable unRevelable, Revelo unRevelo) {
-        return (this.ubicacion.distanciaCon(unRevelable.ubicacion()) <= unRevelo.rango());
+        return (this.unidad.ubicacion().distanciaCon(unRevelable.ubicacion()) <= unRevelo.rango());
     }
 
     public void recuperarse() {
@@ -150,10 +135,5 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     @Override
     public void contarBaja() {
         // No hace nada.
-    }
-
-    @Override
-    public void moverse(Ubicacion unaUbicacion) {
-        this.ubicacion = unaUbicacion;
     }
 }

@@ -33,10 +33,10 @@ class CasoDeUso14Test {
 	 * protoss no se pueden hacer sobre moho, por mas que esten dentro del alcance de un pilon)
 	 * -El moho se puede expandir por un area no ocupada(es decir, que no tenga un edificio
 	 * ya construido) aunque esta este energizada por un pilon*/
-	
-	JugadorZerg jugadorZerg = new JugadorZerg("Brian","Azul", new Recursos(10000,10000));
-	JugadorProtoss jugadorProtoss = new JugadorProtoss("Leo","Rojo", new Recursos(10000,10000));
+
 	Mapa mapa = new Mapa();
+	JugadorZerg jugadorZerg = new JugadorZerg("Brian","Azul", new Recursos(10000,10000), mapa);
+	JugadorProtoss jugadorProtoss = new JugadorProtoss("Leo","Rojo", new Recursos(10000,10000), mapa);
 	
 	@Test
 	void test01HayUnPilonCercaDelMohoPorLoQueNoSePuedeConstruirUnEdificioProtoss() {

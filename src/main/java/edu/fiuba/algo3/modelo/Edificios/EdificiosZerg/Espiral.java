@@ -10,7 +10,9 @@ import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO_HIDRALISCO;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.CONSTRUCCION_MUTALISCO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.SUMINISTRO_MUTALISCO;
 
 public class Espiral extends EdificioZerg {
 
@@ -45,9 +47,10 @@ public class Espiral extends EdificioZerg {
 	
 	public void crearMutalisco() {
 
-		if(!this.larvas.isEmpty()) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
+
 			Unidad unaUnidad = larvas.get(0);
-			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_MUTALISCO), new Mutalisco(this.ubicacion, this.jugador));
+			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_MUTALISCO), new Mutalisco(this.jugador), this.ubicacion);
 			larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
 		}

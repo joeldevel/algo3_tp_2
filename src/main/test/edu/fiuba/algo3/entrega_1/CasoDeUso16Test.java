@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaExcep
 import edu.fiuba.algo3.modelo.Excepciones.VolcanYaTieneUnaRefineriaDeGasConstruidaException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -18,6 +19,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso16Test {
+
+    Mapa mapa = new Mapa();
 
     /* Nodo Mineral */
 
@@ -35,7 +38,7 @@ public class CasoDeUso16Test {
     void test02SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnNexoMineralConstruidoYSeLanzaUnaExcepcion(){
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NexoMineral primerNexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         assertThrows(NodoMineralYaTieneUnRecolectorDeMineralException.class,()->{
@@ -46,11 +49,11 @@ public class CasoDeUso16Test {
     @Test
     void test03SeIntentaConstruirUnNexoMineralEnUnNodoMineralDondeYaHayUnZanganoYSeLanzaUnaExcepcion(){
         Recursos recursos = new Recursos(0,50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
 
         Recursos recursosZerg = new Recursos(0,25);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursosZerg);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursosZerg, mapa);
         Zangano zangano = new Zangano(jugadorZerg);
         zangano.conNodo(nodoMineral);
 
@@ -77,7 +80,7 @@ public class CasoDeUso16Test {
     void test02SeIntentaConstruirUnExtractorEnUnVolcanDondeYaHayUnExtractorConstruidoYSeLanzaUnaExcepcion(){
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor primerExtractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         assertThrows(VolcanYaTieneUnaRefineriaDeGasConstruidaException.class,()->{
