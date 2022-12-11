@@ -26,10 +26,10 @@ public class JugadorZergTest {
 
         jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
 
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.avanzarTurno();
+        for(int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
         jugadorZerg.crearZangano(new Ubicacion(0,0), mapa);
@@ -52,10 +52,13 @@ public class JugadorZergTest {
 
         for(int i = 0; i < 13; i++) {
             jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
         }
 
         // Act
         jugadorZerg.crearZerling(new Ubicacion(1,1), mapa);
+        jugadorZerg.avanzarTurno();
+        mapa.avanzarTurno();
 
         // Assert
         assertEquals(1, jugadorZerg.calcularSuministroo());
@@ -72,16 +75,115 @@ public class JugadorZergTest {
 
         jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa); // Debemos construir un Criadero debido al moho
         jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa); // Debemos construir una Reserva debido a que es condicion para una Guarida
-        jugadorZerg.construir("Guarida", new Ubicacion(1,2), jugadorProtoss, mapa); // Debemos construir una Reserva debido a que es condicion para una Guarida
+        jugadorZerg.construir("Guarida", new Ubicacion(1,2), jugadorProtoss, mapa);
 
         for(int i = 0; i < 13; i++) {
             jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
         }
 
         // Act
         jugadorZerg.crearHidralisco(new Ubicacion(1,2), mapa);
+        jugadorZerg.avanzarTurno();
+        mapa.avanzarTurno();
 
         // Assert
         assertEquals(2, jugadorZerg.calcularSuministroo());
+    }
+
+    @Test
+    public void test04JugadorZergConstruyeUnaEspiralYLuegoDeAvanzarDiezTurnosLaEspiralEstaOperableYCreaUnMutalisco() {
+        // Arrange
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000));
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000));
+
+        Mapa mapa = new Mapa();
+
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa); // Debemos construir un Criadero debido al moho
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa); // Debemos construir una Reserva debido a que es condicion para una Guarida
+        jugadorZerg.construir("Guarida", new Ubicacion(1,2), jugadorProtoss, mapa); // Debemos construir una Guarida debido a que es condicion para una Espiral
+        jugadorZerg.construir("Espiral", new Ubicacion(2,1), jugadorProtoss, mapa);
+
+        for(int i = 0; i < 13; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        // Act
+        jugadorZerg.crearMutalisco(new Ubicacion(2,1), mapa);
+        jugadorZerg.avanzarTurno();
+        mapa.avanzarTurno();
+
+        // Assert
+        assertEquals(4, jugadorZerg.calcularSuministroo());
+    }
+
+    @Test
+    public void test05JugadorZergCreaUnMutaliscoYLoEvolucionaAGuardian() {
+        // Arrange
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000));
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000));
+
+        Mapa mapa = new Mapa();
+
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa); // Debemos construir un Criadero debido al moho
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa); // Debemos construir una Reserva debido a que es condicion para una Guarida
+        jugadorZerg.construir("Guarida", new Ubicacion(1,2), jugadorProtoss, mapa); // Debemos construir una Guarida debido a que es condicion para una Espiral
+        jugadorZerg.construir("Espiral", new Ubicacion(2,1), jugadorProtoss, mapa);
+
+        for(int i = 0; i < 13; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.crearMutalisco(new Ubicacion(2,1), mapa);
+        jugadorZerg.avanzarTurno();
+        mapa.avanzarTurno();
+
+        for(int i = 0; i < 7; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.evolucionarMutaliscoAGuardian(new Ubicacion(2,1), mapa);
+
+        // Assert
+        assertEquals(4, jugadorZerg.calcularSuministroo());
+    }
+
+    @Test
+    public void test06JugadorZergCreaUnMutaliscoYLoEvolucionaADevorador() {
+        // Arrange
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000));
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000));
+
+        Mapa mapa = new Mapa();
+
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa); // Debemos construir un Criadero debido al moho
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa); // Debemos construir una Reserva debido a que es condicion para una Guarida
+        jugadorZerg.construir("Guarida", new Ubicacion(1,2), jugadorProtoss, mapa); // Debemos construir una Guarida debido a que es condicion para una Espiral
+        jugadorZerg.construir("Espiral", new Ubicacion(2,1), jugadorProtoss, mapa);
+
+        for(int i = 0; i < 13; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.crearMutalisco(new Ubicacion(2,1), mapa);
+        jugadorZerg.avanzarTurno();
+        mapa.avanzarTurno();
+
+        for(int i = 0; i < 7; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.evolucionarMutaliscoADevorador(new Ubicacion(2,1), mapa);
+
+        // Assert
+        assertEquals(4, jugadorZerg.calcularSuministroo());
     }
 }

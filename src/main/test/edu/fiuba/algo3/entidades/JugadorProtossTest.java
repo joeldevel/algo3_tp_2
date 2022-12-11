@@ -24,17 +24,20 @@ public class JugadorProtossTest {
 
         for(int i = 0; i < 6; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Pilon este operable y energice
+            mapa.avanzarTurno();
         }
 
         jugadorProtoss.construir("Acceso", new Ubicacion(1,1), jugadorZerg, mapa);
 
         for(int i = 0; i < 9; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Acceso este operable y transporte unidades
+            mapa.avanzarTurno();
         }
 
         // Act
         jugadorProtoss.crearZealot(new Ubicacion(1,1), mapa);
         jugadorProtoss.avanzarTurno();
+        mapa.avanzarTurno();
 
         // Assert
         assertEquals(10, jugadorProtoss.calcularSuministroo());
@@ -53,17 +56,20 @@ public class JugadorProtossTest {
 
         for(int i = 0; i < 6; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Pilon este operable y energice
+            mapa.avanzarTurno();
         }
 
         jugadorProtoss.construir("Acceso", new Ubicacion(1,1), jugadorZerg, mapa);
 
         for(int i = 0; i < 9; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Acceso este operable y transporte unidades
+            mapa.avanzarTurno();
         }
 
         // Act
         jugadorProtoss.crearDragon(new Ubicacion(1,1), mapa);
         jugadorProtoss.avanzarTurno();
+        mapa.avanzarTurno();
 
         // Assert
         assertEquals(15, jugadorProtoss.calcularSuministroo());
@@ -82,23 +88,27 @@ public class JugadorProtossTest {
 
         for(int i = 0; i < 6; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Pilon este operable y energice
+            mapa.avanzarTurno();
         }
 
         jugadorProtoss.construir("Acceso", new Ubicacion(1,1), jugadorZerg, mapa);
 
         for(int i = 0; i < 9; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Acceso este operable y transporte unidades
+            mapa.avanzarTurno();
         }
 
         jugadorProtoss.construir("PuertoEstelar", new Ubicacion(2,2), jugadorZerg, mapa);
 
         for(int i = 0; i < 10; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Puerto Estelar este operable y transporte unidades
+            mapa.avanzarTurno();
         }
 
         // Act
         jugadorProtoss.crearScout(new Ubicacion(2,2), mapa);
         jugadorProtoss.avanzarTurno();
+        mapa.avanzarTurno();
 
         // Assert
         assertEquals(20, jugadorProtoss.calcularSuministroo());

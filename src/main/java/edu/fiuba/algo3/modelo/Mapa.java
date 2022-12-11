@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
@@ -103,6 +104,27 @@ public class Mapa {
 				return edificio;
 			}
 		}
+
+		return null;
+	}
+
+	public boolean verificarUnidadEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+
+		//for(Unidad unidad: this.unidades) {
+		//	verificado = unidad.estaEn(unaUbicacion);
+		//}
+
+		return verificado;
+	}
+
+	public Unidad obtenerUnidadEnUbicacion(Ubicacion unaUbicacion) {
+
+		//for(Unidad unidad: this.unidades) {
+		//	if(unidad.estaEn(unaUbicacion)) {
+		//		return unidad;
+		//	}
+		//}
 
 		return null;
 	}

@@ -170,7 +170,6 @@ public class JugadorZerg implements Jugador {
         if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Criadero", unaUbicacion))) {
             Criadero criadero = (Criadero) unMapa.obtenerEdificioEnUbicacion("Criadero", unaUbicacion);
             criadero.crearZangano();
-            this.unidades.addAll(criadero.obtenerZanganos());
 
             this.cantidadDeZanganos++;
             this.incrementarSuministro(SUMINISTRO_ZANGANO);
@@ -189,7 +188,7 @@ public class JugadorZerg implements Jugador {
 
         if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion))) {
             ReservaDeReproduccion reserva = (ReservaDeReproduccion) unMapa.obtenerEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion);
-            this.unidades.addAll(reserva.obtenerZerlings());
+            reserva.recibirLarvas(obtenerLarvas());
 
             this.cantidadDeZerlings++;
             this.incrementarSuministro(SUMINISTRO_ZERLING);
@@ -219,7 +218,7 @@ public class JugadorZerg implements Jugador {
 
         if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Guarida", unaUbicacion))) {
             Guarida guarida = (Guarida) unMapa.obtenerEdificioEnUbicacion("Guarida", unaUbicacion);
-            this.unidades.addAll(guarida.obtenerHidraliscos());
+            guarida.recibirLarvas(obtenerLarvas());
 
             this.cantidadDeHidraliscos++;
             this.incrementarSuministro(SUMINISTRO_HIDRALISCO);
@@ -230,37 +229,61 @@ public class JugadorZerg implements Jugador {
         }
     }
 
-    // Falta enviar el mensaje al edificio Espiral que permite instanciar Mutalisco.
-    public void crearMutalisco(Edificio unaEspiral) {
+    public void crearMutalisco(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeMutaliscos++;
-        this.incrementarSuministro(SUMINISTRO_MUTALISCO);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarEdificioEnUbicacion("Espiral", unaUbicacion))) {
+            Espiral espiral = (Espiral) unMapa.obtenerEdificioEnUbicacion("Espiral", unaUbicacion);
+            espiral.recibirLarvas(obtenerLarvas());
+
+            this.cantidadDeMutaliscos++;
+            this.incrementarSuministro(SUMINISTRO_MUTALISCO);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
-    // Falta enviar el mensaje que permite instanciar Guardian (evolucion de Mutalisco).
-    public void evolucionarMutaliscoAGuardian(Unidad unMutalisco) {
+    public void evolucionarMutaliscoAGuardian(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_GUARDIAN)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeGuardianes++;
-        this.incrementarSuministro(SUMINISTRO_GUARDIAN);
+        if (!this.haySuministroDisponible(SUMINISTRO_DEVORADOR)) {
+            throw new SuministroSuperaElNumeroDePoblacionException();
+        }
+
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarUnidadEnUbicacion(unaUbicacion))) {
+            Unidad mutalisco = unMapa.obtenerUnidadEnUbicacion(unaUbicacion);
+            mutalisco.evolucionarAGuardian();
+
+            this.cantidadDeGuardianes++;
+            this.incrementarSuministro(SUMINISTRO_GUARDIAN);
+        }
     }
 
-    // Falta enviar el mensaje que permite instanciar Devorador (evolucion de Mutalisco).
-    public void evolucionarMutaliscoADevorador(Unidad unMutalisco) {
+    public void evolucionarMutaliscoADevorador(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_DEVORADOR)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
         }
 
-        this.cantidadDeDevoradores++;
-        this.incrementarSuministro(SUMINISTRO_DEVORADOR);
+        if((unMapa.ubicacionEstaDentroDeMapa(unaUbicacion)) && (unMapa.verificarUnidadEnUbicacion(unaUbicacion))) {
+            Unidad mutalisco = unMapa.obtenerUnidadEnUbicacion(unaUbicacion);
+            mutalisco.evolucionarADevorador();
+
+            this.cantidadDeDevoradores++;
+            this.incrementarSuministro(SUMINISTRO_DEVORADOR);
+        }
+
+        else {
+            throw new UbicacionSinEdificioException();
+        }
     }
 
     public int cantidadDeUnidades(UNIDADES_ZERG tipoUnidad) {

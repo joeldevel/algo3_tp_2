@@ -344,7 +344,7 @@ public class CasoDeUso26Test {
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    @Test
+    /*@Test
     public void test25JugadorZergSinPoblacionIntentaCrearUnMutaliscoYNoPuede() {
         // Arrange
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
@@ -392,5 +392,5 @@ public class CasoDeUso26Test {
 
         // Act & Assert
         assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco(espiral));
-    }
+    }*/
 }

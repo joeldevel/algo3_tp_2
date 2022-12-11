@@ -27,7 +27,6 @@ public class Criadero extends EdificioZerg {
 	
 	private int maxLarvas;
 	private ArrayList<Unidad> larvas;
-	private ArrayList<Unidad> zanganos;
 		
 	public Criadero(Ubicacion unaUbicacion, Jugador unJugador) {
 		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador,"Criadero");
@@ -38,7 +37,6 @@ public class Criadero extends EdificioZerg {
 		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));}};
-		this.zanganos = new ArrayList<Unidad>();
 	}
 
 	@Override
@@ -63,7 +61,7 @@ public class Criadero extends EdificioZerg {
 		Unidad unaUnidad = this.larvas.get(0);
 		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.ubicacion, this.jugador));
 		this.larvas.remove(0);
-		zanganos.add(unaUnidad);
+		this.jugador.agregarUnidad(unaUnidad);
 	}
 	
 	public void crearLarva() {
@@ -76,12 +74,6 @@ public class Criadero extends EdificioZerg {
 	public ArrayList<Unidad> devolverLarvas(){
 		ArrayList<Unidad> aDevolver = new ArrayList<>(this.larvas);
 		this.larvas.clear();
-		return aDevolver;
-	}
-	
-	public ArrayList<Unidad> obtenerZanganos(){
-		ArrayList<Unidad> aDevolver = new ArrayList<>(this.zanganos);
-		this.zanganos.clear();
 		return aDevolver;
 	}
 

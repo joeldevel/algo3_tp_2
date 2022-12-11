@@ -2,19 +2,15 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.CONSTRUCCION_HIDRALISCO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.CONSTRUCCION_ZERLING;
 
 public class Guarida extends EdificioZerg {
 
@@ -23,8 +19,6 @@ public class Guarida extends EdificioZerg {
 	private final int COSTO_GAS = 100;
 	
 	private ArrayList<Unidad> larvas;
-    private ArrayList<Unidad> hidraliscos;
-    
 	
     public Guarida(Ubicacion unaUbicacion, Jugador unJugador){
         super(new Tiempo(-12), new Vida(1250), unaUbicacion, unJugador,"Guarida");
@@ -32,7 +26,6 @@ public class Guarida extends EdificioZerg {
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
         this.larvas = new ArrayList<Unidad>();
-        this.hidraliscos = new ArrayList<Unidad>();
     }
 
 	@Override
@@ -47,23 +40,16 @@ public class Guarida extends EdificioZerg {
 
 	@Override
 	public void ejecutaOperable() {
-		this.crearHidraliscos();
+		this.crearHidralisco();
 	}
 	
-	public void crearHidraliscos() {
-		/* el ciclo deberia tener algo como && this.cumpleConLosRequisitos(unosRequisitos)*/
-		/*while(this.contarLarvas() != 0) {
-			Unidad actual = larvas.get(0);
-			actual.setComportamientoEstado(new Hidralisco(this.ubicacion, this.jugador));
-			hidraliscos.add(actual);
-			larvas.remove(0);
-		}*/
+	public void crearHidralisco() {
 
 		if(!this.larvas.isEmpty()) {
 			Unidad unaUnidad = this.larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_HIDRALISCO), new Hidralisco(this.ubicacion, this.jugador));
 			this.larvas.remove(0);
-			hidraliscos.add(unaUnidad);
+			this.jugador.agregarUnidad(unaUnidad);
 		}
 	}
 	
@@ -73,12 +59,6 @@ public class Guarida extends EdificioZerg {
     	
 	public void recibirLarvas(ArrayList<Unidad> unasLarvas) {
 		this.larvas.addAll(unasLarvas);
-	}
-	
-	public ArrayList<Unidad> obtenerHidraliscos(){
-		ArrayList<Unidad> aDevolver = new ArrayList<>(this.hidraliscos);
-		this.hidraliscos.clear();
-		return aDevolver;
 	}
 
 	@Override
