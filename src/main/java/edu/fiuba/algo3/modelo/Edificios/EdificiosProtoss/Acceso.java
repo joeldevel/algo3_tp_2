@@ -15,6 +15,10 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.SUMINISTRO_DRAGON;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.SUMINISTRO_ZEALOT;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
+
 public class Acceso extends EdificioProtoss {
 
 	private final int POBLACION = 0;
@@ -54,7 +58,7 @@ public class Acceso extends EdificioProtoss {
 		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
 		}
-		while(this.zealots.size() < 5) {
+		while(this.zealots.size() < 5 && this.jugador.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
 			this.zealots.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador)));
 		}
 	}
@@ -63,7 +67,7 @@ public class Acceso extends EdificioProtoss {
 		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
 		}
-		while(this.dragones.size() < 5) {
+		while(this.dragones.size() < 5 && this.jugador.haySuministroDisponible(SUMINISTRO_DRAGON)) {
 			this.dragones.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador)));
 		}
 	}

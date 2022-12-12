@@ -112,7 +112,7 @@ public class JugadorZerg implements Jugador {
     }
     
     public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugadorProtoss,Mapa mapa) {
-    	FabricaDeEdificios.construir(edificio, unaUbicacion, this, jugadorProtoss, mapa);
+        FabricaDeEdificios.construir(edificio, unaUbicacion, this, jugadorProtoss, mapa);
     }
 
     public void crearAmoSupremo(Ubicacion unaUbicacion) {

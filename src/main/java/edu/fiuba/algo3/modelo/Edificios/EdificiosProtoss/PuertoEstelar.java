@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.SUMINISTRO_SCOUT;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
+
 public class PuertoEstelar extends EdificioProtoss {
 
     private final int POBLACION = 0;
@@ -48,7 +51,7 @@ public class PuertoEstelar extends EdificioProtoss {
     	if(! this.estaEnergizado()) {
     		throw new EdificioNoEnergizadoError();
     	}
-    	while(this.scouts.size() < 5) {
+    	while(this.scouts.size() < 5 && this.jugador.haySuministroDisponible(SUMINISTRO_SCOUT)) {
     		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador)));
     	}
     }

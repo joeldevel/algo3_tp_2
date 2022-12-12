@@ -37,11 +37,11 @@ public class VistaMapa {
 
         for(Volcan volcan: this.mapa.volcanes()) {
             Ubicacion ubicacion = volcan.ubicacion();
-            this.canvas.getGraphicsContext2D().setFill(Color.RED);
-            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 10, 10); // Posicion x, posicion y, ancho, altura
+            //this.canvas.getGraphicsContext2D().setFill(Color.RED);
+            //this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 10, 10); // Posicion x, posicion y, ancho, altura
 
-            //Image imagen = new Image("file:src/main/resources/images/geiser-vespeno.png", 50, 50, true, false);
-            //this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY());
+            Image imagen = new Image("file:src/main/resources/images/geiser-vespeno.png", 50, 50, true, false);
+            this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY());
         }
 
         for(NodoMineral nodo: this.mapa.nodosMinerales()) {

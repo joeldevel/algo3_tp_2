@@ -64,7 +64,6 @@ public class CasoDeUso31Test {
         assertEquals(10, jugadorProtoss.calcularPoblacion());
     }
 
-
     /*@Test
     public void test03AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnZealot() {
         // Arrange

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 /**
  * JavaFX App
  */
+
 public class App extends Application {
 
     public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class App extends Application {
         AlgoStar algoStar = crearModelo();
 
         // Pantalla de juego
-        //antallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar); // Pantalla de Cristian
+        //PantallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar); // Pantalla de Cristian
         PantallaJuego pantallaJuego = new PantallaJuego(stage, algoStar);
         Scene escenaJuego = new Scene(pantallaJuego, 500, 500);
         escenaJuego.getStylesheets().add("file:src/main/resources/style.css");
