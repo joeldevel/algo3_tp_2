@@ -1,6 +1,5 @@
 package edu.fiuba.algo3;
 
-
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.vistas.*;
 import javafx.application.Application;

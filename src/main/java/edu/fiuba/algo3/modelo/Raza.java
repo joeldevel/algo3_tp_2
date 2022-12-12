@@ -13,6 +13,10 @@ public abstract class Raza implements Atacable, Revelable{
 		this.ubicacion = unaUbicacion;
 	}
 
+	public int tiempoRestante() {
+		return (this.tiempo.restante());
+	}
+
 	public abstract int obtenerPoblacion();
 	
 	public abstract void avanzarTurno();
