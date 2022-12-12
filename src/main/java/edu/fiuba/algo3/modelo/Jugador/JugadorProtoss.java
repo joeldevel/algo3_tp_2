@@ -300,4 +300,39 @@ public class JugadorProtoss implements Jugador {
 		}
 		return puertoEstelar;
 	}
+
+    @Override
+    public void crearAmoSupremo(Ubicacion unaUbicacion) {
+        // El jugador Protoss no entiende este mensaje
+    }
+
+    @Override
+    public void crearZangano(Ubicacion unaUbicacion) {
+        // El jugador Protoss no entiende este mensaje
+    }
+
+    @Override
+    public void crearZerling(Ubicacion unaUbicacion) {
+        // El jugador Protoss no entiende este mensaje
+    }
+
+    @Override
+    public void crearHidralisco(Ubicacion unaUbicacion) {
+        // El jugador Protoss no entiende este mensaje
+    }
+
+    @Override
+    public void crearMutalisco(Ubicacion unaUbicacion) {
+        // El jugador Protoss no entiende este mensaje
+    }
+
+    @Override
+    public void evolucionarMutaliscoAGuardian(Ubicacion unaUbicacion) {
+        // El jugador Protoss no entiende este mensaje
+    }
+
+    @Override
+    public void evolucionarMutaliscoADevorador(Ubicacion unaUbicacion) {
+        // El jugador Protoss no entiende este mensaje
+    }
 }

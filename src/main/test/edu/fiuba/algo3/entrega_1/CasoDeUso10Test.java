@@ -20,14 +20,14 @@ public class CasoDeUso10Test {
     Mapa mapa = new Mapa();
     JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000, 1000), mapa);
 
-    /*@Test
+    @Test
     void test01SeConstruyeUnCriaderoQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -42,10 +42,10 @@ public class CasoDeUso10Test {
     void test02SeConstruyeUnCriaderoQueNoSeEncuentraOperativoYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(criadero);
@@ -61,11 +61,11 @@ public class CasoDeUso10Test {
     void test03SeConstruyeUnCriaderoQueLuegoDeCuatroTurnosSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
         criadero.avanzarTurno(4);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -80,11 +80,11 @@ public class CasoDeUso10Test {
     void test04SeConstruyeUnCriaderoQueLuegoDeCuatroTurnosSeEncuentraOperativoYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
         criadero.avanzarTurno(4);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(criadero);
@@ -94,18 +94,18 @@ public class CasoDeUso10Test {
 
         // Assert
         assertEquals(500, criadero.obtenerVida());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-   /* @Test
+   @Test
     void test05SeConstruyeUnaEspiralQueNoSeEncuentraOperativaYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(100,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -121,10 +121,10 @@ public class CasoDeUso10Test {
         // Arrange
         // Arrange
         Recursos recursos = new Recursos(100,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(espiral);
@@ -140,11 +140,11 @@ public class CasoDeUso10Test {
     void test07SeConstruyeUnaEspiralQueLuegoDeDiezTurnosSeEncuentraOperativaYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(100,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
         espiral.avanzarTurno(10);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -159,11 +159,11 @@ public class CasoDeUso10Test {
     void test08SeConstruyeUnaEspiralQueLuegoDeDiezTurnosSeEncuentraOperativaYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(100,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
         espiral.avanzarTurno(10);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(espiral);
@@ -173,19 +173,19 @@ public class CasoDeUso10Test {
 
         // Assert
         assertEquals(1300, espiral.obtenerVida());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    /*@Test
+    @Test
     void test09SeConstruyeUnExtractorQueNoSeEncuentraOperativoYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -201,10 +201,10 @@ public class CasoDeUso10Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(extractor);
@@ -221,11 +221,11 @@ public class CasoDeUso10Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         extractor.avanzarTurno(6);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -241,11 +241,11 @@ public class CasoDeUso10Test {
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
         extractor.avanzarTurno(6);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(extractor);
@@ -255,18 +255,18 @@ public class CasoDeUso10Test {
 
         // Assert
         assertEquals(750, extractor.obtenerVida());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    /*@Test
+    @Test
     void test13SeConstruyeUnaGuaridaQueNoSeEncuentraOperativaYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(100,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -281,10 +281,10 @@ public class CasoDeUso10Test {
     void test14SeConstruyeUnaGuaridaQueNoSeEncuentraOperativaYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(100,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(guarida);
@@ -300,11 +300,11 @@ public class CasoDeUso10Test {
     void test15SeConstruyeUnaGuaridaQueLuegoDeDoceTurnosSeEncuentraOperativaYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(100,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
         guarida.avanzarTurno(12);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -319,11 +319,11 @@ public class CasoDeUso10Test {
     void test16SeConstruyeUnaGuaridaQueLuegoDeDoceTurnosSeEncuentraOperativaYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(100,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
         guarida.avanzarTurno(12);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(guarida);
@@ -333,18 +333,18 @@ public class CasoDeUso10Test {
 
         // Assert
         assertEquals(1250, guarida.obtenerVida());
-    }*/
+    }
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
-    /*@Test
+    @Test
     void test17SeConstruyeUnaReservaDeReproduccionQueNoSeEncuentraOperativaYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -359,10 +359,10 @@ public class CasoDeUso10Test {
     void test18SeConstruyeUnaReservaDeReproduccionQueNoSeEncuentraOperativaYRecibeDanioYAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(0,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(rdp);
@@ -378,11 +378,11 @@ public class CasoDeUso10Test {
     void test19SeConstruyeUnaReservaDeReproduccionQueLuegoDeDoceTurnosSeEncuentraOperativaYRecibeDanioYElResultadoEsElIndicado(){
         // Arrange
         Recursos recursos = new Recursos(0,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
         rdp.avanzarTurno(12);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
 
@@ -397,11 +397,11 @@ public class CasoDeUso10Test {
     void test20SeConstruyeUnaReservaDeReproduccionQueLuegoDeDoceTurnosSeEncuentraOperativaYRecibeDanioAlAvanzarOtroTurnoRecuperaSuVidaCorrectamente(){
         // Arrange
         Recursos recursos = new Recursos(0,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         ReservaDeReproduccion rdp = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
         rdp.avanzarTurno(12);
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
         Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
         dragon.avanzarTurno(6);
         dragon.atacar(rdp);
@@ -411,5 +411,5 @@ public class CasoDeUso10Test {
 
         // Assert
         assertEquals(1000, rdp.obtenerVida());
-    }*/
+    }
 }

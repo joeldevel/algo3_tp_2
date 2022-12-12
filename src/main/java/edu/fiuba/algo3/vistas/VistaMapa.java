@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -58,6 +59,15 @@ public class VistaMapa {
         for(Ubicacion ubicacion: this.mapa.areasEspaciales()) {
             this.canvas.getGraphicsContext2D().setFill(Color.BLACK);
             this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 1, 1); // Posicion x, posicion y, ancho, altura
+        }
+
+        for(Unidad unidad: this.mapa.unidades()) {
+
+            if(unidad.tiempoRestante() == 0) {
+                Ubicacion ubicacion = unidad.ubicacion();
+                this.canvas.getGraphicsContext2D().setFill(Color.ORANGE);
+                this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 5, 5); // Posicion x, posicion y, ancho, altura
+            }
         }
     }
 

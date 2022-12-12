@@ -2,11 +2,16 @@ package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.vistas.eventos.BotonCrearEdificioEventHandler;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -14,6 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class PantallaJuego extends BorderPane { // 24:47
 
@@ -159,9 +166,13 @@ public class PantallaJuego extends BorderPane { // 24:47
         Jugador jugadorActual = algoStar.obtenerJugadorTurno();
 
         if (jugadorActual.obtenerRaza().equals("Zerg")) {
-            this.setBottom(this.setBotoneraEdificiosZerg(algoStar));
+            HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosZerg(algoStar), this.setBotoneraUnidadesZerg(algoStar), this.setBotoneraMovimiento(algoStar));
+            contenedorHorizontalBotonera.setSpacing(50);
+            this.setBottom(contenedorHorizontalBotonera);
         } else {
-            this.setBottom(this.setBotoneraEdificiosProtoss(algoStar));
+            HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosProtoss(algoStar), this.setBotoneraUnidadesProtoss(algoStar), this.setBotoneraMovimiento(algoStar));
+            contenedorHorizontalBotonera.setSpacing(50);
+            this.setBottom(contenedorHorizontalBotonera);
         }
     }
 
@@ -214,6 +225,60 @@ public class PantallaJuego extends BorderPane { // 24:47
         return panel;
     }
 
+    // Se crea la botonera Zerg con los edificios correspondientes.
+    public GridPane setBotoneraUnidadesZerg(AlgoStar algoStar) {
+        Jugador jugadorZerg = algoStar.obtenerJugadorTurno();
+
+        Button amo = new Button();
+        amo.setText("   Crear Amo Supremo   ");
+        amo.setMinWidth(130);
+
+        amo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                jugadorZerg.crearAmoSupremo(new Ubicacion(coordenadaX, coordenadaY));
+                vistaMapa.update();
+                setInformacion(algoStar);
+            }
+        });
+
+        Button zangano = new Button();
+        zangano.setText("     Crear Zangano     ");
+        zangano.setMinWidth(177);
+
+        Button zerling = new Button();
+        zerling.setText("     Crear Zerling     ");
+        zerling.setMinWidth(183);
+
+        Button hidralisco = new Button();
+        hidralisco.setText("   Crear Hidralisco    ");
+        hidralisco.setMinWidth(130);
+
+        Button mutalisco = new Button();
+        mutalisco.setText("    Crear Mutalisco    ");
+        mutalisco.setMinWidth(180);
+
+        Button guardian = new Button();
+        guardian.setText("Evolucionar a Guardian ");
+        guardian.setMinWidth(130);
+
+        Button devorador = new Button();
+        devorador.setText("Evolucionar a Devorador");
+        devorador.setMinWidth(130);
+
+        GridPane panel = new GridPane();
+        GridPane.setConstraints(amo, 0, 0);
+        GridPane.setConstraints(zangano, 1, 0);
+        GridPane.setConstraints(zerling, 2, 0);
+        GridPane.setConstraints(hidralisco, 3, 0);
+        GridPane.setConstraints(mutalisco, 0, 1);
+        GridPane.setConstraints(guardian, 1, 1);
+        GridPane.setConstraints(devorador, 2, 1);
+        panel.getChildren().addAll(amo, zangano, zerling, hidralisco, mutalisco, guardian, devorador);
+
+        return panel;
+    }
+
     // Se crea la botonera Protoss con los edificios correspondientes.
     public GridPane setBotoneraEdificiosProtoss(AlgoStar algoStar) {
 
@@ -261,6 +326,50 @@ public class PantallaJuego extends BorderPane { // 24:47
         panel.getChildren().addAll(nexo, pilon, asimilador, acceso, puerto);
 
         return panel;
+    }
+
+    // Se crea la botonera Protoss con los edificios correspondientes.
+    public GridPane setBotoneraUnidadesProtoss(AlgoStar algoStar) {
+        Jugador jugadorProtoss = algoStar.obtenerJugadorTurno();
+
+        Button zealot = new Button();
+        zealot.setText("Crear Zealot");
+        zealot.setMinWidth(130);
+
+        Button dragon = new Button();
+        dragon.setText("Crear Dragon");
+        dragon.setMinWidth(130);
+
+        Button scout = new Button();
+        scout.setText("Crear Scout ");
+        scout.setMinWidth(130);
+
+        GridPane panel = new GridPane();
+        GridPane.setConstraints(zealot, 0, 0);
+        GridPane.setConstraints(dragon, 1, 0);
+        GridPane.setConstraints(scout, 2, 0);
+        panel.getChildren().addAll(zealot, dragon, scout);
+
+        return panel;
+    }
+
+    // Se crea la botonera de movimiento
+    public HBox setBotoneraMovimiento(AlgoStar algoStar) {
+        Jugador jugadorTurno = algoStar.obtenerJugadorTurno();
+
+        // Boton de movimiento
+
+        Button mover = new Button();
+        mover.setText("Mover");
+
+        // Boton de movimiento
+
+        Button cambiarDireccion = new Button();
+        cambiarDireccion.setText("Cambiar de direccion");
+
+        HBox contenedorHorizontalBMovimiento = new HBox(mover, cambiarDireccion);
+
+        return contenedorHorizontalBMovimiento;
     }
 
     // Se crea la pantalla central donde estara el mapa
