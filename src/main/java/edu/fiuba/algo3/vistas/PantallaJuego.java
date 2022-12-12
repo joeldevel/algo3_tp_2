@@ -246,6 +246,15 @@ public class PantallaJuego extends BorderPane { // 24:47
         zangano.setText("     Crear Zangano     ");
         zangano.setMinWidth(177);
 
+        zangano.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                jugadorZerg.crearZangano(new Ubicacion(coordenadaX, coordenadaY));
+                vistaMapa.update();
+                setInformacion(algoStar);
+            }
+        });
+
         Button zerling = new Button();
         zerling.setText("     Crear Zerling     ");
         zerling.setMinWidth(183);
