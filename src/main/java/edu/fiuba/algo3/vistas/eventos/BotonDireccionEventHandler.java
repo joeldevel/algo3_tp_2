@@ -18,6 +18,6 @@ public class BotonDireccionEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        // jugador.cambiarDireccionDeUnidadEn(this.ubicacionUnidad);
+        jugador.cambiarDireccionDeUnidadEn(this.ubicacionUnidad);
     }
 }

@@ -45,13 +45,7 @@ public interface Jugador {
     ArrayList<Unidad> obtenerLarvas();
     boolean haySuministroDisponible(int unSuministro);
 
-    /* Zerg */
-   /* void crearAmoSupremo(Ubicacion unaUbicacion);
-    void crearZangano(Ubicacion unaUbicacion);
-     void crearZerling(Ubicacion unaUbicacion);
-    void crearHidralisco(Ubicacion unaUbicacion);
-    void crearMutalisco(Ubicacion unaUbicacion);
-    void evolucionarMutaliscoAGuardian(Ubicacion unaUbicacion);
-    void evolucionarMutaliscoADevorador(Ubicacion unaUbicacion);*/
+    void moverUnidadEn(Ubicacion unaUbicacion);
+    void cambiarDireccionDeUnidadEn(Ubicacion unaUbicacion);
 }
 

@@ -21,7 +21,7 @@ public class BotonMoverEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        // jugador.moverUnidadEn(this.ubicacionUnidad);
-        // this.vista.update();
+        jugador.moverUnidadEn(this.ubicacionUnidad);
+        this.vista.update();
     }
 }
