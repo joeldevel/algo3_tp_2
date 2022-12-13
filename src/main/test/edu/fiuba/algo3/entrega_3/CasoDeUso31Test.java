@@ -182,9 +182,9 @@ public class CasoDeUso31Test {
         jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,1),jugadorZerg));
         jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,2),jugadorZerg));
-        jugadorZerg.crearAmoSupremo(new Ubicacion(0,3));
-        jugadorZerg.crearAmoSupremo(new Ubicacion(0,4));
-        jugadorZerg.crearAmoSupremo(new Ubicacion(0,5));
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,3), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(0,3));
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,4), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(0,4));
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,5), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(0,5));
 
         // Assert
         assertEquals(30, jugadorZerg.calcularPoblacion());

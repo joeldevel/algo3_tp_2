@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
+import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -49,14 +50,23 @@ public class ReservaDeReproduccion extends EdificioZerg {
 		return new ArrayList<Unidad>();
 	}
 
-	public void crearZerling() {
+public Unidad crearZerling() {
+		
+		if( this.larvas.isEmpty() || !this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING)) {
+			throw new SinRecursosSuficientesException();
+		}
+		Unidad unaUnidad = this.larvas.get(0);
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZERLING), new Zerling(this.jugador), this.ubicacion);
+		this.larvas.remove(0);
+		return unaUnidad;
 
-		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING)) {
+		/*if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING)) {
 			Unidad unaUnidad = this.larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZERLING), new Zerling(this.jugador), this.ubicacion);
 			this.larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
-		}
+		}*/
+		 
 	}
 	
 	public int contarLarvas() {

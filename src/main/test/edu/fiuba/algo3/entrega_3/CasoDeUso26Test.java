@@ -35,7 +35,8 @@ public class CasoDeUso26Test {
         jugadorProtoss.construir("Acceso", new Ubicacion(0,0), jugadorZerg, mapa);
 
         // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot(new Ubicacion(0,0), mapa));
+        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> 
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,0), jugadorProtoss, mapa)); //crearZealot(new Ubicacion(0,0), mapa));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class CasoDeUso26Test {
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.crearZealot(new Ubicacion(0,1), mapa);
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa); //crearZealot(new Ubicacion(0,1), mapa);
 
         // Act
         jugadorProtoss.avanzarTurno();
@@ -70,7 +71,7 @@ public class CasoDeUso26Test {
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.crearZealot(new Ubicacion(0,1), mapa); // FALTA CHEQUEAR EN ACCESO EL SUMINISTRO PORQUE NO DEBERIAN PODER CREARSE TANTOS ZEALOTS. SOLO SE PUEDE UNO CON 1 PILON
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa); //crearZealot(new Ubicacion(0,1), mapa); // FALTA CHEQUEAR EN ACCESO EL SUMINISTRO PORQUE NO DEBERIAN PODER CREARSE TANTOS ZEALOTS. SOLO SE PUEDE UNO CON 1 PILON
 
         jugadorProtoss.avanzarTurno();
         mapa.avanzarTurno();

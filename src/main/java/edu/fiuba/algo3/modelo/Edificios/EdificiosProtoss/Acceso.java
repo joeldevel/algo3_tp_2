@@ -48,28 +48,32 @@ public class Acceso extends EdificioProtoss {
 
 	@Override
 	public void ejecutaOperable() {
-		if(this.estaEnergizado()) {
+		/*if(this.estaEnergizado()) {
 			this.pasarDragonesProductivos();
 			this.pasarZealotsProductivos();
-		}
+		}*/
 	}
 	
-	public void transportarZealots() {
+	public Unidad transportarZealots() {
 		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
 		}
-		while(this.zealots.size() < 5 && this.jugador.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
+		Unidad zealot = new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador));
+		return zealot;
+		/*while(this.zealots.size() < 5) {
 			this.zealots.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador)));
-		}
+		}*/
 	}
 	
-	public void transportarDragones() {
+	public Unidad transportarDragones() {
 		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
 		}
-		while(this.dragones.size() < 5 && this.jugador.haySuministroDisponible(SUMINISTRO_DRAGON)) {
+		Unidad dragon = new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador));
+		return dragon;
+		/*while(this.dragones.size() < 5) {
 			this.dragones.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador)));
-		}
+		}*/
 	}
 	
 	private void pasarZealotsProductivos(){
