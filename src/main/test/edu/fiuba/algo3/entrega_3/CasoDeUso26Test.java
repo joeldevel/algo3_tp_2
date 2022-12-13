@@ -57,7 +57,7 @@ public class CasoDeUso26Test {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(10, jugadorProtoss.calcularSuministro());
+        assertEquals(2, jugadorProtoss.calcularSuministro());
     }
 
     @Test

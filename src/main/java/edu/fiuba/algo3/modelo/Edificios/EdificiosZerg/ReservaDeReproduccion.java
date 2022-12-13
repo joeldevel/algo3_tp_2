@@ -42,7 +42,7 @@ public class ReservaDeReproduccion extends EdificioZerg {
     
 	@Override
 	public void ejecutaOperable() {
-		this.crearZerling();
+		//this.crearZerling();
 	}
 
 	@Override
@@ -52,6 +52,9 @@ public class ReservaDeReproduccion extends EdificioZerg {
 
 public Unidad crearZerling() {
 		
+		System.out.println(this.larvas.isEmpty());
+		System.out.println(!this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING));
+	
 		if( this.larvas.isEmpty() || !this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING)) {
 			throw new SinRecursosSuficientesException();
 		}

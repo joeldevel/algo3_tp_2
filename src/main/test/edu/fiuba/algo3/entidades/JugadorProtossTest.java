@@ -41,7 +41,7 @@ public class JugadorProtossTest {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(10, jugadorProtoss.calcularSuministro());
+        assertEquals(2, jugadorProtoss.calcularSuministro());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class JugadorProtossTest {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(15, jugadorProtoss.calcularSuministro());
+        assertEquals(3, jugadorProtoss.calcularSuministro());
     }
 
     @Test
@@ -107,12 +107,12 @@ public class JugadorProtossTest {
         }
 
         // Act
-        jugadorProtoss.construir("Scout", new Ubicacion(1,1), jugadorZerg, mapa); //crearScout(new Ubicacion(2,2), mapa);
+        jugadorProtoss.construir("Scout", new Ubicacion(2,2), jugadorZerg, mapa); //crearScout(new Ubicacion(2,2), mapa);
         jugadorProtoss.avanzarTurno();
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(20, jugadorProtoss.calcularSuministro());
+        assertEquals(4, jugadorProtoss.calcularSuministro());
     }
     
     @Test

@@ -312,7 +312,18 @@ public class Mapa {
    
    public boolean verificarQueUnidadPuedeMoverseAUbicacion(Unidad unaUnidad,Ubicacion unaUbicacion) {
 	   return (this.ubicacionEstaDentroDeMapa(unaUbicacion) && 
+			   this.verificarUbicacionLibreDeUnidad(unaUbicacion) &&
 			   this.verificarSuperficieParaUnidadEnUbicacion(unaUnidad,unaUbicacion));
+   }
+   
+   public boolean verificarUbicacionLibreDeUnidad(Ubicacion unaUbicacion) {
+	   boolean verificado = true;
+	   for(Unidad actual: this.unidades) {
+		   if(actual.estaEn(unaUbicacion)) {
+			   verificado = false;
+		   }
+	   }
+	   return verificado;
    }
    
    public boolean verificarSuperficieParaUnidadEnUbicacion(Unidad unaUnidad, Ubicacion unaUbicacion) {

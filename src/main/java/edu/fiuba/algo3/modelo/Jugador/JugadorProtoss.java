@@ -189,6 +189,8 @@ public class JugadorProtoss implements Jugador {
         int cupo = 0;
 
         for (Unidad unidad : this.unidades) {
+        	
+        	System.out.println("iterando");
             cupo += unidad.obtenerSuministro();
         }
 
