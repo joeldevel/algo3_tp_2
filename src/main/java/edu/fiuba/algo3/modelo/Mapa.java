@@ -328,6 +328,9 @@ public class Mapa {
    
    public boolean verificarSuperficieParaUnidadEnUbicacion(Unidad unaUnidad, Ubicacion unaUbicacion) {
 	   String superficie = this.obtenerSuperficieDeLaUbicacion(unaUbicacion);
+	   if(unaUnidad.compararSuperficie("Aire")) {
+		   return true;
+	   }
 	   return (unaUnidad.compararSuperficie(superficie));
    }
    

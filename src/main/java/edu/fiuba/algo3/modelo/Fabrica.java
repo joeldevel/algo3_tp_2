@@ -131,8 +131,8 @@ public class Fabrica {
 			   (unMapa.verificarEdificioEnUbicacion("Criadero", unaUbicacion))) {
 				
 				Criadero criadero = (Criadero) unMapa.obtenerEdificioEnUbicacion("Criadero", unaUbicacion);
-				Unidad zangano = criadero.crearZangano();
-				jugadorZerg.agregarUnidad(zangano);
+				criadero.crearZangano();
+				Unidad zangano = jugadorZerg.obtenerUnidadEn(unaUbicacion);
 				unMapa.agregarUnidad(zangano);
 			}
 			
@@ -141,8 +141,8 @@ public class Fabrica {
 				
 				ReservaDeReproduccion reserva = (ReservaDeReproduccion) unMapa.obtenerEdificioEnUbicacion("ReservaDeReproduccion", unaUbicacion);
 				reserva.recibirLarvas(jugadorZerg.obtenerLarvas());
-				Unidad zerling = reserva.crearZerling();
-				jugadorZerg.agregarUnidad(zerling);
+				reserva.crearZerling();
+				Unidad zerling = jugadorZerg.obtenerUnidadEn(unaUbicacion);
 				unMapa.agregarUnidad(zerling);
 			}
 			
@@ -151,8 +151,8 @@ public class Fabrica {
 				
 				Guarida guarida = (Guarida) unMapa.obtenerEdificioEnUbicacion("Guarida", unaUbicacion);
 				guarida.recibirLarvas(jugadorZerg.obtenerLarvas());
-				Unidad hidralisco = guarida.crearHidralisco();
-				jugadorZerg.agregarUnidad(hidralisco);
+				guarida.crearHidralisco();
+				Unidad hidralisco = jugadorZerg.obtenerUnidadEn(unaUbicacion);
 				unMapa.agregarUnidad(hidralisco);
 			}
 			
@@ -161,8 +161,8 @@ public class Fabrica {
 				
 				Espiral espiral = (Espiral) unMapa.obtenerEdificioEnUbicacion("Espiral", unaUbicacion);
 				espiral.recibirLarvas(jugadorZerg.obtenerLarvas());
-				Unidad mutalisco = espiral.crearMutalisco();
-				jugadorZerg.agregarUnidad(mutalisco);
+				espiral.crearMutalisco();
+				Unidad mutalisco = jugadorZerg.obtenerUnidadEn(unaUbicacion);
 				unMapa.agregarUnidad(mutalisco);
 			}
 			

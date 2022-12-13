@@ -44,6 +44,7 @@ public interface Jugador {
     int calcularPoblacion();
     ArrayList<Unidad> obtenerLarvas();
     boolean haySuministroDisponible(int unSuministro);
+	Unidad obtenerUnidadEn(Ubicacion unaUbicacion);
 
     void moverUnidadEn(Ubicacion unaUbicacion);
     void cambiarDireccionDeUnidadEn(Ubicacion unaUbicacion);
