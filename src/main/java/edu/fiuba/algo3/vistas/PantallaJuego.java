@@ -297,6 +297,7 @@ public class PantallaJuego extends BorderPane { // 24:47
     // Se crea la botonera Zerg con los edificios correspondientes.
     public GridPane setBotoneraUnidadesZerg(AlgoStar algoStar) {
         Jugador jugadorZerg = algoStar.obtenerJugadorTurno();
+        Jugador jugadorProtoss = algoStar.obtenerJugadorContrario(jugadorZerg);
 
         Button amo = new Button();
         amo.setText("   Crear Amo Supremo   ");
@@ -305,7 +306,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         amo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //jugadorZerg.crearAmoSupremo(new Ubicacion(coordenadaX, coordenadaY));
+                jugadorZerg.construir("AmoSupremo", new Ubicacion(coordenadaX, coordenadaY), jugadorProtoss, algoStar.obtenerMapa());
                 vistaMapa.update();
                 setInformacion(algoStar);
             }
