@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Excepciones.UbicacionSinEdificioException;
 import edu.fiuba.algo3.modelo.Fabrica;
@@ -334,5 +335,28 @@ public class JugadorZerg implements Jugador {
 			throw new SinEdificioBuscadoError();
 		}
 		return edificio;
+	}
+	
+	public Unidad obtenerUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = null;
+		for(Unidad actual: this.unidades) {
+			if(actual.estaEn(unaUbicacion)) {
+				unidad = actual;
+			}
+		}
+		if(unidad == null) {
+			throw new SinUnidadBuscadaError();
+		}
+		return unidad;
+	}
+	
+	public void moverUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
+		unidad.moverse(this.mapa);
+	}
+	
+	public void cambiarDireccionDeUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
+		unidad.cambiarDireccion();
 	}
 }

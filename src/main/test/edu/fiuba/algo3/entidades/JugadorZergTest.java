@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JugadorZergTest {
@@ -201,5 +202,140 @@ public class JugadorZergTest {
 
         // Assert
         assertEquals(4, jugadorZerg.calcularSuministro());
+    }
+    
+    @Test
+    void test08UnaUnidadSeMueveDeberiaEstarEstarALaDerecha() {
+    	
+    	Mapa mapa = new Mapa();
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for(int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+        
+    	Ubicacion ubicacion1 = new Ubicacion(0,0);
+    	Ubicacion ubicacion2 = new Ubicacion(1,0);
+    	
+    	/* por default la direccion inicial a la que se mueve es hacia la derecha */
+    	jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa); //crearZangano(ubicacion1);
+    	
+    	jugadorZerg.avanzarTurno();
+    	mapa.avanzarTurno();
+    	
+    	jugadorZerg.moverUnidadEn(ubicacion1);
+    	
+    	assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(ubicacion2));
+    }
+    
+    @Test
+    void test09UnaUnidadCambiaLaDireccionUnaVezAntesDeMoverseDeberiaEstarAbajo() {
+    	
+    	Mapa mapa = new Mapa();
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+
+        jugadorZerg.construir("Criadero", new Ubicacion(15,15), jugadorProtoss, mapa);
+
+        for(int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+        
+        /* usos las ubicaciones 15,15 porque el mapa no tiene ubicaciones negativas*/
+    	Ubicacion ubicacion1 = new Ubicacion(15,15);
+    	Ubicacion ubicacion2 = new Ubicacion(15,14);
+    	
+    	/* por default la direccion inicial a la que se mueve es hacia la derecha */
+    	jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa); //crearZangano(ubicacion1);
+    	
+    	jugadorZerg.avanzarTurno();
+    	mapa.avanzarTurno();
+    	
+    	/* al cambiar la direccion se va a mover hacia abajo */
+    	jugadorZerg.cambiarDireccionDeUnidadEn(ubicacion1);
+    	
+    	jugadorZerg.moverUnidadEn(ubicacion1);
+    	
+    	assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(ubicacion2));
+    }
+    
+    @Test
+    void test10UnaUnidadCambiaLaDireccionDosVecesAntesDeMoverseDeberiaEstarALaIzquierda() {
+    	
+    	Mapa mapa = new Mapa();
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+
+        jugadorZerg.construir("Criadero", new Ubicacion(15,15), jugadorProtoss, mapa);
+
+        for(int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+        
+        /* usos las ubicaciones 15,15 porque el mapa no tiene ubicaciones negativas*/
+    	Ubicacion ubicacion1 = new Ubicacion(15,15);
+    	Ubicacion ubicacion2 = new Ubicacion(14,15);
+    	
+    	/* por default la direccion inicial a la que se mueve es hacia la derecha */
+    	jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa); //crearZangano(ubicacion1);
+    	
+    	jugadorZerg.avanzarTurno();
+    	mapa.avanzarTurno();
+    	
+    	/* al cambiar la direccion se va a mover hacia abajo */
+    	jugadorZerg.cambiarDireccionDeUnidadEn(ubicacion1);
+    	jugadorZerg.cambiarDireccionDeUnidadEn(ubicacion1);
+    	
+    	jugadorZerg.moverUnidadEn(ubicacion1);
+    	
+    	assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(ubicacion2));
+    }
+    
+    @Test
+    void test11UnaUnidadCambiaLaDireccionTresVecesAntesDeMoverseDeberiaEstarArriba() {
+    	
+    	Mapa mapa = new Mapa();
+
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
+
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+
+        jugadorZerg.construir("Criadero", new Ubicacion(15,15), jugadorProtoss, mapa);
+
+        for(int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+        
+        /* usos las ubicaciones 15,15 porque el mapa no tiene ubicaciones negativas*/
+    	Ubicacion ubicacion1 = new Ubicacion(15,15);
+    	Ubicacion ubicacion2 = new Ubicacion(15,16);
+    	
+    	/* por default la direccion inicial a la que se mueve es hacia la derecha */
+    	jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa); //crearZangano(ubicacion1);
+    	
+    	jugadorZerg.avanzarTurno();
+    	mapa.avanzarTurno();
+    	
+    	/* al cambiar la direccion se va a mover hacia abajo */
+    	jugadorZerg.cambiarDireccionDeUnidadEn(ubicacion1);
+    	jugadorZerg.cambiarDireccionDeUnidadEn(ubicacion1);
+    	jugadorZerg.cambiarDireccionDeUnidadEn(ubicacion1);
+    	
+    	jugadorZerg.moverUnidadEn(ubicacion1);
+    	
+    	assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(ubicacion2));
     }
 }
