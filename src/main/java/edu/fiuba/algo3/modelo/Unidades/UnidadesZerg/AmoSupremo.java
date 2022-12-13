@@ -32,7 +32,6 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     private ArrayList<Revelo> revelos;
 
     public AmoSupremo(Jugador unJugador) {
-        System.out.println("Entre");
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
         this.vida = new Vida(200);

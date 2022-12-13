@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosZerg;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
+import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -45,15 +46,23 @@ public class Espiral extends EdificioZerg {
 		this.crearMutalisco();
 	}
 	
-	public void crearMutalisco() {
+	public Unidad crearMutalisco() {
+		
+		if(this.larvas.isEmpty() || !this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
+			throw new SinRecursosSuficientesException();
+		}
+		Unidad unaUnidad = larvas.get(0);
+		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_MUTALISCO), new Mutalisco(this.jugador), this.ubicacion);
+		larvas.remove(0);
+		return unaUnidad;
 
-		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
+		/*if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
 
 			Unidad unaUnidad = larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_MUTALISCO), new Mutalisco(this.jugador), this.ubicacion);
 			larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
-		}
+		}*/
 	}
 	
 	public int contarLarvas() {

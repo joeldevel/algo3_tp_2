@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.FabricaDeEdificios;
+import edu.fiuba.algo3.modelo.Fabrica;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
@@ -36,9 +36,9 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion2 = new Ubicacion(5,0);
 		Ubicacion ubicacion3 = new Ubicacion(3,0);
 		
-		FabricaDeEdificios.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		mapa.destruirPilonEn(ubicacion1);
@@ -59,10 +59,10 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion3 = new Ubicacion(1,0);
 		Ubicacion ubicacion4 = new Ubicacion(1,2);
 		
-		FabricaDeEdificios.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("PuertoEstelar", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("PuertoEstelar", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		mapa.destruirPilonEn(ubicacion1);
@@ -82,9 +82,9 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion2 = new Ubicacion(5,0);
 		Ubicacion ubicacion3 = new Ubicacion(3,0);
 		
-		FabricaDeEdificios.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		jugadorProtoss.destruirEdificioEn(ubicacion2);
@@ -109,10 +109,10 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion3 = new Ubicacion(1,0);
 		Ubicacion ubicacion4 = new Ubicacion(1,2);
 		
-		FabricaDeEdificios.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("PuertoEstelar", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("PuertoEstelar", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		jugadorProtoss.destruirEdificioEn(ubicacion2);

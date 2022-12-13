@@ -79,7 +79,7 @@ public class CasoDeUso29Test {
 
         // Act
         for (int i = 0; i < 40; i++) {
-            jugadorZerg.crearAmoSupremo(new Ubicacion(i,0));
+            jugadorZerg.construir("AmoSupremo", new Ubicacion(i,0), jugadorZerg, mapa); //crearAmoSupremo(new Ubicacion(i,0));
         }
 
         // Assert

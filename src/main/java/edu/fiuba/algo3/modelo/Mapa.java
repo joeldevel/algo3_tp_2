@@ -309,4 +309,24 @@ public class Mapa {
 	   	this.energizarEdificios();
 	   	this.moho.avanzarTurno(this.edificios);
    }
+   
+   public boolean verificarQueUnidadPuedeMoverseAUbicacion(Unidad unaUnidad,Ubicacion unaUbicacion) {
+	   return (this.ubicacionEstaDentroDeMapa(unaUbicacion) && 
+			   this.verificarSuperficieParaUnidadEnUbicacion(unaUnidad,unaUbicacion));
+   }
+   
+   public boolean verificarSuperficieParaUnidadEnUbicacion(Unidad unaUnidad, Ubicacion unaUbicacion) {
+	   String superficie = this.obtenerSuperficieDeLaUbicacion(unaUbicacion);
+	   return (unaUnidad.compararSuperficie(superficie));
+   }
+   
+   public String obtenerSuperficieDeLaUbicacion(Ubicacion unaUbicacion) {
+	   String superficie = "Tierra";
+	   for(Ubicacion actual: this.areasEspaciales) {
+		   if(actual.esIgualA(unaUbicacion)) {
+			   superficie = "Aire";
+		   }
+	   }
+	   return superficie;
+   }
 }

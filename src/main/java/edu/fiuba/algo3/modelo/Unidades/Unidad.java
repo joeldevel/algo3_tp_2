@@ -11,6 +11,7 @@ public class Unidad extends Raza {
 
 	private TipoDeUnidad estado;
 	private TipoDeUnidad tipo;
+	private Direccion direccion;
     
 	public Unidad(Tiempo unTiempo, Ubicacion unaUbicacion, TipoDeUnidad unTipo) {
 		super(unTiempo, unaUbicacion);
@@ -18,6 +19,7 @@ public class Unidad extends Raza {
 		this.estado = new UnidadEnConstruccion();
 		this.tipo = unTipo;
 		unTipo.setComportamientoUnidad(this);
+		this.direccion = new Direccion();
 	}
 
 	public TipoDeUnidad obtenerTipo() {
@@ -115,7 +117,14 @@ public class Unidad extends Raza {
 		this.estado.contarBaja();
 	}
 
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
+	public void moverse(Mapa unMapa) {
+		Ubicacion siguiente = this.direccion.obtenerSiguienteUbicacion(this.ubicacion);
+		if(unMapa.verificarQueUnidadPuedeMoverseAUbicacion(this,siguiente)) {
+			this.ubicacion = siguiente;
+		}
+	}
+	
+	public void cambiarDireccion() {
+		this.direccion.cambiarDireccion();
 	}
 }

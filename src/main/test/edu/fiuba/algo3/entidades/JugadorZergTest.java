@@ -16,9 +16,10 @@ public class JugadorZergTest {
         // Arrange
         Mapa mapa = new Mapa();
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
-
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
+        
         // Act
-        jugadorZerg.crearAmoSupremo(new Ubicacion(0,0));
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,0), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(0,0));
 
         // Assert
         assertEquals(0, jugadorZerg.calcularSuministro());
@@ -41,7 +42,7 @@ public class JugadorZergTest {
         }
 
         // Act
-        jugadorZerg.crearZangano(new Ubicacion(0,0));
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa); //crearZangano(new Ubicacion(0,0));
 
         // Assert
         assertEquals(1, jugadorZerg.calcularSuministro());
@@ -71,7 +72,7 @@ public class JugadorZergTest {
         }
 
         // Act
-        jugadorZerg.crearZerling(new Ubicacion(30,0));
+        jugadorZerg.construir("Zerling", new Ubicacion(30,0), jugadorProtoss, mapa); //crearZerling(new Ubicacion(30,0));
         jugadorZerg.avanzarTurno();
         mapa.avanzarTurno();
 
@@ -98,7 +99,7 @@ public class JugadorZergTest {
         }
 
         // Act
-        jugadorZerg.crearHidralisco(new Ubicacion(1,2));
+        jugadorZerg.construir("Hidralisco", new Ubicacion(1,2), jugadorProtoss, mapa); //crearHidralisco(new Ubicacion(1,2));
         jugadorZerg.avanzarTurno();
         mapa.avanzarTurno();
 
@@ -126,7 +127,7 @@ public class JugadorZergTest {
         }
 
         // Act
-        jugadorZerg.crearMutalisco(new Ubicacion(2,1));
+        jugadorZerg.construir("Mutalisco", new Ubicacion(2,1), jugadorProtoss, mapa); //crearMutalisco(new Ubicacion(2,1));
         jugadorZerg.avanzarTurno();
         mapa.avanzarTurno();
 
@@ -153,7 +154,7 @@ public class JugadorZergTest {
             mapa.avanzarTurno();
         }
 
-        jugadorZerg.crearMutalisco(new Ubicacion(2,1));
+        jugadorZerg.construir("Mutalisco", new Ubicacion(2,1), jugadorProtoss, mapa); //crearMutalisco(new Ubicacion(2,1));
         jugadorZerg.avanzarTurno();
         mapa.avanzarTurno();
 
@@ -187,7 +188,7 @@ public class JugadorZergTest {
             mapa.avanzarTurno();
         }
 
-        jugadorZerg.crearMutalisco(new Ubicacion(2,1));
+        jugadorZerg.construir("Mutalisco", new Ubicacion(2,1), jugadorProtoss, mapa); //crearMutalisco(new Ubicacion(2,1));
         jugadorZerg.avanzarTurno();
         mapa.avanzarTurno();
 

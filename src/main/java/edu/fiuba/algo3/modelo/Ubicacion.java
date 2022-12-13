@@ -56,6 +56,23 @@ public class Ubicacion {
 	public boolean yDentroDeRango(int inicio, int fin) {
 		return ( (this.posY >= inicio) && (this.posY <= fin) );
 	}
+	
+	public Ubicacion derecha() {
+		return(new Ubicacion(this.posX+1,this.posY));
+	}
+	
+	public Ubicacion abajo() {
+		return (new Ubicacion(this.posX,this.posY-1));
+	}
+	
+	public Ubicacion izquierda() {
+		return (new Ubicacion(this.posX-1,this.posY));
+	}
+	
+	public Ubicacion arriba() {
+		return (new Ubicacion(this.posX,this.posY+1));
+	}
+
 
     
 }

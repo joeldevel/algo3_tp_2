@@ -57,7 +57,7 @@ public class Criadero extends EdificioZerg {
 		return (this.larvas.size());
 	}
 
-	public void crearZangano() {
+	public Unidad crearZangano() {
 		if(this.larvas.isEmpty()) {
 			throw new CriaderoSinLarvasException();
 		}
@@ -65,7 +65,8 @@ public class Criadero extends EdificioZerg {
 		Unidad unaUnidad = this.larvas.get(0);
 		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.jugador), this.ubicacion);
 		this.larvas.remove(0);
-		this.jugador.agregarUnidad(unaUnidad);
+		//this.jugador.agregarUnidad(unaUnidad);
+		return unaUnidad;
 	}
 	
 	public void crearLarva() {

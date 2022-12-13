@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Excepciones.UbicacionSinEdificioException;
-import edu.fiuba.algo3.modelo.FabricaDeEdificios;
+import edu.fiuba.algo3.modelo.Fabrica;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -111,10 +111,11 @@ public class JugadorZerg implements Jugador {
         return this.recursos.obtenerMineral();
     }
     
-    public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugadorProtoss,Mapa mapa) {
-        FabricaDeEdificios.construir(edificio, unaUbicacion, this, jugadorProtoss, mapa);
+    public void construir(String entidad,Ubicacion unaUbicacion,Jugador jugadorProtoss,Mapa mapa) {
+        Fabrica.construir(entidad, unaUbicacion, this, jugadorProtoss, mapa);
     }
 
+    /*
     public void crearAmoSupremo(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_AMO)) {
@@ -156,7 +157,7 @@ public class JugadorZerg implements Jugador {
         else {
             throw new UbicacionSinEdificioException();
         }
-    }
+    }*/
 
     public ArrayList<Unidad> obtenerLarvas() {
         // Devolvemos las larvas del primer criadero que encontremos
@@ -169,6 +170,7 @@ public class JugadorZerg implements Jugador {
         return new ArrayList<Unidad>();
     }
 
+    /*
     public void crearHidralisco(Ubicacion unaUbicacion) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
@@ -199,7 +201,7 @@ public class JugadorZerg implements Jugador {
         else {
             throw new UbicacionSinEdificioException();
         }
-    }
+    }*/
 
     public void evolucionarMutaliscoAGuardian(Ubicacion unaUbicacion) {
 
@@ -313,7 +315,7 @@ public class JugadorZerg implements Jugador {
 	@Override
 	public void agregarUnidad(Unidad unaUnidad) {
 		this.unidades.add(unaUnidad);
-		this.mapa.agregarUnidad(unaUnidad);
+		//this.mapa.agregarUnidad(unaUnidad);
 	}
 	
 	public void destruirEdificioEn(Ubicacion unaUbicacion) {

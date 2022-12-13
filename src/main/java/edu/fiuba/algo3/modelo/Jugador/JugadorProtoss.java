@@ -3,9 +3,10 @@ package edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
 import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
 import edu.fiuba.algo3.modelo.Excepciones.UbicacionSinEdificioException;
-import edu.fiuba.algo3.modelo.FabricaDeEdificios;
+import edu.fiuba.algo3.modelo.Fabrica;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -105,12 +106,12 @@ public class JugadorProtoss implements Jugador {
         return this.recursos.obtenerMineral();
     }
     
-    public void construir(String edificio,Ubicacion unaUbicacion, Jugador jugador, Mapa mapa) {
-    	FabricaDeEdificios.construir(edificio, unaUbicacion, jugador, this, mapa);
+    public void construir(String entidad,Ubicacion unaUbicacion, Jugador jugador, Mapa mapa) {
+    	Fabrica.construir(entidad, unaUbicacion, jugador, this, mapa);
     }
 
     // Falta enviar el mensaje al edificio Acceso que permite instanciar Zealot.
-    public void crearZealot(Ubicacion unaUbicacion, Mapa unMapa) {
+    /*public void crearZealot(Ubicacion unaUbicacion, Mapa unMapa) {
 
         if (!this.haySuministroDisponible(SUMINISTRO_ZEALOT)) {
             throw new SuministroSuperaElNumeroDePoblacionException();
@@ -156,7 +157,7 @@ public class JugadorProtoss implements Jugador {
         else {
             throw new UbicacionSinEdificioException();
         }
-    }
+    }*/
 
     // La poblacion debe ser siempre menor al valor maximo de poblacion.
     @Override
@@ -273,6 +274,7 @@ public class JugadorProtoss implements Jugador {
 	@Override
 	public void agregarUnidad(Unidad unaUnidad) {
 		this.unidades.add(unaUnidad);
+		//this.mapa.agregarUnidad(unaUnidad);
 	}
 	
 	public Acceso obtenerAccesoEn(Ubicacion unaUbicacion) {
@@ -301,7 +303,7 @@ public class JugadorProtoss implements Jugador {
 		return puertoEstelar;
 	}
 
-    @Override
+    /*@Override
     public void crearAmoSupremo(Ubicacion unaUbicacion) {
         // El jugador Protoss no entiende este mensaje
     }
@@ -334,5 +336,28 @@ public class JugadorProtoss implements Jugador {
     @Override
     public void evolucionarMutaliscoADevorador(Ubicacion unaUbicacion) {
         // El jugador Protoss no entiende este mensaje
-    }
+    }*/
+    
+    public Unidad obtenerUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = null;
+		for(Unidad actual: this.unidades) {
+			if(actual.estaEn(unaUbicacion)) {
+				unidad = actual;
+			}
+		}
+		if(unidad == null) {
+			throw new SinUnidadBuscadaError();
+		}
+		return unidad;
+	}
+    
+    public void moverUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
+		unidad.moverse(this.mapa);
+	}
+	
+	public void cambiarDireccionDeUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
+		unidad.cambiarDireccion();
+	}
 }

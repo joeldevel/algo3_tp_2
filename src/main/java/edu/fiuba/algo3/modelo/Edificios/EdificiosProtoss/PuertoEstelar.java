@@ -42,18 +42,20 @@ public class PuertoEstelar extends EdificioProtoss {
     
     @Override
     public void ejecutaOperable() {
-    	if(this.estaEnergizado()) {
+    	/*if(this.estaEnergizado()) {
     		this.pasarScoutsProductivos();
-    	}
+    	}*/
     }
     
-    public void transportarScout() {
+    public Unidad transportarScout() {
     	if(! this.estaEnergizado()) {
     		throw new EdificioNoEnergizadoError();
     	}
-    	while(this.scouts.size() < 5 && this.jugador.haySuministroDisponible(SUMINISTRO_SCOUT)) {
+    	Unidad scout = new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador));
+    	return scout;
+    	/*while(this.scouts.size() < 5) {
     		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador)));
-    	}
+    	}*/
     }
 	
     private void pasarScoutsProductivos(){

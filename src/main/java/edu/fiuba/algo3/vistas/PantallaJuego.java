@@ -305,7 +305,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         amo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                jugadorZerg.crearAmoSupremo(new Ubicacion(coordenadaX, coordenadaY));
+                //jugadorZerg.crearAmoSupremo(new Ubicacion(coordenadaX, coordenadaY));
                 vistaMapa.update();
                 setInformacion(algoStar);
             }
@@ -318,7 +318,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         zangano.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                jugadorZerg.crearZangano(new Ubicacion(coordenadaX, coordenadaY));
+                //jugadorZerg.crearZangano(new Ubicacion(coordenadaX, coordenadaY));
                 vistaMapa.update();
                 setInformacion(algoStar);
             }
@@ -335,7 +335,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         hidralisco.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                jugadorZerg.crearHidralisco(new Ubicacion(coordenadaX, coordenadaY));
+                //jugadorZerg.crearHidralisco(new Ubicacion(coordenadaX, coordenadaY));
                 vistaMapa.update();
                 setInformacion(algoStar);
             }
