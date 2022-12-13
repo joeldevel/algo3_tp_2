@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
@@ -79,6 +80,11 @@ public class VistaMapa {
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
+                else if (edificio instanceof Acceso) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/espiral/espiral01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
                 else {
                     this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
                     this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
@@ -91,15 +97,14 @@ public class VistaMapa {
 
             if(unidad.tiempoRestante() == 0) {
                 if(unidad.obtenerTipo() instanceof AmoSupremo) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/amo/amo-supremo.png", 50, 50, true, false);
-                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println(imagen.getWidth());
-                    System.out.println(imagen.getWidth());
+                    //Image imagen = new Image("file:src/main/resources/images/sprites/zerg/amo/amo-supremo.png", 50, 50, true, false);
+                    //this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                    this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
+                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
                 }
                 else {
                     this.canvas.getGraphicsContext2D().setFill(Color.ORANGE);
-                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 5, 5); // Posicion x, posicion y, ancho, altura
+                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
                 }
             }
         }

@@ -44,7 +44,7 @@ public class PantallaJuego extends BorderPane { // 24:47
 
         // Informacion de unidades y edificios
 
-        Label vida = new Label();
+        /*Label vida = new Label();
         vida.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         vida.setTextFill(Color.web("#ffffff"));
 
@@ -55,7 +55,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         VBox contenedorVerticalEntidad = new VBox(vida, escudo);
         contenedorVerticalEntidad.setSpacing(10);
         contenedorVerticalEntidad.setTranslateX(-25);
-        contenedorVerticalEntidad.setTranslateY(30);
+        contenedorVerticalEntidad.setTranslateY(30);*/
 
         this.canvasCentral.setOnMouseClicked(e -> {
             this.coordenadaX = (int) e.getX();
@@ -63,22 +63,26 @@ public class PantallaJuego extends BorderPane { // 24:47
             this.coordenadaY = (int) e.getY();
             System.out.println("y: " + e.getY() + "\n");
 
-            if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY ))) {
+            this.setDerecha(algoStar);
+
+            /*if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+                System.out.println("Entrando unidad");
                 Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
 
                 vida.setText("Vida: " + unidad.vidaRestante());
                 escudo.setText("Escudo: " + unidad.escudoRestante());
             }
 
-            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY ))) {
+            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+                System.out.println("Entrando edificio");
                 Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
 
                 vida.setText("Vida: " + edificio.obtenerVida());
                 escudo.setText("Escudo: ");
-            }
+            }*/
         });
 
-        this.setRight(contenedorVerticalEntidad);
+        //this.setRight(contenedorVerticalEntidad);
     }
 
     public int getCoordenadaX() {
@@ -93,6 +97,44 @@ public class PantallaJuego extends BorderPane { // 24:47
         Image imagen = new Image("file:src/main/resources/images/fondo-negro.png", 2000, 2000, true, false);
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
+    }
+
+    public void setDerecha(AlgoStar algoStar) {
+        // Informacion de unidades y edificios
+
+        Label vida = new Label();
+        vida.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        vida.setTextFill(Color.web("#ffffff"));
+
+        Label escudo = new Label();
+        escudo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        escudo.setTextFill(Color.web("#ffffff"));
+
+        VBox contenedorVerticalEntidad = new VBox(vida, escudo);
+        contenedorVerticalEntidad.setSpacing(10);
+        contenedorVerticalEntidad.setTranslateX(-25);
+        contenedorVerticalEntidad.setTranslateY(30);
+
+        //this.canvasCentral.setOnMouseClicked(e -> {
+
+            if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+                System.out.println("Entrando unidad");
+                Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
+
+                vida.setText("Vida: " + unidad.vidaRestante());
+                escudo.setText("Escudo: " + unidad.escudoRestante());
+            }
+
+            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+                System.out.println("Entrando edificio");
+                Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
+
+                vida.setText("Vida: " + edificio.obtenerVida());
+                escudo.setText("Escudo: ");
+            }
+        //});
+
+        this.setRight(contenedorVerticalEntidad);
     }
 
     public void setArriba(AlgoStar algoStar) {
@@ -289,6 +331,15 @@ public class PantallaJuego extends BorderPane { // 24:47
         Button hidralisco = new Button();
         hidralisco.setText("   Crear Hidralisco    ");
         hidralisco.setMinWidth(130);
+
+        hidralisco.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                jugadorZerg.crearHidralisco(new Ubicacion(coordenadaX, coordenadaY));
+                vistaMapa.update();
+                setInformacion(algoStar);
+            }
+        });
 
         Button mutalisco = new Button();
         mutalisco.setText("    Crear Mutalisco    ");

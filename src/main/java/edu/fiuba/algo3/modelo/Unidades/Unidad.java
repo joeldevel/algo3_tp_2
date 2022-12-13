@@ -33,9 +33,9 @@ public class Unidad extends Raza {
 	// Es necesario para poder setear el tiempo de construccion.
 	public void setComportamientoTipo(Tiempo unTiempo, TipoDeUnidad nuevoTipo, Ubicacion unaUbicacion) {
 		this.tiempo = unTiempo;
+		this.ubicacion = unaUbicacion;
 		this.estado = new UnidadEnConstruccion();
 		this.tipo = nuevoTipo;
-		this.ubicacion = unaUbicacion;
 		nuevoTipo.setComportamientoUnidad(this);
 	}
 

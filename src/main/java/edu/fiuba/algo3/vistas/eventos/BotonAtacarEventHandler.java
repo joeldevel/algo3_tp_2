@@ -21,12 +21,18 @@ public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        System.out.println("Vida atacante: " + this.atacante.vidaRestante());
 
         this.canvas.setOnMouseClicked(e -> {
-            System.out.println("x: " + e.getX());
-            System.out.println("y: " + e.getY() + "\n");
+            System.out.println("Ataque en x: " + e.getX());
+            System.out.println("Ataque en y: " + e.getY() + "\n");
+            Unidad atacable = this.mapa.obtenerUnidadEnUbicacion(new Ubicacion((int) e.getX(), (int) e.getY()));
 
-            atacante.atacar(this.mapa.obtenerUnidadEnUbicacion(new Ubicacion((int) e.getX(), (int) e.getY())));
+            System.out.println("Vida antes: " + atacable.vidaRestante());
+
+            this.atacante.atacar(atacable);
+
+            System.out.println("Vida despues: " + atacable.vidaRestante());
         });
     }
 }
