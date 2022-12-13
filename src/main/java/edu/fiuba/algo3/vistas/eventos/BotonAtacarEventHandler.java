@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.TextField;
 
 public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
 
