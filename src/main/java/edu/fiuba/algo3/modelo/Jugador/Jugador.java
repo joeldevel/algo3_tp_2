@@ -44,6 +44,7 @@ public interface Jugador {
     int calcularPoblacion();
     ArrayList<Unidad> obtenerLarvas();
     boolean haySuministroDisponible(int unSuministro);
+	Unidad obtenerUnidadEn(Ubicacion unaUbicacion);
 
     /* Zerg */
    /* void crearAmoSupremo(Ubicacion unaUbicacion);

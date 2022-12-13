@@ -164,7 +164,10 @@ public class JugadorZerg implements Jugador {
         // Devolvemos las larvas del primer criadero que encontremos
         for(Edificio edificio: this.edificios) {
             if(edificio.esUn("Criadero")) {
-                return edificio.devolverLarvas();
+            	Criadero criadero = (Criadero)edificio;
+            	if(criadero.contarLarvas() != 0) {
+            		return criadero.devolverLarvas();            		
+            	}
             }
         }
 
@@ -337,6 +340,7 @@ public class JugadorZerg implements Jugador {
 		return edificio;
 	}
 	
+	@Override
 	public Unidad obtenerUnidadEn(Ubicacion unaUbicacion) {
 		Unidad unidad = null;
 		for(Unidad actual: this.unidades) {

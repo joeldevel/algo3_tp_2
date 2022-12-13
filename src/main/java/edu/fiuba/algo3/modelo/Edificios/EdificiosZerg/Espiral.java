@@ -46,23 +46,15 @@ public class Espiral extends EdificioZerg {
 		this.crearMutalisco();
 	}
 	
-	public Unidad crearMutalisco() {
-		
-		if(this.larvas.isEmpty() || !this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
-			throw new SinRecursosSuficientesException();
-		}
-		Unidad unaUnidad = larvas.get(0);
-		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_MUTALISCO), new Mutalisco(this.jugador), this.ubicacion);
-		larvas.remove(0);
-		return unaUnidad;
+	public void crearMutalisco() {
 
-		/*if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
 
 			Unidad unaUnidad = larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_MUTALISCO), new Mutalisco(this.jugador), this.ubicacion);
 			larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
-		}*/
+		}
 	}
 	
 	public int contarLarvas() {

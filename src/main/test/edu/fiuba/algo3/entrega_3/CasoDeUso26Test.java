@@ -35,8 +35,8 @@ public class CasoDeUso26Test {
         jugadorProtoss.construir("Acceso", new Ubicacion(0,0), jugadorZerg, mapa);
 
         // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> 
-        jugadorProtoss.construir("Zealot", new Ubicacion(0,0), jugadorProtoss, mapa)); //crearZealot(new Ubicacion(0,0), mapa));
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,0), jugadorZerg, mapa);
+        assertEquals(0,jugadorProtoss.calcularSuministro());
     }
 
     @Test

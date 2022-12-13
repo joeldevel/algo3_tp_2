@@ -45,22 +45,14 @@ public class Guarida extends EdificioZerg {
 		this.crearHidralisco();
 	}
 	
-	public Unidad crearHidralisco() {
+	public void crearHidralisco() {
 		
-		if(this.larvas.isEmpty() || !this.jugador.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
-			throw new SinRecursosSuficientesException();
-		}
-		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_HIDRALISCO), new Hidralisco(this.jugador), this.ubicacion);
-		this.larvas.remove(0);
-		return unaUnidad;
-
-		/*if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
 			Unidad unaUnidad = this.larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_HIDRALISCO), new Hidralisco(this.jugador), this.ubicacion);
 			this.larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
-		}*/
+		}
 	}
 	
 	public int contarLarvas() {
