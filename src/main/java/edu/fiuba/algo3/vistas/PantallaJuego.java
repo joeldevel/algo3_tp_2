@@ -1,11 +1,15 @@
 package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.vistas.eventos.BotonAtacarEventHandler;
 import edu.fiuba.algo3.vistas.eventos.BotonCrearEdificioEventHandler;
+import edu.fiuba.algo3.vistas.eventos.BotonDireccionEventHandler;
+import edu.fiuba.algo3.vistas.eventos.BotonMoverEventHandler;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,74 +40,45 @@ public class PantallaJuego extends BorderPane { // 24:47
     public PantallaJuego(Stage stage, AlgoStar algoStar) {
         this.setFondo();
         this.setCentro(algoStar);
+        this.setArriba(algoStar);
 
-        Button botonAvanzarTurno = new Button();
-        botonAvanzarTurno.setText("Avanzar turno");
-        botonAvanzarTurno.setTranslateX(-10);
-        botonAvanzarTurno.setTranslateY(10);
+        // Informacion de unidades y edificios
 
-        VBox contenedorVertical = new VBox(botonAvanzarTurno);
-        contenedorVertical.setSpacing(5);
+        Label vida = new Label();
+        vida.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        vida.setTextFill(Color.web("#ffffff"));
 
-        this.setRight(contenedorVertical);
+        Label escudo = new Label();
+        escudo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        escudo.setTextFill(Color.web("#ffffff"));
 
-        botonAvanzarTurno.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                algoStar.avanzarTurno();
-                setInformacion(algoStar);
-                setBotonera(algoStar);
-                vistaMapa.update();
-            }
-        });
-
-        // Se muestra por pantalla el punto sobre el canvas donde se mueve el mouse
-
-        this.canvasCentral.setOnMouseMoved(e -> {
-            Label coordenadaX = new Label();
-            coordenadaX.setText("x: " + e.getX());
-            coordenadaX.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-            coordenadaX.setTextFill(Color.web("#ffffff"));
-
-            Label coordenadaY = new Label();
-            coordenadaY.setText("y: " + e.getY());
-            coordenadaY.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-            coordenadaY.setTextFill(Color.web("#ffffff"));
-
-            HBox contenedorHorizontalCoordenadas = new HBox(coordenadaX, coordenadaY);
-            contenedorHorizontalCoordenadas.setSpacing(10);
-            contenedorHorizontalCoordenadas.setTranslateX(500);
-            contenedorHorizontalCoordenadas.setTranslateY(10);
-
-            this.setTop(contenedorHorizontalCoordenadas);
-        });
-
-        // Se muestra por consola el punto sobre el canvas donde se hace click
+        VBox contenedorVerticalEntidad = new VBox(vida, escudo);
+        contenedorVerticalEntidad.setSpacing(10);
+        contenedorVerticalEntidad.setTranslateX(-25);
+        contenedorVerticalEntidad.setTranslateY(30);
 
         this.canvasCentral.setOnMouseClicked(e -> {
             this.coordenadaX = (int) e.getX();
             System.out.println("x: " + e.getX());
             this.coordenadaY = (int) e.getY();
             System.out.println("y: " + e.getY() + "\n");
+
+            if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY ))) {
+                Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
+
+                vida.setText("Vida: " + unidad.vidaRestante());
+                escudo.setText("Escudo: " + unidad.escudoRestante());
+            }
+
+            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY ))) {
+                Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
+
+                vida.setText("Vida: " + edificio.obtenerVida());
+                escudo.setText("Escudo: ");
+            }
         });
 
-        // Zoom
-
-        /*this.canvasCentral.setOnScroll(e -> {
-            if(e.getDeltaY() > 0) {
-                System.out.println("Zoom arriba");
-                ANCHO += 1;
-                ALTURA += 1;
-                vistaMapa.update();
-            }
-
-            if(e.getDeltaY() < 0) {
-                System.out.println("Zoom abajo");
-                ANCHO -= 1;
-                ALTURA -= 1;
-                vistaMapa.update();
-            }
-        });*/
+        this.setRight(contenedorVerticalEntidad);
     }
 
     public int getCoordenadaX() {
@@ -120,8 +95,57 @@ public class PantallaJuego extends BorderPane { // 24:47
         this.setBackground(new Background(imagenDeFondo));
     }
 
+    public void setArriba(AlgoStar algoStar) {
+        // Boton para avanzar turno
+
+        Button botonAvanzarTurno = new Button();
+        botonAvanzarTurno.setText("Avanzar turno");
+        botonAvanzarTurno.setTranslateX(-10);
+        botonAvanzarTurno.setTranslateY(10);
+
+        VBox contenedorAvanzarTurno = new VBox(botonAvanzarTurno);
+        contenedorAvanzarTurno.setSpacing(5);
+        contenedorAvanzarTurno.setTranslateX(1800);
+        contenedorAvanzarTurno.setTranslateY(10);
+
+        botonAvanzarTurno.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                algoStar.avanzarTurno();
+                setInformacion(algoStar);
+                setBotonera(algoStar);
+                vistaMapa.update();
+            }
+        });
+
+        // Informacion del mouse sobre el canvas
+
+        Label coordenadaX = new Label();
+        coordenadaX.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        coordenadaX.setTextFill(Color.web("#ffffff"));
+
+        Label coordenadaY = new Label();
+        coordenadaY.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        coordenadaY.setTextFill(Color.web("#ffffff"));
+
+        HBox contenedorHorizontalCoordenadas = new HBox(coordenadaX, coordenadaY);
+        contenedorHorizontalCoordenadas.setSpacing(10);
+        contenedorHorizontalCoordenadas.setTranslateX(-100);
+        contenedorHorizontalCoordenadas.setTranslateY(10);
+
+        this.canvasCentral.setOnMouseMoved(e -> {
+            coordenadaX.setText("x: " + e.getX());
+            coordenadaY.setText("y: " + e.getY());
+        });
+
+        HBox contenedorVertical = new HBox(contenedorAvanzarTurno, contenedorHorizontalCoordenadas);
+        this.setTop(contenedorVertical);
+    }
+
     // Se crea el menu donde estara la informacion del jugador: Nombre, Color, Raza, Recursos, Poblacion, Suministro.
     public void setInformacion(AlgoStar algoStar) {
+        // Informacion del jugador
+
         Jugador jugadorActual = algoStar.obtenerJugadorTurno();
 
         Label nombre = new Label();
@@ -154,10 +178,12 @@ public class PantallaJuego extends BorderPane { // 24:47
         poblacion.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         poblacion.setTextFill(Color.web("#ffffff"));
 
+        // Contenedor de informacion
+
         VBox contenedorVerticalInformacion = new VBox(nombre, color, raza, gas, mineral, poblacion);
         contenedorVerticalInformacion.setSpacing(10);
         contenedorVerticalInformacion.setTranslateX(10);
-        contenedorVerticalInformacion.setTranslateY(10);
+        contenedorVerticalInformacion.setTranslateY(220);
 
         this.setLeft(contenedorVerticalInformacion);
     }
@@ -166,11 +192,11 @@ public class PantallaJuego extends BorderPane { // 24:47
         Jugador jugadorActual = algoStar.obtenerJugadorTurno();
 
         if (jugadorActual.obtenerRaza().equals("Zerg")) {
-            HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosZerg(algoStar), this.setBotoneraUnidadesZerg(algoStar), this.setBotoneraMovimiento(algoStar));
+            HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosZerg(algoStar), this.setBotoneraUnidadesZerg(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
             this.setBottom(contenedorHorizontalBotonera);
         } else {
-            HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosProtoss(algoStar), this.setBotoneraUnidadesProtoss(algoStar), this.setBotoneraMovimiento(algoStar));
+            HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosProtoss(algoStar), this.setBotoneraUnidadesProtoss(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
             this.setBottom(contenedorHorizontalBotonera);
         }
@@ -178,6 +204,7 @@ public class PantallaJuego extends BorderPane { // 24:47
 
     // Se crea la botonera Zerg con los edificios correspondientes.
     public GridPane setBotoneraEdificiosZerg(AlgoStar algoStar) {
+        // Botonera edificios
 
         Button criadero = new Button();
         criadero.setText("Crear criadero ");
@@ -364,19 +391,42 @@ public class PantallaJuego extends BorderPane { // 24:47
 
     // Se crea la botonera de movimiento
     public HBox setBotoneraMovimiento(AlgoStar algoStar) {
-        Jugador jugadorTurno = algoStar.obtenerJugadorTurno();
+        Mapa mapa = algoStar.obtenerMapa();
 
         // Boton de movimiento
 
         Button mover = new Button();
         mover.setText("Mover");
 
+        BotonMoverEventHandler botonMoverEventHandler = new BotonMoverEventHandler(vistaMapa, mapa.obtenerUnidadEnUbicacion(new Ubicacion(coordenadaX, coordenadaY)));
+        mover.setOnAction(botonMoverEventHandler);
+
         // Boton de movimiento
 
-        Button cambiarDireccion = new Button();
-        cambiarDireccion.setText("Cambiar de direccion");
+        Button direccion = new Button();
+        direccion.setText("Cambiar de direccion");
 
-        HBox contenedorHorizontalBMovimiento = new HBox(mover, cambiarDireccion);
+        BotonDireccionEventHandler botonDireccionEventHandler = new BotonDireccionEventHandler(mapa.obtenerUnidadEnUbicacion(new Ubicacion(coordenadaX, coordenadaY)));
+        direccion.setOnAction(botonDireccionEventHandler);
+
+        HBox contenedorHorizontalBMovimiento = new HBox(mover, direccion);
+
+        return contenedorHorizontalBMovimiento;
+    }
+
+    // Se crea la botonera de movimiento
+    public HBox setBotoneraAtaque(AlgoStar algoStar) {
+        Mapa mapa = algoStar.obtenerMapa();
+
+        // Boton de ataque
+
+        Button atacar = new Button();
+        atacar.setText("Atacar");
+
+        BotonAtacarEventHandler botonAtacarEventHandler = new BotonAtacarEventHandler(this.canvasCentral, mapa, mapa.obtenerUnidadEnUbicacion(new Ubicacion(coordenadaX, coordenadaY)));
+        atacar.setOnAction(botonAtacarEventHandler);
+
+        HBox contenedorHorizontalBMovimiento = new HBox(atacar);
 
         return contenedorHorizontalBMovimiento;
     }

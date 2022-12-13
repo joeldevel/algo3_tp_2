@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -32,27 +33,21 @@ public class VistaMapa {
         this.clean();
 
         for(Ubicacion ubicacion: this.mapa.ubicacionesConMoho()) {
-            Image imagen = new Image("file:src/main/resources/images/moho.png", 50, 50, true, false);
-            this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY()); // Imagen, posicion x, posicion y
+            this.canvas.getGraphicsContext2D().setFill(Color.GREEN);
+            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 1, 1); // Posicion x, posicion y, ancho, altura
+        }
+
+        for(NodoMineral nodo: this.mapa.nodosMinerales()) {
+            Ubicacion ubicacion = nodo.ubicacion();
+            this.canvas.getGraphicsContext2D().setFill(Color.BLUE);
+            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
         }
 
         for(Volcan volcan: this.mapa.volcanes()) {
             Ubicacion ubicacion = volcan.ubicacion();
 
             Image imagen = new Image("file:src/main/resources/images/geiser-vespeno.png", 50, 50, true, false);
-            this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY()); // Imagen, posicion x, posicion y
-
-            //System.out.println(imagen.getHeight());
-            //System.out.println(imagen.getWidth());
-        }
-
-        for(NodoMineral nodo: this.mapa.nodosMinerales()) {
-            Ubicacion ubicacion = nodo.ubicacion();
-            //this.canvas.getGraphicsContext2D().setFill(Color.BLUE);
-            //this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 10, 10); // Posicion x, posicion y, ancho, altura
-
-            Image imagen = new Image("file:src/main/resources/images/nodo-mineral.png", 50, 50, true, false);
-            this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY()); // Imagen, posicion x, posicion y
+            this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2)); // Imagen, posicion x, posicion y
         }
 
         for(Edificio edificio: this.mapa.edificios()) {
@@ -61,52 +56,63 @@ public class VistaMapa {
             if(edificio.tiempoRestante() == 0) {
                 if(edificio instanceof Criadero) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/criadero/criadero01.png", 50, 50, true, false);
-                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY());
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof ReservaDeReproduccion) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/reserva/reserva01.png", 50, 50, true, false);
-                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY());
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof Extractor) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/extractor/extractor01.png", 50, 50, true, false);
-                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY());
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof Guarida) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/guarida/guarida01.png", 50, 50, true, false);
-                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY());
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof Espiral) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/espiral/espiral01.png", 50, 50, true, false);
-                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX(), ubicacion.obtenerY());
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else {
+                    this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
+                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
                 }
             }
         }
 
-        for(Ubicacion ubicacion: this.mapa.areasEspaciales()) {
-            this.canvas.getGraphicsContext2D().setFill(Color.BLACK);
-            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 1, 1); // Posicion x, posicion y, ancho, altura
-        }
-
         for(Unidad unidad: this.mapa.unidades()) {
+            Ubicacion ubicacion = unidad.ubicacion();
 
             if(unidad.tiempoRestante() == 0) {
-                Ubicacion ubicacion = unidad.ubicacion();
-                this.canvas.getGraphicsContext2D().setFill(Color.ORANGE);
-                this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 5, 5); // Posicion x, posicion y, ancho, altura
+                if(unidad.obtenerTipo() instanceof AmoSupremo) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/amo/amo-supremo.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println(imagen.getWidth());
+                    System.out.println(imagen.getWidth());
+                }
+                else {
+                    this.canvas.getGraphicsContext2D().setFill(Color.ORANGE);
+                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX(), ubicacion.obtenerY(), 5, 5); // Posicion x, posicion y, ancho, altura
+                }
             }
         }
     }
 
     public void clean() {
-        Image imagen = new Image("file:src/main/resources/images/field2.png", ANCHO, ALTURA, false, false);
+        // Areas terrestres
+        Image imagen = new Image("file:src/main/resources/images/backgrounddetailed5.png", ANCHO, ALTURA, false, false);
         this.canvas.getGraphicsContext2D().drawImage(imagen, 0, 0);
 
-        //this.canvas.getGraphicsContext2D().setFill(Color.LIGHTBLUE);
-        //this.canvas.getGraphicsContext2D().fillRect(0,0,1000,500); // Ancho, Altura
+        // Areas espaciales
+        Image imagen5 = new Image("file:src/main/resources/images/backgrounddetailed4.png", ANCHO/2, ALTURA/2, false, false);
+        this.canvas.getGraphicsContext2D().drawImage(imagen5, 250, 125);
     }
 
     public void update() {

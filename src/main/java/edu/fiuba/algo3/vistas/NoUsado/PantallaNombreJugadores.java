@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.NoUsado;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.vistas.eventos.CrearJugadorHandler;

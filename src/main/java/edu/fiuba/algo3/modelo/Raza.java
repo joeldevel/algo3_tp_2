@@ -35,11 +35,6 @@ public abstract class Raza implements Atacable, Revelable{
     }
 
 	public boolean estaEn(Ubicacion unaUbicacion) {
-		//System.out.println("Ubicacion buscada x: " + unaUbicacion.obtenerX());
-		//System.out.println("Ubicacion buscada y: " + unaUbicacion.obtenerY());
-		//System.out.println("Ubicacion unidad x: " + this.ubicacion().obtenerX());
-		//System.out.println("Ubicacion unidad y: " + this.ubicacion().obtenerY());
-
 		return (this.ubicacion().esIgualA(unaUbicacion));
 	}
 }

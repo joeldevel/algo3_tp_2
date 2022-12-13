@@ -1,11 +1,10 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.NoUsado;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;

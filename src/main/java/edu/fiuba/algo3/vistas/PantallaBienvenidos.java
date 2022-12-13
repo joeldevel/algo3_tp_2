@@ -14,6 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.nio.file.Paths;
+
 public class PantallaBienvenidos extends VBox { // 20:00
 
     Stage stage;
@@ -48,6 +50,8 @@ public class PantallaBienvenidos extends VBox { // 20:00
 
         BotonComenzarEventHandler botonComenzarEventHandler = new BotonComenzarEventHandler(stage, proximaEscena);
         botonComenzar.setOnAction(botonComenzarEventHandler);
+
+        // Sonido
 
         this.getChildren().addAll(etiqueta, botonComenzar);
     }

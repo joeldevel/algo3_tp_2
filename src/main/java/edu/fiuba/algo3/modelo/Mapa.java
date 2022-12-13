@@ -65,16 +65,16 @@ public class Mapa {
 
     public void crearBases() {
     	// Primer base creada manualmente
-    	this.agregarVolcan(new Ubicacion(10,10));
-    	this.agregarNodoMineral(new Ubicacion(10,20));
-    	this.agregarNodoMineral(new Ubicacion(20,10));
-    	this.agregarNodoMineral(new Ubicacion(20,20));
+    	this.agregarVolcan(new Ubicacion(35,23)); // radio de 25 en x / radio de 13 en y
+    	this.agregarNodoMineral(new Ubicacion(80,23));
+    	this.agregarNodoMineral(new Ubicacion(35,57));
+    	this.agregarNodoMineral(new Ubicacion(80,57));
 
 		// Segunda base creada manualmente
-		this.agregarVolcan(new Ubicacion(990,490));
-		this.agregarNodoMineral(new Ubicacion(990,480));
-		this.agregarNodoMineral(new Ubicacion(980,490));
-		this.agregarNodoMineral(new Ubicacion(980,480));
+		this.agregarVolcan(new Ubicacion(965,477)); // radio de 25 en x / radio de 13 en y
+		this.agregarNodoMineral(new Ubicacion(965,444));
+		this.agregarNodoMineral(new Ubicacion(920,477));
+		this.agregarNodoMineral(new Ubicacion(920,444));
     }
     
     public void crearAreas() {

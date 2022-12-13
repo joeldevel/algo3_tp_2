@@ -5,16 +5,30 @@ public class Ubicacion {
 
     protected int posX;
     protected int posY;
+
+    protected int alto;
+    protected int ancho;
     
     public Ubicacion() {
         this.posX = 0;
         this.posY = 0;
+
+        this.alto = 0;
+        this.ancho = 0;
     }
     
     public Ubicacion(int x, int y) {
     	this.posX = x;
     	this.posY = y;
+
+    	this.alto = 0;
+    	this.ancho = 0;
     }
+
+	public void setPerimetro(int unAlto, int unAncho) {
+    	this.alto = unAlto;
+    	this.ancho = unAncho;
+	}
 
 	public int distanciaCon(Ubicacion otraUbicacion) {
 		int distancia = 0;
@@ -32,6 +46,7 @@ public class Ubicacion {
 	
 	public boolean esIgualA(Ubicacion otraUbicacion) {
 		return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
+		//return (((this.posX - this.ancho) <= otraUbicacion.posX && otraUbicacion.posX <= (this.posX + this.ancho)) && ((this.posY - alto) <= otraUbicacion.posY && otraUbicacion.posY <= (this.posY + alto)));
 	}
 	
 	public boolean xDentroDeRango(int inicio, int fin) {

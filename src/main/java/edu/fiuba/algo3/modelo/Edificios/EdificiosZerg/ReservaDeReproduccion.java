@@ -16,6 +16,9 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZE
 
 public class ReservaDeReproduccion extends EdificioZerg {
 
+	public final int ALTO_RADIO = 24;
+	public final int ANCHO_RADIO = 25;
+
 	private final int POBLACION = 0;
     private final int COSTO_MINERAL = 150;
     private final int COSTO_GAS = 0;
@@ -24,6 +27,7 @@ public class ReservaDeReproduccion extends EdificioZerg {
     	
     public ReservaDeReproduccion(Ubicacion unaUbicacion, Jugador unJugador) {
     	super(new Tiempo(-12), new Vida(1000), unaUbicacion, unJugador,"ReservaDeReproduccion");
+		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	

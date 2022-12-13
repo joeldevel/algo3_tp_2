@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
 
+    public static final int AMO_ALTO_RADIO = 21;
+    public static final int AMO_ANCHO_RADIO = 25;
+
     public static final int SUMINISTRO_AMO = 0;
     private final int POBLACION = 5;
     private final int COSTO_MINERAL = 50;

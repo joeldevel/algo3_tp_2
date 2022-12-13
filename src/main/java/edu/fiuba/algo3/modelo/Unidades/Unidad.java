@@ -4,6 +4,9 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.AMO_ALTO_RADIO;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.AMO_ANCHO_RADIO;
+
 public class Unidad extends Raza {
 
 	private TipoDeUnidad estado;
@@ -11,9 +14,14 @@ public class Unidad extends Raza {
     
 	public Unidad(Tiempo unTiempo, Ubicacion unaUbicacion, TipoDeUnidad unTipo) {
 		super(unTiempo, unaUbicacion);
+		this.ubicacion.setPerimetro(AMO_ALTO_RADIO, AMO_ANCHO_RADIO);
 		this.estado = new UnidadEnConstruccion();
 		this.tipo = unTipo;
 		unTipo.setComportamientoUnidad(this);
+	}
+
+	public TipoDeUnidad obtenerTipo() {
+		return this.tipo;
 	}
 
 	// Se delega al tipo y no al estado, porque aunque este en construccion ya tiene un cupo reservado.

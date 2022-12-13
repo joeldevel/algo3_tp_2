@@ -21,6 +21,9 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CONSTRUCCION_
 
 public class Criadero extends EdificioZerg {
 
+	public final int ALTO_RADIO = 19;
+	public final int ANCHO_RADIO = 25;
+
 	private final int POBLACION = 5;
 	private final int COSTO_MINERAL = 200;
 	private final int COSTO_GAS = 0;
@@ -30,6 +33,7 @@ public class Criadero extends EdificioZerg {
 		
 	public Criadero(Ubicacion unaUbicacion, Jugador unJugador) {
 		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador,"Criadero");
+		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
 		
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
