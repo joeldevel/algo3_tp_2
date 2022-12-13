@@ -442,14 +442,12 @@ public class PantallaJuego extends BorderPane { // 24:47
 
     // Se crea la botonera de movimiento
     public HBox setBotoneraMovimiento(AlgoStar algoStar) {
-        Mapa mapa = algoStar.obtenerMapa();
-
         // Boton de movimiento
 
         Button mover = new Button();
         mover.setText("Mover");
 
-        BotonMoverEventHandler botonMoverEventHandler = new BotonMoverEventHandler(vistaMapa, mapa.obtenerUnidadEnUbicacion(new Ubicacion(coordenadaX, coordenadaY)));
+        BotonMoverEventHandler botonMoverEventHandler = new BotonMoverEventHandler(vistaMapa, algoStar.obtenerJugadorTurno(), new Ubicacion(coordenadaX, coordenadaY));
         mover.setOnAction(botonMoverEventHandler);
 
         // Boton de movimiento
@@ -457,7 +455,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         Button direccion = new Button();
         direccion.setText("Cambiar de direccion");
 
-        BotonDireccionEventHandler botonDireccionEventHandler = new BotonDireccionEventHandler(mapa.obtenerUnidadEnUbicacion(new Ubicacion(coordenadaX, coordenadaY)));
+        BotonDireccionEventHandler botonDireccionEventHandler = new BotonDireccionEventHandler(algoStar.obtenerJugadorTurno(), new Ubicacion(coordenadaX, coordenadaY));
         direccion.setOnAction(botonDireccionEventHandler);
 
         HBox contenedorHorizontalBMovimiento = new HBox(mover, direccion);
