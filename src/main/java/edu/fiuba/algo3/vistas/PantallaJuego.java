@@ -125,29 +125,13 @@ public class PantallaJuego extends BorderPane { // 24:47
         botonAvanzarTurno.setTranslateX(-10);
         botonAvanzarTurno.setTranslateY(10);
 
+        BotonAvanzarTurnoEventHandler botonAvanzarTurnoEventHandler = new BotonAvanzarTurnoEventHandler(this.stage, this.proximaExcena, this, this.vistaMapa, algoStar);
+        botonAvanzarTurno.setOnAction(botonAvanzarTurnoEventHandler);
+
         VBox contenedorAvanzarTurno = new VBox(botonAvanzarTurno);
         contenedorAvanzarTurno.setSpacing(5);
         contenedorAvanzarTurno.setTranslateX(1600);
         contenedorAvanzarTurno.setTranslateY(50);
-
-        botonAvanzarTurno.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                try {
-
-                    algoStar.avanzarTurno();
-                    setInformacion(algoStar);
-                    setBotonera(algoStar);
-                    vistaMapa.update();
-
-                } catch (AlgoStarFinalizadoException e) {
-                    stage.setScene(proximaExcena);
-                    stage.setFullScreenExitHint("");
-                    stage.setFullScreen(true);
-                }
-            }
-        });
 
         // Informacion del mouse sobre el canvas
 
