@@ -129,7 +129,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		this.hacerseInvisible();
 	}
 
 	@Override

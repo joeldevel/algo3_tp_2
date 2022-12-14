@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
-import edu.fiuba.algo3.modelo.Excepciones.RevelableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Revelo;
@@ -91,11 +88,9 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     public void revelar(Revelable unRevelable) {
 
         for (Revelo revelo : revelos) {
-            if(! (this.estaEnRangoDeRevelo(unRevelable, revelo))) {
-                throw new RevelableFueraDeRangoError();
+            if((this.estaEnRangoDeRevelo(unRevelable, revelo))) {
+                revelo.revelarA(unRevelable);
             }
-
-            revelo.revelarA(unRevelable);
         }
     }
 
