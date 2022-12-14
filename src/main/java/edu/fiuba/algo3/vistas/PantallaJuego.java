@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vistas;
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -314,7 +315,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         guardian.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //jugadorZerg.evolucionarMutaliscoAGuardian(new Ubicacion(coordenadaX, coordenadaY));
+                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoAGuardian(new Ubicacion(coordenadaX, coordenadaY));
             }
         });
 
@@ -325,7 +326,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         devorador.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //jugadorZerg.evolucionarMutaliscoADevorador(new Ubicacion(coordenadaX, coordenadaY));
+                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoADevorador(new Ubicacion(coordenadaX, coordenadaY));
             }
         });
 

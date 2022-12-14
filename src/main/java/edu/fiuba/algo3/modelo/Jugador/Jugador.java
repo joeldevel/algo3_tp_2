@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Jugador;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
@@ -11,6 +12,9 @@ import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public abstract class Jugador {
+
+	private static final int MAX_POBLACION = 200;
+	private static final int CANT_MINERAL_INICIAL = 200;
 	
 	protected String nombre;
 	protected String color;
@@ -23,6 +27,7 @@ public abstract class Jugador {
     	this.nombre = unNombre;
     	this.color = unColor;
     	this.recursos = new Recursos();
+		this.recursos.guardar(0, CANT_MINERAL_INICIAL);
     	this.mapa = unMapa;
     	this.edificios = new ArrayList<Edificio>();
     	this.unidades = new ArrayList<Unidad>();
@@ -74,8 +79,25 @@ public abstract class Jugador {
     }
     
     public abstract void construir(String entidad,Ubicacion unaUbicacion, Jugador jugador, Mapa mapa);
-    
-    public abstract int calcularPoblacion();
+
+    // La poblacion debe ser siempre menor al valor maximo de poblacion.
+    public int calcularPoblacion() {
+		int poblacion = 0;
+
+		for (Edificio edificio : this.edificios) {
+			poblacion += edificio.obtenerPoblacion();
+		}
+
+		for (Unidad unidad : this.unidades) {
+			poblacion += unidad.obtenerPoblacion();
+		}
+
+		if (poblacion >= MAX_POBLACION) {
+			return MAX_POBLACION;
+		}
+
+		return poblacion;
+	}
     
     public int calcularSuministro() {
         int cupo = 0;
