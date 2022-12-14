@@ -18,12 +18,20 @@ public class Ubicacion {
     }
     
     public Ubicacion(int x, int y) {
-    	this.posX = x;
-    	this.posY = y;
+		this.posX = x;
+		this.posY = y;
 
-    	this.alto = 0;
-    	this.ancho = 0;
-    }
+		this.alto = 0;
+		this.ancho = 0;
+	}
+
+	public Ubicacion(int x, int y, int alto, int ancho) {
+		this.posX = x;
+		this.posY = y;
+
+		this.alto = alto;
+		this.ancho = ancho;
+	}
 
 	public void setPerimetro(int unAlto, int unAncho) {
     	this.alto = unAlto;
@@ -45,8 +53,8 @@ public class Ubicacion {
 	}
 	
 	public boolean esIgualA(Ubicacion otraUbicacion) {
-		return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
-		//return (((this.posX - this.ancho) <= otraUbicacion.posX && otraUbicacion.posX <= (this.posX + this.ancho)) && ((this.posY - alto) <= otraUbicacion.posY && otraUbicacion.posY <= (this.posY + alto)));
+		//return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
+		return (((this.posX - this.ancho) <= otraUbicacion.posX && otraUbicacion.posX <= (this.posX + this.ancho)) && ((this.posY - alto) <= otraUbicacion.posY && otraUbicacion.posY <= (this.posY + alto)));
 	}
 	
 	public boolean xDentroDeRango(int inicio, int fin) {
@@ -58,21 +66,19 @@ public class Ubicacion {
 	}
 	
 	public Ubicacion derecha() {
-		return(new Ubicacion(this.posX+1,this.posY));
+		return(new Ubicacion(this.posX + this.ancho + 1,this.posY, this.alto, this.ancho));
 	}
 	
 	public Ubicacion abajo() {
-		return (new Ubicacion(this.posX,this.posY-1));
+		return (new Ubicacion(this.posX,this.posY - this.alto - 1, this.alto, this.ancho));
 	}
 	
 	public Ubicacion izquierda() {
-		return (new Ubicacion(this.posX-1,this.posY));
+		return (new Ubicacion(this.posX - this.ancho - 1,this.posY, this.alto, this.ancho));
 	}
 	
 	public Ubicacion arriba() {
-		return (new Ubicacion(this.posX,this.posY+1));
+		return (new Ubicacion(this.posX,this.posY + this.alto + 1, this.alto, this.ancho));
 	}
 
-
-    
 }
