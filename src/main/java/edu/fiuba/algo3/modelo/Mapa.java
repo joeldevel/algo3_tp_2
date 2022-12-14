@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -133,14 +134,16 @@ public class Mapa {
 	}
 
 	public Unidad obtenerUnidadEnUbicacion(Ubicacion unaUbicacion) {
-
-		for(Unidad unidad: this.unidades) {
-			if(unidad.estaEn(unaUbicacion)) {
-				return unidad;
+		Unidad unidad = null;
+		for(Unidad actual: this.unidades) {
+			if(actual.estaEn(unaUbicacion)) {
+				unidad = actual;
 			}
 		}
-
-		return null;
+		if(unidad == null) {
+			throw new SinUnidadBuscadaError();
+		}
+		return unidad;
 	}
     
     public boolean verificarAreaEspacial(Ubicacion ubicacion) {
