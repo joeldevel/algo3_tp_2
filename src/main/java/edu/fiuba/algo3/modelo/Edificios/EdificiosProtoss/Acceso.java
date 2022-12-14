@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
@@ -58,6 +59,9 @@ public class Acceso extends EdificioProtoss {
 		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
 		}
+		if(this.tiempoRestante() != 0) {
+			throw new EdificioNoOperativoException();
+		}
 		Unidad zealot = new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador));
 		return zealot;
 		/*while(this.zealots.size() < 5) {
@@ -68,6 +72,9 @@ public class Acceso extends EdificioProtoss {
 	public Unidad transportarDragones() {
 		if(! this.estaEnergizado()) {
 			throw new EdificioNoEnergizadoError();
+		}
+		if(this.tiempoRestante() != 0) {
+			throw new EdificioNoOperativoException();
 		}
 		Unidad dragon = new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador));
 		return dragon;

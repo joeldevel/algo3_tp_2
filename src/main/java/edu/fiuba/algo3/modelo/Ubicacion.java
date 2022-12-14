@@ -53,8 +53,8 @@ public class Ubicacion {
 	}
 	
 	public boolean esIgualA(Ubicacion otraUbicacion) {
-		//return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
-		return (((this.posX - this.ancho) <= otraUbicacion.posX && otraUbicacion.posX <= (this.posX + this.ancho)) && ((this.posY - alto) <= otraUbicacion.posY && otraUbicacion.posY <= (this.posY + alto)));
+		return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
+		//return (((this.posX - this.ancho) <= otraUbicacion.posX && otraUbicacion.posX <= (this.posX + this.ancho)) && ((this.posY - alto) <= otraUbicacion.posY && otraUbicacion.posY <= (this.posY + alto)));
 	}
 	
 	public boolean xDentroDeRango(int inicio, int fin) {
@@ -66,19 +66,26 @@ public class Ubicacion {
 	}
 	
 	public Ubicacion derecha() {
-		return(new Ubicacion(this.posX + this.ancho + 1,this.posY, this.alto, this.ancho));
+		return(new Ubicacion(this.posX + 1,this.posY));
 	}
 	
 	public Ubicacion abajo() {
-		return (new Ubicacion(this.posX,this.posY - this.alto - 1, this.alto, this.ancho));
+		return (new Ubicacion(this.posX,this.posY - 1));
 	}
 	
 	public Ubicacion izquierda() {
-		return (new Ubicacion(this.posX - this.ancho - 1,this.posY, this.alto, this.ancho));
+		return (new Ubicacion(this.posX - 1,this.posY));
 	}
 	
 	public Ubicacion arriba() {
-		return (new Ubicacion(this.posX,this.posY + this.alto + 1, this.alto, this.ancho));
+		return (new Ubicacion(this.posX,this.posY + 1));
 	}
+	
+	/* public Ubicacion convertirCoordenadas(int x, int y){
+	 *    int nuevoX = (int) Math.ceil(x/20);
+	 *    int nuevoY = (int) Math.ceil(y/20);
+	 *    return (new Ubicacion(nuevoX,nuevoY)
+	 * }
+	 *  */
 
 }

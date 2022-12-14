@@ -46,7 +46,8 @@ public class Guarida extends EdificioZerg {
 	
 	public void crearHidralisco() {
 		
-		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_HIDRALISCO)) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_HIDRALISCO) && 
+			this.tiempoRestante() == 0) {
 			Unidad unaUnidad = this.larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_HIDRALISCO), new Hidralisco(this.jugador), this.ubicacion);
 			this.larvas.remove(0);

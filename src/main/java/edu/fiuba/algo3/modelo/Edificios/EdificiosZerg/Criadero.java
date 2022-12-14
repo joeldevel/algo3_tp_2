@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.CriaderoSinLarvasException;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Larva;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
@@ -60,10 +61,12 @@ public class Criadero extends EdificioZerg {
 			throw new CriaderoSinLarvasException();
 		}
 
-		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.jugador), this.ubicacion);
-		this.larvas.remove(0);
-		this.jugador.agregarUnidad(unaUnidad);
+		if(this.tiempoRestante() == 0) {
+			Unidad unaUnidad = this.larvas.get(0);
+			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.jugador), this.ubicacion);
+			this.larvas.remove(0);
+			this.jugador.agregarUnidad(unaUnidad);			
+		}
 	}
 	
 	public void crearLarva() {

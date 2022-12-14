@@ -188,4 +188,8 @@ public abstract class Jugador {
 		unidad.cambiarDireccion();
 	}
 	
+	public int contarUnidades() {
+		return (this.unidades.size());
+	}
+	
 }

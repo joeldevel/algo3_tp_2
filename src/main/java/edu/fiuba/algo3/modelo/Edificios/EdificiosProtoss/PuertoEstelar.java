@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -51,6 +52,9 @@ public class PuertoEstelar extends EdificioProtoss {
     	if(! this.estaEnergizado()) {
     		throw new EdificioNoEnergizadoError();
     	}
+    	if(this.tiempoRestante() != 0) {
+			throw new EdificioNoOperativoException();
+		}
     	Unidad scout = new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador));
     	return scout;
     	/*while(this.scouts.size() < 5) {

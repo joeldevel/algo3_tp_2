@@ -50,7 +50,8 @@ public class ReservaDeReproduccion extends EdificioZerg {
 
 public void crearZerling() {
 	
-		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING)) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_ZERLING) && 
+			this.tiempoRestante() == 0) {
 			Unidad unaUnidad = this.larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZERLING), new Zerling(this.jugador), this.ubicacion);
 			this.larvas.remove(0);

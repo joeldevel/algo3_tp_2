@@ -47,11 +47,12 @@ public class Pilon extends EdificioProtoss {
     }
     
     public void energizarEdificios() {
-    	for(EdificioProtoss actual: this.edificios) {
-    		if(this.ubicacion.distanciaCon(actual.ubicacion()) <= this.radio) {
-    			actual.energizar();
-    		}
-    		
+    	if(this.tiempoRestante() == 0) {
+    		for(EdificioProtoss actual: this.edificios) {
+    			if(this.ubicacion.distanciaCon(actual.ubicacion()) <= this.radio) {
+    				actual.energizar();
+    			}	
+    		}    		
     	}
     }
 	

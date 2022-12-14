@@ -6,7 +6,7 @@ public class Energia {
 	private boolean energia;
 	
 	public Energia() {
-		this.energia = true;
+		this.energia = false;
 	}
 	
 	public void prenderEnergia() {

@@ -46,7 +46,8 @@ public class Espiral extends EdificioZerg {
 	
 	public void crearMutalisco() {
 
-		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO)) {
+		if(!this.larvas.isEmpty() && this.jugador.haySuministroDisponible(SUMINISTRO_MUTALISCO) && 
+			this.tiempoRestante() == 0) {
 
 			Unidad unaUnidad = larvas.get(0);
 			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_MUTALISCO), new Mutalisco(this.jugador), this.ubicacion);

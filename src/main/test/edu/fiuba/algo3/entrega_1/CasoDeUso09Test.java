@@ -36,17 +36,32 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion2 = new Ubicacion(5,0);
 		Ubicacion ubicacion3 = new Ubicacion(3,0);
 		
-		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion1, jugadorZerg, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion2, jugadorZerg, mapa);
+		jugadorProtoss.construir("Acceso", ubicacion3, jugadorZerg, mapa);
+		
+		/* los pilones tienen que estar operativos para poder energizar edificios*/
+		Pilon pilon1 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion1);
+		Pilon pilon2 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion2);
+		
+		pilon1.avanzarTurno(5);
+		pilon2.avanzarTurno(5);
+		
+		/* avanzo un turno el mapa para que se energicen los edificios protoss */
+		mapa.avanzarTurno();
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		mapa.destruirPilonEn(ubicacion1);
 		
 		jugadorProtoss.avanzarTurno();
-		mapa.energizarEdificios();
+		mapa.avanzarTurno();
 		
-		Acceso acceso = jugadorProtoss.obtenerAccesoEn(ubicacion3);
+		/* dejo el acceso operativo para que no lance error de edificio no operativo */
+		Acceso acceso =(Acceso) jugadorProtoss.obtenerEdificioEn(ubicacion3);
+		acceso.avanzarTurno(8);
+		
+		/* hago que mapa energice los edificios*/
+		mapa.avanzarTurno();
 		
 		assertDoesNotThrow(()-> acceso.transportarZealots());
 	}
@@ -59,18 +74,33 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion3 = new Ubicacion(1,0);
 		Ubicacion ubicacion4 = new Ubicacion(1,2);
 		
-		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("PuertoEstelar", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion1, jugadorZerg, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion2, jugadorZerg, mapa);
+		jugadorProtoss.construir("Acceso", ubicacion3, jugadorZerg, mapa);
+		jugadorProtoss.construir("PuertoEstelar", ubicacion4, jugadorZerg, mapa);
+		
+		/* los pilones tienen que estar operativos para poder energizar edificios*/
+		Pilon pilon1 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion1);
+		Pilon pilon2 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion2);
+		
+		pilon1.avanzarTurno(5);
+		pilon2.avanzarTurno(5);
+		
+		/* avanzo un turno el mapa para que se energicen los edificios protoss */
+		mapa.avanzarTurno();
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		mapa.destruirPilonEn(ubicacion1);
 		
 		jugadorProtoss.avanzarTurno();
-		mapa.energizarEdificios();
+		mapa.avanzarTurno();
 		
-		PuertoEstelar puertoEstelar = jugadorProtoss.obtenerPuertoEstelarEn(ubicacion4);
+		/* dejo el puerto estelar operativo para que no tire error de edifio no operativo*/
+		PuertoEstelar puertoEstelar = (PuertoEstelar)jugadorProtoss.obtenerEdificioEn(ubicacion4);
+		puertoEstelar.avanzarTurno(10);
+		
+		/* hago que mapa energice los edificios*/
+		mapa.avanzarTurno();
 		
 		assertDoesNotThrow(()-> puertoEstelar.transportarScout());
 	}
@@ -82,9 +112,16 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion2 = new Ubicacion(5,0);
 		Ubicacion ubicacion3 = new Ubicacion(3,0);
 		
-		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion1, jugadorZerg, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion2, jugadorZerg, mapa);
+		jugadorProtoss.construir("Acceso", ubicacion3, jugadorZerg, mapa);
+		
+		/* los pilones tienen que estar operativos para poder energizar edificios*/
+		Pilon pilon1 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion1);
+		Pilon pilon2 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion2);
+		
+		pilon1.avanzarTurno(5);
+		pilon2.avanzarTurno(5);
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		jugadorProtoss.destruirEdificioEn(ubicacion2);
@@ -94,7 +131,12 @@ class CasoDeUso09Test {
 		jugadorProtoss.avanzarTurno();
 		mapa.energizarEdificios();
 		
-		Acceso acceso = jugadorProtoss.obtenerAccesoEn(ubicacion3);
+		/* dejo el acceso operativo para que no lance error de edificio no operativo */
+		Acceso acceso =(Acceso) jugadorProtoss.obtenerEdificioEn(ubicacion3);
+		acceso.avanzarTurno(8);
+		
+		/* hago que mapa energice los edificios*/
+		mapa.avanzarTurno();
 		
 		assertThrows(EdificioNoEnergizadoError.class,()-> {
 			acceso.transportarZealots();
@@ -109,10 +151,20 @@ class CasoDeUso09Test {
 		Ubicacion ubicacion3 = new Ubicacion(1,0);
 		Ubicacion ubicacion4 = new Ubicacion(1,2);
 		
-		Fabrica.construir("Pilon", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
-		Fabrica.construir("PuertoEstelar", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion1, jugadorZerg, mapa);
+		jugadorProtoss.construir("Pilon", ubicacion2, jugadorZerg, mapa);
+		jugadorProtoss.construir("Acceso", ubicacion3, jugadorZerg, mapa);
+		jugadorProtoss.construir("PuertoEstelar", ubicacion4, jugadorZerg, mapa);
+		
+		/* los pilones tienen que estar operativos para poder energizar edificios*/
+		Pilon pilon1 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion1);
+		Pilon pilon2 = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion2);
+		
+		pilon1.avanzarTurno(5);
+		pilon2.avanzarTurno(5);
+		
+		/* avanzo un turno el mapa para que se energicen los edificios protoss */
+		mapa.avanzarTurno();
 		
 		jugadorProtoss.destruirEdificioEn(ubicacion1);
 		jugadorProtoss.destruirEdificioEn(ubicacion2);
@@ -120,9 +172,14 @@ class CasoDeUso09Test {
 		mapa.destruirPilonEn(ubicacion2);
 		
 		jugadorProtoss.avanzarTurno();
-		mapa.energizarEdificios();
+		mapa.avanzarTurno();
 		
-		PuertoEstelar puertoEstelar = jugadorProtoss.obtenerPuertoEstelarEn(ubicacion4);
+		/* dejo el puerto estelar operativo para que no tire error de edifio no operativo*/
+		PuertoEstelar puertoEstelar = (PuertoEstelar)jugadorProtoss.obtenerEdificioEn(ubicacion4);
+		puertoEstelar.avanzarTurno(10);
+		
+		/* hago que mapa energice los edificios*/
+		mapa.avanzarTurno();
 		
 		assertThrows(EdificioNoEnergizadoError.class,()-> {
 			puertoEstelar.transportarScout();
