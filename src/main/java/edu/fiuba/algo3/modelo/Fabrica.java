@@ -124,6 +124,7 @@ public class Fabrica {
 				Unidad amoSupremo = new Unidad(new Tiempo(CONSTRUCCION_AMO), unaUbicacion, tipoAmoSupremo);
 				jugadorZerg.agregarUnidad(amoSupremo);
 				unMapa.agregarUnidad(amoSupremo);
+				unMapa.agregarAmoSupremo(amoSupremo);
 			}
 			
 			if((entidad == "Zangano") && (jugadorZerg.haySuministroDisponible(SUMINISTRO_ZANGANO)) && 

@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class Mapa {
     private ArrayList<NodoMineral> nodosMinerales;
 	private ArrayList<Edificio> edificios;
 	private ArrayList<Unidad> unidades;
+	private ArrayList<Unidad> amosSupremos;
     private ArrayList<Ubicacion> areasEspaciales;
 
     public Mapa() {
@@ -31,6 +33,7 @@ public class Mapa {
         this.nodosMinerales = new ArrayList<NodoMineral>();
         this.edificios = new ArrayList<Edificio>();
 		this.unidades = new ArrayList<Unidad>();
+		this.amosSupremos = new ArrayList<Unidad>();
         this.areasEspaciales = new ArrayList<Ubicacion>();
         
         this.crearBases();
@@ -313,11 +316,13 @@ public class Mapa {
 	}
 
 	public void destruirUnidad(Unidad unaUnidad) {
+		this.amosSupremos.remove(unaUnidad);
 		this.unidades.remove(unaUnidad);
 	}
    
    public void avanzarTurno() {
 	   	this.energizarEdificios();
+	   	this.revelarUnidades();
 	   	this.moho.avanzarTurno(this.edificios);
    }
    
@@ -353,5 +358,18 @@ public class Mapa {
 		   }
 	   }
 	   return superficie;
+   }
+
+	public void agregarAmoSupremo(Unidad unAmoSupremo) {
+		this.amosSupremos.add(unAmoSupremo);
+	}
+
+   public void revelarUnidades() {
+
+    	for(Unidad amo: this.amosSupremos) {
+    		for(Unidad unidad: this.unidades) {
+    			amo.revelar(unidad);
+			}
+		}
    }
 }
