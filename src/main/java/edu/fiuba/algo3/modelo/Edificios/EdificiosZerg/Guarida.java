@@ -15,6 +15,9 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO
 
 public class Guarida extends EdificioZerg {
 
+	public final int ALTO_RADIO = 19;
+	public final int ANCHO_RADIO = 23;
+
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 200;
 	private final int COSTO_GAS = 100;
@@ -23,6 +26,7 @@ public class Guarida extends EdificioZerg {
 	
     public Guarida(Ubicacion unaUbicacion, Jugador unJugador){
         super(new Tiempo(-12), new Vida(1250), unaUbicacion, unJugador,"Guarida");
+		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

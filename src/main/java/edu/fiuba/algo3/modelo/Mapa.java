@@ -89,15 +89,25 @@ public class Mapa {
     }
 
     public boolean verificarEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
-    	boolean verificado = false;
 
     	for(Edificio edificio: this.edificios) {
-    		if(edificio.esUn(unEdificio)) {
-    			verificado = edificio.estaEn(unaUbicacion);
+    		if(edificio.esUn(unEdificio) && edificio.estaEn(unaUbicacion)) {
+    			return true;
 			}
 		}
 
-    	return verificado;
+    	return false;
+	}
+
+	public boolean verificarEdificioEn(Ubicacion unaUbicacion) {
+
+		for(Edificio edificio: this.edificios) {
+			if(edificio.estaEn(unaUbicacion)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public Edificio obtenerEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
@@ -112,13 +122,14 @@ public class Mapa {
 	}
 
 	public boolean verificarUnidadEnUbicacion(Ubicacion unaUbicacion) {
-		boolean verificado = false;
 
 		for(Unidad unidad: this.unidades) {
-			verificado = unidad.estaEn(unaUbicacion);
+			if(unidad.estaEn(unaUbicacion)) {
+				return true;
+			}
 		}
 
-		return verificado;
+		return false;
 	}
 
 	public Unidad obtenerUnidadEnUbicacion(Ubicacion unaUbicacion) {

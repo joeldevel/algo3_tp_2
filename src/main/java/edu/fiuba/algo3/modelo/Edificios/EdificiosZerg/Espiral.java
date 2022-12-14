@@ -15,6 +15,9 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.SUMINISTRO_
 
 public class Espiral extends EdificioZerg {
 
+	public final int ALTO_RADIO = 25;
+	public final int ANCHO_RADIO = 25;
+
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 100;
@@ -23,6 +26,7 @@ public class Espiral extends EdificioZerg {
 	
 	public Espiral(Ubicacion unaUbicacion, Jugador unJugador){
         super(new Tiempo(-10), new Vida(1300), unaUbicacion, unJugador,"Espiral");
+		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

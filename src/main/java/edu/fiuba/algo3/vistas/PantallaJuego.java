@@ -24,6 +24,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.net.ServerSocket;
+
 public class PantallaJuego extends BorderPane { // 24:47
 
     public static int ANCHO = 1000;
@@ -40,21 +42,6 @@ public class PantallaJuego extends BorderPane { // 24:47
         this.setCentro(algoStar);
         this.setArriba(algoStar);
 
-        // Informacion de unidades y edificios
-
-        /*Label vida = new Label();
-        vida.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        vida.setTextFill(Color.web("#ffffff"));
-
-        Label escudo = new Label();
-        escudo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        escudo.setTextFill(Color.web("#ffffff"));
-
-        VBox contenedorVerticalEntidad = new VBox(vida, escudo);
-        contenedorVerticalEntidad.setSpacing(10);
-        contenedorVerticalEntidad.setTranslateX(-25);
-        contenedorVerticalEntidad.setTranslateY(30);*/
-
         this.canvasCentral.setOnMouseClicked(e -> {
             this.coordenadaX = (int) e.getX();
             System.out.println("x: " + e.getX());
@@ -62,25 +49,7 @@ public class PantallaJuego extends BorderPane { // 24:47
             System.out.println("y: " + e.getY() + "\n");
 
             this.setDerecha(algoStar);
-
-            /*if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando unidad");
-                Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
-
-                vida.setText("Vida: " + unidad.vidaRestante());
-                escudo.setText("Escudo: " + unidad.escudoRestante());
-            }
-
-            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando edificio");
-                Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
-
-                vida.setText("Vida: " + edificio.obtenerVida());
-                escudo.setText("Escudo: ");
-            }*/
         });
-
-        //this.setRight(contenedorVerticalEntidad);
     }
 
     public int getCoordenadaX() {
@@ -118,24 +87,19 @@ public class PantallaJuego extends BorderPane { // 24:47
         contenedorVerticalEntidad.setTranslateX(-25);
         contenedorVerticalEntidad.setTranslateY(30);
 
-        //this.canvasCentral.setOnMouseClicked(e -> {
+        if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+            Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
 
-            if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando unidad");
-                Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
+            vida.setText("Vida: " + unidad.vidaRestante());
+            escudo.setText("Escudo: " + unidad.escudoRestante());
+        }
 
-                vida.setText("Vida: " + unidad.vidaRestante());
-                escudo.setText("Escudo: " + unidad.escudoRestante());
-            }
+        if(algoStar.obtenerMapa().verificarEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+            Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
 
-            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando edificio");
-                Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
-
-                vida.setText("Vida: " + edificio.obtenerVida());
-                escudo.setText("Escudo: ");
-            }
-        //});
+            vida.setText("Vida: " + edificio.obtenerVida());
+            escudo.setText("Escudo: ");
+        }
 
         this.setRight(contenedorVerticalEntidad);
     }
