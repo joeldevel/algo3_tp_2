@@ -42,29 +42,4 @@ public class JugadorProtoss extends Jugador{
     	Fabrica.construir(entidad, unaUbicacion, (JugadorZerg)jugadorZerg, this, mapa);
     }
 	
-	public Acceso obtenerAccesoEn(Ubicacion unaUbicacion) {
-		Acceso acceso = null;
-		for(Edificio actual:this.edificios) {
-			if(actual.estaEn(unaUbicacion) && actual.esUn("Acceso")) {
-				acceso = (Acceso)actual;
-			}
-		}
-		if(acceso == null) {
-			throw new SinEdificioBuscadoError();
-		}
-		return acceso;
-	}
-	
-	public PuertoEstelar obtenerPuertoEstelarEn(Ubicacion unaUbicacion) {
-		PuertoEstelar puertoEstelar = null;
-		for(Edificio actual:this.edificios) {
-			if(actual.estaEn(unaUbicacion) && actual.esUn("PuertoEstelar")) {
-				puertoEstelar = (PuertoEstelar)actual;
-			}
-		}
-		if(puertoEstelar == null) {
-			throw new SinEdificioBuscadoError();
-		}
-		return puertoEstelar;
-	}
 }
