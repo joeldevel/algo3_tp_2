@@ -65,8 +65,10 @@ public class Ubicacion {
 		return ( (this.posY >= inicio) && (this.posY <= fin) );
 	}
 	
-	public Ubicacion derecha() {
-		return(new Ubicacion(this.posX + 1,this.posY));
+
+	/*public Ubicacion derecha() {
+		return(new Ubicacion(this.posX + this.ancho + 1,this.posY, this.alto, this.ancho));
+>>>>>>> branch 'master' of https://github.com/joeldevel/algo3_tp_2.git
 	}
 	
 	public Ubicacion abajo() {
@@ -78,7 +80,14 @@ public class Ubicacion {
 	}
 	
 	public Ubicacion arriba() {
+<<<<<<< HEAD
 		return (new Ubicacion(this.posX,this.posY + 1));
+=======
+		return (new Ubicacion(this.posX,this.posY + this.alto + 1, this.alto, this.ancho));
+	}*/
+
+	public Ubicacion derecha() {
+		return(new Ubicacion(this.posX + 1,this.posY));
 	}
 	
 	/* public Ubicacion convertirCoordenadas(int x, int y){
@@ -88,4 +97,15 @@ public class Ubicacion {
 	 * }
 	 *  */
 
+	public Ubicacion abajo() {
+		return (new Ubicacion(this.posX,this.posY - 1));
+	}
+
+	public Ubicacion izquierda() {
+		return (new Ubicacion(this.posX - 1,this.posY));
+	}
+
+	public Ubicacion arriba() {
+		return (new Ubicacion(this.posX,this.posY + 1));
+	}
 }

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vista.NoUsado;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;

@@ -62,13 +62,13 @@ public class Mapa {
 
     public void crearBases() {
     	// Primer base creada manualmente
-    	this.agregarVolcan(new Ubicacion(35,23)); // radio de 25 en x / radio de 13 en y
+    	this.agregarVolcan(new Ubicacion(35,23));
     	this.agregarNodoMineral(new Ubicacion(80,23));
     	this.agregarNodoMineral(new Ubicacion(35,57));
     	this.agregarNodoMineral(new Ubicacion(80,57));
 
 		// Segunda base creada manualmente
-		this.agregarVolcan(new Ubicacion(965,477)); // radio de 25 en x / radio de 13 en y
+		this.agregarVolcan(new Ubicacion(965,477));
 		this.agregarNodoMineral(new Ubicacion(965,444));
 		this.agregarNodoMineral(new Ubicacion(920,477));
 		this.agregarNodoMineral(new Ubicacion(920,444));
@@ -89,15 +89,25 @@ public class Mapa {
     }
 
     public boolean verificarEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
-    	boolean verificado = false;
 
     	for(Edificio edificio: this.edificios) {
-    		if(edificio.esUn(unEdificio)) {
-    			verificado = edificio.estaEn(unaUbicacion);
+    		if(edificio.esUn(unEdificio) && edificio.estaEn(unaUbicacion)) {
+    			return true;
 			}
 		}
 
-    	return verificado;
+    	return false;
+	}
+
+	public boolean verificarEdificioEn(Ubicacion unaUbicacion) {
+
+		for(Edificio edificio: this.edificios) {
+			if(edificio.estaEn(unaUbicacion)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public Edificio obtenerEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
@@ -112,13 +122,14 @@ public class Mapa {
 	}
 
 	public boolean verificarUnidadEnUbicacion(Ubicacion unaUbicacion) {
-		boolean verificado = false;
 
 		for(Unidad unidad: this.unidades) {
-			verificado = unidad.estaEn(unaUbicacion);
+			if(unidad.estaEn(unaUbicacion)) {
+				return true;
+			}
 		}
 
-		return verificado;
+		return false;
 	}
 
 	public Unidad obtenerUnidadEnUbicacion(Ubicacion unaUbicacion) {

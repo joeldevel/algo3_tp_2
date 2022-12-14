@@ -1,15 +1,11 @@
-package edu.fiuba.algo3.vistas.eventos;
+package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.vistas.PantallaJuego;
-import edu.fiuba.algo3.vistas.VistaMapa;
+import edu.fiuba.algo3.vista.PantallaJuego;
+import edu.fiuba.algo3.vista.VistaMapa;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ComboBox;
-
-import java.util.ArrayList;
 
 public class BotonMoverEventHandler implements EventHandler<ActionEvent> {
 

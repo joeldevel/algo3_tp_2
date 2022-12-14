@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
@@ -16,8 +16,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import static edu.fiuba.algo3.vistas.PantallaJuego.ALTURA;
-import static edu.fiuba.algo3.vistas.PantallaJuego.ANCHO;
+import static edu.fiuba.algo3.vista.PantallaJuego.ALTURA;
+import static edu.fiuba.algo3.vista.PantallaJuego.ANCHO;
 
 public class VistaMapa {
 
@@ -85,27 +85,27 @@ public class VistaMapa {
                 }
 
                 else if (edificio instanceof NexoMineral) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof Pilon) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof Asimilador) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof Acceso) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
                 else if (edificio instanceof PuertoEstelar) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
             }
@@ -131,7 +131,7 @@ public class VistaMapa {
                 }
 
                 else if(unidad.obtenerTipo() instanceof Hidralisco) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/hidralisco/hidralisco01.png.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/hidralisco/hidralisco01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 

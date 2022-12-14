@@ -1,21 +1,17 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
+import edu.fiuba.algo3.controlador.*;
+import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.vistas.eventos.BotonAtacarEventHandler;
-import edu.fiuba.algo3.vistas.eventos.BotonCrearEntidadEventHandler;
-import edu.fiuba.algo3.vistas.eventos.BotonDireccionEventHandler;
-import edu.fiuba.algo3.vistas.eventos.BotonMoverEventHandler;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -32,30 +28,24 @@ public class PantallaJuego extends BorderPane { // 24:47
     private int coordenadaX;
     private int coordenadaY;
 
+    private int unidadCoordenadaX;
+    private int unidadCoordenadaY;
+
+    Stage stage;
+    Scene proximaExcena;
     VistaMapa vistaMapa;
     Canvas canvasCentral;
 
-    public PantallaJuego(Stage stage, AlgoStar algoStar) {
+    public PantallaJuego(Stage stage, Scene proximaEscena, AlgoStar algoStar) {
+        this.stage = stage;
+        this.proximaExcena = proximaEscena;
+
         this.setFondo();
         this.setCentro(algoStar);
         this.setArriba(algoStar);
 
-        // Informacion de unidades y edificios
-
-        /*Label vida = new Label();
-        vida.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        vida.setTextFill(Color.web("#ffffff"));
-
-        Label escudo = new Label();
-        escudo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        escudo.setTextFill(Color.web("#ffffff"));
-
-        VBox contenedorVerticalEntidad = new VBox(vida, escudo);
-        contenedorVerticalEntidad.setSpacing(10);
-        contenedorVerticalEntidad.setTranslateX(-25);
-        contenedorVerticalEntidad.setTranslateY(30);*/
-
         this.canvasCentral.setOnMouseClicked(e -> {
+
             this.coordenadaX = (int) e.getX();
             System.out.println("x: " + e.getX());
             this.coordenadaY = (int) e.getY();
@@ -63,24 +53,12 @@ public class PantallaJuego extends BorderPane { // 24:47
 
             this.setDerecha(algoStar);
 
-            /*if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando unidad");
-                Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
-
-                vida.setText("Vida: " + unidad.vidaRestante());
-                escudo.setText("Escudo: " + unidad.escudoRestante());
-            }
-
-            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando edificio");
-                Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
-
-                vida.setText("Vida: " + edificio.obtenerVida());
-                escudo.setText("Escudo: ");
-            }*/
         });
+    }
 
-        //this.setRight(contenedorVerticalEntidad);
+    public void setUnidadCoordenadas(int x, int y) {
+        this.unidadCoordenadaX = x;
+        this.unidadCoordenadaY = y;
     }
 
     public int getCoordenadaX() {
@@ -91,9 +69,12 @@ public class PantallaJuego extends BorderPane { // 24:47
         return this.coordenadaY;
     }
 
-    public void setCoordenadas(int nuevaCoordenadaX, int nuevaCoordenadaY) {
-        this.coordenadaX = nuevaCoordenadaX;
-        this.coordenadaY = nuevaCoordenadaY;
+    public int getUnidadCoordenadaX() {
+        return this.unidadCoordenadaX;
+    }
+
+    public int getUnidadCoordenadaY() {
+        return this.unidadCoordenadaY;
     }
 
     public void setFondo() {
@@ -115,27 +96,22 @@ public class PantallaJuego extends BorderPane { // 24:47
 
         VBox contenedorVerticalEntidad = new VBox(vida, escudo);
         contenedorVerticalEntidad.setSpacing(10);
-        contenedorVerticalEntidad.setTranslateX(-25);
-        contenedorVerticalEntidad.setTranslateY(30);
+        contenedorVerticalEntidad.setTranslateX(-225);
+        contenedorVerticalEntidad.setTranslateY(80);
 
-        //this.canvasCentral.setOnMouseClicked(e -> {
+        if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+            Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
 
-            if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando unidad");
-                Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
+            vida.setText("Vida: " + unidad.vidaRestante());
+            escudo.setText("Escudo: " + unidad.escudoRestante());
+        }
 
-                vida.setText("Vida: " + unidad.vidaRestante());
-                escudo.setText("Escudo: " + unidad.escudoRestante());
-            }
+        if(algoStar.obtenerMapa().verificarEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
+            Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
 
-            if(algoStar.obtenerMapa().verificarEdificioEnUbicacion("Criadero", new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-                System.out.println("Entrando edificio");
-                Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
-
-                vida.setText("Vida: " + edificio.obtenerVida());
-                escudo.setText("Escudo: ");
-            }
-        //});
+            vida.setText("Vida: " + edificio.obtenerVida());
+            escudo.setText("Escudo: " + edificio.obtenerEscudo());
+        }
 
         this.setRight(contenedorVerticalEntidad);
     }
@@ -148,20 +124,13 @@ public class PantallaJuego extends BorderPane { // 24:47
         botonAvanzarTurno.setTranslateX(-10);
         botonAvanzarTurno.setTranslateY(10);
 
+        BotonAvanzarTurnoEventHandler botonAvanzarTurnoEventHandler = new BotonAvanzarTurnoEventHandler(this.stage, this.proximaExcena, this, this.vistaMapa, algoStar);
+        botonAvanzarTurno.setOnAction(botonAvanzarTurnoEventHandler);
+
         VBox contenedorAvanzarTurno = new VBox(botonAvanzarTurno);
         contenedorAvanzarTurno.setSpacing(5);
         contenedorAvanzarTurno.setTranslateX(1600);
         contenedorAvanzarTurno.setTranslateY(50);
-
-        botonAvanzarTurno.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                algoStar.avanzarTurno();
-                setInformacion(algoStar);
-                setBotonera(algoStar);
-                vistaMapa.update();
-            }
-        });
 
         // Informacion del mouse sobre el canvas
 
@@ -239,13 +208,13 @@ public class PantallaJuego extends BorderPane { // 24:47
         if (jugadorActual.obtenerRaza().equals("Zerg")) {
             HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosZerg(algoStar), this.setBotoneraUnidadesZerg(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
-            contenedorHorizontalBotonera.setTranslateX(260);
+            contenedorHorizontalBotonera.setTranslateX(50);
             contenedorHorizontalBotonera.setTranslateY(-50);
             this.setBottom(contenedorHorizontalBotonera);
         } else {
             HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosProtoss(algoStar), this.setBotoneraUnidadesProtoss(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
-            contenedorHorizontalBotonera.setTranslateX(260);
+            contenedorHorizontalBotonera.setTranslateX(50);
             contenedorHorizontalBotonera.setTranslateY(-50);
             this.setBottom(contenedorHorizontalBotonera);
         }
@@ -348,7 +317,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         guardian.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //jugadorZerg.evolucionarMutaliscoAGuardian(new Ubicacion(coordenadaX, coordenadaY));
+                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoAGuardian(new Ubicacion(coordenadaX, coordenadaY));
             }
         });
 
@@ -359,7 +328,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         devorador.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //jugadorZerg.evolucionarMutaliscoADevorador(new Ubicacion(coordenadaX, coordenadaY));
+                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoADevorador(new Ubicacion(coordenadaX, coordenadaY));
             }
         });
 
@@ -484,17 +453,23 @@ public class PantallaJuego extends BorderPane { // 24:47
 
     // Se crea la botonera de movimiento
     public HBox setBotoneraAtaque(AlgoStar algoStar) {
-        Mapa mapa = algoStar.obtenerMapa();
+        // Boton elegir unidad
 
-        // Boton de ataque
+        Button unidad = new Button();
+        unidad.setText("Elegir unidad");
+
+        BotonElegirUnidadEventHandler botonElegirUnidadEventHandler = new BotonElegirUnidadEventHandler(algoStar, this);
+        unidad.setOnAction(botonElegirUnidadEventHandler);
+
+        // Boton atacar
 
         Button atacar = new Button();
         atacar.setText("Atacar");
 
-        BotonAtacarEventHandler botonAtacarEventHandler = new BotonAtacarEventHandler(this.canvasCentral, mapa, this, vistaMapa);
+        BotonAtacarEventHandler botonAtacarEventHandler = new BotonAtacarEventHandler(algoStar, this, vistaMapa);
         atacar.setOnAction(botonAtacarEventHandler);
 
-        HBox contenedorHorizontalBMovimiento = new HBox(atacar);
+        HBox contenedorHorizontalBMovimiento = new HBox(unidad, atacar);
 
         return contenedorHorizontalBMovimiento;
     }

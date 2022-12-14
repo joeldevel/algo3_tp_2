@@ -1,10 +1,9 @@
-package edu.fiuba.algo3.vistas.NoUsado;
+package edu.fiuba.algo3.vista.NoUsado;
 
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
-import edu.fiuba.algo3.vistas.eventos.CrearJugadorHandler;
-import edu.fiuba.algo3.vistas.eventos.IniciarPartidaHandler;
+import edu.fiuba.algo3.modelo.AlgoStar;
+import edu.fiuba.algo3.controlador.CrearJugadorHandler;
+import edu.fiuba.algo3.controlador.IniciarPartidaHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;

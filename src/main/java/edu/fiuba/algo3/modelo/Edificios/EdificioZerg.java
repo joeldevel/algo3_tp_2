@@ -28,4 +28,9 @@ public abstract class EdificioZerg extends Edificio {
     public void recibirAtaque(int unAtaque, Unidad unidadAtacante) {
     	this.vida.recibirDanioPor(unAtaque, unidadAtacante, this, this.jugador);
     }
+
+    @Override
+    public int obtenerEscudo() {
+        return 0;
+    }
 }

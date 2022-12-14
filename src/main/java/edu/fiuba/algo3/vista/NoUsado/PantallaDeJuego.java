@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.vistas.NoUsado;
+package edu.fiuba.algo3.vista.NoUsado;
 
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
+import edu.fiuba.algo3.modelo.AlgoStar;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;

@@ -18,13 +18,9 @@ import java.util.ArrayList;
 public class JugadorZerg extends Jugador {
 
     private static final String RAZA = "Zerg";
-    private static final int MAX_POBLACION = 200;
-    private static final int CANT_MINERAL_INICIAL = 200;
 
     public JugadorZerg(String unNombre, String unColor, Mapa unMapa) {
     	super(unNombre, unColor, unMapa);
-        this.recursos.guardar(0, CANT_MINERAL_INICIAL);
-        
     }
 
     // Constructor utilizado unicamente para pruebas debido a los recursos.
@@ -39,7 +35,7 @@ public class JugadorZerg extends Jugador {
 
     @Override
     public boolean compararRazas(String otraRaza) {
-        return (otraRaza.equals("Zerg"));
+        return (otraRaza.equals(RAZA));
     }
 
     public void construir(String entidad,Ubicacion unaUbicacion,Jugador jugadorProtoss,Mapa mapa) {
@@ -79,25 +75,4 @@ public class JugadorZerg extends Jugador {
             throw new UbicacionSinEdificioException();
         }
     }
-
-    // La poblacion debe ser siempre menor al valor maximo de poblacion.
-    @Override
-    public int calcularPoblacion() { //DECIDIR SI CAMBIAR A METODO CONCRETO EN PLAYER
-        int poblacion = 0;
-
-        for (Raza edificio : this.edificios) {
-            poblacion += edificio.obtenerPoblacion();
-        }
-
-        for (Unidad unidad : this.unidades) {
-            poblacion += unidad.obtenerPoblacion();
-        }
-
-        if (poblacion >= MAX_POBLACION) {
-            return MAX_POBLACION;
-        }
-
-        return poblacion;
-    }
-    
 }
