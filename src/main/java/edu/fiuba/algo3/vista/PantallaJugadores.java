@@ -1,8 +1,8 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
-import edu.fiuba.algo3.vistas.eventos.BotonComenzarEventHandler;
-import edu.fiuba.algo3.vistas.eventos.BotonValidarEventHandler;
+import edu.fiuba.algo3.controlador.BotonComenzarEventHandler;
+import edu.fiuba.algo3.controlador.BotonValidarEventHandler;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

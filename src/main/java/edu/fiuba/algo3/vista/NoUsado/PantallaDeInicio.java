@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas.NoUsado;
+package edu.fiuba.algo3.vista.NoUsado;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

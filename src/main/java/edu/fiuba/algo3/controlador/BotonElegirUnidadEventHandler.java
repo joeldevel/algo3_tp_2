@@ -1,9 +1,9 @@
-package edu.fiuba.algo3.vistas.eventos;
+package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.vistas.PantallaJuego;
+import edu.fiuba.algo3.vista.PantallaJuego;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
@@ -16,8 +16,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import static edu.fiuba.algo3.vistas.PantallaJuego.ALTURA;
-import static edu.fiuba.algo3.vistas.PantallaJuego.ANCHO;
+import static edu.fiuba.algo3.vista.PantallaJuego.ALTURA;
+import static edu.fiuba.algo3.vista.PantallaJuego.ANCHO;
 
 public class VistaMapa {
 

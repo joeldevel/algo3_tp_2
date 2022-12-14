@@ -1,7 +1,7 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.vistas.eventos.BotonComenzarEventHandler;
-import javafx.application.Platform;
+import edu.fiuba.algo3.controlador.BotonComenzarEventHandler;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,11 +14,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class PantallaFinal extends VBox { // 20:00
+public class PantallaBienvenidos extends VBox { // 20:00
 
     Stage stage;
 
-    public PantallaFinal(Stage stage) {
+    public PantallaBienvenidos(Stage stage, Scene proximaEscena) {
         super();
 
         this.stage = stage;
@@ -29,27 +29,28 @@ public class PantallaFinal extends VBox { // 20:00
 
         // Imagen de fondo
 
-        Image imagen = new Image("file:src/main/resources/images/background01.png", 1950, 1100, false, false);
+        Image imagen = new Image("file:src/main/resources/images/intro-min.png", 2000, 2000, true, false);
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
 
         // Etiqueta de bienvenida
 
         Label etiqueta = new Label();
-        etiqueta.setText("¡Felicitaciones ganaste el juego!");
+        etiqueta.setText("Bienvenidos al juego AlgoStar");
         etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         etiqueta.setTextFill(Color.web("#ffffff"));
 
-        // Boton para salir
+        // Boton para comenzar
 
-        Button botonSalir = new Button();
-        botonSalir.setText("Salir");
-        botonSalir.getStyleClass().add("btn");
+        Button botonComenzar = new Button();
+        botonComenzar.setText("Comenzar AlgoStar");
+        botonComenzar.getStyleClass().add("btn");
 
-        botonSalir.setOnAction(e -> Platform.exit());
+        BotonComenzarEventHandler botonComenzarEventHandler = new BotonComenzarEventHandler(stage, proximaEscena);
+        botonComenzar.setOnAction(botonComenzarEventHandler);
 
         // Sonido...
 
-        this.getChildren().addAll(etiqueta, botonSalir);
+        this.getChildren().addAll(etiqueta, botonComenzar);
     }
 }
