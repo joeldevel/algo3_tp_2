@@ -115,7 +115,7 @@ public class Unidad extends Raza {
 
 	public void moverse(Mapa unMapa) {
 		Ubicacion siguiente = this.direccion.obtenerSiguienteUbicacion(this.ubicacion);
-		if(unMapa.verificarQueUnidadPuedeMoverseAUbicacion(this,siguiente)) {
+		if(unMapa.verificarQueUnidadPuedeMoverseAUbicacion(this, siguiente)) {
 			System.out.println("Se puede mover");
 			this.ubicacion = siguiente;
 			System.out.println("Nueva ubicacion X: " + this.ubicacion.obtenerX());

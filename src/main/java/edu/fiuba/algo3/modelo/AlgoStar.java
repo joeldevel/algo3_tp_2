@@ -98,7 +98,7 @@ public class AlgoStar {
 
     public void avanzarTurno() {
 
-        if(this.turnos.transcurrido() > 3 && ((!this.jugadores.get(0).tieneEdificios()) || (!this.jugadores.get(1).tieneEdificios()))) {
+        if(this.turnos.transcurrido() > 10 && ((!this.jugadores.get(0).tieneEdificios()) || (!this.jugadores.get(1).tieneEdificios()))) {
             throw new AlgoStarFinalizadoException();
         }
 
