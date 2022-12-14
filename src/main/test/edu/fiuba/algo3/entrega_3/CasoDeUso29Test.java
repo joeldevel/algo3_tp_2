@@ -76,10 +76,11 @@ public class CasoDeUso29Test {
         // Act
         Recursos recursos = new Recursos(0, 2000);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
 
         // Act
         for (int i = 0; i < 40; i++) {
-            jugadorZerg.construir("AmoSupremo", new Ubicacion(i,0), jugadorZerg, mapa); //crearAmoSupremo(new Ubicacion(i,0));
+            jugadorZerg.construir("AmoSupremo", new Ubicacion(i,0), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(i,0));
         }
 
         // Assert

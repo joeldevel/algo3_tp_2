@@ -1,52 +1,191 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
-import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
-import edu.fiuba.algo3.modelo.Excepciones.SuministroSuperaElNumeroDePoblacionException;
-import edu.fiuba.algo3.modelo.Excepciones.UbicacionSinEdificioException;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Tiempo;
-import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
-
 import java.util.ArrayList;
 
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.CONSTRUCCION_AMO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo.SUMINISTRO_AMO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO_HIDRALISCO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.SUMINISTRO_MUTALISCO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.SUMINISTRO_ZANGANO;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
+import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
-public interface Jugador {
-    String obtenerNombre();
-    String obtenerColor();
-    String obtenerRaza();
-    boolean compararNombres(String otroNombre);
-    boolean compararColores(String otroColor);
-    boolean compararRazas(String otraRaza);
-    void guardar(int costoGas, int costoMineral);
-    void utilizar(int costoGas, int costoMineral);
-    int obtenerGas();
-    int obtenerMineral();
-    void eliminarEdificio(Edificio unEdificio);
-    void eliminarUnidad(Unidad unaUnidad);
-    public boolean tieneEdificioEnUbicacion(Ubicacion unaUbicacion);
-    public void agregarUnidad(Unidad unaUnidad);
-    public void agregarEdificio(Edificio unEdificio);
-    public boolean verificarEdificio(String nombreEdificio);
-    public void construir(String edificio,Ubicacion unaUbicacion,Jugador jugador,Mapa mapa);
-    public void avanzarTurno();
-    int calcularPoblacion();
-    ArrayList<Unidad> obtenerLarvas();
-    boolean haySuministroDisponible(int unSuministro);
-	Unidad obtenerUnidadEn(Ubicacion unaUbicacion);
+public abstract class Jugador {
+	
+	protected String nombre;
+	protected String color;
+	protected Recursos recursos;
+	protected Mapa mapa;
+	protected ArrayList<Edificio> edificios;
+	protected ArrayList<Unidad> unidades;
 
-    void moverUnidadEn(Ubicacion unaUbicacion);
-    void cambiarDireccionDeUnidadEn(Ubicacion unaUbicacion);
+    public Jugador(String unNombre, String unColor, Mapa unMapa) {
+    	this.nombre = unNombre;
+    	this.color = unColor;
+    	this.recursos = new Recursos();
+    	this.mapa = unMapa;
+    	this.edificios = new ArrayList<Edificio>();
+    	this.unidades = new ArrayList<Unidad>();
+    }
+    
+    public Jugador(String unNombre, String unColor, Recursos unosRecursos, Mapa unMapa) {
+    	this.nombre = unNombre;
+    	this.color = unColor;
+    	this.recursos = unosRecursos;
+    	this.mapa = unMapa;
+    	this.edificios = new ArrayList<Edificio>();
+    	this.unidades = new ArrayList<Unidad>();
+    }
+    
+    public String obtenerNombre() {
+        return (this.nombre);
+    }
+
+    public String obtenerColor() {
+        return (this.color);
+    }
+
+    public abstract String obtenerRaza();
+
+    public boolean compararNombres(String otroNombre) {
+        return (this.nombre.equals(otroNombre));
+    }
+
+    public boolean compararColores(String otroColor) {
+        return (this.color.equals(otroColor));
+    }
+
+    public abstract boolean compararRazas(String otraRaza);
+
+    public void guardar(int costoGas, int costoMineral) {
+        this.recursos.guardar(costoGas, costoMineral);
+    }
+
+    public void utilizar(int costoGas, int costoMineral) {
+        this.recursos.utilizar(costoGas, costoMineral);
+    }
+
+    public int obtenerGas() {
+        return this.recursos.obtenerGas();
+    }
+
+    public int obtenerMineral() {
+        return this.recursos.obtenerMineral();
+    }
+    
+    public abstract void construir(String entidad,Ubicacion unaUbicacion, Jugador jugador, Mapa mapa);
+    
+    public abstract int calcularPoblacion();
+    
+    public int calcularSuministro() {
+        int cupo = 0;
+
+        for (Unidad unidad : this.unidades) {
+            cupo += unidad.obtenerSuministro();
+        }
+
+        return cupo;
+    }
+    
+    public boolean haySuministroDisponible(int unSuministro) {
+        return (this.calcularSuministro() + unSuministro <= this.calcularPoblacion());
+    }
+    
+    public void avanzarTurno() {
+
+        for (Edificio edificio : this.edificios) {
+            edificio.avanzarTurno(); // Edificios: Criadero expande el moho, Extractor recolecta gas, Zangano recolecta mineral, se recuperan, pasa el tiempo de construccion.
+        }
+
+        for (Unidad unidad : this.unidades) {
+            unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
+        }
+
+        this.recursos.guardar(5, 5);
+    }
+    
+    public void eliminarEdificio(Edificio unEdificio) {
+        this.edificios.remove(unEdificio);
+        this.mapa.destruirEdificio(unEdificio);
+    }
+
+    public void eliminarUnidad(Unidad unaUnidad) {
+        this.unidades.remove(unaUnidad);
+        this.mapa.destruirUnidad(unaUnidad);
+    }
+    
+	public boolean tieneEdificioEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+	
+	public void agregarEdificio(Edificio unEdificio) {
+		this.edificios.add(unEdificio);
+	}
+	
+	public Recursos obtenerRecursos() {
+		return (this.recursos);
+	}
+	
+	public boolean verificarEdificio(String unEdificio) {
+		boolean verificado = false;
+		for(Edificio actual: this.edificios) {
+			if(actual.esUn(unEdificio)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+	
+	public void destruirEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
+		this.edificios.remove(edificio);
+	}
+	
+	public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = null;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				edificio = actual;
+			}
+		}
+		if(edificio == null) {
+			throw new SinEdificioBuscadoError();
+		}
+		return edificio;
+	}
+	
+	public void agregarUnidad(Unidad unaUnidad) {
+		this.unidades.add(unaUnidad);
+		//this.mapa.agregarUnidad(unaUnidad);
+	}
+	
+	public Unidad obtenerUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = null;
+		for(Unidad actual: this.unidades) {
+			if(actual.estaEn(unaUbicacion)) {
+				unidad = actual;
+			}
+		}
+		if(unidad == null) {
+			throw new SinUnidadBuscadaError();
+		}
+		return unidad;
+	}
+    
+    public void moverUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
+		unidad.moverse(this.mapa);
+	}
+	
+	public void cambiarDireccionDeUnidadEn(Ubicacion unaUbicacion) {
+		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
+		unidad.cambiarDireccion();
+	}
+	
 }
-

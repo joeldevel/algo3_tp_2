@@ -2,8 +2,6 @@ package edu.fiuba.algo3.vistas.eventos;
 
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
-import edu.fiuba.algo3.modelo.JUGADOR_COLOR;
-import edu.fiuba.algo3.modelo.JUGADOR_RAZA;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

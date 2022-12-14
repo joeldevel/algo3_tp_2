@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.AlgoStar;
 
 import edu.fiuba.algo3.modelo.Excepciones.RazaInexistenteException;
-import edu.fiuba.algo3.modelo.JUGADOR_COLOR;
-import edu.fiuba.algo3.modelo.JUGADOR_RAZA;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
