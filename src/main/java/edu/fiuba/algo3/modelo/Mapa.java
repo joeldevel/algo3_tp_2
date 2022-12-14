@@ -21,9 +21,6 @@ public class Mapa {
     private ArrayList<NodoMineral> nodosMinerales;
 	private ArrayList<Edificio> edificios;
 	private ArrayList<Unidad> unidades;
-
-    //private ArrayList<AreaTerrestre> areasTerrestres;
-
     private ArrayList<Ubicacion> areasEspaciales;
 
     public Mapa() {
@@ -302,7 +299,7 @@ public class Mapa {
 	}
 
 	public void destruirUnidad(Unidad unaUnidad) {
-		this.edificios.remove(unaUnidad);
+		this.unidades.remove(unaUnidad);
 	}
    
    public void avanzarTurno() {

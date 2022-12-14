@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
 import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoError;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 public class Escudo {
 

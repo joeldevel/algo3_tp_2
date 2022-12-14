@@ -4,9 +4,6 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConstruidoException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMineralException;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.SinMinero;
 
 public class NodoMineral implements Mineral {
 
