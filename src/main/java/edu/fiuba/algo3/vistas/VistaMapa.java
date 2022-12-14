@@ -1,14 +1,17 @@
 package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -40,8 +43,9 @@ public class VistaMapa {
 
         for(NodoMineral nodo: this.mapa.nodosMinerales()) {
             Ubicacion ubicacion = nodo.ubicacion();
-            this.canvas.getGraphicsContext2D().setFill(Color.BLUE);
-            this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
+
+            Image imagen = new Image("file:src/main/resources/images/nodo-mineral01.png", 50, 50, true, false);
+            this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2)); // Imagen, posicion x, posicion y
         }
 
         for(Volcan volcan: this.mapa.volcanes()) {
@@ -80,14 +84,29 @@ public class VistaMapa {
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
-                else if (edificio instanceof Acceso) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/espiral/espiral01.png", 50, 50, true, false);
+                else if (edificio instanceof NexoMineral) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
 
-                else {
-                    this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
-                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
+                else if (edificio instanceof Pilon) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if (edificio instanceof Asimilador) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if (edificio instanceof Acceso) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if (edificio instanceof PuertoEstelar) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/edificios/edificio-protoss01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
             }
         }
@@ -97,14 +116,53 @@ public class VistaMapa {
 
             if(unidad.tiempoRestante() == 0) {
                 if(unidad.obtenerTipo() instanceof AmoSupremo) {
-                    //Image imagen = new Image("file:src/main/resources/images/sprites/zerg/amo/amo-supremo.png", 50, 50, true, false);
-                    //this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-                    this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
-                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/amo/amo-supremo.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
-                else {
-                    this.canvas.getGraphicsContext2D().setFill(Color.ORANGE);
-                    this.canvas.getGraphicsContext2D().fillOval(ubicacion.obtenerX() - 5, ubicacion.obtenerY() - 5, 10, 10); // Posicion x, posicion y, ancho, altura
+
+                else if(unidad.obtenerTipo() instanceof Zangano) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/zangano/zangano01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Zerling) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/zerling/zerling01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Hidralisco) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/hidralisco/hidralisco01.png.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Mutalisco) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/mutalisco/mutalisco01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Guardian) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/guardian/guardian01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Devorador) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/devorador/devorador01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Zealot) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/zealot/zealot.png.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Dragon) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/dragon/dragon01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+                }
+
+                else if(unidad.obtenerTipo() instanceof Scout) {
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/scout/scout01.png", 50, 50, true, false);
+                    this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
                 }
             }
         }

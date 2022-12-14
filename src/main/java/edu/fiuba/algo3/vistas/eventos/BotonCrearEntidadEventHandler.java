@@ -9,17 +9,17 @@ import edu.fiuba.algo3.vistas.VistaMapa;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class BotonCrearEdificioEventHandler implements EventHandler<ActionEvent> {
+public class BotonCrearEntidadEventHandler implements EventHandler<ActionEvent> {
 
-    String edificio;
+    String entidad;
     AlgoStar juego;
     VistaMapa vistaMapa;
     PantallaJuego pantalla;
 
     // Si le pasamos la ubicacion por parametro es un problema ya que el boton se crea al correr App.
     // Para crear la ubicacion entonces le pedimos a la pantalla que nos devuelva sus coordenadas donde se clickeo.
-    public BotonCrearEdificioEventHandler(String unEdificio, AlgoStar unJuego, VistaMapa unaVista, PantallaJuego unaPantalla) {
-        this.edificio = unEdificio;
+    public BotonCrearEntidadEventHandler(String unaEntidad, AlgoStar unJuego, VistaMapa unaVista, PantallaJuego unaPantalla) {
+        this.entidad = unaEntidad;
         this.juego = unJuego;
         this.vistaMapa = unaVista;
         this.pantalla = unaPantalla;
@@ -33,7 +33,7 @@ public class BotonCrearEdificioEventHandler implements EventHandler<ActionEvent>
         Mapa mapa = this.juego.obtenerMapa();
 
         // Creamos el edificio
-        jugadorTurno.construir(this.edificio, new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()), jugadorContrario, mapa);
+        jugadorTurno.construir(this.entidad, new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()), jugadorContrario, mapa);
         // Actualizamos el mapa y la informacion en la pantalla
         this.vistaMapa.update();
         this.pantalla.setInformacion(this.juego);

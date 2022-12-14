@@ -40,7 +40,7 @@ public class PantallaMapa {
             }
         }
 
-        this.camel = new ImageView("file:src/main/resources/images/camel-metal-slug.png");
+        this.camel = new ImageView("file:src/main/resources/images/.png");
 
         this.root = new StackPane();
         root.setBorder(Border.EMPTY);
