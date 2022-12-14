@@ -13,6 +13,9 @@ import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 
 public class Pilon extends EdificioProtoss {
 
+	public final int ALTO_RADIO = 21;
+	public final int ANCHO_RADIO = 25;
+
 	private final int POBLACION = 5;
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 0;
@@ -24,6 +27,7 @@ public class Pilon extends EdificioProtoss {
 
     public Pilon(Ubicacion unaUbicacion, Jugador unJugador) {
     	super(new Tiempo(-5), new Vida(300), new Escudo(300), unaUbicacion, unJugador,"Pilon");
+		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 

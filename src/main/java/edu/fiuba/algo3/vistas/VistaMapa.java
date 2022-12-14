@@ -46,9 +46,6 @@ public class VistaMapa {
 
             Image imagen = new Image("file:src/main/resources/images/nodo-mineral01.png", 50, 50, true, false);
             this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2)); // Imagen, posicion x, posicion y
-
-            System.out.println("Nodo mineral ancho: " + imagen.getWidth());
-            System.out.println("Nodo mineral alto: " + imagen.getHeight());
         }
 
         for(Volcan volcan: this.mapa.volcanes()) {
@@ -70,58 +67,61 @@ public class VistaMapa {
                 else if (edificio instanceof ReservaDeReproduccion) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/reserva/reserva01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Reserva ancho: " + imagen.getWidth());
-                    System.out.println("Reserva alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Extractor) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/extractor/extractor01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Extractor ancho: " + imagen.getWidth());
-                    System.out.println("Extractor alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Guarida) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/guarida/guarida01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Guarida ancho: " + imagen.getWidth());
-                    System.out.println("Guarida alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Espiral) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/buildings/espiral/espiral01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Espiral ancho: " + imagen.getWidth());
-                    System.out.println("Espiral alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof NexoMineral) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Nexo ancho: " + imagen.getWidth());
+                    System.out.println("Nexo alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Pilon) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Pilon ancho: " + imagen.getWidth());
+                    System.out.println("Pilon alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Asimilador) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Asimilador ancho: " + imagen.getWidth());
+                    System.out.println("Asimilador alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Acceso) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Acceso ancho: " + imagen.getWidth());
+                    System.out.println("Acceso alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof PuertoEstelar) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Puerto ancho: " + imagen.getWidth());
+                    System.out.println("Puerto alto: " + imagen.getHeight());
                 }
             }
         }
