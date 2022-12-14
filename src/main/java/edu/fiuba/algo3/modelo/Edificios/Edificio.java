@@ -45,10 +45,6 @@ public abstract class Edificio extends Raza implements Recuperable{
     	return (this.vida.restante());
     }
     
-    public Superficie obtenerSuperficie(){
-   		return (this.superficie);
-   	}
-    
     public int distanciaCon(Edificio otroEdificio) {
     	return (this.ubicacion.distanciaCon(otroEdificio.ubicacion()));
     }

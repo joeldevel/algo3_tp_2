@@ -56,10 +56,6 @@ public void crearZerling() {
 		 
 	}
 	
-	public int contarLarvas() {
-		return (this.larvas.size());
-	}
-	
 	public void recibirLarvas(ArrayList<Unidad> unasLarvas) {
 		this.larvas.addAll(unasLarvas);
 	}

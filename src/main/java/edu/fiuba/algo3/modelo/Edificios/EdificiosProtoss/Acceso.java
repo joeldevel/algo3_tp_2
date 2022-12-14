@@ -26,13 +26,9 @@ public class Acceso extends EdificioProtoss {
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 0;
 	
-	private ArrayList<Unidad> zealots;
-	private ArrayList<Unidad> dragones;
 	
     public Acceso(Ubicacion unaUbicacion, Jugador unJugador) {
 		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador,"Acceso");
-		this.zealots = new ArrayList<Unidad>();
-		this.dragones = new ArrayList<Unidad>();
 		
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 	}
@@ -49,10 +45,7 @@ public class Acceso extends EdificioProtoss {
 
 	@Override
 	public void ejecutaOperable() {
-		/*if(this.estaEnergizado()) {
-			this.pasarDragonesProductivos();
-			this.pasarZealotsProductivos();
-		}*/
+		
 	}
 	
 	public Unidad transportarZealots() {
@@ -64,9 +57,6 @@ public class Acceso extends EdificioProtoss {
 		}
 		Unidad zealot = new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador));
 		return zealot;
-		/*while(this.zealots.size() < 5) {
-			this.zealots.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador)));
-		}*/
 	}
 	
 	public Unidad transportarDragones() {
@@ -78,33 +68,8 @@ public class Acceso extends EdificioProtoss {
 		}
 		Unidad dragon = new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador));
 		return dragon;
-		/*while(this.dragones.size() < 5) {
-			this.dragones.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador)));
-		}*/
 	}
-	
-	private void pasarZealotsProductivos(){
-    	ArrayList<Unidad> borrar = new ArrayList<>();
-
-		for(Unidad actual: this.zealots) {
-			this.jugador.agregarUnidad(actual);
-			borrar.add(actual);
-		}
-
-		this.zealots.removeAll(borrar);
-	}
-	
-	private void pasarDragonesProductivos() {
-		ArrayList<Unidad> borrar = new ArrayList<>();
-
-		for(Unidad actual: this.dragones) {
-			this.jugador.agregarUnidad(actual);
-			borrar.add(actual);
-		}
-
-		this.zealots.removeAll(borrar);
-	}
-	
+		
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
 		return this.superficie.compararTipos(otraSuperficie);
