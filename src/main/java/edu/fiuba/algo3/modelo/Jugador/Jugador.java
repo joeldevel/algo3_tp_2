@@ -41,6 +41,10 @@ public abstract class Jugador {
     	this.edificios = new ArrayList<Edificio>();
     	this.unidades = new ArrayList<Unidad>();
     }
+
+    public boolean tieneEdificios() {
+    	return (this.edificios.size() > 0);
+	}
     
     public String obtenerNombre() {
         return (this.nombre);

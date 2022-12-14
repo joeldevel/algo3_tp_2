@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.vistas.eventos;
 
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
+import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -9,8 +9,6 @@ import edu.fiuba.algo3.vistas.PantallaJuego;
 import edu.fiuba.algo3.vistas.VistaMapa;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.TextField;
 
 public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
 

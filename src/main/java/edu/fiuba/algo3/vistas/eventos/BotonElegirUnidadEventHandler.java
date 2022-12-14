@@ -1,14 +1,11 @@
 package edu.fiuba.algo3.vistas.eventos;
 
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
+import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.vistas.PantallaJuego;
-import edu.fiuba.algo3.vistas.VistaMapa;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.canvas.Canvas;
 
 public class BotonElegirUnidadEventHandler implements EventHandler<ActionEvent> {
 

@@ -1,30 +1,25 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
+import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Excepciones.AlgoStarFinalizadoException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
-import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.vistas.eventos.*;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-import java.net.ServerSocket;
 
 public class PantallaJuego extends BorderPane { // 24:47
 
@@ -37,10 +32,15 @@ public class PantallaJuego extends BorderPane { // 24:47
     private int unidadCoordenadaX;
     private int unidadCoordenadaY;
 
+    Stage stage;
+    Scene proximaExcena;
     VistaMapa vistaMapa;
     Canvas canvasCentral;
 
-    public PantallaJuego(Stage stage, AlgoStar algoStar) {
+    public PantallaJuego(Stage stage, Scene proximaEscena, AlgoStar algoStar) {
+        this.stage = stage;
+        this.proximaExcena = proximaEscena;
+
         this.setFondo();
         this.setCentro(algoStar);
         this.setArriba(algoStar);
@@ -133,10 +133,19 @@ public class PantallaJuego extends BorderPane { // 24:47
         botonAvanzarTurno.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                algoStar.avanzarTurno();
-                setInformacion(algoStar);
-                setBotonera(algoStar);
-                vistaMapa.update();
+
+                try {
+
+                    algoStar.avanzarTurno();
+                    setInformacion(algoStar);
+                    setBotonera(algoStar);
+                    vistaMapa.update();
+
+                } catch (AlgoStarFinalizadoException e) {
+                    stage.setScene(proximaExcena);
+                    stage.setFullScreenExitHint("");
+                    stage.setFullScreen(true);
+                }
             }
         });
 

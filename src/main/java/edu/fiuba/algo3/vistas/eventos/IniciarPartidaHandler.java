@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vistas.eventos;
 
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

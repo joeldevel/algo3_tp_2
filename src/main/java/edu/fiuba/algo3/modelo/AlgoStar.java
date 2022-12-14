@@ -1,10 +1,10 @@
-package edu.fiuba.algo3.modelo.AlgoStar;
+package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Excepciones.AlgoStarFinalizadoException;
 import edu.fiuba.algo3.modelo.Excepciones.RazaInexistenteException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
-import edu.fiuba.algo3.modelo.Mapa;
 
 import java.util.ArrayList;
 
@@ -12,39 +12,49 @@ public class AlgoStar {
 
     public static final int JUGADOR_MIN_NOMBRE = 6;
 
-    private AlgoStarEstado estado;
     public ArrayList<Jugador> jugadores;
     public Mapa mapa;
+    private Tiempo turnos;
+    private Jugador jugadorTurno;
 
     public AlgoStar() {
         this.jugadores = new ArrayList<Jugador>();
         this.mapa = new Mapa();
-        this.setComportamientoEstado(new AlgoStarNoIniciado(mapa));
+        this.turnos = new Tiempo(0);
+        this.jugadorTurno = null;
+    }
+
+    public void setJugador(Jugador unJugador) {
+        this.jugadorTurno = unJugador;
+    }
+
+    // Getter para obtener de quien es el turno y poder elegir acciones.
+    public Jugador obtenerJugadorTurno() {
+        return (this.jugadorTurno);
     }
 
     public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
-        return this.estado.obtenerJugadorContrario(jugadorTurno);
+        if (this.jugadores.get(0).compararRazas(this.jugadorTurno.obtenerRaza())) {
+            return this.jugadores.get(1);
+        } else {
+            return this.jugadores.get(0);
+        }
     }
 
     public Mapa obtenerMapa() {
-        return this.estado.obtenerMapa();
-    }
-
-    public Jugador obtenerJugadorTurno() {
-        return (this.estado.obtenerJugadorTurno());
+        return this.mapa;
     }
 
     public void crearJugador(String unNombre, String unColor, String unaRaza) {
 
         if(unaRaza.equals("Zerg")) {
             this.jugadores.add(new JugadorZerg(unNombre, unColor, this.mapa));
+            this.jugadorTurno = this.jugadores.get(0);
         }
 
         else if(unaRaza.equals("Protoss")) {
             this.jugadores.add(new JugadorProtoss(unNombre, unColor, this.mapa));
         }
-
-        this.setComportamientoEstado(new AlgoStarIniciado(this.jugadores, this.mapa));
     }
 
     public boolean validarNombre(String unNombre) {
@@ -87,14 +97,22 @@ public class AlgoStar {
     }
 
     public void avanzarTurno() {
-        this.estado.avanzarTurno();
-    }
 
-    public void setComportamientoEstado(AlgoStarEstado nuevoEstado) {
-        this.estado = nuevoEstado;
-    }
+        if(this.turnos.transcurrido() > 3 && ((!this.jugadores.get(0).tieneEdificios()) || (!this.jugadores.get(1).tieneEdificios()))) {
+            throw new AlgoStarFinalizadoException();
+        }
 
-    public void finalizarAlgoStar() {
-        this.setComportamientoEstado(new AlgoStarFinalizado());
+        if (this.jugadores.get(0) == jugadorTurno) {
+            this.setJugador(jugadores.get(1));
+        } else {
+            this.setJugador(jugadores.get(0));
+        }
+
+        for(Jugador actual: this.jugadores) {
+            actual.avanzarTurno();
+        }
+
+        this.mapa.avanzarTurno();
+        this.turnos.pasarTiempo();
     }
 }
