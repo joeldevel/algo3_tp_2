@@ -54,11 +54,7 @@ public class Guarida extends EdificioZerg {
 			this.jugador.agregarUnidad(unaUnidad);
 		}
 	}
-	
-	public int contarLarvas() {
-		return (this.larvas.size());
-	}
-    	
+		
 	public void recibirLarvas(ArrayList<Unidad> unasLarvas) {
 		this.larvas.addAll(unasLarvas);
 	}

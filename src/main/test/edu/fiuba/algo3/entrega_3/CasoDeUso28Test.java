@@ -262,6 +262,7 @@ public class CasoDeUso28Test {
         // Arrange
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
         AmoSupremo amoSupremo = new AmoSupremo(new Ubicacion(0,0), jugadorZerg);
+        Unidad amoSupremo1 = new Unidad(new Tiempo(CONSTRUCCION_AMO),new Ubicacion(0,0),amoSupremo);
         Zerling zerling = new Zerling(new Ubicacion(0,0), jugadorZerg); // Ataque de tierra
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", new Recursos(1000,1000));
         Zealot zealot = new Zealot(new Ubicacion(0,0), jugadorProtoss); // Unidad de tierra

@@ -21,14 +21,11 @@ public class PuertoEstelar extends EdificioProtoss {
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 150;
 	
-	private ArrayList<Unidad> scouts;
-	
     public PuertoEstelar(Ubicacion unaUbicacion, Jugador unJugador){
         super(new Tiempo(-10), new Vida(600), new Escudo(600), unaUbicacion, unJugador,"PuertoEstelar");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
-        this.scouts = new ArrayList<Unidad>();
     }
 
     @Override
@@ -43,9 +40,6 @@ public class PuertoEstelar extends EdificioProtoss {
     
     @Override
     public void ejecutaOperable() {
-    	/*if(this.estaEnergizado()) {
-    		this.pasarScoutsProductivos();
-    	}*/
     }
     
     public Unidad transportarScout() {
@@ -57,22 +51,8 @@ public class PuertoEstelar extends EdificioProtoss {
 		}
     	Unidad scout = new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador));
     	return scout;
-    	/*while(this.scouts.size() < 5) {
-    		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador)));
-    	}*/
     }
 	
-    private void pasarScoutsProductivos(){
-        ArrayList<Unidad> borrar = new ArrayList<>();
-
-		for(Unidad actual: this.scouts) {
-		    this.jugador.agregarUnidad(actual);
-		    borrar.add(actual);
-		}
-
-        this.scouts.removeAll(borrar);
-	}
-
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {
         return this.superficie.compararTipos(unTipoDeSuperficie);

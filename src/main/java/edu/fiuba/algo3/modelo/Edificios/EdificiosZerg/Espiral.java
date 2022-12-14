@@ -41,7 +41,7 @@ public class Espiral extends EdificioZerg {
 
 	@Override
 	public void ejecutaOperable() {
-		this.crearMutalisco();
+		
 	}
 	
 	public void crearMutalisco() {
@@ -54,10 +54,6 @@ public class Espiral extends EdificioZerg {
 			larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
 		}
-	}
-	
-	public int contarLarvas() {
-		return (this.larvas.size());
 	}
 	
 	public void recibirLarvas(ArrayList<Unidad> unasLarvas) {
