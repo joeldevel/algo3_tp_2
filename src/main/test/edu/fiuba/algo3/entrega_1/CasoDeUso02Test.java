@@ -201,7 +201,7 @@ class CasoDeUso02Test {
 
 		/* se le dice al pilon que energice a los edificios cercanos pero como no esta operativo no funciona */
 		Pilon pilon = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion1);
-		Acceso acceso = (Acceso)jugadorProtoss.obtenerAccesoEn(ubicacion2);
+		Acceso acceso = (Acceso)jugadorProtoss.obtenerEdificioEn(ubicacion2);
 		
 		pilon.energizarEdificios();
 		
@@ -226,7 +226,7 @@ class CasoDeUso02Test {
 
 		/* luego de cinco turnos se le dice a pilon que energice los edificios cercanos */
 		Pilon pilon = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion1);
-		Acceso acceso = (Acceso)jugadorProtoss.obtenerAccesoEn(ubicacion2);
+		Acceso acceso = (Acceso)jugadorProtoss.obtenerEdificioEn(ubicacion2);
 		
 		/* se avanzan 8 turnos para el acceso para que no lance error de no estar operativo*/
 		acceso.avanzarTurno(8);
@@ -249,7 +249,7 @@ class CasoDeUso02Test {
 
 		/* luego de cuatro turnos se le dice a pilon que energice los edificios cercanos y no funciona */
 		Pilon pilon = (Pilon)jugadorProtoss.obtenerEdificioEn(ubicacion1);
-		Acceso acceso = (Acceso)jugadorProtoss.obtenerAccesoEn(ubicacion2);
+		Acceso acceso = (Acceso)jugadorProtoss.obtenerEdificioEn(ubicacion2);
 		
 		/* se avanzan 8 turnos para el acceso para que no lance error de no estar operativo*/
 		acceso.avanzarTurno(8);
