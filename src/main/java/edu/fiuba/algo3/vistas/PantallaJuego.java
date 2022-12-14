@@ -48,6 +48,8 @@ public class PantallaJuego extends BorderPane { // 24:47
             this.coordenadaY = (int) e.getY();
             System.out.println("y: " + e.getY() + "\n");
 
+            System.out.println(algoStar.obtenerMapa().verificarAreaEspacial(new Ubicacion(coordenadaX, coordenadaY)));
+
             this.setDerecha(algoStar);
         });
     }
@@ -84,8 +86,8 @@ public class PantallaJuego extends BorderPane { // 24:47
 
         VBox contenedorVerticalEntidad = new VBox(vida, escudo);
         contenedorVerticalEntidad.setSpacing(10);
-        contenedorVerticalEntidad.setTranslateX(-25);
-        contenedorVerticalEntidad.setTranslateY(30);
+        contenedorVerticalEntidad.setTranslateX(-225);
+        contenedorVerticalEntidad.setTranslateY(80);
 
         if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
             Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
@@ -98,7 +100,7 @@ public class PantallaJuego extends BorderPane { // 24:47
             Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
 
             vida.setText("Vida: " + edificio.obtenerVida());
-            escudo.setText("Escudo: ");
+            escudo.setText("Escudo: " + edificio.obtenerEscudo());
         }
 
         this.setRight(contenedorVerticalEntidad);

@@ -37,7 +37,7 @@ public class Fabrica {
 
 			/* EDIFICIOS ZERG */
 			
-			if((entidad == "Criadero") && !(unMapa.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) {
+			if((entidad == "Criadero") && (!(unMapa.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) && (!(unMapa.verificarAreaEspacial(unaUbicacion))))) {
 				
 				Criadero criadero = new Criadero(unaUbicacion,jugadorZerg);
 				jugadorZerg.agregarEdificio(criadero);
@@ -81,7 +81,7 @@ public class Fabrica {
 				jugadorProtoss.agregarEdificio(nexo);
 				unMapa.agregarEdificio(nexo);
 			}
-			if((entidad == "Pilon") && (!(unMapa.verificarUbicacionAfectadaPorMoho(unaUbicacion)))) {
+			if((entidad == "Pilon") && (!(unMapa.verificarUbicacionAfectadaPorMoho(unaUbicacion))) && (!(unMapa.verificarAreaEspacial(unaUbicacion)))) {
 				
 				Pilon pilon = new Pilon(unaUbicacion,jugadorProtoss);
 				jugadorProtoss.agregarEdificio(pilon);

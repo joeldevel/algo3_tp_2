@@ -33,6 +33,7 @@ public abstract class EdificioProtoss extends Edificio {
     	this.escudo.recuperarse();
     }
 
+    @Override
     public int obtenerEscudo() {
         return (this.escudo.restante());
     }

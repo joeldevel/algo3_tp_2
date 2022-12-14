@@ -32,6 +32,8 @@ public abstract class Edificio extends Raza implements Recuperable{
 	public abstract void ejecutaOperable();
 	
 	public abstract void avanzarTurno();
+
+	public abstract int obtenerEscudo();
     
     @Override
     public abstract void recuperarse();

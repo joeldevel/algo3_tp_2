@@ -133,33 +133,21 @@ public class VistaMapa {
                 else if(unidad.obtenerTipo() instanceof Hidralisco) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/hidralisco/hidralisco01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Hidralisco ancho: " + imagen.getWidth());
-                    System.out.println("Hidralisco alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Mutalisco) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/mutalisco/mutalisco01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Mutalisco ancho: " + imagen.getWidth());
-                    System.out.println("Mutalisco alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Guardian) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/guardian/guardian01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Guardian ancho: " + imagen.getWidth());
-                    System.out.println("Guardian alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Devorador) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/devorador/devorador01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Devorador ancho: " + imagen.getWidth());
-                    System.out.println("Devorador alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Zealot) {
