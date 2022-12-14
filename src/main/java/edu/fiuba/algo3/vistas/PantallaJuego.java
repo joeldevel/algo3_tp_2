@@ -7,10 +7,7 @@ import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.vistas.eventos.BotonAtacarEventHandler;
-import edu.fiuba.algo3.vistas.eventos.BotonCrearEntidadEventHandler;
-import edu.fiuba.algo3.vistas.eventos.BotonDireccionEventHandler;
-import edu.fiuba.algo3.vistas.eventos.BotonMoverEventHandler;
+import edu.fiuba.algo3.vistas.eventos.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -35,6 +34,9 @@ public class PantallaJuego extends BorderPane { // 24:47
     private int coordenadaX;
     private int coordenadaY;
 
+    private int unidadCoordenadaX;
+    private int unidadCoordenadaY;
+
     VistaMapa vistaMapa;
     Canvas canvasCentral;
 
@@ -44,15 +46,20 @@ public class PantallaJuego extends BorderPane { // 24:47
         this.setArriba(algoStar);
 
         this.canvasCentral.setOnMouseClicked(e -> {
+
             this.coordenadaX = (int) e.getX();
             System.out.println("x: " + e.getX());
             this.coordenadaY = (int) e.getY();
             System.out.println("y: " + e.getY() + "\n");
 
-            System.out.println(algoStar.obtenerMapa().verificarAreaEspacial(new Ubicacion(coordenadaX, coordenadaY)));
-
             this.setDerecha(algoStar);
+
         });
+    }
+
+    public void setUnidadCoordenadas(int x, int y) {
+        this.unidadCoordenadaX = x;
+        this.unidadCoordenadaY = y;
     }
 
     public int getCoordenadaX() {
@@ -63,9 +70,12 @@ public class PantallaJuego extends BorderPane { // 24:47
         return this.coordenadaY;
     }
 
-    public void setCoordenadas(int nuevaCoordenadaX, int nuevaCoordenadaY) {
-        this.coordenadaX = nuevaCoordenadaX;
-        this.coordenadaY = nuevaCoordenadaY;
+    public int getUnidadCoordenadaX() {
+        return this.unidadCoordenadaX;
+    }
+
+    public int getUnidadCoordenadaY() {
+        return this.unidadCoordenadaY;
     }
 
     public void setFondo() {
@@ -206,13 +216,13 @@ public class PantallaJuego extends BorderPane { // 24:47
         if (jugadorActual.obtenerRaza().equals("Zerg")) {
             HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosZerg(algoStar), this.setBotoneraUnidadesZerg(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
-            contenedorHorizontalBotonera.setTranslateX(260);
+            contenedorHorizontalBotonera.setTranslateX(50);
             contenedorHorizontalBotonera.setTranslateY(-50);
             this.setBottom(contenedorHorizontalBotonera);
         } else {
             HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosProtoss(algoStar), this.setBotoneraUnidadesProtoss(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
-            contenedorHorizontalBotonera.setTranslateX(260);
+            contenedorHorizontalBotonera.setTranslateX(50);
             contenedorHorizontalBotonera.setTranslateY(-50);
             this.setBottom(contenedorHorizontalBotonera);
         }
@@ -451,17 +461,23 @@ public class PantallaJuego extends BorderPane { // 24:47
 
     // Se crea la botonera de movimiento
     public HBox setBotoneraAtaque(AlgoStar algoStar) {
-        Mapa mapa = algoStar.obtenerMapa();
+        // Boton elegir unidad
 
-        // Boton de ataque
+        Button unidad = new Button();
+        unidad.setText("Elegir unidad");
+
+        BotonElegirUnidadEventHandler botonElegirUnidadEventHandler = new BotonElegirUnidadEventHandler(algoStar, this);
+        unidad.setOnAction(botonElegirUnidadEventHandler);
+
+        // Boton atacar
 
         Button atacar = new Button();
         atacar.setText("Atacar");
 
-        BotonAtacarEventHandler botonAtacarEventHandler = new BotonAtacarEventHandler(this.canvasCentral, mapa, this, vistaMapa);
+        BotonAtacarEventHandler botonAtacarEventHandler = new BotonAtacarEventHandler(algoStar, this, vistaMapa);
         atacar.setOnAction(botonAtacarEventHandler);
 
-        HBox contenedorHorizontalBMovimiento = new HBox(atacar);
+        HBox contenedorHorizontalBMovimiento = new HBox(unidad, atacar);
 
         return contenedorHorizontalBMovimiento;
     }

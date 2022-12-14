@@ -62,13 +62,13 @@ public class Mapa {
 
     public void crearBases() {
     	// Primer base creada manualmente
-    	this.agregarVolcan(new Ubicacion(35,23)); // radio de 25 en x / radio de 13 en y
+    	this.agregarVolcan(new Ubicacion(35,23));
     	this.agregarNodoMineral(new Ubicacion(80,23));
     	this.agregarNodoMineral(new Ubicacion(35,57));
     	this.agregarNodoMineral(new Ubicacion(80,57));
 
 		// Segunda base creada manualmente
-		this.agregarVolcan(new Ubicacion(965,477)); // radio de 25 en x / radio de 13 en y
+		this.agregarVolcan(new Ubicacion(965,477));
 		this.agregarNodoMineral(new Ubicacion(965,444));
 		this.agregarNodoMineral(new Ubicacion(920,477));
 		this.agregarNodoMineral(new Ubicacion(920,444));
