@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 public class NexoMineral extends EdificioProtoss implements Minero {
 
-    public final int ALTO_RADIO = 21;
-    public final int ANCHO_RADIO = 25;
-
     private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 50;
 	private final int COSTO_GAS = 0;
@@ -25,7 +22,6 @@ public class NexoMineral extends EdificioProtoss implements Minero {
 	
     public NexoMineral(NodoMineral unNodo, Ubicacion unaubicacion, Jugador unJugador) {
         super(new Tiempo(-4), new Vida(250), new Escudo(250), unaubicacion, unJugador,"NexoMineral");
-        this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

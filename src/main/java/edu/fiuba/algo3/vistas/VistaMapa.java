@@ -87,41 +87,26 @@ public class VistaMapa {
                 else if (edificio instanceof NexoMineral) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Nexo ancho: " + imagen.getWidth());
-                    System.out.println("Nexo alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Pilon) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Pilon ancho: " + imagen.getWidth());
-                    System.out.println("Pilon alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Asimilador) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Asimilador ancho: " + imagen.getWidth());
-                    System.out.println("Asimilador alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof Acceso) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Acceso ancho: " + imagen.getWidth());
-                    System.out.println("Acceso alto: " + imagen.getHeight());
                 }
 
                 else if (edificio instanceof PuertoEstelar) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/protoss/edificios/edificio-protoss01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
-
-                    System.out.println("Puerto ancho: " + imagen.getWidth());
-                    System.out.println("Puerto alto: " + imagen.getHeight());
                 }
             }
         }
@@ -146,23 +131,35 @@ public class VistaMapa {
                 }
 
                 else if(unidad.obtenerTipo() instanceof Hidralisco) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/hidralisco/hidralisco01.png.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/hidralisco/hidralisco01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Hidralisco ancho: " + imagen.getWidth());
+                    System.out.println("Hidralisco alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Mutalisco) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/mutalisco/mutalisco01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Mutalisco ancho: " + imagen.getWidth());
+                    System.out.println("Mutalisco alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Guardian) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/guardian/guardian01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Guardian ancho: " + imagen.getWidth());
+                    System.out.println("Guardian alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Devorador) {
                     Image imagen = new Image("file:src/main/resources/images/sprites/zerg/devorador/devorador01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, ubicacion.obtenerX() - (imagen.getWidth()/2), ubicacion.obtenerY() - (imagen.getHeight()/2));
+
+                    System.out.println("Devorador ancho: " + imagen.getWidth());
+                    System.out.println("Devorador alto: " + imagen.getHeight());
                 }
 
                 else if(unidad.obtenerTipo() instanceof Zealot) {

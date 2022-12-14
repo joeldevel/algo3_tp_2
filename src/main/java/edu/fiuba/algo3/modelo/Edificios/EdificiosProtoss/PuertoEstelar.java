@@ -16,9 +16,6 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZE
 
 public class PuertoEstelar extends EdificioProtoss {
 
-    public final int ALTO_RADIO = 21;
-    public final int ANCHO_RADIO = 25;
-
     private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 150;
@@ -27,7 +24,6 @@ public class PuertoEstelar extends EdificioProtoss {
 	
     public PuertoEstelar(Ubicacion unaUbicacion, Jugador unJugador){
         super(new Tiempo(-10), new Vida(600), new Escudo(600), unaUbicacion, unJugador,"PuertoEstelar");
-        this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

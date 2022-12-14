@@ -11,9 +11,6 @@ import java.util.ArrayList;
 
 public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 
-	public final int ALTO_RADIO = 21;
-	public final int ANCHO_RADIO = 25;
-
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 100;
 	private final int COSTO_GAS = 0;
@@ -23,8 +20,7 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
     
     public Asimilador(Volcan unVolcan, Ubicacion unaUbicacion, Jugador unJugador) {
     	super(new Tiempo(-6), new Vida(450), new Escudo(450), unaUbicacion, unJugador,"Asimilador");
-		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
-    	
+
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
     	this.cantidadExtraible = 20;

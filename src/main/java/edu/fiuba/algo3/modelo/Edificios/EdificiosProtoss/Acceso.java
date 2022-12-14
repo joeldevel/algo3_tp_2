@@ -21,9 +21,6 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZE
 
 public class Acceso extends EdificioProtoss {
 
-	public final int ALTO_RADIO = 21;
-	public final int ANCHO_RADIO = 25;
-
 	private final int POBLACION = 0;
 	private final int COSTO_MINERAL = 150;
 	private final int COSTO_GAS = 0;
@@ -33,7 +30,6 @@ public class Acceso extends EdificioProtoss {
 	
     public Acceso(Ubicacion unaUbicacion, Jugador unJugador) {
 		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador,"Acceso");
-		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
 		this.zealots = new ArrayList<Unidad>();
 		this.dragones = new ArrayList<Unidad>();
 		
