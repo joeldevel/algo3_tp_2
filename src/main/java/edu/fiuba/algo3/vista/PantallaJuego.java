@@ -30,6 +30,8 @@ public class PantallaJuego extends BorderPane {
 
     public static int TAMAÑO_CELDA = 50;
 
+    private int numeroTurno;
+
     private int coordenadaX;
     private int coordenadaY;
 
@@ -44,6 +46,7 @@ public class PantallaJuego extends BorderPane {
     public PantallaJuego(Stage stage, Scene proximaEscena, AlgoStar algoStar) {
         this.stage = stage;
         this.proximaExcena = proximaEscena;
+        this.numeroTurno = 1;
 
         this.setFondo();
         this.setCentro(algoStar);
@@ -81,6 +84,10 @@ public class PantallaJuego extends BorderPane {
 
     public int getUnidadCoordenadaY() {
         return this.unidadCoordenadaY;
+    }
+
+    public void aumentarTurno() {
+        this.numeroTurno++;
     }
 
     public void setFondo() {
@@ -136,6 +143,7 @@ public class PantallaJuego extends BorderPane {
     }
 
     public void setArriba(AlgoStar algoStar) {
+
         // Boton para avanzar turno
 
         Button botonAvanzarTurno = new Button();
@@ -171,12 +179,24 @@ public class PantallaJuego extends BorderPane {
             coordenadaY.setText("y: " + e.getY());
         });
 
+        // Contenedor
+
         HBox contenedorVertical = new HBox(contenedorAvanzarTurno, contenedorHorizontalCoordenadas);
         this.setTop(contenedorVertical);
     }
 
     // Se crea el menu donde estara la informacion del jugador: Nombre, Color, Raza, Recursos, Poblacion, Suministro.
     public void setInformacion(AlgoStar algoStar) {
+
+        // Etiqueta turnos
+
+        Label turnos = new Label();
+        turnos.setText("Turno " + this.numeroTurno);
+        turnos.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        turnos.setTextFill(Color.web("#ffffff"));
+        turnos.setTranslateX(850);
+        turnos.setTranslateY(-140);
+
         // Informacion del jugador
 
         Jugador jugadorActual = algoStar.obtenerJugadorTurno();
@@ -218,7 +238,7 @@ public class PantallaJuego extends BorderPane {
 
         // Contenedor de informacion
 
-        VBox contenedorVerticalInformacion = new VBox(nombre, color, raza, gas, mineral, poblacion, suministro);
+        VBox contenedorVerticalInformacion = new VBox(turnos, nombre, color, raza, gas, mineral, poblacion, suministro);
         contenedorVerticalInformacion.setSpacing(10);
         contenedorVerticalInformacion.setTranslateX(80);
         contenedorVerticalInformacion.setTranslateY(125);

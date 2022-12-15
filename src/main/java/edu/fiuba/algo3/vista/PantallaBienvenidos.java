@@ -40,6 +40,51 @@ public class PantallaBienvenidos extends VBox {
         etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         etiqueta.setTextFill(Color.web("#ffffff"));
 
+        // Etiqueta de materia
+
+        Label materia = new Label();
+        materia.setText("Algoritmos y Programacion III - FIUBA");
+        materia.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        materia.setTextFill(Color.web("#ffffff"));
+
+        // Etiqueta de tp
+
+        Label tp = new Label();
+        tp.setText("Trabajo practico N° 2 - Segundo cuatrimestre 2022");
+        tp.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        tp.setTextFill(Color.web("#ffffff"));
+
+        // Etiqueta de grupo
+
+        Label grupo = new Label();
+        grupo.setText("Grupo N° 8");
+        grupo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        grupo.setTextFill(Color.web("#ffffff"));
+
+        // Contenedor trabajo
+
+        VBox trabajo = new VBox(materia, tp, grupo);
+        trabajo.setTranslateY(-550);
+
+        // Etiqueta corrector
+
+        Label corrector = new Label();
+        corrector.setText("Corrector: Santiago Valdez");
+        corrector.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        corrector.setTextFill(Color.web("#ffffff"));
+
+        // Etiqueta integrantes
+
+        Label integrantes = new Label();
+        integrantes.setText("Integrantes: Alan Valdevenito, Brian Lahuta, Leonardo Duchen, Cristian Leith");
+        integrantes.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        integrantes.setTextFill(Color.web("#ffffff"));
+
+        // Contenedor nombres
+
+        VBox nombres = new VBox(corrector, integrantes);
+        nombres.setTranslateY(450);
+
         // Boton para comenzar
 
         Button botonComenzar = new Button();
@@ -51,6 +96,6 @@ public class PantallaBienvenidos extends VBox {
 
         // Sonido...
 
-        this.getChildren().addAll(etiqueta, botonComenzar);
+        this.getChildren().addAll(etiqueta, botonComenzar, nombres, trabajo);
     }
 }

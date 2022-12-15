@@ -24,8 +24,6 @@ public class CasoDeUso32Test {
         juego.avanzarTurno();
         juego.avanzarTurno();
         juego.avanzarTurno();
-        juego.avanzarTurno();
-        juego.avanzarTurno();
 
         assertThrows(AlgoStarFinalizadoException.class, () -> juego.avanzarTurno());
     }

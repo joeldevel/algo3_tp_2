@@ -32,6 +32,7 @@ public class BotonAvanzarTurnoEventHandler implements EventHandler<ActionEvent> 
 
         try {
             this.algoStar.avanzarTurno();
+            this.pantalla.aumentarTurno();
             this.pantalla.setInformacion(algoStar);
             this.pantalla.setBotonera(algoStar);
             this.vistaMapa.update();

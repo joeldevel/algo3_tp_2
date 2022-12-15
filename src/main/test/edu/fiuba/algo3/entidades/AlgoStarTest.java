@@ -59,13 +59,11 @@ public class AlgoStarTest {
     }
 
     @Test
-    public void test04SeIniciaAlgoStarYSeAvanzaElTurnoDiezVecesYElTurnoLoTieneElJugadorIndicado() {
+    public void test04SeIniciaAlgoStarYSeAvanzaElTurnoOchoVecesYElTurnoLoTieneElJugadorIndicado() {
         // Arrange
         AlgoStar juego = new AlgoStar();
         juego.crearJugador("JugadorZerg", "Azul", "Zerg");
         juego.crearJugador("JugadorProtoss", "Rojo", "Protoss");
-        juego.avanzarTurno();
-        juego.avanzarTurno();
         juego.avanzarTurno();
         juego.avanzarTurno();
         juego.avanzarTurno();
