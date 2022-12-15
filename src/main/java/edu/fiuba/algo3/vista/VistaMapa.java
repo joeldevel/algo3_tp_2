@@ -193,7 +193,7 @@ public class VistaMapa {
 
         // Areas espaciales
         Image imagen5 = new Image("file:src/main/resources/images/backgrounddetailed4.png", ANCHO/2, ALTURA/2, false, false);
-        this.canvas.getGraphicsContext2D().drawImage(imagen5, 250, 125);
+        this.canvas.getGraphicsContext2D().drawImage(imagen5, 400, 200, 600, 300);
     }
 
     public void update() {

@@ -80,8 +80,8 @@ public class Mapa {
     
     public void crearAreas() {
     	// Areas espaciales creadas manualmente
-    	for(int i = 250; i < 750; i++) {
-    		for(int j = 125; j < 375; j++) {
+    	for(int i = 8; i < 20; i++) {
+    		for(int j = 4; j < 10; j++) {
     			this.areasEspaciales.add(new Ubicacion(i,j));
     		}
     	}

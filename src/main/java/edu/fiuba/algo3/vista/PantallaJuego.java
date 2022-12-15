@@ -53,7 +53,7 @@ public class PantallaJuego extends BorderPane { // 24:47
             this.coordenadaY = (int) e.getY();
             System.out.println("y: " + e.getY() + "\n");
 
-            this.convertirCoordenada(this.coordenadaX);
+            System.out.println(algoStar.obtenerMapa().verificarAreaEspacial(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY))));
 
             this.setDerecha(algoStar);
 
