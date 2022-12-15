@@ -171,8 +171,8 @@ public class PantallaJuego extends BorderPane {
 
         HBox contenedorHorizontalCoordenadas = new HBox(coordenadaX, coordenadaY);
         contenedorHorizontalCoordenadas.setSpacing(10);
-        contenedorHorizontalCoordenadas.setTranslateX(100);
-        contenedorHorizontalCoordenadas.setTranslateY(50);
+        contenedorHorizontalCoordenadas.setTranslateX(780);
+        contenedorHorizontalCoordenadas.setTranslateY(20);
 
         this.canvasCentral.setOnMouseMoved(e -> {
             coordenadaX.setText("x: " + e.getX());
@@ -194,15 +194,17 @@ public class PantallaJuego extends BorderPane {
         turnos.setText("Turno " + this.numeroTurno);
         turnos.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         turnos.setTextFill(Color.web("#ffffff"));
-        turnos.setTranslateX(850);
-        turnos.setTranslateY(-140);
+
+        VBox contenedorVerticalTurnos = new VBox(turnos);
+        contenedorVerticalTurnos.setTranslateX(80);
+        contenedorVerticalTurnos.setTranslateY(125);
 
         // Informacion del jugador
 
         Jugador jugadorActual = algoStar.obtenerJugadorTurno();
 
         Label nombre = new Label();
-        nombre.setText("Turno: " + jugadorActual.obtenerNombre());
+        nombre.setText("Jugador: " + jugadorActual.obtenerNombre());
         nombre.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         nombre.setTextFill(Color.web("#ffffff"));
 
@@ -232,18 +234,23 @@ public class PantallaJuego extends BorderPane {
         poblacion.setTextFill(Color.web("#ffffff"));
 
         Label suministro = new Label();
-        suministro.setText("Poblacion: " + jugadorActual.calcularSuministro());
+        suministro.setText("Suministro: " + jugadorActual.calcularSuministro());
         suministro.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         suministro.setTextFill(Color.web("#ffffff"));
 
         // Contenedor de informacion
 
-        VBox contenedorVerticalInformacion = new VBox(turnos, nombre, color, raza, gas, mineral, poblacion, suministro);
+        VBox contenedorVerticalInformacion = new VBox(nombre, color, raza, gas, mineral, poblacion, suministro);
         contenedorVerticalInformacion.setSpacing(10);
         contenedorVerticalInformacion.setTranslateX(80);
         contenedorVerticalInformacion.setTranslateY(125);
 
-        this.setLeft(contenedorVerticalInformacion);
+        // Contenedor
+
+        VBox contenedorVertical = new VBox(contenedorVerticalTurnos, contenedorVerticalInformacion);
+        contenedorVertical.setSpacing(30);
+
+        this.setLeft(contenedorVertical);
     }
 
     public void setBotonera(AlgoStar algoStar) {
