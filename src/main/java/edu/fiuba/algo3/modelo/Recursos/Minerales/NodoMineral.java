@@ -17,6 +17,10 @@ public class NodoMineral implements Mineral {
         this.ubicacion = unaUbicacion;
     }
 
+    public int getCantidadDeMineralDisponible() {
+        return this.cantidadDeMineralDisponible;
+    }
+
     public void construirRecolectorDeMineral(Minero unMinero) {
     	if(this.minero.tieneMinero()) {
     		throw new NodoMineralYaTieneUnRecolectorDeMineralException();

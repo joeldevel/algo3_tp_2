@@ -17,6 +17,10 @@ public class Volcan {
         this.ubicacion = unaUbicacion;
     }
 
+    public int getCantidadDeGasVespenoDisponible() {
+        return this.cantidadDeGasVespenoDisponible;
+    }
+
     public void construirRefineriaDeGas(RefineriaDeGas unaRefineriaDeGas) {
     	
     	if(this.refineria.tieneRefineria()) {

@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import javafx.event.ActionEvent;
@@ -87,33 +89,46 @@ public class PantallaJuego extends BorderPane {
     }
 
     public void setDerecha(AlgoStar algoStar) {
-        // Informacion de unidades y edificios
+        // Informacion de unidades, edificios y recursos
 
-        Label vida = new Label();
-        vida.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        vida.setTextFill(Color.web("#ffffff"));
+        Label primerInformacion = new Label();
+        primerInformacion.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        primerInformacion.setTextFill(Color.web("#ffffff"));
 
-        Label escudo = new Label();
-        escudo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-        escudo.setTextFill(Color.web("#ffffff"));
+        Label segundaInformacion = new Label();
+        segundaInformacion.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        segundaInformacion.setTextFill(Color.web("#ffffff"));
 
-        VBox contenedorVerticalEntidad = new VBox(vida, escudo);
+        VBox contenedorVerticalEntidad = new VBox(primerInformacion, segundaInformacion);
         contenedorVerticalEntidad.setSpacing(10);
-        contenedorVerticalEntidad.setTranslateX(-225);
-        contenedorVerticalEntidad.setTranslateY(80);
+        contenedorVerticalEntidad.setTranslateX(-120);
+        contenedorVerticalEntidad.setTranslateY(125);
 
         if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
             Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
-            vida.setText("Vida: " + unidad.vidaRestante());
-            escudo.setText("Escudo: " + unidad.escudoRestante());
+            primerInformacion.setText("Vida: " + unidad.vidaRestante());
+            segundaInformacion.setText("Escudo: " + unidad.escudoRestante());
         }
 
         if(algoStar.obtenerMapa().verificarEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
             Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
-            vida.setText("Vida: " + edificio.obtenerVida());
-            escudo.setText("Escudo: " + edificio.obtenerEscudo());
+            primerInformacion.setText("Vida: " + edificio.obtenerVida());
+            segundaInformacion.setText("Escudo: " + edificio.obtenerEscudo());
+        }
+
+        if(algoStar.obtenerMapa().verificarVolcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            Volcan volcan = algoStar.obtenerMapa().volcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
+
+            primerInformacion.setText("Gas: " + volcan.getCantidadDeGasVespenoDisponible());
+        }
+
+        if(algoStar.obtenerMapa().verificarNodoMineralEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            NodoMineral nodo = algoStar.obtenerMapa().nodoEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
+
+            primerInformacion.setText("Mineral: " + nodo.getCantidadDeMineralDisponible());
+            primerInformacion.setTranslateX(20);
         }
 
         this.setRight(contenedorVerticalEntidad);
@@ -204,8 +219,8 @@ public class PantallaJuego extends BorderPane {
 
         VBox contenedorVerticalInformacion = new VBox(nombre, color, raza, gas, mineral, poblacion, suministro);
         contenedorVerticalInformacion.setSpacing(10);
-        contenedorVerticalInformacion.setTranslateX(50);
-        contenedorVerticalInformacion.setTranslateY(220);
+        contenedorVerticalInformacion.setTranslateX(80);
+        contenedorVerticalInformacion.setTranslateY(125);
 
         this.setLeft(contenedorVerticalInformacion);
     }
@@ -217,13 +232,13 @@ public class PantallaJuego extends BorderPane {
             HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosZerg(algoStar), this.setBotoneraUnidadesZerg(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
             contenedorHorizontalBotonera.setTranslateX(50);
-            contenedorHorizontalBotonera.setTranslateY(-50);
+            contenedorHorizontalBotonera.setTranslateY(-80);
             this.setBottom(contenedorHorizontalBotonera);
         } else {
             HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosProtoss(algoStar), this.setBotoneraUnidadesProtoss(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
             contenedorHorizontalBotonera.setTranslateX(50);
-            contenedorHorizontalBotonera.setTranslateY(-50);
+            contenedorHorizontalBotonera.setTranslateY(-80);
             this.setBottom(contenedorHorizontalBotonera);
         }
     }
