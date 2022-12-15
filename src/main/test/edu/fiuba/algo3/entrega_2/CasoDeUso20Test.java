@@ -9,6 +9,10 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
+import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
@@ -27,10 +31,10 @@ class CasoDeUso20Test {
 	@Test
 	void test01UnScoutSePuedeMoverPorAreasDeTierraYEspaciales() {
 		
-		/* en el mapa las areas espaciales estan entre 250 y 750 en X, y entre 125 y 375 en Y*/
-		Ubicacion ubicacion1 = new Ubicacion(246,250);
-		Ubicacion ubicacion2 = new Ubicacion(248,251);
-		Ubicacion ubicacion3 = new Ubicacion(248,249);
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		Ubicacion ubicacion2 = new Ubicacion(6,9);
+		Ubicacion ubicacion3 = new Ubicacion(6,8);
 		
 		/* construyo los edificios necesarios para crear el Scout*/
 		jugadorProtoss.construir("Pilon", ubicacion1, jugadorZerg, mapa);
@@ -56,22 +60,22 @@ class CasoDeUso20Test {
 		/* dejo al scout operativo*/
 		scout.avanzarTurno(9);
 		
-		/* se mueve una vez, esta en la posicion 249,249 que es de tierra*/
+		/* se mueve una vez, esta en la posicion 7,8 que es de tierra*/
 		scout.moverse(mapa);
-		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(249,249)));
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,8)));
 		
-		/* se mueve una segunda vez, esta en la posicion 250,249 que es de aire*/
+		/* se mueve una segunda vez, esta en la posicion 8,8 que es de aire*/
 		scout.moverse(mapa);
-		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(250,249)));
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,8)));
 	}
 	
 	@Test
-	void test02ZealotYDragonNoSePuedenEspaciales() {
+	void test02ZealotYDragonNoSePuedenMoverEnAreasEspaciales() {
 		
-		/* en el mapa las areas espaciales estan entre 250 y 750 en X, y entre 125 y 375 en Y*/
-		Ubicacion ubicacion1 = new Ubicacion(246,250);
-		Ubicacion ubicacion2 = new Ubicacion(248,251);
-		Ubicacion ubicacion3 = new Ubicacion(248,249);
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		Ubicacion ubicacion2 = new Ubicacion(6,9);
+		Ubicacion ubicacion3 = new Ubicacion(6,8);
 		
 		/* construyo los edificios necesarios para crear el Scout*/
 		jugadorProtoss.construir("Pilon", ubicacion1, jugadorZerg, mapa);
@@ -100,20 +104,282 @@ class CasoDeUso20Test {
 		zealot.avanzarTurno(4);
 		dragon.avanzarTurno(6);
 		
-		/* se mueven una vez, esta en la posicion 249,251 zealot, y 249,249 dragon, que es de tierra*/
+		/* se mueven una vez, esta en la posicion 7,9 zealot, y 7,8 dragon, que es de tierra*/
 		zealot.moverse(mapa);
 		dragon.moverse(mapa);
-		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(249,251)));
-		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(249,249)));
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,9)));
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,8)));
 		
-		/* se mueven una segunda vez, esta en la posicion 250,251 zealot, y 250,249 dragon, que es de aire*/
+		/* se mueven una segunda vez, esta en la posicion 8,9 zealot, y 8,8 dragon, que es de aire*/
 		zealot.moverse(mapa);
 		dragon.moverse(mapa);
 		assertThrows(SinUnidadBuscadaError.class, ()->{
-			mapa.obtenerUnidadEnUbicacion(new Ubicacion(250,251));
+			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,9));
 		});
 		assertThrows(SinUnidadBuscadaError.class, ()->{
-			mapa.obtenerUnidadEnUbicacion(new Ubicacion(250,249));
+			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,8));
+		});
+	}
+	
+	@Test
+	void test03UnAmoSupremoSePuedeMoverPorAreasDeTierraYAreasEspaciales() {
+		
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		
+		/* el amo supremo se puede construir sin edificios */
+		jugadorZerg.construir("AmoSupremo", ubicacion1, jugadorProtoss, mapa);
+		
+		Unidad amoSupremo = jugadorZerg.obtenerUnidadEn(ubicacion1);
+		
+		/* dejo al amo supremo operativo*/
+		amoSupremo.avanzarTurno(5);
+		
+		/* se mueve una vez, esta en la posicion 7,7 que es de tierra*/
+		amoSupremo.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,7)));
+		
+		/* se mueve una segunda vez, esta en la posicion 8,7, que es de aire */
+		amoSupremo.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,7)));
+	}
+	
+	@Test
+	void test04MutaliscoSePuedenMoverPorAreasDeTierraYAreasEspaciales() {
+		
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		Ubicacion ubicacion2 = new Ubicacion(6,9);
+		Ubicacion ubicacion3 = new Ubicacion(6,8);
+		Ubicacion ubicacion4 = new Ubicacion(6,6);
+		
+		/* creo los edificios que necesito para crear el mutalisco */
+		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
+		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
+		jugadorZerg.construir("Guarida", ubicacion3, jugadorProtoss, mapa);
+		jugadorZerg.construir("Espiral", ubicacion4, jugadorProtoss, mapa);
+		
+		Criadero criadero = (Criadero) jugadorZerg.obtenerEdificioEn(ubicacion1);
+		ReservaDeReproduccion reserva = (ReservaDeReproduccion)jugadorZerg.obtenerEdificioEn(ubicacion2);
+		Guarida guarida = (Guarida)jugadorZerg.obtenerEdificioEn(ubicacion3);
+		Espiral espiral = (Espiral)jugadorZerg.obtenerEdificioEn(ubicacion4);
+		
+		/* dejo los edificios operativos */
+		criadero.avanzarTurno(4);
+		reserva.avanzarTurno(12);
+		guarida.avanzarTurno(12);
+		espiral.avanzarTurno(10);
+		
+		jugadorZerg.construir("Mutalisco", ubicacion4, jugadorProtoss, mapa);
+		
+		Unidad mutalisco = jugadorZerg.obtenerUnidadEn(ubicacion4);
+		
+		/* dejo a las unidades operativas */
+		mutalisco.avanzarTurno(7);
+		
+		/* se mueve una vez, esta en la posicion 7,6 que es de tierra*/
+		mutalisco.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,6)));
+		
+		/* se mueve una segunda vez, esta en la posicion 8,6, que es de aire */
+		mutalisco.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,6)));
+				
+	}
+	
+	@Test
+	void test05GuardianSePuedeMoverPorAreasDeTierraYAreasEspaciales() {
+		
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		Ubicacion ubicacion2 = new Ubicacion(6,9);
+		Ubicacion ubicacion3 = new Ubicacion(6,8);
+		Ubicacion ubicacion4 = new Ubicacion(6,6);
+		
+		/* creo los edificios que necesito para crear el mutalisco */
+		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
+		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
+		jugadorZerg.construir("Guarida", ubicacion3, jugadorProtoss, mapa);
+		jugadorZerg.construir("Espiral", ubicacion4, jugadorProtoss, mapa);
+		
+		Criadero criadero = (Criadero) jugadorZerg.obtenerEdificioEn(ubicacion1);
+		ReservaDeReproduccion reserva = (ReservaDeReproduccion)jugadorZerg.obtenerEdificioEn(ubicacion2);
+		Guarida guarida = (Guarida)jugadorZerg.obtenerEdificioEn(ubicacion3);
+		Espiral espiral = (Espiral)jugadorZerg.obtenerEdificioEn(ubicacion4);
+		
+		/* dejo los edificios operativos */
+		criadero.avanzarTurno(4);
+		reserva.avanzarTurno(12);
+		guarida.avanzarTurno(12);
+		espiral.avanzarTurno(10);
+		
+		jugadorZerg.construir("Mutalisco", ubicacion4, jugadorProtoss, mapa);
+		
+		Unidad guardian = jugadorZerg.obtenerUnidadEn(ubicacion4);
+		
+		/* dejo a las unidades operativas */
+		guardian.avanzarTurno(7);
+		guardian.evolucionarAGuardian();
+		guardian.avanzarTurno(4);
+		
+		/* se mueve una vez, esta en la posicion 7,6 que es de tierra*/
+		guardian.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,6)));
+		
+		/* se mueve una segunda vez, esta en la posicion 8,6, que es de aire */
+		guardian.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,6)));
+	}
+	
+	@Test
+	void test06DevoradorSePuedeMoverPorAreasDeTierraYAreasEspaciales() {
+		
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		Ubicacion ubicacion2 = new Ubicacion(6,9);
+		Ubicacion ubicacion3 = new Ubicacion(6,8);
+		Ubicacion ubicacion4 = new Ubicacion(6,6);
+		
+		/* creo los edificios que necesito para crear el mutalisco */
+		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
+		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
+		jugadorZerg.construir("Guarida", ubicacion3, jugadorProtoss, mapa);
+		jugadorZerg.construir("Espiral", ubicacion4, jugadorProtoss, mapa);
+		
+		Criadero criadero = (Criadero) jugadorZerg.obtenerEdificioEn(ubicacion1);
+		ReservaDeReproduccion reserva = (ReservaDeReproduccion)jugadorZerg.obtenerEdificioEn(ubicacion2);
+		Guarida guarida = (Guarida)jugadorZerg.obtenerEdificioEn(ubicacion3);
+		Espiral espiral = (Espiral)jugadorZerg.obtenerEdificioEn(ubicacion4);
+		
+		/* dejo los edificios operativos */
+		criadero.avanzarTurno(4);
+		reserva.avanzarTurno(12);
+		guarida.avanzarTurno(12);
+		espiral.avanzarTurno(10);
+		
+		jugadorZerg.construir("Mutalisco", ubicacion4, jugadorProtoss, mapa);
+		
+		Unidad devorador = jugadorZerg.obtenerUnidadEn(ubicacion4);
+		
+		/* dejo a las unidades operativas */
+		devorador.avanzarTurno(7);
+		devorador.evolucionarADevorador();
+		devorador.avanzarTurno(4);
+		
+		/* se mueve una vez, esta en la posicion 7,6 que es de tierra*/
+		devorador.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,6)));
+		
+		/* se mueve una segunda vez, esta en la posicion 8,6, que es de aire */
+		devorador.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,6)));
+	}
+	
+	@Test
+	void test07HidraliscoSoloSePuedeMoverPorAreasDeTierra() {
+		
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		Ubicacion ubicacion2 = new Ubicacion(6,9);
+		Ubicacion ubicacion3 = new Ubicacion(6,8);
+		
+		/* creo los edificios que necesito para crear el hidralisco */
+		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
+		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
+		jugadorZerg.construir("Guarida", ubicacion3, jugadorProtoss, mapa);
+		
+		Criadero criadero = (Criadero) jugadorZerg.obtenerEdificioEn(ubicacion1);
+		ReservaDeReproduccion reserva = (ReservaDeReproduccion)jugadorZerg.obtenerEdificioEn(ubicacion2);
+		Guarida guarida = (Guarida)jugadorZerg.obtenerEdificioEn(ubicacion3);
+		
+		/* dejo los edificios operativos */
+		criadero.avanzarTurno(4);
+		reserva.avanzarTurno(12);
+		guarida.avanzarTurno(12);
+		
+		jugadorZerg.construir("Hidralisco", ubicacion3, jugadorProtoss, mapa);
+		
+		Unidad hidralisco = jugadorZerg.obtenerUnidadEn(ubicacion3);
+		
+		/* dejo a las unidades operativas */
+		hidralisco.avanzarTurno(4);
+		
+		/* se mueve una vez, esta en la posicion 7,8 que es de tierra*/
+		hidralisco.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,8)));
+		
+		/* se mueve una segunda vez, esta en la posicion 8,8, que es de aire */
+		hidralisco.moverse(mapa);
+		assertThrows(SinUnidadBuscadaError.class, ()->{
+			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,8));
+		});
+	}
+	
+	@Test
+	void test08ZerlingSoloSePuedeMoverPorAreasDeTierra() {
+		
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		Ubicacion ubicacion2 = new Ubicacion(6,9);
+		
+		/* creo los edificios que necesito para crear el zerling */
+		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
+		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
+		
+		Criadero criadero = (Criadero) jugadorZerg.obtenerEdificioEn(ubicacion1);
+		ReservaDeReproduccion reserva = (ReservaDeReproduccion)jugadorZerg.obtenerEdificioEn(ubicacion2);
+		
+		/* dejo los edificios operativos */
+		criadero.avanzarTurno(4);
+		reserva.avanzarTurno(12);
+		
+		jugadorZerg.construir("Zerling", ubicacion2, jugadorProtoss, mapa);
+		
+		Unidad zerling = jugadorZerg.obtenerUnidadEn(ubicacion2);
+		
+		/* dejo a las unidades operativas */
+		zerling.avanzarTurno(2);
+		
+		/* se mueve una vez, esta en la posicion 7,9 que es de tierra*/
+		zerling.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,9)));
+		
+		/* se mueve una segunda vez, esta en la posicion 8,9, que es de aire */
+		zerling.moverse(mapa);
+		assertThrows(SinUnidadBuscadaError.class, ()->{
+			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,9));
+		});
+	}
+	
+	@Test
+	void test09ZanganoSoloSePuedeMoverPorAreasDeTierra() {
+		
+		/* en el mapa las areas espaciales estan entre 8 y 20 en X, y entre 4 y 10 en Y*/
+		Ubicacion ubicacion1 = new Ubicacion(6,7);
+		
+		/* creo los edificios que necesito para crear el zangano */
+		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
+		
+		Criadero criadero = (Criadero) jugadorZerg.obtenerEdificioEn(ubicacion1);
+		
+		/* dejo el criadero operativo */
+		criadero.avanzarTurno(4);
+		
+		jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa);
+		
+		Unidad zangano = jugadorZerg.obtenerUnidadEn(ubicacion1);
+		
+		/* dejo a las unidades operativas */
+		zangano.avanzarTurno(1);
+		
+		/* se mueve una vez, esta en la posicion 7,7 que es de tierra*/
+		zangano.moverse(mapa);
+		assertDoesNotThrow(()-> mapa.obtenerUnidadEnUbicacion(new Ubicacion(7,7)));
+		
+		/* se mueve una segunda vez, esta en la posicion 8,7, que es de aire */
+		zangano.moverse(mapa);
+		assertThrows(SinUnidadBuscadaError.class, ()->{
+			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,7));
 		});
 	}
 

@@ -324,6 +324,7 @@ public class Mapa {
 	   	this.energizarEdificios();
 	   	this.revelarUnidades();
 	   	this.moho.avanzarTurno(this.edificios);
+	   	this.moho.borrarUbicacionesQuePodrianEstarAfectadas(areasEspaciales);
    }
    
    public boolean verificarQueUnidadPuedeMoverseAUbicacion(Unidad unaUnidad,Ubicacion unaUbicacion) {
