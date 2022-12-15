@@ -8,27 +8,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Cambios en el nombre de la excepcion.
-// Creacion de la clase recursos.
-// Cambio en los parametros de los jugadores.
-// Cambio en el nombre de las clases ya que no inician de la forma "test..."
-
 public class CasoDeUso26Test {
 
     Mapa mapa = new Mapa();
-    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(1000, 1000), mapa);
-    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(1000, 1000), mapa);
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(5000, 5000), mapa);
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(5000, 5000), mapa);
 
     /* Protoss */
 
     @Test
     public void test01JugadorProtossSinPoblacionIntentaCrearUnZealotYNoPuede() {
         // Arrange
-        jugadorProtoss.construir("Acceso", new Ubicacion(0,0), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(0,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        jugadorProtoss.construir("Zealot", new Ubicacion(0,0), jugadorZerg, mapa);
-        assertEquals(0,jugadorProtoss.calcularSuministro());
+        // Act
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Assert
+        assertEquals(0, jugadorProtoss.calcularSuministro());
     }
 
     @Test
@@ -42,11 +39,8 @@ public class CasoDeUso26Test {
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa); //crearZealot(new Ubicacion(0,1), mapa);
-
         // Act
-        jugadorProtoss.avanzarTurno();
-        mapa.avanzarTurno();
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa);
 
         // Assert
         assertEquals(2, jugadorProtoss.calcularSuministro());
@@ -63,10 +57,8 @@ public class CasoDeUso26Test {
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa); //crearZealot(new Ubicacion(0,1), mapa); // FALTA CHEQUEAR EN ACCESO EL SUMINISTRO PORQUE NO DEBERIAN PODER CREARSE TANTOS ZEALOTS. SOLO SE PUEDE UNO CON 1 PILON
-
-        jugadorProtoss.avanzarTurno();
-        mapa.avanzarTurno();
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa);
 
         // Act
         jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa);
@@ -77,23 +69,31 @@ public class CasoDeUso26Test {
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    /*@Test
+    @Test
     public void test05JugadorProtossSinPoblacionIntentaCrearUnDragonYNoPuede() {
         // Arrange
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.construir("Acceso", new Ubicacion(0,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
+        // Act
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Assert
+        assertEquals(0, jugadorProtoss.calcularSuministro());
     }
 
     @Test
     public void test06JugadorProtossConUnPilonConstruidoPuedeConstruirUnDragonYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        for(int i = 0; i < 8; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorProtoss.crearDragon(acceso);
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
 
         // Assert
         assertEquals(3, jugadorProtoss.calcularSuministro());
@@ -102,13 +102,18 @@ public class CasoDeUso26Test {
     @Test
     public void test07JugadorProtossConDosPilonesConstruidosPuedeConstruirDosDragonesYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        for(int i = 0; i < 8; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorProtoss.crearDragon(acceso);
-        jugadorProtoss.crearDragon(acceso);
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
 
         // Assert
         assertEquals(6, jugadorProtoss.calcularSuministro());
@@ -117,36 +122,60 @@ public class CasoDeUso26Test {
     @Test
     public void test08JugadorProtossConDosPilonConstruidosPuedeConstruirTresDragonesYNoPuedeConstruirUnCuartoDragon() {
         // Arrange
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        jugadorProtoss.crearDragon(acceso);
-        jugadorProtoss.crearDragon(acceso);
-        jugadorProtoss.crearDragon(acceso);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(0,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
-    }*/
+        for(int i = 0; i < 8; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Act
+        jugadorProtoss.construir("Dragon", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Assert
+        assertEquals(9, jugadorProtoss.calcularSuministro());
+    }
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    /*@Test
+    @Test
     public void test09JugadorProtossSinPoblacionIntentaCrearUnScoutYNoPuede() {
         // Arrange
-        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.construir("PuertoEstelar", new Ubicacion(0,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
+        // Act
+        jugadorProtoss.construir("Scout", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Assert
+        assertEquals(0, jugadorProtoss.calcularSuministro());
     }
 
     @Test
     public void test10JugadorProtossConUnPilonConstruidoPuedeConstruirUnScoutYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
-        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+
+        for(int i = 0; i < 5; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorProtoss.construir("Acceso", new Ubicacion(2,2), jugadorZerg, mapa);
+        jugadorProtoss.construir("PuertoEstelar", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        for(int i = 0; i < 10; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorProtoss.crearScout(puerto);
+        jugadorProtoss.construir("Scout", new Ubicacion(0,1), jugadorZerg, mapa);
 
         // Assert
         assertEquals(4, jugadorProtoss.calcularSuministro());
@@ -155,13 +184,25 @@ public class CasoDeUso26Test {
     @Test
     public void test11JugadorProtossConDosPilonesConstruidosPuedeConstruirDosScoutYTieneElSuministroIndicado() {
         // Arrange
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
-        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa);
+
+        for(int i = 0; i < 5; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorProtoss.construir("Acceso", new Ubicacion(2,2), jugadorZerg, mapa);
+        jugadorProtoss.construir("PuertoEstelar", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        for(int i = 0; i < 10; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorProtoss.crearScout(puerto);
-        jugadorProtoss.crearScout(puerto);
+        jugadorProtoss.construir("Scout", new Ubicacion(0,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Scout", new Ubicacion(0,1), jugadorZerg, mapa);
 
         // Assert
         assertEquals(8, jugadorProtoss.calcularSuministro());
@@ -170,35 +211,58 @@ public class CasoDeUso26Test {
     @Test
     public void test12JugadorProtossConDosPilonConstruidosPuedeConstruirDosScoutYNoPuedeConstruirUnTercerScout() {
         // Arrange
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,0),jugadorProtoss));
-        jugadorProtoss.agregarEdificio(new Pilon(new Ubicacion(0,1),jugadorProtoss));
-        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
-        jugadorProtoss.crearScout(puerto);
-        jugadorProtoss.crearScout(puerto);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
-    }*/
+        for(int i = 0; i < 5; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorProtoss.construir("Acceso", new Ubicacion(2,2), jugadorZerg, mapa);
+        jugadorProtoss.construir("PuertoEstelar", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        for(int i = 0; i < 10; i++) {
+            jugadorProtoss.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorProtoss.construir("Scout", new Ubicacion(0,1), jugadorZerg, mapa);
+        jugadorProtoss.construir("Scout", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Act
+        jugadorProtoss.construir("Scout", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Assert
+        assertEquals(8, jugadorProtoss.calcularSuministro());
+    }
 
     /* Zerg */
 
-    /*@Test
+    @Test
     public void test13JugadorZergSinPoblacionIntentaCrearUnZanganoYNoPuede() {
         // Arrange
-        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+        // Jugadores y mapa...
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
+        // Act
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        // Assert
+        assertEquals(0, jugadorZerg.calcularSuministro());
     }
 
     @Test
     public void test14JugadorZergConUnCriaderoConstruidoPuedeConstruirUnZanganoYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(1, jugadorZerg.calcularSuministro());
@@ -207,15 +271,25 @@ public class CasoDeUso26Test {
     @Test
     public void test15JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZanganosYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 3; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(5, jugadorZerg.calcularSuministro());
@@ -224,37 +298,65 @@ public class CasoDeUso26Test {
     @Test
     public void test16JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZanganosYNoPuedeConstruirUnSextoZangano() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
-        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
-    }*/
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 3; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        // Act
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        // Assert
+        assertEquals(5, jugadorZerg.calcularSuministro());
+    }
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-   /*@Test
+   @Test
     public void test17JugadorZergSinPoblacionIntentaCrearUnZerlingYNoPuede() {
-        // Arrange
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
+       // Arrange
+       jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(0,0), jugadorProtoss, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling(reserva));
+       // Act
+       jugadorZerg.construir("Zerling", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+       // Assert
+       assertEquals(0, jugadorZerg.calcularSuministro());
     }
 
     @Test
     public void test18JugadorZergConUnCriaderoConstruidoPuedeConstruirUnZerlingYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(1, jugadorZerg.calcularSuministro());
@@ -263,15 +365,32 @@ public class CasoDeUso26Test {
     @Test
     public void test19JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZerlingsYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 3; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(5, jugadorZerg.calcularSuministro());
@@ -280,37 +399,79 @@ public class CasoDeUso26Test {
     @Test
     public void test20JugadorZergConUnCriaderoConstruidoPuedeConstruirCincoZerlingsYNoPuedeConstruirUnSextoZerling() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Ubicacion(0,0), jugadorZerg);
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
-        jugadorZerg.crearZerling(reserva);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZerling(reserva));
-    }*/
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 3; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        // Act
+        jugadorZerg.construir("Zerling", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        // Assert
+        assertEquals(5, jugadorZerg.calcularSuministro());
+    }
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    /*@Test
+    @Test
     public void test21JugadorZergSinPoblacionIntentaCrearUnHidraliscoYNoPuede() {
         // Arrange
-        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+       jugadorZerg.construir("Guarida", new Ubicacion(0,0), jugadorProtoss, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco(guarida));
+       // Act
+       jugadorZerg.construir("Hidralisco", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+       // Assert
+       assertEquals(0, jugadorZerg.calcularSuministro());
     }
 
     @Test
     public void test22JugadorZergConUnCriaderoConstruidoPuedeConstruirUnHidraliscoYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Guarida", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearHidralisco(guarida);
+        jugadorZerg.construir("Hidralisco", new Ubicacion(2,2), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(2, jugadorZerg.calcularSuministro());
@@ -319,12 +480,30 @@ public class CasoDeUso26Test {
     @Test
     public void test23JugadorZergConUnCriaderoConstruidoPuedeConstruirDosHidraliscosYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Guarida", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearHidralisco(guarida);
-        jugadorZerg.crearHidralisco(guarida);
+        jugadorZerg.construir("Hidralisco", new Ubicacion(2,2), jugadorProtoss, mapa);
+        jugadorZerg.construir("Hidralisco", new Ubicacion(2,2), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(4, jugadorZerg.calcularSuministro());
@@ -333,34 +512,84 @@ public class CasoDeUso26Test {
     @Test
     public void test24JugadorZergConUnCriaderoConstruidoPuedeConstruirDosHidraliscosYNoPuedeConstruirUnTercerHidralisco() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        Guarida guarida = new Guarida(new Ubicacion(0,0), jugadorZerg);
-        jugadorZerg.crearHidralisco(guarida);
-        jugadorZerg.crearHidralisco(guarida);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearHidralisco(guarida));
-    }*/
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Guarida", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Hidralisco", new Ubicacion(2,2), jugadorProtoss, mapa);
+        jugadorZerg.construir("Hidralisco", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        // Act
+        jugadorZerg.construir("Hidralisco", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        // Assert
+        assertEquals(4, jugadorZerg.calcularSuministro());
+    }
 
     /* ------------------------------------------------------------------------------------------------------------- */
 
-    /*@Test
+    @Test
     public void test25JugadorZergSinPoblacionIntentaCrearUnMutaliscoYNoPuede() {
         // Arrange
-        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Espiral", new Ubicacion(0,0), jugadorProtoss, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco(espiral));
+        // Act
+        jugadorZerg.construir("Mutalisco", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        // Assert
+        assertEquals(0, jugadorZerg.calcularSuministro());
     }
 
     @Test
     public void test26JugadorZergConUnCriaderoConstruidoPuedeConstruirUnMutaliscoYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Guarida", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Espiral", new Ubicacion(3,3), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 10; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearMutalisco(espiral);
+        jugadorZerg.construir("Mutalisco", new Ubicacion(3,3), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(4, jugadorZerg.calcularSuministro());
@@ -369,13 +598,38 @@ public class CasoDeUso26Test {
     @Test
     public void test27JugadorZergConDosCriaderosConstruidosPuedeConstruirDosMutaliscosYTieneElSuministroIndicado() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,1),jugadorZerg));
-        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Guarida", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Espiral", new Ubicacion(3,3), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 10; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
 
         // Act
-        jugadorZerg.crearMutalisco(espiral);
-        jugadorZerg.crearMutalisco(espiral);
+        jugadorZerg.construir("Mutalisco", new Ubicacion(3,3), jugadorProtoss, mapa);
+        jugadorZerg.construir("Mutalisco", new Ubicacion(3,3), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(8, jugadorZerg.calcularSuministro());
@@ -384,13 +638,42 @@ public class CasoDeUso26Test {
     @Test
     public void test28JugadorZergConDosCriaderosConstruidosPuedeConstruirDosMutaliscosYNoPuedeConstruirUnTercerMutalisco() {
         // Arrange
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
-        jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,1),jugadorZerg));
-        Espiral espiral = new Espiral(new Ubicacion(0,0), jugadorZerg);
-        jugadorZerg.crearMutalisco(espiral);
-        jugadorZerg.crearMutalisco(espiral);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,1), jugadorProtoss, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearMutalisco(espiral));
-    }*/
+        for (int i = 0; i < 4; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,1), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Guarida", new Ubicacion(2,2), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 12; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Espiral", new Ubicacion(3,3), jugadorProtoss, mapa);
+
+        for (int i = 0; i < 10; i++) {
+            jugadorZerg.avanzarTurno();
+            mapa.avanzarTurno();
+        }
+
+        jugadorZerg.construir("Mutalisco", new Ubicacion(3,3), jugadorProtoss, mapa);
+        jugadorZerg.construir("Mutalisco", new Ubicacion(3,3), jugadorProtoss, mapa);
+
+        // Act
+        jugadorZerg.construir("Mutalisco", new Ubicacion(3,3), jugadorProtoss, mapa);
+
+        // Assert
+        assertEquals(8, jugadorZerg.calcularSuministro());
+    }
 }

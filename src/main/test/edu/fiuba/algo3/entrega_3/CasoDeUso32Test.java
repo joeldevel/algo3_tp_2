@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-// Cuando se instancia AlgoStar ya se considera como inicializado el juego.
-
 public class CasoDeUso32Test {
 
     @Test

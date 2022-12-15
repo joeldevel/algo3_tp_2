@@ -12,10 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// Creacion de la clase recursos.
-// Cambio en los parametros de los jugadores.
-// Cambio en el nombre de las clases ya que no inician de la forma "test..."
-
 public class CasoDeUso29Test {
 
     Mapa mapa = new Mapa();
