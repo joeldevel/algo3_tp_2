@@ -36,7 +36,7 @@ public class ReservaDeReproduccion extends EdificioZerg {
     
 	@Override
 	public void ejecutaOperable() {
-		this.crearZerling();
+		//this.crearZerling();
 	}
 
 	@Override

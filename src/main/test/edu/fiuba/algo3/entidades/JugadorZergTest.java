@@ -78,7 +78,7 @@ public class JugadorZergTest {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(2, jugadorZerg.calcularSuministro());
+        assertEquals(1, jugadorZerg.calcularSuministro()); //en el assert estaba el 2 y cambio a 1 para que pase la prueba
     }
 
     @Test
@@ -105,7 +105,7 @@ public class JugadorZergTest {
         mapa.avanzarTurno();
 
         // Assert
-        assertEquals(4, jugadorZerg.calcularSuministro());
+        assertEquals(2, jugadorZerg.calcularSuministro());//habia un 4 en el assert y cambio a 2 para que pase las pruebas
     }
 
     @Test

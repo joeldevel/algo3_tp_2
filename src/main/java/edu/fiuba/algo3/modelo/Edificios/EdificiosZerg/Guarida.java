@@ -41,7 +41,7 @@ public class Guarida extends EdificioZerg {
 
 	@Override
 	public void ejecutaOperable() {
-		this.crearHidralisco();
+		//this.crearHidralisco();
 	}
 	
 	public void crearHidralisco() {
