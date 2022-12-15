@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class PantallaFinal extends VBox { // 20:00
+public class PantallaFinal extends VBox {
 
     Stage stage;
 

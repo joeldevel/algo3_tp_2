@@ -20,7 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class PantallaJuego extends BorderPane { // 24:47
+public class PantallaJuego extends BorderPane {
 
     public static int ANCHO = 1400;
     public static int ALTURA = 700;
@@ -47,14 +47,8 @@ public class PantallaJuego extends BorderPane { // 24:47
         this.setArriba(algoStar);
 
         this.canvasCentral.setOnMouseClicked(e -> {
-
             this.coordenadaX = (int) e.getX();
-            System.out.println("x: " + e.getX());
             this.coordenadaY = (int) e.getY();
-            System.out.println("y: " + e.getY() + "\n");
-
-            System.out.println(algoStar.obtenerMapa().verificarAreaEspacial(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY))));
-
             this.setDerecha(algoStar);
 
         });
@@ -201,9 +195,14 @@ public class PantallaJuego extends BorderPane { // 24:47
         poblacion.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         poblacion.setTextFill(Color.web("#ffffff"));
 
+        Label suministro = new Label();
+        suministro.setText("Poblacion: " + jugadorActual.calcularSuministro());
+        suministro.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        suministro.setTextFill(Color.web("#ffffff"));
+
         // Contenedor de informacion
 
-        VBox contenedorVerticalInformacion = new VBox(nombre, color, raza, gas, mineral, poblacion);
+        VBox contenedorVerticalInformacion = new VBox(nombre, color, raza, gas, mineral, poblacion, suministro);
         contenedorVerticalInformacion.setSpacing(10);
         contenedorVerticalInformacion.setTranslateX(50);
         contenedorVerticalInformacion.setTranslateY(220);

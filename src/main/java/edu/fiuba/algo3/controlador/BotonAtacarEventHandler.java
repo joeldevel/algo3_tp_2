@@ -12,41 +12,36 @@ import javafx.event.EventHandler;
 
 public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
 
-    private final Mapa mapa;
+    private final AlgoStar algoStar;
     private final PantallaJuego pantalla;
     private final VistaMapa vistaMapa;
 
     public BotonAtacarEventHandler(AlgoStar algoStar, PantallaJuego pantalla, VistaMapa vista) {
-        this.mapa = algoStar.obtenerMapa();
+        this.algoStar = algoStar;
         this.pantalla = pantalla;
         this.vistaMapa = vista;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        Mapa mapa = this.algoStar.obtenerMapa();
 
         if (mapa.verificarUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())))) {
             Unidad atacable = mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
 
-            System.out.println("Vida atacable antes: " + atacable.vidaRestante());
+            mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaY()))).atacar(atacable);
 
-            mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY()))).atacar(atacable);
-
-            System.out.println("Vida atacable despues: " + atacable.vidaRestante());
-
-            vistaMapa.update();
+            this.pantalla.setDerecha(this.algoStar);
+            this.vistaMapa.update();
         }
 
          if (mapa.verificarEdificioEn(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())))) {
             Edificio atacable = mapa.obtenerEdificioEn(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
 
-            System.out.println("Vida atacable antes: " + atacable.obtenerVida());
-
             mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaY()))).atacar(atacable);
 
-            System.out.println("Vida atacable despues: " + atacable.obtenerVida());
-
-            vistaMapa.update();
+            this.pantalla.setDerecha(this.algoStar);
+            this.vistaMapa.update();
         }
     }
 }
