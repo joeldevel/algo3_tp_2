@@ -282,7 +282,6 @@ public class PantallaJuego extends BorderPane { // 24:47
     // Se crea la botonera Zerg con los edificios correspondientes.
     public GridPane setBotoneraUnidadesZerg(AlgoStar algoStar) {
         Jugador jugadorZerg = algoStar.obtenerJugadorTurno();
-        Jugador jugadorProtoss = algoStar.obtenerJugadorContrario(jugadorZerg);
 
         Button amo = new Button();
         amo.setText("   Crear Amo Supremo   ");
@@ -405,7 +404,6 @@ public class PantallaJuego extends BorderPane { // 24:47
 
     // Se crea la botonera Protoss con los edificios correspondientes.
     public GridPane setBotoneraUnidadesProtoss(AlgoStar algoStar) {
-        Jugador jugadorProtoss = algoStar.obtenerJugadorTurno();
 
         Button zealot = new Button();
         zealot.setText("Crear Zealot");
