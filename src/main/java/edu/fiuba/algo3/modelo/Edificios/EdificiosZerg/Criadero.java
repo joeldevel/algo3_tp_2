@@ -8,15 +8,11 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Excepciones.CriaderoSinLarvasException;
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Larva;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CONSTRUCCION_ZANGANO;
-
-/* el criadero deberia implementar una interfaz evolucionador por ejemplo, que habilite a evolucionar las
- * larvas a otro tipo de unidad zerg. Sino una buna idea es usar el patron Factory Method */
 
 public class Criadero extends EdificioZerg {
 

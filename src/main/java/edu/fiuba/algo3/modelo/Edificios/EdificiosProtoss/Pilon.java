@@ -19,8 +19,6 @@ public class Pilon extends EdificioProtoss {
 	
 	private int radio;
 	private ArrayList<EdificioProtoss> edificios;
-	/* ver si el pilon tiene una referencia a los edificios o si el jugadores le pasa a todos los pilones 
-	 * que tenga los edificios que tiene*/
 
     public Pilon(Ubicacion unaUbicacion, Jugador unJugador) {
     	super(new Tiempo(-5), new Vida(300), new Escudo(300), unaUbicacion, unJugador,"Pilon");

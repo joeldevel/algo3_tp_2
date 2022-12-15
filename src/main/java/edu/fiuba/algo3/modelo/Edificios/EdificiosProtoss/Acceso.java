@@ -11,14 +11,9 @@ import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
-
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.SUMINISTRO_DRAGON;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.SUMINISTRO_ZEALOT;
-import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZERLING;
 
 public class Acceso extends EdificioProtoss {
 

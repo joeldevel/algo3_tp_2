@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.Jugador;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;

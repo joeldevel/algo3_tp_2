@@ -1,15 +1,9 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
-import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
-import edu.fiuba.algo3.modelo.Excepciones.UbicacionSinEdificioException;
 import edu.fiuba.algo3.modelo.Fabrica;
 import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Raza;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 // La poblacion aumenta a medida que se crean los edificios correspondientes.
 // El cupo aumenta a metida que se crean unidades.

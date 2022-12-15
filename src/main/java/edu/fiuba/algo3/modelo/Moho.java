@@ -74,18 +74,6 @@ public class Moho {
 		return true;
 	}
 	
-	/*public void borrarUbicacionesQuePodrianEstarAfectadas(ArrayList<Ubicacion> ubicaciones) {
-		ArrayList<Ubicacion> aBorrar = new ArrayList<Ubicacion>();
-		for(Ubicacion actual: ubicaciones) {
-			if(this.estaAfectadaLaUbicacion(actual)) {
-				aBorrar.add(actual);
-			}
-		}
-		for(Ubicacion ubicacion: aBorrar) {
-			this.ubicacionesAfectadas.remove(ubicacion);
-		}
-	}*/
-	
 	public boolean estaAfectadaLaUbicacion(Ubicacion unaUbicacion) {
 		boolean esta = false;
 		for(Ubicacion afectada: this.ubicacionesAfectadas) {

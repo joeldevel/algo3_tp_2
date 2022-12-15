@@ -8,8 +8,6 @@ import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
-
 import java.util.ArrayList;
 
 public class Mapa {
