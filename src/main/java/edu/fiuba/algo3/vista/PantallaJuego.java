@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -472,7 +473,7 @@ public class PantallaJuego extends BorderPane {
         return contenedorHorizontalBMovimiento;
     }
 
-    // Se crea la botonera de movimiento
+    // Se crea la botonera ataque y trabajo
     public HBox setBotoneraAtaque(AlgoStar algoStar) {
         // Boton elegir unidad
 
@@ -485,14 +486,25 @@ public class PantallaJuego extends BorderPane {
         // Boton atacar
 
         Button atacar = new Button();
-        atacar.setText("Atacar");
+        atacar.setText(" Atacar ");
 
         BotonAtacarEventHandler botonAtacarEventHandler = new BotonAtacarEventHandler(algoStar, this, vistaMapa);
         atacar.setOnAction(botonAtacarEventHandler);
 
-        HBox contenedorHorizontalBMovimiento = new HBox(unidad, atacar);
+        // Boton trabajar
 
-        return contenedorHorizontalBMovimiento;
+        Button trabajar = new Button();
+        trabajar.setText("Trabajar");
+
+        BotonTrabajarEventHandler botonTrabajarEventHandler = new BotonTrabajarEventHandler(algoStar, this, vistaMapa);
+        trabajar.setOnAction(botonTrabajarEventHandler);
+
+        // Contenedores
+
+        VBox contenedorHorizontalAcciones = new VBox(atacar, trabajar);
+        HBox contenedorHorizontal = new HBox(unidad, contenedorHorizontalAcciones);
+
+        return contenedorHorizontal;
     }
 
     // Se crea la pantalla central donde estara el mapa

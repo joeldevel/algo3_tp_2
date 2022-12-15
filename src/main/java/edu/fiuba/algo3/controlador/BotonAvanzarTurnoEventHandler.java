@@ -2,6 +2,8 @@ package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
 import edu.fiuba.algo3.modelo.Excepciones.AlgoStarFinalizadoException;
+import edu.fiuba.algo3.modelo.Ubicacion;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import edu.fiuba.algo3.vista.PantallaJuego;
 import edu.fiuba.algo3.vista.VistaMapa;
 import javafx.event.ActionEvent;
