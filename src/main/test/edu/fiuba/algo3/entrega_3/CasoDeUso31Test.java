@@ -13,6 +13,7 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
+import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.AmoSupremo;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 import org.junit.jupiter.api.Test;
@@ -64,75 +65,75 @@ public class CasoDeUso31Test {
         assertEquals(10, jugadorProtoss.calcularPoblacion());
     }
 
-    /*@Test
+    @Test
     public void test03AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnZealot() {
         // Arrange
-        Pilon pilon = new Pilon(new Ubicacion(0,0),jugadorProtoss);
-        jugadorProtoss.agregarEdificio(pilon);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        Pilon pilon = (Pilon) mapa.obtenerEdificioEn(new Ubicacion(0,0));
 
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        jugadorProtoss.crearZealot(acceso);
+        jugadorProtoss.construir("Acceso", new Ubicacion(1,1), jugadorZerg, mapa);
 
-        //Guardian tipoGuardian = new Guardian(jugadorZerg);
-        //Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
-        //unidad.avanzarTurno(4);
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
 
-        //for(int i = 0; i < 24; i++) {
-        //    unidad.atacar(pilon);
-        //}
+        for(int i = 0; i < 24; i++) {
+            unidad.atacar(pilon);
+        }
 
-        jugadorProtoss.eliminarEdificio(pilon);
+        // Act
+        jugadorProtoss.construir("Zealot", new Ubicacion(1,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearZealot(acceso));
+        // Assert
+        assertEquals(0, jugadorProtoss.calcularSuministro());
     }
 
     @Test
     public void test04AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnDragon() {
         // Arrange
-        Pilon pilon = new Pilon(new Ubicacion(0,0),jugadorProtoss);
-        jugadorProtoss.agregarEdificio(pilon);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        Pilon pilon = (Pilon) mapa.obtenerEdificioEn(new Ubicacion(0,0));
 
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        jugadorProtoss.crearZealot(acceso);
+        jugadorProtoss.construir("Acceso", new Ubicacion(1,1), jugadorZerg, mapa);
 
-        //Guardian tipoGuardian = new Guardian(jugadorZerg);
-        //Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
-        //unidad.avanzarTurno(4);
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
 
-        //for(int i = 0; i < 24; i++) {
-        //    unidad.atacar(pilon);
-        //}
+        for(int i = 0; i < 24; i++) {
+            unidad.atacar(pilon);
+        }
 
-        jugadorProtoss.eliminarEdificio(pilon);
+        // Act
+        jugadorProtoss.construir("Dragon", new Ubicacion(1,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearDragon(acceso));
+        // Assert
+        assertEquals(0, jugadorProtoss.calcularSuministro());
     }
 
     @Test
     public void test05AlDestruirUnPilonDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnScout() {
         // Arrange
-        Pilon pilon = new Pilon(new Ubicacion(0,0),jugadorProtoss);
-        jugadorProtoss.agregarEdificio(pilon);
+        jugadorProtoss.construir("Pilon", new Ubicacion(0,0), jugadorZerg, mapa);
+        Pilon pilon = (Pilon) mapa.obtenerEdificioEn(new Ubicacion(0,0));
 
-        Acceso acceso = new Acceso(new Ubicacion(0,0), jugadorProtoss);
-        jugadorProtoss.crearZealot(acceso);
+        jugadorProtoss.construir("Acceso", new Ubicacion(1,0), jugadorZerg, mapa);
+        jugadorProtoss.construir("PuertoEstelar", new Ubicacion(1,1), jugadorZerg, mapa);
 
-        //Guardian tipoGuardian = new Guardian(jugadorZerg);
-        //Unidad guardian = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
-        //guardian.avanzarTurno(4);
+        Guardian tipoGuardian = new Guardian(jugadorZerg);
+        Unidad unidad = new Unidad(new Tiempo(CONSTRUCCION_GUARDIAN), new Ubicacion(0,0), tipoGuardian);
+        unidad.avanzarTurno(4);
 
-        //for(int i = 0; i < 24; i++) {
-        //    guardian.atacar(pilon);
-        //}
+        for(int i = 0; i < 24; i++) {
+            unidad.atacar(pilon);
+        }
 
-        jugadorProtoss.eliminarEdificio(pilon);
-        PuertoEstelar puerto = new PuertoEstelar(new Ubicacion(0,0), jugadorProtoss);
+        // Act
+        jugadorProtoss.construir("Scout", new Ubicacion(1,1), jugadorZerg, mapa);
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.crearScout(puerto));
-    }*/
+        // Assert
+        assertEquals(0, jugadorProtoss.calcularSuministro());
+    }
 
     /* Zerg */
 
@@ -152,23 +153,20 @@ public class CasoDeUso31Test {
     @Test
     public void test07ConstruirTresCriaderosYDestruirUnoDisminuyeElNumeroDePoblacionDeLaFormaIndicada() {
         // Arrange
-        Criadero primerCriadero = new Criadero(new Ubicacion(0,0),jugadorZerg);
-        jugadorZerg.agregarEdificio(primerCriadero);
-        Criadero segundoCriadero = new Criadero(new Ubicacion(0,0),jugadorZerg);
-        jugadorZerg.agregarEdificio(segundoCriadero);
-        Criadero tercerCriadero = new Criadero(new Ubicacion(0,0),jugadorZerg);
-        jugadorZerg.agregarEdificio(tercerCriadero);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("Criadero", new Ubicacion(1,1), jugadorProtoss, mapa);
+        jugadorZerg.construir("Criadero", new Ubicacion(2,2), jugadorProtoss, mapa);
 
-        //Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
-        //Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
-        //dragon.avanzarTurno(6);
+        Criadero criadero = (Criadero) mapa.obtenerEdificioEn(new Ubicacion(0,0));
+
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
+        dragon.avanzarTurno(6);
 
         // Act
-        //for(int i = 0; i < 25; i++) {
-        //    dragon.atacar(criadero);
-        //}
-
-        jugadorZerg.eliminarEdificio(tercerCriadero);
+        for(int i = 0; i < 25; i++) {
+            dragon.atacar(criadero);
+        }
 
         // Assert
         assertEquals(10, jugadorZerg.calcularPoblacion());
@@ -182,58 +180,69 @@ public class CasoDeUso31Test {
         jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,0),jugadorZerg));
         jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,1),jugadorZerg));
         jugadorZerg.agregarEdificio(new Criadero(new Ubicacion(0,2),jugadorZerg));
-        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,3), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(0,3));
-        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,4), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(0,4));
-        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,5), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(0,5));
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,3), jugadorProtoss, mapa);
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,4), jugadorProtoss, mapa);
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(0,5), jugadorProtoss, mapa);
 
         // Assert
         assertEquals(30, jugadorZerg.calcularPoblacion());
     }
 
-    /*@Test
+    @Test
     public void test09SeConstruyeUnCriaderoYUnZanganoYAlDestruirElCriaderoDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnSegundoZangano() {
         // Arrange
-        Criadero criadero = new Criadero(new Ubicacion(0,0),jugadorZerg);
-        jugadorZerg.agregarEdificio(criadero);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+        Criadero criadero = (Criadero) mapa.obtenerEdificioEn(new Ubicacion(0,0));
 
-        Criadero criaderoUnidad = new Criadero(new Ubicacion(0,0), jugadorZerg);
-        jugadorZerg.crearZangano(criaderoUnidad);
+        for(int i = 0; i < 5; i++) {
+            jugadorZerg.avanzarTurno();
+        }
 
-        //Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
-        //Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
-        //dragon.avanzarTurno(6);
+        jugadorZerg.construir("Zangano", new Ubicacion(0, 0), jugadorProtoss, mapa);
 
-        //for(int i = 0; i < 25; i++) {
-        //    dragon.atacar(criadero);
-        //}
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(1, 1), tipoDragon);
+        dragon.avanzarTurno(6);
 
-        jugadorZerg.eliminarEdificio(criadero);
+        // Act
+        for(int i = 0; i < 25; i++) {
+            dragon.atacar(criadero);
+        }
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criaderoUnidad));
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        // Act
+        assertEquals(1, jugadorZerg.calcularSuministro());
     }
 
     @Test
-    public void test10SeConstruyeUnAmoSupremoYUnZanganoYAlDestruirElAmoSupremoDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnSegundoZangano() {
+    public void test10SeConstruyeUnCriaderoYUnAmoSupremoYCincoZanganosYAlDestruirElAmoSupremoDisminuyeElNumeroDePoblacionYNoEsPosibleCrearUnSextoZangano() {
         // Arrange
-        Unidad amoSupremo = jugadorZerg.crearAmoSupremo(new Ubicacion(0,0));
-        Criadero criadero = new Criadero(new Ubicacion(0,0), jugadorZerg);
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.avanzarTurno();
-        jugadorZerg.crearZangano(criadero);
+        jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("AmoSupremo", new Ubicacion(1,1), jugadorProtoss, mapa);
+        Unidad amo = (Unidad) mapa.obtenerUnidadEnUbicacion(new Ubicacion(1,1));
 
-        Dragon tipoDragon = new Dragon(new Ubicacion(0, 0), jugadorProtoss); // Ataque de tierra y aire
-        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(0, 0), tipoDragon);
-        dragon.avanzarTurno(6);
-
-        for(int i = 0; i < 10; i++) {
-            dragon.atacar(amoSupremo);
+        for(int i = 0; i < 5; i++) {
+            jugadorZerg.avanzarTurno();
         }
 
-        // Act & Assert
-        assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorZerg.crearZangano(criadero));
-    }*/
+        for(int i = 0; i < 5; i++) {
+            jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+            jugadorZerg.avanzarTurno();
+        }
+
+        Dragon tipoDragon = new Dragon(jugadorProtoss); // Ataque de tierra y aire
+        Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), new Ubicacion(2, 2), tipoDragon);
+        dragon.avanzarTurno(6);
+
+        // Act
+        for(int i = 0; i < 25; i++) {
+            dragon.atacar(amo);
+        }
+
+        jugadorZerg.construir("Zangano", new Ubicacion(0,0), jugadorProtoss, mapa);
+
+        // Act
+        assertEquals(5, jugadorZerg.calcularSuministro());
+    }
 }

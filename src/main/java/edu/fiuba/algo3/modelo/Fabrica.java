@@ -119,7 +119,7 @@ public class Fabrica {
 			/* UNIDADES ZERG */
 			
 			if((entidad == "AmoSupremo") && (jugadorZerg.haySuministroDisponible(SUMINISTRO_AMO))) {
-				
+
 				AmoSupremo tipoAmoSupremo = new AmoSupremo(jugadorZerg);
 				Unidad amoSupremo = new Unidad(new Tiempo(CONSTRUCCION_AMO), unaUbicacion, tipoAmoSupremo);
 				jugadorZerg.agregarUnidad(amoSupremo);
@@ -129,7 +129,7 @@ public class Fabrica {
 			
 			if((entidad == "Zangano") && (jugadorZerg.haySuministroDisponible(SUMINISTRO_ZANGANO)) && 
 			   (unMapa.verificarEdificioEnUbicacion("Criadero", unaUbicacion))) {
-				
+
 				Criadero criadero = (Criadero) unMapa.obtenerEdificioEnUbicacion("Criadero", unaUbicacion);
 				criadero.crearZangano();
 				Unidad zangano = jugadorZerg.obtenerUnidadEn(unaUbicacion);

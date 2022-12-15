@@ -76,8 +76,11 @@ public class CasoDeUso26Test {
         jugadorProtoss.avanzarTurno();
         mapa.avanzarTurno();
 
-        // Act & Assert
-        //assertThrows(SuministroSuperaElNumeroDePoblacionException.class, () -> jugadorProtoss.avanzarTurno());
+        // Act
+        jugadorProtoss.construir("Zealot", new Ubicacion(0,1), jugadorZerg, mapa);
+
+        // Assert
+        assertEquals(4, jugadorProtoss.calcularSuministro());
     }
 
     /* ------------------------------------------------------------------------------------------------------------- */

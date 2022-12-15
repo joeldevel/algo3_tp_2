@@ -193,6 +193,7 @@ public abstract class Jugador {
 	
 	public Unidad obtenerUnidadEn(Ubicacion unaUbicacion) {
 		Unidad unidad = null;
+
 		for(Unidad actual: this.unidades) {
 			if(actual.estaEn(unaUbicacion)) {
 				unidad = actual;
