@@ -439,9 +439,9 @@ class CasoDeUso02Test {
 	@Test
 	void test22SeConstruyeUnaGuaridaYNoSeEncuentraOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
-		Ubicacion ubicacion3 = new Ubicacion(19,19);
+		Ubicacion ubicacion1 = new Ubicacion(2,2);
+		Ubicacion ubicacion2 = new Ubicacion(3,3);
+		Ubicacion ubicacion3 = new Ubicacion(1,1);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -463,9 +463,9 @@ class CasoDeUso02Test {
 
 	@Test
     void test23SeConstruyeUnaGuaridaYDespuesDeDoceTurnosSeEncuentraOperativa(){
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
-		Ubicacion ubicacion3 = new Ubicacion(19,19);
+		Ubicacion ubicacion1 = new Ubicacion(2,2);
+		Ubicacion ubicacion2 = new Ubicacion(3,3);
+		Ubicacion ubicacion3 = new Ubicacion(1,1);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -486,9 +486,9 @@ class CasoDeUso02Test {
 	@Test
 	void test24SeConstruyeUnaGuaridaYSeAvanzaOnceTurnosNoDeberiaEstarOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
-		Ubicacion ubicacion3 = new Ubicacion(19,19);
+		Ubicacion ubicacion1 = new Ubicacion(2,2);
+		Ubicacion ubicacion2 = new Ubicacion(3,3);
+		Ubicacion ubicacion3 = new Ubicacion(1,1);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -514,8 +514,8 @@ class CasoDeUso02Test {
 	@Test
 	void test25SeConstruyeUnaReservaDeReproduccionYNoSeEncuentraOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
+		Ubicacion ubicacion1 = new Ubicacion(1,1);
+		Ubicacion ubicacion2 = new Ubicacion(2,2);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -534,8 +534,8 @@ class CasoDeUso02Test {
 	@Test
 	void test26SeConstruyeUnaReservaDeReproduccionYDespuesDeDoceTurnosSeEncuentraOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
+		Ubicacion ubicacion1 = new Ubicacion(1,1);
+		Ubicacion ubicacion2 = new Ubicacion(2,2);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -555,8 +555,8 @@ class CasoDeUso02Test {
 	@Test
 	void test27SeConstruyeUnaReservaDeReproduccionYSeAvanzaOnceTurnosNoDeberiaEstarOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
+		Ubicacion ubicacion1 = new Ubicacion(1,1);
+		Ubicacion ubicacion2 = new Ubicacion(2,2);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -580,10 +580,10 @@ class CasoDeUso02Test {
 	@Test
 	void test28SeConstruyeUnaEspiralYNoSeEncuentraOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
-		Ubicacion ubicacion3 = new Ubicacion(19,19);
-		Ubicacion ubicacion4 = new Ubicacion(18,18);
+		Ubicacion ubicacion1 = new Ubicacion(3,3);
+		Ubicacion ubicacion2 = new Ubicacion(4,4);
+		Ubicacion ubicacion3 = new Ubicacion(2,2);
+		Ubicacion ubicacion4 = new Ubicacion(1,1);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -603,10 +603,10 @@ class CasoDeUso02Test {
 	@Test
 	void test29SeConstruyeUnaEspiralYDespuesDeDiezTurnosSeEncuentraOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
-		Ubicacion ubicacion3 = new Ubicacion(19,19);
-		Ubicacion ubicacion4 = new Ubicacion(18,18);
+		Ubicacion ubicacion1 = new Ubicacion(3,3);
+		Ubicacion ubicacion2 = new Ubicacion(4,4);
+		Ubicacion ubicacion3 = new Ubicacion(2,2);
+		Ubicacion ubicacion4 = new Ubicacion(1,1);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);
@@ -628,10 +628,10 @@ class CasoDeUso02Test {
 	@Test
 	void test30SeConstruyeUnaEspiralYSeAvanzaNueveTurnosNoDeberiaEstarOperativa(){
 		// Arrange
-		Ubicacion ubicacion1 = new Ubicacion(20,20);
-		Ubicacion ubicacion2 = new Ubicacion(21,21);
-		Ubicacion ubicacion3 = new Ubicacion(19,19);
-		Ubicacion ubicacion4 = new Ubicacion(18,18);
+		Ubicacion ubicacion1 = new Ubicacion(3,3);
+		Ubicacion ubicacion2 = new Ubicacion(4,4);
+		Ubicacion ubicacion3 = new Ubicacion(2,2);
+		Ubicacion ubicacion4 = new Ubicacion(1,1);
 		
 		jugadorZerg.construir("Criadero", ubicacion1, jugadorProtoss, mapa);
 		jugadorZerg.construir("ReservaDeReproduccion", ubicacion2, jugadorProtoss, mapa);

@@ -74,13 +74,15 @@ public class CasoDeUso29Test {
     @Test
     public void test04JugadorZergLlegaAlLimiteDePoblacionCreandoCuarentaAmosSupremosYElValorDePoblacionEsElIndicado() {
         // Act
-        Recursos recursos = new Recursos(0, 2000);
+        Recursos recursos = new Recursos(0, 5000);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
 
         // Act
-        for (int i = 0; i < 40; i++) {
-            jugadorZerg.construir("AmoSupremo", new Ubicacion(i,0), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(i,0));
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 14; j++) {
+                jugadorZerg.construir("AmoSupremo", new Ubicacion(i,j), jugadorProtoss, mapa); //crearAmoSupremo(new Ubicacion(i,0));
+            }
         }
 
         // Assert

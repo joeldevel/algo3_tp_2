@@ -243,7 +243,7 @@ public class JugadorZergTest {
 
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
 
-        jugadorZerg.construir("Criadero", new Ubicacion(15,15), jugadorProtoss, mapa);
+        jugadorZerg.construir("Criadero", new Ubicacion(1,1), jugadorProtoss, mapa);
 
         for(int i = 0; i < 4; i++) {
             jugadorZerg.avanzarTurno();
@@ -251,8 +251,8 @@ public class JugadorZergTest {
         }
         
         /* usos las ubicaciones 15,15 porque el mapa no tiene ubicaciones negativas*/
-    	Ubicacion ubicacion1 = new Ubicacion(15,15);
-    	Ubicacion ubicacion2 = new Ubicacion(15,14);
+    	Ubicacion ubicacion1 = new Ubicacion(1,1);
+    	Ubicacion ubicacion2 = new Ubicacion(1,0);
     	
     	/* por default la direccion inicial a la que se mueve es hacia la derecha */
     	jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa); //crearZangano(ubicacion1);
@@ -277,7 +277,7 @@ public class JugadorZergTest {
 
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
 
-        jugadorZerg.construir("Criadero", new Ubicacion(15,15), jugadorProtoss, mapa);
+        jugadorZerg.construir("Criadero", new Ubicacion(1,1), jugadorProtoss, mapa);
 
         for(int i = 0; i < 4; i++) {
             jugadorZerg.avanzarTurno();
@@ -285,8 +285,8 @@ public class JugadorZergTest {
         }
         
         /* usos las ubicaciones 15,15 porque el mapa no tiene ubicaciones negativas*/
-    	Ubicacion ubicacion1 = new Ubicacion(15,15);
-    	Ubicacion ubicacion2 = new Ubicacion(14,15);
+    	Ubicacion ubicacion1 = new Ubicacion(1,1);
+    	Ubicacion ubicacion2 = new Ubicacion(0,1);
     	
     	/* por default la direccion inicial a la que se mueve es hacia la derecha */
     	jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa); //crearZangano(ubicacion1);
@@ -312,7 +312,7 @@ public class JugadorZergTest {
 
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(50000, 50000), mapa);
 
-        jugadorZerg.construir("Criadero", new Ubicacion(15,15), jugadorProtoss, mapa);
+        jugadorZerg.construir("Criadero", new Ubicacion(1,1), jugadorProtoss, mapa);
 
         for(int i = 0; i < 4; i++) {
             jugadorZerg.avanzarTurno();
@@ -320,8 +320,8 @@ public class JugadorZergTest {
         }
         
         /* usos las ubicaciones 15,15 porque el mapa no tiene ubicaciones negativas*/
-    	Ubicacion ubicacion1 = new Ubicacion(15,15);
-    	Ubicacion ubicacion2 = new Ubicacion(15,16);
+    	Ubicacion ubicacion1 = new Ubicacion(1,1);
+    	Ubicacion ubicacion2 = new Ubicacion(1,2);
     	
     	/* por default la direccion inicial a la que se mueve es hacia la derecha */
     	jugadorZerg.construir("Zangano", ubicacion1, jugadorProtoss, mapa); //crearZangano(ubicacion1);

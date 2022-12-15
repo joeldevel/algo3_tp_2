@@ -123,22 +123,22 @@ public class JugadorProtossTest {
 
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
 
-        jugadorProtoss.construir("Pilon", new Ubicacion(15,15), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
 
         for(int i = 0; i < 6; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Pilon este operable y energice
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.construir("Acceso", new Ubicacion(17,17), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(3,3), jugadorZerg, mapa);
 
         for(int i = 0; i < 9; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Acceso este operable y transporte unidades
             mapa.avanzarTurno();
         }
 
-        Ubicacion ubicacion1 = new Ubicacion(17,17);
-        Ubicacion ubicacion2 = new Ubicacion(18,17);
+        Ubicacion ubicacion1 = new Ubicacion(3,3);
+        Ubicacion ubicacion2 = new Ubicacion(4,3);
         
         jugadorProtoss.construir("Dragon", ubicacion1, jugadorZerg, mapa); //crearDragon(ubicacion1, mapa);
         
@@ -161,22 +161,22 @@ public class JugadorProtossTest {
 
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
 
-        jugadorProtoss.construir("Pilon", new Ubicacion(15,15), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
 
         for(int i = 0; i < 6; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Pilon este operable y energice
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.construir("Acceso", new Ubicacion(17,17), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(3,3), jugadorZerg, mapa);
 
         for(int i = 0; i < 9; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Acceso este operable y transporte unidades
             mapa.avanzarTurno();
         }
 
-        Ubicacion ubicacion1 = new Ubicacion(17,17);
-        Ubicacion ubicacion2 = new Ubicacion(17,16);
+        Ubicacion ubicacion1 = new Ubicacion(3,3);
+        Ubicacion ubicacion2 = new Ubicacion(3,2);
         
         jugadorProtoss.construir("Dragon", ubicacion1, jugadorZerg, mapa); //crearDragon(ubicacion1, mapa);
         
@@ -201,22 +201,22 @@ public class JugadorProtossTest {
 
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
 
-        jugadorProtoss.construir("Pilon", new Ubicacion(15,15), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
 
         for(int i = 0; i < 6; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Pilon este operable y energice
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.construir("Acceso", new Ubicacion(17,17), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(3,3), jugadorZerg, mapa);
 
         for(int i = 0; i < 9; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Acceso este operable y transporte unidades
             mapa.avanzarTurno();
         }
 
-        Ubicacion ubicacion1 = new Ubicacion(17,17);
-        Ubicacion ubicacion2 = new Ubicacion(16,17);
+        Ubicacion ubicacion1 = new Ubicacion(3,3);
+        Ubicacion ubicacion2 = new Ubicacion(2,3);
         
         jugadorProtoss.construir("Dragon", ubicacion1, jugadorZerg, mapa); //crearDragon(ubicacion1, mapa);
         
@@ -241,22 +241,22 @@ public class JugadorProtossTest {
 
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", new Recursos(50000, 50000), mapa);
 
-        jugadorProtoss.construir("Pilon", new Ubicacion(15,15), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
+        jugadorProtoss.construir("Pilon", new Ubicacion(1,1), jugadorZerg, mapa); // Debemos construir un Pilon debido a la energia
 
         for(int i = 0; i < 6; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Pilon este operable y energice
             mapa.avanzarTurno();
         }
 
-        jugadorProtoss.construir("Acceso", new Ubicacion(17,17), jugadorZerg, mapa);
+        jugadorProtoss.construir("Acceso", new Ubicacion(3,3), jugadorZerg, mapa);
 
         for(int i = 0; i < 9; i++) {
             jugadorProtoss.avanzarTurno(); // Avanzamos los turnos para que el Acceso este operable y transporte unidades
             mapa.avanzarTurno();
         }
 
-        Ubicacion ubicacion1 = new Ubicacion(17,17);
-        Ubicacion ubicacion2 = new Ubicacion(17,18);
+        Ubicacion ubicacion1 = new Ubicacion(3,3);
+        Ubicacion ubicacion2 = new Ubicacion(3,4);
         
         jugadorProtoss.construir("Dragon", ubicacion1, jugadorZerg, mapa); //crearDragon(ubicacion1, mapa);
         
