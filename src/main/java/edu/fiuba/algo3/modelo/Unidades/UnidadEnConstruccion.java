@@ -17,7 +17,7 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
 
     @Override
     public boolean compararSuperficie(String otraSuperficie) {
-        throw new UnidadEnConstruccionException();
+        return true;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void conNodo(NodoMineral nodo) {
+    public void trabajarEn(NodoMineral nodo) {
         throw new UnidadEnConstruccionException();
     }
 

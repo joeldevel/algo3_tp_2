@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -112,31 +114,39 @@ public class PantallaJuego extends BorderPane {
         contenedorVerticalEntidad.setTranslateX(-120);
         contenedorVerticalEntidad.setTranslateY(125);
 
-        if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
-            Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
-
-            primerInformacion.setText("Vida: " + unidad.vidaRestante());
-            segundaInformacion.setText("Escudo: " + unidad.escudoRestante());
-        }
 
         if(algoStar.obtenerMapa().verificarEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
             Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             primerInformacion.setText("Vida: " + edificio.obtenerVida());
+            primerInformacion.setTranslateX(20);
+
             segundaInformacion.setText("Escudo: " + edificio.obtenerEscudo());
+            segundaInformacion.setTranslateX(20);
         }
 
-        if(algoStar.obtenerMapa().verificarVolcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+        else if(algoStar.obtenerMapa().verificarVolcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
             Volcan volcan = algoStar.obtenerMapa().volcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             primerInformacion.setText("Gas: " + volcan.getCantidadDeGasVespenoDisponible());
+            primerInformacion.setTranslateX(20);
         }
 
-        if(algoStar.obtenerMapa().verificarNodoMineralEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+        else if(algoStar.obtenerMapa().verificarNodoMineralEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
             NodoMineral nodo = algoStar.obtenerMapa().nodoEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             primerInformacion.setText("Mineral: " + nodo.getCantidadDeMineralDisponible());
             primerInformacion.setTranslateX(20);
+        }
+
+        else if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
+
+            primerInformacion.setText("Vida: " + unidad.vidaRestante());
+            primerInformacion.setTranslateX(20);
+
+            segundaInformacion.setText("Escudo: " + unidad.escudoRestante());
+            segundaInformacion.setTranslateX(20);
         }
 
         this.setRight(contenedorVerticalEntidad);
@@ -459,7 +469,7 @@ public class PantallaJuego extends BorderPane {
         dragon.setMinWidth(130);
 
         BotonCrearEntidadEventHandler botonCrearDragonEventHandler = new BotonCrearEntidadEventHandler("Dragon", algoStar, vistaMapa, this);
-        zealot.setOnAction(botonCrearDragonEventHandler);
+        dragon.setOnAction(botonCrearDragonEventHandler);
 
         Button scout = new Button();
         scout.setText("Crear Scout ");

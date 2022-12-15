@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.Unidades;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
 public class Unidad extends Raza {
 
@@ -89,8 +88,11 @@ public class Unidad extends Raza {
 		return this.estado.vidaRestante();
 	}
 
-	public void conNodo(NodoMineral nodo) {
-		this.estado.conNodo(nodo);
+	public void trabajarEn(NodoMineral nodo) {
+
+		if(nodo.ubicacion().esIgualA(this.ubicacion)) {
+			this.estado.trabajarEn(nodo);
+		}
 	}
 
 	public int escudoRestante() {

@@ -39,7 +39,7 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Mutalisco no entiende este mensaje.
 	}
 

@@ -1,10 +1,8 @@
 package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Extractor;
 import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -48,7 +46,7 @@ public class BotonTrabajarEventHandler implements EventHandler<ActionEvent> {
 
             Unidad zangano = mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaY())));
             NodoMineral nodo = (NodoMineral) mapa.nodoEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
-            zangano.conNodo(nodo);
+            zangano.trabajarEn(nodo);
 
             this.pantalla.setDerecha(this.algoStar);
             this.vistaMapa.update();

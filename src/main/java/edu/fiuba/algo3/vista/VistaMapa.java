@@ -155,17 +155,17 @@ public class VistaMapa {
                 }
 
                 else if(unidad.obtenerTipo() instanceof Zealot) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/zealot/zealot.png.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/zealot/zealot01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, convertirCoordenada(ubicacion.obtenerX()), convertirCoordenada(ubicacion.obtenerY()));
                 }
 
                 else if(unidad.obtenerTipo() instanceof Dragon) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/dragon/dragon01.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/dragon/dragon01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, convertirCoordenada(ubicacion.obtenerX()), convertirCoordenada(ubicacion.obtenerY()));
                 }
 
                 else if(unidad.obtenerTipo() instanceof Scout) {
-                    Image imagen = new Image("file:src/main/resources/images/sprites/zerg/scout/scout01.png", 50, 50, true, false);
+                    Image imagen = new Image("file:src/main/resources/images/sprites/protoss/scout/scout01.png", 50, 50, true, false);
                     this.canvas.getGraphicsContext2D().drawImage(imagen, convertirCoordenada(ubicacion.obtenerX()), convertirCoordenada(ubicacion.obtenerY()));
                 }
             }

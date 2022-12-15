@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBajasException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Revelable;
@@ -53,7 +52,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Zealot no entiende este mensaje.
 	}
 
@@ -99,8 +98,6 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	public void hacerseInvisible() {
 		if (cantidadDeBajas >= 3) {
 			estado = new ZealotInvisible();
-		} else {
-			throw new CantidadInsuficienteDeBajasException();
 		}
 	}
 

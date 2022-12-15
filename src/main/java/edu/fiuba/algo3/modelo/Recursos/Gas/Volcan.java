@@ -26,6 +26,7 @@ public class Volcan {
     	if(this.refineria.tieneRefineria()) {
     		throw new VolcanYaTieneUnaRefineriaDeGasConstruidaException();
     	}
+
     	this.refineria = unaRefineriaDeGas;
     }
     

@@ -87,8 +87,8 @@ public class Mapa {
     }
     
     public boolean ubicacionEstaDentroDeMapa(Ubicacion unaUbicacion) {
-    	return( (unaUbicacion.xDentroDeRango(0, ANCHO)) &&
-    			(unaUbicacion.yDentroDeRango(0, ALTURA)) );
+    	return( (unaUbicacion.xDentroDeRango(0, ANCHO-1)) &&
+    			(unaUbicacion.yDentroDeRango(0, ALTURA-1)) );
     }
 
     public boolean verificarEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {

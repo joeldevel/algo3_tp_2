@@ -37,7 +37,7 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Scout no entiende este mensaje.
 	}
 

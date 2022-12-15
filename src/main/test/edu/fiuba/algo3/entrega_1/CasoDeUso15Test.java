@@ -94,7 +94,7 @@ public class CasoDeUso15Test {
         Zangano tipoZangano =  new Zangano(jugadorZerg);
         Unidad zangano = new Unidad(new Tiempo(CONSTRUCCION_ZANGANO), new Ubicacion(0,0), tipoZangano);
         zangano.avanzarTurno(1);
-        zangano.conNodo(nodoMineral);
+        zangano.trabajarEn(nodoMineral);
 
         // Act & Assert
         assertThrows(NodoMineralSinMineralParaRecolectarException.class,()->{

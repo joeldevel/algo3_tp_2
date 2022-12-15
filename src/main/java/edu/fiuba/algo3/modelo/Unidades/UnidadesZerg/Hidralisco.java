@@ -36,7 +36,7 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Hidralisco no entiende este mensaje.
 	}
 

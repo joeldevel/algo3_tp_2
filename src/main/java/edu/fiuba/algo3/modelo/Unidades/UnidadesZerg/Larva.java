@@ -14,7 +14,7 @@ public class Larva implements TipoDeUnidad {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Larva no entiende este mensaje.
 	}
 

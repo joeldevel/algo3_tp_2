@@ -25,6 +25,7 @@ public class NodoMineral implements Mineral {
     	if(this.minero.tieneMinero()) {
     		throw new NodoMineralYaTieneUnRecolectorDeMineralException();
     	}
+
     	this.minero = unMinero;
     }
     

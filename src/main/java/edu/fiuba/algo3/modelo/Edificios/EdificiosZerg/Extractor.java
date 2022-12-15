@@ -57,8 +57,10 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     	if(this.contarZanganos() == this.cantidadMaximaDeZanganos) {
     		throw new CantidadMaximaDeZanganosEnExtractorException();
     	}
-    	this.zanganos.add(unZangano);
-    	
+
+    	if(unZangano.ubicacion().esIgualA(this.ubicacion())) {
+			this.zanganos.add(unZangano);
+		}
     }
 
     @Override

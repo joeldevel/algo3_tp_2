@@ -39,7 +39,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     }
 
     @Override
-    public void conNodo(NodoMineral nodo) {
+    public void trabajarEn(NodoMineral nodo) {
         // Amo Supremo no entiende este mensaje.
     }
 

@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBajasException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Mapa;
@@ -25,7 +24,7 @@ public class CasoDeUso28Test {
     Mapa mapa = new Mapa();
 
     @Test
-    void test01UnZealotIntentaHacerseInvisibleSinTenerTresBajasYSaleUnError() {
+    void test01UnZealotIntentaHacerseInvisibleSinTenerTresBajasYAlAtacarloUnHidraliscoElEscudoDelZealotDisminuye() {
         // Arrange
         Recursos recursos = new Recursos(1000,1000);
         JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Azul", recursos, mapa);
@@ -46,15 +45,25 @@ public class CasoDeUso28Test {
         mapa.agregarUnidad(zerling2);
         zerling2.avanzarTurno(2);
 
+        Hidralisco tipoHidralisco = new Hidralisco(jugadorZerg);
+        Unidad hidralisco = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(0,0), tipoHidralisco);
+        mapa.agregarUnidad(hidralisco);
+        hidralisco.avanzarTurno(4);
+
         // Act and Assert
         for(int i = 0; i < 5; i++) {
             zealot.atacar(zerling1);
             zealot.atacar(zerling2);
         }
 
-        assertThrows(CantidadInsuficienteDeBajasException.class,()->{
-            zealot.avanzarTurno();
-        });
+        zealot.avanzarTurno();
+        mapa.avanzarTurno();
+
+        // Act
+        hidralisco.atacar(zealot);
+
+        // Assert
+        assertEquals(50, zealot.escudoRestante());
     }
 
     @Test
@@ -93,11 +102,6 @@ public class CasoDeUso28Test {
         Hidralisco tipoHidralisco = new Hidralisco(jugadorZerg);
         Unidad hidralisco = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(0,0), tipoHidralisco);
         mapa.agregarUnidad(hidralisco);
-        hidralisco.avanzarTurno(4);
-
-        Hidralisco tipoHidralisco2 = new Hidralisco(jugadorZerg);
-        Unidad hidralisco3 = new Unidad(new Tiempo(CONSTRUCCION_HIDRALISCO), new Ubicacion(10,10), tipoHidralisco2);
-        mapa.agregarUnidad(hidralisco3);
         hidralisco.avanzarTurno(4);
 
         for(int i = 0; i < 5; i++) {

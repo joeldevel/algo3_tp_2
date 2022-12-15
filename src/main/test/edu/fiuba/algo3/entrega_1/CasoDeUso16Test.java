@@ -55,7 +55,7 @@ public class CasoDeUso16Test {
         Recursos recursosZerg = new Recursos(0,25);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursosZerg, mapa);
         Zangano zangano = new Zangano(jugadorZerg);
-        zangano.conNodo(nodoMineral);
+        zangano.trabajarEn(nodoMineral);
 
         assertThrows(NodoMineralYaTieneUnRecolectorDeMineralException.class,()->{
             NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);

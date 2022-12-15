@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 
 public interface TipoDeUnidad {
 
-	void conNodo(NodoMineral nodo);
+	void trabajarEn(NodoMineral nodo);
 
 	void setComportamientoUnidad(Unidad unaUnidad);
 

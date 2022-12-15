@@ -35,7 +35,7 @@ public class Zerling implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Zerling no entiende este mensaje.
 	}
 

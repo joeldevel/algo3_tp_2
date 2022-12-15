@@ -44,9 +44,9 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 		this.unidad = unaUnidad;
 	}
     
-    public void conNodo(NodoMineral unNodo) {
-    	this.nodo = unNodo;
-    	unNodo.construirRecolectorDeMineral(this);
+    public void trabajarEn(NodoMineral unNodo) {
+		this.nodo = unNodo;
+		unNodo.construirRecolectorDeMineral(this);
     }
 
 	public void avanzarTurno() {
@@ -67,7 +67,6 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public boolean tieneMinero() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

@@ -35,7 +35,7 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Guardian no entiende este mensaje.
 	}
 

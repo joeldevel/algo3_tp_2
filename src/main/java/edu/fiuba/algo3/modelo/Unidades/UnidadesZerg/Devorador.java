@@ -35,7 +35,7 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void conNodo(NodoMineral nodo) {
+    public void trabajarEn(NodoMineral nodo) {
         // Devorador no entiende este mensaje.
     }
 

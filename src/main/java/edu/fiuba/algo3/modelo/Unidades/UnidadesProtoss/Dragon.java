@@ -37,7 +37,7 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Dragon no entiende este mensaje.
 	}
 
