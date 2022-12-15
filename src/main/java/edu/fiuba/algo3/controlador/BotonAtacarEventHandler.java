@@ -25,24 +25,24 @@ public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        if (mapa.verificarUnidadEnUbicacion(new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()))) {
-            Unidad atacable = mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()));
+        if (mapa.verificarUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())))) {
+            Unidad atacable = mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
 
             System.out.println("Vida atacable antes: " + atacable.vidaRestante());
 
-            mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.getUnidadCoordenadaX(), this.pantalla.getUnidadCoordenadaY())).atacar(atacable);
+            mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY()))).atacar(atacable);
 
             System.out.println("Vida atacable despues: " + atacable.vidaRestante());
 
             vistaMapa.update();
         }
 
-        else if (mapa.verificarEdificioEn(new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()))) {
-            Edificio atacable = mapa.obtenerEdificioEn(new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()));
+         if (mapa.verificarEdificioEn(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())))) {
+            Edificio atacable = mapa.obtenerEdificioEn(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
 
             System.out.println("Vida atacable antes: " + atacable.obtenerVida());
 
-            mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.getUnidadCoordenadaX(), this.pantalla.getUnidadCoordenadaY())).atacar(atacable);
+            mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaY()))).atacar(atacable);
 
             System.out.println("Vida atacable despues: " + atacable.obtenerVida());
 

@@ -7,9 +7,6 @@ import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMinera
 
 public class NodoMineral implements Mineral {
 
-    public final int ALTO_RADIO = 21;
-    public final int ANCHO_RADIO = 25;
-
     private Minero minero;
     private int cantidadDeMineralDisponible;
     private Ubicacion ubicacion;
@@ -18,7 +15,6 @@ public class NodoMineral implements Mineral {
         this.minero = new SinMinero(this);
         this.cantidadDeMineralDisponible = 2000;
         this.ubicacion = unaUbicacion;
-        this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
     }
 
     public void construirRecolectorDeMineral(Minero unMinero) {

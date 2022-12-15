@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class Mapa {
 
-	private static int ANCHO = 1000;
-	private static int ALTURA = 500;
+	private static int ANCHO = 28;
+	private static int ALTURA = 14;
 
     private Moho moho;
     private ArrayList<Pilon> pilones;
@@ -66,16 +66,16 @@ public class Mapa {
 
     public void crearBases() {
     	// Primer base creada manualmente
-    	this.agregarVolcan(new Ubicacion(35,23));
-    	this.agregarNodoMineral(new Ubicacion(80,23));
-    	this.agregarNodoMineral(new Ubicacion(35,57));
-    	this.agregarNodoMineral(new Ubicacion(80,57));
+		this.agregarVolcan(new Ubicacion(0,0));
+		this.agregarNodoMineral(new Ubicacion(1,1));
+		this.agregarNodoMineral(new Ubicacion(0,1));
+		this.agregarNodoMineral(new Ubicacion(1,0));
 
 		// Segunda base creada manualmente
-		this.agregarVolcan(new Ubicacion(965,477));
-		this.agregarNodoMineral(new Ubicacion(965,444));
-		this.agregarNodoMineral(new Ubicacion(920,477));
-		this.agregarNodoMineral(new Ubicacion(920,444));
+		this.agregarVolcan(new Ubicacion(27,13));
+		this.agregarNodoMineral(new Ubicacion(26,12));
+		this.agregarNodoMineral(new Ubicacion(27,12));
+		this.agregarNodoMineral(new Ubicacion(26,13));
     }
     
     public void crearAreas() {

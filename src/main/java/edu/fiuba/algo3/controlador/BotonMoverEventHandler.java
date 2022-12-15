@@ -21,12 +21,7 @@ public class BotonMoverEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        jugador.moverUnidadEn(new Ubicacion(pantalla.getCoordenadaX(), pantalla.getCoordenadaY()));
-
-        // Obtenemos las nuevas coordenadas para no tener que volver a clickear la unidad
-        //Unidad unidadMovida = jugador.obtenerUnidadEn(new Ubicacion(pantalla.getCoordenadaX(), pantalla.getCoordenadaY()));
-        //this.pantalla.setCoordenadas(unidadMovida.ubicacion().obtenerX(), unidadMovida.ubicacion().obtenerY());
-
+        jugador.moverUnidadEn(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
         this.vista.update();
     }
 }

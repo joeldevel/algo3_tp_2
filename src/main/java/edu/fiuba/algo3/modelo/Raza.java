@@ -3,9 +3,6 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 public abstract class Raza implements Atacable, Revelable{
-
-	public static final int ALTO_RADIO = 20;
-	public static final int ANCHO_RADIO = 20;
 	
 	protected Tiempo tiempo;
 	protected Ubicacion ubicacion;
@@ -14,7 +11,6 @@ public abstract class Raza implements Atacable, Revelable{
 	public Raza(Tiempo unTiempo, Ubicacion unaUbicacion) {
 		this.tiempo = unTiempo;
 		this.ubicacion = unaUbicacion;
-		this.ubicacion.setPerimetro(ALTO_RADIO, ANCHO_RADIO);
 	}
 
 	public int tiempoRestante() {

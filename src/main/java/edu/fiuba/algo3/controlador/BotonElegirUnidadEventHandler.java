@@ -20,10 +20,10 @@ public class BotonElegirUnidadEventHandler implements EventHandler<ActionEvent> 
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        if(mapa.verificarUnidadEnUbicacion(new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()))) {
+        if(mapa.verificarUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())))) {
             this.pantalla.setUnidadCoordenadas(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY());
 
-            System.out.println("Vida atacante: " +  mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY())).vidaRestante());
+            System.out.println("Vida atacante: " +  mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY()))).vidaRestante());
         }
     }
 }

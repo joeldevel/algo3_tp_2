@@ -22,8 +22,10 @@ import javafx.stage.Stage;
 
 public class PantallaJuego extends BorderPane { // 24:47
 
-    public static int ANCHO = 1000;
-    public static int ALTURA = 500;
+    public static int ANCHO = 1400;
+    public static int ALTURA = 700;
+
+    public static int TAMAÑO_CELDA = 50;
 
     private int coordenadaX;
     private int coordenadaY;
@@ -51,9 +53,16 @@ public class PantallaJuego extends BorderPane { // 24:47
             this.coordenadaY = (int) e.getY();
             System.out.println("y: " + e.getY() + "\n");
 
+            this.convertirCoordenada(this.coordenadaX);
+
             this.setDerecha(algoStar);
 
         });
+    }
+
+    public int convertirCoordenada(int unaCoordenada) {
+        int nuevaCoordenada = (int) Math.ceil(unaCoordenada/TAMAÑO_CELDA);
+        return nuevaCoordenada;
     }
 
     public void setUnidadCoordenadas(int x, int y) {
@@ -99,15 +108,15 @@ public class PantallaJuego extends BorderPane { // 24:47
         contenedorVerticalEntidad.setTranslateX(-225);
         contenedorVerticalEntidad.setTranslateY(80);
 
-        if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-            Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(this.coordenadaX, this.coordenadaY));
+        if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             vida.setText("Vida: " + unidad.vidaRestante());
             escudo.setText("Escudo: " + unidad.escudoRestante());
         }
 
-        if(algoStar.obtenerMapa().verificarEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY))) {
-            Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(this.coordenadaX, this.coordenadaY));
+        if(algoStar.obtenerMapa().verificarEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             vida.setText("Vida: " + edificio.obtenerVida());
             escudo.setText("Escudo: " + edificio.obtenerEscudo());
@@ -317,7 +326,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         guardian.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoAGuardian(new Ubicacion(coordenadaX, coordenadaY));
+                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoAGuardian(new Ubicacion(convertirCoordenada(coordenadaX), convertirCoordenada(coordenadaY)));
             }
         });
 
@@ -328,7 +337,7 @@ public class PantallaJuego extends BorderPane { // 24:47
         devorador.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoADevorador(new Ubicacion(coordenadaX, coordenadaY));
+                ((JugadorZerg) jugadorZerg).evolucionarMutaliscoADevorador(new Ubicacion(convertirCoordenada(coordenadaX), convertirCoordenada(coordenadaY)));
             }
         });
 

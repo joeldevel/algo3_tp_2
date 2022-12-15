@@ -60,12 +60,12 @@ public class JugadorZergTest {
 
         jugadorZerg.construir("Criadero", new Ubicacion(0,0), jugadorProtoss, mapa); // Debemos construir un Criadero debido al moho
 
-        for(int i = 0; i < 50; i++) {
+        for(int i = 0; i < 5; i++) {
             jugadorZerg.avanzarTurno();
             mapa.avanzarTurno();
         }
 
-        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(30,0), jugadorProtoss, mapa);
+        jugadorZerg.construir("ReservaDeReproduccion", new Ubicacion(1,0), jugadorProtoss, mapa);
 
         for(int i = 0; i < 13; i++) {
             jugadorZerg.avanzarTurno();
@@ -73,7 +73,7 @@ public class JugadorZergTest {
         }
 
         // Act
-        jugadorZerg.construir("Zerling", new Ubicacion(30,0), jugadorProtoss, mapa); //crearZerling(new Ubicacion(30,0));
+        jugadorZerg.construir("Zerling", new Ubicacion(1,0), jugadorProtoss, mapa);
         jugadorZerg.avanzarTurno();
         mapa.avanzarTurno();
 

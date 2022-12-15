@@ -33,7 +33,7 @@ public class BotonCrearEntidadEventHandler implements EventHandler<ActionEvent> 
         Mapa mapa = this.juego.obtenerMapa();
 
         // Creamos el edificio
-        jugadorTurno.construir(this.entidad, new Ubicacion(this.pantalla.getCoordenadaX(), this.pantalla.getCoordenadaY()), jugadorContrario, mapa);
+        jugadorTurno.construir(this.entidad, new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())), jugadorContrario, mapa);
         // Actualizamos el mapa y la informacion en la pantalla
         this.vistaMapa.update();
         this.pantalla.setInformacion(this.juego);
