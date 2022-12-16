@@ -4,10 +4,8 @@ import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConst
 
 public class SinMinero implements Minero {
 
-	private NodoMineral nodo;
-	
-	public SinMinero(NodoMineral unNodo) {
-		this.nodo = unNodo;
+	public SinMinero() {
+		
 	}
 	
 	@Override

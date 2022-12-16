@@ -5,10 +5,6 @@ import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Ubicacion;
 
-// La poblacion aumenta a medida que se crean los edificios correspondientes.
-// El cupo aumenta a metida que se crean unidades.
-// Siempre debe cumplirse que cupo <= poblacion <= MAX_POBLACION.
-
 public class JugadorProtoss extends Jugador{
 
     private static final String RAZA = "Protoss";

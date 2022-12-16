@@ -14,7 +14,7 @@ public class NodoMineral implements Mineral {
     private Ubicacion ubicacion;
 
     public NodoMineral(Ubicacion unaUbicacion) {
-        this.minero = new SinMinero(this);
+        this.minero = new SinMinero();
         this.cantidadDeMineralDisponible = MINERAL_INICIAL;
         this.ubicacion = unaUbicacion;
     }
@@ -39,7 +39,6 @@ public class NodoMineral implements Mineral {
     @Override
     public int recolectarMineral(int unaCantidadDeMineralParaExtraer) {
     	
-    	/* Caso borde donde por ejemplo tenemos 10 de mineral y nos piden 30. Deberiamos devolver esos 10 y dejar al Nodo Mineral en 0. */
     	if(this.mineralRestante() == 0) {
     		throw new NodoMineralSinMineralParaRecolectarException();
     	}

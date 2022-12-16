@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoError;
 
 public class Escudo {
 
+	private static double MULTIPLICADOR = 0.05;
+	
 	private int proteccionMax;
 	private int proteccionRestante;
 	
@@ -42,7 +44,7 @@ public class Escudo {
     }
 	
 	 private int recuperacion(){
-	    	return ((int)(this.proteccionMax * 0.05));
+	    	return ((int)(this.proteccionMax * MULTIPLICADOR));
 	    }
 	
 	

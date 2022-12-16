@@ -20,9 +20,6 @@ public class Ataque {
 	
 	public void atacarA(Atacable unAtacable, Unidad unidadAtacante) {
 
-        // En caso de que el ataque y la unidad atacada no sean compatibles, devuelve false y entonces no se hace nada.
-        // Este resultado se ve reflejado en el escudo o vida de la unidad atacada ya que permanecera igual.
-
 		if(this.superficie.atacableTieneLaMismaSuperficie(unAtacable)) {
             unAtacable.recibirAtaque(this.danio, unidadAtacante);
         }

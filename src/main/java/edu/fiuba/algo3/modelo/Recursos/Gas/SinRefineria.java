@@ -1,17 +1,11 @@
 package edu.fiuba.algo3.modelo.Recursos.Gas;
 
 import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaException;
-import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
-import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 
 public class SinRefineria implements RefineriaDeGas {
 	
-	private int cantidadExtraida;
-	private Volcan volcan;
-	
-	public SinRefineria(Volcan unVolcan) {
-		this.cantidadExtraida = 0;
-		this.volcan = unVolcan;
+	public SinRefineria() {
+		
 	}
 
 	@Override

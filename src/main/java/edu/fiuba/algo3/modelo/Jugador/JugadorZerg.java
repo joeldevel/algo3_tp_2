@@ -10,10 +10,6 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import java.util.ArrayList;
 
-// La poblacion aumenta a medida que se crean los edificios correspondientes.
-// El cupo aumenta a metida que se crean unidades.
-// Siempre debe cumplirse que cupo <= poblacion <= MAX_POBLACION.
-
 public class JugadorZerg extends Jugador {
 
     private static final String RAZA = "Zerg";
@@ -42,7 +38,7 @@ public class JugadorZerg extends Jugador {
     }
 
     public ArrayList<Unidad> obtenerLarvas() {
-        // Devolvemos las larvas del primer criadero que encontremos
+        
         for(Edificio edificio: this.edificios) {
             if(edificio.esUn("Criadero")) {
             	Criadero criadero = (Criadero)edificio;

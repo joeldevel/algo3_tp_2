@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Recursos.Minerales;
 
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
 
 public class SinNodoMineral implements Mineral {
 

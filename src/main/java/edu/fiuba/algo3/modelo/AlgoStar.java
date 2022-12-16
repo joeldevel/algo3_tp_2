@@ -28,7 +28,6 @@ public class AlgoStar {
         this.jugadorTurno = unJugador;
     }
 
-    // Getter para obtener de quien es el turno y poder elegir acciones.
     public Jugador obtenerJugadorTurno() {
         return (this.jugadorTurno);
     }

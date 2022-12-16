@@ -7,6 +7,8 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 
 public class Vida {
+	
+	private static double MULTIPLICADOR = 0.05;
 
     private int vidaMax;
     private int vidaRestante;
@@ -60,6 +62,6 @@ public class Vida {
     }
     
     private int recuperacion(){
-    	return ((int)(this.vidaMax * 0.05));
+    	return ((int)(this.vidaMax * MULTIPLICADOR));
     }
 }

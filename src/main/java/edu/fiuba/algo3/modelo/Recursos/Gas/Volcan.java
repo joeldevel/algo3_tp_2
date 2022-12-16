@@ -14,7 +14,7 @@ public class Volcan {
     private Ubicacion ubicacion;
 
     public Volcan(Ubicacion unaUbicacion) {
-    	this.refineria = new SinRefineria(this);
+    	this.refineria = new SinRefineria();
         this.cantidadDeGasVespenoDisponible = GAS_INICIAL;
         this.ubicacion = unaUbicacion;
     }
@@ -46,7 +46,6 @@ public class Volcan {
             throw new VolcanSinRefineriaDeGasConstruidaException();
         }
 
-        /* Caso borde donde por ejemplo tenemos 10 de gas y nos piden 20. Deberiamos devolver esos 10 y dejar al Volcan en 0. */
         if(this.gasVespenoRestante() < unaCantidadDeGasParaExtraer) {
             unaCantidadDeGasParaExtraer = this.gasVespenoRestante();
             this.cantidadDeGasVespenoDisponible = 0;
