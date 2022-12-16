@@ -14,11 +14,14 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
-	public static final int SUMINISTRO_ZANGANO = 1;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 25;
-	private final int COSTO_GAS = 0;
 	public static final int CONSTRUCCION_ZANGANO = -1;
+	private static final int VIDA_ZANGANO = 25;
+
+	public static final int SUMINISTRO_ZANGANO = 1;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 25;
+	private static final int COSTO_GAS = 0;
+	private static final int RECOLECTABLE = 10;
 
 	private Vida vida;
 	private Jugador jugador;
@@ -31,10 +34,10 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 	public Zangano(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(25);
+		this.vida = new Vida(VIDA_ZANGANO);
 		this.superficie = new Superficie("Tierra");
 
-		this.cantidadRecolectableDeMineral = 10;
+		this.cantidadRecolectableDeMineral = RECOLECTABLE;
 		this.jugador = unJugador;
 		this.unidad = null;
 		this.nodo = new SinNodoMineral();
@@ -89,7 +92,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public int obtenerSuministro() {
-		return this.SUMINISTRO_ZANGANO;
+		return SUMINISTRO_ZANGANO;
 	}
 
 	@Override
@@ -105,7 +108,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
-		// Zangano no entiende este mensaje.
+		// No entiende este mensaje.
 	}
 
 	@Override
@@ -120,26 +123,26 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
+		// ...
 	}
 }

@@ -35,7 +35,7 @@ public class PantallaJugadores extends VBox {
 
         // Imagen de fondo
 
-        Image imagen = new Image("file:src/main/resources/images/intro-min.png", 2000, 2000, true, false);
+        Image imagen = new Image("file:src/main/resources/images/background-bienvenidos.png", 2000, 2000, true, false);
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
 

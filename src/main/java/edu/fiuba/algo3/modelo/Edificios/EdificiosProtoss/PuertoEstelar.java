@@ -10,15 +10,21 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.CONSTRUCCION_SCOUT;
+
 public class PuertoEstelar extends EdificioProtoss {
 
-    private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 150;
-	private final int COSTO_GAS = 150;
-	
+    public static final int CONSTRUCCION_PUERTO = -10;
+    public static final int VIDA_PUERTO = 600;
+    public static final int ESCUDO_PUERTO = 600;
+
+    private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 150;
+	private static final int COSTO_GAS = 150;
+
     public PuertoEstelar(Ubicacion unaUbicacion, Jugador unJugador){
-        super(new Tiempo(-10), new Vida(600), new Escudo(600), unaUbicacion, unJugador,"PuertoEstelar");
-        
+        super(new Tiempo(CONSTRUCCION_PUERTO), new Vida(VIDA_PUERTO), new Escudo(ESCUDO_PUERTO), unaUbicacion, unJugador,"PuertoEstelar");
+
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
     }
@@ -35,6 +41,7 @@ public class PuertoEstelar extends EdificioProtoss {
     
     @Override
     public void ejecutaOperable() {
+        // ...
     }
     
     public Unidad transportarScout() {
@@ -44,7 +51,7 @@ public class PuertoEstelar extends EdificioProtoss {
     	if(this.tiempoRestante() != 0) {
 			throw new EdificioNoOperativoException();
 		}
-    	Unidad scout = new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.jugador));
+    	Unidad scout = new Unidad(new Tiempo(CONSTRUCCION_SCOUT), this.ubicacion, new Scout(this.jugador));
     	return scout;
     }
 	

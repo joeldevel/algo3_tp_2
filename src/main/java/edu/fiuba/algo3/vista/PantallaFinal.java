@@ -27,7 +27,7 @@ public class PantallaFinal extends VBox {
 
         // Imagen de fondo
 
-        Image imagen = new Image("file:src/main/resources/images/background01.png", 1950, 1100, false, false);
+        Image imagen = new Image("file:src/main/resources/images/background-final.png", 1950, 1100, false, false);
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
 

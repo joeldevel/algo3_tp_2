@@ -7,13 +7,15 @@ import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMinera
 
 public class NodoMineral implements Mineral {
 
+    private static final int MINERAL_INICIAL = 2000;
+
     private Minero minero;
     private int cantidadDeMineralDisponible;
     private Ubicacion ubicacion;
 
     public NodoMineral(Ubicacion unaUbicacion) {
         this.minero = new SinMinero(this);
-        this.cantidadDeMineralDisponible = 2000;
+        this.cantidadDeMineralDisponible = MINERAL_INICIAL;
         this.ubicacion = unaUbicacion;
     }
 

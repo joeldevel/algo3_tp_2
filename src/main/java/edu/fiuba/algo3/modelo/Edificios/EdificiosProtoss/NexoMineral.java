@@ -12,20 +12,24 @@ import java.util.ArrayList;
 
 public class NexoMineral extends EdificioProtoss implements Minero {
 
-    private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 50;
-	private final int COSTO_GAS = 0;
+    public static final int CONSTRUCCION_NEXO = -4;
+    public static final int VIDA_NEXO = 250;
+    public static final int ESCUDO_NEXO = 250;
+
+    private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 50;
+	private static final int COSTO_GAS = 0;
+	private static final int RECOLECTABLE = 10;
 	
 	private int cantidadRecolectable;
     private NodoMineral nodo;
-
 	
     public NexoMineral(NodoMineral unNodo, Ubicacion unaubicacion, Jugador unJugador) {
-        super(new Tiempo(-4), new Vida(250), new Escudo(250), unaubicacion, unJugador,"NexoMineral");
+        super(new Tiempo(CONSTRUCCION_NEXO ), new Vida(VIDA_NEXO), new Escudo(ESCUDO_NEXO), unaubicacion, unJugador,"NexoMineral");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
-        this.cantidadRecolectable = 10;
+        this.cantidadRecolectable = RECOLECTABLE;
         this.nodo = unNodo;
 
         unNodo.construirRecolectorDeMineral(this);

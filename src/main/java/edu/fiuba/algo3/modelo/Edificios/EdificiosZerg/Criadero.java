@@ -16,19 +16,23 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CONSTRUCCION_
 
 public class Criadero extends EdificioZerg {
 
-	private final int POBLACION = 5;
-	private final int COSTO_MINERAL = 200;
-	private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_CRIADERO = -4;
+	public static final int VIDA_CRIADERO = 500;
+
+	private static final int POBLACION = 5;
+	private static final int COSTO_MINERAL = 200;
+	private static final int COSTO_GAS = 0;
+	private static final int MAX_LARVAS = 3;
 	
 	private int maxLarvas;
 	private ArrayList<Unidad> larvas;
 		
 	public Criadero(Ubicacion unaUbicacion, Jugador unJugador) {
-		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador,"Criadero");
+		super(new Tiempo(CONSTRUCCION_CRIADERO), new Vida(VIDA_CRIADERO), unaUbicacion, unJugador,"Criadero");
 		
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.maxLarvas = 3;
+		this.maxLarvas = MAX_LARVAS;
 		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));}};

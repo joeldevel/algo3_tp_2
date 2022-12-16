@@ -21,11 +21,17 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInv
 
 public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
-	public static final int SUMINISTRO_ZEALOT = 2;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 150;
-	private final int COSTO_GAS = 0;
 	public static final int CONSTRUCCION_ZEALOT = -4;
+	private static final int VIDA_ZEALOT = 100;
+	private static final int ESCUDO_ZEALOT = 60;
+
+	private static final int ATAQUE_TIERRA_DANIO = 8;
+	private static final int ATAQUE_TIERRA_RADIO = 1;
+
+	public static final int SUMINISTRO_ZEALOT = 2;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 150;
+	private static final int COSTO_GAS = 0;
 
 	private Vida vida;
 	private Escudo escudo;
@@ -39,13 +45,13 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	public Zealot(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(100);
-		this.escudo = new Escudo(60);
+		this.vida = new Vida(VIDA_ZEALOT);
+		this.escudo = new Escudo(ESCUDO_ZEALOT);
 		this.jugador = unJugador;
 		this.unidad = null;
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{
-			add(new Ataque(8, new Superficie("Tierra"), 1));
+			add(new Ataque(ATAQUE_TIERRA_DANIO, new Superficie("Tierra"), ATAQUE_TIERRA_RADIO));
 		}};
 		this.estado = new ZealotNoInvisible();
 		this.cantidadDeBajas = 0;
@@ -53,7 +59,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void trabajarEn(NodoMineral nodo) {
-		// Zealot no entiende este mensaje.
+		// No entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -131,17 +137,17 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override

@@ -48,7 +48,7 @@ public class VistaMapa {
         for(NodoMineral nodo: this.mapa.nodosMinerales()) {
             Ubicacion ubicacion = nodo.ubicacion();
 
-            Image imagen = new Image("file:src/main/resources/images/nodo-mineral01.png", 50, 50, true, false);
+            Image imagen = new Image("file:src/main/resources/images/nodo-mineral.png", 50, 50, true, false);
             this.canvas.getGraphicsContext2D().drawImage(imagen, convertirCoordenada(ubicacion.obtenerX()), convertirCoordenada(ubicacion.obtenerY())); // Imagen, posicion x, posicion y
         }
 
@@ -188,11 +188,11 @@ public class VistaMapa {
 
     public void clean() {
         // Areas terrestres
-        Image imagen = new Image("file:src/main/resources/images/backgrounddetailed5.png", ANCHO, ALTURA, false, false);
+        Image imagen = new Image("file:src/main/resources/images/background-area-tierra.png", ANCHO, ALTURA, false, false);
         this.canvas.getGraphicsContext2D().drawImage(imagen, 0, 0);
 
         // Areas espaciales
-        Image imagen5 = new Image("file:src/main/resources/images/backgrounddetailed4.png", ANCHO/2, ALTURA/2, false, false);
+        Image imagen5 = new Image("file:src/main/resources/images/background-area-espacial.png", ANCHO/2, ALTURA/2, false, false);
         this.canvas.getGraphicsContext2D().drawImage(imagen5, 400, 200, 600, 300);
     }
 

@@ -7,13 +7,15 @@ import edu.fiuba.algo3.modelo.Excepciones.VolcanYaTieneUnaRefineriaDeGasConstrui
 
 public class Volcan {
 
+    private static final int GAS_INICIAL = 5000;
+
 	private RefineriaDeGas refineria;
     private int cantidadDeGasVespenoDisponible;
     private Ubicacion ubicacion;
 
     public Volcan(Ubicacion unaUbicacion) {
     	this.refineria = new SinRefineria(this);
-        this.cantidadDeGasVespenoDisponible = 5000;
+        this.cantidadDeGasVespenoDisponible = GAS_INICIAL;
         this.ubicacion = unaUbicacion;
     }
 

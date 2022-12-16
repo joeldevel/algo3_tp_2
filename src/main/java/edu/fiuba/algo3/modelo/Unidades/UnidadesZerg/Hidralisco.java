@@ -12,32 +12,37 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int SUMINISTRO_HIDRALISCO = 2;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 50;
-	private final int COSTO_GAS = 100;
 	public static final int CONSTRUCCION_HIDRALISCO = -4;
+	private static final int VIDA_HIDRALISCO = 80;
+
+	private static final int ATAQUE_DANIO = 10;
+	private static final int ATAQUE_RADIO = 4;
+
+	public static final int SUMINISTRO_HIDRALISCO = 2;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 50;
+	private static final int COSTO_GAS = 100;
 	
 	private Vida vida;
 	private Jugador jugador;
 	private Unidad unidad;
 	private Superficie superficie;
-	private ArrayList<Ataque>ataques;
+	private ArrayList<Ataque> ataques;
 	
 	public Hidralisco(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(80);
+		this.vida = new Vida(VIDA_HIDRALISCO);
 		this.jugador = unJugador;
 		this.unidad = null;
 		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(10,new Superficie("Tierra"),4));
-												 add(new Ataque(10,new Superficie("Aire"),4));}};
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(ATAQUE_DANIO ,new Superficie("Tierra"), ATAQUE_RADIO));
+												 add(new Ataque(ATAQUE_DANIO ,new Superficie("Aire"), ATAQUE_RADIO));}};
 	}
 
 	@Override
 	public void trabajarEn(NodoMineral nodo) {
-		// Hidralisco no entiende este mensaje.
+		// No entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -103,31 +108,31 @@ public class Hidralisco implements TipoDeUnidad, Atacante, Atacable {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		// ...
 	}
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 }

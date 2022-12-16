@@ -15,14 +15,17 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling.SUMINISTRO_ZE
 
 public class ReservaDeReproduccion extends EdificioZerg {
 
-	private final int POBLACION = 0;
-    private final int COSTO_MINERAL = 150;
-    private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_RESERVA = -12;
+	public static final int VIDA_RESERVA = 1000;
+
+	private static final int POBLACION = 0;
+    private static final int COSTO_MINERAL = 150;
+    private static final int COSTO_GAS = 0;
     
     private ArrayList<Unidad> larvas;
     	
     public ReservaDeReproduccion(Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(new Tiempo(-12), new Vida(1000), unaUbicacion, unJugador,"ReservaDeReproduccion");
+    	super(new Tiempo(CONSTRUCCION_RESERVA), new Vida(VIDA_RESERVA), unaUbicacion, unJugador,"ReservaDeReproduccion");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
@@ -36,7 +39,7 @@ public class ReservaDeReproduccion extends EdificioZerg {
     
 	@Override
 	public void ejecutaOperable() {
-		//this.crearZerling();
+		// ...
 	}
 
 	@Override
@@ -53,7 +56,6 @@ public void crearZerling() {
 			this.larvas.remove(0);
 			this.jugador.agregarUnidad(unaUnidad);
 		}
-		 
 	}
 	
 	public void recibirLarvas(ArrayList<Unidad> unasLarvas) {

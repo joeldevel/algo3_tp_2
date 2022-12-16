@@ -13,20 +13,25 @@ import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 
 public class Pilon extends EdificioProtoss {
 
-	private final int POBLACION = 5;
-	private final int COSTO_MINERAL = 100;
-	private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_PILON = -5;
+	public static final int VIDA_PILON = 300;
+	public static final int ESCUDO_PILON = 300;
+
+	private static final int POBLACION = 5;
+	private static final int COSTO_MINERAL = 100;
+	private static final int COSTO_GAS = 0;
+	private static final int RADIO = 3;
 	
 	private int radio;
 	private ArrayList<EdificioProtoss> edificios;
 
     public Pilon(Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(new Tiempo(-5), new Vida(300), new Escudo(300), unaUbicacion, unJugador,"Pilon");
+    	super(new Tiempo(CONSTRUCCION_PILON), new Vida(VIDA_PILON), new Escudo(ESCUDO_PILON), unaUbicacion, unJugador,"Pilon");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
     	this.edificios = new ArrayList<>();
-        this.radio = 3;
+        this.radio = RADIO;
     }
 
 	@Override

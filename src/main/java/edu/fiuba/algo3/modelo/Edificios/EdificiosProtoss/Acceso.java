@@ -15,15 +15,21 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.CONSTRUCCION_DRAGON;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.CONSTRUCCION_ZEALOT;
+
 public class Acceso extends EdificioProtoss {
 
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 150;
-	private final int COSTO_GAS = 0;
-	
+	public static final int CONSTRUCCION_ACCESO = -8;
+	public static final int VIDA_ACCESO = 500;
+	public static final int ESCUDO_ACCESO = 500;
+
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 150;
+	private static final int COSTO_GAS = 0;
 	
     public Acceso(Ubicacion unaUbicacion, Jugador unJugador) {
-		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador,"Acceso");
+		super(new Tiempo(CONSTRUCCION_ACCESO), new Vida(VIDA_ACCESO), new Escudo(ESCUDO_ACCESO), unaUbicacion, unJugador,"Acceso");
 		
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 	}
@@ -40,7 +46,7 @@ public class Acceso extends EdificioProtoss {
 
 	@Override
 	public void ejecutaOperable() {
-		
+		// ...
 	}
 	
 	public Unidad transportarZealots() {
@@ -50,7 +56,7 @@ public class Acceso extends EdificioProtoss {
 		if(this.tiempoRestante() != 0) {
 			throw new EdificioNoOperativoException();
 		}
-		Unidad zealot = new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.jugador));
+		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), this.ubicacion, new Zealot(this.jugador));
 		return zealot;
 	}
 	
@@ -61,7 +67,7 @@ public class Acceso extends EdificioProtoss {
 		if(this.tiempoRestante() != 0) {
 			throw new EdificioNoOperativoException();
 		}
-		Unidad dragon = new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.jugador));
+		Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), this.ubicacion, new Dragon(this.jugador));
 		return dragon;
 	}
 		

@@ -11,11 +11,18 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Scout implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int SUMINISTRO_SCOUT = 4;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 300;
-	private final int COSTO_GAS = 150;
 	public static final int CONSTRUCCION_SCOUT = -9;
+	private static final int VIDA_SCOUT = 150;
+	private static final int ESCUDO_SCOUT = 100;
+
+	private static final int ATAQUE_TIERRA_DANIO = 8;
+	private static final int ATAQUE_AIRE_DANIO = 14;
+	private static final int ATAQUE_RADIO = 4;
+
+	public static final int SUMINISTRO_SCOUT = 4;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 300;
+	private static final int COSTO_GAS = 150;
 
 	private Vida vida;
 	private Escudo escudo;
@@ -27,18 +34,18 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 	public Scout(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(150);
-		this.escudo = new Escudo(100);
+		this.vida = new Vida(VIDA_SCOUT);
+		this.escudo = new Escudo(ESCUDO_SCOUT);
 		this.jugador = unJugador;
 		this.unidad = null;
 		this.superficie = new Superficie("Aire");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(8,new Superficie("Tierra"),4));
-		 										 add(new Ataque(14,new Superficie("Aire"),4));}};
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(ATAQUE_TIERRA_DANIO,new Superficie("Tierra"),ATAQUE_RADIO));
+		 										 add(new Ataque(ATAQUE_AIRE_DANIO,new Superficie("Aire"),ATAQUE_RADIO));}};
 	}
 
 	@Override
 	public void trabajarEn(NodoMineral nodo) {
-		// Scout no entiende este mensaje.
+		// No entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -109,31 +116,31 @@ public class Scout implements TipoDeUnidad, Atacante, Atacable {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		// ...
 	}
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
+		// ...
 	}
 }

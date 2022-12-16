@@ -12,11 +12,16 @@ import java.util.ArrayList;
 
 public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
-    public static final int SUMINISTRO_DEVORADOR = 4;
-    private final int POBLACION = 0;
-    private final int COSTO_MINERAL = 150;
-    private final int COSTO_GAS = 50;
     public static final int CONSTRUCCION_DEVORADOR = -4;
+    private static final int VIDA_DEVORADOR = 200;
+
+    private static final int ATAQUE_AIRE_DANIO = 15;
+    private static final int ATAQUE_AIRE_RADIO = 5;
+
+    public static final int SUMINISTRO_DEVORADOR = 4;
+    private static final int POBLACION = 0;
+    private static final int COSTO_MINERAL = 150;
+    private static final int COSTO_GAS = 50;
 
     private Vida vida;
     private Jugador jugador;
@@ -27,16 +32,16 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     public Devorador(Jugador unJugador) {
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-        this.vida = new Vida(200);
+        this.vida = new Vida(VIDA_DEVORADOR);
         this.jugador = unJugador;
         this.unidad = null;
         this.superficie = new Superficie("Aire");
-        this.ataques = new ArrayList<Ataque>() {{add(new Ataque(15,new Superficie("Aire"),5));}};
+        this.ataques = new ArrayList<Ataque>() {{add(new Ataque(ATAQUE_AIRE_DANIO,new Superficie("Aire"),ATAQUE_AIRE_RADIO));}};
     }
 
     @Override
     public void trabajarEn(NodoMineral nodo) {
-        // Devorador no entiende este mensaje.
+        // No entiende este mensaje.
     }
 
     public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -102,31 +107,31 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
 
     @Override
     public void avanzarTurno() {
-        // No hace nada.
+        // ...
     }
 
     @Override
     public void evolucionarAGuardian(Unidad unaUnidad) {
-        // No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+        // No entiende este mensaje.
     }
 
     @Override
     public void evolucionarADevorador(Unidad unaUnidad) {
-        // No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+        // No entiende este mensaje.
     }
 
     @Override
     public void revelar(Revelable unRevelable) {
-        // No hace nada.
+        // No entiende este mensaje.
     }
 
     @Override
     public void serRevelado() {
-        // No hace nada.
+        // No entiende este mensaje.
     }
 
     @Override
     public void contarBaja() {
-        // No hace nada.
+        // ...
     }
 }

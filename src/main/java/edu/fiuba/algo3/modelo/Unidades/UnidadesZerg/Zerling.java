@@ -12,11 +12,16 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Zerling implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int SUMINISTRO_ZERLING = 1;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 25;
-	private final int COSTO_GAS = 0;
 	public static final int CONSTRUCCION_ZERLING = -2;
+	private static final int VIDA_ZERLING = 35;
+
+	private static final int ATAQUE_TIERRA_DANIO = 4;
+	private static final int ATAQUE_TIERRA_RADIO = 1;
+
+	public static final int SUMINISTRO_ZERLING = 1;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 25;
+	private static final int COSTO_GAS = 0;
 
 	private Vida vida;
 	private Jugador jugador;
@@ -27,16 +32,16 @@ public class Zerling implements TipoDeUnidad, Atacante, Atacable {
 	public Zerling(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(35);
+		this.vida = new Vida(VIDA_ZERLING);
 		this.jugador = unJugador;
 		this.unidad = null;
 		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(4,new Superficie("Tierra"),1));}};
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(ATAQUE_TIERRA_DANIO ,new Superficie("Tierra"), ATAQUE_TIERRA_RADIO));}};
 	}
 
 	@Override
 	public void trabajarEn(NodoMineral nodo) {
-		// Zerling no entiende este mensaje.
+		// No entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -102,31 +107,31 @@ public class Zerling implements TipoDeUnidad, Atacante, Atacable {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		// ...
 	}
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
+		// ...
 	}
 }

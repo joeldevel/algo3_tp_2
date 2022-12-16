@@ -15,14 +15,17 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco.SUMINISTRO
 
 public class Guarida extends EdificioZerg {
 
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 200;
-	private final int COSTO_GAS = 100;
+	public static final int CONSTRUCCION_GUARIDA = -12;
+	public static final int VIDA_GUARIDA = 1250;
+
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 200;
+	private static final int COSTO_GAS = 100;
 	
 	private ArrayList<Unidad> larvas;
 	
     public Guarida(Ubicacion unaUbicacion, Jugador unJugador){
-        super(new Tiempo(-12), new Vida(1250), unaUbicacion, unJugador,"Guarida");
+        super(new Tiempo(CONSTRUCCION_GUARIDA), new Vida(VIDA_GUARIDA), unaUbicacion, unJugador,"Guarida");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
@@ -41,7 +44,7 @@ public class Guarida extends EdificioZerg {
 
 	@Override
 	public void ejecutaOperable() {
-		//this.crearHidralisco();
+		// ...
 	}
 	
 	public void crearHidralisco() {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -12,11 +11,16 @@ import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int SUMINISTRO_GUARDIAN = 4;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 50;
-	private final int COSTO_GAS = 100;
 	public static final int CONSTRUCCION_GUARDIAN = -4;
+	private static final int VIDA_GUARDIAN = 100;
+
+	private static final int ATAQUE_TIERRA_DANIO = 25;
+	private static final int ATAQUE_TIERRA_RADIO = 10;
+
+	public static final int SUMINISTRO_GUARDIAN = 4;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 50;
+	private static final int COSTO_GAS = 100;
 
 	private Vida vida;
 	private Jugador jugador;
@@ -27,16 +31,16 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 	public Guardian(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(100);
+		this.vida = new Vida(VIDA_GUARDIAN);
 		this.jugador = unJugador;
 		this.unidad = null;
 		this.superficie = new Superficie("Aire");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(25,new Superficie("Tierra"),10));}};
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(ATAQUE_TIERRA_DANIO ,new Superficie("Tierra"), ATAQUE_TIERRA_RADIO));}};
 	}
 
 	@Override
 	public void trabajarEn(NodoMineral nodo) {
-		// Guardian no entiende este mensaje.
+		// No entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -101,31 +105,31 @@ public class Guardian implements TipoDeUnidad, Atacante, Atacable {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		// ...
 	}
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
+		// ...
 	}
 }

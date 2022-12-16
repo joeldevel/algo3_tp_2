@@ -15,14 +15,17 @@ import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Mutalisco.SUMINISTRO_
 
 public class Espiral extends EdificioZerg {
 
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 150;
-	private final int COSTO_GAS = 100;
+	public static final int CONSTRUCCION_ESPIRAL = -10;
+	public static final int VIDA_ESPIRAL = 1300;
+
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 150;
+	private static final int COSTO_GAS = 100;
 	
 	private ArrayList<Unidad> larvas;
 	
 	public Espiral(Ubicacion unaUbicacion, Jugador unJugador){
-        super(new Tiempo(-10), new Vida(1300), unaUbicacion, unJugador,"Espiral");
+        super(new Tiempo(CONSTRUCCION_ESPIRAL), new Vida(VIDA_ESPIRAL), unaUbicacion, unJugador,"Espiral");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
@@ -41,7 +44,7 @@ public class Espiral extends EdificioZerg {
 
 	@Override
 	public void ejecutaOperable() {
-		
+		// ...
 	}
 	
 	public void crearMutalisco() {
