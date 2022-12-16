@@ -39,27 +39,27 @@ public class Mapa {
         this.moho.agregarUbicacionesInafectables(this.areasEspaciales);
     }
 
-	public ArrayList<Ubicacion> ubicacionesConMoho() {
+	public ArrayList<Ubicacion> getUbicacionesConMoho() {
 		return this.moho.ubicacionesConMoho();
 	}
 
-    public ArrayList<Volcan> volcanes() {
+    public ArrayList<Volcan> getVolcanes() {
     	return this.volcanes;
 	}
 
-	public ArrayList<NodoMineral> nodosMinerales() {
+	public ArrayList<NodoMineral> getNodosMinerales() {
 		return this.nodosMinerales;
 	}
 
-	public ArrayList<Edificio> edificios() {
+	public ArrayList<Edificio> getEdificios() {
 		return this.edificios;
 	}
 
-	public ArrayList<Unidad> unidades() {
+	public ArrayList<Unidad> getUnidades() {
 		return this.unidades;
 	}
 
-	public ArrayList<Ubicacion> areasEspaciales() {
+	public ArrayList<Ubicacion> getAreasEspaciales() {
 		return this.areasEspaciales;
 	}
 
@@ -91,6 +91,34 @@ public class Mapa {
     			(unaUbicacion.yDentroDeRango(0, ALTURA-1)) );
     }
 
+	public boolean verificarUbicacionAfectadaPorMoho(Ubicacion unaUbicacion) {
+		return (this.moho.estaAfectadaLaUbicacion(unaUbicacion));
+	}
+
+	public boolean verificarQueUnidadPuedeMoverseAUbicacion(Unidad unaUnidad,Ubicacion unaUbicacion) {
+		return (this.ubicacionEstaDentroDeMapa(unaUbicacion) &&
+				this.verificarUbicacionLibreDeUnidad(unaUbicacion) &&
+				this.verificarSuperficieParaUnidadEnUbicacion(unaUnidad,unaUbicacion));
+	}
+
+	public boolean verificarUbicacionLibreDeUnidad(Ubicacion unaUbicacion) {
+		boolean verificado = true;
+		for(Unidad actual: this.unidades) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = false;
+			}
+		}
+		return verificado;
+	}
+
+	public boolean verificarSuperficieParaUnidadEnUbicacion(Unidad unaUnidad, Ubicacion unaUbicacion) {
+		String superficie = this.obtenerSuperficieDeLaUbicacion(unaUbicacion);
+		if(unaUnidad.compararSuperficie("Aire")) {
+			return true;
+		}
+		return (unaUnidad.compararSuperficie(superficie));
+	}
+
     public boolean verificarEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
 
     	for(Edificio edificio: this.edificios) {
@@ -113,17 +141,6 @@ public class Mapa {
 		return false;
 	}
 
-	public Edificio obtenerEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
-
-		for(Edificio edificio: this.edificios) {
-			if((edificio.esUn(unEdificio)) && (edificio.estaEn(unaUbicacion))) {
-				return edificio;
-			}
-		}
-
-		return null;
-	}
-
 	public boolean verificarUnidadEnUbicacion(Ubicacion unaUbicacion) {
 
 		for(Unidad unidad: this.unidades) {
@@ -133,6 +150,78 @@ public class Mapa {
 		}
 
 		return false;
+	}
+
+	public boolean verificarAreaEspacial(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Ubicacion actual: this.areasEspaciales) {
+			if(actual.esIgualA(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+
+		return verificado;
+	}
+
+	public boolean verificarUbicacionLibre(Ubicacion unaUbicacion) {
+		boolean verificado = true;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = false;
+			}
+		}
+		return verificado;
+	}
+
+	public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
+		return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) &&
+				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
+	}
+
+	public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
+		return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) &&
+				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
+	}
+
+	public boolean estaAfectadaPorPilonLaUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Pilon actual: pilones) {
+			if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+
+	public boolean verificarVolcanEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Volcan actual: this.volcanes) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+
+	public boolean verificarNodoMineralEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(NodoMineral actual: this.nodosMinerales) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+
+	public Edificio obtenerEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
+
+		for(Edificio edificio: this.edificios) {
+			if((edificio.esUn(unEdificio)) && (edificio.estaEn(unaUbicacion))) {
+				return edificio;
+			}
+		}
+
+		return null;
 	}
 
 	public Unidad obtenerUnidadEnUbicacion(Ubicacion unaUbicacion) {
@@ -147,59 +236,8 @@ public class Mapa {
 		}
 		return unidad;
 	}
-    
-    public boolean verificarAreaEspacial(Ubicacion ubicacion) {
-    	boolean verificado = false;
-    	for(Ubicacion actual: this.areasEspaciales) {
-    		if(actual.esIgualA(ubicacion)) {
-    			verificado = true;
-    		}
-    	}
-
-    	return verificado;
-    }
-    
-    public boolean verificarUbicacionLibre(Ubicacion unaUbicacion) {
-    	boolean verificado = true;
-    	for(Edificio actual: this.edificios) {
-    		if(actual.estaEn(unaUbicacion)) {
-    			verificado = false;
-    		}
-    	}
-    	return verificado;
-    }
-    
-   public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) &&
-				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
-   }
    
-   public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) &&
-				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
-   }
-   
-   public boolean estaAfectadaPorPilonLaUbicacion(Ubicacion unaUbicacion) {
-		boolean verificado = false;
-		for(Pilon actual: pilones) {
-			if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
-				verificado = true;
-			}
-		}
-		return verificado;
-	}
-   
-   public boolean verificarVolcanEnUbicacion(Ubicacion unaUbicacion) {
-	   boolean verificado = false;
-	   for(Volcan actual: this.volcanes) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   verificado = true;
-		   }
-	   }
-	   return verificado;
-   }
-   
-   public Volcan volcanEnUbicacion(Ubicacion unaUbicacion) {
+   public Volcan obtenerVolcanEnUbicacion(Ubicacion unaUbicacion) {
 	   Volcan buscado = null;
 	   for(Volcan actual: this.volcanes) {
 		   if(actual.estaEn(unaUbicacion)) {
@@ -209,17 +247,7 @@ public class Mapa {
 	   return buscado;
    }
    
-   public boolean verificarNodoMineralEnUbicacion(Ubicacion unaUbicacion) {
-	   boolean verificado = false;
-	   for(NodoMineral actual: this.nodosMinerales) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   verificado = true;
-		   }
-	   }
-	   return verificado;
-   }
-   
-   public NodoMineral nodoEnUbicacion(Ubicacion unaUbicacion) {
+   public NodoMineral obtenerNodoEnUbicacion(Ubicacion unaUbicacion) {
 	   NodoMineral buscado = null;
 	   for(NodoMineral actual: this.nodosMinerales) {
 		   if(actual.estaEn(unaUbicacion)) {
@@ -228,10 +256,42 @@ public class Mapa {
 	   }
 	   return buscado;
    }
-   
-   public boolean verificarUbicacionAfectadaPorMoho(Ubicacion unaUbicacion) {
-	   return (this.moho.estaAfectadaLaUbicacion(unaUbicacion));
-   }
+
+	public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = null;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				edificio = actual;
+			}
+		}
+		if(edificio == null) {
+			throw new SinEdificioBuscadoException();
+		}
+		return edificio;
+	}
+
+	public Pilon obtenerPilonEn(Ubicacion unaUbicacion) {
+		Pilon pilon = null;
+		for(Pilon actual: this.pilones) {
+			if(actual.estaEn(unaUbicacion)) {
+				pilon = actual;
+			}
+		}
+		if(pilon == null) {
+			throw new SinEdificioBuscadoException();
+		}
+		return pilon;
+	}
+
+	public String obtenerSuperficieDeLaUbicacion(Ubicacion unaUbicacion) {
+		String superficie = "Tierra";
+		for(Ubicacion actual: this.areasEspaciales) {
+			if(actual.esIgualA(unaUbicacion)) {
+				superficie = "Aire";
+			}
+		}
+		return superficie;
+	}
    
    public void agregarOrigenAMoho(Ubicacion unaUbicacion) {
 	   this.moho.agregarOrigen(unaUbicacion,this.edificios);
@@ -254,113 +314,53 @@ public class Mapa {
    }
    
    public void agregarAPilones(Ubicacion unaUbicacion, EdificioProtoss edificio) {
-	   for(Pilon actual: this.pilones) {
-		   if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
-			   actual.agregarEdificio(edificio);
-		   }
-	   }
-   }
+		for(Pilon actual: this.pilones) {
+			if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
+				actual.agregarEdificio(edificio);
+			}
+		}
+    }
+
+   	public void agregarEdificio(Edificio unEdificio) {
+		this.edificios.add(unEdificio);
+	}
+
+	public void agregarUnidad(Unidad unaUnidad) {
+		this.unidades.add(unaUnidad);
+	}
+
+	public void agregarAmoSupremo(Unidad unAmoSupremo) {
+		this.amosSupremos.add(unAmoSupremo);
+	}
    
    public void destruirPilonEn(Ubicacion unaUbicacion) {
 	   Pilon pilon = this.obtenerPilonEn(unaUbicacion);
 	   this.pilones.remove(pilon);
    }
    
-   public Pilon obtenerPilonEn(Ubicacion unaUbicacion) {
-	   Pilon pilon = null;
-	   for(Pilon actual: this.pilones) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   pilon = actual;
-		   }
-	   }
-	   if(pilon == null) {
-		   throw new SinEdificioBuscadoException();
-	   }
-	   return pilon;
-   }
-   
-   public void energizarEdificios() {
-	   for(Pilon actual: this.pilones) {
-		   actual.energizarEdificios();
-	   }
-   }
-   
    public void destruirOrigenDeMoho(Ubicacion unaUbicacion) {
 	   this.moho.destruirOrigenEn(unaUbicacion);
-   }
-   
-   public void agregarEdificio(Edificio unEdificio) {
-	   this.edificios.add(unEdificio);
    }
    
    public void destruirEdificio(Edificio unEdificio) {
 	   this.edificios.remove(unEdificio);
    }
-   
-   public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
-	   Edificio edificio = null;
-	   for(Edificio actual: this.edificios) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   edificio = actual;
-		   }
-	   }
-	   if(edificio == null) {
-		   throw new SinEdificioBuscadoException();
-	   }
-	   return edificio;
-   }
-
-	public void agregarUnidad(Unidad unaUnidad) {
-		this.unidades.add(unaUnidad);
-	}
 
 	public void destruirUnidad(Unidad unaUnidad) {
 		this.amosSupremos.remove(unaUnidad);
 		this.unidades.remove(unaUnidad);
 	}
-   
+
    public void avanzarTurno() {
 	   	this.energizarEdificios();
 	   	this.revelarUnidades();
 	   	this.moho.avanzarTurno(this.edificios);
    }
-   
-   public boolean verificarQueUnidadPuedeMoverseAUbicacion(Unidad unaUnidad,Ubicacion unaUbicacion) {
-	   return (this.ubicacionEstaDentroDeMapa(unaUbicacion) && 
-			   this.verificarUbicacionLibreDeUnidad(unaUbicacion) &&
-			   this.verificarSuperficieParaUnidadEnUbicacion(unaUnidad,unaUbicacion));
-   }
-   
-   public boolean verificarUbicacionLibreDeUnidad(Ubicacion unaUbicacion) {
-	   boolean verificado = true;
-	   for(Unidad actual: this.unidades) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   verificado = false;
-		   }
-	   }
-	   return verificado;
-   }
-   
-   public boolean verificarSuperficieParaUnidadEnUbicacion(Unidad unaUnidad, Ubicacion unaUbicacion) {
-	   String superficie = this.obtenerSuperficieDeLaUbicacion(unaUbicacion);
-	   if(unaUnidad.compararSuperficie("Aire")) {
-		   return true;
-	   }
-	   return (unaUnidad.compararSuperficie(superficie));
-   }
-   
-   public String obtenerSuperficieDeLaUbicacion(Ubicacion unaUbicacion) {
-	   String superficie = "Tierra";
-	   for(Ubicacion actual: this.areasEspaciales) {
-		   if(actual.esIgualA(unaUbicacion)) {
-			   superficie = "Aire";
-		   }
-	   }
-	   return superficie;
-   }
 
-	public void agregarAmoSupremo(Unidad unAmoSupremo) {
-		this.amosSupremos.add(unAmoSupremo);
+	public void energizarEdificios() {
+		for(Pilon actual: this.pilones) {
+			actual.energizarEdificios();
+		}
 	}
 
    public void revelarUnidades() {

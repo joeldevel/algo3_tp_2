@@ -19,7 +19,7 @@ public class AlgoStarTest {
         String jugadorEsperado = "JugadorZerg";
 
         // Act
-        Jugador jugador = juego.obtenerJugadorTurno();
+        Jugador jugador = juego.getJugadorTurno();
 
         // Assert
         assertEquals(true, jugador.compararNombres(jugadorEsperado));
@@ -35,7 +35,7 @@ public class AlgoStarTest {
         String jugadorEsperado = "JugadorProtoss";
 
         // Act
-        Jugador jugador = juego.obtenerJugadorTurno();
+        Jugador jugador = juego.getJugadorTurno();
 
         // Assert
         assertEquals(true, jugador.compararNombres(jugadorEsperado));
@@ -52,7 +52,7 @@ public class AlgoStarTest {
         String jugadorEsperado = "JugadorZerg";
 
         // Act
-        Jugador jugador = juego.obtenerJugadorTurno();
+        Jugador jugador = juego.getJugadorTurno();
 
         // Assert
         assertEquals(true, jugador.compararNombres(jugadorEsperado));
@@ -75,7 +75,7 @@ public class AlgoStarTest {
         String jugadorEsperado = "JugadorZerg";
 
         // Act
-        Jugador jugador = juego.obtenerJugadorTurno();
+        Jugador jugador = juego.getJugadorTurno();
 
         // Assert
         assertEquals(true, jugador.compararNombres(jugadorEsperado));
@@ -90,12 +90,12 @@ public class AlgoStarTest {
 
         // Turno de JugadorZerg: Construye un criadero en la posicion (1,1) y avanza el turno
         System.out.println("Primer turno");
-        Jugador jugador1 = juego.obtenerJugadorTurno();
-        System.out.println("Jugador turno: " + jugador1.obtenerRaza());
-        Mapa mapa1 = juego.obtenerMapa();
+        Jugador jugador1 = juego.getJugadorTurno();
+        System.out.println("Jugador turno: " + jugador1.getRaza());
+        Mapa mapa1 = juego.getMapa();
         Ubicacion ubicacion1 = new Ubicacion(1,1);
         Jugador jugadorContario1 = juego.obtenerJugadorContrario(jugador1);
-        System.out.println("Jugador contrario: " + jugadorContario1.obtenerRaza());
+        System.out.println("Jugador contrario: " + jugadorContario1.getRaza());
         System.out.println("Antes de la construccion la ubicacion esta libre: " + mapa1.verificarUbicacionLibre(ubicacion1));
         jugador1.construir("Criadero", ubicacion1, jugadorContario1, mapa1);
         System.out.println("Despues de la construccion la ubicacion esta libre: " + mapa1.verificarUbicacionLibre(ubicacion1));
@@ -103,12 +103,12 @@ public class AlgoStarTest {
 
         // Turno de JugadorProtoss: Construye un pilon en la posicion (20,20) y avanza el turno
         System.out.println("\nSegundo turno");
-        Jugador jugador2 = juego.obtenerJugadorTurno();
-        System.out.println("Jugador turno: " + jugador2.obtenerRaza());
-        Mapa mapa2 = juego.obtenerMapa();
+        Jugador jugador2 = juego.getJugadorTurno();
+        System.out.println("Jugador turno: " + jugador2.getRaza());
+        Mapa mapa2 = juego.getMapa();
         Ubicacion ubicacion2 = new Ubicacion(20,20);
         Jugador jugadorContario2 = juego.obtenerJugadorContrario(jugador2);
-        System.out.println("Jugador contrario: " + jugadorContario2.obtenerRaza());
+        System.out.println("Jugador contrario: " + jugadorContario2.getRaza());
         System.out.println("Antes de la construccion la ubicacion esta libre: " + mapa2.verificarUbicacionLibre(ubicacion2));
         jugador2.construir("Pilon", ubicacion2, jugadorContario2, mapa2);
         System.out.println("Despues de la construccion la ubicacion esta libre: " + mapa2.verificarUbicacionLibre(ubicacion2));

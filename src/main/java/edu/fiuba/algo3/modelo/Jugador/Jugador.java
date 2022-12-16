@@ -40,20 +40,32 @@ public abstract class Jugador {
     	this.edificios = new ArrayList<Edificio>();
     	this.unidades = new ArrayList<Unidad>();
     }
-
-    public boolean tieneEdificios() {
-    	return (this.edificios.size() > 0);
-	}
     
-    public String obtenerNombre() {
+    public String getNombre() {
         return (this.nombre);
     }
 
-    public String obtenerColor() {
+    public String getColor() {
         return (this.color);
     }
 
-    public abstract String obtenerRaza();
+	public abstract String getRaza();
+
+	public int getGas() {
+		return this.recursos.obtenerGas();
+	}
+
+	public int getMineral() {
+		return this.recursos.obtenerMineral();
+	}
+
+	public Recursos getRecursos() {
+		return (this.recursos);
+	}
+
+	public boolean tieneEdificios() {
+		return (this.edificios.size() > 0);
+	}
 
     public boolean compararNombres(String otroNombre) {
         return (this.nombre.equals(otroNombre));
@@ -71,14 +83,6 @@ public abstract class Jugador {
 
     public void utilizar(int costoGas, int costoMineral) {
         this.recursos.utilizar(costoGas, costoMineral);
-    }
-
-    public int obtenerGas() {
-        return this.recursos.obtenerGas();
-    }
-
-    public int obtenerMineral() {
-        return this.recursos.obtenerMineral();
     }
     
     public abstract void construir(String entidad,Ubicacion unaUbicacion, Jugador jugador, Mapa mapa);
@@ -115,30 +119,7 @@ public abstract class Jugador {
     public boolean haySuministroDisponible(int unSuministro) {
         return (this.calcularSuministro() + unSuministro <= this.calcularPoblacion());
     }
-    
-    public void avanzarTurno() {
 
-        for (Edificio edificio : this.edificios) {
-            edificio.avanzarTurno(); // Edificios: Criadero expande el moho, Extractor recolecta gas, Zangano recolecta mineral, se recuperan, pasa el tiempo de construccion.
-        }
-
-        for (Unidad unidad : this.unidades) {
-            unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
-        }
-
-        this.recursos.guardar(5, 5);
-    }
-    
-    public void eliminarEdificio(Edificio unEdificio) {
-        this.edificios.remove(unEdificio);
-        this.mapa.destruirEdificio(unEdificio);
-    }
-
-    public void eliminarUnidad(Unidad unaUnidad) {
-        this.unidades.remove(unaUnidad);
-        this.mapa.destruirUnidad(unaUnidad);
-    }
-    
 	public boolean tieneEdificioEnUbicacion(Ubicacion unaUbicacion) {
 		boolean verificado = false;
 		for(Edificio actual: this.edificios) {
@@ -148,15 +129,7 @@ public abstract class Jugador {
 		}
 		return verificado;
 	}
-	
-	public void agregarEdificio(Edificio unEdificio) {
-		this.edificios.add(unEdificio);
-	}
-	
-	public Recursos obtenerRecursos() {
-		return (this.recursos);
-	}
-	
+
 	public boolean verificarEdificio(String unEdificio) {
 		boolean verificado = false;
 		for(Edificio actual: this.edificios) {
@@ -166,12 +139,7 @@ public abstract class Jugador {
 		}
 		return verificado;
 	}
-	
-	public void destruirEdificioEn(Ubicacion unaUbicacion) {
-		Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
-		this.edificios.remove(edificio);
-	}
-	
+
 	public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
 		Edificio edificio = null;
 		for(Edificio actual: this.edificios) {
@@ -184,12 +152,7 @@ public abstract class Jugador {
 		}
 		return edificio;
 	}
-	
-	public void agregarUnidad(Unidad unaUnidad) {
-		this.unidades.add(unaUnidad);
-		//this.mapa.agregarUnidad(unaUnidad);
-	}
-	
+
 	public Unidad obtenerUnidadEn(Ubicacion unaUbicacion) {
 		Unidad unidad = null;
 
@@ -203,6 +166,33 @@ public abstract class Jugador {
 		}
 		return unidad;
 	}
+
+	public void agregarEdificio(Edificio unEdificio) {
+		this.edificios.add(unEdificio);
+	}
+
+	public void agregarUnidad(Unidad unaUnidad) {
+		this.unidades.add(unaUnidad);
+	}
+    
+    public void destruirEdificio(Edificio unEdificio) {
+        this.edificios.remove(unEdificio);
+        this.mapa.destruirEdificio(unEdificio);
+    }
+
+    public void destruirUnidad(Unidad unaUnidad) {
+        this.unidades.remove(unaUnidad);
+        this.mapa.destruirUnidad(unaUnidad);
+    }
+	
+	public void destruirEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
+		this.edificios.remove(edificio);
+	}
+
+	public int contarUnidades() {
+		return (this.unidades.size());
+	}
     
     public void moverUnidadEn(Ubicacion unaUbicacion) {
 		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
@@ -213,9 +203,17 @@ public abstract class Jugador {
 		Unidad unidad = this.obtenerUnidadEn(unaUbicacion);
 		unidad.cambiarDireccion();
 	}
-	
-	public int contarUnidades() {
-		return (this.unidades.size());
+
+	public void avanzarTurno() {
+
+		for (Edificio edificio : this.edificios) {
+			edificio.avanzarTurno(); // Edificios: Criadero expande el moho, Extractor recolecta gas, Zangano recolecta mineral, se recuperan, pasa el tiempo de construccion.
+		}
+
+		for (Unidad unidad : this.unidades) {
+			unidad.avanzarTurno(); // Unidades: Se recuperan, pasa el tiempo de construccion.
+		}
+
+		this.recursos.guardar(5, 5);
 	}
-	
 }

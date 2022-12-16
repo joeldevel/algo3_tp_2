@@ -30,7 +30,7 @@ public class Vida {
 		}
 		else if(this.vidaRestante <= unaCantidad){
 			this.vidaRestante = 0;
-			unJugadorAtacado.eliminarUnidad(unidadAtacada);
+			unJugadorAtacado.destruirUnidad(unidadAtacada);
 			unidadAtacante.contarBaja();
 		}
 	}
@@ -44,7 +44,7 @@ public class Vida {
     	}
     	else if(this.vidaRestante <= unaCantidad){
     		this.vidaRestante = 0;
-			unJugadorAtacado.eliminarEdificio(edificioAtacado);
+			unJugadorAtacado.destruirEdificio(edificioAtacado);
     	}
     }
     

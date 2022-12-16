@@ -9,15 +9,12 @@ import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -115,8 +112,8 @@ public class PantallaJuego extends BorderPane {
         contenedorVerticalEntidad.setTranslateY(125);
 
 
-        if(algoStar.obtenerMapa().verificarEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
-            Edificio edificio = algoStar.obtenerMapa().obtenerEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
+        if(algoStar.getMapa().verificarEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            Edificio edificio = algoStar.getMapa().obtenerEdificioEn(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             primerInformacion.setText("Vida: " + edificio.obtenerVida());
             primerInformacion.setTranslateX(20);
@@ -125,22 +122,22 @@ public class PantallaJuego extends BorderPane {
             segundaInformacion.setTranslateX(20);
         }
 
-        else if(algoStar.obtenerMapa().verificarVolcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
-            Volcan volcan = algoStar.obtenerMapa().volcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
+        else if(algoStar.getMapa().verificarVolcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            Volcan volcan = algoStar.getMapa().obtenerVolcanEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             primerInformacion.setText("Gas: " + volcan.getCantidadDeGasVespenoDisponible());
             primerInformacion.setTranslateX(20);
         }
 
-        else if(algoStar.obtenerMapa().verificarNodoMineralEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
-            NodoMineral nodo = algoStar.obtenerMapa().nodoEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
+        else if(algoStar.getMapa().verificarNodoMineralEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            NodoMineral nodo = algoStar.getMapa().obtenerNodoEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             primerInformacion.setText("Mineral: " + nodo.getCantidadDeMineralDisponible());
             primerInformacion.setTranslateX(20);
         }
 
-        else if(algoStar.obtenerMapa().verificarUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
-            Unidad unidad = algoStar.obtenerMapa().obtenerUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
+        else if(algoStar.getMapa().verificarUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)))) {
+            Unidad unidad = algoStar.getMapa().obtenerUnidadEnUbicacion(new Ubicacion(convertirCoordenada(this.coordenadaX), convertirCoordenada(this.coordenadaY)));
 
             primerInformacion.setText("Vida: " + unidad.vidaRestante());
             primerInformacion.setTranslateX(20);
@@ -211,30 +208,30 @@ public class PantallaJuego extends BorderPane {
 
         // Informacion del jugador
 
-        Jugador jugadorActual = algoStar.obtenerJugadorTurno();
+        Jugador jugadorActual = algoStar.getJugadorTurno();
 
         Label nombre = new Label();
-        nombre.setText("Jugador: " + jugadorActual.obtenerNombre());
+        nombre.setText("Jugador: " + jugadorActual.getNombre());
         nombre.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         nombre.setTextFill(Color.web("#ffffff"));
 
         Label color = new Label();
-        color.setText("Color: " + jugadorActual.obtenerColor());
+        color.setText("Color: " + jugadorActual.getColor());
         color.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         color.setTextFill(Color.web("#ffffff"));
 
         Label raza = new Label();
-        raza.setText("Raza: " + jugadorActual.obtenerRaza());
+        raza.setText("Raza: " + jugadorActual.getRaza());
         raza.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         raza.setTextFill(Color.web("#ffffff"));
 
         Label gas = new Label();
-        gas.setText("Gas: " + jugadorActual.obtenerGas());
+        gas.setText("Gas: " + jugadorActual.getGas());
         gas.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         gas.setTextFill(Color.web("#ffffff"));
 
         Label mineral = new Label();
-        mineral.setText("Mineral: " + jugadorActual.obtenerMineral());
+        mineral.setText("Mineral: " + jugadorActual.getMineral());
         mineral.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         mineral.setTextFill(Color.web("#ffffff"));
 
@@ -264,9 +261,9 @@ public class PantallaJuego extends BorderPane {
     }
 
     public void setBotonera(AlgoStar algoStar) {
-        Jugador jugadorActual = algoStar.obtenerJugadorTurno();
+        Jugador jugadorActual = algoStar.getJugadorTurno();
 
-        if (jugadorActual.obtenerRaza().equals("Zerg")) {
+        if (jugadorActual.getRaza().equals("Zerg")) {
             HBox contenedorHorizontalBotonera = new HBox(this.setBotoneraEdificiosZerg(algoStar), this.setBotoneraUnidadesZerg(algoStar), this.setBotoneraMovimiento(algoStar), this.setBotoneraAtaque(algoStar));
             contenedorHorizontalBotonera.setSpacing(50);
             contenedorHorizontalBotonera.setTranslateX(50);
@@ -333,7 +330,7 @@ public class PantallaJuego extends BorderPane {
 
     // Se crea la botonera Zerg con los edificios correspondientes.
     public GridPane setBotoneraUnidadesZerg(AlgoStar algoStar) {
-        Jugador jugadorZerg = algoStar.obtenerJugadorTurno();
+        Jugador jugadorZerg = algoStar.getJugadorTurno();
 
         Button amo = new Button();
         amo.setText("   Crear Amo Supremo   ");
@@ -494,7 +491,7 @@ public class PantallaJuego extends BorderPane {
         Button mover = new Button();
         mover.setText("Mover");
 
-        BotonMoverEventHandler botonMoverEventHandler = new BotonMoverEventHandler(vistaMapa, algoStar.obtenerJugadorTurno(), this);
+        BotonMoverEventHandler botonMoverEventHandler = new BotonMoverEventHandler(vistaMapa, algoStar.getJugadorTurno(), this);
         mover.setOnAction(botonMoverEventHandler);
 
         // Boton de movimiento
@@ -502,7 +499,7 @@ public class PantallaJuego extends BorderPane {
         Button direccion = new Button();
         direccion.setText("Cambiar de direccion");
 
-        BotonDireccionEventHandler botonDireccionEventHandler = new BotonDireccionEventHandler(algoStar.obtenerJugadorTurno(), this);
+        BotonDireccionEventHandler botonDireccionEventHandler = new BotonDireccionEventHandler(algoStar.getJugadorTurno(), this);
         direccion.setOnAction(botonDireccionEventHandler);
 
         HBox contenedorHorizontalBMovimiento = new HBox(mover, direccion);
@@ -553,7 +550,7 @@ public class PantallaJuego extends BorderPane {
 
         // Se dibuja el mapa
 
-        this.vistaMapa = new VistaMapa(algostar.obtenerMapa(), canvasCentral);
+        this.vistaMapa = new VistaMapa(algostar.getMapa(), canvasCentral);
         this.vistaMapa.dibujar();
 
         // Se ubica el canvas en el centro del BorderPane

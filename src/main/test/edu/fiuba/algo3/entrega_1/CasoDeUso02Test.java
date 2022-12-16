@@ -108,7 +108,7 @@ class CasoDeUso02Test {
 		asimilador.avanzarTurno();
 
 		// Act
-		int resultado = jugadorProtoss.obtenerGas();
+		int resultado = jugadorProtoss.getGas();
 
 		// Assert
 		assertEquals(10000, resultado);
@@ -122,7 +122,7 @@ class CasoDeUso02Test {
 
 		/* avanzo un turno mas para que extraiga el gas automaticamente */
 		asimilador.avanzarTurno();
-		int resultado = jugadorProtoss.obtenerGas();
+		int resultado = jugadorProtoss.getGas();
 
 		// Assert
 		assertEquals(10020, resultado);
@@ -135,7 +135,7 @@ class CasoDeUso02Test {
 		asimilador.avanzarTurno(5);
 
 		/* avanzo un turno mas para que intente extraer gas automaticamente*/
-		int resultado = jugadorProtoss.obtenerGas();
+		int resultado = jugadorProtoss.getGas();
 
 		// Assert
 		assertEquals(10000, resultado);
@@ -151,7 +151,7 @@ class CasoDeUso02Test {
 		nexoMineral.avanzarTurno();
 
 		// Act
-		int resultado = jugadorProtoss.obtenerMineral();
+		int resultado = jugadorProtoss.getMineral();
 
 		// Assert
 		assertEquals(9950, resultado);
@@ -166,7 +166,7 @@ class CasoDeUso02Test {
 
 		/* se avanza un turno para que extraiga mineral automaticamente*/
 		nexoMineral.avanzarTurno();
-		int resultado = jugadorProtoss.obtenerMineral();
+		int resultado = jugadorProtoss.getMineral();
 
 		// Assert
 		assertEquals(9960, resultado);
@@ -181,7 +181,7 @@ class CasoDeUso02Test {
 
 		/* se avanza un turno para que intente extraer mineral automaticamente */
 		nexoMineral.avanzarTurno();
-		int resultado = jugadorProtoss.obtenerMineral();
+		int resultado = jugadorProtoss.getMineral();
 
 		// Assert
 		assertEquals(9950, resultado);
@@ -388,7 +388,7 @@ class CasoDeUso02Test {
 		extractor.avanzarTurno();
 
 		// Act
-		int resultado = jugadorZerg.obtenerGas();
+		int resultado = jugadorZerg.getGas();
 
 		// Assert
 		assertEquals(10000, resultado);
@@ -408,7 +408,7 @@ class CasoDeUso02Test {
 
 		/* se avanza un turno para que extraiga el gas automaticamente*/
 		extractor.avanzarTurno();
-		int resultado = jugadorZerg.obtenerGas();
+		int resultado = jugadorZerg.getGas();
 
 		// Assert
 		assertEquals(10030, resultado);
@@ -428,7 +428,7 @@ class CasoDeUso02Test {
 
 		/* se avanza un turno para que intente extraer gas automaticamente*/
 		extractor.avanzarTurno();
-		int resultado = jugadorZerg.obtenerGas();
+		int resultado = jugadorZerg.getGas();
 
 		// Assert
 		assertEquals(10000, resultado);

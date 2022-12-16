@@ -56,7 +56,7 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 	
 	@Override
     public int obtenerGas() {
-		return this.jugador.obtenerGas();
+		return this.jugador.getGas();
     }
 
 	@Override

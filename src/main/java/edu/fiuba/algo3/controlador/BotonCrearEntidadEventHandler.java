@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
-import edu.fiuba.algo3.modelo.Excepciones.AlgoStarFinalizadoException;
-import edu.fiuba.algo3.modelo.Excepciones.SinRecursosSuficientesException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -31,9 +29,9 @@ public class BotonCrearEntidadEventHandler implements EventHandler<ActionEvent> 
     public void handle(ActionEvent actionEvent) {
 
         // Obtenemos los jugadores y el mapa
-        Jugador jugadorTurno = this.juego.obtenerJugadorTurno();
+        Jugador jugadorTurno = this.juego.getJugadorTurno();
         Jugador jugadorContrario = this.juego.obtenerJugadorContrario(jugadorTurno);
-        Mapa mapa = this.juego.obtenerMapa();
+        Mapa mapa = this.juego.getMapa();
 
         // Creamos el edificio
         jugadorTurno.construir(this.entidad, new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())), jugadorContrario, mapa);

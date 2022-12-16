@@ -47,7 +47,7 @@ public class Fabrica {
 			if((entidad == "Extractor") && (unMapa.verificarConstruccionZerg(unaUbicacion)) && 
 			   (unMapa.verificarVolcanEnUbicacion(unaUbicacion))){
 				
-				Extractor extractor = new Extractor(unMapa.volcanEnUbicacion(unaUbicacion), unaUbicacion,jugadorZerg);
+				Extractor extractor = new Extractor(unMapa.obtenerVolcanEnUbicacion(unaUbicacion), unaUbicacion,jugadorZerg);
 				jugadorZerg.agregarEdificio(extractor);
 				unMapa.agregarEdificio(extractor);
 			}
@@ -77,7 +77,7 @@ public class Fabrica {
 			if((entidad == "NexoMineral") && (unMapa.verificarConstruccionProtoss(unaUbicacion)) && 
 			   (unMapa.verificarNodoMineralEnUbicacion(unaUbicacion))){
 				
-				NexoMineral nexo = new NexoMineral(unMapa.nodoEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss);
+				NexoMineral nexo = new NexoMineral(unMapa.obtenerNodoEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss);
 				jugadorProtoss.agregarEdificio(nexo);
 				unMapa.agregarEdificio(nexo);
 			}
@@ -90,7 +90,7 @@ public class Fabrica {
 			}
 			if((entidad == "Asimilador") && (unMapa.verificarVolcanEnUbicacion(unaUbicacion) && (unMapa.verificarConstruccionProtoss(unaUbicacion)))) {
 				
-				Asimilador asimilador = new Asimilador(unMapa.volcanEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss);
+				Asimilador asimilador = new Asimilador(unMapa.obtenerVolcanEnUbicacion(unaUbicacion),unaUbicacion,jugadorProtoss);
 				jugadorProtoss.agregarEdificio(asimilador);
 				unMapa.agregarEdificio(asimilador);
 			}

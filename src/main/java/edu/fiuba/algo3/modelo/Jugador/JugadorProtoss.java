@@ -19,7 +19,7 @@ public class JugadorProtoss extends Jugador{
     }
 
     @Override
-    public String obtenerRaza() {
+    public String getRaza() {
         return RAZA;
     }
 

@@ -26,7 +26,7 @@ public class BotonTrabajarEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Mapa mapa = this.algoStar.obtenerMapa();
+        Mapa mapa = this.algoStar.getMapa();
 
         if ((mapa.verificarEdificioEnUbicacion("Extractor", new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())))) &&
             (mapa.verificarUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaY())))) &&
@@ -45,7 +45,7 @@ public class BotonTrabajarEventHandler implements EventHandler<ActionEvent> {
                 (mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaY()))).obtenerTipo() instanceof Zangano)) {
 
             Unidad zangano = mapa.obtenerUnidadEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getUnidadCoordenadaY())));
-            NodoMineral nodo = (NodoMineral) mapa.nodoEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
+            NodoMineral nodo = (NodoMineral) mapa.obtenerNodoEnUbicacion(new Ubicacion(this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaX()), this.pantalla.convertirCoordenada(this.pantalla.getCoordenadaY())));
             zangano.trabajarEn(nodo);
 
             this.pantalla.setDerecha(this.algoStar);

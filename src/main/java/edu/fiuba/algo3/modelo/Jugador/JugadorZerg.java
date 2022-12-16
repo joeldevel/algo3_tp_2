@@ -24,7 +24,7 @@ public class JugadorZerg extends Jugador {
     }
 
     @Override
-    public String obtenerRaza() {
+    public String getRaza() {
         return RAZA;
     }
 

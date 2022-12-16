@@ -39,7 +39,7 @@ public class CasoDeUso15Test {
         asimilador.avanzarTurno(300);
 
         // Assert
-        assertEquals(5000, jugadorProtoss.obtenerRecursos().obtenerGas());
+        assertEquals(5000, jugadorProtoss.getRecursos().obtenerGas());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class CasoDeUso15Test {
         nexoMineral.avanzarTurno(250);
 
         // Act
-        assertEquals(2000, jugadorProtoss.obtenerRecursos().obtenerMineral());
+        assertEquals(2000, jugadorProtoss.getRecursos().obtenerMineral());
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -87,7 +87,7 @@ public class CasoDeUso15Test {
         extractor.avanzarTurno(167);
 
         // Assert
-        assertEquals(5000, jugadorZerg.obtenerRecursos().obtenerGas());
+        assertEquals(5000, jugadorZerg.getRecursos().obtenerGas());
     }
 
     @Test
@@ -106,6 +106,6 @@ public class CasoDeUso15Test {
         zangano.avanzarTurno(250);
 
         // Assert
-        assertEquals(2000, jugadorZerg.obtenerRecursos().obtenerMineral());
+        assertEquals(2000, jugadorZerg.getRecursos().obtenerMineral());
     }
 }

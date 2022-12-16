@@ -40,26 +40,26 @@ public class VistaMapa {
     public void dibujarFormas() {
         this.clean();
 
-        for(Ubicacion ubicacion: this.mapa.ubicacionesConMoho()) {
+        for(Ubicacion ubicacion: this.mapa.getUbicacionesConMoho()) {
             this.canvas.getGraphicsContext2D().setFill(Color.GREEN);
             this.canvas.getGraphicsContext2D().fillRect(convertirCoordenada(ubicacion.obtenerX()), convertirCoordenada(ubicacion.obtenerY()), 50, 50); // Posicion x, posicion y, ancho, altura
         }
 
-        for(NodoMineral nodo: this.mapa.nodosMinerales()) {
+        for(NodoMineral nodo: this.mapa.getNodosMinerales()) {
             Ubicacion ubicacion = nodo.ubicacion();
 
             Image imagen = new Image("file:src/main/resources/images/nodo-mineral.png", 50, 50, true, false);
             this.canvas.getGraphicsContext2D().drawImage(imagen, convertirCoordenada(ubicacion.obtenerX()), convertirCoordenada(ubicacion.obtenerY())); // Imagen, posicion x, posicion y
         }
 
-        for(Volcan volcan: this.mapa.volcanes()) {
+        for(Volcan volcan: this.mapa.getVolcanes()) {
             Ubicacion ubicacion = volcan.ubicacion();
 
             Image imagen = new Image("file:src/main/resources/images/geiser-vespeno.png", 50, 50, true, false);
             this.canvas.getGraphicsContext2D().drawImage(imagen, convertirCoordenada(ubicacion.obtenerX()), convertirCoordenada(ubicacion.obtenerY())); // Imagen, posicion x, posicion y
         }
 
-        for(Edificio edificio: this.mapa.edificios()) {
+        for(Edificio edificio: this.mapa.getEdificios()) {
             Ubicacion ubicacion = edificio.ubicacion();
 
             if(edificio.tiempoRestante() == 0) {
@@ -115,7 +115,7 @@ public class VistaMapa {
             }
         }
 
-        for(Unidad unidad: this.mapa.unidades()) {
+        for(Unidad unidad: this.mapa.getUnidades()) {
             Ubicacion ubicacion = unidad.ubicacion();
 
             if(unidad.tiempoRestante() == 0) {

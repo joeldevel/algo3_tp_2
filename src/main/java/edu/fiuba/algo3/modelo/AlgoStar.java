@@ -27,20 +27,20 @@ public class AlgoStar {
         this.jugadorTurno = unJugador;
     }
 
-    public Jugador obtenerJugadorTurno() {
+    public Jugador getJugadorTurno() {
         return (this.jugadorTurno);
     }
 
+    public Mapa getMapa() {
+        return this.mapa;
+    }
+
     public Jugador obtenerJugadorContrario(Jugador jugadorTurno) {
-        if (this.jugadores.get(0).compararRazas(this.jugadorTurno.obtenerRaza())) {
+        if (this.jugadores.get(0).compararRazas(this.jugadorTurno.getRaza())) {
             return this.jugadores.get(1);
         } else {
             return this.jugadores.get(0);
         }
-    }
-
-    public Mapa obtenerMapa() {
-        return this.mapa;
     }
 
     public void crearJugador(String unNombre, String unColor, String unaRaza) {

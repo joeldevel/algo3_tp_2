@@ -33,7 +33,7 @@ public class CasoDeUso07Test {
         nexoMineral.avanzarTurno(5);
 
         // Assert
-        assertEquals(10, jugadorProtoss.obtenerMineral());
+        assertEquals(10, jugadorProtoss.getMineral());
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -57,7 +57,7 @@ public class CasoDeUso07Test {
         zangano.avanzarTurno();
 
         // Assert
-        assertEquals(30, jugadorZerg.obtenerMineral());
+        assertEquals(30, jugadorZerg.getMineral());
     }
 
     @Test
@@ -75,6 +75,6 @@ public class CasoDeUso07Test {
         zangano.avanzarTurno();
 
         // Assert
-        assertEquals(0, jugadorZerg.obtenerMineral());
+        assertEquals(0, jugadorZerg.getMineral());
     }
 }

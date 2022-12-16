@@ -62,7 +62,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public int obtenerMineral() {
-		return this.jugador.obtenerMineral();
+		return this.jugador.getMineral();
 	}
 
 	@Override

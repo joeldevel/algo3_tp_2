@@ -57,7 +57,7 @@ public class NexoMineral extends EdificioProtoss implements Minero {
     
 	@Override
     public int obtenerMineral() {
-		return this.jugador.obtenerMineral();
+		return this.jugador.getMineral();
     }
 
 	@Override

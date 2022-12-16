@@ -13,7 +13,7 @@ public class BotonElegirUnidadEventHandler implements EventHandler<ActionEvent> 
     private final PantallaJuego pantalla;
 
     public BotonElegirUnidadEventHandler(AlgoStar algoStar, PantallaJuego pantalla) {
-        this.mapa = algoStar.obtenerMapa();
+        this.mapa = algoStar.getMapa();
         this.pantalla = pantalla;
     }
 
