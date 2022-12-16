@@ -3,8 +3,6 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Asimilador;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Extractor;
-import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
-import edu.fiuba.algo3.modelo.Excepciones.VolcanSinGasVespenoParaExtraerException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Mapa;
@@ -18,6 +16,7 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 import org.junit.jupiter.api.Test;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CONSTRUCCION_ZANGANO;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso15Test {
@@ -35,10 +34,12 @@ public class CasoDeUso15Test {
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
         asimilador.avanzarTurno(6);
 
-        // Act & Assert
-        assertThrows(VolcanSinGasVespenoParaExtraerException.class,()->{
-            asimilador.avanzarTurno(251); // Avanzamos tantos turnos como sea necesario para que el Volcan no tenga mas gas.
-        });
+        // Act
+        // Al avanzar el turno 250 veces el Volcan se queda sin gas y el jugador recolecto 5000 de gas. Luego, si avanzamos el turno 50 veces mas el jugador deberia seguir teniendo 5000 de gas.
+        asimilador.avanzarTurno(300);
+
+        // Assert
+        assertEquals(5000, jugadorProtoss.obtenerRecursos().obtenerGas());
     }
 
     @Test
@@ -50,10 +51,12 @@ public class CasoDeUso15Test {
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
         nexoMineral.avanzarTurno(4);
 
-        // Act & Assert
-        assertThrows(NodoMineralSinMineralParaRecolectarException.class,()->{
-            nexoMineral.avanzarTurno(201); // Avanzamos tantos turnos como sea necesario para que el Nodo Mineral no tenga mas gas.
-        });
+        // Assert
+        // Al avanzar el turno 200 veces el Nodo se queda sin mineral y el jugador recolecto 2000 de mineral. Luego, si avanzamos el turno 50 veces mas el jugador deberia seguir teniendo 2000 de mineral.
+        nexoMineral.avanzarTurno(250);
+
+        // Act
+        assertEquals(2000, jugadorProtoss.obtenerRecursos().obtenerMineral());
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -79,10 +82,12 @@ public class CasoDeUso15Test {
         Unidad tercerZangano = new Unidad(new Tiempo(CONSTRUCCION_ZANGANO), new Ubicacion(0,0), tipoTercerZangano);
         extractor.guardarZangano(tercerZangano);
 
-        // Act & Assert
-        assertThrows(VolcanSinGasVespenoParaExtraerException.class,()->{
-            extractor.avanzarTurno(168); // Avanzamos tantos turnos como sea necesario para que el Volcan no tenga mas gas.
-        });
+        // Act
+        // Al avanzar el turno 167 veces el Volcan se queda sin gas y el jugador recolecto 5000 de gas. Luego, si avanzamos el turno 33 veces mas el jugador deberia seguir teniendo 5000 de gas.
+        extractor.avanzarTurno(167);
+
+        // Assert
+        assertEquals(5000, jugadorZerg.obtenerRecursos().obtenerGas());
     }
 
     @Test
@@ -96,9 +101,11 @@ public class CasoDeUso15Test {
         zangano.avanzarTurno(1);
         zangano.trabajarEn(nodoMineral);
 
-        // Act & Assert
-        assertThrows(NodoMineralSinMineralParaRecolectarException.class,()->{
-            zangano.avanzarTurno(201); // Avanzamos tantos turnos como sea necesario para que el Nodo Mineral no tenga mas gas.
-        });
+        // Act
+        // Al avanzar el turno 200 veces el Nodo se queda sin mineral y el jugador recolecto 2000 de mineral. Luego, si avanzamos el turno 50 veces mas el jugador deberia seguir teniendo 2000 de mineral.
+        zangano.avanzarTurno(250);
+
+        // Assert
+        assertEquals(2000, jugadorZerg.obtenerRecursos().obtenerMineral());
     }
 }

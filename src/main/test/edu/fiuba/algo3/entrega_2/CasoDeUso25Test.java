@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.AlgoStar;
-import edu.fiuba.algo3.modelo.Excepciones.RazaInexistenteException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -59,8 +58,6 @@ public class CasoDeUso25Test {
         String razaIncorrecta = "abc";
 
         // Act & Assert
-        assertThrows(RazaInexistenteException.class,()->{
-            algoStar.validarRaza(razaIncorrecta);
-        });
+        assertFalse(algoStar.validarRaza(razaIncorrecta));
     }
 }

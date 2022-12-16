@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.Recursos.Gas;
 
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Excepciones.VolcanSinGasVespenoParaExtraerException;
-import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaException;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanYaTieneUnaRefineriaDeGasConstruidaException;
 
 public class Volcan {
@@ -35,25 +33,26 @@ public class Volcan {
     public int gasVespenoRestante() {
         return this.cantidadDeGasVespenoDisponible;
     }
+
+    public boolean tieneRefineria() {
+        return (this.refineria.tieneRefineria());
+    }
     
     public int extraerGas(int unaCantidadDeGasParaExtraer) {
 
-        if(this.gasVespenoRestante() == 0) {
-            throw new VolcanSinGasVespenoParaExtraerException();
-        }
+        if(this.gasVespenoRestante() > 0 && this.tieneRefineria()) {
 
-        if(!this.refineria.tieneRefineria()) {
-            throw new VolcanSinRefineriaDeGasConstruidaException();
-        }
+            if (this.gasVespenoRestante() < unaCantidadDeGasParaExtraer) {
+                unaCantidadDeGasParaExtraer = this.gasVespenoRestante();
+                this.cantidadDeGasVespenoDisponible = 0;
+                return unaCantidadDeGasParaExtraer;
+            }
 
-        if(this.gasVespenoRestante() < unaCantidadDeGasParaExtraer) {
-            unaCantidadDeGasParaExtraer = this.gasVespenoRestante();
-            this.cantidadDeGasVespenoDisponible = 0;
+            this.cantidadDeGasVespenoDisponible = this.cantidadDeGasVespenoDisponible - unaCantidadDeGasParaExtraer;
             return unaCantidadDeGasParaExtraer;
         }
 
-        this.cantidadDeGasVespenoDisponible = this.cantidadDeGasVespenoDisponible - unaCantidadDeGasParaExtraer;
-        return unaCantidadDeGasParaExtraer;
+        return 0;
     }
     
     public boolean estaEn(Ubicacion unaUbicacion) {

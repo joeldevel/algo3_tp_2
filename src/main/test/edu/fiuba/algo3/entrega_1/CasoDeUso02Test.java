@@ -2,9 +2,9 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.*;
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoException;
 import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
-import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Mapa;
@@ -205,11 +205,11 @@ class CasoDeUso02Test {
 		
 		pilon.energizarEdificios();
 		
-		assertThrows(EdificioNoEnergizadoError.class,()->{
+		assertThrows(EdificioNoEnergizadoException.class,()->{
 			acceso.transportarZealots();
 		});
 		
-		assertThrows(EdificioNoEnergizadoError.class,()->{
+		assertThrows(EdificioNoEnergizadoException.class,()->{
 			acceso.transportarDragones();
 		});
 	}
@@ -256,11 +256,11 @@ class CasoDeUso02Test {
 		pilon.avanzarTurno(4);
 		pilon.energizarEdificios();
 		
-		assertThrows(EdificioNoEnergizadoError.class,()->{
+		assertThrows(EdificioNoEnergizadoException.class,()->{
 			acceso.transportarZealots();
 		});
 		
-		assertThrows(EdificioNoEnergizadoError.class,()->{
+		assertThrows(EdificioNoEnergizadoException.class,()->{
 			acceso.transportarDragones();
 		});
 	}
@@ -454,7 +454,7 @@ class CasoDeUso02Test {
 		Guarida guarida = (Guarida)jugadorZerg.obtenerEdificioEn(ubicacion3);
 		
 		/* se quiere buscar la unidad en jugador para agregarla al mapa y tira error */
-		assertThrows(SinUnidadBuscadaError.class,()-> {
+		assertThrows(SinUnidadBuscadaException.class,()-> {
 			jugadorZerg.construir("Hidralisco", ubicacion3, jugadorProtoss, mapa);
 			
 		});
@@ -502,7 +502,7 @@ class CasoDeUso02Test {
 		guarida.avanzarTurno(11);
 		
 		/* se quiere buscar la unidad en jugador para agregarla al mapa y tira error */
-		assertThrows(SinUnidadBuscadaError.class,()-> {
+		assertThrows(SinUnidadBuscadaException.class,()-> {
 			jugadorZerg.construir("Hidralisco", ubicacion3, jugadorProtoss, mapa);
 			
 		});
@@ -525,7 +525,7 @@ class CasoDeUso02Test {
 		criadero.avanzarTurno(4);
 		
 		/* se quiere buscar la unidad en jugador para agregarla al mapa y tira error */
-		assertThrows(SinUnidadBuscadaError.class,()-> {
+		assertThrows(SinUnidadBuscadaException.class,()-> {
 			jugadorZerg.construir("Zerling", ubicacion2, jugadorProtoss, mapa);
 			
 		});
@@ -569,7 +569,7 @@ class CasoDeUso02Test {
 		reserva.avanzarTurno(11);
 		
 		/* se quiere buscar la unidad en jugador para agregarla al mapa y tira error */
-		assertThrows(SinUnidadBuscadaError.class,()-> {
+		assertThrows(SinUnidadBuscadaException.class,()-> {
 			jugadorZerg.construir("Zerling", ubicacion2, jugadorProtoss, mapa);
 			
 		});
@@ -595,7 +595,7 @@ class CasoDeUso02Test {
 		criadero.avanzarTurno(4);
 		
 		/* se quiere buscar la unidad en jugador para agregarla al mapa y tira error */
-		assertThrows(SinUnidadBuscadaError.class,()-> {
+		assertThrows(SinUnidadBuscadaException.class,()-> {
 			jugadorZerg.construir("Mutalisco", ubicacion4, jugadorProtoss, mapa);
 		});
 	}
@@ -646,7 +646,7 @@ class CasoDeUso02Test {
 		espiral.avanzarTurno(9);
 		
 		/* se quiere buscar la unidad en jugador para agregarla al mapa y tira error */
-		assertThrows(SinUnidadBuscadaError.class,()-> {
+		assertThrows(SinUnidadBuscadaException.class,()-> {
 			jugadorZerg.construir("Mutalisco", ubicacion4, jugadorProtoss, mapa);
 		});
 	}

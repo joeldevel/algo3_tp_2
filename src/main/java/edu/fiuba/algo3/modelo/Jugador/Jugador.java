@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
-import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
+import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoException;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaException;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
@@ -180,7 +180,7 @@ public abstract class Jugador {
 			}
 		}
 		if(edificio == null) {
-			throw new SinEdificioBuscadoError();
+			throw new SinEdificioBuscadoException();
 		}
 		return edificio;
 	}
@@ -199,7 +199,7 @@ public abstract class Jugador {
 			}
 		}
 		if(unidad == null) {
-			throw new SinUnidadBuscadaError();
+			throw new SinUnidadBuscadaException();
 		}
 		return unidad;
 	}

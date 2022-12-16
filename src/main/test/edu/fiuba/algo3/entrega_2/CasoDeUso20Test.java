@@ -13,12 +13,11 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.ReservaDeReproduccion;
-import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
 
 class CasoDeUso20Test {
 	
@@ -113,10 +112,10 @@ class CasoDeUso20Test {
 		/* se mueven una segunda vez, esta en la posicion 8,9 zealot, y 8,8 dragon, que es de aire*/
 		zealot.moverse(mapa);
 		dragon.moverse(mapa);
-		assertThrows(SinUnidadBuscadaError.class, ()->{
+		assertThrows(SinUnidadBuscadaException.class, ()->{
 			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,9));
 		});
-		assertThrows(SinUnidadBuscadaError.class, ()->{
+		assertThrows(SinUnidadBuscadaException.class, ()->{
 			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,8));
 		});
 	}
@@ -310,7 +309,7 @@ class CasoDeUso20Test {
 		
 		/* se mueve una segunda vez, esta en la posicion 8,8, que es de aire */
 		hidralisco.moverse(mapa);
-		assertThrows(SinUnidadBuscadaError.class, ()->{
+		assertThrows(SinUnidadBuscadaException.class, ()->{
 			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,8));
 		});
 	}
@@ -346,7 +345,7 @@ class CasoDeUso20Test {
 		
 		/* se mueve una segunda vez, esta en la posicion 8,9, que es de aire */
 		zerling.moverse(mapa);
-		assertThrows(SinUnidadBuscadaError.class, ()->{
+		assertThrows(SinUnidadBuscadaException.class, ()->{
 			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,9));
 		});
 	}
@@ -378,7 +377,7 @@ class CasoDeUso20Test {
 		
 		/* se mueve una segunda vez, esta en la posicion 8,7, que es de aire */
 		zangano.moverse(mapa);
-		assertThrows(SinUnidadBuscadaError.class, ()->{
+		assertThrows(SinUnidadBuscadaException.class, ()->{
 			mapa.obtenerUnidadEnUbicacion(new Ubicacion(8,7));
 		});
 	}

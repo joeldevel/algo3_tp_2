@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
-import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
-import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaError;
+import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoException;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaException;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -143,7 +143,7 @@ public class Mapa {
 			}
 		}
 		if(unidad == null) {
-			throw new SinUnidadBuscadaError();
+			throw new SinUnidadBuscadaException();
 		}
 		return unidad;
 	}
@@ -274,7 +274,7 @@ public class Mapa {
 		   }
 	   }
 	   if(pilon == null) {
-		   throw new SinEdificioBuscadoError();
+		   throw new SinEdificioBuscadoException();
 	   }
 	   return pilon;
    }
@@ -305,7 +305,7 @@ public class Mapa {
 		   }
 	   }
 	   if(edificio == null) {
-		   throw new SinEdificioBuscadoError();
+		   throw new SinEdificioBuscadoException();
 	   }
 	   return edificio;
    }

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Escudo;
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoError;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioException;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoException;
 
 // Borre dos test referidos al parametro de regeneracion.
 
@@ -45,7 +45,7 @@ class EscudoTest {
 	@Test
 	void test04SeIntentaInstanciarUnEscudoConSuProteccionMaximaNegativaSeDeberiaLanzarUnaExcepcion() {
 		
-		assertThrows(ValorInvalidoParaEscudoError.class,()->{
+		assertThrows(ValorInvalidoParaEscudoException.class,()->{
 			new Escudo(-100);
 			});
 	}
@@ -98,7 +98,7 @@ class EscudoTest {
 		
 		Escudo escudo = new Escudo(500);
 		
-		assertThrows(ValorInvalidoDeDanioError.class,()->{
+		assertThrows(ValorInvalidoDeDanioException.class,()->{
 			escudo.recibirDanioPor(-100);
 			});
 	}

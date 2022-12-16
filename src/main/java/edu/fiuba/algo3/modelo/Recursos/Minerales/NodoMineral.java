@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.Recursos.Minerales;
 
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
-import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConstruidoException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMineralException;
 
 public class NodoMineral implements Mineral {
@@ -35,24 +33,27 @@ public class NodoMineral implements Mineral {
     public int mineralRestante() {
     	return (this.cantidadDeMineralDisponible);
     }
+
+    public boolean tieneMinero() {
+        return (this.minero.tieneMinero());
+    }
     
     @Override
     public int recolectarMineral(int unaCantidadDeMineralParaExtraer) {
-    	
-    	if(this.mineralRestante() == 0) {
-    		throw new NodoMineralSinMineralParaRecolectarException();
-    	}
-    	if(!this.minero.tieneMinero()) {
-            throw new NodoMineralSinRecolectorDeMineralConstruidoException();
-        }
-    	if(this.mineralRestante() < unaCantidadDeMineralParaExtraer) {
-            unaCantidadDeMineralParaExtraer = this.cantidadDeMineralDisponible;
-            this.cantidadDeMineralDisponible = 0;
+
+        if (this.mineralRestante() > 0 && this.tieneMinero()) {
+
+            if (this.mineralRestante() < unaCantidadDeMineralParaExtraer) {
+                unaCantidadDeMineralParaExtraer = this.cantidadDeMineralDisponible;
+                this.cantidadDeMineralDisponible = 0;
+                return unaCantidadDeMineralParaExtraer;
+            }
+
+            this.cantidadDeMineralDisponible = this.cantidadDeMineralDisponible - unaCantidadDeMineralParaExtraer;
             return unaCantidadDeMineralParaExtraer;
         }
 
-        this.cantidadDeMineralDisponible = this.cantidadDeMineralDisponible - unaCantidadDeMineralParaExtraer;
-        return unaCantidadDeMineralParaExtraer;
+        return 0;
     }
     
     @Override

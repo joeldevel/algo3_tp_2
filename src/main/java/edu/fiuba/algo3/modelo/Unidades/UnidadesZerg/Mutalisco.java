@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Devorador.CONSTRUCCION_DEVORADOR;
 import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian.CONSTRUCCION_GUARDIAN;
@@ -70,11 +69,9 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 
 		for (Ataque ataque : ataques) {
-			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
-				throw new AtacableFueraDeRangoError();
+			if(this.estaEnRangoDeAtaque(unAtacable, ataque)) {
+				ataque.atacarA(unAtacable, unidadAtacante);
 			}
-
-			ataque.atacarA(unAtacable, unidadAtacante);
 		}
 	}
 

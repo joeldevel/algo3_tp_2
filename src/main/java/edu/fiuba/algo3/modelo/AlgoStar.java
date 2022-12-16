@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Excepciones.AlgoStarFinalizadoException;
-import edu.fiuba.algo3.modelo.Excepciones.RazaInexistenteException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
@@ -84,7 +83,7 @@ public class AlgoStar {
     public boolean validarRaza(String unaRaza) {
 
         if(!(unaRaza.equals("Zerg") || unaRaza.equals("Protoss"))) {
-            throw new RazaInexistenteException();
+            return false;
         }
 
         // Los jugadores no pueden tener la misma raza.

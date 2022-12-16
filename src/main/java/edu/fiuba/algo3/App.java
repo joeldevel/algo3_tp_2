@@ -27,7 +27,7 @@ public class App extends Application {
         PantallaFinal pantallaFinal = new PantallaFinal(stage);
         Scene escenaFinal = new Scene(pantallaFinal, 500, 500);
         escenaFinal.getStylesheets().add("file:src/main/resources/style.css");
-        
+
         PantallaJuego pantallaJuego = new PantallaJuego(stage, escenaFinal, algoStar);
         Scene escenaJuego = new Scene(pantallaJuego, 500, 500);
         escenaJuego.getStylesheets().add("file:src/main/resources/style.css");

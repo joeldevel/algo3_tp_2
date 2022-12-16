@@ -4,7 +4,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Excepciones.OrigenNoEncontradoError;
+import edu.fiuba.algo3.modelo.Excepciones.OrigenNoEncontradoException;
 
 public class Moho {
  
@@ -117,7 +117,7 @@ public class Moho {
 			}
 		}
 		if(origen == null) {
-			throw new OrigenNoEncontradoError();
+			throw new OrigenNoEncontradoException();
 		}
 		return origen;
 	}

@@ -14,8 +14,8 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaVidaError;
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaVidaException;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioException;
 import edu.fiuba.algo3.modelo.Vida;
 
 // Borre dos test referidos al parametro de regeneracion.
@@ -83,7 +83,7 @@ class VidaTest {
 	@Test
 	void test04SeIntentaInstanciarUnaVidaConSuVidaMaximaNegativaDeberiaLanzarUnaExcepcion() {
 		
-		assertThrows(ValorInvalidoParaVidaError.class,()->{
+		assertThrows(ValorInvalidoParaVidaException.class,()->{
 		new Vida(-1);
 		});
 	}
@@ -91,7 +91,7 @@ class VidaTest {
 	@Test
 	void test05SeIntentaInstanciarUnaVidaConSuVidaMaximaEnCeroDeberiaLanzarUnaExcepcion() {
 
-		assertThrows(ValorInvalidoParaVidaError.class,()->{
+		assertThrows(ValorInvalidoParaVidaException.class,()->{
 		new Vida(0);
 		});
 	}
@@ -180,7 +180,7 @@ class VidaTest {
         zerling.avanzarTurno(2);
 
         // Act & Assert
-		assertThrows(ValorInvalidoDeDanioError.class,()->{
+		assertThrows(ValorInvalidoDeDanioException.class,()->{
             vida.recibirDanioPor(-10, zerling, pilon, jugadorProtoss);
 			});
 	}

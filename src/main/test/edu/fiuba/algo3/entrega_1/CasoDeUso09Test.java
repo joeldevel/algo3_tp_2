@@ -2,18 +2,14 @@ package edu.fiuba.algo3.entrega_1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.Fabrica;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Acceso;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.PuertoEstelar;
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
@@ -138,7 +134,7 @@ class CasoDeUso09Test {
 		/* hago que mapa energice los edificios*/
 		mapa.avanzarTurno();
 		
-		assertThrows(EdificioNoEnergizadoError.class,()-> {
+		assertThrows(EdificioNoEnergizadoException.class,()-> {
 			acceso.transportarZealots();
 		});	
 	}
@@ -181,7 +177,7 @@ class CasoDeUso09Test {
 		/* hago que mapa energice los edificios*/
 		mapa.avanzarTurno();
 		
-		assertThrows(EdificioNoEnergizadoError.class,()-> {
+		assertThrows(EdificioNoEnergizadoException.class,()-> {
 			puertoEstelar.transportarScout();
 		});
 	}

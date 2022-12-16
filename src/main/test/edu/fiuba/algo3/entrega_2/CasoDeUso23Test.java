@@ -18,7 +18,6 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Guardian;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Hidralisco;
@@ -50,10 +49,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			zerling.atacar(zealot);			
-		});
+
+		zerling.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -87,11 +86,11 @@ class CasoDeUso23Test {
 		Ubicacion ubicacion2 = new Ubicacion(1,1);
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
-		zerling.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			zerling.atacar(zealot);			
-		});
+		zealot.avanzarTurno(4);
+
+		zerling.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -124,10 +123,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			hidralisco.atacar(zealot);
-		});
+
+		hidralisco.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -144,10 +143,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			hidralisco.atacar(zealot);
-		});
+
+		hidralisco.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -164,10 +163,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			hidralisco.atacar(zealot);
-		});
+
+		hidralisco.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -184,10 +183,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			hidralisco.atacar(zealot);
-		});
+
+		hidralisco.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -234,10 +233,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			mutalisco.atacar(zealot);
-		});		
+
+		mutalisco.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -252,10 +251,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			mutalisco.atacar(zealot);
-		});		
+
+		mutalisco.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -270,10 +269,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			mutalisco.atacar(zealot);
-		});		
+
+		mutalisco.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -342,10 +341,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			guardian.atacar(zealot);
-		});		
+
+		guardian.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -360,10 +359,10 @@ class CasoDeUso23Test {
 		Zealot tipoZealot = new Zealot(jugadorProtoss);
 		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), ubicacion2, tipoZealot);
 		zealot.avanzarTurno(4);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			guardian.atacar(zealot);
-		});		
+
+		guardian.atacar(zealot);
+
+		assertEquals(60, zealot.escudoRestante());
 	}
 	
 	@Test
@@ -434,10 +433,10 @@ class CasoDeUso23Test {
 		Zerling tipoZerling = new Zerling(jugadorZerg);
 		Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), ubicacion2, tipoZerling);
 		zerling.avanzarTurno(2);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			zealot.atacar(zerling);
-		});		
+
+		zealot.atacar(zerling);
+
+		assertEquals(35, zerling.vidaRestante());
 	}
 	
 	@Test
@@ -452,10 +451,10 @@ class CasoDeUso23Test {
 		Zerling tipoZerling = new Zerling(jugadorZerg);
 		Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), ubicacion2, tipoZerling);
 		zerling.avanzarTurno(2);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			zealot.atacar(zerling);
-		});		
+
+		zealot.atacar(zerling);
+
+		assertEquals(35, zerling.vidaRestante());
 	}
 	
 	@Test
@@ -506,10 +505,10 @@ class CasoDeUso23Test {
 		Zerling tipoZerling = new Zerling(jugadorZerg);
 		Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), ubicacion2, tipoZerling);
 		zerling.avanzarTurno(2);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			dragon.atacar(zerling);
-		});		
+
+		dragon.atacar(zerling);
+
+		assertEquals(35, zerling.vidaRestante());
 	}
 	
 	@Test
@@ -524,10 +523,10 @@ class CasoDeUso23Test {
 		Zerling tipoZerling = new Zerling(jugadorZerg);
 		Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), ubicacion2, tipoZerling);
 		zerling.avanzarTurno(2);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			dragon.atacar(zerling);
-		});		
+
+		dragon.atacar(zerling);
+
+		assertEquals(35, zerling.vidaRestante());
 	}
 	
 	@Test
@@ -542,10 +541,10 @@ class CasoDeUso23Test {
 		Zerling tipoZerling = new Zerling(jugadorZerg);
 		Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), ubicacion2, tipoZerling);
 		zerling.avanzarTurno(2);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			dragon.atacar(zerling);
-		});		
+
+		dragon.atacar(zerling);
+
+		assertEquals(35, zerling.vidaRestante());
 	}
 	
 	@Test
@@ -596,10 +595,10 @@ class CasoDeUso23Test {
 		Zerling tipoZerling = new Zerling(jugadorZerg);
 		Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), ubicacion2, tipoZerling);
 		zerling.avanzarTurno(2);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			scout.atacar(zerling);
-		});		
+
+		scout.atacar(zerling);
+
+		assertEquals(35, zerling.vidaRestante());
 	}
 	
 	@Test
@@ -614,10 +613,10 @@ class CasoDeUso23Test {
 		Zerling tipoZerling = new Zerling(jugadorZerg);
 		Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), ubicacion2, tipoZerling);
 		zerling.avanzarTurno(2);
-		
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			scout.atacar(zerling);
-		});		
+
+		scout.atacar(zerling);
+
+		assertEquals(35, zerling.vidaRestante());
 	}
 	
 	@Test
@@ -671,9 +670,9 @@ class CasoDeUso23Test {
 		JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
 		Acceso acceso = new Acceso(ubicacion2, jugadorProtoss);
 
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			zerling.atacar(acceso);
-		});
+		zerling.atacar(acceso);
+
+		assertEquals(500, acceso.obtenerEscudo());
 	}
 
 	@Test
@@ -705,9 +704,9 @@ class CasoDeUso23Test {
 		Ubicacion ubicacion2 = new Ubicacion(0,2);
 		Criadero criadero = new Criadero(ubicacion2, jugadorZerg);
 
-		assertThrows(AtacableFueraDeRangoError.class, ()->{
-			zealot.atacar(criadero);
-		});
+		zealot.atacar(criadero);
+
+		assertEquals(500, criadero.obtenerVida());
 	}
 
 	@Test

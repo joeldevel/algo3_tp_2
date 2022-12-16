@@ -15,7 +15,6 @@ import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.EstadoDeZealot;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotInvisible;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
@@ -83,12 +82,11 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
-		for (Ataque ataque : ataques) {
-			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
-				throw new AtacableFueraDeRangoError();
-			}
 
-			ataque.atacarA(unAtacable, unidadAtacante);
+		for (Ataque ataque : ataques) {
+			if(this.estaEnRangoDeAtaque(unAtacable, ataque)) {
+				ataque.atacarA(unAtacable, unidadAtacante);
+			}
 		}
 	}
 

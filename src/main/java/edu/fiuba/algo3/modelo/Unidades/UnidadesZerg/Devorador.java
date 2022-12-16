@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
@@ -67,11 +66,9 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 
         for (Ataque ataque : ataques) {
-            if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
-                throw new AtacableFueraDeRangoError();
+            if(this.estaEnRangoDeAtaque(unAtacable, ataque)) {
+                ataque.atacarA(unAtacable, unidadAtacante);
             }
-
-            ataque.atacarA(unAtacable, unidadAtacante);
         }
     }
 
