@@ -89,10 +89,12 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
         // No hace nada
     }
 
+    @Override
     public void serRevelado() {
         // No hace nada
     }
 
+    @Override
     public void contarBaja() {
         throw new UnidadEnConstruccionException();
     }

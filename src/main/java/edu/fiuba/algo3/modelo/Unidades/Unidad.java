@@ -26,6 +26,12 @@ public class Unidad extends Raza {
 		return this.tipo.obtenerSuministro();
 	}
 
+	// Se delega al tipo y no al estado, porque aunque este en construccion ya aumenta la poblacion.
+	@Override
+	public int obtenerPoblacion() {
+		return this.tipo.obtenerPoblacion();
+	}
+
 	public void setComportamientoTipo(Tiempo unTiempo, TipoDeUnidad nuevoTipo, Ubicacion unaUbicacion) {
 		this.tiempo = unTiempo;
 		this.ubicacion = unaUbicacion;
@@ -50,12 +56,6 @@ public class Unidad extends Raza {
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
 		return this.estado.compararSuperficie(otraSuperficie);
-	}
-
-	// Se delega al tipo y no al estado, porque aunque este en construccion ya aumenta la poblacion.
-	@Override
-	public int obtenerPoblacion() {
-		return this.tipo.obtenerPoblacion();
 	}
 
 	@Override
@@ -85,15 +85,15 @@ public class Unidad extends Raza {
 		return this.estado.vidaRestante();
 	}
 
+	public int escudoRestante() {
+		return (this.estado.escudoRestante());
+	}
+
 	public void trabajarEn(NodoMineral nodo) {
 
 		if(nodo.ubicacion().esIgualA(this.ubicacion)) {
 			this.estado.trabajarEn(nodo);
 		}
-	}
-
-	public int escudoRestante() {
-		return (this.estado.escudoRestante());
 	}
 
 	public void hacerseInvisible() {

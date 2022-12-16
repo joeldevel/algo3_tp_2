@@ -82,6 +82,7 @@ class Mapa{
     -unidades: ArrayList<Unidad>
     -amosSupremos: ArrayList<Unidad>
     -areasEspaciales: : ArrayList<Ubicacion>
+    +Mapa()
     +getUbicacionesConMoho(): ArrayList<Ubicacion>
     +getVolcanes(): ArrayList<Volcan>
     +getNodosMinerales(): ArrayList<NodoMineral>
@@ -129,9 +130,21 @@ class Mapa{
     +revelarUnidades()
 }
 
-AlgoStar  -left-> "2" Jugador
+class Recursos {
+    -cantidadDeGas: int
+    -cantidadDeMineral: int
+    +Recursos()
+    +guardar(cantidadDeGas, cantidadDeMineral)
+    +utilizar(cantidadDeGas, cantidadDeMineral)
+    +obtenerGas()
+    +obtenerMineral()
+}
+
+AlgoStar  -down-> "2" Jugador
 AlgoStar -right-> Mapa
 
+Jugador -> Mapa
+Jugador -left-> Recursos
 JugadorProtoss -up-|> Jugador
 JugadorZerg -up-|> Jugador
 

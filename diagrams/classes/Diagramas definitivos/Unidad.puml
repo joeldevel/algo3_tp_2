@@ -1,0 +1,83 @@
+Nota: Comentar en el informe sobre la existencia de la clase UnidadEnConstruccion
+
+@startuml
+
+interface Atacable {
+    +recibirAtaque()
+    +ubicacion(): Ubicacion
+    +comprarSuperficie(otraSuperficie): boolean
+}
+
+abstract class Raza {
+    -tiempo: Tiempo
+    -ubicacion: Ubicacion
+    -jugador: Jugador
+    +tiempoRestante(): int
+    +{abstract} obtenerPoblacion()
+    +{abstract} avanzarTurno()
+    +ubicacion(): Ubicacion
+    +estaEn(unaUbicacion): boolean
+}
+
+class Unidad {
+    -estado: TipoDeUnidad
+    -tipo: TipoDeUnidad
+    -direccion: Direccion
+    +Unidad(unTiempo, unaUbicacion, unTipo)
+    +obtenerTipo(): TipoDeUnidad
+    +obtenerSuministro()
+    +obtenerPoblacion()
+    +setComportamientoTipo(unTiempo, nuevoTipoDeUnidad, unaUbicacion)
+    +setComportamientoEstado(unTipoDeUnidad)
+    +recibirAtaque(unDanio)
+    +atacar(unAtacable)
+    +compararSuperficie(otraSuperficie)
+    +avanzarTurno()
+    +evolucionarAGuardian()
+    +evolucionarADevorador()
+    +vidaRestante()
+    +escudoRestante(): int
+    +trabajarEn(unNodoMineral)
+    +hacerseInvisible()
+    +revelar(unRevelable)
+    +serRevelado()
+    +contarBaja()
+    +moverse(unMapa)
+    +cambiarDireccion()
+}
+
+note right: En el constructor tenemos\n\nthis.estado = new UnidadEnConstruccion()\nthis.tipo = unTipo\n\nCuando se cumpla el tiempo de construccion se llamara\nal metodo setComportamientoEstado(unTipoDeUnidad) y tendremos\n\nthis.estado = this.tipo
+
+class Direccion {
+    -direccion: String
+    +Direccion()
+    +cambiarDireccion()
+    +obtenerSiguienteUbicacion(unaUbicacion)
+}
+
+interface TipoDeUnidad {
+    +trabajarEn(unNodoMineral)
+    +setComportamientoUnidad(unaUnidad)
+    +obtenerPoblacion()
+    +obtenerSuministro()
+    +recibirAtaque(unDanio, unidadAtacante)
+    +atacar(unAtacable, unidadAtacante)
+    +recuperarse()
+    +evolucionarAGuardian(unaUnidad)
+    +evolucionarADevorador(unaUnidad)
+    +vidaRestante()
+    +escudoRestante()
+    +compararSuperficie(otraSuperficie)
+    +avanzarTurno()
+    +hacerseInvisible()
+    +revelar(unRevelable)
+    +serRevelado()
+    +contarBaja()
+}
+
+Raza ..right|> Atacable
+Unidad --up|> Raza
+Unidad <--down> TipoDeUnidad
+Unidad --left> Direccion
+
+@enduml

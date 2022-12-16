@@ -1,0 +1,40 @@
+@startuml
+
+class Mapa{
+    -moho: Moho
+    -pilones: ArrayList<Pilon>
+    -volcanes: ArrayList<Volcan>
+    -nodosMinerales: : ArrayList<NodoMineral>
+    -edificios: ArrayList<Edificio>
+    -unidades: ArrayList<Unidad>
+    -amosSupremos: ArrayList<Unidad>
+    -areasEspaciales: : ArrayList<Ubicacion>
+    +Mapa()
+}
+
+class Moho
+
+class Pilon
+
+class Volcan
+
+class NodoMineral
+
+abstract class Edificio
+
+class Unidad
+
+class AmoSupremo
+
+class Ubicacion
+
+Mapa -down-> Moho
+Mapa -down-> Pilon
+Mapa -right-> Volcan
+Mapa -left-> NodoMineral
+Mapa -up-> Edificio
+Mapa -up-> Unidad
+Mapa -up-> AmoSupremo
+Mapa -down-> Ubicacion
+
+@enduml

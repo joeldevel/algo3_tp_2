@@ -6,7 +6,6 @@ public abstract class Raza implements Atacable, Revelable{
 	
 	protected Tiempo tiempo;
 	protected Ubicacion ubicacion;
-	protected Jugador jugador;
 	
 	public Raza(Tiempo unTiempo, Ubicacion unaUbicacion) {
 		this.tiempo = unTiempo;

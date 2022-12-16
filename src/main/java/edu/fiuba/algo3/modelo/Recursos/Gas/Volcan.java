@@ -29,10 +29,6 @@ public class Volcan {
 
     	this.refineria = unaRefineriaDeGas;
     }
-    
-    public int gasVespenoRestante() {
-        return this.cantidadDeGasVespenoDisponible;
-    }
 
     public boolean tieneRefineria() {
         return (this.refineria.tieneRefineria());
@@ -40,10 +36,10 @@ public class Volcan {
     
     public int extraerGas(int unaCantidadDeGasParaExtraer) {
 
-        if(this.gasVespenoRestante() > 0 && this.tieneRefineria()) {
+        if(this.getCantidadDeGasVespenoDisponible() > 0 && this.tieneRefineria()) {
 
-            if (this.gasVespenoRestante() < unaCantidadDeGasParaExtraer) {
-                unaCantidadDeGasParaExtraer = this.gasVespenoRestante();
+            if (this.getCantidadDeGasVespenoDisponible() < unaCantidadDeGasParaExtraer) {
+                unaCantidadDeGasParaExtraer = this.getCantidadDeGasVespenoDisponible();
                 this.cantidadDeGasVespenoDisponible = 0;
                 return unaCantidadDeGasParaExtraer;
             }

@@ -2,23 +2,23 @@
 
 @startuml
 
-class GasVespeno{
-    -cantidad: int
-}
-
 class Volcan{
 	-refineria: RefineriaDeGas
 	-cantidadDeGasVespenoDisponible: int
-	+Volcan(unaCantidadDeGasVespeno)
+	-ubicacion: Ubicacion
+	+Volcan(unaUbicacion)
+	+getCantidadDeGasVespenoDisponible(): int
 	+construirRefineriaDeGas(unaRefineria)
-	+extraerGasUsandoRefineria(cantidadGasParaExtraer)
-	+extraerGas(cantidadDeGasParaExtraer)
+	+tieneRefineria(): boolean
+	+extraerGas(unaCantidadGasParaExtraer)
+	+estaEn(unaUbicacion): boolean
+	+ubicacion(): Ubicacion
 }
 
 interface RefineriaDeGas{
-	+extraerGasUsandoRefineria(unVolcan): int
-	+construirEn(unVolcan)
+	+extraerGasD(unVolcan): int
 	+obtenerGas(): int
+	+tieneRefineria(): boolean
 }
 
 class Extractor{
@@ -83,7 +83,6 @@ Asimilador --> EstadoOperativo
 RefineriaDeGas <|.. Extractor
 RefineriaDeGas <|.. Asimilador
 
-Volcan --> GasVespeno
 Volcan <--> RefineriaDeGas
 
 @enduml
