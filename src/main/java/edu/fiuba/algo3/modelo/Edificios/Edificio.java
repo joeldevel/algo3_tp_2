@@ -41,6 +41,11 @@ public abstract class Edificio extends Raza implements Recuperable{
     @Override
     public abstract void recibirAtaque(int unAtaque, Unidad unidadAtacante);
     
+    @Override
+    public boolean compararSuperficie(String unTipoDeSuperficie) {
+        return this.superficie.compararTipos(unTipoDeSuperficie);
+    }
+    
     public int obtenerVida() {
     	return (this.vida.restante());
     }
@@ -54,4 +59,10 @@ public abstract class Edificio extends Raza implements Recuperable{
     }
 
     public abstract ArrayList<Unidad> devolverLarvas();
+    
+    @Override
+    public void serRevelado() {
+    	//No entiende este mensaje
+    }
+    
 }

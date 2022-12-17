@@ -8,4 +8,5 @@ public interface Atacable {
 	void recibirAtaque(int unDanio, Unidad unidadAtacante);
 	Ubicacion ubicacion();
 	boolean compararSuperficie(String otraSuperficie);
+	void serRevelado();
 }

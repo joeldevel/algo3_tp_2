@@ -63,13 +63,4 @@ public class Espiral extends EdificioZerg {
 		this.larvas.addAll(unasLarvas);
 	}
 
-	@Override
-	public boolean compararSuperficie(String unTipoDeSuperficie) {
-		return this.superficie.compararTipos(unTipoDeSuperficie);
-	}
-
-	@Override
-	public void serRevelado() {
-		// No hace nada.
-	}
 }

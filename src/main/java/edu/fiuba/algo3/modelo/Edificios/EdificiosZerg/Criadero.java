@@ -78,13 +78,4 @@ public class Criadero extends EdificioZerg {
 		return aDevolver;
 	}
 
-	@Override
-	public boolean compararSuperficie(String unTipoDeSuperficie) {
-		return this.superficie.compararTipos(unTipoDeSuperficie);
-	}
-
-	@Override
-	public void serRevelado() {
-		// No hace nada.
-	}
 }

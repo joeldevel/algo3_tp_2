@@ -85,7 +85,7 @@ public class UnidadEnConstruccion implements TipoDeUnidad, Atacante, Atacable {
     }
 
     @Override
-    public void revelar(Revelable unRevelable) {
+    public void revelar(Atacable unRevelable) {
         // No hace nada
     }
 

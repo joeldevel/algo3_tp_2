@@ -64,13 +64,4 @@ public class Asimilador extends EdificioProtoss implements RefineriaDeGas {
 		return true;
 	}
 
-	@Override
-	public boolean compararSuperficie(String unTipoDeSuperficie) {
-		return this.superficie.compararTipos(unTipoDeSuperficie);
-	}
-
-	@Override
-	public void serRevelado() {
-		// No hace nada.
-	}
 }

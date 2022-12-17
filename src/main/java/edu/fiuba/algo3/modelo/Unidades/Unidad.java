@@ -100,7 +100,7 @@ public class Unidad extends Raza {
 		this.estado.hacerseInvisible();
 	}
 
-	public void revelar(Revelable unRevelable) {
+	public void revelar(Atacable unRevelable) {
 		this.estado.revelar(unRevelable);
 	}
 

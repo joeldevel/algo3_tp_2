@@ -54,14 +54,5 @@ public class PuertoEstelar extends EdificioProtoss {
     	Unidad scout = new Unidad(new Tiempo(CONSTRUCCION_SCOUT), this.ubicacion, new Scout(this.jugador));
     	return scout;
     }
-	
-    @Override
-    public boolean compararSuperficie(String unTipoDeSuperficie) {
-        return this.superficie.compararTipos(unTipoDeSuperficie);
-    }
 
-    @Override
-    public void serRevelado() {
-        // No hace nada.
-    }
 }

@@ -4,8 +4,6 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
-import edu.fiuba.algo3.modelo.Revelo;
-import edu.fiuba.algo3.modelo.Revelador;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
@@ -89,7 +87,7 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     }
 
     @Override
-    public void revelar(Revelable unRevelable) {
+    public void revelar(Atacable unRevelable) {
 
         for (Revelo revelo : revelos) {
             if((this.estaEnRangoDeRevelo(unRevelable, revelo))) {
@@ -97,8 +95,8 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
             }
         }
     }
-
-    public boolean estaEnRangoDeRevelo(Revelable unRevelable, Revelo unRevelo) {
+    
+    public boolean estaEnRangoDeRevelo(Atacable unRevelable, Revelo unRevelo) {
         return (this.unidad.ubicacion().distanciaCon(unRevelable.ubicacion()) <= unRevelo.rango());
     }
 
@@ -135,4 +133,5 @@ public class AmoSupremo implements TipoDeUnidad, Atacable, Revelador  {
     public void contarBaja() {
         // ...
     }
+
 }
