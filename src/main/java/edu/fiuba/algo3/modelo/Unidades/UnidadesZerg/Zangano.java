@@ -50,9 +50,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
     }
 
 	public void avanzarTurno() {
-		if(nodo.tieneMineral()) {
-			this.jugador.guardar(0, this.recolectarMineralDe(this.nodo));
-		}
+		this.jugador.guardar(0, this.recolectarMineralDe(this.nodo));
 	}
 
 	@Override

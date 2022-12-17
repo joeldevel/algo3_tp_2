@@ -23,7 +23,7 @@ public class NodoMineral implements Mineral {
     }
 
     public void construirRecolectorDeMineral(Minero unMinero) {
-    	if(this.minero.tieneMinero()) {
+    	if(this.tieneMinero()) {
     		throw new NodoMineralYaTieneUnRecolectorDeMineralException();
     	}
 
@@ -50,11 +50,6 @@ public class NodoMineral implements Mineral {
         }
 
         return 0;
-    }
-    
-    @Override
-    public boolean tieneMineral() {
-        return true;
     }
     
     public boolean estaEn(Ubicacion unaUbicacion) {

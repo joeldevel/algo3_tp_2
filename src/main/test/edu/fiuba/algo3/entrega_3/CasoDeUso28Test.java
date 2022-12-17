@@ -121,7 +121,7 @@ public class CasoDeUso28Test {
     }
 
     @Test
-    void test03UnZerlingAtacaAUnZealotYElEscudoDelZealotNoDisminuyePorqueEstaInvisible(){
+    void test03UnZerlingAtacaAUnZealotYElEscudoDelZealotNoDisminuyePorqueEstaInvisible() {
         // Arrange
         Recursos recursos = new Recursos(1000,1000);
         JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", recursos, mapa);
