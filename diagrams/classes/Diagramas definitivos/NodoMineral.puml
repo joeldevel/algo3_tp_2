@@ -1,0 +1,115 @@
+@startuml
+
+class NodoMineral{
+	-minero: Minero
+	-cantidadDeMineralDisponible: int
+	-ubicacion: Ubicacion
+	+NodoMineral(unaUbicacion)
+	+getCantidadDeMineralDisponible(): int
+	+construirRecolectorDeMineral(unMinero)
+	+tieneMinero(): boolean
+	+recolectarMineral(unaCantidadDeMineralParaExtraer): int
+	+tieneMineral(): boolean
+	+estaEn(unaUbicacion): boolean
+	+ubicacion(): Ubicacion
+}
+
+interface Mineral {
+    +getCantidadDeMineralDisponible(): int
+    +recolectarMineral(unaCantidad): int
+    +tieneMineral(): boolean
+}
+
+class SinNodoMineral {
+    +getCantidadDeMineralDisponible(): int
+    +recolectarMineral(unaCantidad): int
+    +tieneMineral(): boolean
+}
+
+interface Minero{
+	+recolectarMineralDe(unNodoMineral): int
+	+obtenerMineral(): int
+	+tieneMinero(): boolean
+}
+
+class SinMinero {
+    +recolectarMineralDe(unNodoMineral): int
+    +obtenerMineral(): int
+    +tieneMinero(): boolean
+}
+
+class NexoMineral{
+	-cantidadRecolectable: int
+	-nodo: NodoMineral
+	+NexoMineral(unNodo, unaUbicacion, unJugador)
+	+devolverLarvas(): ArrayList<Unidad>
+	+obtenerPoblacion(): int
+	+ejecutaOperable()
+	+recolectarMineralDe(unNodoMineral)
+	+obtenerMineral(): int
+	+tieneMinero(): boolean
+	+compararSupreficie(unTipoDeSuperficie): boolean
+	+serRevelado()
+}
+
+abstract class EstadoOperativo {
+    -edificio: Edificio
+    +EstadoOperativo(unEdificio)
+    +{abstract} ejecutar()
+}
+
+class Operable{
+    +Operable(unEdificio)
+    +ejecutar()
+}
+
+class EnConstruccion{
+    +EnConstruccion(unEdificio)
+    +ejecutar()
+}
+
+class Zangano{
+    -vida: Vida
+    -jugador: Jugador
+    -unidad: Unidad
+    -superficie: Superficie
+    -cantidadRecolectableDeMineral: int
+    -nodo: Mineral
+    +Zangano(unJugador)
+    +setComportamientoUnidad(unaUnidad)
+    +trabajarEn(unNodo)
+    +avanzarTurno()
+    +recolectarMineralDe(unNodoMineral)
+    +obtenerMineral(): int
+    +tieneMinero(): boolean
+    +vidaRestante(): int
+    +escudoRestante(): int
+    +hacerseInvisible()
+    +obtenerPoblacion(): int
+    +obtenerSuministro(): int
+    +recibirAtaque()
+    +ubicacion(): Ubicacion
+    +atacar(unAtacable, unidadAtacante)
+    +recuperarse()
+    +compararSupreficie(unTipoDeSuperficie): boolean
+    +evolucionarAGuardian(unaUnidad)
+    +evolucionarADevorador(unaUnidad)
+    +revelar()
+    +serRevelado()
+    +contarBaja()
+}
+
+NexoMineral --> EstadoOperativo
+
+EstadoOperativo <|.. Operable
+EstadoOperativo <|.. EnConstruccion
+
+Minero <|.left. SinMinero
+Minero <|. NexoMineral
+Minero <|.. Zangano
+
+NodoMineral <--> Minero
+NodoMineral .right.|> Mineral
+SinNodoMineral ..|> Mineral
+
+@enduml

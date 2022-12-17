@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.Recursos.Minerales;
 
 public interface Mineral {
 
-	public int mineralRestante();
+	public int getCantidadDeMineralDisponible();
 	
 	public int recolectarMineral(int unaCantidad);
 	

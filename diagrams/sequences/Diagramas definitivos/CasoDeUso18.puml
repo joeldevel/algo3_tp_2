@@ -1,0 +1,74 @@
+test05UnZealotAtacaAUnZerlingYLaVidaDelZerlingDisminuyeLoIndicado()
+
+Nota: Suponemos que el tiempo esta avanzado del tal forma que las unidades estan operables y no en construccion.
+
+@startuml
+
+== Inicializacion ==
+
+Usuario->"m: Mapa": Mapa()
+Usuario->"rp: Recursos": Recursos(1000,1000)
+Usuario->"jugadorProtoss: JugadorProtoss": JugadorProtoss(unNombre, unColor, rp, m)
+Usuario->"rz: Recursos": Recursos(1000,1000)
+Usuario->"jugadorZerg: JugadorZerg": JugadorProtoss(unNombre, unColor, rz, m)
+
+Usuario -> "tipoZealot: Zealot": Zealot(jugadorProtoss)
+Usuario -> "tiempoZealot: Tiempo": Tiempo(-4)
+Usuario -> "ubicacionZealot: Ubicacion": Ubicacion(0,0)
+Usuario -> "unidadZealot: Unidad": Unidad(tiempoZerling, ubicacionZealot, tipoZealot)
+
+Usuario -> "tipoZerling: Zerling": Zerling(jugadorZerg)
+Usuario -> "tiempoZerling: Tiempo": Tiempo(-2)
+Usuario -> "ubicacionZerling: Ubicacion": Ubicacion(0,0)
+Usuario -> "unidadZerling: Unidad": Unidad(tiempoZerling, ubicacionZerling, tipoZerling)
+
+@enduml
+
+@startuml
+
+== Caso de uso ==
+
+Usuario -> "unidadZealot: Unidad": atacar(unidadZerling)
+"unidadZealot: Unidad" -> "tipoZealot: Zealot": atacar(unidadZerling, this)
+
+loop para cada ataque
+"tipoZealot: Zealot" -> "tipoZealot: Zealot": estaEnRangoDeAtaque(unidadZerling, ataqueZealot)
+"tipoZealot: Zealot" -> "unidadZealot: Unidad": ubicacion()
+"unidadZealot: Unidad" --> "tipoZealot: Zealot"
+"tipoZealot: Zealot" -> "unidadZerling: Unidad": ubicacion()
+"unidadZerling: Unidad" --> "tipoZealot: Zealot": ubicacionZerling
+"tipoZealot: Zealot" -> "ubicacionZealot: Ubicacion": distanciaCon(ubicacionZerling)
+"ubicacionZealot: Ubicacion" --> "tipoZealot: Zealot": 0
+"tipoZealot: Zealot" -> "ataqueZealot: Ataque": rango()
+"ataqueZealot: Ataque" -> "tipoZealot: Zealot": 1
+"tipoZealot: Zealot" --> "tipoZealot: Zealot": true
+
+"tipoZealot: Zealot" -> "ataqueZealot: Ataque": atacarA(unidadZerling, unidadZealot)
+
+"ataqueZealot: Ataque" -> "superficieAtaqueZealot: Superficie": atacableTieneLaMismaSuperficie(unidadZerling)
+"superficieAtaqueZealot: Superficie" -> "unidadZerling: Unidad": compararSuperficie(Tierra)
+"unidadZerling: Unidad" -> "tipoZerling: Zerling": compararSuperficie(Tierra)
+"tipoZerling: Zerling" -> "superficieZerling: Superficie": compararTipos(Tierra)
+"superficieZerling: Superficie" --> "tipoZerling: Zerling": true
+"tipoZerling: Zerling" --> "unidadZerling: Unidad": true
+"unidadZerling: Unidad" --> "superficieAtaqueZealot: Superficie": true
+"superficieAtaqueZealot: Superficie" --> "ataqueZealot: Ataque": true
+
+"ataqueZealot: Ataque" -> "unidadZerling: Unidad": recibirAtaque(8, unidadZealot)
+"unidadZerling: Unidad" -> "tipoZerling: Zerling": recibirAtaque(8 unidadZealot)
+"tipoZerling: Zerling" -> "vidaZerling: Vida": recibirDanioPor(8, unidadZealot, unidadZerling, jugadorZerg)
+"vidaZerling: Vida" --> "tipoZerling: Zerling"
+"tipoZerling: Zerling" --> "tipoZerling: Zerling"
+"tipoZerling: Zerling" --> "unidadZerling: Unidad"
+"unidadZerling: Unidad" --> "ataqueZealot: Ataque"
+"ataqueZealot: Ataque" --> "tipoZealot: Zealot"
+end
+
+Usuario -> "unidadZerling: Unidad": vidaRestante()
+"unidadZerling: Unidad" -> "tipoZerling: Zerling": vidaRestante()
+"tipoZerling: Zerling" -> "vidaZerling: Vida": restante()
+"vidaZerling: Vida" --> "tipoZerling: Zerling": 27
+"tipoZerling: Zerling" --> "unidadZerling: Unidad": 27
+"unidadZerling: Unidad" --> Usuario: 27
+
+@enduml
