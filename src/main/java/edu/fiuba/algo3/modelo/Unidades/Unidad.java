@@ -2,18 +2,23 @@ package edu.fiuba.algo3.modelo.Unidades;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
 public class Unidad extends Raza {
 
 	private TipoDeUnidad estado;
 	private TipoDeUnidad tipo;
+	private Direccion direccion;
     
 	public Unidad(Tiempo unTiempo, Ubicacion unaUbicacion, TipoDeUnidad unTipo) {
 		super(unTiempo, unaUbicacion);
 		this.estado = new UnidadEnConstruccion();
 		this.tipo = unTipo;
 		unTipo.setComportamientoUnidad(this);
+		this.direccion = new Direccion();
+	}
+
+	public TipoDeUnidad obtenerTipo() {
+		return this.tipo;
 	}
 
 	// Se delega al tipo y no al estado, porque aunque este en construccion ya tiene un cupo reservado.
@@ -21,15 +26,20 @@ public class Unidad extends Raza {
 		return this.tipo.obtenerSuministro();
 	}
 
-	// Este metodo se utiliza cuando cambiamos el tipo de unidad. Ej: Cuando una larva evoluciona a Zangano.
-	// Es necesario para poder setear el tiempo de construccion.
-	public void setComportamientoTipo(Tiempo unTiempo, TipoDeUnidad nuevoTipo) {
-		this.tiempo = unTiempo;
-		this.estado = new UnidadEnConstruccion();
-		this.tipo = nuevoTipo;
+	// Se delega al tipo y no al estado, porque aunque este en construccion ya aumenta la poblacion.
+	@Override
+	public int obtenerPoblacion() {
+		return this.tipo.obtenerPoblacion();
 	}
 
-	// Este metodo se utiliza cuando el tiempo de construccion se cumplio.
+	public void setComportamientoTipo(Tiempo unTiempo, TipoDeUnidad nuevoTipo, Ubicacion unaUbicacion) {
+		this.tiempo = unTiempo;
+		this.ubicacion = unaUbicacion;
+		this.estado = new UnidadEnConstruccion();
+		this.tipo = nuevoTipo;
+		nuevoTipo.setComportamientoUnidad(this);
+	}
+
 	public void setComportamientoEstado(TipoDeUnidad nuevoEstado) {
 		this.estado = nuevoEstado;
 	}
@@ -46,12 +56,6 @@ public class Unidad extends Raza {
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
 		return this.estado.compararSuperficie(otraSuperficie);
-	}
-
-	// Se delega al tipo y no al estado, porque aunque este en construccion ya aumenta la poblacion.
-	@Override
-	public int obtenerPoblacion() {
-		return this.tipo.obtenerPoblacion();
 	}
 
 	@Override
@@ -81,12 +85,15 @@ public class Unidad extends Raza {
 		return this.estado.vidaRestante();
 	}
 
-	public void conNodo(NodoMineral nodo) {
-		this.estado.conNodo(nodo);
-	}
-
 	public int escudoRestante() {
 		return (this.estado.escudoRestante());
+	}
+
+	public void trabajarEn(NodoMineral nodo) {
+
+		if(nodo.ubicacion().esIgualA(this.ubicacion)) {
+			this.estado.trabajarEn(nodo);
+		}
 	}
 
 	public void hacerseInvisible() {
@@ -104,12 +111,15 @@ public class Unidad extends Raza {
 	public void contarBaja() {
 		this.estado.contarBaja();
 	}
-	
-	public int tiempoRestante() {
-		return (this.tiempo.restante());
-	}
 
-	public void moverse(Ubicacion unaUbicacion) {
-		this.estado.moverse(unaUbicacion);
+	public void moverse(Mapa unMapa) {
+		Ubicacion siguiente = this.direccion.obtenerSiguienteUbicacion(this.ubicacion);
+		if(unMapa.verificarQueUnidadPuedeMoverseAUbicacion(this, siguiente)) {
+			this.ubicacion = siguiente;
+		}
+	}
+	
+	public void cambiarDireccion() {
+		this.direccion.cambiarDireccion();
 	}
 }

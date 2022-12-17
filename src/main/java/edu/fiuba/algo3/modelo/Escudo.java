@@ -1,17 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoError;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioException;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaEscudoException;
 
 public class Escudo {
 
+	private static double MULTIPLICADOR = 0.05;
+	
 	private int proteccionMax;
 	private int proteccionRestante;
 	
 	public Escudo(int unaProteccion) {
 		if(unaProteccion <= 0){
-    		throw new ValorInvalidoParaEscudoError();
+    		throw new ValorInvalidoParaEscudoException();
     	}
         this.proteccionMax = unaProteccion;
         this.proteccionRestante = unaProteccion;
@@ -19,7 +20,7 @@ public class Escudo {
 	
 	public void recibirDanioPor(int unaCantidad) {
     	if(unaCantidad < 0) {
-    		throw new ValorInvalidoDeDanioError();
+    		throw new ValorInvalidoDeDanioException();
     	}
     	if(this.proteccionRestante > unaCantidad) {
     		this.proteccionRestante -= unaCantidad;
@@ -43,7 +44,7 @@ public class Escudo {
     }
 	
 	 private int recuperacion(){
-	    	return ((int)(this.proteccionMax * 0.05));
+	    	return ((int)(this.proteccionMax * MULTIPLICADOR));
 	    }
 	
 	

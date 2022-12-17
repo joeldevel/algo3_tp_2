@@ -1,55 +1,55 @@
 package edu.fiuba.algo3.modelo.Recursos.Minerales;
 
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
-import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConstruidoException;
 import edu.fiuba.algo3.modelo.Excepciones.NodoMineralYaTieneUnRecolectorDeMineralException;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.SinMinero;
 
 public class NodoMineral implements Mineral {
+
+    private static final int MINERAL_INICIAL = 2000;
 
     private Minero minero;
     private int cantidadDeMineralDisponible;
     private Ubicacion ubicacion;
 
     public NodoMineral(Ubicacion unaUbicacion) {
-        this.minero = new SinMinero(this);
-        this.cantidadDeMineralDisponible = 2000;
+        this.minero = new SinMinero();
+        this.cantidadDeMineralDisponible = MINERAL_INICIAL;
         this.ubicacion = unaUbicacion;
+    }
+
+    @Override
+    public int getCantidadDeMineralDisponible() {
+        return this.cantidadDeMineralDisponible;
     }
 
     public void construirRecolectorDeMineral(Minero unMinero) {
     	if(this.minero.tieneMinero()) {
     		throw new NodoMineralYaTieneUnRecolectorDeMineralException();
     	}
+
     	this.minero = unMinero;
     }
-    
-    @Override
-    public int mineralRestante() {
-    	return (this.cantidadDeMineralDisponible);
+
+    public boolean tieneMinero() {
+        return (this.minero.tieneMinero());
     }
     
     @Override
     public int recolectarMineral(int unaCantidadDeMineralParaExtraer) {
-    	
-    	/* Caso borde donde por ejemplo tenemos 10 de mineral y nos piden 30. Deberiamos devolver esos 10 y dejar al Nodo Mineral en 0. */
-    	if(this.mineralRestante() == 0) {
-    		throw new NodoMineralSinMineralParaRecolectarException();
-    	}
-    	if(!this.minero.tieneMinero()) {
-            throw new NodoMineralSinRecolectorDeMineralConstruidoException();
-        }
-    	if(this.mineralRestante() < unaCantidadDeMineralParaExtraer) {
-            unaCantidadDeMineralParaExtraer = this.cantidadDeMineralDisponible;
-            this.cantidadDeMineralDisponible = 0;
+
+        if (this.getCantidadDeMineralDisponible() > 0 && this.tieneMinero()) {
+
+            if (this.getCantidadDeMineralDisponible() < unaCantidadDeMineralParaExtraer) {
+                unaCantidadDeMineralParaExtraer = this.cantidadDeMineralDisponible;
+                this.cantidadDeMineralDisponible = 0;
+                return unaCantidadDeMineralParaExtraer;
+            }
+
+            this.cantidadDeMineralDisponible = this.cantidadDeMineralDisponible - unaCantidadDeMineralParaExtraer;
             return unaCantidadDeMineralParaExtraer;
         }
 
-        this.cantidadDeMineralDisponible = this.cantidadDeMineralDisponible - unaCantidadDeMineralParaExtraer;
-        return unaCantidadDeMineralParaExtraer;
+        return 0;
     }
     
     @Override

@@ -1,67 +1,52 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.Minero;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.SinNodoMineral;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
-	public static final int SUMINISTRO_ZANGANO = 1;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 25;
-	private final int COSTO_GAS = 0;
 	public static final int CONSTRUCCION_ZANGANO = -1;
+	private static final int VIDA_ZANGANO = 25;
+
+	public static final int SUMINISTRO_ZANGANO = 1;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 25;
+	private static final int COSTO_GAS = 0;
+	private static final int RECOLECTABLE = 10;
 
 	private Vida vida;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 
 	private int cantidadRecolectableDeMineral;
     private Mineral nodo;
 
-	public Zangano(Ubicacion unaUbicacion, Jugador unJugador) {
+	public Zangano(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(25);
-		this.ubicacion = unaUbicacion;
+		this.vida = new Vida(VIDA_ZANGANO);
 		this.superficie = new Superficie("Tierra");
 
-		this.cantidadRecolectableDeMineral = 10;
+		this.cantidadRecolectableDeMineral = RECOLECTABLE;
 		this.jugador = unJugador;
 		this.unidad = null;
 		this.nodo = new SinNodoMineral();
 	}
 
-    public Zangano(Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(25);
-		this.ubicacion = new Ubicacion();
-		this.superficie = new Superficie("Tierra");
-
-        this.cantidadRecolectableDeMineral = 10;
-		this.jugador = unJugador;
-		this.unidad = null;
-        this.nodo = new SinNodoMineral();
-    }
-
 	public void setComportamientoUnidad(Unidad unaUnidad) {
 		this.unidad = unaUnidad;
 	}
     
-    public void conNodo(NodoMineral unNodo) {
-    	this.nodo = unNodo;
-    	unNodo.construirRecolectorDeMineral(this);
+    public void trabajarEn(NodoMineral unNodo) {
+		this.nodo = unNodo;
+		unNodo.construirRecolectorDeMineral(this);
     }
 
 	public void avanzarTurno() {
@@ -77,12 +62,11 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public int obtenerMineral() {
-		return this.jugador.obtenerMineral();
+		return this.jugador.getMineral();
 	}
 
 	@Override
 	public boolean tieneMinero() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -105,7 +89,7 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public int obtenerSuministro() {
-		return this.SUMINISTRO_ZANGANO;
+		return SUMINISTRO_ZANGANO;
 	}
 
 	@Override
@@ -116,12 +100,12 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 
 	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
-		// Zangano no entiende este mensaje.
+		// No entiende este mensaje.
 	}
 
 	@Override
@@ -136,31 +120,26 @@ public class Zangano implements TipoDeUnidad, Minero, Atacable {
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
+		// ...
 	}
 }

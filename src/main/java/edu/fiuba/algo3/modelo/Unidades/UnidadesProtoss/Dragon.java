@@ -4,57 +4,46 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 
 public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 
-	public static final int SUMINISTRO_DRAGON = 3;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 125;
-	private final int COSTO_GAS = 50;
 	public static final int CONSTRUCCION_DRAGON = -6;
+	private static final int VIDA_DRAGON = 100;
+	private static final int ESCUDO_DRAGON = 80;
+
+	private static final int ATAQUE_DANIO = 20;
+	private static final int ATAQUE_RADIO = 4;
+
+	public static final int SUMINISTRO_DRAGON = 3;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 125;
+	private static final int COSTO_GAS = 50;
 	
 	private Vida vida;
 	private Escudo escudo;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
-	
-	public Dragon(Ubicacion unaUbicacion, Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(100);
-		this.escudo = new Escudo(80);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
-												 add(new Ataque(20,new Superficie("Aire"),4));}};
-	}
 	
 	public Dragon(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(100);
-		this.escudo = new Escudo(80);
+		this.vida = new Vida(VIDA_DRAGON);
+		this.escudo = new Escudo(ESCUDO_DRAGON);
 		this.jugador = unJugador;
 		this.unidad = null;
-		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(20,new Superficie("Tierra"),4));
-		 										 add(new Ataque(20,new Superficie("Aire"),4));}};
+		this.ataques = new ArrayList<Ataque>() {{add(new Ataque(ATAQUE_DANIO,new Superficie("Tierra"),ATAQUE_RADIO));
+												 add(new Ataque(ATAQUE_DANIO,new Superficie("Aire"),ATAQUE_RADIO));}};
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
-		// Dragon no entiende este mensaje.
+	public void trabajarEn(NodoMineral nodo) {
+		// No entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -84,21 +73,19 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
 
 		for (Ataque ataque : ataques) {
-			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
-				throw new AtacableFueraDeRangoError();
+			if(this.estaEnRangoDeAtaque(unAtacable, ataque)) {
+				ataque.atacarA(unAtacable, unidadAtacante);
 			}
-
-			ataque.atacarA(unAtacable, unidadAtacante);
 		}
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-        return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+        return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
     }
 
 	@Override
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 	
 	public int vidaRestante() {
@@ -125,36 +112,31 @@ public class Dragon implements TipoDeUnidad, Atacante, Atacable {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		// ...
 	}
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
+		// ...
 	}
 }

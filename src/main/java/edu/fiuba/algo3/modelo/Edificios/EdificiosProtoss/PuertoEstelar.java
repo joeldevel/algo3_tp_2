@@ -2,29 +2,36 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoException;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Scout.CONSTRUCCION_SCOUT;
 
 public class PuertoEstelar extends EdificioProtoss {
 
-    private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 150;
-	private final int COSTO_GAS = 150;
-	
-	private ArrayList<Unidad> scouts;
-	
+    public static final int CONSTRUCCION_PUERTO = -10;
+    public static final int VIDA_PUERTO = 600;
+    public static final int ESCUDO_PUERTO = 600;
+
+    private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 150;
+	private static final int COSTO_GAS = 150;
+
     public PuertoEstelar(Ubicacion unaUbicacion, Jugador unJugador){
-        super(new Tiempo(-10), new Vida(600), new Escudo(600), unaUbicacion, unJugador,"PuertoEstelar");
-        
+        super(new Tiempo(CONSTRUCCION_PUERTO), new Vida(VIDA_PUERTO), new Escudo(ESCUDO_PUERTO), unaUbicacion, unJugador,"PuertoEstelar");
+
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         
-        this.scouts = new ArrayList<Unidad>();
+    }
+
+    @Override
+    public ArrayList<Unidad> devolverLarvas() {
+        return new ArrayList<Unidad>();
     }
 
     @Override
@@ -34,30 +41,20 @@ public class PuertoEstelar extends EdificioProtoss {
     
     @Override
     public void ejecutaOperable() {
-    	if(this.estaEnergizado()) {
-    		this.pasarScoutsProductivos();
-    	}
+        // ...
     }
     
-    public void transportarScout() {
-    	if(! (this.estaEnergizado())) {
-    		throw new EdificioNoEnergizadoError();
+    public Unidad transportarScout() {
+    	if(! this.estaEnergizado()) {
+    		throw new EdificioNoEnergizadoException();
     	}
-    	while(this.scouts.size() < 5) {
-    		this.scouts.add(new Unidad(new Tiempo(-9), this.ubicacion, new Scout(this.ubicacion,this.jugador)));
-    	}
-        /* aca debe ir la verificacion de requisitos*/
-    	//this.scouts.add(new Unidad(new Scout()));
+    	if(this.tiempoRestante() != 0) {
+			throw new EdificioNoOperativoException();
+		}
+    	Unidad scout = new Unidad(new Tiempo(CONSTRUCCION_SCOUT), this.ubicacion, new Scout(this.jugador));
+    	return scout;
     }
 	
-    private void pasarScoutsProductivos(){
-		for(Unidad actual: this.scouts) {
-			if(actual.tiempoRestante() == 0) {
-				this.jugador.agregarUnidad(actual);
-			}
-		}
-	}
-
     @Override
     public boolean compararSuperficie(String unTipoDeSuperficie) {
         return this.superficie.compararTipos(unTipoDeSuperficie);

@@ -1,23 +1,18 @@
 package edu.fiuba.algo3.modelo.Recursos.Minerales;
 
-import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinRecolectorDeMineralConstruidoException;
-
 public class SinMinero implements Minero {
 
-	private NodoMineral nodo;
-	
-	public SinMinero(NodoMineral unNodo) {
-		this.nodo = unNodo;
+	public SinMinero() {
 	}
 	
 	@Override
 	public int recolectarMineralDe(Mineral unNodoMineral) {
-		throw new NodoMineralSinRecolectorDeMineralConstruidoException();
+		return 0;
 	}
 
 	@Override
 	public int obtenerMineral() {
-		throw new NodoMineralSinRecolectorDeMineralConstruidoException();
+		return 0;
 	}
 
 	@Override

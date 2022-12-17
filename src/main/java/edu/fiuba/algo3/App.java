@@ -1,17 +1,15 @@
 package edu.fiuba.algo3;
 
-
-import edu.fiuba.algo3.modelo.AlgoStar.AlgoStar;
-import edu.fiuba.algo3.vistas.*;
+import edu.fiuba.algo3.modelo.AlgoStar;
+import edu.fiuba.algo3.vista.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
  * JavaFX App
  */
+
 public class App extends Application {
 
     public static void main(String[] args) {
@@ -25,14 +23,16 @@ public class App extends Application {
 
         AlgoStar algoStar = crearModelo();
 
-        // Pantalla de juego
-        //antallaDeJuego pantallaDeJuego = new PantallaDeJuego(algoStar); // Pantalla de Cristian
-        PantallaJuego pantallaJuego = new PantallaJuego(stage, algoStar);
+        // Pantalla de finalizacion
+        PantallaFinal pantallaFinal = new PantallaFinal(stage);
+        Scene escenaFinal = new Scene(pantallaFinal, 500, 500);
+        escenaFinal.getStylesheets().add("file:src/main/resources/style.css");
+
+        PantallaJuego pantallaJuego = new PantallaJuego(stage, escenaFinal, algoStar);
         Scene escenaJuego = new Scene(pantallaJuego, 500, 500);
         escenaJuego.getStylesheets().add("file:src/main/resources/style.css");
 
         // Pantalla donde se ingresa la inforamacion de los jugadores
-        //PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, pantallaDeJuego.getScene(), algoStar, pantallaDeJuego); // Pantalla de Cristian
         PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, escenaJuego, algoStar, pantallaJuego);
         Scene escenaJugadores = new Scene(pantallaJugadores, 500, 500);
         escenaJugadores.getStylesheets().add("file:src/main/resources/style.css");

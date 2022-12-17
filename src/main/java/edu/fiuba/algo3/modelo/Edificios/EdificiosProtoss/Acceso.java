@@ -9,27 +9,34 @@ import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
-import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoError;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoEnergizadoException;
+import edu.fiuba.algo3.modelo.Excepciones.EdificioNoOperativoException;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot;
 
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Dragon.CONSTRUCCION_DRAGON;
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.Zealot.CONSTRUCCION_ZEALOT;
+
 public class Acceso extends EdificioProtoss {
 
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 150;
-	private final int COSTO_GAS = 0;
-	
-	private ArrayList<Unidad> zealots;
-	private ArrayList<Unidad> dragones;
+	public static final int CONSTRUCCION_ACCESO = -8;
+	public static final int VIDA_ACCESO = 500;
+	public static final int ESCUDO_ACCESO = 500;
+
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 150;
+	private static final int COSTO_GAS = 0;
 	
     public Acceso(Ubicacion unaUbicacion, Jugador unJugador) {
-		super(new Tiempo(-8), new Vida(500), new Escudo(500), unaUbicacion, unJugador,"Acceso");
-		this.zealots = new ArrayList<Unidad>();
-		this.dragones = new ArrayList<Unidad>();
+		super(new Tiempo(CONSTRUCCION_ACCESO), new Vida(VIDA_ACCESO), new Escudo(ESCUDO_ACCESO), unaUbicacion, unJugador,"Acceso");
 		
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
+	}
+
+	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
 	}
 
 	@Override
@@ -39,49 +46,31 @@ public class Acceso extends EdificioProtoss {
 
 	@Override
 	public void ejecutaOperable() {
-		if(this.estaEnergizado()) {
-			this.pasarDragonesProductivos();
-			this.pasarZealotsProductivos();
-		}
+		// ...
 	}
 	
-	public void transportarZealots() {
-		if(! (this.estaEnergizado())) {
-			throw new EdificioNoEnergizadoError();
+	public Unidad transportarZealots() {
+		if(! this.estaEnergizado()) {
+			throw new EdificioNoEnergizadoException();
 		}
-		while(this.zealots.size() < 5) {
-			this.zealots.add(new Unidad(new Tiempo(-4), this.ubicacion, new Zealot(this.ubicacion, this.jugador)));
+		if(this.tiempoRestante() != 0) {
+			throw new EdificioNoOperativoException();
 		}
+		Unidad zealot = new Unidad(new Tiempo(CONSTRUCCION_ZEALOT), this.ubicacion, new Zealot(this.jugador));
+		return zealot;
 	}
 	
-	public void transportarDragones(Recursos recursosDelJugador) {
-		if(! (this.estaEnergizado())) {
-			throw new EdificioNoEnergizadoError();
+	public Unidad transportarDragones() {
+		if(! this.estaEnergizado()) {
+			throw new EdificioNoEnergizadoException();
 		}
-		while(this.dragones.size() < 5) {
-			this.dragones.add(new Unidad(new Tiempo(-6), this.ubicacion, new Dragon(this.ubicacion, this.jugador)));
+		if(this.tiempoRestante() != 0) {
+			throw new EdificioNoOperativoException();
 		}
+		Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), this.ubicacion, new Dragon(this.jugador));
+		return dragon;
 	}
-	
-	private void pasarZealotsProductivos(){
-		for(Unidad actual: this.zealots) {
-			if(actual.tiempoRestante() == 0) {
-				this.jugador.agregarUnidad(actual);
-				this.zealots.remove(actual);
-				
-			}
-		}
-	}
-	
-	private void pasarDragonesProductivos() {
-		for(Unidad actual: this.dragones) {
-			if(actual.tiempoRestante() == 0) {
-				this.jugador.agregarUnidad(actual);
-				this.dragones.remove(actual);
-			}
-		}
-	}
-	
+		
 	@Override
 	public boolean compararSuperficie(String otraSuperficie) {
 		return this.superficie.compararTipos(otraSuperficie);

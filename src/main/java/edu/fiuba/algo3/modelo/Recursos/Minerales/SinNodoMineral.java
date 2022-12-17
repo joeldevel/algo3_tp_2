@@ -1,18 +1,15 @@
 package edu.fiuba.algo3.modelo.Recursos.Minerales;
 
-import edu.fiuba.algo3.modelo.Excepciones.NodoMineralSinMineralParaRecolectarException;
-import edu.fiuba.algo3.modelo.Recursos.Minerales.Mineral;
-
 public class SinNodoMineral implements Mineral {
 
 	@Override
-	public int mineralRestante() {
-		throw new NodoMineralSinMineralParaRecolectarException();
+	public int getCantidadDeMineralDisponible() {
+		return 0;
 	}
 
 	@Override
 	public int recolectarMineral(int unaCantidad) {
-		throw new NodoMineralSinMineralParaRecolectarException();
+		return 0;
 	}
 	
 	@Override

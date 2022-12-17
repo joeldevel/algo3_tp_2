@@ -6,11 +6,14 @@ public abstract class Raza implements Atacable, Revelable{
 	
 	protected Tiempo tiempo;
 	protected Ubicacion ubicacion;
-	protected Jugador jugador;
 	
 	public Raza(Tiempo unTiempo, Ubicacion unaUbicacion) {
 		this.tiempo = unTiempo;
 		this.ubicacion = unaUbicacion;
+	}
+
+	public int tiempoRestante() {
+		return (this.tiempo.restante());
 	}
 
 	public abstract int obtenerPoblacion();
@@ -29,6 +32,8 @@ public abstract class Raza implements Atacable, Revelable{
    	public Ubicacion ubicacion() {
     	return (this.ubicacion);
     }
-   	
-    
+
+	public boolean estaEn(Ubicacion unaUbicacion) {
+		return (this.ubicacion().esIgualA(unaUbicacion));
+	}
 }

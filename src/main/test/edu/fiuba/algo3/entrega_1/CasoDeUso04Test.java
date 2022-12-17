@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Edificios.EdificiosZerg.Extractor;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -19,29 +20,31 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasoDeUso04Test {
 
+    Mapa mapa = new Mapa();
+
     /* Extractor */
 
     @Test
-    void test03SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSeisTurnosSinTenerZanganosDevuelveElResultadoIndicado(){
+    void test01SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSeisTurnosSinTenerZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         // Act
         extractor.avanzarTurno(6);
 
         // Assert
-        assertEquals(0, jugadorZerg.obtenerGas());
+        assertEquals(0, jugadorZerg.getGas());
     }
 
     @Test
-    void test04SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConUnZanganoDevuelveElResultadoIndicado(){
+    void test02SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConUnZanganoDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,125);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoZangano =  new Zangano(jugadorZerg);
@@ -52,15 +55,15 @@ public class CasoDeUso04Test {
         extractor.avanzarTurno(7);
 
         // Assert
-        assertEquals(10, jugadorZerg.obtenerGas());
+        assertEquals(10, jugadorZerg.getGas());
     }
 
     @Test
-    void test05SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConDosZanganosDevuelveElResultadoIndicado(){
+    void test03SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConDosZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,150);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoPrimerZangano =  new Zangano(jugadorZerg);
@@ -74,15 +77,15 @@ public class CasoDeUso04Test {
         extractor.avanzarTurno(7);
 
         // Assert
-        assertEquals(20, jugadorZerg.obtenerGas());
+        assertEquals(20, jugadorZerg.getGas());
     }
 
     @Test
-    void test06SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConTresZanganosDevuelveElResultadoIndicado(){
+    void test04SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConTresZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,175);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoPrimerZangano =  new Zangano(jugadorZerg);
@@ -99,15 +102,15 @@ public class CasoDeUso04Test {
         extractor.avanzarTurno(7);
 
         // Assert
-        assertEquals(30, jugadorZerg.obtenerGas());
+        assertEquals(30, jugadorZerg.getGas());
     }
 
     @Test
-    void test07SeConstruyeUnExtractorEnUnVolcanSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
+    void test05SeConstruyeUnExtractorEnUnVolcanSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,200);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Extractor extractor = new Extractor(volcan, new Ubicacion(0,0), jugadorZerg);
 
         Zangano tipoPrimerZangano =  new Zangano(jugadorZerg);
@@ -133,32 +136,32 @@ public class CasoDeUso04Test {
     /* Asimilador */
 
     @Test
-    void test02SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanSieteTurnosYSeDevuelveElResultadoIndicado(){
+    void test06SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanSieteTurnosYSeDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.avanzarTurno(7);
 
         // Assert
-        assertEquals(20, jugadorProtoss.obtenerGas());
+        assertEquals(20, jugadorProtoss.getGas());
     }
 
     @Test
-    void test03SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanDiezTurnosYSeDevuelveElResultadoIndicado(){
+    void test07SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanDiezTurnosYSeDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         Asimilador asimilador = new Asimilador(volcan, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         asimilador.avanzarTurno(10);
 
         // Assert
-        assertEquals(80, jugadorProtoss.obtenerGas());
+        assertEquals(80, jugadorProtoss.getGas());
     }
 }

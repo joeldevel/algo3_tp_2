@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 
+import java.util.ArrayList;
+
 public abstract class Edificio extends Raza implements Recuperable{
 	
 	protected Vida vida;
@@ -30,6 +32,8 @@ public abstract class Edificio extends Raza implements Recuperable{
 	public abstract void ejecutaOperable();
 	
 	public abstract void avanzarTurno();
+
+	public abstract int obtenerEscudo();
     
     @Override
     public abstract void recuperarse();
@@ -41,20 +45,13 @@ public abstract class Edificio extends Raza implements Recuperable{
     	return (this.vida.restante());
     }
     
-    public Superficie obtenerSuperficie(){
-   		return (this.superficie);
-   	}
-    
     public int distanciaCon(Edificio otroEdificio) {
     	return (this.ubicacion.distanciaCon(otroEdificio.ubicacion()));
-    }
-    
-    public boolean estaEn(Ubicacion unaUbicacion) {
-    	return (this.ubicacion.esIgualA(unaUbicacion));
     }
 	
     public boolean esUn(String unEdificio) {
     	return (this.identificador == unEdificio);
     }
-	
+
+    public abstract ArrayList<Unidad> devolverLarvas();
 }

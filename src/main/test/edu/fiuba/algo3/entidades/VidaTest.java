@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -13,16 +14,17 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zerling;
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaVidaError;
-import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioError;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoParaVidaException;
+import edu.fiuba.algo3.modelo.Excepciones.ValorInvalidoDeDanioException;
 import edu.fiuba.algo3.modelo.Vida;
 
 // Borre dos test referidos al parametro de regeneracion.
 
 class VidaTest {
 
-    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000));
-    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(1000,1000));
+	Mapa mapa = new Mapa();
+    JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Rojo", new Recursos(1000,1000), mapa);
+    JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", new Recursos(1000,1000), mapa);
 
 	@Test
 	void test01UnaVidaRecibeDanioPorUnValorDeberiaReducirLaVida() {
@@ -31,7 +33,7 @@ class VidaTest {
 
 		Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0,0), jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -49,7 +51,7 @@ class VidaTest {
 
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0,0), jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -67,7 +69,7 @@ class VidaTest {
 
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0,0), jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -81,7 +83,7 @@ class VidaTest {
 	@Test
 	void test04SeIntentaInstanciarUnaVidaConSuVidaMaximaNegativaDeberiaLanzarUnaExcepcion() {
 		
-		assertThrows(ValorInvalidoParaVidaError.class,()->{
+		assertThrows(ValorInvalidoParaVidaException.class,()->{
 		new Vida(-1);
 		});
 	}
@@ -89,7 +91,7 @@ class VidaTest {
 	@Test
 	void test05SeIntentaInstanciarUnaVidaConSuVidaMaximaEnCeroDeberiaLanzarUnaExcepcion() {
 
-		assertThrows(ValorInvalidoParaVidaError.class,()->{
+		assertThrows(ValorInvalidoParaVidaException.class,()->{
 		new Vida(0);
 		});
 	}
@@ -101,7 +103,7 @@ class VidaTest {
 
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0,0), jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -121,7 +123,7 @@ class VidaTest {
 
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0,0), jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -141,7 +143,7 @@ class VidaTest {
 
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0,0), jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
@@ -173,12 +175,12 @@ class VidaTest {
 
         Pilon pilon = new Pilon(new Ubicacion(0,0), jugadorProtoss);
 
-        Zerling tipoZerling = new Zerling(new Ubicacion(0,0), jugadorZerg);
+        Zerling tipoZerling = new Zerling(jugadorZerg);
         Unidad zerling = new Unidad(new Tiempo(CONSTRUCCION_ZERLING), new Ubicacion(0,0), tipoZerling);
         zerling.avanzarTurno(2);
 
         // Act & Assert
-		assertThrows(ValorInvalidoDeDanioError.class,()->{
+		assertThrows(ValorInvalidoDeDanioException.class,()->{
             vida.recibirDanioPor(-10, zerling, pilon, jugadorProtoss);
 			});
 	}

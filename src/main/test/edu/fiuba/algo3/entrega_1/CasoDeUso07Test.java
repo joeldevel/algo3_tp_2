@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.NexoMineral;
 import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -16,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasoDeUso07Test {
 
+    Mapa mapa = new Mapa();
+
     /* Protoss */
 
     @Test
@@ -23,14 +26,14 @@ public class CasoDeUso07Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 50);
-        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos);
+        JugadorProtoss jugadorProtoss = new JugadorProtoss("Protoss", "Rojo", recursos, mapa);
         NexoMineral nexoMineral = new NexoMineral(nodoMineral, new Ubicacion(0,0), jugadorProtoss);
 
         // Act
         nexoMineral.avanzarTurno(5);
 
         // Assert
-        assertEquals(10, jugadorProtoss.obtenerMineral());
+        assertEquals(10, jugadorProtoss.getMineral());
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -42,11 +45,11 @@ public class CasoDeUso07Test {
         // Arrange
         NodoMineral nodoMineral = new NodoMineral(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 25);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Zangano tipoZangano =  new Zangano(jugadorZerg);
         Unidad zangano = new Unidad(new Tiempo(CONSTRUCCION_ZANGANO), new Ubicacion(0,0), tipoZangano);
         zangano.avanzarTurno(1);
-        zangano.conNodo(nodoMineral);
+        zangano.trabajarEn(nodoMineral);
 
         // Act
         zangano.avanzarTurno();
@@ -54,14 +57,14 @@ public class CasoDeUso07Test {
         zangano.avanzarTurno();
 
         // Assert
-        assertEquals(30, jugadorZerg.obtenerMineral());
+        assertEquals(30, jugadorZerg.getMineral());
     }
 
     @Test
     void test03UnZanganoQueNoEstaTrabajandoEnUnNodoMineralNoDeberiaRecolecarMineral() {
         // Arrange
         Recursos recursos = new Recursos(0, 25);
-        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos);
+        JugadorZerg jugadorZerg = new JugadorZerg("Zerg", "Azul", recursos, mapa);
         Zangano tipoZangano =  new Zangano(jugadorZerg);
         Unidad zangano = new Unidad(new Tiempo(CONSTRUCCION_ZANGANO), new Ubicacion(0,0), tipoZangano);
         zangano.avanzarTurno(1);
@@ -72,6 +75,6 @@ public class CasoDeUso07Test {
         zangano.avanzarTurno();
 
         // Assert
-        assertEquals(0, jugadorZerg.obtenerMineral());
+        assertEquals(0, jugadorZerg.getMineral());
     }
 }

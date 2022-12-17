@@ -4,17 +4,18 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Excepciones.OrigenNoEncontradoError;
-import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
+import edu.fiuba.algo3.modelo.Excepciones.OrigenNoEncontradoException;
 
 public class Moho {
  
 	private ArrayList<Origen> origenes;
 	private ArrayList<Ubicacion> ubicacionesAfectadas;
+	private ArrayList<Ubicacion> ubicacionesQueNoSePuedenAfectar;
 	
 	public Moho() {
 		this.origenes = new ArrayList<Origen>();
 		this.ubicacionesAfectadas = new ArrayList<Ubicacion>();
+		this.ubicacionesQueNoSePuedenAfectar = new ArrayList<Ubicacion>();
 	}
 
 	public ArrayList<Ubicacion> ubicacionesConMoho() {
@@ -38,7 +39,8 @@ public class Moho {
 			for(int i = actual.limiteIzquierdo(); i <= actual.limiteDerecho(); i++) {
 				for(int j = actual.limiteInferior(); j <= actual.limiterSuperior(); j++) {
 					Ubicacion nueva = new Ubicacion(i,j);
-					if( (actual.afectaLaUbicacion(nueva)) && (!(this.estaAfectadaLaUbicacion(nueva))) ) {
+					if( (actual.afectaLaUbicacion(nueva)) && (!(this.estaAfectadaLaUbicacion(nueva))) &&
+						((this.sePuedeAfectarLaUbicacion(nueva)))) {
 						this.ubicacionesAfectadas.add(nueva);
 					}
 				}
@@ -56,6 +58,20 @@ public class Moho {
 		for(Ubicacion ubicacion: aBorrar) {
 			this.ubicacionesAfectadas.remove(ubicacion);
 		}
+	}
+	
+	public void agregarUbicacionesInafectables(ArrayList<Ubicacion> unasUbicaciones) {
+		this.ubicacionesQueNoSePuedenAfectar.addAll(unasUbicaciones);
+	}
+	
+	public boolean sePuedeAfectarLaUbicacion(Ubicacion unaUbicacion) {
+		
+		for(Ubicacion actual: this.ubicacionesQueNoSePuedenAfectar) {
+			if(actual.esIgualA(unaUbicacion)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean estaAfectadaLaUbicacion(Ubicacion unaUbicacion) {
@@ -101,7 +117,7 @@ public class Moho {
 			}
 		}
 		if(origen == null) {
-			throw new OrigenNoEncontradoError();
+			throw new OrigenNoEncontradoException();
 		}
 		return origen;
 	}

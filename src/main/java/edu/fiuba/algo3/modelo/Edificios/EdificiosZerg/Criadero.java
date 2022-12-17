@@ -4,8 +4,6 @@ import java.util.*;
 
 import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
-import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Tiempo;
 import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Vida;
@@ -14,29 +12,30 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Larva;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
 
-/* el criadero deberia implementar una interfaz evolucionador por ejemplo, que habilite a evolucionar las
- * larvas a otro tipo de unidad zerg. Sino una buna idea es usar el patron Factory Method */
+import static edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano.CONSTRUCCION_ZANGANO;
 
 public class Criadero extends EdificioZerg {
 
-	private final int POBLACION = 5;
-	private final int COSTO_MINERAL = 200;
-	private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_CRIADERO = -4;
+	public static final int VIDA_CRIADERO = 500;
+
+	private static final int POBLACION = 5;
+	private static final int COSTO_MINERAL = 200;
+	private static final int COSTO_GAS = 0;
+	private static final int MAX_LARVAS = 3;
 	
 	private int maxLarvas;
 	private ArrayList<Unidad> larvas;
-	private ArrayList<Unidad> zanganos;
 		
 	public Criadero(Ubicacion unaUbicacion, Jugador unJugador) {
-		super(new Tiempo(-4), new Vida(500), unaUbicacion, unJugador,"Criadero");
+		super(new Tiempo(CONSTRUCCION_CRIADERO), new Vida(VIDA_CRIADERO), unaUbicacion, unJugador,"Criadero");
 		
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.maxLarvas = 3;
+		this.maxLarvas = MAX_LARVAS;
 		this.larvas = new ArrayList<Unidad>() {{ add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));
 												 add(new Unidad(new Tiempo(0),unaUbicacion,new Larva()));}};
-		this.zanganos = new ArrayList<Unidad>();
 	}
 
 	@Override
@@ -57,10 +56,13 @@ public class Criadero extends EdificioZerg {
 		if(this.larvas.isEmpty()) {
 			throw new CriaderoSinLarvasException();
 		}
-		Unidad unaUnidad = this.larvas.get(0);
-		unaUnidad.setComportamientoEstado(new Zangano(this.ubicacion, this.jugador));
-		this.larvas.remove(0);
-		zanganos.add(unaUnidad);
+
+		if(this.tiempoRestante() == 0) {
+			Unidad unaUnidad = this.larvas.get(0);
+			unaUnidad.setComportamientoTipo(new Tiempo(CONSTRUCCION_ZANGANO), new Zangano(this.jugador), this.ubicacion);
+			this.larvas.remove(0);
+			this.jugador.agregarUnidad(unaUnidad);			
+		}
 	}
 	
 	public void crearLarva() {
@@ -68,16 +70,11 @@ public class Criadero extends EdificioZerg {
 			this.larvas.add(new Unidad(new Tiempo(0),this.ubicacion(),new Larva()));
 		}
 	}
-	
-	public ArrayList<Unidad> obtenerLarvas(){
-		ArrayList<Unidad> aDevolver = this.larvas;
+
+	@Override
+	public ArrayList<Unidad> devolverLarvas(){
+		ArrayList<Unidad> aDevolver = new ArrayList<>(this.larvas);
 		this.larvas.clear();
-		return aDevolver;
-	}
-	
-	public ArrayList<Unidad> obtenerZanganos(){
-		ArrayList<Unidad> aDevolver = this.zanganos;
-		this.zanganos.clear();
 		return aDevolver;
 	}
 

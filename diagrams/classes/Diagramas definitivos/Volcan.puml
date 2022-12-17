@@ -1,0 +1,88 @@
+@startuml
+
+class Volcan{
+	-refineria: RefineriaDeGas
+	-cantidadDeGasVespenoDisponible: int
+	-ubicacion: Ubicacion
+	+Volcan(unaUbicacion)
+	+getCantidadDeGasVespenoDisponible(): int
+	+construirRefineriaDeGas(unaRefineria)
+	+tieneRefineria(): boolean
+	+extraerGas(unaCantidadGasParaExtraer)
+	+estaEn(unaUbicacion): boolean
+	+ubicacion(): Ubicacion
+}
+
+interface RefineriaDeGas{
+	+extraerGasDe(unVolcan): int
+	+obtenerGas(): int
+	+tieneRefineria(): boolean
+}
+
+class SinRefineria {
+    +extraerGasDe(unVolcan): int
+	+obtenerGas(): int
+	+tieneRefineria(): boolean
+}
+
+class Extractor{
+	-cantidadExtraible: int
+	-cantidadMaximaDeZanganos: int
+	-volcan: Volcan
+	-zanganos: ArrayList<Zangano>
+	+Extractor(unVolcan, unaUbicacion, unJugador)
+	+devolverLarvas(): ArrayList<Unidad>
+	+obtenerPoblacion(): int
+	+ejecutaOperable()
+	+contarZanganos(): int
+	+guardarZangano(unZangano)
+	+extraerGasDe(unVolcan): int
+	+obtenerGas(): int
+	+tieneRefineria(): boolean
+	+compararSuperficie(unTipoDeSuperficie): boolean
+	+serRevelado()
+}
+
+class Asimilador {
+    -cantidadExtraible: int
+    -volcan: Volcan
+    +Asimilador(unVolcan, unaUbicacion, unJugador)
+    +devolverLarvas(): ArrayList<Unidad>
+	+obtenerPoblacion(): int
+	+ejecutaOperable()
+	+extraerGasDe(unVolcan): int
+	+obtenerGas(): int
+	+tieneRefineria(): boolean
+	+compararSuperficie(unTipoDeSuperficie): boolean
+	+serRevelado()
+}
+
+abstract class EstadoOperativo {
+    -edificio: Edificio
+    +EstadoOperativo(unEdificio)
+    +{abstract} ejecutar()
+}
+
+class Operable{
+    +Operable(unEdificio)
+    +ejecutar()
+}
+
+class EnConstruccion{
+    +EnConstruccion(unEdificio)
+    +ejecutar()
+}
+
+Operable ..up|> EstadoOperativo
+EnConstruccion ..up|> EstadoOperativo
+
+Extractor --> EstadoOperativo
+Asimilador --> EstadoOperativo
+
+RefineriaDeGas <|.left. SinRefineria
+RefineriaDeGas <|.. Extractor
+RefineriaDeGas <|.. Asimilador
+
+Volcan <--> RefineriaDeGas
+
+@enduml

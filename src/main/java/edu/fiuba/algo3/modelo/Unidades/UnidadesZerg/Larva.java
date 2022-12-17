@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.Unidades.UnidadesZerg;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
@@ -10,15 +8,15 @@ import edu.fiuba.algo3.modelo.Unidades.Unidad;
 public class Larva implements TipoDeUnidad {
 	
 	public Larva() {
-		
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
+	public void trabajarEn(NodoMineral nodo) {
 		// Larva no entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
+		// No entiende este mensaje.
 	}
 
 	@Override
@@ -33,27 +31,28 @@ public class Larva implements TipoDeUnidad {
 
 	@Override
 	public void recibirAtaque(int unDanio, Unidad unidadAtacante) {
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
-		// TODO Auto-generated method stub
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void recuperarse() {
-		// TODO Auto-generated method stub
+		// No entiende este mensaje.
 		
 	}
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
@@ -76,26 +75,21 @@ public class Larva implements TipoDeUnidad {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		// ...
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void serRevelado() {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
-		// No hace nada.
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 }

@@ -1,34 +1,27 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Areas.AreaEspacial;
-import edu.fiuba.algo3.modelo.Areas.AreaTerrestre;
-import edu.fiuba.algo3.modelo.Areas.Base;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
 import edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss.Pilon;
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBasesException;
-import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoError;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Jugador.JugadorProtoss;
-import edu.fiuba.algo3.modelo.Jugador.JugadorZerg;
+import edu.fiuba.algo3.modelo.Excepciones.SinEdificioBuscadoException;
+import edu.fiuba.algo3.modelo.Excepciones.SinUnidadBuscadaException;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
-
+import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import java.util.ArrayList;
 
 public class Mapa {
 
-	private static int TAMANIO_HORIZONTAL = 100;
-	private static int TAMANIO_VERTICAL = 100;
+	private static int ANCHO = 28;
+	private static int ALTURA = 14;
 
     private Moho moho;
     private ArrayList<Pilon> pilones;
     private ArrayList<Volcan> volcanes;
     private ArrayList<NodoMineral> nodosMinerales;
-    private ArrayList<Edificio> edificios;
-
-    //private ArrayList<AreaTerrestre> areasTerrestres;
-
+	private ArrayList<Edificio> edificios;
+	private ArrayList<Unidad> unidades;
+	private ArrayList<Unidad> amosSupremos;
     private ArrayList<Ubicacion> areasEspaciales;
 
     public Mapa() {
@@ -37,86 +30,160 @@ public class Mapa {
         this.volcanes = new ArrayList<Volcan>();
         this.nodosMinerales = new ArrayList<NodoMineral>();
         this.edificios = new ArrayList<Edificio>();
+		this.unidades = new ArrayList<Unidad>();
+		this.amosSupremos = new ArrayList<Unidad>();
         this.areasEspaciales = new ArrayList<Ubicacion>();
         
         this.crearBases();
         this.crearAreas();
+        this.moho.agregarUbicacionesInafectables(this.areasEspaciales);
     }
 
-	public ArrayList<Ubicacion> ubicacionesConMoho() {
+	public ArrayList<Ubicacion> getUbicacionesConMoho() {
 		return this.moho.ubicacionesConMoho();
 	}
 
-    public ArrayList<Volcan> volcanes() {
+    public ArrayList<Volcan> getVolcanes() {
     	return this.volcanes;
 	}
 
-	public ArrayList<NodoMineral> nodosMinerales() {
+	public ArrayList<NodoMineral> getNodosMinerales() {
 		return this.nodosMinerales;
 	}
 
-	public ArrayList<Edificio> edificios() {
+	public ArrayList<Edificio> getEdificios() {
 		return this.edificios;
 	}
 
+	public ArrayList<Unidad> getUnidades() {
+		return this.unidades;
+	}
+
+	public ArrayList<Ubicacion> getAreasEspaciales() {
+		return this.areasEspaciales;
+	}
+
     public void crearBases() {
-    	/* se crean bases manualmente */
-    	this.agregarVolcan(new Ubicacion(10,10));
-    	this.agregarVolcan(new Ubicacion(90,90));
-    	this.agregarNodoMineral(new Ubicacion(10,20));
-    	this.agregarNodoMineral(new Ubicacion(20,10));
-    	this.agregarNodoMineral(new Ubicacion(20,20));
-    	this.agregarNodoMineral(new Ubicacion(90,80));
-    	this.agregarNodoMineral(new Ubicacion(80,80));
-    	this.agregarNodoMineral(new Ubicacion(80,90));
+    	// Primer base creada manualmente
+		this.agregarVolcan(new Ubicacion(0,0));
+		this.agregarNodoMineral(new Ubicacion(1,1));
+		this.agregarNodoMineral(new Ubicacion(0,1));
+		this.agregarNodoMineral(new Ubicacion(1,0));
+
+		// Segunda base creada manualmente
+		this.agregarVolcan(new Ubicacion(27,13));
+		this.agregarNodoMineral(new Ubicacion(26,12));
+		this.agregarNodoMineral(new Ubicacion(27,12));
+		this.agregarNodoMineral(new Ubicacion(26,13));
     }
     
     public void crearAreas() {
-    	/* se crean las areas manualmente*/
-    	for(int i= 40; i<60; i++) {
-    		for(int j= 40; j<60; j++) {
+    	// Areas espaciales creadas manualmente
+    	for(int i = 8; i < 20; i++) {
+    		for(int j = 4; j < 10; j++) {
     			this.areasEspaciales.add(new Ubicacion(i,j));
     		}
     	}
     }
     
     public boolean ubicacionEstaDentroDeMapa(Ubicacion unaUbicacion) {
-    	return( (unaUbicacion.xDentroDeRango(0,this.TAMANIO_HORIZONTAL)) && 
-    			(unaUbicacion.yDentroDeRango(0,this.TAMANIO_VERTICAL)) );
+    	return( (unaUbicacion.xDentroDeRango(0, ANCHO-1)) &&
+    			(unaUbicacion.yDentroDeRango(0, ALTURA-1)) );
     }
-    
-    public boolean verificarAreaEspacial(Ubicacion ubicacion) {
-    	boolean verificado = false;
-    	for(Ubicacion actual: this.areasEspaciales) {
-    		if(actual.esIgualA(ubicacion)) {
-    			verificado = true;
-    		}
-    	}
 
-    	return verificado;
-    }
-    
-    public boolean verificarUbicacionLibre(Ubicacion unaUbicacion) {
-    	boolean verificado = true;
-    	for(Edificio actual: this.edificios) {
-    		if(actual.estaEn(unaUbicacion)) {
-    			verificado = false;
-    		}
-    	}
-    	return verificado;
-    }
-    
-   public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) &&
+	public boolean verificarUbicacionAfectadaPorMoho(Ubicacion unaUbicacion) {
+		return (this.moho.estaAfectadaLaUbicacion(unaUbicacion));
+	}
+
+	public boolean verificarQueUnidadPuedeMoverseAUbicacion(Unidad unaUnidad,Ubicacion unaUbicacion) {
+		return (this.ubicacionEstaDentroDeMapa(unaUbicacion) &&
+				this.verificarUbicacionLibreDeUnidad(unaUbicacion) &&
+				this.verificarSuperficieParaUnidadEnUbicacion(unaUnidad,unaUbicacion));
+	}
+
+	public boolean verificarUbicacionLibreDeUnidad(Ubicacion unaUbicacion) {
+		boolean verificado = true;
+		for(Unidad actual: this.unidades) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = false;
+			}
+		}
+		return verificado;
+	}
+
+	public boolean verificarSuperficieParaUnidadEnUbicacion(Unidad unaUnidad, Ubicacion unaUbicacion) {
+		String superficie = this.obtenerSuperficieDeLaUbicacion(unaUbicacion);
+		if(unaUnidad.compararSuperficie("Aire")) {
+			return true;
+		}
+		return (unaUnidad.compararSuperficie(superficie));
+	}
+
+    public boolean verificarEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
+
+    	for(Edificio edificio: this.edificios) {
+    		if(edificio.esUn(unEdificio) && edificio.estaEn(unaUbicacion)) {
+    			return true;
+			}
+		}
+
+    	return false;
+	}
+
+	public boolean verificarEdificioEn(Ubicacion unaUbicacion) {
+
+		for(Edificio edificio: this.edificios) {
+			if(edificio.estaEn(unaUbicacion)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean verificarUnidadEnUbicacion(Ubicacion unaUbicacion) {
+
+		for(Unidad unidad: this.unidades) {
+			if(unidad.estaEn(unaUbicacion)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean verificarAreaEspacial(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Ubicacion actual: this.areasEspaciales) {
+			if(actual.esIgualA(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+
+		return verificado;
+	}
+
+	public boolean verificarUbicacionLibre(Ubicacion unaUbicacion) {
+		boolean verificado = true;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = false;
+			}
+		}
+		return verificado;
+	}
+
+	public boolean verificarConstruccionZerg(Ubicacion unaUbicacion) {
+		return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (!(this.estaAfectadaPorPilonLaUbicacion(unaUbicacion))) &&
 				(moho.estaAfectadaLaUbicacion(unaUbicacion)) );
-   }
-   
-   public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
-	   return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) &&
+	}
+
+	public boolean verificarConstruccionProtoss(Ubicacion unaUbicacion) {
+		return ( (!(this.verificarAreaEspacial(unaUbicacion))) && (this.estaAfectadaPorPilonLaUbicacion(unaUbicacion)) &&
 				(!(moho.estaAfectadaLaUbicacion(unaUbicacion))) );
-   }
-   
-   public boolean estaAfectadaPorPilonLaUbicacion(Ubicacion unaUbicacion) {
+	}
+
+	public boolean estaAfectadaPorPilonLaUbicacion(Ubicacion unaUbicacion) {
 		boolean verificado = false;
 		for(Pilon actual: pilones) {
 			if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
@@ -125,18 +192,52 @@ public class Mapa {
 		}
 		return verificado;
 	}
+
+	public boolean verificarVolcanEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(Volcan actual: this.volcanes) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+
+	public boolean verificarNodoMineralEnUbicacion(Ubicacion unaUbicacion) {
+		boolean verificado = false;
+		for(NodoMineral actual: this.nodosMinerales) {
+			if(actual.estaEn(unaUbicacion)) {
+				verificado = true;
+			}
+		}
+		return verificado;
+	}
+
+	public Edificio obtenerEdificioEnUbicacion(String unEdificio, Ubicacion unaUbicacion) {
+
+		for(Edificio edificio: this.edificios) {
+			if((edificio.esUn(unEdificio)) && (edificio.estaEn(unaUbicacion))) {
+				return edificio;
+			}
+		}
+
+		return null;
+	}
+
+	public Unidad obtenerUnidadEnUbicacion(Ubicacion unaUbicacion) {
+		Unidad unidad = null;
+		for(Unidad actual: this.unidades) {
+			if(actual.estaEn(unaUbicacion)) {
+				unidad = actual;
+			}
+		}
+		if(unidad == null) {
+			throw new SinUnidadBuscadaException();
+		}
+		return unidad;
+	}
    
-   public boolean verificarVolcanEnUbicacion(Ubicacion unaUbicacion) {
-	   boolean verificado = false;
-	   for(Volcan actual: this.volcanes) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   verificado = true;
-		   }
-	   }
-	   return verificado;
-   }
-   
-   public Volcan volcanEnUbicacion(Ubicacion unaUbicacion) {
+   public Volcan obtenerVolcanEnUbicacion(Ubicacion unaUbicacion) {
 	   Volcan buscado = null;
 	   for(Volcan actual: this.volcanes) {
 		   if(actual.estaEn(unaUbicacion)) {
@@ -146,17 +247,7 @@ public class Mapa {
 	   return buscado;
    }
    
-   public boolean verificarNodoMineralEnUbicacion(Ubicacion unaUbicacion) {
-	   boolean verificado = false;
-	   for(NodoMineral actual: this.nodosMinerales) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   verificado = true;
-		   }
-	   }
-	   return verificado;
-   }
-   
-   public NodoMineral nodoEnUbicacion(Ubicacion unaUbicacion) {
+   public NodoMineral obtenerNodoEnUbicacion(Ubicacion unaUbicacion) {
 	   NodoMineral buscado = null;
 	   for(NodoMineral actual: this.nodosMinerales) {
 		   if(actual.estaEn(unaUbicacion)) {
@@ -165,10 +256,42 @@ public class Mapa {
 	   }
 	   return buscado;
    }
-   
-   public boolean verificarUbicacionAfectadaPorMoho(Ubicacion unaUbicacion) {
-	   return (this.moho.estaAfectadaLaUbicacion(unaUbicacion));
-   }
+
+	public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
+		Edificio edificio = null;
+		for(Edificio actual: this.edificios) {
+			if(actual.estaEn(unaUbicacion)) {
+				edificio = actual;
+			}
+		}
+		if(edificio == null) {
+			throw new SinEdificioBuscadoException();
+		}
+		return edificio;
+	}
+
+	public Pilon obtenerPilonEn(Ubicacion unaUbicacion) {
+		Pilon pilon = null;
+		for(Pilon actual: this.pilones) {
+			if(actual.estaEn(unaUbicacion)) {
+				pilon = actual;
+			}
+		}
+		if(pilon == null) {
+			throw new SinEdificioBuscadoException();
+		}
+		return pilon;
+	}
+
+	public String obtenerSuperficieDeLaUbicacion(Ubicacion unaUbicacion) {
+		String superficie = "Tierra";
+		for(Ubicacion actual: this.areasEspaciales) {
+			if(actual.esIgualA(unaUbicacion)) {
+				superficie = "Aire";
+			}
+		}
+		return superficie;
+	}
    
    public void agregarOrigenAMoho(Ubicacion unaUbicacion) {
 	   this.moho.agregarOrigen(unaUbicacion,this.edificios);
@@ -191,65 +314,61 @@ public class Mapa {
    }
    
    public void agregarAPilones(Ubicacion unaUbicacion, EdificioProtoss edificio) {
-	   for(Pilon actual: this.pilones) {
-		   if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
-			   actual.agregarEdificio(edificio);
-		   }
-	   }
-   }
+		for(Pilon actual: this.pilones) {
+			if(actual.laUbicacionEstaEnElRangoDeConstruccion(unaUbicacion)) {
+				actual.agregarEdificio(edificio);
+			}
+		}
+    }
+
+   	public void agregarEdificio(Edificio unEdificio) {
+		this.edificios.add(unEdificio);
+	}
+
+	public void agregarUnidad(Unidad unaUnidad) {
+		this.unidades.add(unaUnidad);
+	}
+
+	public void agregarAmoSupremo(Unidad unAmoSupremo) {
+		this.amosSupremos.add(unAmoSupremo);
+	}
    
    public void destruirPilonEn(Ubicacion unaUbicacion) {
 	   Pilon pilon = this.obtenerPilonEn(unaUbicacion);
 	   this.pilones.remove(pilon);
    }
    
-   public Pilon obtenerPilonEn(Ubicacion unaUbicacion) {
-	   Pilon pilon = null;
-	   for(Pilon actual: this.pilones) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   pilon = actual;
-		   }
-	   }
-	   if(pilon == null) {
-		   throw new SinEdificioBuscadoError();
-	   }
-	   return pilon;
-   }
-   
-   public void energizarEdificios() {
-	   for(Pilon actual: this.pilones) {
-		   actual.energizarEdificios();
-	   }
-   }
-   
    public void destruirOrigenDeMoho(Ubicacion unaUbicacion) {
 	   this.moho.destruirOrigenEn(unaUbicacion);
    }
    
-   public void agregarEdificio(Edificio unEdificio) {
-	   this.edificios.add(unEdificio);
+   public void destruirEdificio(Edificio unEdificio) {
+	   this.edificios.remove(unEdificio);
    }
-   
-   public void destruirEdificioEn(Ubicacion unaUbicacion) {
-	   Edificio edificio = this.obtenerEdificioEn(unaUbicacion);
-	   this.edificios.remove(edificio);
-   }
-   
-   public Edificio obtenerEdificioEn(Ubicacion unaUbicacion) {
-	   Edificio edificio = null;
-	   for(Edificio actual: this.edificios) {
-		   if(actual.estaEn(unaUbicacion)) {
-			   edificio = actual;
-		   }
-	   }
-	   if(edificio == null) {
-		   throw new SinEdificioBuscadoError();
-	   }
-	   return edificio;
-   }
-   
+
+	public void destruirUnidad(Unidad unaUnidad) {
+		this.amosSupremos.remove(unaUnidad);
+		this.unidades.remove(unaUnidad);
+	}
+
    public void avanzarTurno() {
 	   	this.energizarEdificios();
+	   	this.revelarUnidades();
 	   	this.moho.avanzarTurno(this.edificios);
+   }
+
+	public void energizarEdificios() {
+		for(Pilon actual: this.pilones) {
+			actual.energizarEdificios();
+		}
+	}
+
+   public void revelarUnidades() {
+
+    	for(Unidad amo: this.amosSupremos) {
+    		for(Unidad unidad: this.unidades) {
+    			amo.revelar(unidad);
+			}
+		}
    }
 }

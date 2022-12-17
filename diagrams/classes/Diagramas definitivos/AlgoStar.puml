@@ -1,0 +1,151 @@
+@startuml
+
+class AlgoStar{
+    -jugadores: ArrayList<Jugador>
+    -mapa: Mapa
+    -turnos: Tiempo
+    -jugadorTurno: Jugador
+    +AlgoStar()
+    +setJugador(unJugador)
+    +getJugadorTurno(): Jugador
+    +getMapa(): Mapa
+    +obtenerJugadorContrario(unJugador): Jugador
+    +crearJugador(unNombre, unColor, unaRaza)
+    +validarNombre(unNombre)
+    +validarColor(unColor)
+    +validarRaza(unaRaza)
+    +avanzarTurno()
+
+}
+
+abstract class Jugador {
+    -nombre: String
+    -color: String
+    -recursos: Recursos
+    -Mapa: Mapa
+    -edificios: ArrayList<Edificio>
+    -unidades: ArrayList<Unidad>
+    +Jugador(unNombre, unColor, unMapa)
+    +getNombre(): String
+    +getColor(): String
+    +{abstract} getRaza(): String
+    +getGas(): int
+    +getMineral(): int
+    +getRecursos(): Recursos
+    +tieneEdificios(): boolean
+    +compararNombres(otroNombre): boolean
+    +compararColores(otroColor): boolean
+    +{abstract} compararRazas(otraRaza): boolean
+    +guardar(gas, mineral)
+    +utilizar(costoGas, costoMineral)
+    +calcularPoblacion(): int
+    +calcularSuministro(): int
+    +haySuministroDisponible(unSuministro): boolean
+    +tieneEdificioEnUbicacion(unaUbicacion): boolean
+    +verificarEdificio(unEdificio): boolean
+    +obtenerEdificioEn(unaUbicacion): Edificio
+    +obtenerUnidadEn(unaUbicacion): Unidad
+    +agregarEdificio(unEdificio)
+    +agregarUnidad(unaUnidad)
+    +destruirEdificio(unEdificio)
+    +destruirUnidad(unaUnidad)
+    +destruirEdificioEn(unaUbicacion)
+    +contarUnidades(): int
+    +moverUnidadEn(unaUbicacion)
+    +cambiarDireccionDeUnidadEn(unaUbicacion)
+    +avanzarTurno()
+}
+
+class JugadorZerg {
+    +JugadorZerg(unNombre, unColor, unMapa)
+    +getRaza(): String
+    +compararRazas(otraRaza): boolean
+    +construir(unaEntidad, unaUbicacion, jugadorProtoss, unMapa)
+    +obtenerLarvas(): ArrayList<Unidad>
+    +evolucionarMutaliscoAGuardian(unaUbicacion)
+    +evolucionarMutaliscoADevorador(unaUbicacion)
+}
+
+class JugadorProtoss {
+    +JugadorProtoss(unNombre, unColor, unMapa)
+    +getRaza(): String
+    +compararRazas(otraRaza): boolean
+    +construir(unaEntidad, unaUbicacion, jugadorZerg, unMapa)
+}
+
+class Mapa{
+    -moho: Moho
+    -pilones: ArrayList<Pilon>
+    -volcanes: ArrayList<Volcan>
+    -nodosMinerales: : ArrayList<NodoMineral>
+    -edificios: ArrayList<Edificio>
+    -unidades: ArrayList<Unidad>
+    -amosSupremos: ArrayList<Unidad>
+    -areasEspaciales: : ArrayList<Ubicacion>
+    +Mapa()
+    +getUbicacionesConMoho(): ArrayList<Ubicacion>
+    +getVolcanes(): ArrayList<Volcan>
+    +getNodosMinerales(): ArrayList<NodoMineral>
+    +getEdificios(): ArrayList<Edificio>
+    +getUnidades(): ArrayList<Unidad>
+    +getAreasEspaciales(): ArrayList<Ubicacion>
+    +crearBases()
+    +crearAreas()
+    +ubicacionEstaDentroDeMapa(unaUbicacion): boolean
+    +verificarUbicacionAfectadaPorMoho(unaUbicacion): boolean
+    +verificarQueUnidadPuedeMoverseAUbicacion(unaUnidad, unaUbicacion): boolean
+    +verificarUbicacionLibreDeUnidad(unaUbicacion): boolean
+    +verificarSuperficieParaUnidadEnUbicacion(unaUnidad, unaUbicacion): boolean
+    +verificarEdificioEnUbicacion(unEdificio, unaUbicacion): boolean
+    +verificarEdificioEn(unaUbicacion): boolean
+    +verificarUnidadEnUbicacion(unaUbicacion): boolean
+    +verificarAreaEspacial(unaUbicacion): boolean
+    +verificarUbicacionLibre(unaUbicacion): boolean
+    +verificarConstruccionZerg(unaUbicacion): boolean
+    +verificarConstruccionProtoss(unaUbicacion): boolean
+    +estaAfectadaPorPilonLaUbicacion(unaUbicacion): boolean
+    +verificarVolcanEnUbicacion(unaUbicacion): boolean
+    +verificarNodoMineralEnUbicacion(unaUbicacion): boolean
+    +obtenerEdificioEnUbicacion(unEdificio, unaUbicacion): Edificio
+    +obtenerUnidadEnUbicacion(unaUbicacion): Unidad
+    +obtenerVolcanEnUbicacion(unaUbicacion): Volcan
+    +obtenerNodoEnUbicacion(unaUbicacion): NodoMineral
+    +obtenerEdificioEn(unaUbicacion): Edificio
+    +obtenerPilonEn(unaUbicacion)
+    +obtenerSuperficieDeLaUbicacion(unaUbicacion): String
+    +agregarOrigenAMoho(unaUbicacion)
+    +agregarPilon(unPilon)
+    +agregarVolcan(unaUbicacion)
+    +agregarNodoMineral(unaUbicacion)
+    +agregarAPilones(unaubicacion, unEdificioProtoss)
+    +agregarEdificio(unEdificio)
+    +agregarUnidad(unaUnidad)
+    +agregarAmoSupremo(unAmoSupremo)
+    +destruirPilonEn(unaUbicacion)
+    +destruirOrigenDeMoho(unaUbicacion)
+    +destruirEdificio(unEdificio)
+    +destruirUnidad(unaUnidad)
+    +avanzarTurno()
+    +energizarEdificos()
+    +revelarUnidades()
+}
+
+class Recursos {
+    -cantidadDeGas: int
+    -cantidadDeMineral: int
+    +Recursos()
+    +guardar(cantidadDeGas, cantidadDeMineral)
+    +utilizar(cantidadDeGas, cantidadDeMineral)
+    +obtenerGas()
+    +obtenerMineral()
+}
+
+AlgoStar  -down-> "2" Jugador
+AlgoStar -right-> Mapa
+
+Jugador -> Mapa
+Jugador -left-> Recursos
+JugadorProtoss -up-|> Jugador
+JugadorZerg -up-|> Jugador
+
+@enduml

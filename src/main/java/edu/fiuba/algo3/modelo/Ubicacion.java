@@ -12,9 +12,9 @@ public class Ubicacion {
     }
     
     public Ubicacion(int x, int y) {
-    	this.posX = x;
-    	this.posY = y;
-    }
+		this.posX = x;
+		this.posY = y;
+	}
 
 	public int distanciaCon(Ubicacion otraUbicacion) {
 		int distancia = 0;
@@ -31,7 +31,7 @@ public class Ubicacion {
 	}
 	
 	public boolean esIgualA(Ubicacion otraUbicacion) {
-		return((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
+		return ((this.posX == otraUbicacion.posX) && (this.posY == otraUbicacion.posY));
 	}
 	
 	public boolean xDentroDeRango(int inicio, int fin) {
@@ -42,5 +42,19 @@ public class Ubicacion {
 		return ( (this.posY >= inicio) && (this.posY <= fin) );
 	}
 
-    
+	public Ubicacion derecha() {
+		return(new Ubicacion(this.posX + 1,this.posY));
+	}
+
+	public Ubicacion abajo() {
+		return (new Ubicacion(this.posX,this.posY - 1));
+	}
+
+	public Ubicacion izquierda() {
+		return (new Ubicacion(this.posX - 1,this.posY));
+	}
+
+	public Ubicacion arriba() {
+		return (new Ubicacion(this.posX,this.posY + 1));
+	}
 }

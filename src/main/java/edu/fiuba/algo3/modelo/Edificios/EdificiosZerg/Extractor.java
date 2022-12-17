@@ -5,18 +5,20 @@ import edu.fiuba.algo3.modelo.Edificios.EdificioZerg;
 import edu.fiuba.algo3.modelo.Excepciones.CantidadMaximaDeZanganosEnExtractorException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Gas.Volcan;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
 import edu.fiuba.algo3.modelo.Recursos.Gas.RefineriaDeGas;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
-import edu.fiuba.algo3.modelo.Unidades.UnidadesZerg.Zangano;
-
 import java.util.ArrayList;
 
 public class Extractor extends EdificioZerg implements RefineriaDeGas {
 
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 100;
-	private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_EXTRACTOR = -6;
+	public static final int VIDA_EXTRACTOR = 750;
+
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 100;
+	private static final int COSTO_GAS = 0;
+	private static final int RECOLECTABLE = 10;
+	private static final int MAX_ZANGANOS = 3;
 	
 	private int cantidadExtraible;
     private int cantidadMaximaDeZanganos;
@@ -24,17 +26,22 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     private ArrayList<Unidad> zanganos;
     
     public Extractor(Volcan unVolcan, Ubicacion unaUbicacion, Jugador unJugador){
-    	super(new Tiempo(-6), new Vida(750), unaUbicacion, unJugador,"Extractor");
+    	super(new Tiempo(CONSTRUCCION_EXTRACTOR), new Vida(VIDA_EXTRACTOR), unaUbicacion, unJugador,"Extractor");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
     	
-    	this.cantidadExtraible = 10;
-    	this.cantidadMaximaDeZanganos = 3;
+    	this.cantidadExtraible = RECOLECTABLE;
+    	this.cantidadMaximaDeZanganos = MAX_ZANGANOS;
     	this.volcan = unVolcan;
         this.zanganos = new ArrayList<Unidad>();
 
 		unVolcan.construirRefineriaDeGas(this);
     }
+
+	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
 
 	@Override
 	public int obtenerPoblacion() {
@@ -55,8 +62,10 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
     	if(this.contarZanganos() == this.cantidadMaximaDeZanganos) {
     		throw new CantidadMaximaDeZanganosEnExtractorException();
     	}
-    	this.zanganos.add(unZangano);
-    	
+
+    	if(unZangano.ubicacion().esIgualA(this.ubicacion())) {
+			this.zanganos.add(unZangano);
+		}
     }
 
     @Override
@@ -66,7 +75,7 @@ public class Extractor extends EdificioZerg implements RefineriaDeGas {
 	
 	@Override
     public int obtenerGas() {
-		return this.jugador.obtenerGas();
+		return this.jugador.getGas();
     }
 
 	@Override

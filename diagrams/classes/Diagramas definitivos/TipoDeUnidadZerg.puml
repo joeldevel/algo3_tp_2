@@ -1,0 +1,73 @@
+@startuml
+
+interface TipoDeUnidad {
+    +trabajarEn(unNodoMineral)
+    +setComportamientoUnidad(unaUnidad)
+    +obtenerPoblacion()
+    +obtenerSuministro()
+    +recibirAtaque(unDanio, unidadAtacante)
+    +atacar(unAtacable, unidadAtacante)
+    +recuperarse()
+    +evolucionarAGuardian(unaUnidad)
+    +evolucionarADevorador(unaUnidad)
+    +vidaRestante()
+    +escudoRestante()
+    +compararSuperficie(otraSuperficie)
+    +avanzarTurno()
+    +hacerseInvisible()
+    +revelar(unRevelable)
+    +serRevelado()
+    +contarBaja()
+}
+
+class Zerling {
+    -vida: Vida
+    -jugador: Jugador
+    -unidad: Unidad
+    -Superficie: superficie
+    -ataques: ArrayList<Ataque>
+    +Zerling(unJugador)
+    +trabajarEn(unNodoMineral)
+    +setComportamientoUnidad(unaUnidad)
+    +obtenerPoblacion()
+    +obtenerSuministro()
+    +recibirAtaque(unDanio, unidadAtacante)
+    +atacar(unAtacable, unidadAtacante)
+    +recuperarse()
+    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +escudoRestante(): int
+    +hacerseInvisible()
+    +comprarSuperficie(unTipoDeSuperficie)
+    +avanzarTurno()
+    +evolucionarAGuardian()
+    +evolucionarADevorador()
+    +revelar(unRevelable)
+    +serRevelado()
+    +contarBaja()
+}
+
+class Superficie {
+    -tipo: String
+    +Superficie(unTipoDeSuperficie)
+    +atacableTieneLaMismaSuperficie(unAtacable): boolean
+    +revelableTieneLaMismaSuperficie(unRevelable): boolean
+    +compararTipos(unTipoDeSuperficie): boolean
+}
+
+class Ataque{
+    -danio: int
+    -tipo: Superficie
+    -rango: int
+    +Ataque(unDanio, unaSuperficie, unRango)
+    +rango(): int
+    +atacarA(unAtacable, unidadAtacante)
+}
+
+Zerling ..up|> TipoDeUnidad
+Zerling -down-> Ataque
+Zerling -down> Superficie
+Ataque -down> Superficie
+
+@enduml

@@ -1,53 +1,54 @@
 package edu.fiuba.algo3.modelo.Recursos.Gas;
 
 import edu.fiuba.algo3.modelo.Ubicacion;
-import edu.fiuba.algo3.modelo.Excepciones.VolcanSinGasVespenoParaExtraerException;
-import edu.fiuba.algo3.modelo.Excepciones.VolcanSinRefineriaDeGasConstruidaException;
 import edu.fiuba.algo3.modelo.Excepciones.VolcanYaTieneUnaRefineriaDeGasConstruidaException;
 
 public class Volcan {
+
+    private static final int GAS_INICIAL = 5000;
 
 	private RefineriaDeGas refineria;
     private int cantidadDeGasVespenoDisponible;
     private Ubicacion ubicacion;
 
     public Volcan(Ubicacion unaUbicacion) {
-    	this.refineria = new SinRefineria(this);
-        this.cantidadDeGasVespenoDisponible = 5000;
+    	this.refineria = new SinRefineria();
+        this.cantidadDeGasVespenoDisponible = GAS_INICIAL;
         this.ubicacion = unaUbicacion;
+    }
+
+    public int getCantidadDeGasVespenoDisponible() {
+        return this.cantidadDeGasVespenoDisponible;
     }
 
     public void construirRefineriaDeGas(RefineriaDeGas unaRefineriaDeGas) {
     	
-    	if(this.refineria.tieneRefineria()) {
+    	if(this.tieneRefineria()) {
     		throw new VolcanYaTieneUnaRefineriaDeGasConstruidaException();
     	}
+
     	this.refineria = unaRefineriaDeGas;
     }
-    
-    public int gasVespenoRestante() {
-        return this.cantidadDeGasVespenoDisponible;
+
+    public boolean tieneRefineria() {
+        return (this.refineria.tieneRefineria());
     }
     
     public int extraerGas(int unaCantidadDeGasParaExtraer) {
 
-        if(this.gasVespenoRestante() == 0) {
-            throw new VolcanSinGasVespenoParaExtraerException();
-        }
+        if(this.getCantidadDeGasVespenoDisponible() > 0 && this.tieneRefineria()) {
 
-        if(!this.refineria.tieneRefineria()) {
-            throw new VolcanSinRefineriaDeGasConstruidaException();
-        }
+            if (this.getCantidadDeGasVespenoDisponible() < unaCantidadDeGasParaExtraer) {
+                unaCantidadDeGasParaExtraer = this.getCantidadDeGasVespenoDisponible();
+                this.cantidadDeGasVespenoDisponible = 0;
+                return unaCantidadDeGasParaExtraer;
+            }
 
-        /* Caso borde donde por ejemplo tenemos 10 de gas y nos piden 20. Deberiamos devolver esos 10 y dejar al Volcan en 0. */
-        if(this.gasVespenoRestante() < unaCantidadDeGasParaExtraer) {
-            unaCantidadDeGasParaExtraer = this.gasVespenoRestante();
-            this.cantidadDeGasVespenoDisponible = 0;
+            this.cantidadDeGasVespenoDisponible = this.cantidadDeGasVespenoDisponible - unaCantidadDeGasParaExtraer;
             return unaCantidadDeGasParaExtraer;
         }
 
-        this.cantidadDeGasVespenoDisponible = this.cantidadDeGasVespenoDisponible - unaCantidadDeGasParaExtraer;
-        return unaCantidadDeGasParaExtraer;
+        return 0;
     }
     
     public boolean estaEn(Ubicacion unaUbicacion) {

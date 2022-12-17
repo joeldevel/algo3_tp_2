@@ -21,25 +21,10 @@
 }
 
 #pane{
-    -fx-background-image: url("images/intro-min.png");
+    -fx-background-image: url("images/background-bienvenidos.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
-}
-
-#mapa{
-    -fx-background-image: url("images/mapa.png");
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
-
-#select-player-pane {
-        -fx-background-image: url("images/select-player.png");
-        -fx-background-color: rgba(0,0,0,0.2);
-        -fx-background-repeat: stretch;
-        -fx-background-size: cover;
-        -fx-background-position: center center;
 }
 
 #display-title {
@@ -124,13 +109,6 @@
 }
 
 /***** pantalla de juego *****/
-
-.fondo-mapa {
-    -fx-background-image: url("images/field.png"); /* temporal*/
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
 
 .panel-superior {
     -fx-background-color: -fx-dark-bg;

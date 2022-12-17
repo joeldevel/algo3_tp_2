@@ -1,0 +1,74 @@
+@startuml
+
+interface TipoDeUnidad {
+    +trabajarEn(unNodoMineral)
+    +setComportamientoUnidad(unaUnidad)
+    +obtenerPoblacion()
+    +obtenerSuministro()
+    +recibirAtaque(unDanio, unidadAtacante)
+    +atacar(unAtacable, unidadAtacante)
+    +recuperarse()
+    +evolucionarAGuardian(unaUnidad)
+    +evolucionarADevorador(unaUnidad)
+    +vidaRestante()
+    +escudoRestante()
+    +compararSuperficie(otraSuperficie)
+    +avanzarTurno()
+    +hacerseInvisible()
+    +revelar(unRevelable)
+    +serRevelado()
+    +contarBaja()
+}
+
+class Dragon {
+    -vida: Vida
+    -escudo: Escudo
+    -jugador: Jugador
+    -unidad: Unidad
+    -Superficie: superficie
+    -ataques: ArrayList<Ataque>
+    +Dragon(unJugador)
+    +trabajarEn(unNodoMineral)
+    +setComportamientoUnidad(unaUnidad)
+    +obtenerPoblacion()
+    +obtenerSuministro()
+    +recibirAtaque(unDanio, unidadAtacante)
+    +atacar(unAtacable, unidadAtacante)
+    +estaEnRangoDeAtaque(unAtacable, unAtaque): boolean
+    +ubicacion(): Ubicacion
+    +vidaRestante(): int
+    +escudoRestante(): int
+    +hacerseInvisible()
+    +recuperarse()
+    +comprarSuperficie(unTipoDeSuperficie)
+    +avanzarTurno()
+    +evolucionarAGuardian()
+    +evolucionarADevorador()
+    +revelar(unRevelable)
+    +serRevelado()
+    +contarBaja()
+}
+
+class Superficie {
+    -tipo: String
+    +Superficie(unTipoDeSuperficie)
+    +atacableTieneLaMismaSuperficie(unAtacable): boolean
+    +revelableTieneLaMismaSuperficie(unRevelable): boolean
+    +compararTipos(unTipoDeSuperficie): boolean
+}
+
+class Ataque{
+    -danio: int
+    -tipo: Superficie
+    -rango: int
+    +Ataque(unDanio, unaSuperficie, unRango)
+    +rango(): int
+    +atacarA(unAtacable, unidadAtacante)
+}
+
+Dragon ..up|> TipoDeUnidad
+Dragon -down-> Ataque
+Dragon -down> Superficie
+Ataque -down> Superficie
+
+@enduml

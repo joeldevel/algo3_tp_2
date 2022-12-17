@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
-import edu.fiuba.algo3.modelo.Excepciones.CantidadInsuficienteDeBajasException;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
 import edu.fiuba.algo3.modelo.Revelable;
@@ -16,63 +15,50 @@ import edu.fiuba.algo3.modelo.Unidades.TipoDeUnidad;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.EstadoDeZealot;
-import edu.fiuba.algo3.modelo.Excepciones.AtacableFueraDeRangoError;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotInvisible;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
 public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
-	public static final int SUMINISTRO_ZEALOT = 2;
-	private final int POBLACION = 0;
-	private final int COSTO_MINERAL = 150;
-	private final int COSTO_GAS = 0;
 	public static final int CONSTRUCCION_ZEALOT = -4;
+	private static final int VIDA_ZEALOT = 100;
+	private static final int ESCUDO_ZEALOT = 60;
+
+	private static final int ATAQUE_TIERRA_DANIO = 8;
+	private static final int ATAQUE_TIERRA_RADIO = 1;
+
+	public static final int SUMINISTRO_ZEALOT = 2;
+	private static final int POBLACION = 0;
+	private static final int COSTO_MINERAL = 150;
+	private static final int COSTO_GAS = 0;
 
 	private Vida vida;
 	private Escudo escudo;
 	private Jugador jugador;
 	private Unidad unidad;
-	private Ubicacion ubicacion;
 	private Superficie superficie;
 	private ArrayList<Ataque> ataques;
 	private EstadoDeZealot estado;
 	private int cantidadDeBajas;
 
-	public Zealot(Ubicacion unaUbicacion, Jugador unJugador) {
-		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
-
-		this.vida = new Vida(100);
-		this.escudo = new Escudo(60);
-		this.jugador = unJugador;
-		this.unidad = null;
-		this.ubicacion = unaUbicacion;
-		this.superficie = new Superficie("Tierra");
-		this.ataques = new ArrayList<Ataque>() {{
-			add(new Ataque(8, new Superficie("Tierra"), 1));
-		}};
-		this.estado = new ZealotNoInvisible();
-		this.cantidadDeBajas = 0;
-	}
-
 	public Zealot(Jugador unJugador) {
 		unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
-		this.vida = new Vida(100);
-		this.escudo = new Escudo(60);
+		this.vida = new Vida(VIDA_ZEALOT);
+		this.escudo = new Escudo(ESCUDO_ZEALOT);
 		this.jugador = unJugador;
 		this.unidad = null;
-		this.ubicacion = new Ubicacion();
 		this.superficie = new Superficie("Tierra");
 		this.ataques = new ArrayList<Ataque>() {{
-			add(new Ataque(8, new Superficie("Tierra"), 1));
+			add(new Ataque(ATAQUE_TIERRA_DANIO, new Superficie("Tierra"), ATAQUE_TIERRA_RADIO));
 		}};
 		this.estado = new ZealotNoInvisible();
 		this.cantidadDeBajas = 0;
 	}
 
 	@Override
-	public void conNodo(NodoMineral nodo) {
-		// Zealot no entiende este mensaje.
+	public void trabajarEn(NodoMineral nodo) {
+		// No entiende este mensaje.
 	}
 
 	public void setComportamientoUnidad(Unidad unaUnidad) {
@@ -96,12 +82,11 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void atacar(Atacable unAtacable, Unidad unidadAtacante) {
-		for (Ataque ataque : ataques) {
-			if(! (this.estaEnRangoDeAtaque(unAtacable, ataque))) {
-				throw new AtacableFueraDeRangoError();
-			}
 
-			ataque.atacarA(unAtacable, unidadAtacante);
+		for (Ataque ataque : ataques) {
+			if(this.estaEnRangoDeAtaque(unAtacable, ataque)) {
+				ataque.atacarA(unAtacable, unidadAtacante);
+			}
 		}
 	}
 
@@ -111,14 +96,12 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	public boolean estaEnRangoDeAtaque(Atacable unAtacable, Ataque unAtaque) {
-		return (this.ubicacion.distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
+		return (this.unidad.ubicacion().distanciaCon(unAtacable.ubicacion()) <= unAtaque.rango());
 	}
 
 	public void hacerseInvisible() {
 		if (cantidadDeBajas >= 3) {
 			estado = new ZealotInvisible();
-		} else {
-			throw new CantidadInsuficienteDeBajasException();
 		}
 	}
 
@@ -129,7 +112,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public Ubicacion ubicacion() {
-		return (this.ubicacion);
+		return (this.unidad.ubicacion());
 	}
 
 	public int vidaRestante() {
@@ -147,31 +130,26 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 
 	@Override
 	public void avanzarTurno() {
-		// No hace nada.
+		this.hacerseInvisible();
 	}
 
 	@Override
 	public void evolucionarAGuardian(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void evolucionarADevorador(Unidad unaUnidad) {
-		// No hace nada ya que es un mensaje particular que entiende solo Mutalisco.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void revelar(Revelable unRevelable) {
-		// No hace nada.
+		// No entiende este mensaje.
 	}
 
 	@Override
 	public void contarBaja() {
 		cantidadDeBajas += 1;
-	}
-
-	@Override
-	public void moverse(Ubicacion unaUbicacion) {
-		this.ubicacion = unaUbicacion;
 	}
 }

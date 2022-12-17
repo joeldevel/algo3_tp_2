@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.FabricaDeEdificios;
+import edu.fiuba.algo3.modelo.Fabrica;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Moho;
 import edu.fiuba.algo3.modelo.Ubicacion;
@@ -33,10 +33,10 @@ class CasoDeUso14Test {
 	 * protoss no se pueden hacer sobre moho, por mas que esten dentro del alcance de un pilon)
 	 * -El moho se puede expandir por un area no ocupada(es decir, que no tenga un edificio
 	 * ya construido) aunque esta este energizada por un pilon*/
-	
-	JugadorZerg jugadorZerg = new JugadorZerg("Brian","Azul", new Recursos(10000,10000));
-	JugadorProtoss jugadorProtoss = new JugadorProtoss("Leo","Rojo", new Recursos(10000,10000));
+
 	Mapa mapa = new Mapa();
+	JugadorZerg jugadorZerg = new JugadorZerg("Brian","Azul", new Recursos(10000,10000), mapa);
+	JugadorProtoss jugadorProtoss = new JugadorProtoss("Leo","Rojo", new Recursos(10000,10000), mapa);
 	
 	@Test
 	void test01HayUnPilonCercaDelMohoPorLoQueNoSePuedeConstruirUnEdificioProtoss() {
@@ -48,25 +48,25 @@ class CasoDeUso14Test {
 		Ubicacion ubicacion5 = new Ubicacion(4,1);
 		Ubicacion ubicacion6 = new Ubicacion(6,0);
 		
-		FabricaDeEdificios.construir("Criadero", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Criadero", ubicacion1, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Pilon", ubicacion2, jugadorZerg, jugadorProtoss, mapa);
 		
 		mapa.agregarVolcan(ubicacion4);
 		mapa.agregarNodoMineral(ubicacion5);
 		
-		FabricaDeEdificios.construir("NexoMineral", ubicacion5, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Asimilador", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
-		FabricaDeEdificios.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("NexoMineral", ubicacion5, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Asimilador", ubicacion4, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Acceso", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
 		
 		assertFalse(jugadorProtoss.verificarEdificio("NexoMineral"));
 		assertFalse(jugadorProtoss.verificarEdificio("Asimilador"));
 		assertFalse(jugadorProtoss.verificarEdificio("Acceso"));
 		
-		FabricaDeEdificios.construir("Acceso", ubicacion6, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("Acceso", ubicacion6, jugadorZerg, jugadorProtoss, mapa);
 		
 		assertTrue(jugadorProtoss.verificarEdificio("Acceso"));
 		
-		FabricaDeEdificios.construir("PuertoEstelar", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
+		Fabrica.construir("PuertoEstelar", ubicacion3, jugadorZerg, jugadorProtoss, mapa);
 		
 		assertFalse(jugadorProtoss.verificarEdificio("PuertoEstelar"));
 	}

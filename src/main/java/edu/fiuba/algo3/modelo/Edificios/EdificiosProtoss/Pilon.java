@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.Edificios.EdificiosProtoss;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Tiempo;
@@ -11,27 +10,34 @@ import edu.fiuba.algo3.modelo.Ubicacion;
 import edu.fiuba.algo3.modelo.Unidades.Unidad;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Edificios.EdificioProtoss;
-import edu.fiuba.algo3.modelo.Recursos.Recursos;
 
 public class Pilon extends EdificioProtoss {
 
-	private final int POBLACION = 5;
-	private final int COSTO_MINERAL = 100;
-	private final int COSTO_GAS = 0;
+	public static final int CONSTRUCCION_PILON = -5;
+	public static final int VIDA_PILON = 300;
+	public static final int ESCUDO_PILON = 300;
+
+	private static final int POBLACION = 5;
+	private static final int COSTO_MINERAL = 100;
+	private static final int COSTO_GAS = 0;
+	private static final int RADIO = 3;
 	
 	private int radio;
 	private ArrayList<EdificioProtoss> edificios;
-	/* ver si el pilon tiene una referencia a los edificios o si el jugadores le pasa a todos los pilones 
-	 * que tenga los edificios que tiene*/
 
     public Pilon(Ubicacion unaUbicacion, Jugador unJugador) {
-    	super(new Tiempo(-5), new Vida(300), new Escudo(300), unaUbicacion, unJugador,"Pilon");
+    	super(new Tiempo(CONSTRUCCION_PILON), new Vida(VIDA_PILON), new Escudo(ESCUDO_PILON), unaUbicacion, unJugador,"Pilon");
     	
     	unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
 
     	this.edificios = new ArrayList<>();
-        this.radio = 3;
+        this.radio = RADIO;
     }
+
+	@Override
+	public ArrayList<Unidad> devolverLarvas() {
+		return new ArrayList<Unidad>();
+	}
 
 	@Override
 	public int obtenerPoblacion() {
@@ -44,11 +50,12 @@ public class Pilon extends EdificioProtoss {
     }
     
     public void energizarEdificios() {
-    	for(EdificioProtoss actual: this.edificios) {
-    		if(this.ubicacion.distanciaCon(actual.ubicacion()) <= this.radio) {
-    			actual.energizar();
-    		}
-    		
+    	if(this.tiempoRestante() == 0) {
+    		for(EdificioProtoss actual: this.edificios) {
+    			if(this.ubicacion.distanciaCon(actual.ubicacion()) <= this.radio) {
+    				actual.energizar();
+    			}	
+    		}    		
     	}
     }
 	
