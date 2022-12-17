@@ -23,7 +23,7 @@ public class Volcan {
 
     public void construirRefineriaDeGas(RefineriaDeGas unaRefineriaDeGas) {
     	
-    	if(this.refineria.tieneRefineria()) {
+    	if(this.tieneRefineria()) {
     		throw new VolcanYaTieneUnaRefineriaDeGasConstruidaException();
     	}
 

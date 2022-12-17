@@ -17,6 +17,7 @@ public class NodoMineral implements Mineral {
         this.ubicacion = unaUbicacion;
     }
 
+    @Override
     public int getCantidadDeMineralDisponible() {
         return this.cantidadDeMineralDisponible;
     }
@@ -28,11 +29,6 @@ public class NodoMineral implements Mineral {
 
     	this.minero = unMinero;
     }
-    
-    @Override
-    public int mineralRestante() {
-    	return (this.cantidadDeMineralDisponible);
-    }
 
     public boolean tieneMinero() {
         return (this.minero.tieneMinero());
@@ -41,9 +37,9 @@ public class NodoMineral implements Mineral {
     @Override
     public int recolectarMineral(int unaCantidadDeMineralParaExtraer) {
 
-        if (this.mineralRestante() > 0 && this.tieneMinero()) {
+        if (this.getCantidadDeMineralDisponible() > 0 && this.tieneMinero()) {
 
-            if (this.mineralRestante() < unaCantidadDeMineralParaExtraer) {
+            if (this.getCantidadDeMineralDisponible() < unaCantidadDeMineralParaExtraer) {
                 unaCantidadDeMineralParaExtraer = this.cantidadDeMineralDisponible;
                 this.cantidadDeMineralDisponible = 0;
                 return unaCantidadDeMineralParaExtraer;

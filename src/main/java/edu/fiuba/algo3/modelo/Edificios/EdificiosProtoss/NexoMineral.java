@@ -25,7 +25,7 @@ public class NexoMineral extends EdificioProtoss implements Minero {
     private NodoMineral nodo;
 	
     public NexoMineral(NodoMineral unNodo, Ubicacion unaubicacion, Jugador unJugador) {
-        super(new Tiempo(CONSTRUCCION_NEXO ), new Vida(VIDA_NEXO), new Escudo(ESCUDO_NEXO), unaubicacion, unJugador,"NexoMineral");
+        super(new Tiempo(CONSTRUCCION_NEXO), new Vida(VIDA_NEXO), new Escudo(ESCUDO_NEXO), unaubicacion, unJugador,"NexoMineral");
         
         unJugador.utilizar(COSTO_GAS, COSTO_MINERAL);
         

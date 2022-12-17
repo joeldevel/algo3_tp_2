@@ -25,7 +25,7 @@ public class CasoDeUso04Test {
     /* Extractor */
 
     @Test
-    void test03SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSeisTurnosSinTenerZanganosDevuelveElResultadoIndicado(){
+    void test01SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSeisTurnosSinTenerZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,100);
@@ -40,7 +40,7 @@ public class CasoDeUso04Test {
     }
 
     @Test
-    void test04SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConUnZanganoDevuelveElResultadoIndicado(){
+    void test02SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConUnZanganoDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,125);
@@ -59,7 +59,7 @@ public class CasoDeUso04Test {
     }
 
     @Test
-    void test05SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConDosZanganosDevuelveElResultadoIndicado(){
+    void test03SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConDosZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,150);
@@ -81,7 +81,7 @@ public class CasoDeUso04Test {
     }
 
     @Test
-    void test06SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConTresZanganosDevuelveElResultadoIndicado(){
+    void test04SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConTresZanganosDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,175);
@@ -106,7 +106,7 @@ public class CasoDeUso04Test {
     }
 
     @Test
-    void test07SeConstruyeUnExtractorEnUnVolcanSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
+    void test05SeConstruyeUnExtractorEnUnVolcanSeRecibenTresZanganoYUnCuartoYaNoPuedeRecibirse(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0,200);
@@ -136,7 +136,7 @@ public class CasoDeUso04Test {
     /* Asimilador */
 
     @Test
-    void test02SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanSieteTurnosYSeDevuelveElResultadoIndicado(){
+    void test06SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanSieteTurnosYSeDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);
@@ -151,7 +151,7 @@ public class CasoDeUso04Test {
     }
 
     @Test
-    void test03SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanDiezTurnosYSeDevuelveElResultadoIndicado(){
+    void test07SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanDiezTurnosYSeDevuelveElResultadoIndicado(){
         // Arrange
         Volcan volcan = new Volcan(new Ubicacion(0,0));
         Recursos recursos = new Recursos(0, 100);

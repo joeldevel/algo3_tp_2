@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.Recursos.Minerales;
 public class SinNodoMineral implements Mineral {
 
 	@Override
-	public int mineralRestante() {
+	public int getCantidadDeMineralDisponible() {
 		return 0;
 	}
 

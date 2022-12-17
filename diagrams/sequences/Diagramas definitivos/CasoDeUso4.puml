@@ -1,0 +1,133 @@
+test06SeConstruyeUnAsimiladorEnUnVolcanYSeAvanzanSieteTurnosYSeDevuelveElResultadoIndicado()
+
+@startuml
+
+== Initialization ==
+
+Usuario->"u: Ubicacion": Ubicacion(0,0)
+Usuario->"v: Volcan": Volcan(u)
+Usuario->"r: Recursos": Recursos(0,100)
+Usuario->"m: Mapa": Mapa()
+Usuario->"j: JugadorProtoss": JugadorProtoss(unNombre, unColor, r, m)
+Usuario->"a: Asimilador": Asimilador(v, u, j)
+
+"a: Asimilador" -> "j: JugadorProtoss": utilizar(0,100)
+"j: JugadorProtoss" -> "r: Recursos": utilizar(0,100)
+"r: Recursos" --> "j: JugadorProtoss"
+"j: JugadorProtoss" --> "a: Asimilador"
+
+"a: Asimilador"->"v: Volcan": construirRefineriaDeGas(this)
+"v: Volcan"->"v: Volcan": tieneRefineria()
+"v: Volcan"->"s: SinRefineria": tieneRefineria()
+"s: SinRefineria" --> "v: Volcan": false
+"v: Volcan" --> "v: Volcan"
+"v: Volcan" --> "a: Asimilador"
+"a: Asimilador" --> Usuario
+
+@enduml
+
+@startuml
+
+== Caso de uso ==
+
+loop seis veces
+Usuario->"a: Asimilador": avanzarTurno()
+"a: Asimilador"->"e: EnConstrucion": ejecutar()
+"e: EnConstrucion" -> "a: Asimilador": ejecutaEnConstruccion()
+"a: Asimilador" --> "e: EnConstrucion"
+"e: EnConstrucion" --> "a: Asimilador"
+"a: Asimilador" --> Usuario
+end
+
+Usuario->"a: Asimilador": avanzarTurno()
+"a: Asimilador"->"o: Operable": ejecutar()
+"o: Operable"->"a: Asimilador": ejecutaOperable()
+"a: Asimilador"->"a: Asimilador": extraerGasDe(this.volcan)
+"a: Asimilador"->"v: Volcan": extraerGas(20)
+"v: Volcan" -> "a: Asimilador": tieneRefineria()
+"a: Asimilador" --> "v: Volcan": true
+"v: Volcan" --> "a: Asimilador": 20
+"a: Asimilador" --> "a: Asimilador": 20
+"a: Asimilador" -> "j: JugadorProtoss": guardar(20,0)
+"j: JugadorProtoss" -> "r: Recursos": guardar(20,0)
+"r: Recursos" --> "j: JugadorProtoss"
+"j: JugadorProtoss" --> "a: Asimilador"
+"a: Asimilador" --> "o: Operable"
+"o: Operable" --> "a: Asimilador"
+"a: Asimilador" --> Usuario
+
+Usuario->"j: JugadorProtoss": getGas()
+return 20
+
+@enduml
+
+*------------------------------------------------------------------------------*
+
+test02SeConstruyeUnExtractorEnUnVolcanYSeAvanzanSieteTurnosConUnZanganoDevuelveElResultadoIndicado()
+
+@startuml
+
+== Initialization ==
+
+Usuario->"u: Ubicacion": Ubicacion(0,0)
+Usuario->"v: Volcan": Volcan(u)
+Usuario->"r: Recursos": Recursos(0,125)
+Usuario->"m: Mapa": Mapa()
+Usuario->"j: JugadorZerg": JugadorZerg(unNombre, unColor, r, m)
+Usuario->"ex: Extractor": Extractor(v, u, j)
+
+"ex: Extractor" -> "j: JugadorZerg": utilizar(0,125)
+"j: JugadorZerg" -> "r: Recursos": utilizar(0,125)
+"r: Recursos" --> "j: JugadorZerg"
+"j: JugadorZerg" --> "ex: Extractor"
+
+"ex: Extractor"->"v: Volcan": construirRefineriaDeGas(this)
+"v: Volcan"->"v: Volcan": tieneRefineria()
+"v: Volcan"->"s: SinRefineria": tieneRefineria()
+"s: SinRefineria" --> "v: Volcan": false
+"v: Volcan" --> "v: Volcan"
+"v: Volcan" --> "ex: Extractor"
+"ex: Extractor" --> Usuario
+
+Usuario -> "tipo: Zangano": Zangano(j)
+Usuario -> "t: Tiempo": Tiempo(-1)
+Usuario -> "unidad: Unidad": Unidad(t, u, tipo)
+
+@enduml
+
+@startuml
+
+== Caso de uso ==
+
+Usuario -> "ex: Extractor": guardarZangano(unidad)
+
+loop seis veces
+Usuario->"ex: Extractor": avanzarTurno()
+"ex: Extractor"->"e: EnConstrucion": ejecutar()
+"e: EnConstrucion" -> "ex: Extractor": ejecutaEnConstruccion()
+"ex: Extractor" --> "e: EnConstrucion"
+"e: EnConstrucion" --> "ex: Extractor"
+"ex: Extractor" --> Usuario
+end
+
+Usuario-> "ex: Extractor": avanzarTurno()
+"ex: Extractor"->"o: Operable": ejecutar()
+"o: Operable"->"ex: Extractor": ejecutaOperable()
+"ex: Extractor" -> "ex: Extractor": extraerGasDe(this.volcan)
+"ex: Extractor" ->"v: Volcan": extraerGas(10)
+"v: Volcan" -> "ex: Extractor": tieneRefineria()
+"ex: Extractor"--> "v: Volcan": true
+"v: Volcan" --> "ex: Extractor": 10
+"ex: Extractor" --> "ex: Extractor": 10
+"ex: Extractor" -> "j: JugadorZerg": guardar(10,0)
+"j: JugadorZerg" -> "r: Recursos": guardar(10,0)
+"r: Recursos" --> "j: JugadorZerg"
+"j: JugadorZerg" --> "ex: Extractor"
+"ex: Extractor" --> "o: Operable"
+"o: Operable" --> "ex: Extractor"
+"ex: Extractor" --> Usuario
+
+Usuario->"j: JugadorZerg": getGas()
+return 10
+
+@enduml
