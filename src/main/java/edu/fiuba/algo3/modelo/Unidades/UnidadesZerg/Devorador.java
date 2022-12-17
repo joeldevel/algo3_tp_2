@@ -115,11 +115,11 @@ public class Devorador implements TipoDeUnidad, Atacante, Atacable {
     public void evolucionarADevorador(Unidad unaUnidad) {
         // No entiende este mensaje.
     }
-
-    @Override
-    public void revelar(Revelable unRevelable) {
-        // No entiende este mensaje.
-    }
+	
+	@Override
+	public void revelar(Atacable unRevelable) {
+		// No entiende este mensaje.
+	}
 
     @Override
     public void serRevelado() {

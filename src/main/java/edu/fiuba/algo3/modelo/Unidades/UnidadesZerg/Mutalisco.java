@@ -119,7 +119,7 @@ public class Mutalisco implements TipoDeUnidad, Atacante, Atacable {
 	}
 
 	@Override
-	public void revelar(Revelable unRevelable) {
+	public void revelar(Atacable unRevelable) {
 		// No entiende este mensaje.
 	}
 

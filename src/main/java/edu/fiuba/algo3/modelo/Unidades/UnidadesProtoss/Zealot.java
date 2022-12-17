@@ -6,7 +6,6 @@ import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Atacante;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.Minerales.NodoMineral;
-import edu.fiuba.algo3.modelo.Revelable;
 import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Escudo;
 import edu.fiuba.algo3.modelo.Superficie;
@@ -18,7 +17,7 @@ import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.EstadoDeZea
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotInvisible;
 import edu.fiuba.algo3.modelo.Unidades.UnidadesProtoss.EstadosZealot.ZealotNoInvisible;
 
-public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
+public class Zealot implements TipoDeUnidad, Atacante, Atacable {
 
 	public static final int CONSTRUCCION_ZEALOT = -4;
 	private static final int VIDA_ZEALOT = 100;
@@ -144,7 +143,7 @@ public class Zealot implements TipoDeUnidad, Atacante, Atacable, Revelable {
 	}
 
 	@Override
-	public void revelar(Revelable unRevelable) {
+	public void revelar(Atacable unRevelable) {
 		// No entiende este mensaje.
 	}
 

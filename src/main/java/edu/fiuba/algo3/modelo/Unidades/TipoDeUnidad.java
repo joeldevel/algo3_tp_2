@@ -32,8 +32,8 @@ public interface TipoDeUnidad {
     void avanzarTurno();
 
 	void hacerseInvisible();
-
-	void revelar(Revelable unRevelable);
+	
+	void revelar(Atacable unRevelable);
 
 	void serRevelado();
 

@@ -77,9 +77,9 @@ public class Larva implements TipoDeUnidad {
 	public void avanzarTurno() {
 		// ...
 	}
-
+	
 	@Override
-	public void revelar(Revelable unRevelable) {
+	public void revelar(Atacable unRevelable) {
 		// No entiende este mensaje.
 	}
 

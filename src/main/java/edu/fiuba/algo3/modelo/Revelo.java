@@ -13,8 +13,8 @@ public class Revelo {
     public int rango() {
         return (this.rango);
     }
-
-    public void revelarA(Revelable unRevelable) {
+    
+    public void revelarA(Atacable unRevelable) {
         if(this.superficie.revelableTieneLaMismaSuperficie(unRevelable)){
             unRevelable.serRevelado();
         }

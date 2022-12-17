@@ -62,16 +62,6 @@ public class Pilon extends EdificioProtoss {
 	public boolean laUbicacionEstaEnElRangoDeConstruccion(Ubicacion unaUbicacion) {
 		return (unaUbicacion.distanciaCon(this.ubicacion) <= this.radio);
 	}
-
-	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return (this.superficie.compararTipos(otraSuperficie));
-	}
-
-	@Override
-	public void serRevelado() {
-		// No hace nada.
-	}
 	
 	public void agregarEdificio(EdificioProtoss unEdificio) {
 		this.edificios.add(unEdificio);
