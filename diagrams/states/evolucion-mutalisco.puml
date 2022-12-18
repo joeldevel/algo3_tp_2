@@ -1,0 +1,12 @@
+@startuml
+title Evoluciones del Mutalisco
+
+state  Guardian
+state  Devorador
+
+state evolucionar <<choice>>
+
+Mutalisco --> evolucionar : evolucionar
+evolucionar --> Guardian
+evolucionar --> Devorador
+@enduml
