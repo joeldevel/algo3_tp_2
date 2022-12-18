@@ -1,0 +1,535 @@
+"Relacion de jugador con las clases que contiene"
+@startuml
+
+abstract class Jugador{
+	#nombre: String
+	#color: String
+	
+	+Jugador(unNombre:String,unColor:String,unMapa:Mapa)
+	+Jugador(unNombre:String,unColor:String,unosRecursos:Recursos,unMapa:Mapa)
+	+{abstract}getRaza():String
+	+{abstract}construir(entidad:String,unaUbicacion:Ubicacion,jugador:Jugador,mapa:Mapa)
+	+calcularPoblacion():int
+	+calcularSuministro():int
+	+obtenerEdificioEn(unaUbicacion:Ubicacion):Edificio
+	+obtenerUnidadEn(unaUbicacion:Ubicacion):Unidad
+	+moverUnidadEn(unaUbicacion:Ubicacion)
+	+cambiarDireccionDeUnidadEn(unaUbicacion:Ubicacion)
+	+avanzarTurno()
+}	
+
+class Recursos{
+	-cantidadDeGas:int
+	-cantidadDeMineral:int
+	+Recursos()
+	+Recursos(gas:int,mineral:int)
+	+guardar(gas:int,mineral:int)
+	+utilizar(gas:int,mineral:int)
+}
+
+class Mapa{
+	-moho:Moho
+	-pilones:ArrayList<Pilon>
+	-volcanes:ArrayList<Volcan>
+	-nodosMinerales:ArrayList<NodoMineral>
+	-areasEspaciales:ArrayList<Ubicacion>
+	+Mapa()
+	+ubicacionEstaDentroDeMapa(unaUbicacion:Ubicacion):boolean
+	+verificarUbicacionAfectadaPorMoho(unaUbicacion:Ubicacion):boolean
+	+verificarQueUnidadPuedeMoverseAUbicacion(unaUnidad:Unidad,unaUbicacion:Ubicacion):boolean
+	+verificarConstruccionZerg(unaUbicacion:Ubicacion):boolean
+	+verificarConstruccionProtoss(unaUbicacion:Ubicacion):boolean
+	+estaAfectadaPorPilonLaUbicacion(unaUbicacion:Ubicacion):boolean
+	+avanzarTurno()
+}
+
+abstract class Edificio
+class Unidad
+
+Jugador "1   "-down->"1 " Recursos
+Jugador "1 "-down->"1  " Mapa
+Jugador "1"-right->"           *" Edificio
+Jugador "1"-right->"*" Unidad
+
+Edificio "1  "-up->"1" Jugador
+
+Mapa "1"-right->"*" Edificio
+Mapa "1"-left->"        *" Unidad
+
+@enduml
+
+------------------------------------------------------------------------------
+
+"Relacion de jugador con sus clases hijas"
+@startuml
+
+abstract class Jugador{
+	#nombre: String
+	#color: String
+	#recursos:Recursos
+	#mapa:Mapa
+	#edificios:ArrayList<Edificio>
+	#unidades:ArrayList<Unidad>
+	
+	+Jugador(unNombre:String,unColor:String,unMapa:Mapa)
+	+Jugador(unNombre:String,unColor:String,unosRecursos:Recursos,unMapa:Mapa)
+	+{abstract}getRaza():String
+	+{abstract}construir(entidad:String,unaUbicacion:Ubicacion,jugador:Jugador,mapa:Mapa)
+	+calcularPoblacion():int
+	+calcularSuministro():int
+	+obtenerEdificioEn(unaUbicacion:Ubicacion):Edificio
+	+obtenerUnidadEn(unaUbicacion:Ubicacion):Unidad
+	+moverUnidadEn(unaUbicacion:Ubicacion)
+	+cambiarDireccionDeUnidadEn(unaUbicacion:Ubicacion)
+	+avanzarTurno()
+}	
+
+class JugadorZerg{
+	+getRaza():String
+	+construir(entidad:String,unaUbicacion:Ubicacion,jugador:Jugador,mapa:Mapa)
+	+obtenerLarvas():ArrayList<Unidad>
+	+evolucionarMutaliscoAGuardian(unaUbicacion:Ubicacion)
+	+evolucionarMutaliscoADevorador(unaUbicacion:Ubicacion)
+}
+
+class JugadorProtoss{
+	+getRaza():String
+	+construir(entidad:String,unaUbicacion:Ubicacion,jugador:Jugador,mapa:Mapa)
+}
+
+Jugador <|-- JugadorZerg
+Jugador <|-- JugadorProtoss
+
+
+@enduml
+
+-------------------------------------------------------------------------
+
+"Relacion entre Raza,Edificio,Unidad"
+@startuml
+
+abstract class Raza{
+	#tiempo:Tiempo
+	#ubicacion:Ubicacion
+	+Raza(unTiempo:Tiempo,unaUbicacion:Ubicacion)
+	+tiempoRestante():int
+	+{abstract}obtenerPoblacion():int
+	+{abstract}avanzarTurno()
+	+avanzarTurno(cantidad:int)
+	+ubicacion():Ubicacion
+	+estaEn(unaUbicacion:Ubicacion):boolean
+	+{abstract}recibirAtaque(unDanio:int,unidadAtacante:Unidad)
+	+ubicacion():Ubicacion
+	+{abstract}compararSuperficies(otraSuperficie:String):boolean
+	+{abstract}serRevelado()
+}
+abstract class Edificio{
+	#vida:Vida
+	#jugador:Jugador
+	#superficie:Superficie
+	#estado:EstadoOperativo
+	#identificador:String
+	+Edificio(unTiempo:Tiempo,unaVida:Vida,
+	unaUbicacion:Ubicacion,unJugador:Jugador,unIdentificador:String)
+	+ejecutaEnConstruccion()
+	+{abstract}ejecutaOperable()
+	+{abstract}avanzarTurno()
+	+{abstract}recuperarse()
+	+{abstract}recibirAtaque(unDanio:int,unidadAtacante:Unidad)
+	+compararSuperficies(otraSuperficie:String):boolean
+	+serRevelado()
+	+distanciaCon(otroEdificio:Edificio):int
+	+esUn(unEdificio:String):boolean
+	
+}
+
+class Unidad{
+	#estado:TipoDeUnidad
+	#tipo:TipoDeUnidad
+	#direccion:Direccion
+	+Unidad(unTiempo:Tiempo,unaUbicacion:Ubicacion,unTipo:TipoDeUnidad)
+	+setComportamientoTipo(unTiempo:Tiempo,
+	nuevoTipo:TipoDeUnidad,unaUbicacion:Ubicacion)
+	+setComportamientoEstado(nuevoEstado:TipoDeUnidad)
+	+recibirAtaque(unDanio:int,unidadAtacante:Unidad)
+	+compararSuperficies(otraSuperficie:String):boolean
+	+serRevelado()
+	+atacar(unAtacable:Atacable)
+	+avanzarTurno()
+	+moverse(unMapa:Mapa)
+	+cambiarDireccion()
+}
+
+interface Atacable{
+	+recibirAtaque(unDanio:int,unidadAtacante:Unidad)
+	+ubicacion():Ubicacion
+	+compararSuperficies(otraSuperficie:String):boolean
+	+serRevelado()
+}
+
+interface Recuperable{
+	+recuperarse()
+}
+
+Edificio .right.|> Recuperable
+Raza .down.|> Atacable
+
+Raza <|-down- Edificio
+Raza <|-left- Unidad
+
+@enduml
+
+------------------------------------------------------------------------------
+
+"Relacion entre Edificio y sus clases hijas"
+@startuml
+
+abstract class Edificio{
+	#vida:Vida
+	#jugador:Jugador
+	#superficie:Superficie
+	#estado:EstadoOperativo
+	#identificador:String
+	+Edificio(unTiempo:Tiempo,unaVida:Vida,
+	unaUbicacion:Ubicacion,unJugador:Jugador,unIdentificador:String)
+	+ejecutaEnConstruccion()
+	+{abstract}ejecutaOperable()
+	+{abstract}avanzarTurno()
+	+{abstract}recuperarse()
+	+{abstract}recibirAtaque(unDanio:int,unidadAtacante:Unidad)
+	+compararSuperficies(otraSuperficie:String):boolean
+	+serRevelado()
+	+distanciaCon(otroEdificio:Edificio):int
+	+esUn(unEdificio:String):boolean
+}
+
+abstract class EdificioZerg{
+	+EdificioZerg(unTiempo:Tiempo,unaVida:Vida,
+	unaUbicacion:Ubicacion,unJugador:Jugador,unIdentificador:String)
+	+avanzarTurno()
+	+recuperarse()
+	+recibirAtaque(unAtaque:int,unidadAtacante:Unidad)
+	+{abstract}ejecutaOperable()
+}
+
+abstract class EdificioProtoss{
+	#escudo:Escudo
+	#energia:Energia
+	+EdificioProtoss(unTiempo:Tiempo,unaVida:Vida,unEscudo:Escudo,
+	unaUbicacion:Ubicacion,unJugador:Jugador,unIdentificador:String)
+	+avanzarTurno()
+	+recuperarse()
+	+recibirAtaque(unAtaque:int,unidadAtacante:Unidad)
+	+energizar()
+	+estaEnergizado():boolean
+	+{abstract}ejecutaOperable()
+}
+
+Edificio <|--EdificioZerg
+Edificio <|--EdificioProtoss
+
+@enduml
+
+--------------------------------------------------------------
+
+"Relacion entre EdificioZerg y sus clases hijas"
+@startuml
+
+abstract class EdificioZerg{
+	#tiempo:Tiempo
+	#ubicacion:Ubicacion
+	#vida:Vida
+	#superficie:Superficie
+	#estado:EstadoOperativo
+	#identificador:String
+	+EdificioZerg(unTiempo:Tiempo,unaVida:Vida,
+	unaUbicacion:Ubicacion,unJugador:Jugador,unIdentificador:String)
+	+avanzarTurno()
+	+recuperarse()
+	+recibirAtaque(unAtaque:int,unidadAtacante:Unidad)
+	+{abstract}ejecutaOperable()
+}
+
+class Criadero{
+	-maxLarvas:int
+	-larvas:ArrayList<Unidad>
+	+Criadero(unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+crearZangano()
+	+crearLarva()
+}
+
+class Extractor{
+	-cantidadExtraible:int
+	-cantidadMaximaDeZanganos:int
+	-volcan:Volcan
+	-zanganos:ArrayList<Unidad>
+	+Extractor(unVolcan:Volcan,
+	unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+guardarZangano(unZangano:Unidad)
+	+extraerGasDe(unVolcan:Volcan):int
+	+obtenerGas():int
+	+tieneRefineria():boolean
+}
+
+class ReservaDeReproduccion{
+	-larvas:ArrayList<Unidad>
+	+ReservaDeReproduccion(unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+crearZerling()
+	+recibirLarvas(unasLarvas:ArrayList<Unidad>)
+}
+
+class Guarida{
+	-larvas:ArrayList<Unidad>
+	+Guarida(unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+crearHidralisco()
+	+recibirLarvas(unasLarvas:ArrayList<Unidad>)
+}
+
+class Espiral{
+	-larvas:ArrayList<Unidad>
+	+Espiral(unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+crearMutalisco()
+	+recibirLarvas(unasLarvas:ArrayList<Unidad>)
+}
+
+interface RefineriaDeGas{
+	+extraerGasDe(unVolcan:Volcan):int
+	+obtenerGas():int
+	+tieneRefineria():boolean
+}
+
+EdificioZerg <|-up- Criadero
+EdificioZerg <|-left- Extractor
+EdificioZerg <|-up- ReservaDeReproduccion
+EdificioZerg <|-- Guarida
+EdificioZerg <|-right- Espiral
+
+Extractor ..|> RefineriaDeGas
+
+@enduml
+
+---------------------------------------------------------------------
+
+"Relacion entre EdificiosProtoss y sus clases hijas"
+@startuml
+
+abstract class EdificioProtoss{
+	#tiempo:Tiempo
+	#ubicacion:Ubicacion
+	#vida:Vida
+	#superficie:Superficie
+	#estado:EstadoOperativo
+	#identificador:String
+	#escudo:Escudo
+	#energia:Energia
+	+EdificioProtoss(unTiempo:Tiempo,unaVida:Vida,unEscudo:Escudo,
+	unaUbicacion:Ubicacion,unJugador:Jugador,unIdentificador:String)
+	+avanzarTurno()
+	+recuperarse()
+	+recibirAtaque(unAtaque:int,unidadAtacante:Unidad)
+	+energizar()
+	+estaEnergizado():boolean
+	+{abstract}ejecutaOperable()
+}
+
+class Pilon{
+	-radio:int
+	-edificios:ArrayList<EdificioProtoss>
+	+Pilon(unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+energizarEdificios()
+	+estaEnRango(unaUbicacion:Ubicacion):boolean
+	+agregarEdificio(unEdificio:EdificioProtoss)
+}
+
+class NexoMineral{
+	-cantidadRecolectable:int
+	-nodo:NodoMineral
+	+NexoMineral(unNodo:NodoMineral,
+	unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+recolectarMineralDe(unNodoMineral:Mineral):int
+	+obtenerMineal():int
+	+tieneMinero():boolean
+}
+
+class Asimilador{
+	-cantidadExtraible:int
+	-volcan:Volcan
+	+Asimilador(unVolcan:Volcan,
+	unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+extraerGasDe(unVolcan:Volcan):int
+	+obtenerGas():int
+	+tieneRefineria():boolean
+}
+
+class Acceso{
+	+Acceso(unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+transportarZealots():Unidad
+	+transportarDragones():Unidad
+}
+
+class PuertoEstelar{
+	+PuertoEstelar(unaUbicacion:Ubicacion,unJugador:Jugador)
+	+ejecutaOperable()
+	+transportarScout():Unidad
+}
+
+interface Minero{
+	+recolectarMineralDe(unNodoMineral:Mineral):int
+	+obtenerMineal():int
+	+tieneMinero():boolean
+}
+
+interface RefineriaDeGas{
+	+extraerGasDe(unVolcan:Volcan):int
+	+obtenerGas():int
+	+tieneRefineria():boolean
+}
+
+EdificioProtoss <|-up- Pilon
+EdificioProtoss <|-left- NexoMineral
+EdificioProtoss <|-right- Asimilador
+EdificioProtoss <|-- Acceso
+EdificioProtoss <|-up- PuertoEstelar
+
+NexoMineral ..|> Minero
+Asimilador ..|> RefineriaDeGas
+
+@enduml
+
+------------------------------------------------------------------------------------------
+
+"Caso de uso 02 para Criadero"
+@startuml
+
+title: Se construye un criadero y no se encuentra operativo
+hide footbox
+
+actor Usuario
+
+create Mapa
+Usuario->Mapa:<<create>> \n new Mapa()
+
+create JugadorZerg
+Usuario->JugadorZerg:<<create>> \n new JugadorZerg(nombre1,color1,new Recursos(10000,10000),Mapa)
+
+create JugadorProtoss
+Usuario->JugadorProtoss:<<create>> \n new JugadorProtoss(nombre2,color2,new Recursos(10000,10000),Mapa)
+
+create Ubicacion
+Usuario -> Ubicacion:<<create>> new Ubicacion(20,20)
+
+== Inicializacion ==
+
+Usuario++
+
+Usuario->JugadorZerg++:construir("Criadero",Ubicacion,JugadorProtoss,Mapa)
+JugadorZerg->Fabrica++:__construir("Criadero",Ubicacion,JugadorZerg,JugadorProtoss,Mapa)__
+note left: este es un mensaje de clase
+note right: en este caso el jugador cumple con las \nprecondiciones, por lo que no se \nlanza una excepcion al crear el edificio
+
+Fabrica->Mapa++:verificarUbicacionLibre(Ubicacion)
+Mapa-->Fabrica:true
+Fabrica->Mapa:estaAfectadaPorPilonLaUbicacion(Ubicacion)
+Mapa-->Fabrica:false
+
+create Criadero
+Fabrica->Criadero:<<create>>\nnew Criadero(Ubicacion,JugadorZerg)
+
+Fabrica->JugadorZerg:agregarEdificio(Criadero)
+Fabrica->Mapa:agregarEdificio(Criadero)
+Fabrica->Mapa--:agregarOrigenAMoho(Ubicacion)
+
+Usuario->Criadero++:crearZangano()
+note right:como el edificio no esta operativo\nno crea ningun zangano, por lo que\nno aumentan las unidades del jugador
+Criadero--
+
+Usuario->JugadorZerg:contarUnidades()
+JugadorZerg-->Usuario--: 0
+
+Usuario--
+
+
+@enduml
+
+----------------------------------------------------------------------
+
+@startuml
+
+title: Se construye un criadero y luego de cuatro turnos se encuentra operativo
+hide footbox
+
+actor Usuario
+
+create Mapa
+Usuario->Mapa:<<create>> \n new Mapa()
+
+create JugadorZerg
+Usuario->JugadorZerg:<<create>> \n new JugadorZerg(nombre1,color1,new Recursos(10000,10000),Mapa)
+
+create JugadorProtoss
+Usuario->JugadorProtoss:<<create>> \n new JugadorProtoss(nombre2,color2,new Recursos(10000,10000),Mapa)
+
+create Ubicacion
+Usuario -> Ubicacion:<<create>> new Ubicacion(20,20)
+
+== Inicializacion ==
+
+Usuario++
+
+Usuario->JugadorZerg++:construir("Criadero",Ubicacion,JugadorProtoss,Mapa)
+JugadorZerg->Fabrica++:__construir("Criadero",Ubicacion,JugadorZerg,JugadorProtoss,Mapa)__
+note left: este es un mensaje de clase
+note right: en este caso el jugador cumple con las \nprecondiciones, por lo que no se \nlanza una excepcion al crear el edificio
+
+Fabrica->Mapa++:verificarUbicacionLibre(Ubicacion)
+Mapa-->Fabrica:true
+Fabrica->Mapa:estaAfectadaPorPilonLaUbicacion(Ubicacion)
+Mapa-->Fabrica:false
+
+create Criadero
+Fabrica->Criadero:<<create>>\nnew Criadero(Ubicacion,JugadorZerg)
+
+Fabrica->JugadorZerg:agregarEdificio(Criadero)
+Fabrica->Mapa:agregarEdificio(Criadero)
+Fabrica->Mapa--:agregarOrigenAMoho(Ubicacion)
+
+Usuario->Criadero++:avanzarTurno(4)
+
+	loop para cada turno
+	
+	Criadero->Tiempo++:pasarTiempo()
+	Tiempo--
+	Criadero->Estado++:ejecutar()
+	Estado--
+	note right:si el estado es operativo \nse crean larvas automaticamente \nen cada turno
+	Criadero->Criadero:recuperarse()
+
+	end
+
+Usuario->Criadero:crearZangano()
+note right:como el edificio esta operativo\ncrea un zangano y aumentan \nlas unidades del jugador
+Criadero--
+
+Usuario->JugadorZerg:contarUnidades()
+JugadorZerg-->Usuario--: 1
+
+Usuario--
+
+
+@enduml
+
+
+
+
+
+
+

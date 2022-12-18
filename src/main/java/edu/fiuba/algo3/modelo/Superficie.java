@@ -12,7 +12,7 @@ public class Superficie {
         return (unAtacable.compararSuperficie(this.tipo));
     }
 
-    public boolean revelableTieneLaMismaSuperficie(Revelable unRevelable) {
+    public boolean revelableTieneLaMismaSuperficie(Atacable unRevelable) {
         return (unRevelable.compararSuperficie(this.tipo));
     }
 

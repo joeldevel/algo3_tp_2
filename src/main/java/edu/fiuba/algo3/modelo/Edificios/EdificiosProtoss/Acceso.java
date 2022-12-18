@@ -70,14 +70,5 @@ public class Acceso extends EdificioProtoss {
 		Unidad dragon = new Unidad(new Tiempo(CONSTRUCCION_DRAGON), this.ubicacion, new Dragon(this.jugador));
 		return dragon;
 	}
-		
-	@Override
-	public boolean compararSuperficie(String otraSuperficie) {
-		return this.superficie.compararTipos(otraSuperficie);
-	}
 
-	@Override
-	public void serRevelado() {
-		// No hace nada.
-	}
 }

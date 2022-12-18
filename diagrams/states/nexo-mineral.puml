@@ -1,0 +1,9 @@
+@startuml
+hide empty description
+title Construcción de NexoMineral
+
+[*] --> enConstruccion
+
+enConstruccion -> Operable : pasan 4 turnos
+
+@enduml
