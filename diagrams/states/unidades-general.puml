@@ -1,0 +1,10 @@
+@startuml
+hide empty description
+title Construcción de unidades \nfuncionamiento general
+
+[*] --> unidadEnConstruccion
+
+unidadEnConstruccion -> tipoDeUnidad : pasan X turnos
+
+@enduml
+
