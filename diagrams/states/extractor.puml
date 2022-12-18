@@ -1,0 +1,9 @@
+@startuml
+hide empty description
+title Construcción de extractor
+
+[*] --> enConstruccion
+
+enConstruccion -> Operable : pasan 6 turnos
+
+@enduml
