@@ -405,6 +405,128 @@ Asimilador ..|> RefineriaDeGas
 
 @enduml
 
+------------------------------------------------------------------------------------------
+
+"Caso de uso 02 para Criadero"
+@startuml
+
+title: Se construye un criadero y no se encuentra operativo
+hide footbox
+
+actor Usuario
+
+create Mapa
+Usuario->Mapa:<<create>> \n new Mapa()
+
+create JugadorZerg
+Usuario->JugadorZerg:<<create>> \n new JugadorZerg(nombre1,color1,new Recursos(10000,10000),Mapa)
+
+create JugadorProtoss
+Usuario->JugadorProtoss:<<create>> \n new JugadorProtoss(nombre2,color2,new Recursos(10000,10000),Mapa)
+
+create Ubicacion
+Usuario -> Ubicacion:<<create>> new Ubicacion(20,20)
+
+== Inicializacion ==
+
+Usuario++
+
+Usuario->JugadorZerg++:construir("Criadero",Ubicacion,JugadorProtoss,Mapa)
+JugadorZerg->Fabrica++:__construir("Criadero",Ubicacion,JugadorZerg,JugadorProtoss,Mapa)__
+note left: este es un mensaje de clase
+note right: en este caso el jugador cumple con las \nprecondiciones, por lo que no se \nlanza una excepcion al crear el edificio
+
+Fabrica->Mapa++:verificarUbicacionLibre(Ubicacion)
+Mapa-->Fabrica:true
+Fabrica->Mapa:estaAfectadaPorPilonLaUbicacion(Ubicacion)
+Mapa-->Fabrica:false
+
+create Criadero
+Fabrica->Criadero:<<create>>\nnew Criadero(Ubicacion,JugadorZerg)
+
+Fabrica->JugadorZerg:agregarEdificio(Criadero)
+Fabrica->Mapa:agregarEdificio(Criadero)
+Fabrica->Mapa--:agregarOrigenAMoho(Ubicacion)
+
+Usuario->Criadero++:crearZangano()
+note right:como el edificio no esta operativo\nno crea ningun zangano, por lo que\nno aumentan las unidades del jugador
+Criadero--
+
+Usuario->JugadorZerg:contarUnidades()
+JugadorZerg-->Usuario--: 0
+
+Usuario--
+
+
+@enduml
+
+----------------------------------------------------------------------
+
+@startuml
+
+title: Se construye un criadero y luego de cuatro turnos se encuentra operativo
+hide footbox
+
+actor Usuario
+
+create Mapa
+Usuario->Mapa:<<create>> \n new Mapa()
+
+create JugadorZerg
+Usuario->JugadorZerg:<<create>> \n new JugadorZerg(nombre1,color1,new Recursos(10000,10000),Mapa)
+
+create JugadorProtoss
+Usuario->JugadorProtoss:<<create>> \n new JugadorProtoss(nombre2,color2,new Recursos(10000,10000),Mapa)
+
+create Ubicacion
+Usuario -> Ubicacion:<<create>> new Ubicacion(20,20)
+
+== Inicializacion ==
+
+Usuario++
+
+Usuario->JugadorZerg++:construir("Criadero",Ubicacion,JugadorProtoss,Mapa)
+JugadorZerg->Fabrica++:__construir("Criadero",Ubicacion,JugadorZerg,JugadorProtoss,Mapa)__
+note left: este es un mensaje de clase
+note right: en este caso el jugador cumple con las \nprecondiciones, por lo que no se \nlanza una excepcion al crear el edificio
+
+Fabrica->Mapa++:verificarUbicacionLibre(Ubicacion)
+Mapa-->Fabrica:true
+Fabrica->Mapa:estaAfectadaPorPilonLaUbicacion(Ubicacion)
+Mapa-->Fabrica:false
+
+create Criadero
+Fabrica->Criadero:<<create>>\nnew Criadero(Ubicacion,JugadorZerg)
+
+Fabrica->JugadorZerg:agregarEdificio(Criadero)
+Fabrica->Mapa:agregarEdificio(Criadero)
+Fabrica->Mapa--:agregarOrigenAMoho(Ubicacion)
+
+Usuario->Criadero++:avanzarTurno(4)
+
+	loop para cada turno
+	
+	Criadero->Tiempo++:pasarTiempo()
+	Tiempo--
+	Criadero->Estado++:ejecutar()
+	Estado--
+	note right:si el estado es operativo \nse crean larvas automaticamente \nen cada turno
+	Criadero->Criadero:recuperarse()
+
+	end
+
+Usuario->Criadero:crearZangano()
+note right:como el edificio esta operativo\ncrea un zangano y aumentan \nlas unidades del jugador
+Criadero--
+
+Usuario->JugadorZerg:contarUnidades()
+JugadorZerg-->Usuario--: 1
+
+Usuario--
+
+
+@enduml
+
 
 
 
