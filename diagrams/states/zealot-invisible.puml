@@ -1,0 +1,9 @@
+@startuml
+title Zealot se vuelve invisible
+
+state Zealot {
+    [*] --> ZealotNoInvisible
+    ZealotNoInvisible -> ZealotInvisible : cantidadDeBajas >= 3
+}
+
+@enduml
