@@ -1,0 +1,57 @@
+@startuml
+title Modelo
+
+package Edificios <<Folder>> {
+    package EdificiosProtoss <<Folder>> {
+        class Acceso
+        class Asmiliador
+        class NexoMineral
+        class Pilon
+        class PuertoEstelar
+    }
+
+    package EdificioZerg <<Folder>> {
+        class Criadero
+        class Espiral
+        class Extractor
+        class Guarida
+        class ReservaDeReproduccion
+      }
+
+    abstract class Edificio
+    abstract class EdificioProtoss
+    abstract class EdificioZerg
+    class EnConstruccion
+    class EstadoOperativo
+    class Operable
+}
+
+package Unidades <<Folder>> {
+    package  UnidadesProtoss <<Folder>> {
+        package EstadosZealot <<Folder>> {
+            interface EstadoDeZealot
+            class ZealotInvisible
+            class ZealotNoinvisible
+        }
+        class Dragon
+        class Scout
+        class Zealot
+    }
+
+    package UnidadesZerg <<Folder>> {
+        class AmoSupremo
+        class Devorador
+        class Guardian
+        class Hidralisco
+        class Larva
+        class Mutalisco
+        class Zangano
+        class Zerling
+    }
+
+    interface TipoDeUnidad
+    class Unidad
+    class UnidadEnConstruccion
+}
+
+@enduml
