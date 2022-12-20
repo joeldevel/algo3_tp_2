@@ -79,24 +79,24 @@ package Modelo <<Folder>> {
     }
 
     package Excepciones <<Folder>> {
-        exception AlgoStarFinalizadoException
-        exception CantidadMaximaDeZanganosEnExtractorException
-        exception CriaderoSinLarvasException
-        exception EdificioNoEnergizadosException
-        exception EdificioNoOperativoException
-        exception NodoMineralYaTieneUnRecolectorDeMineralException
-        exception OrigenNoEncontradoException
-        exception SinEdificioBuscadoException
-        exception SinRecursosSUficientesException
-        exception SinUnidadBuscadaExcpetion
-        exception UbicacionSinEdificioException
-        exception UnidadEnConstruccionException
-        exception UnidadEnConstruccionException
-        exception ValorInvalidoDeDanioException
-        exception ValorInvalidoParaEscudoException
-        exception ValorInvalidoParaVidaException
-        exception VolcanYaTieneUnaRefirenciaDeGasConstruidaException
-    }
+            exception AlgoStarFinalizadoException
+            exception CantidadMaximaDeZanganosEnExtractorException
+            exception CriaderoSinLarvasException
+            exception EdificioNoEnergizadosException
+            exception EdificioNoOperativoException
+            exception NodoMineralYaTieneUnRecolectorDeMineralException
+            exception OrigenNoEncontradoException
+            exception SinEdificioBuscadoException
+            exception SinRecursosSUficientesException
+            exception SinUnidadBuscadaExcpetion
+            exception UbicacionSinEdificioException
+            exception UnidadEnConstruccionException
+            exception UnidadEnConstruccionException
+            exception ValorInvalidoDeDanioException
+            exception ValorInvalidoParaEscudoException
+            exception ValorInvalidoParaVidaException
+            exception VolcanYaTieneUnaRefirenciaDeGasConstruidaException
+        }
 
     class AlgoStar
     interface Atacable

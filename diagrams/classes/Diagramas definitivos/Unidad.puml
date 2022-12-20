@@ -77,7 +77,7 @@ interface TipoDeUnidad {
 
 Raza ..right|> Atacable
 Unidad --up|> Raza
-Unidad <--down> TipoDeUnidad
-Unidad --left> Direccion
+Unidad "1" <--down> "1" TipoDeUnidad
+Unidad "1" --left> "1" Direccion
 
 @enduml

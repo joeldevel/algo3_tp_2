@@ -66,8 +66,8 @@ class Ataque{
 }
 
 Zerling ..up|> TipoDeUnidad
-Zerling -down-> Ataque
-Zerling -down> Superficie
-Ataque -down> Superficie
+Zerling "1" -down-> "1" Ataque
+Zerling "1" -down> "1" Superficie
+Ataque "1" -down> "1" Superficie
 
 @enduml

@@ -140,11 +140,11 @@ class Recursos {
     +obtenerMineral()
 }
 
-AlgoStar  -down-> "2" Jugador
-AlgoStar -right-> Mapa
+AlgoStar "1" -down-> "0..2" Jugador
+AlgoStar "1" -right-> "1" Mapa
 
-Jugador -> Mapa
-Jugador -left-> Recursos
+Jugador "1" -> "1" Mapa
+Jugador "1" -left-> "1" Recursos
 JugadorProtoss -up-|> Jugador
 JugadorZerg -up-|> Jugador
 

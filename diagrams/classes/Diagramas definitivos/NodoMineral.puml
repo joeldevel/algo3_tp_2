@@ -99,7 +99,7 @@ class Zangano{
     +contarBaja()
 }
 
-NexoMineral --> EstadoOperativo
+NexoMineral "1" --> "1" EstadoOperativo
 
 EstadoOperativo <|.. Operable
 EstadoOperativo <|.. EnConstruccion
@@ -108,7 +108,7 @@ Minero <|.left. SinMinero
 Minero <|. NexoMineral
 Minero <|.. Zangano
 
-NodoMineral <--> Minero
+NodoMineral "1" <--> "1" Minero
 NodoMineral .right.|> Mineral
 SinNodoMineral ..|> Mineral
 
