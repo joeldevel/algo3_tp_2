@@ -5,7 +5,7 @@ Nota: Suponemos que el Zealot ataco y mato anteriormente a 3 unidades para conse
 
 @startuml
 
-== Inicializacion ==
+== Inicializacion jugadores ==
 
 Usuario->"m: Mapa": Mapa()
 Usuario->"rp: Recursos": Recursos(1000,1000)
@@ -13,10 +13,22 @@ Usuario->"jugadorProtoss: JugadorProtoss": JugadorProtoss(unNombre, unColor, rp,
 Usuario->"rz: Recursos": Recursos(1000,1000)
 Usuario->"jugadorZerg: JugadorZerg": JugadorZerg(unNombre, unColor, rz, m)
 
+@enduml
+
+@startuml
+
+== Inicializacion unidad Zealot ==
+
 Usuario -> "tipoZealot: Zealot": Zealot(jugadorProtoss)
 Usuario -> "tiempoZealot: Tiempo": Tiempo(-4)
 Usuario -> "ubicacionZealot: Ubicacion": Ubicacion(0,0)
 Usuario -> "unidadZealot: Unidad": Unidad(tiempoZerling, ubicacionZealot, tipoZealot)
+
+@enduml
+
+@startuml
+
+== Inicializacion unidad Zerling ==
 
 Usuario -> "tipoZerling: Zerling": Zerling(jugadorZerg)
 Usuario -> "tiempoZerling: Tiempo": Tiempo(-2)
@@ -64,11 +76,87 @@ loop para cada ataque
 "ataqueZerling: Ataque" --> "tipoZerling: Zerling"
 end
 
+"tipoZerling: Zerling" --> "unidadZerling: Unidad"
+"unidadZerling: Unidad" --> Usuario
+
 Usuario -> "unidadZealot: Unidad": escudoRestante()
 "unidadZealot: Unidad" -> "tipoZealot: Zealot": escudoRestante()
 "tipoZealot: Zealot" -> "escudoZealot: Escudo": restante()
 "escudoZealot: Escudo" --> "tipoZealot: Zealot": 60
 "tipoZealot: Zealot" --> "unidadZealot: Unidad": 60
 "unidadZealot: Unidad" --> Usuario: 60
+
+@enduml
+
+@startuml
+
+== Caso de uso ==
+
+Usuario -> "unidadZerling: Unidad": atacar(unidadZealot)
+"unidadZerling: Unidad" -> "tipoZerling: Zerling": atacar(unidadZealot, this)
+"tipoZerling: Zerling" --> "unidadZerling: Unidad"
+"unidadZerling: Unidad" --> Usuario
+
+Usuario -> "unidadZealot: Unidad": escudoRestante()
+"unidadZealot: Unidad" -> "tipoZealot: Zealot": escudoRestante()
+"tipoZealot: Zealot" -> "escudoZealot: Escudo": restante()
+"escudoZealot: Escudo" --> "tipoZealot: Zealot": 60
+"tipoZealot: Zealot" --> "unidadZealot: Unidad": 60
+"unidadZealot: Unidad" --> Usuario: 60
+
+@enduml
+
+@startuml
+
+== Caso de uso: Verificacion de rango ==
+
+loop para cada ataque
+"tipoZerling: Zerling" -> "tipoZerling: Zerling": estaEnRangoDeAtaque(UnidadZealot, ataqueZerling)
+"tipoZerling: Zerling" -> "UnidadZerling: Unidad": ubicacion()
+"UnidadZerling: Unidad" --> "tipoZerling: Zerling"
+"tipoZerling: Zerling" -> "unidadZealot: Unidad": ubicacion()
+"unidadZealot: Unidad" --> "tipoZealot: Zealot": ubicacionZealot
+"tipoZerling: Zerling" -> "ubicacionZerling: Ubicacion": distanciaCon(unicacionZealot)
+"ubicacionZerling: Ubicacion" --> "tipoZerling: Zerling": 0
+"tipoZerling: Zerling" -> "ataqueZerling: Ataque": rango()
+"ataqueZerling: Ataque" -> "tipoZerling: Zerling": 1
+"tipoZerling: Zerling" --> "tipoZerling: Zerling": true
+end
+
+@enduml
+
+@startuml
+
+== Caso de uso: Verificacion de compatibilidad de superficies ==
+
+loop para cada ataque
+"tipoZerling: Zerling" -> "ataqueZerling: Ataque": atacarA(unidadZealot, unidadZerling)
+
+"ataqueZerling: Ataque" -> "superficieAtaqueZerling: Superficie": atacableTieneLaMismaSuperficie(unidadZealot)
+"superficieAtaqueZerling: Superficie" -> "unidadZealot: Unidad": compararSuperficie(Tierra)
+"unidadZealot: Unidad" -> "tipoZealot: Zealot": compararSuperficie(Tierra)
+"tipoZealot: Zealot" -> "superficieZealot: Superficie": compararTipos(Tierra)
+"superficieZealot: Superficie" --> "tipoZealot: Zealot": true
+"tipoZealot: Zealot" --> "unidadZealot: Unidad": true
+"unidadZealot: Unidad" --> "superficieAtaqueZerling: Superficie": true
+"superficieAtaqueZerling: Superficie" --> "ataqueZerling: Ataque": true
+
+end
+
+@enduml
+
+@startuml
+
+== Caso de uso: Recibir ataque ==
+
+loop para cada ataque
+"ataqueZerling: Ataque" -> "unidadZealot: Unidad": recibirAtaque(4, unidadZerling)
+"unidadZealot: Unidad" -> "tipoZealot: Zealot": recibirAtaque(4, unidadZerling)
+"tipoZealot: Zealot" -> "estadoZealot: ZealotInvisible": recibirAtaque(4, vidaZealot, escudoZealot, unidadZerling, unidadZealot, jugadorProtoss)
+"estadoZealot: ZealotInvisible" --> "tipoZealot: Zealot"
+"tipoZealot: Zealot" --> "unidadZealot: Unidad"
+"unidadZealot: Unidad" --> "ataqueZerling: Ataque"
+"ataqueZerling: Ataque" --> "tipoZerling: Zerling"
+end
 
 @enduml
