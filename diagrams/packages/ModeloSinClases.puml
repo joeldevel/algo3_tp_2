@@ -1,0 +1,32 @@
+@startuml
+
+package Modelo <<Folder>> {
+    package Edificios <<Folder>> {
+        package EdificiosProtoss <<Folder>> {
+        }
+
+        package EdificioZerg <<Folder>> {
+          }
+    }
+
+    package Unidades <<Folder>> {
+        package  UnidadesProtoss <<Folder>> {
+        }
+
+        package UnidadesZerg <<Folder>> {
+        }
+    }
+
+    package Jugador <<Folder>> {
+    }
+
+    package Recursos <<Folder>> {
+        package Gas <<Folder>> {
+        }
+
+        package Minerales <<Folder>> {
+        }
+    }
+}
+
+@enduml

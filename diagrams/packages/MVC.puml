@@ -9,8 +9,10 @@ package Vista <<Folder>> {
 package Controlador <<Folder>> {
 }
 
-Modelo ..> Vista
+Vista --> Modelo
 
-Vista ..> Controlador
+Vista --> Controlador
+
+Controlador --> Modelo
 
 @enduml
