@@ -1,0 +1,9 @@
+@startuml
+hide empty description
+title Construcción de Dragon
+
+[*] --> unidadEnConstruccion
+
+unidadEnConstruccion -> Dragon : pasan 6 turnos
+
+@enduml

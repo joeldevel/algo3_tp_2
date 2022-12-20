@@ -1,0 +1,122 @@
+@startuml
+
+package Modelo <<Folder>> {
+    package Edificios <<Folder>> {
+        package EdificiosProtoss <<Folder>> {
+            class Acceso
+            class Asmiliador
+            class NexoMineral
+            class Pilon
+            class PuertoEstelar
+        }
+
+        package EdificioZerg <<Folder>> {
+            class Criadero
+            class Espiral
+            class Extractor
+            class Guarida
+            class ReservaDeReproduccion
+          }
+
+        abstract class Edificio
+        abstract class EdificioProtoss
+        abstract class EdificioZerg
+        class EnConstruccion
+        class EstadoOperativo
+        class Operable
+    }
+
+    package Unidades <<Folder>> {
+        package  UnidadesProtoss <<Folder>> {
+            package EstadosZealot <<Folder>> {
+                interface EstadoDeZealot
+                class ZealotInvisible
+                class ZealotNoinvisible
+            }
+            class Dragon
+            class Scout
+            class Zealot
+        }
+
+        package UnidadesZerg <<Folder>> {
+            class AmoSupremo
+            class Devorador
+            class Guardian
+            class Hidralisco
+            class Larva
+            class Mutalisco
+            class Zangano
+            class Zerling
+        }
+
+        interface TipoDeUnidad
+        class Unidad
+        class UnidadEnConstruccion
+    }
+
+    package Jugador <<Folder>> {
+        abstract class Jugador
+        class JugadorProtoss
+        class JugadorZerg
+    }
+
+    package Recursos <<Folder>> {
+        package Gas <<Folder>> {
+            interface RefineriaDeGas
+            class SinRefineria
+            class Volcan
+        }
+
+        package Minerales <<Folder>> {
+            interface Mineral
+            interface Minero
+            class NodoMineral
+            class SinMinero
+            class SinNodoMineral
+        }
+
+        class Recursos
+    }
+
+    package Excepciones <<Folder>> {
+        exception AlgoStarFinalizadoException
+        exception CantidadMaximaDeZanganosEnExtractorException
+        exception CriaderoSinLarvasException
+        exception EdificioNoEnergizadosException
+        exception EdificioNoOperativoException
+        exception NodoMineralYaTieneUnRecolectorDeMineralException
+        exception OrigenNoEncontradoException
+        exception SinEdificioBuscadoException
+        exception SinRecursosSUficientesException
+        exception SinUnidadBuscadaExcpetion
+        exception UbicacionSinEdificioException
+        exception UnidadEnConstruccionException
+        exception UnidadEnConstruccionException
+        exception ValorInvalidoDeDanioException
+        exception ValorInvalidoParaEscudoException
+        exception ValorInvalidoParaVidaException
+        exception VolcanYaTieneUnaRefirenciaDeGasConstruidaException
+    }
+
+    class AlgoStar
+    interface Atacable
+    interface Atacante
+    class Ataque
+    class Direccion
+    class Energia
+    class Escudo
+    class Fabrica
+    class Mapa
+    class Moho
+    class Origen
+    abstract class Raza
+    interface Recuperable
+    interface Revelador
+    class Revelo
+    class Superficie
+    class Tiempo
+    class Ubicacion
+    class Vida
+}
+
+@enduml

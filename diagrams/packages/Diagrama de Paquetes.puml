@@ -1,0 +1,16 @@
+@startuml
+
+package Modelo <<Folder>> {
+}
+
+package Vista <<Folder>> {
+}
+
+package Controlador <<Folder>> {
+}
+
+Modelo ..> Vista
+
+Vista ..> Controlador
+
+@enduml

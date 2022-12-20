@@ -1,0 +1,15 @@
+@startuml
+
+package Controlador <<Folder>> {
+    class BotonAtacarEventHandler
+    class BotonAvanzarTurnoEventHandler
+    class BotonComenzarEventHandler
+    class BotonCrearEntidadEventHandler
+    class BotonDireccionEventHandler
+    class BotonElegirUnidadEventHandler
+    class BotonMoverEventHandler
+    class BotonTrabajarEventHandler
+    class BotonValidarEventHandler
+}
+
+@enduml

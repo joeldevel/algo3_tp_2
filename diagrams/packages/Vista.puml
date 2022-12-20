@@ -1,0 +1,11 @@
+@startuml
+
+package Vista <<Folder>> {
+    class PantallaBienvenidos
+    class PantallaFinal
+    class PantallaJuego
+    class PantallaJugadores
+    class VistaMapa
+}
+
+@enduml
