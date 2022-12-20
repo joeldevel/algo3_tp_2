@@ -29,7 +29,7 @@ class Extractor{
 	-cantidadExtraible: int
 	-cantidadMaximaDeZanganos: int
 	-volcan: Volcan
-	-zanganos: ArrayList<Zangano>
+	-zanganos: ArrayList<Unidad>
 	+Extractor(unVolcan, unaUbicacion, unJugador)
 	+devolverLarvas(): ArrayList<Unidad>
 	+obtenerPoblacion(): int
@@ -76,13 +76,13 @@ class EnConstruccion{
 Operable ..up|> EstadoOperativo
 EnConstruccion ..up|> EstadoOperativo
 
-Extractor --> EstadoOperativo
-Asimilador --> EstadoOperativo
+Extractor "1" --> "1" EstadoOperativo
+Asimilador "1" --> "1" EstadoOperativo
 
 RefineriaDeGas <|.left. SinRefineria
 RefineriaDeGas <|.. Extractor
 RefineriaDeGas <|.. Asimilador
 
-Volcan <--> RefineriaDeGas
+Volcan "1" <--> "1" RefineriaDeGas
 
 @enduml

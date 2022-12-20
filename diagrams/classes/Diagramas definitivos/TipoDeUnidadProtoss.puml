@@ -67,8 +67,8 @@ class Ataque{
 }
 
 Dragon ..up|> TipoDeUnidad
-Dragon -down-> Ataque
-Dragon -down> Superficie
-Ataque -down> Superficie
+Dragon "1" -down-> "2" Ataque
+Dragon "1" -down> "1" Superficie
+Ataque "1" -down> "1" Superficie
 
 @enduml
