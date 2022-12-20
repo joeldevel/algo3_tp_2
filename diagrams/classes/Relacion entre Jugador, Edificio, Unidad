@@ -687,6 +687,16 @@ note right: el Criadero se instancia con 500 de vida
 
 == Inicialización ==
 
+@enduml
+
+@startuml
+
+title: __Caso de uso 10,11,12__\n Caso general: Se crea una Unidad y un Edificio y se lo ataca.\nCaso específico: Se crea un Criadero y es atacado por una Unidad
+hide footbox
+
+actor Usuario
+
+
 Usuario++
 
 Usuario -> Unidad++:avanzarTurno(6)
