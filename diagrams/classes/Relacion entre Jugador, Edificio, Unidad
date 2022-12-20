@@ -527,6 +527,207 @@ Usuario--
 
 @enduml
 
+------------------------------------------------------------------------
+
+@startuml
+
+title: Se construye un criadero y luego de tres turnos no se encuentra operativo
+hide footbox
+
+actor Usuario
+
+create Mapa
+Usuario->Mapa:<<create>> \n new Mapa()
+
+create JugadorZerg
+Usuario->JugadorZerg:<<create>> \n new JugadorZerg(nombre1,color1,new Recursos(10000,10000),Mapa)
+
+create JugadorProtoss
+Usuario->JugadorProtoss:<<create>> \n new JugadorProtoss(nombre2,color2,new Recursos(10000,10000),Mapa)
+
+create Ubicacion
+Usuario -> Ubicacion:<<create>> new Ubicacion(20,20)
+
+== Inicializacion ==
+
+Usuario++
+
+Usuario->JugadorZerg++:construir("Criadero",Ubicacion,JugadorProtoss,Mapa)
+JugadorZerg->Fabrica++:__construir("Criadero",Ubicacion,JugadorZerg,JugadorProtoss,Mapa)__
+note left: este es un mensaje de clase
+note right: en este caso el jugador cumple con las \nprecondiciones, por lo que no se \nlanza una excepcion al crear el edificio
+
+Fabrica->Mapa++:verificarUbicacionLibre(Ubicacion)
+Mapa-->Fabrica:true
+Fabrica->Mapa:estaAfectadaPorPilonLaUbicacion(Ubicacion)
+Mapa-->Fabrica:false
+
+create Criadero
+Fabrica->Criadero:<<create>>\nnew Criadero(Ubicacion,JugadorZerg)
+
+Fabrica->JugadorZerg:agregarEdificio(Criadero)
+Fabrica->Mapa:agregarEdificio(Criadero)
+Fabrica->Mapa--:agregarOrigenAMoho(Ubicacion)
+
+Usuario->Criadero++:avanzarTurno(3)
+
+	loop para cada turno
+	
+	Criadero->Tiempo++:pasarTiempo()
+	Tiempo--
+	Criadero->Estado++:ejecutar()
+	Estado--
+	note right:si el estado es operativo \nse crean larvas automaticamente \nen cada turno
+	Criadero->Criadero:recuperarse()
+
+	end
+
+Usuario->Criadero:crearZangano()
+note right:como el edificio no esta operativo\nno crea un zangano y no aumentan \nlas unidades del jugador
+Criadero--
+
+Usuario->JugadorZerg:contarUnidades()
+JugadorZerg-->Usuario--: 0
+
+Usuario--
+
+@enduml
+
+---------------------------------------------------------------------
+
+"Implementacion del metodo crear zangano de criadero"
+@startuml
+
+title Implementacion del método crearZangano() cuando Criadero tiene larvas y esta operativo
+hide footbox
+
+actor jugadorZerg
+jugadorZerg++
+
+jugadorZerg -> Criadero++: crearZangano()
+note right: el criadero tiene larvas
+
+Criadero -> larvas++: isEmpty()
+larvas --> Criadero: false
+Criadero -> larvas: get(0)
+Criadero -> Unidad++: setComportamientoTipo(unTiempo:Tiempo,new TipoDeUnidad(jugadorZerg),unaUbicacion:Ubicacion)
+Unidad--
+note over Unidad: el tipo de unidad en este caso es Zangano 
+
+Criadero -> larvas: remove(0)
+larvas--
+Criadero -> jugadorZerg--:agregarUnidad(unaUnidad)
+note over Criadero: esta unidad es el zangano que acabo de crear
+
+
+@enduml
+
+"Implementacion del metodo crear zangano de criadero"
+@startuml
+
+title Implementacion del método crearZangano() cuando Criadero no tiene larvas y esta operativo\nSe lanza una excepcion
+hide footbox
+
+actor jugadorZerg
+jugadorZerg++
+
+jugadorZerg -> Criadero++: crearZangano()
+note right: el criadero no tiene larvas
+
+Criadero -> larvas++: isEmpty()
+larvas --> Criadero: true
+
+|||
+
+create CriaderoSinLarvasException
+Criadero -> CriaderoSinLarvasException:<<create>>\nnew CriaderoSinLarvasException()
+
+@enduml
+
+----------------------------------------------------------------------------
+
+" Se crea un criadero y es atacado por una unidad"
+
+@startuml
+
+title: __Caso de uso 10,11,12__\n Caso general: Se crea una Unidad y un Edificio y se lo ataca.\nCaso específico: Se crea un Criadero y es atacado por una Unidad
+hide footbox
+
+actor Usuario
+
+create Mapa
+Usuario -> Mapa:<<create>>\nnew Mapa()
+
+create Recursos
+Usuario -> Recursos:<<create>>\nnew Recursos(10000,10000)
+
+create JugadorProtoss
+Usuario -> JugadorProtoss:<<create>>\nnew JugadorProtoss(nombre1,color1,Recursos,Mapa)
+
+create Recursos
+Usuario -> Recursos:<<create>>\nnew Recursos(10000,10000)
+
+create JugadorZerg
+Usuario -> JugadorZerg:<<create>>\nnew JugadorZerg(nombre2,color2,Recursos,Mapa)
+
+create Dragon
+Usuario -> Dragon:<<create>>\nnew Dragon(JugadorProtoss)
+note right: Dragon es TipoDeUnidad y como el jugador protoss\ntiene recursos suficiente no lanza excepcion
+
+create Ubicacion
+Usuario -> Ubicacion:<<create>>\nnew Ubicacion(0,0)
+
+create Unidad
+Usuario -> Unidad:<<create>>\nnew Unidad(unTiempo:Tiempo,Ubicacion,Dragon)
+note right:La unidad atacante esta en rango de ataque
+
+create Criadero
+Usuario -> Criadero:<<create>>\nnew Criadero(Ubicacion,JugadorZerg)
+note right: el Criadero se instancia con 500 de vida
+
+== Inicialización ==
+
+Usuario++
+
+Usuario -> Unidad++:avanzarTurno(6)
+note over Unidad:Se avanza el turno para dejar operativa la unidad
+
+	loop para cada turno
+	
+	Unidad -> Tiempo++:pasarTiempo()
+	Tiempo--
+	Unidad -> Unidad:setComportamientoEstado(TipoDeUnidad)
+	note left: si transcurre el tiempo de construccion se instancia \ncon el tipo de unidad, en este caso Dragon 
+	
+	note over Unidad: si la Unidad está operativa
+	Unidad -> Estado++:recuperarse()
+	Unidad -> Estado:avanzarTurno()
+	
+	end
+	
+Usuario -> Unidad: atacar(Criadero)
+Unidad -> Estado:atacar(Criadero,Unidad)
+
+	loop para cada ataque del Dragon
+	
+	Estado -> Estado: estaEnRangoDeAtaque(Criadero,Ataque)
+	Estado -> Ataque++:atacarA(Criadero,Unidad)
+	Ataque-- 
+	
+	end
+	
+Estado--
+Unidad--
+
+Usuario -> Criadero++: obtenerVida()
+Criadero --> Usuario--: 480
+note left Criadero: se descuentan los puntos del ataque y Criadero devuelve la vida que le quedó
+
+
+@enduml
+
+
+
 
 
 
