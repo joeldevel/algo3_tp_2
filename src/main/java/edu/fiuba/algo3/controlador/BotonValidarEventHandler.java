@@ -40,7 +40,6 @@ public class BotonValidarEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        // Si el cuadro del nombre esta vacio...
         if (textoNombre.getText().trim().equals("")) {
             etiquetaNombre.setText("Debe ingresar un texto");
             etiquetaNombre.setTextFill(Color.RED);
@@ -49,11 +48,6 @@ public class BotonValidarEventHandler implements EventHandler<ActionEvent> {
 
         else {
 
-            // System.out.println(textoNombre.getText());
-            // System.out.println(textoColor.getText());
-            // System.out.println(textoRaza.getText());
-
-            // Si la informacion ingresada es correcta...
             if(algoStar.validarNombre(textoNombre.getText()) & algoStar.validarColor((String) this.colores.getValue()) & algoStar.validarRaza((String) this.razas.getValue())) {
                 etiquetaNombre.setText("Nombre correcto");
                 etiquetaNombre.setTextFill(Color.DARKGREEN);
@@ -64,10 +58,8 @@ public class BotonValidarEventHandler implements EventHandler<ActionEvent> {
                 etiquetaRaza.setText("Raza correcta");
                 etiquetaRaza.setTextFill(Color.DARKGREEN);
 
-                // Se crea el jugador
                 algoStar.crearJugador(this.textoNombre.getText(), (String) this.colores.getValue(), (String) this.razas.getValue());
 
-                // Deshabilitamos el boton de validacion
                 this.validar.setDisable(true);
 
                 System.out.println("Cantidad de jugadores: " + algoStar.jugadores.size());

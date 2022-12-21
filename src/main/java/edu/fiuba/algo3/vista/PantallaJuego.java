@@ -55,7 +55,6 @@ public class PantallaJuego extends BorderPane {
             this.coordenadaX = (int) e.getX();
             this.coordenadaY = (int) e.getY();
             this.setDerecha(algoStar);
-
         });
     }
 
@@ -96,7 +95,6 @@ public class PantallaJuego extends BorderPane {
     }
 
     public void setDerecha(AlgoStar algoStar) {
-        // Informacion de unidades, edificios y recursos
 
         Label primerInformacion = new Label();
         primerInformacion.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
@@ -151,8 +149,6 @@ public class PantallaJuego extends BorderPane {
 
     public void setArriba(AlgoStar algoStar) {
 
-        // Boton para avanzar turno
-
         Button botonAvanzarTurno = new Button();
         botonAvanzarTurno.setText("Avanzar turno");
         botonAvanzarTurno.setTranslateX(-10);
@@ -165,8 +161,6 @@ public class PantallaJuego extends BorderPane {
         contenedorAvanzarTurno.setSpacing(5);
         contenedorAvanzarTurno.setTranslateX(1600);
         contenedorAvanzarTurno.setTranslateY(50);
-
-        // Informacion del mouse sobre el canvas
 
         Label coordenadaX = new Label();
         coordenadaX.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
@@ -186,16 +180,11 @@ public class PantallaJuego extends BorderPane {
             coordenadaY.setText("y: " + e.getY());
         });
 
-        // Contenedor
-
         HBox contenedorVertical = new HBox(contenedorAvanzarTurno, contenedorHorizontalCoordenadas);
         this.setTop(contenedorVertical);
     }
 
-    // Se crea el menu donde estara la informacion del jugador: Nombre, Color, Raza, Recursos, Poblacion, Suministro.
     public void setInformacion(AlgoStar algoStar) {
-
-        // Etiqueta turnos
 
         Label turnos = new Label();
         turnos.setText("Turno " + this.numeroTurno);
@@ -205,8 +194,6 @@ public class PantallaJuego extends BorderPane {
         VBox contenedorVerticalTurnos = new VBox(turnos);
         contenedorVerticalTurnos.setTranslateX(80);
         contenedorVerticalTurnos.setTranslateY(125);
-
-        // Informacion del jugador
 
         Jugador jugadorActual = algoStar.getJugadorTurno();
 
@@ -245,14 +232,10 @@ public class PantallaJuego extends BorderPane {
         suministro.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         suministro.setTextFill(Color.web("#ffffff"));
 
-        // Contenedor de informacion
-
         VBox contenedorVerticalInformacion = new VBox(nombre, color, raza, gas, mineral, poblacion, suministro);
         contenedorVerticalInformacion.setSpacing(10);
         contenedorVerticalInformacion.setTranslateX(80);
         contenedorVerticalInformacion.setTranslateY(125);
-
-        // Contenedor
 
         VBox contenedorVertical = new VBox(contenedorVerticalTurnos, contenedorVerticalInformacion);
         contenedorVertical.setSpacing(30);
@@ -278,9 +261,7 @@ public class PantallaJuego extends BorderPane {
         }
     }
 
-    // Se crea la botonera Zerg con los edificios correspondientes.
     public GridPane setBotoneraEdificiosZerg(AlgoStar algoStar) {
-        // Botonera edificios
 
         Button criadero = new Button();
         criadero.setText("Crear criadero ");
@@ -328,7 +309,6 @@ public class PantallaJuego extends BorderPane {
         return panel;
     }
 
-    // Se crea la botonera Zerg con los edificios correspondientes.
     public GridPane setBotoneraUnidadesZerg(AlgoStar algoStar) {
         Jugador jugadorZerg = algoStar.getJugadorTurno();
 
@@ -402,7 +382,6 @@ public class PantallaJuego extends BorderPane {
         return panel;
     }
 
-    // Se crea la botonera Protoss con los edificios correspondientes.
     public GridPane setBotoneraEdificiosProtoss(AlgoStar algoStar) {
 
         Button nexo = new Button();
@@ -451,7 +430,6 @@ public class PantallaJuego extends BorderPane {
         return panel;
     }
 
-    // Se crea la botonera Protoss con los edificios correspondientes.
     public GridPane setBotoneraUnidadesProtoss(AlgoStar algoStar) {
 
         Button zealot = new Button();
@@ -484,17 +462,13 @@ public class PantallaJuego extends BorderPane {
         return panel;
     }
 
-    // Se crea la botonera de movimiento
     public HBox setBotoneraMovimiento(AlgoStar algoStar) {
-        // Boton de movimiento
 
         Button mover = new Button();
         mover.setText("Mover");
 
         BotonMoverEventHandler botonMoverEventHandler = new BotonMoverEventHandler(vistaMapa, algoStar.getJugadorTurno(), this);
         mover.setOnAction(botonMoverEventHandler);
-
-        // Boton de movimiento
 
         Button direccion = new Button();
         direccion.setText("Cambiar de direccion");
@@ -507,9 +481,7 @@ public class PantallaJuego extends BorderPane {
         return contenedorHorizontalBMovimiento;
     }
 
-    // Se crea la botonera ataque y trabajo
     public HBox setBotoneraAtaque(AlgoStar algoStar) {
-        // Boton elegir unidad
 
         Button unidad = new Button();
         unidad.setText("Elegir unidad");
@@ -517,15 +489,11 @@ public class PantallaJuego extends BorderPane {
         BotonElegirUnidadEventHandler botonElegirUnidadEventHandler = new BotonElegirUnidadEventHandler(algoStar, this);
         unidad.setOnAction(botonElegirUnidadEventHandler);
 
-        // Boton atacar
-
         Button atacar = new Button();
         atacar.setText(" Atacar ");
 
         BotonAtacarEventHandler botonAtacarEventHandler = new BotonAtacarEventHandler(algoStar, this, vistaMapa);
         atacar.setOnAction(botonAtacarEventHandler);
-
-        // Boton trabajar
 
         Button trabajar = new Button();
         trabajar.setText("Trabajar");
@@ -533,28 +501,17 @@ public class PantallaJuego extends BorderPane {
         BotonTrabajarEventHandler botonTrabajarEventHandler = new BotonTrabajarEventHandler(algoStar, this, vistaMapa);
         trabajar.setOnAction(botonTrabajarEventHandler);
 
-        // Contenedores
-
         VBox contenedorHorizontalAcciones = new VBox(atacar, trabajar);
         HBox contenedorHorizontal = new HBox(unidad, contenedorHorizontalAcciones);
 
         return contenedorHorizontal;
     }
 
-    // Se crea la pantalla central donde estara el mapa
     public void setCentro(AlgoStar algostar) {
 
-        // Se crea el canvas donde se dibujara
-
-        this.canvasCentral = new Canvas(ANCHO, ALTURA); // Ancho, Altura
-
-        // Se dibuja el mapa
-
+        this.canvasCentral = new Canvas(ANCHO, ALTURA);
         this.vistaMapa = new VistaMapa(algostar.getMapa(), canvasCentral);
         this.vistaMapa.dibujar();
-
-        // Se ubica el canvas en el centro del BorderPane
-
         this.setCenter(canvasCentral);
     }
 }

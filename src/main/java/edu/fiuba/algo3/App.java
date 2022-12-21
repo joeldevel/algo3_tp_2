@@ -20,10 +20,8 @@ public class App extends Application {
     public void start(Stage stage) {
 
         stage.setTitle("AlgoStar");
-
         AlgoStar algoStar = crearModelo();
 
-        // Pantalla de finalizacion
         PantallaFinal pantallaFinal = new PantallaFinal(stage);
         Scene escenaFinal = new Scene(pantallaFinal, 500, 500);
         escenaFinal.getStylesheets().add("file:src/main/resources/style.css");
@@ -32,12 +30,10 @@ public class App extends Application {
         Scene escenaJuego = new Scene(pantallaJuego, 500, 500);
         escenaJuego.getStylesheets().add("file:src/main/resources/style.css");
 
-        // Pantalla donde se ingresa la inforamacion de los jugadores
         PantallaJugadores pantallaJugadores = new PantallaJugadores(stage, escenaJuego, algoStar, pantallaJuego);
         Scene escenaJugadores = new Scene(pantallaJugadores, 500, 500);
         escenaJugadores.getStylesheets().add("file:src/main/resources/style.css");
 
-        // Pantalla de bienvenida
         PantallaBienvenidos pantallaBienvenidos = new PantallaBienvenidos(stage, escenaJugadores);
         Scene escenaBienvenidos = new Scene(pantallaBienvenidos, 500, 500);
         escenaBienvenidos.getStylesheets().add("file:src/main/resources/style.css");
